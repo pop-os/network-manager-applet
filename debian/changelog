@@ -1,5 +1,15 @@
 network-manager-applet (0.6.5-1) unstable; urgency=low
 
   * Initial release after the package split.
+  * Imported files from previous network-manager source package
+    - debian/nm-applet.sgml
+    - debian/network-manager-applet.manpages
+    - debian/network-manager-gnome.README.Debian
+    - debian/patches/01-dbus_access_nm_applet.patch
+    - debian/patches/10-po_fr.patch
+    - debian/patches/11-po_de.patch
+  * debian/patches/12-po_jp.patch
+    - Fixes for the Japanese translation. (Closes: #430672) 
+      Patch by Kobayashi Noritada <nori1@dolphin.c.u-tokyo.ac.jp>
 
  -- Michael Biebl <biebl@debian.org>  Mon, 27 Aug 2007 01:47:31 +0200
