@@ -1,22 +1,22 @@
 This package was debianized by Michael Biebl <biebl@debian.org> on
-Mon, 27 Aug 2007 02:03:51 +0200.
+Mon, 27 Aug 2007 08:03:51 +0200.
 
 It was downloaded from http://ftp.gnome.org/pub/GNOME/sources/network-manager-applet/
 
 Upstream author:
     Dan Williams <dcbw@redhat.com>
 
-Copyright holders:
-  Copyright 2004-2005 Red Hat, Inc.
-  Copyright 2006 Thiago Jung Bauermann <thiago.bauermann@gmail.com>
-  Copyright 1999, 2000 Eazel, Inc.
-  Copyright 2002 Anders Carlsson <andersca@gnu.org>
-  Copyright 2006 Novell, Inc.
-  Copyright 2006 Thiago Jung Bauermann <thiago.bauermann@gmail.com>
-  Copyright 2001, 2002 Free Software Foundation
+Copyright:
+    Copyright 2004-2005 Red Hat, Inc.
+    Copyright 2006 Thiago Jung Bauermann <thiago.bauermann@gmail.com>
+    Copyright 1999, 2000 Eazel, Inc.
+    Copyright 2002 Anders Carlsson <andersca@gnu.org>
+    Copyright 2006 Novell, Inc.
+    Copyright 2006 Thiago Jung Bauermann <thiago.bauermann@gmail.com>
+    Copyright 2001, 2002 Free Software Foundation
 
 License:
-All the software:
+All files if not specified otherwise are licensed under the GPL v2 or later:
 
     This package is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
