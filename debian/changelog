@@ -11,6 +11,9 @@ network-manager-applet (0.6.5-1) unstable; urgency=low
   * debian/patches/12-po_jp.patch
     - Fixes for the Japanese translation. (Closes: #430672)
       Patch by Kobayashi Noritada <nori1@dolphin.c.u-tokyo.ac.jp>
-  * Add debian/watch to track upstream releases. 
+  * debian/patches/20-stable_branch_updates_r98.patch
+    - Pull updates from the stable branch up until revision 98.
+    - Contains various bug fixes and translation updates.
+  * Add debian/watch to track new upstream releases.
 
- -- Michael Biebl <biebl@debian.org>  Mon, 27 Aug 2007 07:42:51 +0200
+ -- Michael Biebl <biebl@debian.org>  Mon, 27 Aug 2007 08:03:06 +0200
