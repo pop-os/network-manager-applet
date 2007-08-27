@@ -1,0 +1,5 @@
+network-manager-applet (0.6.5-1) unstable; urgency=low
+
+  * Initial release after the package split.
+
+ -- Michael Biebl <biebl@debian.org>  Mon, 27 Aug 2007 01:47:31 +0200

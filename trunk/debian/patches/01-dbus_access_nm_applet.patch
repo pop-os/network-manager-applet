@@ -1,0 +1,17 @@
+Index: nm-applet.conf
+===================================================================
+--- nm-applet.conf	(Revision 52)
++++ nm-applet.conf	(Arbeitskopie)
+@@ -14,6 +14,12 @@
+ 		<allow send_destination="org.freedesktop.NetworkManagerInfo"/>
+                 <allow send_interface="org.freedesktop.NetworkManagerInfo"/>
+ 	</policy>
++	<policy group="netdev">
++		<allow own="org.freedesktop.NetworkManagerInfo"/>
++
++		<allow send_destination="org.freedesktop.NetworkManagerInfo"/>
++                <allow send_interface="org.freedesktop.NetworkManagerInfo"/>
++	</policy>
+ 	<policy context="default">
+ 		<deny own="org.freedesktop.NetworkManagerInfo"/>
+ 
