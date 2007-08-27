@@ -2,13 +2,13 @@ Source: network-manager-applet
 Section: gnome
 Priority: optional
 Maintainer: Michael Biebl <biebl@debian.org>
-Build-Depends: debhelper (>= 5.0.0), cdbs, gnome-common, intltool, libdbus-glib-1-dev (>= 0.60), libiw-dev(>= 27+28pre9), libgnome2-dev, libgnomeui-dev, libgnome-keyring-dev, libglade2-dev, libgtk2.0-dev, libglib2.0-dev, libgconf2-dev, libnotify-dev (>= 0.3), libnm-util-dev (>= 0.6.5), network-manager-dev (>= 0.6.5)
+Build-Depends: debhelper (>= 5.0.0), cdbs, autotools-dev, intltool, libdbus-glib-1-dev (>= 0.60), libiw-dev(>= 27+28pre9), libgnome2-dev, libgnomeui-dev, libgnome-keyring-dev, libglade2-dev, libgtk2.0-dev, libglib2.0-dev (>= 2.10), libgconf2-dev, libnotify-dev (>= 0.3.0), libnm-util-dev (>= 0.6.5), network-manager-dev (>= 0.6.5), docbook-to-man
 Standards-Version: 3.7.2
 
 Package: network-manager-gnome
 Architecture: any
 Section: gnome
-Depends: ${shlibs:Depends}, ${misc:Depends}, network-manager
+Depends: ${shlibs:Depends}, ${misc:Depends}, network-manager (>= 0.6.5)
 Recommends: notification-daemon, libpam-keyring
 Provides: nm-applet
 Description: network management framework (GNOME frontend)
