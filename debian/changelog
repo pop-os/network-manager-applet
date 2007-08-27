@@ -9,7 +9,8 @@ network-manager-applet (0.6.5-1) unstable; urgency=low
     - debian/patches/10-po_fr.patch
     - debian/patches/11-po_de.patch
   * debian/patches/12-po_jp.patch
-    - Fixes for the Japanese translation. (Closes: #430672) 
+    - Fixes for the Japanese translation. (Closes: #430672)
       Patch by Kobayashi Noritada <nori1@dolphin.c.u-tokyo.ac.jp>
+  * Add debian/watch to track upstream releases. 
 
- -- Michael Biebl <biebl@debian.org>  Mon, 27 Aug 2007 01:47:31 +0200
+ -- Michael Biebl <biebl@debian.org>  Mon, 27 Aug 2007 07:42:51 +0200
