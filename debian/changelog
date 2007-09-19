@@ -1,15 +1,17 @@
-network-manager-applet (0.6.5-2) UNRELEASED; urgency=low
+network-manager-applet (0.6.5-2) unstable; urgency=low
 
-  * NOT RELEASED YET
+  * debian/patches/30-connection_info_hide_on_delete_event.patch
+    - Patch from Ubuntu. Hide connection info dialog on delete-event. 
+      (Closes: #406073)
 
- -- Michael Biebl <biebl@debian.org>  Mon, 27 Aug 2007 16:07:37 +0200
+ -- Michael Biebl <biebl@debian.org>  Wed, 19 Sep 2007 22:34:18 +0200
 
 network-manager-applet (0.6.5-1) unstable; urgency=low
 
   * Initial release after the package split.
   * Imported files from previous network-manager source package
     - debian/nm-applet.sgml
-    - debian/network-manager-applet.manpages
+    - debian/network-manager-gnome.manpages
     - debian/network-manager-gnome.README.Debian
     - debian/patches/01-dbus_access_nm_applet.patch
     - debian/patches/10-po_fr.patch

@@ -1,0 +1,14 @@
+diff -Nur network-manager-applet-0.6.5/src/applet.c network-manager-applet-0.6.5.new/src/applet.c
+--- network-manager-applet-0.6.5/src/applet.c	2007-09-18 15:41:43.000000000 +0200
++++ network-manager-applet-0.6.5.new/src/applet.c	2007-09-18 15:41:57.000000000 +0200
+@@ -281,8 +281,9 @@
+ 
+ 	if (nma_update_info (applet))
+ 	{
+-		gtk_window_present (GTK_WINDOW (info_dialog));
++		g_signal_connect(info_dialog, "delete-event", gtk_widget_hide_on_delete, info_dialog);
+ 		g_signal_connect_swapped (info_dialog, "response", G_CALLBACK (gtk_widget_hide), info_dialog);
++		gtk_window_present (GTK_WINDOW (info_dialog));
+ 	}
+ }
+ 
