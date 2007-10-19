@@ -1,3 +1,11 @@
+network-manager-applet (0.6.5-3) unstable; urgency=low
+
+  * debian/control
+    - Use the new "Homepage:" field to specify the upstream URL.
+    - Add Recommends: network-manager-openvpn-gnome, network-manager-vpnc-gnome
+
+ -- Michael Biebl <biebl@debian.org>  Fri, 19 Oct 2007 18:23:59 +0200
+
 network-manager-applet (0.6.5-2) unstable; urgency=low
 
   * debian/patches/30-connection_info_hide_on_delete_event.patch
