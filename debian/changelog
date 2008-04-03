@@ -1,5 +1,6 @@
-network-manager-applet (0.6.5-4) UNRELEASED; urgency=low
+network-manager-applet (0.6.6-1) UNRELEASED; urgency=low
 
+  * New upstream release.
   * debian/control
     - The Vcs-* fields are now officially supported, so remove the XS- prefix.
     - Bump Standards-Version to 3.7.3. No further changes required. 
