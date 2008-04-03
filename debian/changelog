@@ -6,8 +6,15 @@ network-manager-applet (0.6.6-1) UNRELEASED; urgency=low
     - The Vcs-* fields are now officially supported, so remove the XS- prefix.
     - Bump Standards-Version to 3.7.3. No further changes required. 
     - Fix Xfce spelling error in the package description.
+  * Removed patches
+    - debian/patches/10-po_fr.patch (merged upstream)
+    - debian/patches/11-po_de.patch (merged upstream)
+    - debian/patches/12-po_jp.patch (merged upstream)
+    - debian/patches/20-stable_branch_updates_r98.patch (applied upstream)
+    - debian/patches/30-connection_info_hide_on_delete_event.patch (merged
+      upstream)
 
- -- Michael Biebl <biebl@debian.org>  Thu, 03 Apr 2008 03:49:22 +0200
+ -- Michael Biebl <biebl@debian.org>  Thu, 03 Apr 2008 04:05:54 +0200
 
 network-manager-applet (0.6.5-3) unstable; urgency=low
 
