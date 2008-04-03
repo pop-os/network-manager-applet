@@ -13,6 +13,9 @@ network-manager-applet (0.6.6-1) UNRELEASED; urgency=low
     - debian/patches/20-stable_branch_updates_r98.patch (applied upstream)
     - debian/patches/30-connection_info_hide_on_delete_event.patch (merged
       upstream)
+  * debian/patches/02-hal_deprecated_keys.patch
+    - Add support for newer HAL versions where the "net.physical_device" key
+      has been deprecated and replaced by "net.originating_device".
   * debian/rules
     - The nm-applet autostart file is now installed into /etc/xdg/autostart by
       default, so we no longer have to move it around manually.

@@ -1,0 +1,13 @@
+Index: src/applet-dbus-devices.c
+===================================================================
+--- src/applet-dbus-devices.c	(Revision 647)
++++ src/applet-dbus-devices.c	(Arbeitskopie)
+@@ -472,7 +472,7 @@
+ 	if ((message = dbus_message_new_method_call ("org.freedesktop.Hal", network_device_get_hal_udi (dev),
+ 										"org.freedesktop.Hal.Device", "GetPropertyString")))
+ 	{
+-		const char *	prop = "net.physical_device";
++		const char *	prop = "net.originating_device";
+ 
+ 		dbus_message_append_args (message, DBUS_TYPE_STRING, &prop, DBUS_TYPE_INVALID);
+ 		dbus_connection_send_with_reply (applet->connection, message, &pcall, -1);
