@@ -1,4 +1,4 @@
-network-manager-applet (0.6.6-1) UNRELEASED; urgency=low
+network-manager-applet (0.6.6-1) unstable; urgency=low
 
   * New upstream release.
     - Better handling of VPN and WPA Enterprise security. (Closes: #444977)
