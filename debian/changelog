@@ -16,8 +16,10 @@ network-manager-applet (0.6.6-1) UNRELEASED; urgency=low
   * debian/rules
     - The nm-applet autostart file is now installed into /etc/xdg/autostart by
       default, so we no longer have to move it around manually.
+  * debian/network-manager-gnome.postinst
+    - Tell dbus to reload its config files.
 
- -- Michael Biebl <biebl@debian.org>  Thu, 03 Apr 2008 04:10:56 +0200
+ -- Michael Biebl <biebl@debian.org>  Thu, 03 Apr 2008 21:34:40 +0200
 
 network-manager-applet (0.6.5-3) unstable; urgency=low
 
