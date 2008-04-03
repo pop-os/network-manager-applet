@@ -11,13 +11,6 @@ DEB_CONFIGURE_SCRIPT_ENV += LDFLAGS="-Wl,--as-needed"
 build/network-manager-gnome::
 	/usr/bin/docbook-to-man debian/nm-applet.sgml > debian/nm-applet.1
 
-binary-install/network-manager-gnome::
-	# Install the autostart file following the new freedesktop.org spec
-	mkdir debian/${cdbs_curpkg}/etc/xdg/
-	mv debian/${cdbs_curpkg}/usr/share/gnome/autostart/ debian/${cdbs_curpkg}/etc/xdg/
-	rm -rf debian/${cdbs_curpkg}/usr/share/gnome/
-
 clean::
-	rm -f po/*.gmo
 	rm -f debian/*.1
 

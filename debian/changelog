@@ -13,8 +13,11 @@ network-manager-applet (0.6.6-1) UNRELEASED; urgency=low
     - debian/patches/20-stable_branch_updates_r98.patch (applied upstream)
     - debian/patches/30-connection_info_hide_on_delete_event.patch (merged
       upstream)
+  * debian/rules
+    - The nm-applet autostart file is now installed into /etc/xdg/autostart by
+      default, so we no longer have to move it around manually.
 
- -- Michael Biebl <biebl@debian.org>  Thu, 03 Apr 2008 04:05:54 +0200
+ -- Michael Biebl <biebl@debian.org>  Thu, 03 Apr 2008 04:10:56 +0200
 
 network-manager-applet (0.6.5-3) unstable; urgency=low
 
