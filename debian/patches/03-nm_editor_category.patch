@@ -1,0 +1,13 @@
+Index: editor/nm-editor.desktop
+===================================================================
+--- editor/nm-editor.desktop	(Revision 650)
++++ editor/nm-editor.desktop	(Arbeitskopie)
+@@ -6,7 +6,7 @@
+ Exec=nm-editor
+ Terminal=false
+ Type=Application
+-Categories=Network;Settings;
++Categories=Settings;X-GNOME-NetworkSettings;
+ OnlyShowIn=GNOME;
+ X-GNOME-Bugzilla-Bugzilla=GNOME
+ X-GNOME-Bugzilla-Product=NetworkManager
