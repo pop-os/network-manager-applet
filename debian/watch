@@ -1,3 +1,3 @@
 version=3
 
-http://download.gnome.org/sources/network-manager-applet/0.6/network-manager-applet-(.*)\.tar\.gz
+http://download.gnome.org/sources/network-manager-applet/([\d\.]+)/network-manager-applet-(.*)\.tar\.gz
