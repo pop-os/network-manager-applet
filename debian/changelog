@@ -1,11 +1,11 @@
-network-manager-applet (0.6.6-2) UNRELEASED; urgency=low
+network-manager-applet (0.6.6-2) unstable; urgency=low
 
   * debian/control
     - Add Build-Depends on pkg-config.
   * debian/patches/03-nm_editor_category.patch
     - Don't show nm-editor under Applications->Internet. (Closes: #474544)
 
- -- Michael Biebl <biebl@debian.org>  Thu, 03 Apr 2008 22:27:21 +0200
+ -- Michael Biebl <biebl@debian.org>  Sun, 06 Apr 2008 16:39:07 +0200
 
 network-manager-applet (0.6.6-1) unstable; urgency=low
 
