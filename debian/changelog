@@ -1,3 +1,16 @@
+network-manager-applet (0.7.0~svn755-1) UNRELEASED; urgency=low
+
+  * debian/rules: Updated, switch to quilt as a patch system
+  * debian/control: Updated
+  * debian/nm-vpn-properties.sgml: Added
+  * debian/network-manager-gnome.manpages: Add nm-vpn-properties.1
+  * debian/patches/01-dbus_access_nm_applet.patch: Updated
+  * Removed obsolete patches:
+    - debian/patches/02-hal_deprecated_keys.patch
+    - debian/patches/03-nm_editor_category.patch
+
+ -- Michael Biebl <biebl@debian.org>  Wed, 23 Apr 2008 07:07:11 +0200
+
 network-manager-applet (0.6.6-2) unstable; urgency=low
 
   * debian/control

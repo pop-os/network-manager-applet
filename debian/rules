@@ -2,15 +2,17 @@
 
 include /usr/share/cdbs/1/rules/debhelper.mk
 include /usr/share/cdbs/1/class/gnome.mk
-include /usr/share/cdbs/1/rules/simple-patchsys.mk
+include /usr/share/cdbs/1/rules/patchsys-quilt.mk
+include /usr/share/cdbs/1/rules/utils.mk
 
 DEB_INSTALL_DOCS_ALL := CONTRIBUTING
 
-DEB_CONFIGURE_SCRIPT_ENV += LDFLAGS="-Wl,--as-needed"
-
-build/network-manager-gnome::
-	/usr/bin/docbook-to-man debian/nm-applet.sgml > debian/nm-applet.1
+DEB_CONFIGURE_SCRIPT_ENV += LDFLAGS="-Wl,-z,defs -Wl,--as-needed"
 
 clean::
 	rm -f debian/*.1
 
+
+build/network-manager-gnome::
+	/usr/bin/docbook-to-man debian/nm-vpn-properties.sgml > debian/nm-vpn-properties.1
+	/usr/bin/docbook-to-man debian/nm-applet.sgml > debian/nm-applet.1
