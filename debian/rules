@@ -14,5 +14,4 @@ clean::
 
 
 build/network-manager-gnome::
-	/usr/bin/docbook-to-man debian/nm-vpn-properties.sgml > debian/nm-vpn-properties.1
 	/usr/bin/docbook-to-man debian/nm-applet.sgml > debian/nm-applet.1
