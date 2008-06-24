@@ -6,6 +6,7 @@ network-manager-applet (0.7.0~svn759-1) UNRELEASED; urgency=low
   * Removed obsolete patches:
     - debian/patches/02-hal_deprecated_keys.patch
     - debian/patches/03-nm_editor_category.patch
+  * debian/copyright: Revised for the latest changes.
 
  -- Michael Biebl <biebl@debian.org>  Wed, 23 Apr 2008 07:07:11 +0200
 
