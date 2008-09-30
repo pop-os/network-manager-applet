@@ -1,5 +1,6 @@
-network-manager-applet (0.7.0~svn863-1) UNRELEASED; urgency=low
+network-manager-applet (0.7.0~svn876-1) UNRELEASED; urgency=low
 
+  [ Michael Biebl ]
   * debian/rules: Updated, switch to quilt as a patch system
   * debian/control: Updated
   * debian/patches/01-dbus_access_nm_applet.patch: Updated
@@ -8,7 +9,10 @@ network-manager-applet (0.7.0~svn863-1) UNRELEASED; urgency=low
     - debian/patches/03-nm_editor_category.patch
   * debian/copyright: Revised for the latest changes.
 
- -- Michael Biebl <biebl@debian.org>  Fri, 22 Aug 2008 22:42:45 +0200
+  [ Simon McVittie ]
+  * Newer svn snapshot
+
+ -- Simon McVittie <smcv@debian.org>  Thu, 04 Sep 2008 19:37:16 +0100
 
 network-manager-applet (0.6.6-2) unstable; urgency=low
 
