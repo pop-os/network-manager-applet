@@ -1,4 +1,4 @@
-network-manager-applet (0.7.0~svn876-1) UNRELEASED; urgency=low
+network-manager-applet (0.7.0~svn920-1) UNRELEASED; urgency=low
 
   [ Michael Biebl ]
   * debian/rules: Updated, switch to quilt as a patch system
@@ -12,7 +12,10 @@ network-manager-applet (0.7.0~svn876-1) UNRELEASED; urgency=low
   [ Simon McVittie ]
   * Newer svn snapshot
 
- -- Simon McVittie <smcv@debian.org>  Thu, 04 Sep 2008 19:37:16 +0100
+  [ Sjoerd Simons ]
+  * 
+
+ -- Sjoerd Simons <sjoerd@debian.org>  Thu, 02 Oct 2008 23:55:44 +0100
 
 network-manager-applet (0.6.6-2) unstable; urgency=low
 
