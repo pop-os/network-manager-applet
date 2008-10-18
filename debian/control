@@ -7,7 +7,7 @@ Build-Depends: debhelper (>= 5.0.0), cdbs, autotools-dev, intltool, quilt,
  libdbus-glib-1-dev (>= 0.72), libiw-dev(>= 27+28pre9),
  libgnome-keyring-dev, libglade2-dev, libgtk2.0-dev (>= 2.10),
  libglib2.0-dev (>= 2.10), libgconf2-dev, libnotify-dev (>= 0.4.3),
- libnm-util-dev (>= 0.7), libnm-glib-dev (>= 0.70~svn4191),
+ libnm-util-dev (>= 0.7), libnm-glib-dev (>= 0.7.0~svn4191),
  libnm-glib-vpn-dev (>= 0.7), network-manager-dev (>= 0.7), docbook-to-man,
  libpolkit-gnome-dev
 Standards-Version: 3.8.0
