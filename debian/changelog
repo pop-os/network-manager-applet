@@ -1,4 +1,4 @@
-network-manager-applet (0.7.0~svn953-1) UNRELEASED; urgency=low
+network-manager-applet (0.7.0~svn953-1) experimental; urgency=low
 
   [ Michael Biebl ]
   * debian/rules: Updated, switch to quilt as a patch system
@@ -17,8 +17,7 @@ network-manager-applet (0.7.0~svn953-1) UNRELEASED; urgency=low
     - Added. cope with a small NM 0.7 api change
   * debian/control: Build-Depend on nm-glib dev packages with new api
 
-
- -- Sjoerd Simons <sjoerd@debian.org>  Sat, 18 Oct 2008 21:17:13 +0100
+ -- Sjoerd Simons <sjoerd@debian.org>  Sat, 18 Oct 2008 21:40:05 +0100
 
 network-manager-applet (0.6.6-2) unstable; urgency=low
 
