@@ -1,8 +1,10 @@
 network-manager-applet (0.7.0-1) UNRELEASED; urgency=low
 
   * New upstream release.
+  * debian/patches/02-nm-api-update.patch:
+    - Removed. Fixed upstream
 
- -- Sjoerd Simons <sjoerd@debian.org>  Sat, 29 Nov 2008 23:03:22 +0100
+ -- Sjoerd Simons <sjoerd@debian.org>  Sat, 29 Nov 2008 23:16:11 +0100
 
 network-manager-applet (0.7.0~svn953-1) experimental; urgency=low
 
