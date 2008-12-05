@@ -1,0 +1,26 @@
+diff -urNd network-manager-applet-0.6.6.orig/nm-disconnect-wireless-on-exit.sh network-manager-applet-0.6.6/nm-disconnect-wireless-on-exit.sh
+--- network-manager-applet-0.6.6.orig/nm-disconnect-wireless-on-exit.sh	2008-08-24 13:59:20.000000000 +0100
++++ network-manager-applet-0.6.6/nm-disconnect-wireless-on-exit.sh	2008-08-24 13:59:59.000000000 +0100
+@@ -3,19 +3,19 @@
+ GCONF_TOOL=/usr/bin/gconftool-2
+ GCONF_PATH=/apps/NetworkManagerApplet/disconnect_wireless_on_exit
+ 
+-if test "x$1" == "x"; then
++if test "x$1" = "x"; then
+ 	echo -n "Current value is: "
+ 	$GCONF_TOOL --get $GCONF_PATH
+ 	exit 0
+ fi
+ 
+-if test $1 == "true" || test $1 == "yes"; then
++if test $1 = "true" || test $1 = "yes"; then
+ 	echo "Setting to true"
+ 	$GCONF_TOOL --set $GCONF_PATH --type=bool true
+ 	exit 0
+ fi
+ 
+-if test $1 == "false" || test $1 == "no"; then
++if test $1 = "false" || test $1 = "no"; then
+ 	echo "Setting to false"
+ 	$GCONF_TOOL --set $GCONF_PATH --type=bool false
+ 	exit 0
