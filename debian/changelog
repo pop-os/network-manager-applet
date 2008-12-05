@@ -6,6 +6,9 @@ network-manager-applet (0.6.6-3) unstable; urgency=low
   * debian/patches/05-fix_bashisms.patch
     - Fix bashisms in nm-disconnect-wireless-on-exit.sh. (Closes: #489638)
       Thanks Chris Lamb for the patch.
+  * debian/patches/06-po_fr.patch
+    - Fix typos in French translation. (Closes: #506254)
+      Thanks Cyril Brulebois for the patch.
 
  -- Michael Biebl <biebl@debian.org>  Fri, 05 Dec 2008 19:52:02 +0100
 

@@ -1,0 +1,31 @@
+--- a/po/fr.po
++++ b/po/fr.po
+@@ -262,7 +262,7 @@
+
+ #: ../src/applet.c:1091
+ msgid "Wired network connection"
+-msgstr "Connexion à un réseau cablé"
++msgstr "Connexion à un réseau câblé"
+
+ #: ../src/applet.c:1095
+ msgid "Connected to an Ad-Hoc wireless network"
+@@ -622,7 +622,7 @@
+ #: ../src/menu-items.c:88
+ #, c-format
+ msgid "Wired Network (%s)"
+-msgstr "Réseau cablé (%s)"
++msgstr "Réseau câblé (%s)"
+
+ #: ../src/menu-items.c:91
+ msgid "_Wired Network"
+@@ -800,8 +800,8 @@
+
+ #: ../src/wso-wpa-psk.c:178
+ msgid "WPA2 Personal"
+-msgstr "WPA2 Personel"
++msgstr "WPA2 Personnel"
+
+ #: ../src/wso-wpa-psk.c:180
+ msgid "WPA Personal"
+-msgstr "WPA Personel"
++msgstr "WPA Personnel"
