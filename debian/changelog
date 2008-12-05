@@ -1,3 +1,11 @@
+network-manager-applet (0.6.6-3) unstable; urgency=low
+
+  * debian/patches/04-autostart.patch
+    - Allow nm-applet to be started in desktop environments like XFCE or LXDE.
+      Only disable it for KDE, as we have k-n-m there. (Closes: #500119)
+
+ -- Michael Biebl <biebl@debian.org>  Fri, 05 Dec 2008 19:52:02 +0100
+
 network-manager-applet (0.6.6-2) unstable; urgency=low
 
   * debian/control
