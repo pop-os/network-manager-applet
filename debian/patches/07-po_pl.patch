@@ -1,0 +1,96 @@
+--- network-manager-applet-0.6.6_org/po/pl.po	2008-04-12 22:05:30.000000000 +0200
++++ network-manager-applet-0.6.6/po/pl.po	2008-04-13 00:05:56.000000000 +0200
+@@ -209,7 +209,7 @@
+ 
+ #: ../src/applet-dbus-devices.c:935
+ msgid "You are now connected to the wired network."
+-msgstr "Połączono z siecią kablową."
++msgstr "Połączono z siecią przewodową."
+ 
+ #: ../src/applet-dbus-devices.c:943
+ msgid "Connection Established"
+@@ -230,7 +230,7 @@
+ 
+ #: ../src/applet-dbus.c:281
+ msgid "Connection to the wired network failed."
+-msgstr "Połączenie z siecią kablową zakończone niepowodzeniem."
++msgstr "Połączenie z siecią przewodową zakończone niepowodzeniem."
+ 
+ #: ../src/applet.c:190
+ msgid "Error displaying connection information:"
+@@ -347,7 +347,7 @@
+ #: ../src/applet.c:916
+ #, c-format
+ msgid "Preparing device %s for the wired network..."
+-msgstr "Przygotowywanie urządzenia %s do sieci kablowej..."
++msgstr "Przygotowywanie urządzenia %s do sieci przewodowej..."
+ 
+ #: ../src/applet.c:918
+ #, c-format
+@@ -357,7 +357,7 @@
+ #: ../src/applet.c:926
+ #, c-format
+ msgid "Configuring device %s for the wired network..."
+-msgstr "Konfigurowanie urządzenia %s dla sieci kablowej..."
++msgstr "Konfigurowanie urządzenia %s dla sieci przewodowej..."
+ 
+ #: ../src/applet.c:928
+ #, c-format
+@@ -372,7 +372,7 @@
+ #: ../src/applet.c:944
+ #: ../src/applet.c:954
+ msgid "Requesting a network address from the wired network..."
+-msgstr "Wysyłanie żądania adresu do sieci kablowej..."
++msgstr "Wysyłanie żądania adresu do sieci przewodowej..."
+ 
+ #: ../src/applet.c:946
+ #: ../src/applet.c:956
+@@ -382,7 +382,7 @@
+ 
+ #: ../src/applet.c:964
+ msgid "Finishing connection to the wired network..."
+-msgstr "Zamykanie połączenia z siecią kablową..."
++msgstr "Zamykanie połączenia z siecią przewodową..."
+ 
+ #: ../src/applet.c:966
+ #, c-format
+@@ -408,7 +408,7 @@
+ 
+ #: ../src/applet.c:1106
+ msgid "Wired network connection"
+-msgstr "Połączenie kablowe"
++msgstr "Połączenie przewodowe"
+ 
+ #: ../src/applet.c:1109
+ msgid "Connected to an Ad-Hoc wireless network"
+@@ -857,11 +857,11 @@
+ #: ../src/menu-items.c:88
+ #, c-format
+ msgid "Wired Network (%s)"
+-msgstr "Sieć kablowa (%s)"
++msgstr "Sieć przewodowa (%s)"
+ 
+ #: ../src/menu-items.c:91
+ msgid "_Wired Network"
+-msgstr "Sieć _kablowa"
++msgstr "Sieć _przewodowa"
+ 
+ # NOTSURE mnogie
+ #: ../src/menu-items.c:163
+@@ -1079,14 +1079,14 @@
+ #~ msgid ""
+ #~ "unable to create netlink socket for monitoring wired ethernet devices - %s"
+ #~ msgstr ""
+-#~ "nie można utworzyć gniazda netlink dla monitorowania kablowych urządzeń "
++#~ "nie można utworzyć gniazda netlink dla monitorowania przewodowych urządzeń "
+ #~ "ethernet - %s"
+ #~ msgid ""
+ #~ "unable to bind to netlink socket for monitoring wired ethernet devices - %"
+ #~ "s"
+ #~ msgstr ""
+ #~ "nie można utworzyć dowiązania do gniazda netlink dla monitorowania "
+-#~ "kablowych urządzeń ethernet - %s"
++#~ "przewodowych urządzeń ethernet - %s"
+ #~ msgid "operation took too long"
+ #~ msgstr "operacja zajęła zbyt dużo czasu"
+ #~ msgid "received data from wrong type of sender"
