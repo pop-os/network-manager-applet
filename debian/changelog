@@ -1,6 +1,12 @@
 network-manager-applet (0.7.0-1) UNRELEASED; urgency=low
 
   * New upstream release.
+    - Notification popups can be disabled. (Closes: #446963)
+    - Notification applet correctly handles panel restarts. (Closes:# 458332)
+    - The nm-editor tool has been replaced by nm-connection-editor.
+      (Closes: #494148, #482107, #485651)
+    - Show the correct configuration for WPA Enterprise setups in
+      nm-connection-editor (Closes: #480039)  
 
   [ Sjoerd Simons ]
   * debian/patches/02-nm-api-update.patch:
