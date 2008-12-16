@@ -11,6 +11,8 @@ network-manager-applet (0.7.0-1) UNRELEASED; urgency=low
   * debian/copyright
     - More updates to the copyright file. The polkit-helper bits are licensed
       under the LGPL.
+  * debian/control
+    - Add network-manager-pptp-gnome to Suggests.
 
  -- Michael Biebl <biebl@debian.org>  Tue, 16 Dec 2008 06:20:48 +0100
 
