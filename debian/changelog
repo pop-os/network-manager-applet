@@ -10,8 +10,17 @@ network-manager-applet (0.7.0-1) UNRELEASED; urgency=low
 network-manager-applet (0.7.0~svn953-1) experimental; urgency=low
 
   [ Michael Biebl ]
-  * debian/rules: Updated, switch to quilt as a patch system
-  * debian/control: Updated
+  * Switch to quilt patch management system.
+  * debian/rules
+    - Set libexecdir to /usr/lib/NetworkManager, so nm-applet and
+      nm-connection-editor automatically find the VPN GUI plugins.
+  * debian/control:
+    - Bump Standards-Version to 3.8.0. No further changes.
+    - Demote Recommends on VPN plugins to Suggests.
+    - Bump Depends on network-manager to (>= 0.7).
+    - Add Build-Depends on libpolkit-gnome-dev.
+    - Add Recommends on policykit-gnome. This package is required if you want
+      to manage system connections.
   * debian/patches/01-dbus_access_nm_applet.patch: Updated
   * Removed obsolete patches:
     - debian/patches/02-hal_deprecated_keys.patch
