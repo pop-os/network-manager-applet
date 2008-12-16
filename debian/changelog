@@ -1,11 +1,18 @@
 network-manager-applet (0.7.0-1) UNRELEASED; urgency=low
 
   * New upstream release.
+
+  [ Sjoerd Simons ]
   * debian/patches/02-nm-api-update.patch:
     - Removed. Fixed upstream
   * debian/control: Tighten build-depends on nm related libraries
 
- -- Sjoerd Simons <sjoerd@debian.org>  Mon, 01 Dec 2008 12:44:21 +0000
+  [ Michael Biebl ]
+  * debian/copyright
+    - More updates to the copyright file. The polkit-helper bits are licensed
+      under the LGPL.
+
+ -- Michael Biebl <biebl@debian.org>  Tue, 16 Dec 2008 06:20:48 +0100
 
 network-manager-applet (0.7.0~svn953-1) experimental; urgency=low
 
