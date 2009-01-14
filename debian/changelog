@@ -1,4 +1,4 @@
-network-manager-applet (0.6.6-4) UNRELEASED; urgency=low
+network-manager-applet (0.6.6-4) unstable; urgency=low
 
   * debian/patches/08-manual_means_always_online.patch
     - manual-means-online: If there are interfaces that are not managed by
@@ -8,7 +8,7 @@ network-manager-applet (0.6.6-4) UNRELEASED; urgency=low
   * debian/patches/09-fix_assertion_because_of_unmanaged_devices.patch
     - Fix assertion failures for unmanaged devices.
 
- -- Michael Biebl <biebl@debian.org>  Fri, 05 Dec 2008 20:24:48 +0100
+ -- Michael Biebl <biebl@debian.org>  Wed, 14 Jan 2009 08:48:15 +0100
 
 network-manager-applet (0.6.6-3) unstable; urgency=low
 
