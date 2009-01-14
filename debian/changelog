@@ -1,3 +1,15 @@
+network-manager-applet (0.6.6-4) UNRELEASED; urgency=low
+
+  * debian/patches/08-manual_means_always_online.patch
+    - manual-means-online: If there are interfaces that are not managed by
+      NetworkManager because they have custom configuration in
+      /etc/network/interfaces, we assume to be online and show a wired network
+      icon indicating manual network configuration.
+  * debian/patches/09-fix_assertion_because_of_unmanaged_devices.patch
+    - Fix assertion failures for unmanaged devices.
+
+ -- Michael Biebl <biebl@debian.org>  Fri, 05 Dec 2008 20:24:48 +0100
+
 network-manager-applet (0.6.6-3) unstable; urgency=low
 
   * debian/patches/04-autostart.patch
