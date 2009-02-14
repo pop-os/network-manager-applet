@@ -4,7 +4,7 @@ Priority: optional
 Maintainer: Utopia Maintenance Team <pkg-utopia-maintainers@lists.alioth.debian.org>
 Uploaders: Michael Biebl <biebl@debian.org>
 Build-Depends: cdbs,
- debhelper (>= 5.0.0),
+ debhelper (>= 7),
  autotools-dev,
  intltool,
  quilt,
