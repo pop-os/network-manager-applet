@@ -1,4 +1,4 @@
-network-manager-applet (0.7.0-2) UNRELEASED; urgency=low
+network-manager-applet (0.7.0-2) experimental; urgency=low
 
   * debian/patches/01-dbus_access_nm_applet.patch
     - Remove bare send_interface directives to avoid non-deterministic allow
@@ -11,7 +11,7 @@ network-manager-applet (0.7.0-2) UNRELEASED; urgency=low
   * debian/compat
     - Bump to debhelper v7 compat mode.
 
- -- Michael Biebl <biebl@debian.org>  Fri, 06 Feb 2009 00:26:45 +0100
+ -- Michael Biebl <biebl@debian.org>  Sat, 14 Feb 2009 16:16:35 +0100
 
 network-manager-applet (0.7.0-1) experimental; urgency=low
 
