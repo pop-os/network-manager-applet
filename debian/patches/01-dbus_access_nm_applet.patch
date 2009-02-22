@@ -1,17 +1,45 @@
-Index: nm-applet.conf
+Index: network-manager-applet-0.7.0/nm-applet.conf
 ===================================================================
---- nm-applet.conf	(Revision 52)
-+++ nm-applet.conf	(Arbeitskopie)
-@@ -14,6 +14,12 @@
- 		<allow send_destination="org.freedesktop.NetworkManagerInfo"/>
-                 <allow send_interface="org.freedesktop.NetworkManagerInfo"/>
- 	</policy>
-+	<policy group="netdev">
-+		<allow own="org.freedesktop.NetworkManagerInfo"/>
-+
-+		<allow send_destination="org.freedesktop.NetworkManagerInfo"/>
-+                <allow send_interface="org.freedesktop.NetworkManagerInfo"/>
-+	</policy>
- 	<policy context="default">
- 		<deny own="org.freedesktop.NetworkManagerInfo"/>
+--- network-manager-applet-0.7.0.orig/nm-applet.conf	2007-12-12 11:17:44.000000000 +0100
++++ network-manager-applet-0.7.0/nm-applet.conf	2009-02-06 00:23:03.000000000 +0100
+@@ -6,27 +6,30 @@
+ 		<allow own="org.freedesktop.NetworkManagerUserSettings"/>
  
+ 		<allow send_destination="org.freedesktop.NetworkManagerUserSettings"/>
+-		<allow send_interface="org.freedesktop.NetworkManagerSettings"/>
+-
+-		<!-- Only root can get secrets -->
+-		<allow send_interface="org.freedesktop.NetworkManagerSettings.Secrets"/>
+ 	</policy>
+ 	<policy at_console="true">
+ 		<allow own="org.freedesktop.NetworkManagerUserSettings"/>
+ 
+ 		<allow send_destination="org.freedesktop.NetworkManagerUserSettings"/>
+-		<allow send_interface="org.freedesktop.NetworkManagerSettings"/>
+ 
+ 		<!-- Only root can get secrets -->
+-		<deny send_interface="org.freedesktop.NetworkManagerSettings.Secrets"/>
++		<deny send_destination="org.freedesktop.NetworkManagerUserSettings"
++		      send_interface="org.freedesktop.NetworkManagerSettings.Secrets"/>
+ 	</policy>
+-	<policy context="default">
+-		<deny own="org.freedesktop.NetworkManagerUserSettings"/>
++	<policy group="netdev">
++		<allow own="org.freedesktop.NetworkManagerUserSettings"/>
+ 
+ 		<allow send_destination="org.freedesktop.NetworkManagerUserSettings"/>
+-		<allow send_interface="org.freedesktop.NetworkManagerSettings"/>
++
+ 		<!-- Only root can get secrets -->
+-		<deny send_interface="org.freedesktop.NetworkManagerSettings.Secrets"/>
++		<allow send_destination="org.freedesktop.NetworkManagerUserSettings"
++		       send_interface="org.freedesktop.NetworkManagerSettings.Secrets"/>
++	</policy>
++	<policy context="default">
++		<deny send_destination="org.freedesktop.NetworkManagerUserSettings"/>
++
++		<allow send_destination="org.freedesktop.NetworkManagerUserSettings"
++		       send_interface="org.freedesktop.DBus.Introspectable"/>
+ 	</policy>
+ 
+ 	<limit name="max_replies_per_connection">512</limit>

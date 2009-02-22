@@ -1,3 +1,72 @@
+network-manager-applet (0.7.0-2) experimental; urgency=low
+
+  * debian/patches/01-dbus_access_nm_applet.patch
+    - Remove bare send_interface directives to avoid non-deterministic allow
+      messages with no interface. (Closes: #510728)
+    - Do not allow unpriviledged processes to ask for a users' connections.
+    - Allow introspection by default.
+  * debian/control
+    - Wrap build dependencies.
+    - Bump build dependency on debhelper to (>= 7).
+  * debian/compat
+    - Bump to debhelper v7 compat mode.
+
+ -- Michael Biebl <biebl@debian.org>  Sat, 14 Feb 2009 16:16:35 +0100
+
+network-manager-applet (0.7.0-1) experimental; urgency=low
+
+  * New upstream release.
+    - Notification popups can be disabled. (Closes: #446963)
+    - Notification applet correctly handles panel restarts. (Closes:# 458332)
+    - The nm-editor tool has been replaced by nm-connection-editor.
+      (Closes: #494148, #482107, #485651)
+    - Show the correct configuration for WPA Enterprise setups in
+      nm-connection-editor (Closes: #480039)  
+
+  [ Sjoerd Simons ]
+  * debian/patches/02-nm-api-update.patch:
+    - Removed. Fixed upstream
+  * debian/control: Tighten build-depends on nm related libraries
+
+  [ Michael Biebl ]
+  * debian/copyright
+    - More updates to the copyright file. The polkit-helper bits are licensed
+      under the LGPL.
+  * debian/control
+    - Add network-manager-pptp-gnome to Suggests.
+
+ -- Michael Biebl <biebl@debian.org>  Tue, 16 Dec 2008 06:50:06 +0100
+
+network-manager-applet (0.7.0~svn953-1) experimental; urgency=low
+
+  [ Michael Biebl ]
+  * Switch to quilt patch management system.
+  * debian/rules
+    - Set libexecdir to /usr/lib/NetworkManager, so nm-applet and
+      nm-connection-editor automatically find the VPN GUI plugins.
+  * debian/control:
+    - Bump Standards-Version to 3.8.0. No further changes.
+    - Demote Recommends on VPN plugins to Suggests.
+    - Bump Depends on network-manager to (>= 0.7).
+    - Add Build-Depends on libpolkit-gnome-dev.
+    - Add Recommends on policykit-gnome. This package is required if you want
+      to manage system connections.
+  * debian/patches/01-dbus_access_nm_applet.patch: Updated
+  * Removed obsolete patches:
+    - debian/patches/02-hal_deprecated_keys.patch
+    - debian/patches/03-nm_editor_category.patch
+  * debian/copyright: Revised for the latest changes.
+
+  [ Simon McVittie ]
+  * Newer svn snapshot
+
+  [ Sjoerd Simons ]
+  * debian/patches/02-nm-api-udate.patch
+    - Added. cope with a small NM 0.7 api change
+  * debian/control: Build-Depend on nm-glib dev packages with new api
+
+ -- Sjoerd Simons <sjoerd@debian.org>  Sat, 18 Oct 2008 21:40:05 +0100
+
 network-manager-applet (0.6.6-4) unstable; urgency=low
 
   * debian/patches/08-manual_means_always_online.patch
