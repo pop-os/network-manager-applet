@@ -1,5 +1,6 @@
-network-manager-applet (0.7.0-3) UNRELEASED; urgency=low
+network-manager-applet (0.7.0.97-1) UNRELEASED; urgency=low
 
+  * New upstream release.
   * Merge experimental branch into unstable.
 
  -- Michael Biebl <biebl@debian.org>  Sun, 22 Feb 2009 02:03:21 +0100
