@@ -1,7 +1,13 @@
 network-manager-applet (0.7.0.97-1) UNRELEASED; urgency=low
 
   * New upstream release.
-  * Merge experimental branch into unstable.
+  * Merge experimental branch into unstable. Remaining changes:
+    - Update 01-dbus_access_nm_applet.patch, changes have been merged upstream
+      and we only keep the "netdev" group related diff.
+    - Update 04-autostart.patch, do not start nm-applet in KDE.
+    - Remove 05-fix_bashisms.patch, obsolete.
+    - Remove 06-po_fr.patch, obsolete.
+    - Remove 07-po_pl.patch, merged upstream.
 
  -- Michael Biebl <biebl@debian.org>  Sun, 22 Feb 2009 02:03:21 +0100
 

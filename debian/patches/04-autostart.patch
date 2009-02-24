@@ -1,12 +1,11 @@
-Index: network-manager-applet-0.6.6/nm-applet.desktop
+Index: network-manager-applet-0.7.0.97/nm-applet.desktop.in
 ===================================================================
---- network-manager-applet-0.6.6.orig/nm-applet.desktop	2008-11-28 12:54:30.000000000 +0100
-+++ network-manager-applet-0.6.6/nm-applet.desktop	2008-11-28 12:55:00.000000000 +0100
-@@ -7,7 +7,7 @@
+--- network-manager-applet-0.7.0.97.orig/nm-applet.desktop.in	2009-02-22 02:19:09.000000000 +0100
++++ network-manager-applet-0.7.0.97/nm-applet.desktop.in	2009-02-22 02:19:13.000000000 +0100
+@@ -5,6 +5,7 @@
+ Exec=nm-applet --sm-disable
  Terminal=false
  Type=Application
- Categories=
--OnlyShowIn=GNOME;
 +NotShowIn=KDE;
  X-GNOME-Bugzilla-Bugzilla=GNOME
  X-GNOME-Bugzilla-Product=NetworkManager
