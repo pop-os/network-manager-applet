@@ -8,6 +8,8 @@ network-manager-applet (0.7.0.97-1) UNRELEASED; urgency=low
     - Remove 05-fix_bashisms.patch, obsolete.
     - Remove 06-po_fr.patch, obsolete.
     - Remove 07-po_pl.patch, merged upstream.
+    - Remove 08-manual_means_always_online.patch, obsolete.
+    - Remove 09-fix_assertion_because_of_unmanaged_devices.patch, obsolete.
   * debian/control
     - Bump Build-Depends on libnm-util-dev to (>= 0.7.0.97).
 
