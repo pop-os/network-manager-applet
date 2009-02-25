@@ -1,4 +1,4 @@
-network-manager-applet (0.7.0.97-1) UNRELEASED; urgency=low
+network-manager-applet (0.7.0.97-1) unstable; urgency=low
 
   * New upstream release.
   * Merge experimental branch into unstable. Remaining changes:
@@ -13,7 +13,7 @@ network-manager-applet (0.7.0.97-1) UNRELEASED; urgency=low
   * debian/control
     - Bump Build-Depends on libnm-util-dev to (>= 0.7.0.97).
 
- -- Michael Biebl <biebl@debian.org>  Sun, 22 Feb 2009 02:03:21 +0100
+ -- Michael Biebl <biebl@debian.org>  Wed, 25 Feb 2009 10:41:53 +0100
 
 network-manager-applet (0.7.0-2) experimental; urgency=low
 
