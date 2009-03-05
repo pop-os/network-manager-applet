@@ -1,4 +1,4 @@
-network-manager-applet (0.7.0.99-1) unstable; urgency=low
+network-manager-applet (0.7.0.99-1) UNRELEASED; urgency=low
 
   * New upstream release (0.7.1 rc3).
   * debian/control
