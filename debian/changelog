@@ -1,11 +1,11 @@
-network-manager-applet (0.7.0.99-1) UNRELEASED; urgency=low
+network-manager-applet (0.7.0.99-1) unstable; urgency=low
 
   * New upstream release (0.7.1 rc3).
   * debian/control
     - Upgrade Recommends on policykit-gnome to Depends which is required for
       editing system connections. (Closes: #507733)
 
- -- Michael Biebl <biebl@debian.org>  Thu, 05 Mar 2009 13:11:20 +0100
+ -- Michael Biebl <biebl@debian.org>  Thu, 05 Mar 2009 13:27:57 +0100
 
 network-manager-applet (0.7.0.97-1) unstable; urgency=low
 
