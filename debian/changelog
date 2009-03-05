@@ -4,6 +4,7 @@ network-manager-applet (0.7.0.99-1) UNRELEASED; urgency=low
   * debian/control
     - Upgrade Recommends on policykit-gnome to Depends which is required for
       editing system connections. (Closes: #507733)
+    - Bump Build-Depends on libnm-glib-dev to (>= 0.7.0.99).
 
  -- Michael Biebl <biebl@debian.org>  Thu, 05 Mar 2009 13:27:57 +0100
 
