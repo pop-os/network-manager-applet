@@ -1,4 +1,4 @@
-network-manager-applet (0.7.0.99-1) UNRELEASED; urgency=low
+network-manager-applet (0.7.0.99-1) unstable; urgency=low
 
   * New upstream release (0.7.1 rc3).
   * debian/control
@@ -6,7 +6,7 @@ network-manager-applet (0.7.0.99-1) UNRELEASED; urgency=low
       editing system connections. (Closes: #507733)
     - Bump Build-Depends on libnm-glib-dev to (>= 0.7.0.99).
 
- -- Michael Biebl <biebl@debian.org>  Thu, 05 Mar 2009 13:27:57 +0100
+ -- Michael Biebl <biebl@debian.org>  Thu, 05 Mar 2009 23:11:47 +0100
 
 network-manager-applet (0.7.0.97-1) unstable; urgency=low
 
