@@ -1,20 +1,20 @@
-Index: network-manager-applet-0.7.0.97/nm-applet.conf
-===================================================================
---- network-manager-applet-0.7.0.97.orig/nm-applet.conf	2009-02-05 21:06:32.000000000 +0100
-+++ network-manager-applet-0.7.0.97/nm-applet.conf	2009-02-22 02:09:38.000000000 +0100
-@@ -16,6 +16,15 @@
-                 <deny send_destination="org.freedesktop.NetworkManagerUserSettings"
-                       send_interface="org.freedesktop.NetworkManagerSettings.Secrets"/>
+diff --git a/nm-applet-dbus-126.conf b/nm-applet-dbus-126.conf
+index 2bd6b1a..fb3904b 100644
+--- a/nm-applet-dbus-126.conf
++++ b/nm-applet-dbus-126.conf
+@@ -32,6 +32,15 @@
+                 <allow send_destination="org.freedesktop.NetworkManagerUserSettings"
+                        send_interface="org.freedesktop.NetworkManagerSettings.Connection"/>
          </policy>
 +        <policy group="netdev">
 +                <allow own="org.freedesktop.NetworkManagerUserSettings"/>
 +
-+                <allow send_destination="org.freedesktop.NetworkManagerUserSettings"/>
++                <allow send_destination="org.freedesktop.NetworkManagerUserSettings"
++                       send_interface="org.freedesktop.NetworkManagerSettings"/>
 +
-+                <!-- Only root can get secrets -->
-+                <deny send_destination="org.freedesktop.NetworkManagerUserSettings"
-+                      send_interface="org.freedesktop.NetworkManagerSettings.Secrets"/>
++                <allow send_destination="org.freedesktop.NetworkManagerUserSettings"
++                       send_interface="org.freedesktop.NetworkManagerSettings.Connection"/>
 +        </policy>
          <policy context="default">
-                 <deny send_destination="org.freedesktop.NetworkManagerUserSettings"/>
- 
+                 <allow send_destination="org.freedesktop.NetworkManagerUserSettings"
+                        send_interface="org.freedesktop.DBus.Introspectable"/>
