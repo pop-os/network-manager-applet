@@ -1,4 +1,4 @@
-network-manager-applet (0.7.0.100-1) UNRELEASED; urgency=low
+network-manager-applet (0.7.0.100-1) unstable; urgency=low
 
   * New upstream release (0.7.1 rc4).
   * debian/patches/01-dbus_access_nm_applet.patch
@@ -6,7 +6,7 @@ network-manager-applet (0.7.0.100-1) UNRELEASED; urgency=low
   * debian/control
     - Bump Standards-Version to 3.8.1. No further changes.
 
- -- Michael Biebl <biebl@debian.org>  Wed, 08 Apr 2009 07:47:01 +0200
+ -- Michael Biebl <biebl@debian.org>  Wed, 08 Apr 2009 08:04:41 +0200
 
 network-manager-applet (0.7.0.99-1) unstable; urgency=low
 
