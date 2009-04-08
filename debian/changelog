@@ -3,6 +3,8 @@ network-manager-applet (0.7.0.100-1) UNRELEASED; urgency=low
   * New upstream release (0.7.1 rc4).
   * debian/patches/01-dbus_access_nm_applet.patch
     - Updated for latest upstream changes.
+  * debian/control
+    - Bump Standards-Version to 3.8.1. No further changes.
 
  -- Michael Biebl <biebl@debian.org>  Wed, 08 Apr 2009 07:47:01 +0200
 
