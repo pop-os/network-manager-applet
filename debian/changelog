@@ -1,8 +1,8 @@
-network-manager-applet (0.7.1-1) UNRELEASED; urgency=low
+network-manager-applet (0.7.1-1) unstable; urgency=low
 
   * New upstream release.
 
- -- Michael Biebl <biebl@debian.org>  Thu, 16 Apr 2009 19:31:50 +0200
+ -- Michael Biebl <biebl@debian.org>  Thu, 16 Apr 2009 23:55:05 +0200
 
 network-manager-applet (0.7.0.100-1) unstable; urgency=low
 
