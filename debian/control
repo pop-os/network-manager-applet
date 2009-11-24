@@ -22,7 +22,7 @@ Build-Depends: cdbs,
  network-manager-dev (>= 0.7.2),
  docbook-to-man,
  libpolkit-gnome-dev
-Standards-Version: 3.8.1
+Standards-Version: 3.8.3
 Vcs-Svn: svn://svn.debian.org/svn/pkg-utopia/packages/unstable/network-manager-applet
 Vcs-Browser: http://svn.debian.org/wsvn/pkg-utopia/packages/unstable/network-manager-applet
 Homepage: http://www.gnome.org/projects/NetworkManager/
