@@ -2,6 +2,8 @@ network-manager-applet (0.7.2-1) UNRELEASED; urgency=low
 
   * New upstream release.
     - Adds support for GTC (WPA2 Enterprise/PEAP). See #543454.
+  * debian/control
+    - Bump build dependencies on nm packages to (>= 0.7.2).
 
  -- Michael Biebl <biebl@debian.org>  Tue, 24 Nov 2009 01:39:34 +0100
 
