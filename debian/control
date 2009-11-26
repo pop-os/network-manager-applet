@@ -33,7 +33,8 @@ Section: gnome
 Depends: ${shlibs:Depends}, ${misc:Depends},
  network-manager (>= 0.7),
  policykit-gnome,
- gnome-icon-theme
+ gnome-icon-theme,
+ dbus-x11
 Recommends: notification-daemon,
  libpam-keyring
 Suggests: network-manager-openvpn-gnome,

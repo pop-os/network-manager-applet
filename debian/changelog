@@ -7,6 +7,7 @@ network-manager-applet (0.7.2-1) UNRELEASED; urgency=low
     - Bump build dependencies on nm packages to (>= 0.7.2).
     - Bump Standards-Version to 3.7.3. No further changes.
     - Add dependency on gnome-icon-theme. (Closes: #520437)
+    - Add dependency on dbus-x11. (Closes: #461436)
   * debian/nm-applet.sgml
     - Fix references to to other man pages. (Closes: #556427)
 
