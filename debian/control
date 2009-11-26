@@ -30,9 +30,14 @@ Homepage: http://www.gnome.org/projects/NetworkManager/
 Package: network-manager-gnome
 Architecture: any
 Section: gnome
-Depends: ${shlibs:Depends}, ${misc:Depends}, network-manager (>= 0.7), policykit-gnome
-Recommends: notification-daemon, libpam-keyring
-Suggests: network-manager-openvpn-gnome, network-manager-vpnc-gnome, network-manager-pptp-gnome
+Depends: ${shlibs:Depends}, ${misc:Depends},
+ network-manager (>= 0.7),
+ policykit-gnome
+Recommends: notification-daemon,
+ libpam-keyring
+Suggests: network-manager-openvpn-gnome,
+ network-manager-vpnc-gnome,
+ network-manager-pptp-gnome
 Description: network management framework (GNOME frontend)
  NetworkManager attempts to keep an active network connection available at all
  times. It is intended only for the desktop use-case, and is not intended for
