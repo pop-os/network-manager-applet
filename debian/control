@@ -32,7 +32,8 @@ Architecture: any
 Section: gnome
 Depends: ${shlibs:Depends}, ${misc:Depends},
  network-manager (>= 0.7),
- policykit-gnome
+ policykit-gnome,
+ gnome-icon-theme
 Recommends: notification-daemon,
  libpam-keyring
 Suggests: network-manager-openvpn-gnome,
