@@ -1,4 +1,4 @@
-network-manager-applet (0.7.2-1) UNRELEASED; urgency=low
+network-manager-applet (0.7.2-1) unstable; urgency=low
 
   * New upstream release.
     - Add support for GTC (WPA2 Enterprise/PEAP). See #543454.
@@ -11,7 +11,7 @@ network-manager-applet (0.7.2-1) UNRELEASED; urgency=low
   * debian/nm-applet.sgml
     - Fix references to to other man pages. (Closes: #556427)
 
- -- Michael Biebl <biebl@debian.org>  Tue, 24 Nov 2009 01:39:34 +0100
+ -- Michael Biebl <biebl@debian.org>  Thu, 26 Nov 2009 02:39:25 +0100
 
 network-manager-applet (0.7.1-1) unstable; urgency=low
 
