@@ -67,7 +67,7 @@ manpage.1: manpage.sgml
   <refsect1>
     <title>SEE ALSO</title>
 
-    <para>NetworkManager (1). nm-vpn-properties (1)</para>
+    <para>NetworkManager(8), nm-tool(1)</para>
 
     <para>More Information about NetworkManager can be found at
       http://www.gnome.org/projects/NetworkManager/ .</para>

@@ -16,13 +16,13 @@ Build-Depends: cdbs,
  libglib2.0-dev (>= 2.10),
  libgconf2-dev,
  libnotify-dev (>= 0.4.3),
- libnm-util-dev (>= 0.7.0),
- libnm-glib-dev (>= 0.7.0),
- libnm-glib-vpn-dev (>= 0.7.0),
- network-manager-dev (>= 0.7.0),
+ libnm-util-dev (>= 0.7.2),
+ libnm-glib-dev (>= 0.7.2),
+ libnm-glib-vpn-dev (>= 0.7.2),
+ network-manager-dev (>= 0.7.2),
  docbook-to-man,
  libpolkit-gnome-dev
-Standards-Version: 3.8.0
+Standards-Version: 3.8.3
 Vcs-Svn: svn://svn.debian.org/svn/pkg-utopia/packages/unstable/network-manager-applet
 Vcs-Browser: http://svn.debian.org/wsvn/pkg-utopia/packages/unstable/network-manager-applet
 Homepage: http://www.gnome.org/projects/NetworkManager/
@@ -30,9 +30,16 @@ Homepage: http://www.gnome.org/projects/NetworkManager/
 Package: network-manager-gnome
 Architecture: any
 Section: gnome
-Depends: ${shlibs:Depends}, ${misc:Depends}, network-manager (>= 0.7)
-Recommends: notification-daemon, libpam-keyring, policykit-gnome
-Suggests: network-manager-openvpn-gnome, network-manager-vpnc-gnome, network-manager-pptp-gnome
+Depends: ${shlibs:Depends}, ${misc:Depends},
+ network-manager (>= 0.7),
+ policykit-gnome,
+ gnome-icon-theme,
+ dbus-x11
+Recommends: notification-daemon,
+ libpam-keyring
+Suggests: network-manager-openvpn-gnome,
+ network-manager-vpnc-gnome,
+ network-manager-pptp-gnome
 Description: network management framework (GNOME frontend)
  NetworkManager attempts to keep an active network connection available at all
  times. It is intended only for the desktop use-case, and is not intended for

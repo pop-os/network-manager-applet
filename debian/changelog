@@ -1,3 +1,61 @@
+network-manager-applet (0.7.2-1) unstable; urgency=low
+
+  * New upstream release.
+    - Add support for GTC (WPA2 Enterprise/PEAP). See #543454.
+    - Add gconf schema for applet values. (Closes: #524004)
+  * debian/control
+    - Bump build dependencies on nm packages to (>= 0.7.2).
+    - Bump Standards-Version to 3.7.3. No further changes.
+    - Add dependency on gnome-icon-theme. (Closes: #520437)
+    - Add dependency on dbus-x11. (Closes: #461436)
+  * debian/nm-applet.sgml
+    - Fix references to to other man pages. (Closes: #556427)
+
+ -- Michael Biebl <biebl@debian.org>  Thu, 26 Nov 2009 02:39:25 +0100
+
+network-manager-applet (0.7.1-1) unstable; urgency=low
+
+  * New upstream release.
+
+ -- Michael Biebl <biebl@debian.org>  Thu, 16 Apr 2009 23:55:05 +0200
+
+network-manager-applet (0.7.0.100-1) unstable; urgency=low
+
+  * New upstream release (0.7.1 rc4).
+  * debian/patches/01-dbus_access_nm_applet.patch
+    - Updated for latest upstream changes.
+  * debian/control
+    - Bump Standards-Version to 3.8.1. No further changes.
+
+ -- Michael Biebl <biebl@debian.org>  Wed, 08 Apr 2009 08:04:41 +0200
+
+network-manager-applet (0.7.0.99-1) unstable; urgency=low
+
+  * New upstream release (0.7.1 rc3).
+  * debian/control
+    - Upgrade Recommends on policykit-gnome to Depends which is required for
+      editing system connections. (Closes: #507733)
+    - Bump Build-Depends on libnm-glib-dev to (>= 0.7.0.99).
+
+ -- Michael Biebl <biebl@debian.org>  Thu, 05 Mar 2009 23:11:47 +0100
+
+network-manager-applet (0.7.0.97-1) unstable; urgency=low
+
+  * New upstream release.
+  * Merge experimental branch into unstable. Remaining changes:
+    - Update 01-dbus_access_nm_applet.patch, changes have been merged upstream
+      and we only keep the "netdev" group related diff.
+    - Update 04-autostart.patch, do not start nm-applet in KDE.
+    - Remove 05-fix_bashisms.patch, obsolete.
+    - Remove 06-po_fr.patch, obsolete.
+    - Remove 07-po_pl.patch, merged upstream.
+    - Remove 08-manual_means_always_online.patch, obsolete.
+    - Remove 09-fix_assertion_because_of_unmanaged_devices.patch, obsolete.
+  * debian/control
+    - Bump Build-Depends on libnm-util-dev to (>= 0.7.0.97).
+
+ -- Michael Biebl <biebl@debian.org>  Wed, 25 Feb 2009 10:41:53 +0100
+
 network-manager-applet (0.7.0-2) experimental; urgency=low
 
   * debian/patches/01-dbus_access_nm_applet.patch
@@ -66,6 +124,35 @@ network-manager-applet (0.7.0~svn953-1) experimental; urgency=low
   * debian/control: Build-Depend on nm-glib dev packages with new api
 
  -- Sjoerd Simons <sjoerd@debian.org>  Sat, 18 Oct 2008 21:40:05 +0100
+
+network-manager-applet (0.6.6-4) unstable; urgency=low
+
+  * debian/patches/08-manual_means_always_online.patch
+    - manual-means-online: If there are interfaces that are not managed by
+      NetworkManager because they have custom configuration in
+      /etc/network/interfaces, we assume to be online and show a wired network
+      icon indicating manual network configuration.
+  * debian/patches/09-fix_assertion_because_of_unmanaged_devices.patch
+    - Fix assertion failures for unmanaged devices.
+
+ -- Michael Biebl <biebl@debian.org>  Wed, 14 Jan 2009 08:48:15 +0100
+
+network-manager-applet (0.6.6-3) unstable; urgency=low
+
+  * debian/patches/04-autostart.patch
+    - Allow nm-applet to be started in desktop environments like XFCE or LXDE.
+      Only disable it for KDE, as we have k-n-m there. (Closes: #500119)
+  * debian/patches/05-fix_bashisms.patch
+    - Fix bashisms in nm-disconnect-wireless-on-exit.sh. (Closes: #489638)
+      Thanks Chris Lamb for the patch.
+  * debian/patches/06-po_fr.patch
+    - Fix typos in French translation. (Closes: #506254)
+      Thanks Cyril Brulebois for the patch.
+  * debian/patches/07-po_pl.patch
+    - Improvements to Polish translation. (Closes: #450588)
+      Thanks Radosław Warowny for the patch.
+
+ -- Michael Biebl <biebl@debian.org>  Fri, 05 Dec 2008 19:52:02 +0100
 
 network-manager-applet (0.6.6-2) unstable; urgency=low
 

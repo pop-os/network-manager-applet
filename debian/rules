@@ -9,7 +9,7 @@ DEB_INSTALL_DOCS_ALL := CONTRIBUTING
 
 DEB_CONFIGURE_LIBEXECDIR := "\$$(prefix)/lib/NetworkManager"
 
-DEB_CONFIGURE_SCRIPT_ENV += LDFLAGS="-Wl,-z,defs -Wl,--as-needed"
+LDFLAGS += -Wl,-z,defs -Wl,--as-needed
 
 clean::
 	rm -f debian/*.1
