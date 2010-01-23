@@ -1,4 +1,4 @@
-network-manager-applet (0.7.2-2) UNRELEASED; urgency=low
+network-manager-applet (0.7.2-2) unstable; urgency=low
 
   * debian/control
     - Bump Build-Depends on libdbus-glib-1-dev to (>= 0.74).
