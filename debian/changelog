@@ -17,6 +17,10 @@ network-manager-applet (0.7.999-1) UNRELEASED; urgency=low
       mobile phone and make it available for NetworkManager.
   * debian/rules
     - Don't install libtool *.la and static library files.
+  * debian/patches/02-CVE-2009-4145_fix_leakage_of_secrets_on_system_bus.patch
+    - Remove, fixed upstream.
+  * debian/patches/03-CVE-2009-4144_fix_ca_cert_handling_after_cert_file_deletion.patch
+    - Remove, fixed upstream.
 
  -- Michael Biebl <biebl@debian.org>  Sat, 23 Jan 2010 04:37:14 +0100
 
