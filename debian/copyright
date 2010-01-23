@@ -1,9 +1,11 @@
 This package was debianized by Michael Biebl <biebl@debian.org> on
 Mon, 27 Aug 2007 08:03:51 +0200.
 
-It was downloaded from http://ftp.gnome.org/pub/GNOME/sources/network-manager-applet/
+It was downloaded from
+http://ftp.gnome.org/pub/GNOME/sources/network-manager-applet/
 
 Upstream author:
+
     Dan Williams <dcbw@redhat.com>
 
 
@@ -11,9 +13,8 @@ All files if not specified otherwise are licensed under the following terms:
 
 Copyright:
 
-    Copyright (C) 2004 - 2008 Red Hat, Inc.
+    Copyright (C) 2004 - 2009 Red Hat, Inc.
     Copyright (C) 2005 - 2008 Novell, Inc.
-    Copyright (C) 2003 - 2005 Jouni Malinen <jkmaline@cc.hut.fi>
     Copyright (C) 2001, 2002 Free Software Foundation
 
 License:
@@ -37,11 +38,14 @@ Public License can be found in `/usr/share/common-licenses/GPL'.
 
 
 
-src/polkit-helper/*.[ch]:
+src/utils/nmn-mobile-providers.[ch]
+src/gnome-bluetooth/network-manager-applet.c
 
 Copyright:
 
-    Copyright (C) 2007 David Zeuthen, <david@fubar.dk>
+    Copyright (C) 2009 Novell, Inc.
+    Copyright (C) 2009 Red Hat, Inc.
+    Copyright (C) 2009 Bastien Nocera <hadess@hadess.net>
 
 License:
 

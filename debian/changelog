@@ -21,6 +21,8 @@ network-manager-applet (0.7.999-1) UNRELEASED; urgency=low
     - Remove, fixed upstream.
   * debian/patches/03-CVE-2009-4144_fix_ca_cert_handling_after_cert_file_deletion.patch
     - Remove, fixed upstream.
+  * debian/copyright
+    - Review and update copyright file.
 
  -- Michael Biebl <biebl@debian.org>  Sat, 23 Jan 2010 04:37:14 +0100
 
