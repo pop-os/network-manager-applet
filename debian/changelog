@@ -4,6 +4,13 @@ network-manager-applet (0.7.999-1) UNRELEASED; urgency=low
     - Port to PolicyKit 1. (Closes: #549503)
     - Mobile broadband assisstant.
     - Bluetooth support integrating with gnome-bluetooth.
+  * debian/control
+    - Bump Build-Depends on libglib2.0-dev to (>= 2.16).
+    - Bump Build-Depends on libnm-* packages to (>= 0.7.999).
+    - Replace Build-Depends on libpolkit-gnome-dev with
+      libpolkit-gobject-1-dev (>= 0.92).
+    - Add Build-Depends on libgnome-bluetooth-dev (>= 2.27.6).
+
 
  -- Michael Biebl <biebl@debian.org>  Sat, 23 Jan 2010 04:37:14 +0100
 

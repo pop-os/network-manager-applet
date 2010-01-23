@@ -14,15 +14,16 @@ Build-Depends:
  libgnome-keyring-dev,
  libglade2-dev,
  libgtk2.0-dev (>= 2.14),
- libglib2.0-dev (>= 2.10),
+ libglib2.0-dev (>= 2.16),
  libgconf2-dev,
  libnotify-dev (>= 0.4.3),
- libnm-util-dev (>= 0.7.2),
- libnm-glib-dev (>= 0.7.2),
- libnm-glib-vpn-dev (>= 0.7.2),
- network-manager-dev (>= 0.7.2),
+ libnm-util-dev (>= 0.7.999),
+ libnm-glib-dev (>= 0.7.999),
+ libnm-glib-vpn-dev (>= 0.7.999),
+ network-manager-dev (>= 0.7.999),
  docbook-to-man,
- libpolkit-gnome-dev
+ libpolkit-gobject-1-dev (>= 0.92),
+ libgnome-bluetooth-dev (>= 2.27.6)
 Standards-Version: 3.8.3
 Vcs-Svn: svn://svn.debian.org/pkg-utopia/packages/unstable/network-manager-applet/
 Vcs-Browser: http://svn.debian.org/wsvn/pkg-utopia/packages/unstable/network-manager-applet/
