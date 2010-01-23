@@ -3,16 +3,17 @@ Section: gnome
 Priority: optional
 Maintainer: Utopia Maintenance Team <pkg-utopia-maintainers@lists.alioth.debian.org>
 Uploaders: Michael Biebl <biebl@debian.org>
-Build-Depends: cdbs,
+Build-Depends:
+ cdbs,
  debhelper (>= 7),
  autotools-dev,
  intltool,
  quilt,
- libdbus-glib-1-dev (>= 0.72),
+ libdbus-glib-1-dev (>= 0.74),
  libiw-dev(>= 27+28pre9),
  libgnome-keyring-dev,
  libglade2-dev,
- libgtk2.0-dev (>= 2.10),
+ libgtk2.0-dev (>= 2.14),
  libglib2.0-dev (>= 2.10),
  libgconf2-dev,
  libnotify-dev (>= 0.4.3),
@@ -23,21 +24,25 @@ Build-Depends: cdbs,
  docbook-to-man,
  libpolkit-gnome-dev
 Standards-Version: 3.8.3
-Vcs-Svn: svn://svn.debian.org/svn/pkg-utopia/packages/unstable/network-manager-applet
-Vcs-Browser: http://svn.debian.org/wsvn/pkg-utopia/packages/unstable/network-manager-applet
+Vcs-Svn: svn://svn.debian.org/pkg-utopia/packages/unstable/network-manager-applet/
+Vcs-Browser: http://svn.debian.org/wsvn/pkg-utopia/packages/unstable/network-manager-applet/
 Homepage: http://www.gnome.org/projects/NetworkManager/
 
 Package: network-manager-gnome
 Architecture: any
 Section: gnome
-Depends: ${shlibs:Depends}, ${misc:Depends},
+Depends:
+ ${shlibs:Depends},
+ ${misc:Depends},
  network-manager (>= 0.7),
  policykit-gnome,
  gnome-icon-theme,
  dbus-x11
-Recommends: notification-daemon,
+Recommends:
+ notification-daemon,
  libpam-keyring
-Suggests: network-manager-openvpn-gnome,
+Suggests:
+ network-manager-openvpn-gnome,
  network-manager-vpnc-gnome,
  network-manager-pptp-gnome
 Description: network management framework (GNOME frontend)

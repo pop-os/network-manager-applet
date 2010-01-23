@@ -1,2 +1,4 @@
 01-dbus_access_nm_applet.patch
+02-CVE-2009-4145_fix_leakage_of_secrets_on_system_bus.patch
+03-CVE-2009-4144_fix_ca_cert_handling_after_cert_file_deletion.patch
 04-autostart.patch

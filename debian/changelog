@@ -1,3 +1,20 @@
+network-manager-applet (0.7.2-2) unstable; urgency=low
+
+  * debian/control
+    - Bump Build-Depends on libdbus-glib-1-dev to (>= 0.74).
+    - Bump Build-Depends on libgtk2.0-dev to (>= 2.14).
+  * debian/patches/02-CVE-2009-4145_fix_leakage_of_secrets_on_system_bus.patch
+    - Fix potential leakage of secrets onto the system bus. (Closes: #563371)
+      Patch backported from upstream Git.
+      Fixes: CVE-2009-4145
+  * debian/patches/03-CVE-2009-4144_fix_ca_cert_handling_after_cert_file_deletion.patch
+    - Fix possible connections to spoofed WPA Enterprise networks when
+      certification file is deleted. (Closes: #560067)
+      Patch backported from upstream Git.
+      Fixes: CVE-2009-4144
+
+ -- Michael Biebl <biebl@debian.org>  Fri, 22 Jan 2010 23:33:06 +0100
+
 network-manager-applet (0.7.2-1) unstable; urgency=low
 
   * New upstream release.
