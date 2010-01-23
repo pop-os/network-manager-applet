@@ -1,3 +1,12 @@
+network-manager-applet (0.7.999-1) UNRELEASED; urgency=low
+
+  * New upstream release (0.8 rc3).
+    - Port to PolicyKit 1. (Closes: #549503)
+    - Mobile broadband assisstant.
+    - Bluetooth support integrating with gnome-bluetooth.
+
+ -- Michael Biebl <biebl@debian.org>  Sat, 23 Jan 2010 04:37:14 +0100
+
 network-manager-applet (0.7.2-2) unstable; urgency=low
 
   * debian/control
