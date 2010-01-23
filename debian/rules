@@ -17,3 +17,6 @@ clean::
 
 build/network-manager-gnome::
 	/usr/bin/docbook-to-man debian/nm-applet.sgml > debian/nm-applet.1
+
+common-binary-post-install-arch::
+	find debian/network-manager-gnome/ -name \*.la -o -name \*.a | xargs rm -f

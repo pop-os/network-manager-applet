@@ -15,6 +15,8 @@ network-manager-applet (0.7.999-1) UNRELEASED; urgency=low
       configuration of your mobile broadband service provider.
     - Add Recommends on gnome-bluetooth which allows to easily setup your
       mobile phone and make it available for NetworkManager.
+  * debian/rules
+    - Don't install libtool *.la and static library files.
 
  -- Michael Biebl <biebl@debian.org>  Sat, 23 Jan 2010 04:37:14 +0100
 
