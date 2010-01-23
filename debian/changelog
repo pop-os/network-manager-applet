@@ -1,4 +1,4 @@
-network-manager-applet (0.7.999-1) unstable; urgency=low
+network-manager-applet (0.7.999-1) experimental; urgency=low
 
   * New upstream release (0.8 rc3).
     - Port to PolicyKit 1. (Closes: #549503)
