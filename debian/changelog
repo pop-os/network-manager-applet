@@ -10,7 +10,11 @@ network-manager-applet (0.7.999-1) UNRELEASED; urgency=low
     - Replace Build-Depends on libpolkit-gnome-dev with
       libpolkit-gobject-1-dev (>= 0.92).
     - Add Build-Depends on libgnome-bluetooth-dev (>= 2.27.6).
-
+    - Replace Depends on policykit-gnome with policykit-1-gnome.
+    - Add Recommends on mobile-broadband-provider-info for easier
+      configuration of your mobile broadband service provider.
+    - Add Recommends on gnome-bluetooth which allows to easily setup your
+      mobile phone and make it available for NetworkManager.
 
  -- Michael Biebl <biebl@debian.org>  Sat, 23 Jan 2010 04:37:14 +0100
 

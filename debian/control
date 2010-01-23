@@ -36,12 +36,14 @@ Depends:
  ${shlibs:Depends},
  ${misc:Depends},
  network-manager (>= 0.7),
- policykit-gnome,
+ policykit-1-gnome,
  gnome-icon-theme,
  dbus-x11
 Recommends:
  notification-daemon,
- libpam-keyring
+ libpam-keyring,
+ mobile-broadband-provider-info,
+ gnome-bluetooth
 Suggests:
  network-manager-openvpn-gnome,
  network-manager-vpnc-gnome,
