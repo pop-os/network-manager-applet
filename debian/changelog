@@ -1,3 +1,9 @@
+network-manager-applet (0.7.999-2) unstable; urgency=low
+
+  * Upload to unstable.
+
+ -- Michael Biebl <biebl@debian.org>  Tue, 26 Jan 2010 17:33:18 +0100
+
 network-manager-applet (0.7.999-1) experimental; urgency=low
 
   * New upstream release (0.8 rc3).
