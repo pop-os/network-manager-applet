@@ -1,4 +1,4 @@
-network-manager-applet (0.8.0.999-1) UNRELEASED; urgency=low
+network-manager-applet (0.8.0.999-1) unstable; urgency=low
 
   * New upstream release (0.8.1 rc1).
   * Switch to source format 3.0 (quilt).
@@ -9,7 +9,7 @@ network-manager-applet (0.8.0.999-1) UNRELEASED; urgency=low
     - Bump Standards-Version to 3.9.0. No further changes.
     - Bump Build-Depends on libnm-* packages to (>= 0.8.0.999).
 
- -- Michael Biebl <biebl@debian.org>  Thu, 08 Jul 2010 04:41:19 +0200
+ -- Michael Biebl <biebl@debian.org>  Fri, 09 Jul 2010 00:45:16 +0200
 
 network-manager-applet (0.8-1) unstable; urgency=low
 
