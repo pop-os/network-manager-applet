@@ -1,6 +1,10 @@
 network-manager-applet (0.8.0.999-1) UNRELEASED; urgency=low
 
   * New upstream release (0.8.1 rc1).
+  * Switch to source format 3.0 (quilt).
+    - Add debian/source/format.
+    - Drop Build-Depends on quilt.
+    - Remove /usr/share/cdbs/1/rules/patchsys-quilt.mk from debian/rules.
 
  -- Michael Biebl <biebl@debian.org>  Thu, 08 Jul 2010 04:41:19 +0200
 

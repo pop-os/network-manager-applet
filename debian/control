@@ -8,7 +8,6 @@ Build-Depends:
  debhelper (>= 7),
  autotools-dev,
  intltool,
- quilt,
  libdbus-glib-1-dev (>= 0.74),
  libiw-dev(>= 27+28pre9),
  libgnome-keyring-dev,
