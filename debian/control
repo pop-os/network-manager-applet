@@ -23,7 +23,7 @@ Build-Depends:
  docbook-to-man,
  libpolkit-gobject-1-dev (>= 0.92),
  libgnome-bluetooth-dev (>= 2.27.6)
-Standards-Version: 3.8.4
+Standards-Version: 3.9.0
 Vcs-Svn: svn://svn.debian.org/pkg-utopia/packages/unstable/network-manager-applet/
 Vcs-Browser: http://svn.debian.org/wsvn/pkg-utopia/packages/unstable/network-manager-applet/
 Homepage: http://www.gnome.org/projects/NetworkManager/
@@ -34,7 +34,7 @@ Section: gnome
 Depends:
  ${shlibs:Depends},
  ${misc:Depends},
- network-manager (>= 0.7),
+ network-manager (>= 0.8),
  policykit-1-gnome,
  gnome-icon-theme,
  dbus-x11
