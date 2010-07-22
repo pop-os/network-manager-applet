@@ -3,6 +3,8 @@ network-manager-applet (0.8.1-1) UNRELEASED; urgency=low
   * New upstream release.
   * debian/control
     - Bump Build-Depends on libnm-* packages to (>= 0.8.1).
+    - Bump Depends on network-manager to (>= 0.8.1) so the "Enable Networking"
+      option works correctly. (Closes: #588618)
 
  -- Michael Biebl <biebl@debian.org>  Thu, 22 Jul 2010 01:49:28 +0200
 
