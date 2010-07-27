@@ -1,4 +1,4 @@
-network-manager-applet (0.8.1-1) UNRELEASED; urgency=low
+network-manager-applet (0.8.1-1) unstable; urgency=low
 
   * New upstream release.
   * debian/control
@@ -7,7 +7,7 @@ network-manager-applet (0.8.1-1) UNRELEASED; urgency=low
       option works correctly. (Closes: #588618, #570169)
     - Bump Standards-Version to 3.9.1. No further changes.
 
- -- Michael Biebl <biebl@debian.org>  Thu, 22 Jul 2010 01:49:28 +0200
+ -- Michael Biebl <biebl@debian.org>  Tue, 27 Jul 2010 09:51:13 +0200
 
 network-manager-applet (0.8.0.999-1) unstable; urgency=low
 
