@@ -1,4 +1,4 @@
-network-manager-applet (0.8.1-2) UNRELEASED; urgency=low
+network-manager-applet (0.8.1-2) unstable; urgency=low
 
   * debian/patches/02-hide-pin-in-pin-puk-dialog-by-default.patch
     - Hide PIN in PIN/PUK dialog by default. (Closes: #592364)
@@ -7,7 +7,7 @@ network-manager-applet (0.8.1-2) UNRELEASED; urgency=low
     - Ensure Enter closes the PIN/PUK dialog.
       Patch cherry-picked from upstream Git.
 
- -- Michael Biebl <biebl@debian.org>  Tue, 27 Jul 2010 10:22:29 +0200
+ -- Michael Biebl <biebl@debian.org>  Wed, 17 Nov 2010 23:49:29 +0100
 
 network-manager-applet (0.8.1-1) unstable; urgency=low
 
