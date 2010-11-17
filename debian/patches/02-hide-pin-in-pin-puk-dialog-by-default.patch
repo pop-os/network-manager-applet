@@ -1,0 +1,189 @@
+commit cda2ffae25954d28fbce803b05cf65cfb2a6cd46
+Author: Dan Williams <dcbw@redhat.com>
+Date:   Sat Aug 7 22:21:21 2010 -0500
+
+    mobile: hide PIN in PIN/PUK dialog by default (bgo #620480) (rh #615085) (lp:589139)
+
+Index: network-manager-applet-0.8.1/src/applet-device-gsm.c
+===================================================================
+--- network-manager-applet-0.8.1.orig/src/applet-device-gsm.c	2010-07-12 21:40:12.000000000 +0200
++++ network-manager-applet-0.8.1/src/applet-device-gsm.c	2010-11-17 23:14:39.843528212 +0100
+@@ -947,6 +947,7 @@
+ {
+ 	const char *header = NULL;
+ 	const char *title = NULL;
++	const char *show_pass_label = NULL;
+ 	char *desc = NULL;
+ 	const char *label1 = NULL, *label2 = NULL, *label3 = NULL;
+ 	const char *device_desc;
+@@ -970,6 +971,7 @@
+ 		label1 = _("PIN code:");
+ 		label1_min = 4;
+ 		label1_max = 8;
++		show_pass_label = _("Show PIN code");
+ 		unlock_code = UNLOCK_CODE_PIN;
+ 	} else if (!strcmp (info->unlock_required, "sim-puk")) {
+ 		title = _("SIM PUK unlock required");
+@@ -983,6 +985,7 @@
+ 		label2_min = label3_min = 4;
+ 		label2_max = label3_max = 8;
+ 		match23 = TRUE;
++		show_pass_label = _("Show PIN/PUK codes");
+ 		unlock_code = UNLOCK_CODE_PUK;
+ 	} else {
+ 		g_warning ("Unhandled unlock request for '%s'", info->unlock_required);
+@@ -990,7 +993,7 @@
+ 	}
+ 
+ 	/* Construct and run the dialog */
+-	info->dialog = applet_mobile_pin_dialog_new (title, header, desc);
++	info->dialog = applet_mobile_pin_dialog_new (title, header, desc, show_pass_label);
+ 	g_free (desc);
+ 	g_return_if_fail (info->dialog != NULL);
+ 
+Index: network-manager-applet-0.8.1/src/applet-dialogs.c
+===================================================================
+--- network-manager-applet-0.8.1.orig/src/applet-dialogs.c	2010-06-26 03:46:37.000000000 +0200
++++ network-manager-applet-0.8.1/src/applet-dialogs.c	2010-11-17 23:14:39.859524662 +0100
+@@ -831,10 +831,32 @@
+ 	gtk_dialog_response (dialog, GTK_RESPONSE_CANCEL);
+ }
+ 
++static void
++show_toggled_cb (GtkWidget *button, gpointer user_data)
++{
++	GtkWidget *dialog = GTK_WIDGET (user_data);
++	gboolean show;
++	GtkWidget *widget;
++	GladeXML *xml;
++
++	xml = g_object_get_data (G_OBJECT (dialog), "xml");
++	g_return_if_fail (xml != NULL);
++
++	show = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (button));
++
++	widget = glade_xml_get_widget (xml, "code1_entry");
++	gtk_entry_set_visibility (GTK_ENTRY (widget), show);
++	widget = glade_xml_get_widget (xml, "code2_entry");
++	gtk_entry_set_visibility (GTK_ENTRY (widget), show);
++	widget = glade_xml_get_widget (xml, "code3_entry");
++	gtk_entry_set_visibility (GTK_ENTRY (widget), show);
++}
++
+ GtkWidget *
+ applet_mobile_pin_dialog_new (const char *title,
+                               const char *header,
+-                              const char *desc)
++                              const char *desc,
++                              const char *show_password_label)
+ {
+ 	char *glade_file, *str;
+ 	GladeXML *xml;
+@@ -844,6 +866,7 @@
+ 	g_return_val_if_fail (title != NULL, NULL);
+ 	g_return_val_if_fail (header != NULL, NULL);
+ 	g_return_val_if_fail (desc != NULL, NULL);
++	g_return_val_if_fail (show_password_label != NULL, NULL);
+ 
+ 	glade_file = g_build_filename (GLADEDIR, "applet.glade", NULL);
+ 	g_return_val_if_fail (glade_file != NULL, NULL);
+@@ -870,6 +893,12 @@
+ 	widget = glade_xml_get_widget (xml, "desc_label");
+ 	gtk_label_set_text (GTK_LABEL (widget), desc);
+ 
++	widget = glade_xml_get_widget (xml, "show_password_checkbutton");
++	gtk_button_set_label (GTK_BUTTON (widget), show_password_label);
++	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (widget), FALSE);
++	g_signal_connect (widget, "toggled", G_CALLBACK (show_toggled_cb), dialog);
++	show_toggled_cb (widget, dialog);
++
+ 	g_signal_connect (dialog, "delete-event", G_CALLBACK (mpd_cancel_dialog), NULL);
+ 
+ 	mpd_entry_changed (NULL, dialog);
+@@ -1099,6 +1128,9 @@
+ 	gtk_widget_set_sensitive (widget, FALSE);
+ 	widget = glade_xml_get_widget (xml, "unlock_cancel_button");
+ 	gtk_widget_set_sensitive (widget, FALSE);
++
++	widget = glade_xml_get_widget (xml, "show_password_checkbutton");
++	gtk_widget_set_sensitive (widget, FALSE);
+ }
+ 
+ void
+@@ -1139,5 +1171,8 @@
+ 	gtk_widget_set_sensitive (widget, TRUE);
+ 	widget = glade_xml_get_widget (xml, "unlock_cancel_button");
+ 	gtk_widget_set_sensitive (widget, TRUE);
++
++	widget = glade_xml_get_widget (xml, "show_password_checkbutton");
++	gtk_widget_set_sensitive (widget, TRUE);
+ }
+ 
+Index: network-manager-applet-0.8.1/src/applet-dialogs.h
+===================================================================
+--- network-manager-applet-0.8.1.orig/src/applet-dialogs.h	2010-06-26 03:46:37.000000000 +0200
++++ network-manager-applet-0.8.1/src/applet-dialogs.h	2010-11-17 23:14:39.863524333 +0100
+@@ -41,7 +41,8 @@
+ 
+ GtkWidget *applet_mobile_pin_dialog_new (const char *title,
+                                          const char *header,
+-                                         const char *desc);
++                                         const char *desc,
++                                         const char *show_password_label);
+ 
+ void applet_mobile_pin_dialog_present (GtkWidget *dialog, gboolean now);
+ 
+Index: network-manager-applet-0.8.1/src/applet.glade
+===================================================================
+--- network-manager-applet-0.8.1.orig/src/applet.glade	2010-06-26 03:46:37.000000000 +0200
++++ network-manager-applet-0.8.1/src/applet.glade	2010-11-17 23:14:39.867525122 +0100
+@@ -1874,7 +1874,7 @@
+                     <child>
+                       <widget class="GtkTable" id="table14">
+                         <property name="visible">True</property>
+-                        <property name="n_rows">4</property>
++                        <property name="n_rows">5</property>
+                         <property name="n_columns">2</property>
+                         <property name="column_spacing">6</property>
+                         <property name="row_spacing">6</property>
+@@ -1954,6 +1954,9 @@
+                           <placeholder/>
+                         </child>
+                         <child>
++                          <placeholder/>
++                        </child>
++                        <child>
+                           <widget class="GtkHBox" id="progress_hbox">
+                             <property name="visible">True</property>
+                             <property name="spacing">6</property>
+@@ -1984,13 +1987,28 @@
+                           <packing>
+                             <property name="left_attach">1</property>
+                             <property name="right_attach">2</property>
+-                            <property name="top_attach">3</property>
+-                            <property name="bottom_attach">4</property>
++                            <property name="top_attach">4</property>
++                            <property name="bottom_attach">5</property>
+                             <property name="x_options">GTK_FILL</property>
+                             <property name="y_options">GTK_FILL</property>
+                             <property name="y_padding">6</property>
+                           </packing>
+                         </child>
++                        <child>
++                          <widget class="GtkCheckButton" id="show_password_checkbutton">
++                            <property name="label" translatable="yes">Show it</property>
++                            <property name="visible">True</property>
++                            <property name="can_focus">True</property>
++                            <property name="receives_default">False</property>
++                            <property name="draw_indicator">True</property>
++                          </widget>
++                          <packing>
++                            <property name="left_attach">1</property>
++                            <property name="right_attach">2</property>
++                            <property name="top_attach">3</property>
++                            <property name="bottom_attach">4</property>
++                          </packing>
++                        </child>
+                       </widget>
+                     </child>
+                   </widget>
