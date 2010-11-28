@@ -1,0 +1,2563 @@
+# translation of network-manager-applet.master.ta.po to Tamil
+# Tamil translation of network-manager-applet.
+# Copyright (C) 2009 network-manager-applet's COPYRIGHT HOLDER
+# This file is distributed under the same license as the network-manager-applet package.
+#
+# ifelix <ifelix25@gmail.com>, 2009.
+# I. Felix <ifelix@redhat.com>, 2009, 2010.
+# I Felix <ifelix@redhat.com>, 2010.
+msgid ""
+msgstr ""
+"Project-Id-Version: network-manager-applet.master.ta\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-05-18 18:03+0530\n"
+"PO-Revision-Date: 2010-05-19 13:08+0530\n"
+"Last-Translator: I Felix <ifelix@redhat.com>\n"
+"Language-Team: Tamil <kde-i18n-doc@kde.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n!=1);\\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"X-Generator: Lokalize 1.0\n"
+
+#: ../nm-applet.desktop.in.h:1
+msgid "Control your network connections"
+msgstr "உங்களது பிணையத்தின் இணைப்புகளை கட்டுப்படுத்து"
+
+#: ../nm-applet.desktop.in.h:2
+msgid "Network Manager"
+msgstr "பிணைய மேலாளர்"
+
+#: ../nm-applet.schemas.in.h:1
+msgid "Disable WiFi Create"
+msgstr "செயல்நீக்க WiFiஐ உருவாக்கு"
+
+#: ../nm-applet.schemas.in.h:2
+msgid "Disable connected notifications"
+msgstr "செயல்படுத்தாத இணைக்கப்பட்ட அறிவிப்புகள்"
+
+#: ../nm-applet.schemas.in.h:3
+msgid "Disable disconnected notifications"
+msgstr "செயல்படுத்தாத இணைக்கப்படாத அறிவிப்புகள்"
+
+#: ../nm-applet.schemas.in.h:4
+msgid "Set this to TRUE to disable notifications when connecting to a network."
+msgstr "Set this to TRUE to disable notifications when connecting to a network."
+
+#: ../nm-applet.schemas.in.h:5
+msgid "Set this to TRUE to disable notifications when disconnecting from a network."
+msgstr "Set this to TRUE to disable notifications when disconnecting from a network."
+
+#: ../nm-applet.schemas.in.h:6
+msgid ""
+"Set this to TRUE to disable notifications when wireless networks are "
+"available."
+msgstr ""
+"Set this to TRUE to disable notifications when wireless networks are "
+"available."
+
+#: ../nm-applet.schemas.in.h:7
+msgid "Set to TRUE to disable creation of adhoc networks when using the applet."
+msgstr ""
+"அப்லெட்டைப் பயன்படுத்தும் போது சரி என்பதற்கு செயல்நீக்க உருவாக்கமான  adhoc பிணையங்களை "
+"அமைக்கவும்."
+
+#: ../nm-applet.schemas.in.h:8
+msgid "Stamp"
+msgstr "முத்திரை"
+
+#: ../nm-applet.schemas.in.h:9
+msgid "Suppress networks available notifications"
+msgstr "கிடைக்கக்கூடிய அறிவிப்புகளின் பிணையத்தை குறைக்கிறது"
+
+#: ../nm-applet.schemas.in.h:10
+msgid "Used to determine whether settings should be migrated to a new version."
+msgstr "Used to determine whether settings should be migrated to a new version."
+
+#: ../nm-connection-editor.desktop.in.h:1
+msgid "Manage and change your network connection settings"
+msgstr "உங்களின் பிணைய இணைப்பு அமைவுகளை மேலாண்மை மற்றும் மாற்றவும்"
+
+#: ../nm-connection-editor.desktop.in.h:2
+#: ../src/connection-editor/nm-connection-editor.glade.h:7
+msgid "Network Connections"
+msgstr "பிணைய இணைப்புகள்"
+
+#: ../src/applet-dbus-manager.c:165
+#, c-format
+msgid "An instance of nm-applet is already running.\n"
+msgstr "nm-அப்லெட்டின் ஒரு எடுத்துக்காட்டு ஏற்கனவே இயங்கிக் கொண்டிருக்கிறது.\n"
+
+#: ../src/applet-dbus-manager.c:167
+#, c-format
+msgid "Could not acquire the %s service. (%d)\n"
+msgstr "%s சேவையை பெற முடியவில்லை. (%d)\n"
+
+#: ../src/applet-device-bt.c:174 ../src/applet-device-cdma.c:332
+#: ../src/applet-device-gsm.c:375 ../src/applet-device-wired.c:241
+#: ../src/applet-device-wifi.c:773
+msgid "Available"
+msgstr "கிடைக்கக்கூடி"
+
+#: ../src/applet-device-bt.c:200 ../src/applet-device-cdma.c:374
+#: ../src/applet-device-gsm.c:417 ../src/applet-device-wired.c:270
+#, c-format
+msgid "You are now connected to '%s'."
+msgstr "நீங்கள் இப்போது '%s'உடன் இணைப்படுகிறார்கள்."
+
+#: ../src/applet-device-bt.c:204 ../src/applet-device-cdma.c:378
+#: ../src/applet-device-gsm.c:421 ../src/applet-device-wired.c:274
+#: ../src/applet-device-wifi.c:1214
+msgid "Connection Established"
+msgstr "இணைப்பு ஸ்தாபிக்கப்படுகிறது"
+
+#: ../src/applet-device-bt.c:205
+msgid "You are now connected to the mobile broadband network."
+msgstr "இப்போது மொபைல் ப்ராட்பேண்ட் பிணையத்தோடு இணைக்கப்படுகிறது."
+
+#: ../src/applet-device-bt.c:231 ../src/applet-device-cdma.c:413
+#: ../src/applet-device-gsm.c:456
+#, c-format
+msgid "Preparing mobile broadband connection '%s'..."
+msgstr "Preparing mobile broadband connection '%s'..."
+
+#: ../src/applet-device-bt.c:234 ../src/applet-device-cdma.c:416
+#: ../src/applet-device-gsm.c:459
+#, c-format
+msgid "Configuring mobile broadband connection '%s'..."
+msgstr "கட்டமைக்கப்பட்ட மொபைல் பிராட்பேண்டுஇணைப்பு '%s'..."
+
+#: ../src/applet-device-bt.c:237 ../src/applet-device-cdma.c:419
+#: ../src/applet-device-gsm.c:462
+#, c-format
+msgid "User authentication required for mobile broadband connection '%s'..."
+msgstr "'%s'ன் மொபைல் பிராட்பேண்டு இணைப்புக்கு பயனர் அங்கீகாரம் தேவைப்படுகிறது..."
+
+#: ../src/applet-device-bt.c:240 ../src/applet-device-cdma.c:422
+#: ../src/applet-device-gsm.c:465 ../src/applet.c:2266
+#, c-format
+msgid "Requesting a network address for '%s'..."
+msgstr "ஒரு பிணைய முகவரி '%s'காக தேவைப்படுகிறது..."
+
+#: ../src/applet-device-bt.c:244 ../src/applet-device-cdma.c:439
+#: ../src/applet-device-gsm.c:477
+#, c-format
+msgid "Mobile broadband connection '%s' active"
+msgstr "மொபைல் பிராட்பேண்டு இணைப்பு '%s' செயல்பாட்டிலுள்ளது"
+
+#: ../src/applet-device-cdma.c:184 ../src/connection-editor/page-mobile.c:621
+#: ../src/mb-menu-item.c:55
+msgid "CDMA"
+msgstr "CDMA"
+
+#: ../src/applet-device-cdma.c:281 ../src/applet-device-gsm.c:325
+#, c-format
+msgid "Mobile Broadband (%s)"
+msgstr "மொபைல் பிராட்பேண்டு (%s)"
+
+#: ../src/applet-device-cdma.c:283 ../src/applet-device-gsm.c:327
+#: ../src/connection-editor/page-mobile.c:318
+#: ../src/connection-editor/nm-connection-editor.glade.h:6
+#: ../src/connection-editor/nm-connection-list.c:1401
+msgid "Mobile Broadband"
+msgstr "மொபைல் பிராட்பேண்டு"
+
+#. Default connection item
+#: ../src/applet-device-cdma.c:345
+msgid "New Mobile Broadband (CDMA) connection..."
+msgstr "புதிய மொபைல் பிராட்பேண்டு (CDMA) இணைப்பு..."
+
+#: ../src/applet-device-cdma.c:379
+msgid "You are now connected to the CDMA network."
+msgstr "இப்போது நீங்கள் CDMA பிணையத்தோடு இணைக்கப்பட்டுள்ளீர்கள்."
+
+#: ../src/applet-device-cdma.c:434 ../src/applet-device-gsm.c:472
+#, c-format
+msgid "Mobile broadband connection '%s' active: (%d%%%s%s)"
+msgstr "மொபைல் பிராட்பேண்டு இணைப்பு '%s' செயல்பாட்டிலுள்ளது : (%d%%%s%s)"
+
+#: ../src/applet-device-cdma.c:437 ../src/applet-device-gsm.c:475
+msgid "roaming"
+msgstr "ரோமிங் "
+
+#: ../src/applet-device-gsm.c:210 ../src/connection-editor/page-mobile.c:624
+#: ../src/mb-menu-item.c:60
+msgid "GSM"
+msgstr "GSM"
+
+#. Default connection item
+#: ../src/applet-device-gsm.c:388
+msgid "New Mobile Broadband (GSM) connection..."
+msgstr "புதிய மொபைல் பிராட்பேண்டு (GSM) இணைப்பு..."
+
+#: ../src/applet-device-gsm.c:422
+msgid "You are now connected to the GSM network."
+msgstr "இப்போது நீங்கள் GSM பிணையத்தோடு இணைக்கப்படுகிறது."
+
+#: ../src/applet-device-gsm.c:704
+msgid "PIN code required"
+msgstr "PIN குறியீடு தேவைப்படுகிறது"
+
+#: ../src/applet-device-gsm.c:706
+msgid "PUK code required"
+msgstr "PUK குறியீடு தேவைப்படுகிறது"
+
+#: ../src/applet-device-gsm.c:715
+msgid "PIN code is needed for the mobile broadband device"
+msgstr "PIN குறியீடு மொபைல் பிராட்பேண்டு சாதனத்திற்கு தேவைப்படுகிறது"
+
+#: ../src/applet-device-gsm.c:717
+msgid "PUK code is needed for the mobile broadband device"
+msgstr "PUK குறியீடு மொபைல் பிராட்பேண்டு சாதனத்திற்கு தேவைப்படுகிறது"
+
+#: ../src/applet-device-gsm.c:850
+msgid "Wrong PIN code; please contact your provider."
+msgstr "தவறான PIN குறியீடு; உங்கள் வழங்கியை தொடர்பு கொள்ளவும்."
+
+#: ../src/applet-device-gsm.c:873
+msgid "Wrong PUK code; please contact your provider."
+msgstr "தவறான PUK குறியீடு; உங்கள் வழங்கியை தொடர்பு கொள்ளவும்."
+
+#. Start the spinner to show the progress of the unlock
+#: ../src/applet-device-gsm.c:900
+msgid "Sending unlock code..."
+msgstr "பூட்டுநீக்கிய குறியீட்டை அனுப்புகிறது..."
+
+#: ../src/applet-device-gsm.c:959
+msgid "SIM PIN unlock required"
+msgstr "SIM PIN பூட்டைநீக்க தேவைப்படுகிறது"
+
+#: ../src/applet-device-gsm.c:960
+msgid "SIM PIN Unlock Required"
+msgstr "SIM PIN பூட்டைநீக்க தேவைப்படுகிறது"
+
+#. FIXME: some warning about # of times you can enter incorrect PIN
+#: ../src/applet-device-gsm.c:962
+#, c-format
+msgid ""
+"The mobile broadband device '%s' requires a SIM PIN code before it can be "
+"used."
+msgstr ""
+"பயன்படுத்தும் முன் மொபைல் ப்ராட்பாண்ட் சாதனம் '%s'க்கு ஒரு SIM PIN குறியீடு "
+"தேவைப்படுகிறது."
+
+#: ../src/applet-device-gsm.c:963
+msgid "PIN code:"
+msgstr "PIN குறியீடு:"
+
+#: ../src/applet-device-gsm.c:968
+msgid "SIM PUK unlock required"
+msgstr "SIM PUK பூட்டைநீக்க தேவைப்படுகிறது"
+
+#: ../src/applet-device-gsm.c:969
+msgid "SIM PUK Unlock Required"
+msgstr "SIM PUK பூட்டுநீக்க தேவைப்படுகிறது"
+
+#. FIXME: some warning about # of times you can enter incorrect PUK
+#: ../src/applet-device-gsm.c:971
+#, c-format
+msgid ""
+"The mobile broadband device '%s' requires a SIM PUK code before it can be "
+"used."
+msgstr ""
+"பயன்படுத்தும் முன் மொபைல் ப்ராட்பாண்ட் சாதனம் '%s'க்கு ஒரு SIM PUK குறியீடு "
+"தேவைப்படுகிறது."
+
+#: ../src/applet-device-gsm.c:972
+msgid "PUK code:"
+msgstr "PUK குறியீடு:"
+
+#: ../src/applet-device-gsm.c:974
+msgid "New PIN code:"
+msgstr "புதிய PIN குறியீடு:"
+
+#: ../src/applet-device-gsm.c:975
+msgid "Re-enter new PIN code:"
+msgstr "புதிய PIN குறியீட்டை மீண்டும்-உள்ளிடவும்:"
+
+#: ../src/applet-device-wired.c:63
+msgid "Auto Ethernet"
+msgstr "தானியக்கி ஈதர்நெட்"
+
+#: ../src/applet-device-wired.c:206
+#, c-format
+msgid "Wired Networks (%s)"
+msgstr "ஒயர்டு பிணையங்கள் (%s)"
+
+#: ../src/applet-device-wired.c:208
+#, c-format
+msgid "Wired Network (%s)"
+msgstr "ஒயர்டு பிணையம் (%s)"
+
+#: ../src/applet-device-wired.c:211
+msgid "Wired Networks"
+msgstr "ஒயர்டு பிணையங்கள்"
+
+#: ../src/applet-device-wired.c:213
+msgid "Wired Network"
+msgstr "ஒயர்டு பிணையம்"
+
+#. Notify user of unmanaged or unavailable device
+#: ../src/applet-device-wired.c:233 ../src/applet.c:1305
+msgid "disconnected"
+msgstr "துணைடிக்கப்பட்டது"
+
+#: ../src/applet-device-wired.c:275
+msgid "You are now connected to the wired network."
+msgstr "இப்போது ஒயர்டு பிணையத்தோடு இணைக்கப்படுகிறது."
+
+#: ../src/applet-device-wired.c:301
+#, c-format
+msgid "Preparing wired network connection '%s'..."
+msgstr "ஒயர்டு பிணைய இணைப்பிற்கு '%s' தயாராகிறது..."
+
+#: ../src/applet-device-wired.c:304
+#, c-format
+msgid "Configuring wired network connection '%s'..."
+msgstr "கட்டமைக்கப்பட்ட ஒயர்டு பிணைய இணைப்பு '%s'..."
+
+#: ../src/applet-device-wired.c:307
+#, c-format
+msgid "User authentication required for wired network connection '%s'..."
+msgstr "'%s'ன் ஒயர்டு பிணைய இணைப்புக்கு பயனர் அங்கீகாரம் தேவைப்படுகிறது..."
+
+#: ../src/applet-device-wired.c:310
+#, c-format
+msgid "Requesting a wired network address for '%s'..."
+msgstr "'%s'காக ஒரு ஒயர்டு பிணைய முகவரி தேவைப்படுகிறது..."
+
+#: ../src/applet-device-wired.c:314
+#, c-format
+msgid "Wired network connection '%s' active"
+msgstr "ஒயர்டு பிணைய இணைப்பு '%s' செயலிபடுகிறது"
+
+#: ../src/applet-device-wired.c:565
+msgid "DSL authentication"
+msgstr "DSL அங்கீகாரம்"
+
+#: ../src/applet-device-wifi.c:87
+msgid "_Connect to Hidden Wireless Network..."
+msgstr "மறைக்கப்பட்ட ஒயர்லெஸ் பிணையத்துடன் இணைக்கவும் (_C)..."
+
+#: ../src/applet-device-wifi.c:120
+msgid "Create _New Wireless Network..."
+msgstr "புதிய ஒயர்லெஸ்பிணையத்தை உருவாக்கவும் (_N)..."
+
+#: ../src/applet-device-wifi.c:705
+#, c-format
+msgid "Wireless Networks (%s)"
+msgstr "ஒயர்லெஸ் பிணையங்கள் (%s)"
+
+#: ../src/applet-device-wifi.c:707
+#, c-format
+msgid "Wireless Network (%s)"
+msgstr "ஒயர்லெஸ் பிணையங்கள் (%s)"
+
+#: ../src/applet-device-wifi.c:709
+msgid "Wireless Network"
+msgid_plural "Wireless Networks"
+msgstr[0] "ஒயர்லெஸ் பிணையங்கள்ஒயர்லெஸ் பிணையங்கள்ஒயர்லெஸ் பிணையங்கள்"
+msgstr[1] "ஒயர்லெஸ் பிணையம்"
+
+#: ../src/applet-device-wifi.c:739
+msgid "wireless is disabled"
+msgstr "ஒயர்லெஸை செயல்நீக்கு"
+
+#: ../src/applet-device-wifi.c:800
+msgid "More networks"
+msgstr "நிறைய பிணையங்கள்"
+
+#: ../src/applet-device-wifi.c:1004
+msgid "Wireless Networks Available"
+msgstr "ஒயர்லெஸ் பிணையங்கள் இருக்கிறது"
+
+#: ../src/applet-device-wifi.c:1005
+msgid "Click on this icon to connect to a wireless network"
+msgstr "ஒரு ஒயர்லெஸ் பிணையத்தை இணைப்பதற்கு இந்த சின்னத்தை கிளிக் செய்யவும்"
+
+#: ../src/applet-device-wifi.c:1008 ../src/applet.c:677
+msgid "Don't show this message again"
+msgstr "இந்த செய்தியை மீண்டும் காட்டாதே"
+
+#: ../src/applet-device-wifi.c:1212
+#, c-format
+msgid "You are now connected to the wireless network '%s'."
+msgstr "'%s' ஒயர்லெஸ் பிணையத்தோடு இப்போது நீங்கள் இணைக்கப்படுகிறீர்கள்."
+
+#: ../src/applet-device-wifi.c:1213 ../src/applet-device-wifi.c:1244
+msgid "(none)"
+msgstr "(ஒன்றுமில்லை)"
+
+#: ../src/applet-device-wifi.c:1254
+#, c-format
+msgid "Preparing wireless network connection '%s'..."
+msgstr "'%s'காக ஒயர்லெஸ் பிணையம் தயாராகிறதுடுகிறது..."
+
+#: ../src/applet-device-wifi.c:1257
+#, c-format
+msgid "Configuring wireless network connection '%s'..."
+msgstr "'%s' ஒயர்லெஸ் பிணைய இணைப்பு கட்டமைக்கிறது..."
+
+#: ../src/applet-device-wifi.c:1260
+#, c-format
+msgid "User authentication required for wireless network '%s'..."
+msgstr "'%s'ன் ஒயர்லெஸ் பிணைய இணைப்புக்கு பயனர் அங்கீகாரம் தேவைப்படுகிறது..."
+
+#: ../src/applet-device-wifi.c:1263
+#, c-format
+msgid "Requesting a wireless network address for '%s'..."
+msgstr "'%s'காக ஒரு ஒயர்லெஸ் பிணைய முகவரி தேவைப்படுகிறது..."
+
+#: ../src/applet-device-wifi.c:1283
+#, c-format
+msgid "Wireless network connection '%s' active: %s (%d%%)"
+msgstr "ஒயர்லெஸ் பிணைய இணைப்பு '%s' செயல்படுகிறது: %s (%d%%)"
+
+#: ../src/applet-device-wifi.c:1287
+#, c-format
+msgid "Wireless network connection '%s' active"
+msgstr "ஒயர்லெஸ் பிணைய இணைப்பு '%s' செயல்படுகிறது"
+
+#: ../src/applet-dialogs.c:56
+msgid "Error displaying connection information:"
+msgstr "பிழை காட்டும் இணைப்பு தகவல்:"
+
+#: ../src/applet-dialogs.c:87
+#: ../src/connection-editor/page-wireless-security.c:284
+#: ../src/wireless-dialog.c:962
+#: ../src/wireless-security/wireless-security.c:341
+msgid "LEAP"
+msgstr "LEAP"
+
+#: ../src/applet-dialogs.c:89
+msgid "Dynamic WEP"
+msgstr "மாறும்           WEP"
+
+#: ../src/applet-dialogs.c:91 ../src/applet-dialogs.c:192
+#: ../src/applet-dialogs.c:194
+msgid "WPA/WPA2"
+msgstr "WPA/WPA2"
+
+#: ../src/applet-dialogs.c:190
+msgid "WEP"
+msgstr "WEP"
+
+#: ../src/applet-dialogs.c:198
+#: ../src/connection-editor/page-wireless-security.c:238
+#: ../src/wireless-dialog.c:919
+msgctxt "No wifi security used"
+msgid "None"
+msgstr "ஒன்றுமில்லை"
+
+#: ../src/applet-dialogs.c:207
+msgctxt "No wired security used"
+msgid "None"
+msgstr "ஒன்றுமில்லை"
+
+#: ../src/applet-dialogs.c:210
+msgctxt "Unknown/unrecognized wired or wifi security"
+msgid "Unknown"
+msgstr "தெரியாத"
+
+#: ../src/applet-dialogs.c:280 ../src/applet-dialogs.c:382
+#, c-format
+msgid "%u Mb/s"
+msgstr "%u Mb/s"
+
+#: ../src/applet-dialogs.c:282 ../src/applet-dialogs.c:384
+#: ../src/applet-dialogs.c:421 ../src/applet-dialogs.c:439
+#: ../src/applet-dialogs.c:450
+msgid "Unknown"
+msgstr "தெரியாத"
+
+#: ../src/applet-dialogs.c:313
+#, c-format
+msgid "Ethernet (%s)"
+msgstr "ஈதர்நெட் (%s)"
+
+#: ../src/applet-dialogs.c:315
+#, c-format
+msgid "802.11 WiFi (%s)"
+msgstr "802.11 WiFi (%s)"
+
+#: ../src/applet-dialogs.c:317
+#, c-format
+msgid "GSM (%s)"
+msgstr "GSM (%s)"
+
+#: ../src/applet-dialogs.c:319
+#, c-format
+msgid "CDMA (%s)"
+msgstr "CDMA (%s)"
+
+#: ../src/applet-dialogs.c:324
+msgid "Interface:"
+msgstr "முகப்பு:"
+
+#: ../src/applet-dialogs.c:340
+msgid "Hardware Address:"
+msgstr "வன்பொருள் முகவரி:"
+
+#: ../src/applet-dialogs.c:350
+msgid "Driver:"
+msgstr "இயக்கி:"
+
+#: ../src/applet-dialogs.c:388
+msgid "Speed:"
+msgstr "வேகம்:"
+
+#: ../src/applet-dialogs.c:397
+msgid "Security:"
+msgstr "பாதுகாப்பு:"
+
+#: ../src/applet-dialogs.c:419
+msgid "IP Address:"
+msgstr "IP முகவரி:"
+
+#: ../src/applet-dialogs.c:437
+msgid "Broadcast Address:"
+msgstr "ஒளிப்பரப்பு முகவரி:"
+
+#: ../src/applet-dialogs.c:448
+msgid "Subnet Mask:"
+msgstr "துணை இணைய மறைப்பு:"
+
+#: ../src/applet-dialogs.c:460
+msgid "Default Route:"
+msgstr "முன்னிருப்பு வழி:"
+
+#: ../src/applet-dialogs.c:474
+msgid "Primary DNS:"
+msgstr "முதன்மை DNS:"
+
+#: ../src/applet-dialogs.c:485
+msgid "Secondary DNS:"
+msgstr "இரண்டாவது DNS:"
+
+#. Shouldn't really happen but ...
+#: ../src/applet-dialogs.c:548
+msgid "No valid active connections found!"
+msgstr "சரியான செயல்பாட்டிலுள்ள இணைப்புகள் காணப்படுவில்லை!"
+
+#: ../src/applet-dialogs.c:674
+msgid ""
+"Copyright © 2004-2008 Red Hat, Inc.\n"
+"Copyright © 2005-2008 Novell, Inc."
+msgstr ""
+"Copyright © 2004-2008 Red Hat, Inc.\n"
+"Copyright © 2005-2008 Novell, Inc."
+
+#: ../src/applet-dialogs.c:676
+msgid "Notification area applet for managing your network devices and connections."
+msgstr "உங்கள் பிணைய சாதனங்கள் மற்றும் இணைப்புகளை நிர்வகிக்கும் அறிவிப்பு பகுதி ஆப்லெட்"
+
+#: ../src/applet-dialogs.c:678
+msgid "NetworkManager Website"
+msgstr "பிணைய மேலாளர் இணையத்தளம்"
+
+#: ../src/applet-dialogs.c:681
+msgid "translator-credits"
+msgstr "மொழிபெயர்ப்பாளர்-சன்மானம்"
+
+#: ../src/applet-dialogs.c:697
+msgid "Missing resources"
+msgstr "விடிபட்ட மூலங்கள்"
+
+#: ../src/applet-dialogs.c:723
+msgid "Mobile broadband network password"
+msgstr "மொபைல் பிராட்பேண்டு பிணையத்தின் கடவுச்சொல்"
+
+#: ../src/applet-dialogs.c:732
+#, c-format
+msgid "A password is required to connect to '%s'."
+msgstr "'%s'ஐ இணைப்பதற்கு ஒரு கடவுச்சொல் தேவைப்படுகிறது."
+
+#: ../src/applet-dialogs.c:750
+msgid "Password:"
+msgstr "கடவுச்சொல்:"
+
+#: ../src/applet.c:790
+#, c-format
+msgid ""
+"\n"
+"The VPN connection '%s' failed because the network connection was "
+"interrupted."
+msgstr ""
+"\n"
+"VPN இணைப்பு '%s' தோல்வியுற்றது ஏனெனில் பிணைய இணைப்பு தடங்கல் செய்கிறது."
+
+#: ../src/applet.c:793
+#, c-format
+msgid ""
+"\n"
+"The VPN connection '%s' failed because the VPN service stopped unexpectedly."
+msgstr ""
+"\n"
+"VPN இணைப்பு '%s' தோல்வியுற்றது ஏனெனில் VPN சேவை எதிர்பாரமல் நிறுத்தப்பட்டது."
+
+#: ../src/applet.c:796
+#, c-format
+msgid ""
+"\n"
+"The VPN connection '%s' failed because the VPN service returned invalid "
+"configuration."
+msgstr ""
+"\n"
+"The VPN connection '%s' failed because the VPN service returned invalid "
+"configuration."
+
+#: ../src/applet.c:799
+#, c-format
+msgid ""
+"\n"
+"The VPN connection '%s' failed because the connection attempt timed out."
+msgstr ""
+"\n"
+"The VPN connection '%s' failed because the connection attempt timed out."
+
+#: ../src/applet.c:802
+#, c-format
+msgid ""
+"\n"
+"The VPN connection '%s' failed because the VPN service did not start in time."
+msgstr ""
+"\n"
+"VPN இணைப்பு '%s' தோல்வியுற்றது ஏனெனில் VPN சேவை நேரத்திற்கு துவக்கவில்லை."
+
+#: ../src/applet.c:805
+#, c-format
+msgid ""
+"\n"
+"The VPN connection '%s' failed because the VPN service failed to start."
+msgstr ""
+"\n"
+"VPN இணைப்பு '%s' தோல்வியுற்றது ஏனெனில் VPN சேவை துவக்கவில்லை."
+
+#: ../src/applet.c:808
+#, c-format
+msgid ""
+"\n"
+"The VPN connection '%s' failed because there were no valid VPN secrets."
+msgstr ""
+"\n"
+"VPN இணைப்பு '%s' தோல்வியுற்றது ஏனெனில் அங்கே சரியான VPNரகசியங்கள் இல்லை.."
+
+#: ../src/applet.c:811
+#, c-format
+msgid ""
+"\n"
+"The VPN connection '%s' failed because of invalid VPN secrets."
+msgstr ""
+"\n"
+"VPN இணைப்பு '%s' தோல்வியுற்றது ஏனெனில் தவறான VPN ரகசியங்கள்."
+
+#: ../src/applet.c:818
+#, c-format
+msgid ""
+"\n"
+"The VPN connection '%s' failed."
+msgstr ""
+"\n"
+"VPN இணைப்பு '%s' தோல்வியுற்றது."
+
+#: ../src/applet.c:836
+#, c-format
+msgid ""
+"\n"
+"The VPN connection '%s' disconnected because the network connection was "
+"interrupted."
+msgstr ""
+"\n"
+"VPN இணைப்பு '%s' துண்டிக்கப்பட்டது ஏனெனில் பிணைய இணைப்பில் தடங்கல் ஏற்பட்டது."
+
+#: ../src/applet.c:839
+#, c-format
+msgid ""
+"\n"
+"The VPN connection '%s' disconnected because the VPN service stopped."
+msgstr ""
+"\n"
+"VPN இணைப்பு '%s' VPN சேவை நிறுத்தப்பட்டதால் துண்டிக்கப்பட்டது."
+
+#: ../src/applet.c:845
+#, c-format
+msgid ""
+"\n"
+"The VPN connection '%s' disconnected."
+msgstr ""
+"\n"
+"VPN இணைப்பு '%s' துண்டிக்கப்படுட்டது."
+
+#: ../src/applet.c:876
+msgid "VPN Login Message"
+msgstr "VPN உட்புகும் செய்தி"
+
+#: ../src/applet.c:888 ../src/applet.c:896 ../src/applet.c:943
+msgid "VPN Connection Failed"
+msgstr "VPN இணைப்பு தோல்வியுற்றது"
+
+#: ../src/applet.c:950
+#, c-format
+msgid ""
+"\n"
+"The VPN connection '%s' failed because the VPN service failed to start.\n"
+"\n"
+"%s"
+msgstr ""
+"\n"
+"VPN இணைப்பு '%s' தோல்வியுற்றது ஏனெனில் VPN சேவை துவங்குவதில் தோல்வி.\n"
+"\n"
+"%s"
+
+#: ../src/applet.c:953
+#, c-format
+msgid ""
+"\n"
+"The VPN connection '%s' failed to start.\n"
+"\n"
+"%s"
+msgstr ""
+"\n"
+"VPN இணைப்பு '%s'ஐ துவக்க முடியவில்லை.\n"
+"\n"
+"%s"
+
+#: ../src/applet.c:1296
+msgid "device not ready"
+msgstr "சாதனம் தயாராக இல்லை"
+
+#: ../src/applet.c:1321
+msgid "Disconnect"
+msgstr "துண்டி"
+
+#: ../src/applet.c:1335
+msgid "device not managed"
+msgstr "சாதனம் மேலாண்மை செய்யப்படவில்லை"
+
+#: ../src/applet.c:1381
+msgid "No network devices available"
+msgstr "பிணைய சாதனம் கிடைக்கப்பெறவில்லை"
+
+#: ../src/applet.c:1469
+msgid "_VPN Connections"
+msgstr "_VPN இணைப்புகள்"
+
+#: ../src/applet.c:1522
+msgid "_Configure VPN..."
+msgstr " VPNஐ கட்டமைக்கவும் (_C)..."
+
+#: ../src/applet.c:1526
+msgid "_Disconnect VPN"
+msgstr "VPNஐ துணைடிக்கவும் (_D)"
+
+#: ../src/applet.c:1613
+msgid "NetworkManager is not running..."
+msgstr "பிணைய மேலாளர் இயக்கத்தில் இல்லை..."
+
+#: ../src/applet.c:1618 ../src/applet.c:2394
+msgid "Networking disabled"
+msgstr "பிணைய செயல்நீக்கப்பட்டது"
+
+#. 'Enable Networking' item
+#: ../src/applet.c:1835
+msgid "Enable _Networking"
+msgstr "பிணையம் செயல்படுகிறது (_N)"
+
+#. 'Enable Wireless' item
+#: ../src/applet.c:1844
+msgid "Enable _Wireless"
+msgstr "ஒயர்லெஸ் செயல்படுகிறது (_W)"
+
+#. 'Enable Mobile Broadband' item
+#: ../src/applet.c:1853
+msgid "Enable _Mobile Broadband"
+msgstr "மொபைல் பிராட்பேண்டை செயற்படுத்தவும் (_M)"
+
+#. Toggle notifications item
+#: ../src/applet.c:1864
+msgid "Enable N_otifications"
+msgstr "அறிவிப்புகளை செயற்படுத்தவும் (_o)"
+
+#. 'Connection Information' item
+#: ../src/applet.c:1875
+msgid "Connection _Information"
+msgstr "இணைப்பு தகவல் (_I)"
+
+#. 'Edit Connections...' item
+#: ../src/applet.c:1885
+msgid "Edit Connections..."
+msgstr "இணைப்புகளை திருத்தவும்..."
+
+#. Help item
+#: ../src/applet.c:1899
+msgid "_Help"
+msgstr "உதவி (_H)"
+
+#. About item
+#: ../src/applet.c:1908
+msgid "_About"
+msgstr "பற்றி (_A)"
+
+#: ../src/applet.c:2099
+msgid "Disconnected"
+msgstr "துண்டிக்கபட்டது"
+
+#: ../src/applet.c:2100
+msgid "The network connection has been disconnected."
+msgstr "பிணைய இணைப்பு துண்டிக்கப்படும்."
+
+#: ../src/applet.c:2260
+#, c-format
+msgid "Preparing network connection '%s'..."
+msgstr "பிணைய இணைப்பு '%s' தயாராகிறது..."
+
+#: ../src/applet.c:2263
+#, c-format
+msgid "User authentication required for network connection '%s'..."
+msgstr "பிணைய இணைப்பு '%s'காக பயனர் அங்கீகாரம் தேவைப்படுகிறது..."
+
+#: ../src/applet.c:2269
+#, c-format
+msgid "Network connection '%s' active"
+msgstr "பிணைய இணைப்பு '%s' செயல்படுகிறது"
+
+#: ../src/applet.c:2350
+#, c-format
+msgid "Starting VPN connection '%s'..."
+msgstr "VPN இணைப்பு '%s'துவங்குகிறது..."
+
+#: ../src/applet.c:2353
+#, c-format
+msgid "User authentication required for VPN connection '%s'..."
+msgstr "VPN இணைப்பு '%s'காக பயனர் அங்கீகாரம் தேவைப்படுகிறது..."
+
+#: ../src/applet.c:2356
+#, c-format
+msgid "Requesting a VPN address for '%s'..."
+msgstr "'%s'காக ஒரு VPN முகவரி தேவைப்படுகிறது..."
+
+#: ../src/applet.c:2359
+#, c-format
+msgid "VPN connection '%s' active"
+msgstr "VPN இணைப்பு '%s' செயல்படுகிறது"
+
+#: ../src/applet.c:2398
+msgid "No network connection"
+msgstr "பிணைய இணைப்பு இல்லை"
+
+#: ../src/applet.c:2938
+msgid "NetworkManager Applet"
+msgstr "பிணைய மேலாளர் அப்லெட்"
+
+#: ../src/applet.c:2944 ../src/wired-dialog.c:128
+msgid ""
+"The NetworkManager Applet could not find some required resources (the glade "
+"file was not found)."
+msgstr "பிணைய மேலாளர் அப்லெட் தேவையான மூலங்களைத் தேடவில்லை. (க்ளைடு கோப்பு காணப்படவில்லை)."
+
+#: ../src/applet.glade.h:1 ../src/connection-editor/ce-vpn-wizard.glade.h:1
+msgid " "
+msgstr " "
+
+#: ../src/applet.glade.h:2
+msgid ""
+"1 (Default)\n"
+"2\n"
+"3\n"
+"4"
+msgstr ""
+"1 (முன்னிருப்பு)\n"
+"2\n"
+"3\n"
+"4"
+
+#: ../src/applet.glade.h:6
+msgid "<span size=\"larger\" weight=\"bold\">Active Network Connections</span>"
+msgstr "<span size=\"larger\" weight=\"bold\">பிணைய இணைப்புகள் செயல்படுகிறது</span>"
+
+#: ../src/applet.glade.h:7
+msgid "Anony_mous identity:"
+msgstr "பெயரில்லாத அடையாளம் (_m):"
+
+#: ../src/applet.glade.h:8
+msgid "As_k for this password every time"
+msgstr "ஒவ்வொரு முறையும் இந்த கடவுச்சொல்லைக் கேட்கவும் (_k)"
+
+#: ../src/applet.glade.h:9
+msgid ""
+"Automatic\n"
+"Version 0\n"
+"Version 1"
+msgstr ""
+"தானாக\n"
+"பதிப்பு 0\n"
+"பதிப்பு 1"
+
+#: ../src/applet.glade.h:12
+msgid "C_A certificate:"
+msgstr "C_A சான்றிதழ்:"
+
+#: ../src/applet.glade.h:13
+msgid "C_onnect"
+msgstr "இணை (_o)"
+
+#: ../src/applet.glade.h:14
+msgid "Co_nnection:"
+msgstr "இணைப்பு (_n):"
+
+#: ../src/applet.glade.h:15
+msgid "Connection Information"
+msgstr "இணைப்பு தகவல்"
+
+#: ../src/applet.glade.h:16
+msgid "Don't _warn me again"
+msgstr "மீண்டும் என்னை எச்சரிக்காதே (_w)"
+
+#: ../src/applet.glade.h:17
+msgid "I_dentity:"
+msgstr "அடையாளம்(_d):"
+
+#: ../src/applet.glade.h:18
+msgid "I_nner authentication:"
+msgstr "உள் அங்கீகாரம் (_n):"
+
+#: ../src/applet.glade.h:19
+msgid "No"
+msgstr "இல்லை"
+
+#: ../src/applet.glade.h:20
+msgid ""
+"Open System\n"
+"Shared Key"
+msgstr ""
+"திறந்த கணினி\n"
+"பகிரப்பட்ட விசை"
+
+#: ../src/applet.glade.h:22
+msgid "Other Wireless Network..."
+msgstr "மற்ற ஒயர்லெஸ் பிணையம்..."
+
+#: ../src/applet.glade.h:23
+msgid "Private _key:"
+msgstr "தனிப்பட்ட விசை ( _k):"
+
+#: ../src/applet.glade.h:24
+msgid "Sho_w key"
+msgstr "விசையை காட்டு (_w)"
+
+#: ../src/applet.glade.h:25 ../src/connection-editor/ce-page-dsl.glade.h:1
+msgid "Sho_w password"
+msgstr "கடவுச்சொல்லைக் காட்டு (_w)"
+
+#: ../src/applet.glade.h:26
+msgid "WEP inde_x:"
+msgstr "WEP அட்டவணை (_x):"
+
+#: ../src/applet.glade.h:27
+msgid "Wireless _adapter:"
+msgstr "ஒயர்லெஸ் அடாப்படர் (_a):"
+
+#: ../src/applet.glade.h:28
+msgid "Yes"
+msgstr "ஆம்"
+
+#: ../src/applet.glade.h:29
+msgid "_Authentication:"
+msgstr "அங்கீகாரம் (_A):"
+
+#: ../src/applet.glade.h:30
+msgid "_Key:"
+msgstr "விசை (_K):"
+
+#: ../src/applet.glade.h:31
+msgid "_Network name:"
+msgstr "பிணைய பெயர் (_N):"
+
+#: ../src/applet.glade.h:32
+msgid "_PEAP version:"
+msgstr "_PEAP பதிப்பு:"
+
+#: ../src/applet.glade.h:33 ../src/connection-editor/ce-page-dsl.glade.h:2
+#: ../src/connection-editor/ce-page-mobile.glade.h:15
+msgid "_Password:"
+msgstr "கடவுச்சொல் (_P):"
+
+#: ../src/applet.glade.h:34
+msgid "_Private key password:"
+msgstr "தனிப்பட்ட விசை கடவுச்சொல் (_P):"
+
+#: ../src/applet.glade.h:35 ../src/connection-editor/ce-page-mobile.glade.h:16
+msgid "_Type:"
+msgstr "வகை (_T):"
+
+#: ../src/applet.glade.h:36
+msgid "_Unlock"
+msgstr "பூட்டுநீக்கு (_U)"
+
+#: ../src/applet.glade.h:37
+msgid "_User certificate:"
+msgstr "பயனர் சான்றிதழ் (_U):"
+
+#: ../src/applet.glade.h:38 ../src/connection-editor/ce-page-dsl.glade.h:4
+#: ../src/connection-editor/ce-page-mobile.glade.h:17
+msgid "_Username:"
+msgstr "பயனர் பெயர் (_U) "
+
+#: ../src/applet.glade.h:39
+msgid "_Wireless security:"
+msgstr "ஒயர்லெஸ் பாதுகாப்பு (_W):"
+
+#: ../src/applet.glade.h:40
+msgid "label"
+msgstr "லேபில்"
+
+#: ../src/connection-editor/ce-page.c:69
+msgid "automatic"
+msgstr "தானாக"
+
+#: ../src/connection-editor/ce-page.c:221
+#: ../src/connection-editor/nm-connection-editor.c:616
+msgid "Failed to update connection secrets due to an unknown error."
+msgstr "தெரியாத பிழையால் இணைப்பு ரகசியங்களை மேம்படுத்த முடியவில்லை."
+
+#: ../src/connection-editor/ce-page-dsl.glade.h:3
+msgid "_Service:"
+msgstr "சேவை (_S):"
+
+#: ../src/connection-editor/ce-page-ip4.glade.h:1
+#: ../src/connection-editor/ce-page-ip6.glade.h:1
+msgid "<b>Addresses</b>"
+msgstr "<b>முகவரிகள்</b>"
+
+#: ../src/connection-editor/ce-page-ip4.glade.h:2
+#: ../src/connection-editor/ce-page-ip6.glade.h:2
+msgid ""
+"Automatic\n"
+"Automatic with manual DNS settings\n"
+"Manual\n"
+"Link-Local\n"
+"Shared to other computers"
+msgstr ""
+"தானாக\n"
+"கைமுறையடன் தானியக்கி DNS அமைவுகள்\n"
+"கைமுறை\n"
+"இணைப்பு-உள்ளமை\n"
+"மற்ற கணினிகளுடன் பகிரப்பட்டது"
+
+#: ../src/connection-editor/ce-page-ip4.glade.h:7
+msgid "D_HCP client ID:"
+msgstr "D_HCP கிளையன்ட் குறியீடு:"
+
+#: ../src/connection-editor/ce-page-ip4.glade.h:8
+#: ../src/connection-editor/ce-page-ip6.glade.h:7
+msgid ""
+"Domains used when resolving host names. Use commas to separate multiple "
+"domains."
+msgstr ""
+"புரவலன் பெயர்களை தீர்க்கும் போது பயன்படுத்தப்பட்ட டொமைன்கள். பல டொமைன்களை அரைப்புள்ளியால் "
+"பிரிக்கவும்."
+
+#: ../src/connection-editor/ce-page-ip4.glade.h:9
+#: ../src/connection-editor/ce-page-ip6.glade.h:8
+msgid ""
+"IP addresses identify your computer on the network.  Click the \"Add\" "
+"button to add an IP address."
+msgstr ""
+"IP பிணையத்தில் உங்களது கணினி முகவரிகள் அடையாளம்.  \"Add\" பட்டனுடன் சேர்த்துஒரு IP "
+"முகவரியை கிளிக் செய்யவும்."
+
+#: ../src/connection-editor/ce-page-ip4.glade.h:10
+#: ../src/connection-editor/ce-page-ip6.glade.h:9
+msgid ""
+"IP addresses of domain name servers used to resolve host names. Use commas "
+"to separate multiple domain name server addresses."
+msgstr ""
+"புரவலன் பெயர்களை தீர்க்க ஐபி முகவரிகள் பயன்படுத்தப்பட்டுள்ளது. பல டொமைன்களின் பெயர் சேவையக "
+"முகவரிகளை அரைப்புள்ளியால் பிரிக்கவும்."
+
+#: ../src/connection-editor/ce-page-ip4.glade.h:11
+#: ../src/connection-editor/ce-page-ip6.glade.h:10
+msgid ""
+"If enabled, this connection will never be used as the default network "
+"connection."
+msgstr ""
+"பெறமுடிந்தால், முன்னிருப்பு பிணைய இணைப்புக்கு இந்த இணைப்பை ஒருபோதும்  பயன்படுத்த "
+"முடியாது."
+
+#: ../src/connection-editor/ce-page-ip4.glade.h:12
+#: ../src/connection-editor/ce-page-ip6.glade.h:11
+msgid "Ig_nore automatically obtained routes"
+msgstr "தானாக ஏற்படும் வழிகளிலிருந்து புறக்கணிக்கவும் (_n)"
+
+#: ../src/connection-editor/ce-page-ip4.glade.h:13
+msgid "Require IPv4 addressing for this connection to complete"
+msgstr "தேவையான IPv4 முகவரி இந்த இணைப்புக்கு முடிந்தது"
+
+#: ../src/connection-editor/ce-page-ip4.glade.h:14
+msgid ""
+"The DHCP client identifier allows the network administrator to customize "
+"your computer's configuration.  If you wish to use a DHCP client identifier, "
+"enter it here."
+msgstr ""
+"இந்த DHCP கிளையன் அடையாளப்படுத்தி ஒரு பிணைய நிர்வாகியை தனிபயனாக்க அனுமதிக்கிறது. "
+"நீங்கள் ஒரு DHCP கிளையன் அடையாளப்படுத்தியை இங்கே உள்ளிட பயன்படுத்தவும்."
+
+#: ../src/connection-editor/ce-page-ip4.glade.h:15
+#: ../src/connection-editor/ce-page-ip6.glade.h:13
+msgid "Use this c_onnection only for resources on its network"
+msgstr "மூலங்களின் பிணையத்திற்கு மட்டும் இந்த இணைப்பை பயன்படுத்தவும் (_o)"
+
+#: ../src/connection-editor/ce-page-ip4.glade.h:16
+msgid ""
+"When connecting to IPv6-capable networks, allows the connection to complete "
+"if IPv4 configuration fails but IPv6 configuration succeeds."
+msgstr ""
+"IPv4 கட்டமைப்பு தோல்வியடைந்து ஆனால் IPv6 வெற்றியடைந்தால், IPv6-திறன் நெட்வொர்க்குடன் "
+"இணைக்கும் போது இணைப்பை முடிக்க அனுமதிக்கிறது."
+
+#: ../src/connection-editor/ce-page-ip4.glade.h:17
+#: ../src/connection-editor/ce-page-ip6.glade.h:15
+msgid "_DNS servers:"
+msgstr "_DNS சேவையகங்கள்:"
+
+#: ../src/connection-editor/ce-page-ip4.glade.h:18
+#: ../src/connection-editor/ce-page-ip6.glade.h:16
+msgid "_Method:"
+msgstr "முறை (_M):"
+
+#: ../src/connection-editor/ce-page-ip4.glade.h:19
+#: ../src/connection-editor/ce-page-ip6.glade.h:17
+msgid "_Routes&#x2026;"
+msgstr "வழிகள் (_R)&#x2026;"
+
+#: ../src/connection-editor/ce-page-ip4.glade.h:20
+#: ../src/connection-editor/ce-page-ip6.glade.h:18
+msgid "_Search domains:"
+msgstr "செயற்களத்தை தேடவும் (_S):"
+
+#: ../src/connection-editor/ce-page-ip6.glade.h:12
+msgid "Require IPv6 addressing for this connection to complete"
+msgstr "IPv6 முகவரிக்கு இந்த இணைப்பு முடிக்க தேவை"
+
+#: ../src/connection-editor/ce-page-ip6.glade.h:14
+msgid ""
+"When connecting to IPv4-capable networks, allows the connection to complete "
+"if IPv6 configuration fails but IPv4 configuration succeeds."
+msgstr ""
+"IPv6 கட்டமைப்பு தோல்வியடைந்து ஆனால் IPv4 கட்டமைப்பு வெற்றியடைந்தால், IPv4-திறன் "
+"நெட்வொர்க்குடன் இணைக்கும் போது, இணைப்பை முடிக்க அனுமதிக்கிறது."
+
+#: ../src/connection-editor/ce-page-mobile.glade.h:1
+msgid "<b>Advanced</b>"
+msgstr "<b>கூடுதலான</b>"
+
+#: ../src/connection-editor/ce-page-mobile.glade.h:2
+msgid "<b>Basic</b>"
+msgstr "<b>அடிப்படை</b>"
+
+#: ../src/connection-editor/ce-page-mobile.glade.h:3
+msgid "Allow roaming if home network is not available"
+msgstr "முகப்பு பிணையம் கிடைக்கவில்லையெனில் ரோமிங்கை அனுமதிக்கவும்"
+
+#: ../src/connection-editor/ce-page-mobile.glade.h:4
+msgid ""
+"Any\n"
+"3G (UMTS/HSPA)\n"
+"2G (GPRS/EDGE)\n"
+"Prefer 3G (UMTS/HSPA)\n"
+"Prefer 2G (GPRS/EDGE)"
+msgstr ""
+"ஏதேனும்\n"
+"3G (UMTS/HSPA)\n"
+"2G (GPRS/EDGE)\n"
+"Prefer 3G (UMTS/HSPA)\n"
+"Prefer 2G (GPRS/EDGE)"
+
+#: ../src/connection-editor/ce-page-mobile.glade.h:9
+msgid "Change..."
+msgstr "மாற்று..."
+
+#: ../src/connection-editor/ce-page-mobile.glade.h:10
+msgid "N_etwork ID:"
+msgstr "பிணையம் ID (_e) :"
+
+#: ../src/connection-editor/ce-page-mobile.glade.h:11
+msgid "Nu_mber:"
+msgstr "எண் (_m):"
+
+#: ../src/connection-editor/ce-page-mobile.glade.h:12
+msgid "PI_N:"
+msgstr "PI_N:"
+
+#: ../src/connection-editor/ce-page-mobile.glade.h:13
+msgid "Sho_w passwords"
+msgstr "கடவுச்சொற்களைக் காட்டு (_w)"
+
+#: ../src/connection-editor/ce-page-mobile.glade.h:14
+msgid "_APN:"
+msgstr "_APN:"
+
+#: ../src/connection-editor/ce-page-ppp.glade.h:1
+msgid "<b>Allowed Authentication Methods</b>"
+msgstr "<b>அங்கீகாரம் முறைகள் அனுமதிக்கப்பட்டது</b>"
+
+#: ../src/connection-editor/ce-page-ppp.glade.h:2
+msgid "<b>Authentication</b>"
+msgstr "<b>உறுதிப்படுத்து</b>"
+
+#: ../src/connection-editor/ce-page-ppp.glade.h:3
+msgid "<b>Compression</b>"
+msgstr "<b>அழுத்தம்</b>"
+
+#: ../src/connection-editor/ce-page-ppp.glade.h:4
+msgid "<b>Echo</b>"
+msgstr "<b>எகோ</b>"
+
+#: ../src/connection-editor/ce-page-ppp.glade.h:5
+msgid ""
+"<i>In most cases, the provider's PPP servers will support all authentication "
+"methods.  If connections fail, try disabling support for some methods.</i>"
+msgstr ""
+"<i>பல சமயங்களில், வழங்குபவர் PPP சேவையகங்கள் அனைத்து அங்கீகார முறைகளுக்கும் "
+"துணைபுரிவதில்லை.  இணைப்பு தோல்வியுற்றால், சில முறைகளுக்காவது துணைபுரிய முயற்சிக்கவும்."
+"</i>"
+
+#: ../src/connection-editor/ce-page-ppp.glade.h:6
+msgid "Allow _BSD data compression"
+msgstr "_BSD தரவு அழுத்தம் அனுமதிக்கிறது"
+
+#: ../src/connection-editor/ce-page-ppp.glade.h:7
+msgid "Allow _Deflate data compression"
+msgstr "_Deflate தரவு குறுக்கத்தை அனுமதி"
+
+#: ../src/connection-editor/ce-page-ppp.glade.h:8
+msgid "Allowed methods:"
+msgstr "அனுமதிக்கப்பட்ட முறைகள்:"
+
+#: ../src/connection-editor/ce-page-ppp.glade.h:9
+msgid "C_HAP"
+msgstr "C_HAP"
+
+#: ../src/connection-editor/ce-page-ppp.glade.h:10
+msgid "Challenge Handshake Authentication Protocol"
+msgstr "Challenge Handshake Authentication Protocol"
+
+#: ../src/connection-editor/ce-page-ppp.glade.h:11
+msgid "Configure _Methods…"
+msgstr "முறைகள் கட்டமைக்கப்பட்டது (_M)…"
+
+#: ../src/connection-editor/ce-page-ppp.glade.h:12
+msgid "Extensible Authentication Protocol"
+msgstr "Extensible Authentication Protocol"
+
+#: ../src/connection-editor/ce-page-ppp.glade.h:13
+msgid "MSCHAP v_2"
+msgstr "MSCHAP v_2"
+
+#: ../src/connection-editor/ce-page-ppp.glade.h:14
+msgid "Microsoft Challenge Handshake Authentication Protocol"
+msgstr "Microsoft Challenge Handshake Authentication Protocol"
+
+#: ../src/connection-editor/ce-page-ppp.glade.h:15
+msgid "Microsoft Challenge Handshake Authentication Protocol version 2"
+msgstr "Microsoft Challenge Handshake Authentication Protocol version 2"
+
+#: ../src/connection-editor/ce-page-ppp.glade.h:16
+msgid "Password Authentication Protocol"
+msgstr "கடவுச்சொல் அங்கீகார நெறிமுறை"
+
+#: ../src/connection-editor/ce-page-ppp.glade.h:17
+msgid "Send PPP _echo packets"
+msgstr "PPP எகோ பாக்கெட்டுகளை அனுப்பு (_e)"
+
+#: ../src/connection-editor/ce-page-ppp.glade.h:18
+msgid "Use TCP _header compression"
+msgstr "TCP தலைப்பு அழுத்தத்தை பயன்படுத்து (_h)"
+
+#: ../src/connection-editor/ce-page-ppp.glade.h:19
+msgid "Use _stateful MPPE"
+msgstr "நிலையான MPPE பயன்படுத்தவும் (_s)"
+
+#: ../src/connection-editor/ce-page-ppp.glade.h:20
+msgid "_EAP"
+msgstr "_EAP"
+
+#: ../src/connection-editor/ce-page-ppp.glade.h:21
+msgid "_MSCHAP"
+msgstr "_MSCHAP"
+
+#: ../src/connection-editor/ce-page-ppp.glade.h:22
+msgid "_PAP"
+msgstr "_PAP"
+
+#: ../src/connection-editor/ce-page-ppp.glade.h:23
+msgid "_Require 128-bit encryption"
+msgstr "128-பிட் மறைகுறியாக்கம் தேவைப்படுகிறது (_R)"
+
+#: ../src/connection-editor/ce-page-ppp.glade.h:24
+msgid "_Use point-to-point encryption (MPPE)"
+msgstr "பாயிண்ட் டு பாயிண்ட் மறைகுறியாக்கத்தை பயன்படுத்து (_U) (MPPE)"
+
+#: ../src/connection-editor/ce-page-wired.glade.h:1
+msgid "Aut_onegotiate"
+msgstr "தானாக மாற்றக்கூடிய (_o)"
+
+#: ../src/connection-editor/ce-page-wired.glade.h:2
+msgid ""
+"Automatic\n"
+"10 Mb/s\n"
+"100 Mb/s\n"
+"1 Gb/s\n"
+"10 Gb/s"
+msgstr ""
+"தானாகc\n"
+"10 Mb/s\n"
+"100 Mb/s\n"
+"1 Gb/s\n"
+"10 Gb/s"
+
+#: ../src/connection-editor/ce-page-wired.glade.h:7
+msgid ""
+"Automatic\n"
+"Twisted Pair (TP)\n"
+"Attachment Unit Interface (AUI)\n"
+"BNC\n"
+"Media Independent Interface (MII)"
+msgstr ""
+"தானாக\n"
+"Twisted Pair (TP)\n"
+"Attachment Unit Interface (AUI)\n"
+"BNC\n"
+"Media Independent Interface (MII)"
+
+#: ../src/connection-editor/ce-page-wired.glade.h:12
+msgid "Full duple_x"
+msgstr "முழு இரட்டை (_x)"
+
+#: ../src/connection-editor/ce-page-wired.glade.h:13
+#: ../src/connection-editor/ce-page-wireless.glade.h:8
+msgid "MT_U:"
+msgstr "MT_U:"
+
+#: ../src/connection-editor/ce-page-wired.glade.h:14
+#: ../src/connection-editor/ce-page-wireless.glade.h:15
+msgid "_MAC address:"
+msgstr "_MAC முகவரி:"
+
+#: ../src/connection-editor/ce-page-wired.glade.h:15
+msgid "_Port:"
+msgstr "துறை (_P):"
+
+#: ../src/connection-editor/ce-page-wired.glade.h:16
+msgid "_Speed:"
+msgstr "வேகம் (_S):"
+
+#: ../src/connection-editor/ce-page-wired.glade.h:17
+#: ../src/connection-editor/ce-page-wireless.glade.h:18
+msgid "bytes"
+msgstr "பைட்டுகள்"
+
+#: ../src/connection-editor/ce-page-wireless.glade.h:1
+msgid ""
+"Automatic\n"
+"A (5 GHz)\n"
+"B/G (2.4 GHz)"
+msgstr ""
+"தானாக\n"
+"A (5 GHz)\n"
+"B/G (2.4 GHz)"
+
+#: ../src/connection-editor/ce-page-wireless.glade.h:4
+msgid "Ban_d:"
+msgstr "பிணைப்பு (_d):"
+
+#: ../src/connection-editor/ce-page-wireless.glade.h:5
+msgid "C_hannel:"
+msgstr "சேனல் (_h):"
+
+#: ../src/connection-editor/ce-page-wireless.glade.h:6
+msgid ""
+"Infrastructure\n"
+"Ad-hoc"
+msgstr ""
+"கட்டமைப்பு\n"
+"Ad-hoc"
+
+#: ../src/connection-editor/ce-page-wireless.glade.h:9
+msgid "M_ode:"
+msgstr "முறைமை (_o):"
+
+#: ../src/connection-editor/ce-page-wireless.glade.h:10
+msgid "Mb/s"
+msgstr "Mb/s"
+
+#: ../src/connection-editor/ce-page-wireless.glade.h:11
+msgid ""
+"This option locks this connection to the network device specified by the MAC "
+"address entered here.  Example: 00:11:22:33:44:55"
+msgstr ""
+"இந்த விருப்பம் இந்த இணைப்பை பிணைய சாதனத்துடன் இங்கே உள்ளிடப்பட்ட MAC முகவரியுடன்  "
+"பூட்டுகிறது.  எடுத்துக்காட்டு: 00:11:22:33:44:55"
+
+#: ../src/connection-editor/ce-page-wireless.glade.h:12
+msgid ""
+"This option locks this connection to the wireless access point (AP) "
+"specified by the BSSID entered here.  Example: 00:11:22:33:44:55"
+msgstr ""
+"இந்த விருப்பம் இந்த இணைப்பை வயர்லெஸ் அணுகல் புள்ளி (AP) இங்கே உள்ளிடப்பட்ட BSSIDயுடன்  "
+"பூட்டுகிறது.  எடுத்துக்காட்டு: 00:11:22:33:44:55"
+
+#: ../src/connection-editor/ce-page-wireless.glade.h:13
+msgid "Transmission po_wer:"
+msgstr "மாற்றப்படும் பவர் (_w):"
+
+#: ../src/connection-editor/ce-page-wireless.glade.h:14
+msgid "_BSSID:"
+msgstr "_BSSID:"
+
+#: ../src/connection-editor/ce-page-wireless.glade.h:16
+msgid "_Rate:"
+msgstr "விகிதம்: (_R)"
+
+#: ../src/connection-editor/ce-page-wireless.glade.h:17
+msgid "_SSID:"
+msgstr "_SSID:"
+
+#: ../src/connection-editor/ce-page-wireless.glade.h:19
+msgid "mW"
+msgstr "mW"
+
+#: ../src/connection-editor/ce-page-wireless-security.glade.h:1
+msgid "_Security:"
+msgstr "பாதுகாப்பு (_S):"
+
+#: ../src/connection-editor/ce-vpn-wizard.glade.h:2
+msgid ""
+"<span weight=\"bold\" size=\"larger\">Choose a VPN Connection Type</span>\n"
+"\n"
+"Select the type of VPN you wish to use for the new connection.  If the type "
+"of VPN connection you wish to create does not appear in the list, you may "
+"not have the correct VPN plugin installed."
+msgstr ""
+"<span weight=\"bold\" size=\"larger\">VPN இணைப்பு வகை ஒன்றை தேர்ந்தெடுக்கவும்</"
+"span>\n"
+"\n"
+"ஒரு புதிய இணைப்பை நீங்கள் பயன்படுத்த VPN வகைத் தேர்ந்தெடுக்கவும்.  நீங்கள் உருவாக்க "
+"விரும்பும் VPN இணைப்பு வகை பட்டியலில் தெரியவில்லை எனில், நீங்கள் சரியான VPN கூடுதல் "
+"இணைப்பை நிறுவவில்லை."
+
+#: ../src/connection-editor/ce-vpn-wizard.glade.h:5
+msgid "Create…"
+msgstr "உருவாக்கு..."
+
+#: ../src/connection-editor/ip4-routes-dialog.c:501
+#: ../src/connection-editor/ip6-routes-dialog.c:459
+#: ../src/connection-editor/page-ip4.c:731
+#: ../src/connection-editor/page-ip6.c:716
+msgid "Address"
+msgstr "முகவரி"
+
+#: ../src/connection-editor/ip4-routes-dialog.c:517
+#: ../src/connection-editor/page-ip4.c:748
+msgid "Netmask"
+msgstr "நெட்மாஸ்க்"
+
+#: ../src/connection-editor/ip4-routes-dialog.c:533
+#: ../src/connection-editor/ip6-routes-dialog.c:491
+#: ../src/connection-editor/page-ip4.c:765
+#: ../src/connection-editor/page-ip6.c:750
+msgid "Gateway"
+msgstr "நுழைவாயில்"
+
+#: ../src/connection-editor/ip4-routes-dialog.c:549
+#: ../src/connection-editor/ip6-routes-dialog.c:507
+msgid "Metric"
+msgstr "மெட்ரிக்"
+
+#: ../src/connection-editor/ip6-routes-dialog.c:475
+#: ../src/connection-editor/page-ip6.c:733
+msgid "Prefix"
+msgstr "முன்பொருத்தம்"
+
+#: ../src/connection-editor/page-dsl.c:140
+#: ../src/connection-editor/page-dsl.c:147
+msgid "Could not load DSL user interface."
+msgstr "DSL பயனர் இடைமுகத்தை ஏற்ற முடியவில்லை."
+
+#: ../src/connection-editor/page-dsl.c:153
+#: ../src/connection-editor/nm-connection-editor.glade.h:4
+#: ../src/connection-editor/nm-connection-list.c:1409
+msgid "DSL"
+msgstr "DSL"
+
+#: ../src/connection-editor/page-dsl.c:241
+#, c-format
+msgid "DSL connection %d"
+msgstr "DSL இணைப்பு %d"
+
+#: ../src/connection-editor/page-ip4.c:126
+#: ../src/connection-editor/page-ip6.c:125
+msgid "Automatic (VPN)"
+msgstr "தானாக (VPN)"
+
+#: ../src/connection-editor/page-ip4.c:127
+#: ../src/connection-editor/page-ip6.c:126
+msgid "Automatic (VPN) addresses only"
+msgstr "தானியக்கி (VPN) முகவரிகள் மட்டுமே"
+
+#: ../src/connection-editor/page-ip4.c:130
+#: ../src/connection-editor/page-ip6.c:129
+msgid "Automatic (PPP)"
+msgstr "தானாக (PPP)"
+
+#: ../src/connection-editor/page-ip4.c:131
+#: ../src/connection-editor/page-ip6.c:130
+msgid "Automatic (PPP) addresses only"
+msgstr "தானியக்கி (PPP) முகவரிகள் மட்டுமே"
+
+#: ../src/connection-editor/page-ip4.c:133
+#: ../src/connection-editor/page-ip6.c:132
+msgid "Automatic (PPPoE)"
+msgstr "தானாக (PPPoE)"
+
+#: ../src/connection-editor/page-ip4.c:134
+#: ../src/connection-editor/page-ip6.c:133
+msgid "Automatic (PPPoE) addresses only"
+msgstr "தானியக்கி (PPPoE) முகவரிகள் மட்டுமே"
+
+#: ../src/connection-editor/page-ip4.c:136
+msgid "Automatic (DHCP)"
+msgstr "தானாக (DHCP)"
+
+#: ../src/connection-editor/page-ip4.c:137
+msgid "Automatic (DHCP) addresses only"
+msgstr "தானியக்கி (DHCP) முகவரிகள் மட்டுமே "
+
+#: ../src/connection-editor/page-ip4.c:162
+#: ../src/connection-editor/page-ip6.c:184
+msgid "Manual"
+msgstr "கைமுறை"
+
+#: ../src/connection-editor/page-ip4.c:174
+#: ../src/connection-editor/page-ip6.c:197
+msgid "Link-Local Only"
+msgstr "இணைப்பு-உள்ளமை மட்டும்"
+
+#: ../src/connection-editor/page-ip4.c:180
+#: ../src/connection-editor/page-ip6.c:204
+msgid "Shared to other computers"
+msgstr "மற்ற கணினிகள்ளுடன் பகிரப்பட்டது"
+
+#: ../src/connection-editor/page-ip4.c:190
+msgid "Disabled"
+msgstr "செயல்நீக்கப்பட்டது"
+
+#: ../src/connection-editor/page-ip4.c:693
+#, c-format
+msgid "Editing IPv4 routes for %s"
+msgstr "IPv4 வழிகள் %sகாக திருத்துகிறது"
+
+#: ../src/connection-editor/page-ip4.c:812
+#: ../src/connection-editor/page-ip4.c:819
+msgid "Could not load IPv4 user interface."
+msgstr "IPv4 பயனர் இடைமுகத்தை ஏற்ற முடியவில்லை."
+
+#: ../src/connection-editor/page-ip4.c:825
+msgid "IPv4 Settings"
+msgstr "IPv4 அமைவுகள்"
+
+#: ../src/connection-editor/page-ip6.c:135
+msgid "Automatic"
+msgstr "தானாக"
+
+#: ../src/connection-editor/page-ip6.c:136
+msgid "Automatic, addresses only"
+msgstr "தானியக்கி முகவரிகள் மட்டுமே"
+
+#: ../src/connection-editor/page-ip6.c:148
+#: ../src/wireless-security/eap-method.c:196
+msgid "Ignore"
+msgstr "தவிர்"
+
+#: ../src/connection-editor/page-ip6.c:172
+msgid "Automatic, DHCP only"
+msgstr "தானாக, (DHCP) மட்டும்"
+
+#: ../src/connection-editor/page-ip6.c:678
+#, c-format
+msgid "Editing IPv6 routes for %s"
+msgstr "IPv6 வழிகள் %sகாக திருத்துகிறது"
+
+#: ../src/connection-editor/page-ip6.c:795
+#: ../src/connection-editor/page-ip6.c:802
+msgid "Could not load IPv6 user interface."
+msgstr "IPv6 பயனர் இடைமுகத்தை ஏற்ற முடியவில்லை."
+
+#: ../src/connection-editor/page-ip6.c:808
+msgid "IPv6 Settings"
+msgstr "IPv6 அமைவுகள்"
+
+#: ../src/connection-editor/page-mobile.c:305
+#: ../src/connection-editor/page-mobile.c:312
+msgid "Could not load mobile broadband user interface."
+msgstr "மொபைல் பிராட்பேண்டு பயனர் இடைமுகத்தை ஏற்ற முடியவில்லை."
+
+#: ../src/connection-editor/page-mobile.c:333
+msgid "Unsupported mobile broadband connection type."
+msgstr "துணைபுரியாத மொபைல் பிராட்பேண்டை இணைப்பு வகை. முடியவில்லை."
+
+#. Fall back to just asking for GSM vs. CDMA
+#: ../src/connection-editor/page-mobile.c:574
+msgid "Select Mobile Broadband Provider Type"
+msgstr "மொபைல் பிராட்பேண்டு வழங்குபவர் வகையை தேர்ந்தெடுக்கவும்"
+
+#: ../src/connection-editor/page-mobile.c:601
+msgid ""
+"Select the technology your mobile broadband provider uses.  If you are "
+"unsure, ask your provider."
+msgstr ""
+"உங்கள் வழங்குபவர் பயன்படுத்தும் டெக்னாலஜியை உங்களது பிராட்பேண்டு மொபைலுக்கு "
+"தேர்ந்தெடுக்கவும்.உங்களுக்கு தெரியவில்லை என்றால், அவரைக் கேட்டவும்."
+
+#: ../src/connection-editor/page-mobile.c:606
+msgid "My provider uses _GSM-based technology (i.e. GPRS, EDGE, UMTS, HSDPA)"
+msgstr ""
+"எனது வழங்குபவர் _GSM-தொடர்புடைய டெக்னாலஜியைப் பயன்படுத்துகிறார் (எ.கா. GPRS, EDGE, "
+"UMTS, HSDPA)"
+
+#: ../src/connection-editor/page-mobile.c:611
+msgid "My provider uses _CDMA-based technology (i.e. 1xRTT, EVDO)"
+msgstr "எனது வழங்குபவர் _CDMA-தொடர்புடைய டெக்னாலஜியைப் பயன்படுத்துகிறார் (எ.கா. 1xRTT, EVDO)"
+
+#: ../src/connection-editor/page-ppp.c:132
+msgid "EAP"
+msgstr "EAP"
+
+#: ../src/connection-editor/page-ppp.c:133
+#: ../src/wireless-security/eap-method-ttls.c:228
+msgid "PAP"
+msgstr "PAP"
+
+#: ../src/connection-editor/page-ppp.c:134
+#: ../src/wireless-security/eap-method-ttls.c:276
+msgid "CHAP"
+msgstr "CHAP"
+
+#: ../src/connection-editor/page-ppp.c:135
+#: ../src/wireless-security/eap-method-peap.c:245
+#: ../src/wireless-security/eap-method-ttls.c:260
+msgid "MSCHAPv2"
+msgstr "MSCHAPv2"
+
+#: ../src/connection-editor/page-ppp.c:136
+#: ../src/wireless-security/eap-method-ttls.c:244
+msgid "MSCHAP"
+msgstr "MSCHAP"
+
+#. Translators: "none" refers to authentication methods
+#: ../src/connection-editor/page-ppp.c:139
+msgid "none"
+msgstr "ஒன்றுமில்லை"
+
+#: ../src/connection-editor/page-ppp.c:199
+#, c-format
+msgid "Editing PPP authentication methods for %s"
+msgstr "PPP அங்கீகாரம் முறைகள் %sகாக திருத்தப்படுகிறது"
+
+#: ../src/connection-editor/page-ppp.c:283
+#: ../src/connection-editor/page-ppp.c:290
+msgid "Could not load PPP user interface."
+msgstr "PPP பயனர் இடைமுகத்தை ஏற்ற முடியவில்லை."
+
+#: ../src/connection-editor/page-ppp.c:296
+msgid "PPP Settings"
+msgstr "PPP அமைவுகள்"
+
+#: ../src/connection-editor/page-vpn.c:108
+#: ../src/connection-editor/nm-connection-editor.glade.h:8
+#: ../src/connection-editor/nm-connection-list.c:1405
+msgid "VPN"
+msgstr "VPN"
+
+#: ../src/connection-editor/page-vpn.c:119
+#, c-format
+msgid "Could not find VPN plugin service for '%s'."
+msgstr "VPN கூடுதல் இணைப்பு சேவை '%s'காக தேட முடியவில்லை."
+
+#: ../src/connection-editor/page-vpn.c:213
+#: ../src/connection-editor/nm-connection-list.c:990
+#, c-format
+msgid "VPN connection %d"
+msgstr "VPN இணைப்பு %d"
+
+#: ../src/connection-editor/page-wired.c:207
+#: ../src/connection-editor/page-wired.c:214
+msgid "Could not load wired user interface."
+msgstr "ஒயர்டு பயனர் இடைமுகத்தை ஏற்ற முடியவில்லை."
+
+#: ../src/connection-editor/page-wired.c:220
+#: ../src/connection-editor/nm-connection-editor.glade.h:9
+#: ../src/connection-editor/nm-connection-list.c:1393
+msgid "Wired"
+msgstr "ஒயர்டு"
+
+#: ../src/connection-editor/page-wired.c:339
+#, c-format
+msgid "Wired connection %d"
+msgstr "ஒயர்டு இணைப்பு %d"
+
+#: ../src/connection-editor/page-wired-security.c:115
+msgid "802.1x Security"
+msgstr "802.1x பாதுகாப்பு"
+
+#: ../src/connection-editor/page-wired-security.c:123
+msgid "Use 802.1X security for this connection"
+msgstr "Use 802.1X இந்த இணைப்புக்காகு பாதுகப்பை பயன்படுத்துா"
+
+#: ../src/connection-editor/page-wireless.c:144
+#: ../src/connection-editor/page-wireless.c:148
+msgid "default"
+msgstr "முன்னிருப்பு"
+
+#: ../src/connection-editor/page-wireless.c:166
+#, c-format
+msgid "%u (%u MHz)"
+msgstr "%u (%u MHz)"
+
+#: ../src/connection-editor/page-wireless.c:351
+#: ../src/connection-editor/page-wireless.c:358
+msgid "Could not load WiFi user interface."
+msgstr "WiFi பயனர் இடைமுகத்தை ஏற்ற முடியவில்லை."
+
+#: ../src/connection-editor/page-wireless.c:364
+#: ../src/connection-editor/nm-connection-editor.glade.h:10
+#: ../src/connection-editor/nm-connection-list.c:1397
+msgid "Wireless"
+msgstr "கம்பியில்லா"
+
+#: ../src/connection-editor/page-wireless.c:511
+#, c-format
+msgid "Wireless connection %d"
+msgstr "ஒயர்லெஸ் இணைப்பு %d"
+
+#: ../src/connection-editor/page-wireless-security.c:262
+#: ../src/wireless-dialog.c:936
+msgid "WEP 40/128-bit Key"
+msgstr "WEP 40/128-பிட் விசை"
+
+#: ../src/connection-editor/page-wireless-security.c:271
+#: ../src/wireless-dialog.c:945
+msgid "WEP 128-bit Passphrase"
+msgstr "WEP 128-பிட் கடவுச்சொல்"
+
+#: ../src/connection-editor/page-wireless-security.c:297
+#: ../src/wireless-dialog.c:975
+msgid "Dynamic WEP (802.1x)"
+msgstr "மாறும் WEP (802.1x)"
+
+#: ../src/connection-editor/page-wireless-security.c:311
+#: ../src/wireless-dialog.c:989
+msgid "WPA & WPA2 Personal"
+msgstr "WPA & WPA2 தனிப்பட்ட"
+
+#: ../src/connection-editor/page-wireless-security.c:325
+#: ../src/wireless-dialog.c:1003
+msgid "WPA & WPA2 Enterprise"
+msgstr "WPA & WPA2 கடவுச்சொல்"
+
+#: ../src/connection-editor/page-wireless-security.c:365
+msgid "Could not load WiFi security user interface; missing WiFi setting."
+msgstr "WiFi பாதுகாப்பு பயனர் இடைமுகத்தை ஏற்ற முடியவில்லை; விடுபட்ட WiFi அமைவுகள்."
+
+#: ../src/connection-editor/page-wireless-security.c:372
+#: ../src/connection-editor/page-wireless-security.c:379
+msgid "Could not load WiFi security user interface."
+msgstr "WiFi பாதுகாப்பு பயனர் இடைமுகத்தை ஏற்ற முடியவில்லை."
+
+#: ../src/connection-editor/page-wireless-security.c:385
+msgid "Wireless Security"
+msgstr "ஒயர்லெஸ் பாதுகாப்பு"
+
+#: ../src/connection-editor/nm-connection-editor.c:100
+#, c-format
+msgid "Editing %s"
+msgstr "%sஐ திருத்துகிறது"
+
+#: ../src/connection-editor/nm-connection-editor.c:104
+msgid "Editing un-named connection"
+msgstr "பெயரிடப்படாத இணைப்பை திருத்துகிறது"
+
+#: ../src/connection-editor/nm-connection-editor.c:287
+msgid ""
+"The connection editor could not find some required resources (the "
+"NetworkManager applet glade file was not found)."
+msgstr ""
+"இணைப்பு எடிட்டர் தேவையான மூலங்களை தேடவில்லை (பிணைய மேலாளர் அப்லெட் க்ளேடு கோப்பு "
+"காணப்படவில்லை)."
+
+#: ../src/connection-editor/nm-connection-editor.c:300
+msgid ""
+"The connection editor could not find some required resources (the glade file "
+"was not found)."
+msgstr "இணைப்பு எடிட்டர் தேவையான மூலங்களை தேடவில்லை (க்ளேடு கோப்பு காணப்படவில்லை)."
+
+#: ../src/connection-editor/nm-connection-editor.c:398
+msgid "Error creating connection editor dialog."
+msgstr "எடிட்டர் உரையாடல் இணைப்பை உருவாக்குவதில் பிழை."
+
+#: ../src/connection-editor/nm-connection-editor.c:419
+msgid "Apply"
+msgstr "பயன்படுத்து"
+
+#: ../src/connection-editor/nm-connection-editor.c:420
+msgid "Save this connection for all users of this machine."
+msgstr "இந்த கணினியில் அனைத்து பயனர்கள் இணைப்பையும் சேமிக்கவும்."
+
+#: ../src/connection-editor/nm-connection-editor.c:421
+msgid "Apply..."
+msgstr "செயல்படுத்து..."
+
+#: ../src/connection-editor/nm-connection-editor.c:422
+msgid "Authenticate to save this connection for all users of this machine."
+msgstr "இந்த கணினியில் அனைத்து பயனர்கள் இணைப்பையும் சேமிக்க அங்கீகரிக்கவும்."
+
+#: ../src/connection-editor/nm-connection-editor.glade.h:1
+msgid "Available to all users"
+msgstr "அனைத்து பயனர்களுக்கும் கிடைக்கப் பெறும"
+
+#: ../src/connection-editor/nm-connection-editor.glade.h:2
+msgid "Connect _automatically"
+msgstr "தானாக இணைக்கவும் (_a)"
+
+#: ../src/connection-editor/nm-connection-editor.glade.h:3
+msgid "Connection _name:"
+msgstr "இணைப்பு பெயர் (_n):"
+
+#: ../src/connection-editor/nm-connection-editor.glade.h:5
+msgid "E_xport"
+msgstr "ஏற்றுமதி (_x)"
+
+#: ../src/connection-editor/nm-connection-editor.glade.h:11
+msgid "_Import"
+msgstr "இறக்குமதி (_I)"
+
+#: ../src/connection-editor/nm-connection-list.c:219
+msgid "never"
+msgstr "இல்லை"
+
+#: ../src/connection-editor/nm-connection-list.c:230
+#: ../src/connection-editor/nm-connection-list.c:241
+msgid "now"
+msgstr "இப்போது"
+
+#. less than an hour ago
+#: ../src/connection-editor/nm-connection-list.c:248
+#, c-format
+msgid "%d minute ago"
+msgid_plural "%d minutes ago"
+msgstr[0] "%d நிமிடம் முன்"
+msgstr[1] "%d நிமிடங்களுக்கு முன்"
+
+#: ../src/connection-editor/nm-connection-list.c:252
+#, c-format
+msgid "%d hour ago"
+msgid_plural "%d hours ago"
+msgstr[0] "%d மணி முன்"
+msgstr[1] "%d மணி முன்"
+
+#: ../src/connection-editor/nm-connection-list.c:264
+#, c-format
+msgid "%d day ago"
+msgid_plural "%d days ago"
+msgstr[0] "%d நாள் முன்"
+msgstr[1] "%d நாள் முன்"
+
+#: ../src/connection-editor/nm-connection-list.c:270
+#, c-format
+msgid "%d month ago"
+msgid_plural "%d months ago"
+msgstr[0] "%d மாதம் முன்"
+msgstr[1] "%d மாதம் முன்"
+
+#: ../src/connection-editor/nm-connection-list.c:274
+#, c-format
+msgid "%d year ago"
+msgid_plural "%d years ago"
+msgstr[0] "%d வருடத்திற்கு முன்"
+msgstr[1] "%d வருடங்களுக்கு முன்"
+
+#: ../src/connection-editor/nm-connection-list.c:596
+msgid "Connection add failed"
+msgstr "இணைப்பை சேர்க்க முடியவில்லை"
+
+#: ../src/connection-editor/nm-connection-list.c:625
+#, c-format
+msgid "Error editing connection: property '%s' / '%s' invalid: %d"
+msgstr "திருத்துகிற இணைப்பில் பிழை: தன்மை '%s' / '%s' தவறான: %d"
+
+#: ../src/connection-editor/nm-connection-list.c:632
+#: ../src/connection-editor/nm-connection-list.c:747
+msgid "An unknown error occurred."
+msgstr "ஒரு தெரியாத பிழை ஏற்பட்டுவிட்டது."
+
+#: ../src/connection-editor/nm-connection-list.c:637
+#: ../src/connection-editor/nm-connection-list.c:788
+msgid "Error initializing editor"
+msgstr "பிழையை நிறுவும் எடிட்டர்"
+
+#: ../src/connection-editor/nm-connection-list.c:653
+#: ../src/connection-editor/nm-connection-list.c:805
+#: ../src/connection-editor/nm-connection-list.c:973
+msgid ""
+"The connection editor dialog could not be initialized due to an unknown "
+"error."
+msgstr "தெரியாத பிழையால் இணைப்பு எடிட்டர் உரையாடலை நிறுவ முடியவில்லை."
+
+#: ../src/connection-editor/nm-connection-list.c:662
+msgid "Could not create new connection"
+msgstr "புதிய இணைப்பை உருவாக்க முடியவில்லை"
+
+#: ../src/connection-editor/nm-connection-list.c:673
+msgid "Could not edit new connection"
+msgstr "புதிய இணைப்பை திருத்த முடியவில்லை"
+
+#: ../src/connection-editor/nm-connection-list.c:820
+msgid "Could not edit connection"
+msgstr "இணைப்பை திருத்த முடியவில்லை"
+
+#: ../src/connection-editor/nm-connection-list.c:845
+msgid "Connection delete failed"
+msgstr "இணைப்பை அழிக்க முடியவில்லை"
+
+#: ../src/connection-editor/nm-connection-list.c:877
+#, c-format
+msgid "Are you sure you wish to delete the connection %s?"
+msgstr " %s இணைப்பை அழிக்க நீங்கள் விரும்புகிறீர்களா?"
+
+#: ../src/connection-editor/nm-connection-list.c:1020
+#: ../src/connection-editor/vpn-helpers.c:228
+msgid "Cannot import VPN connection"
+msgstr "VPN இணைப்பை இறக்க முடியவில்லை"
+
+#: ../src/connection-editor/nm-connection-list.c:1022
+msgid ""
+"The VPN plugin failed to import the VPN connection correctly\n"
+"\n"
+"Error: no VPN service type."
+msgstr ""
+"VPN கூடுதல் இணைப்பை சரியாக VPN இணைப்பை இறக்க முடியவில்லை\n"
+"\n"
+"பிழை: VPN சேவை வகை இல்லை."
+
+#: ../src/connection-editor/nm-connection-list.c:1035
+msgid "Could not edit imported connection"
+msgstr "இறக்கப்பட்ட இணைப்பை திருத்த முடியவில்லை"
+
+#: ../src/connection-editor/nm-connection-list.c:1169
+msgid "Name"
+msgstr "பெயர்"
+
+#: ../src/connection-editor/nm-connection-list.c:1181
+msgid "Last Used"
+msgstr "கடைசியில் பயன்படுத்தப்பட்டது"
+
+#: ../src/connection-editor/nm-connection-list.c:1284
+msgid "Edit"
+msgstr "தொகு"
+
+#: ../src/connection-editor/nm-connection-list.c:1285
+msgid "Edit the selected connection"
+msgstr "தேர்ந்தெடுக்கப்பட்ட இணைப்பை திருத்தவும்"
+
+#: ../src/connection-editor/nm-connection-list.c:1286
+msgid "Edit..."
+msgstr "திருத்து..."
+
+#: ../src/connection-editor/nm-connection-list.c:1287
+msgid "Authenticate to edit the selected connection"
+msgstr "தேர்ந்தெடுக்கப்பட்ட இணைப்பை திருத்த அங்கீகாரம்"
+
+#: ../src/connection-editor/nm-connection-list.c:1301
+msgid "Delete"
+msgstr "அழிக்கவும்"
+
+#: ../src/connection-editor/nm-connection-list.c:1302
+msgid "Delete the selected connection"
+msgstr "தேர்ந்தெடுக்கப்பட்ட இணைப்பை அழிக்கவும்"
+
+#: ../src/connection-editor/nm-connection-list.c:1303
+msgid "Delete..."
+msgstr "அழிக்கவும்..."
+
+#: ../src/connection-editor/nm-connection-list.c:1304
+msgid "Authenticate to delete the selected connection"
+msgstr "தேர்ந்தெடுக்கப்பட்ட இணைப்பை அழிக்க அங்கீகாரம்"
+
+#: ../src/connection-editor/vpn-helpers.c:230
+#, c-format
+msgid ""
+"The file '%s' could not be read or does not contain recognized VPN "
+"connection information\n"
+"\n"
+"Error: %s."
+msgstr ""
+"கோப்பு '%s'ஐ வாசிக்க முடியவில்லை அல்லது அங்கீகரிக்கப்பட்ட VPN இணைப்புத் தகவலை "
+"பெற்றிருக்கவில்லை \n"
+"\n"
+"பிழை: %s."
+
+#: ../src/connection-editor/vpn-helpers.c:262
+msgid "Select file to import"
+msgstr "இறக்க கோப்பை தேர்ந்தெடுக்கவும்"
+
+#: ../src/connection-editor/vpn-helpers.c:310
+#, c-format
+msgid "A file named \"%s\" already exists."
+msgstr "\"%s\" என பெயரிடப்பட்ட கோப்பு ஏற்கனவே உள்ளது."
+
+#: ../src/connection-editor/vpn-helpers.c:312
+msgid "_Replace"
+msgstr "மாற்று (_R)"
+
+#: ../src/connection-editor/vpn-helpers.c:314
+#, c-format
+msgid "Do you want to replace %s with the VPN connection you are saving?"
+msgstr "VPN இணைப்புடன் %s ஐ இடமாற்ற நீங்கள் விரும்புகிறீர்களா?"
+
+#: ../src/connection-editor/vpn-helpers.c:350
+msgid "Cannot export VPN connection"
+msgstr "VPN இணைப்பை ஏற்ற முடியவல்லை"
+
+#: ../src/connection-editor/vpn-helpers.c:352
+#, c-format
+msgid ""
+"The VPN connection '%s' could not be exported to %s.\n"
+"\n"
+"Error: %s."
+msgstr ""
+"VPN இணைப்பு '%s' ஆனது %sஐ ஏற்றுமதி செய்ய முடியாது.\n"
+"\n"
+"பிழை: %s."
+
+#: ../src/connection-editor/vpn-helpers.c:386
+msgid "Export VPN connection..."
+msgstr "VPN இணைப்பை ஏற்றவும்..."
+
+#: ../src/gnome-bluetooth/bt-widget.c:213
+#, c-format
+msgid "%s Network"
+msgstr "%s பிணையம்"
+
+#: ../src/gnome-bluetooth/bt-widget.c:322
+#, c-format
+msgid "Error: %s"
+msgstr "பிழை: %s"
+
+#: ../src/gnome-bluetooth/bt-widget.c:441
+msgid "Mobile wizard was canceled"
+msgstr "மொபைல் பார்வை ரத்துசெய்யப்பட்டது"
+
+#: ../src/gnome-bluetooth/bt-widget.c:450
+msgid "Unknown phone device type (not GSM or CDMA)"
+msgstr "தெரியாத ஃபோன் சாதன வகை ( GSM இல்லை அல்லது CDMA)"
+
+#: ../src/gnome-bluetooth/bt-widget.c:478
+msgid "Your phone is now ready to use!"
+msgstr "உங்கள் ஃபோன் இப்போது பயன்படுத்துவதற்கு தயாராக உள்ளது!"
+
+#: ../src/gnome-bluetooth/bt-widget.c:648
+#: ../src/gnome-bluetooth/bt-widget.c:654
+msgid "failed to connect to the phone."
+msgstr "ஃபோனுக்கு இணைக்க முடியவில்லை."
+
+#: ../src/gnome-bluetooth/bt-widget.c:687
+msgid "unexpectedly disconnected from the phone."
+msgstr "எதிர்பாராமல் ஃபோனிலிருந்து துண்டிக்கப்பட்டது."
+
+#: ../src/gnome-bluetooth/bt-widget.c:696
+msgid "timed out detecting phone details."
+msgstr "ஃபோன் விவரங்களை தேடுவதற்கு நேரம் முடிந்தது."
+
+#: ../src/gnome-bluetooth/bt-widget.c:711
+msgid "could not connect to the system bus."
+msgstr "கணினி பஸ்க்கு இணைக்க முடியவில்லை."
+
+#: ../src/gnome-bluetooth/bt-widget.c:716
+msgid "Detecting phone configuration..."
+msgstr "ஃபோன் கட்டமைப்பை தேடுகிறது..."
+
+#: ../src/gnome-bluetooth/bt-widget.c:782
+msgid "could not find the Bluetooth device."
+msgstr "ஃப்ளூடூத் சாதனத்தை தேட முடியவில்லை."
+
+#: ../src/gnome-bluetooth/bt-widget.c:912
+msgid ""
+"The default Bluetooth adapter must be enabled before setting up a Dial-Up-"
+"Networking connection."
+msgstr ""
+"டயல்-அப்-பிணைய இணைப்பு அமைவிற்கு முன் முன்னிருப்பு ஃப்ளூடூத் அடாப்படர் செயல்படுதப்பட "
+"வேண்டும்."
+
+#: ../src/gnome-bluetooth/bt-widget.c:944
+#, c-format
+msgid "Bluetooth configuration not possible (failed to connect to D-Bus: %s)."
+msgstr "ப்ளூடூத் கட்டமைப்பு சாத்தியமில்லை (D-Busஉடன் இணைக்க முடியவில்லை: %s)."
+
+#: ../src/gnome-bluetooth/bt-widget.c:954
+msgid "Bluetooth configuration not possible (failed to create D-Bus proxy)."
+msgstr "ப்ளூடூத் கட்டமைப்பு சாத்தியமில்லை (D-Bus ப்ராக்ஸியை உருவாக்க முடியவில்லை)."
+
+#: ../src/gnome-bluetooth/bt-widget.c:963
+#, c-format
+msgid "Bluetooth configuration not possible (error finding NetworkManager: %s)."
+msgstr "ப்ளூடூத் கட்டமைப்பு சாத்தியமில்லை (NetworkManagerஐ கண்டுபிடிப்பதில் பிழை: %s)."
+
+#: ../src/gnome-bluetooth/bt-widget.c:1014
+msgid "Use your mobile phone as a network device (PAN/NAP)"
+msgstr "ஒரு பிணைய சாதனமாக உங்கள் மொபைல் ஃபோனை பயன்படுத்தவும் (PAN/NAP)"
+
+#: ../src/gnome-bluetooth/bt-widget.c:1023
+msgid "Access the Internet using your mobile phone (DUN)"
+msgstr "உங்களது மொபைல் போனுக்கு பயன்படுத்துகிற இணையத்தை அணுகுகிறது (DUN)"
+
+#: ../src/main.c:70
+msgid "Usage:"
+msgstr "பயன்பாடு:"
+
+#: ../src/main.c:72
+msgid ""
+"This program is a component of NetworkManager (http://projects.gnome.org/"
+"NetworkManager)."
+msgstr "இது NetworkManager இன் நிரல் ஆகும் (http://projects.gnome.org/NetworkManager)."
+
+#: ../src/main.c:73
+msgid ""
+"It is not intended for command-line interaction but instead runs in the "
+"GNOME desktop environment."
+msgstr ""
+"கட்டளை வரி கலந்துரையாடலுக்கு நோக்கமில்லை ஆனால் அதற்கு பதிலாக GNOME பணிமேடை சூழலை "
+"இயக்குகிறது."
+
+#: ../src/mb-menu-item.c:58
+msgid "EVDO"
+msgstr "EVDO"
+
+#: ../src/mb-menu-item.c:62
+msgid "GPRS"
+msgstr "GPRS"
+
+#: ../src/mb-menu-item.c:64
+msgid "EDGE"
+msgstr "EDGE"
+
+#: ../src/mb-menu-item.c:66
+msgid "UMTS"
+msgstr "UMTS"
+
+#: ../src/mb-menu-item.c:68
+msgid "HSDPA"
+msgstr "HSDPA"
+
+#: ../src/mb-menu-item.c:70
+msgid "HSUPA"
+msgstr "HSUPA"
+
+#: ../src/mb-menu-item.c:72
+msgid "HSPA"
+msgstr "HSPA"
+
+#: ../src/mb-menu-item.c:104
+msgid "not enabled"
+msgstr "செயல்படுத்தப்படவில்லை"
+
+#: ../src/mb-menu-item.c:110
+msgid "not registered"
+msgstr "பதிவு செய்யப்படவில்லை"
+
+#: ../src/mb-menu-item.c:128
+#, c-format
+msgid "Home network (%s)"
+msgstr "முகப்பு பிணையம் (%s)"
+
+#: ../src/mb-menu-item.c:130
+#, c-format
+msgid "Home network"
+msgstr "இல்ல பிணையம்"
+
+#: ../src/mb-menu-item.c:138
+msgid "searching"
+msgstr "தேடுகிறது"
+
+#: ../src/mb-menu-item.c:141
+msgid "registration denied"
+msgstr "பதிவுசெய்தல் மறுக்கப்பட்டது"
+
+#: ../src/mb-menu-item.c:146 ../src/mb-menu-item.c:152
+#, c-format
+msgid "%s (%s roaming)"
+msgstr "%s (%s ரோமிங்)"
+
+#: ../src/mb-menu-item.c:148 ../src/mb-menu-item.c:154
+#, c-format
+msgid "%s (roaming)"
+msgstr "%s (ரோமிங்)"
+
+#: ../src/mb-menu-item.c:157
+#, c-format
+msgid "Roaming network (%s)"
+msgstr "ரோமிங் பிணையம் (%s)"
+
+#: ../src/mb-menu-item.c:159
+#, c-format
+msgid "Roaming network"
+msgstr "ரோமிங் பிணையம்"
+
+#: ../src/utils/mobile-wizard.c:196
+msgid "Your mobile broadband connection is configured with the following settings:"
+msgstr "பின்வரும் அமைவுகள் உங்கள் மொபைல் பிராட்பேண்டு இணைப்பு கட்டமைக்கப்படுகிறது:"
+
+#. Device
+#: ../src/utils/mobile-wizard.c:203
+msgid "Your Device:"
+msgstr "உங்கள் சாதனம்:"
+
+#. Provider
+#: ../src/utils/mobile-wizard.c:214
+msgid "Your Provider:"
+msgstr "உங்கள் வழங்குபவர்:"
+
+#. Plan and APN
+#: ../src/utils/mobile-wizard.c:225
+msgid "Your Plan:"
+msgstr "உங்கள் திட்டம்:"
+
+#: ../src/utils/mobile-wizard.c:246
+msgid ""
+"A connection will now be made to your mobile broadband provider using the "
+"settings you selected.  If the connection fails or you cannot access network "
+"resources, double-check your settings.  To modify your mobile broadband "
+"connection settings, choose \"Network Connections\" from the System >> "
+"Preferences menu."
+msgstr ""
+" A connection will now be made to your mobile broadband provider using the "
+"settings you selected.  If the connection fails or you cannot access network "
+"resources, double-check your settings.  To modify your mobile broadband "
+"connection settings, choose \"Network Connections\" from the System >> "
+"Preferences menu."
+
+#: ../src/utils/mobile-wizard.c:258
+msgid "Confirm Mobile Broadband Settings"
+msgstr "மொபைல் பிராட்பேண்டு அமைவுகளை உறுதி செய்யவும்"
+
+#: ../src/utils/mobile-wizard.c:319
+msgid "Unlisted"
+msgstr "பட்டியலிடப்படாத"
+
+#: ../src/utils/mobile-wizard.c:437
+msgid "_Select your plan:"
+msgstr "உங்கள் திட்டத்தை தேர்ந்தெடுக்கவும் (_S):"
+
+#: ../src/utils/mobile-wizard.c:461
+msgid "Selected plan _APN (Access Point Name):"
+msgstr "தேர்ந்தெடுக்கப்பட்ட திட்டம் _APN (Access Point Name):"
+
+#: ../src/utils/mobile-wizard.c:480
+msgid ""
+"Warning: Selecting an incorrect plan may result in billing issues for your "
+"broadband account or may prevent connectivity.\n"
+"\n"
+"If you are unsure of your plan please ask your provider for your plan's APN."
+msgstr ""
+"எச்சரிக்கை: ஒரு தவறான திட்டத்தை தேர்ந்தெடுப்பது உங்கள் ப்ராட்பேண்ட் கணக்கில் தவறான பில்லை "
+"கொடுக்கலாம் அல்லது இணைப்பை துண்டிக்கலாம்.\n"
+"\n"
+"உங்கள் திட்டத்தை பற்றி எதுவும் தெரியவில்லையெனில் உங்கள் திட்டத்தின் APNஐ வழங்குநரிடம் "
+"கேட்கவும்."
+
+#: ../src/utils/mobile-wizard.c:487
+msgid "Choose your Billing Plan"
+msgstr "பில்லிங் திட்டத்தை தேர்ந்தெடுக்கவும்"
+
+#: ../src/utils/mobile-wizard.c:535
+msgid "My plan is not listed..."
+msgstr "எனது திட்டம் பட்டியலிடப்படவில்லை..."
+
+#: ../src/utils/mobile-wizard.c:688
+msgid "Select your provider from a _list:"
+msgstr "ஒரு பட்டியலிருந்து உங்கள் வழங்குபவரை தேர்ந்தெடுக்கவும் (_l):"
+
+#: ../src/utils/mobile-wizard.c:701
+msgid "Provider"
+msgstr "வழங்குபவர்"
+
+#: ../src/utils/mobile-wizard.c:726
+msgid "I can't find my provider and I wish to enter it _manually:"
+msgstr "எனது வழங்குபவரை தேட முடியவில்லை மற்றும் கைமுறையாக அதை உள்ளிட விரும்புகிறேன் (_m):"
+
+#: ../src/utils/mobile-wizard.c:737
+msgid "Provider:"
+msgstr "வழங்குபவர்:"
+
+#: ../src/utils/mobile-wizard.c:753
+msgid "My provider uses GSM technology (GPRS, EDGE, UMTS, HSPA)"
+msgstr "எனது வழங்குபவர் GSM டெக்னாலஜியை பயன்படுத்துகிறார் (GPRS, EDGE, UMTS, HSPA)"
+
+#: ../src/utils/mobile-wizard.c:755
+msgid "My provider uses CDMA technology (1xRTT, EVDO)"
+msgstr "எனது வழங்குபவர் CDMA டெக்னாலஜியை பயன்படுத்துகிறார் (1xRTT, EVDO)"
+
+#: ../src/utils/mobile-wizard.c:766
+msgid "Choose your Provider"
+msgstr "உங்கள் வழங்குபவரை தேர்ந்தெடுக்கவும்"
+
+#: ../src/utils/mobile-wizard.c:1012
+msgid "Country List:"
+msgstr "மாநிலப் பட்டியல்:"
+
+#: ../src/utils/mobile-wizard.c:1024
+msgid "Country"
+msgstr "நாடு"
+
+#: ../src/utils/mobile-wizard.c:1031
+msgid "My country is not listed"
+msgstr "எனது நாடு பட்டியலிடப்படவில்லை"
+
+#: ../src/utils/mobile-wizard.c:1077
+msgid "Choose your Provider's Country"
+msgstr "உங்களின் வழங்குபவரின் நாட்டைத் தேர்ந்தெடுக்கவும்"
+
+#: ../src/utils/mobile-wizard.c:1126
+msgid "Installed GSM device"
+msgstr "GSM சாதனம் நிறுவப்பட்டது"
+
+#: ../src/utils/mobile-wizard.c:1129
+msgid "Installed CDMA device"
+msgstr "CDMA சாதனம் நிறுவபட்டது"
+
+#: ../src/utils/mobile-wizard.c:1297
+msgid ""
+"This assistant helps you easily set up a mobile broadband connection to a "
+"cellular (3G) network."
+msgstr ""
+"ஒரு செல்லுலார் (3G) பிணையத்துடன் மொபைல் பிராட்பேண்டு இணைப்பைஅமைக்க உங்களுக்கு உதவியாளர் "
+"உதவிபுரிவார்."
+
+#: ../src/utils/mobile-wizard.c:1302
+msgid "You will need the following information:"
+msgstr "பின்வரும் தகவல் உங்களுக்கு தேவை:"
+
+#: ../src/utils/mobile-wizard.c:1313
+msgid "Your broadband provider's name"
+msgstr "உங்கள் பிராட்பேண்டு வழங்குபவர்கள் பெயர்"
+
+#: ../src/utils/mobile-wizard.c:1319
+msgid "Your broadband billing plan name"
+msgstr "உங்கள் பிராட்பேண்டு பில்லிங் திட்டப் பெயர்"
+
+#: ../src/utils/mobile-wizard.c:1325
+msgid "(in some cases) Your broadband billing plan APN (Access Point Name)"
+msgstr "(ஒரு சில சமயங்களில்) உங்களது பிராட்பேண்டுபில்லிங் திட்டம் APN (Access Point Name)"
+
+#: ../src/utils/mobile-wizard.c:1352
+msgid "Create a connection for _this mobile broadband device:"
+msgstr "இந்த மொபைல் பிராட்பேண்டு சாதன இணைப்பை உருவாக்கவும் (_t):"
+
+#: ../src/utils/mobile-wizard.c:1367
+msgid "Any device"
+msgstr "ஏதாவது சாதனம்"
+
+#: ../src/utils/mobile-wizard.c:1380
+msgid "Set up a Mobile Broadband Connection"
+msgstr "மொபைல் பிராட்பேண்டு இணைப்பை அமைக்கவும்"
+
+#: ../src/utils/mobile-wizard.c:1554
+msgid "New Mobile Broadband Connection"
+msgstr "புதிய மொபைல் பிராட்பேண்டு இணைப்பு"
+
+#: ../src/utils/nmn-mobile-providers.c:76
+msgid "United Kingdom"
+msgstr "ஐக்கிய அரசு"
+
+#: ../src/utils/nmn-mobile-providers.c:523
+msgid "Default"
+msgstr "முன்னிருப்பு"
+
+#: ../src/vpn-password-dialog.c:137 ../src/vpn-password-dialog.c:255
+#, c-format
+msgid "Cannot start VPN connection '%s'"
+msgstr "VPN இணைப்பு '%s'ஐ துவக்க முடியவில்லை"
+
+#: ../src/vpn-password-dialog.c:140
+#, c-format
+msgid ""
+"Could not find the authentication dialog for VPN connection type '%s'. "
+"Contact your system administrator."
+msgstr ""
+"VPN இணைப்பு வகை '%s'க்கு உரையாடல் அங்கீகாரத்தை தேட முடியவில்லை. உங்கள் கணினி "
+"நிர்வாகியை தொடர்பு கொள்ளவும்."
+
+#: ../src/vpn-password-dialog.c:258
+#, c-format
+msgid ""
+"There was a problem launching the authentication dialog for VPN connection "
+"type '%s'. Contact your system administrator."
+msgstr ""
+"அங்கீகரிக்கப்பட்ட உரையாடல் VPN கான இணைப்பு வகை '%s'ஐ கண்டுபிடிப்பதில் ஒரு சிக்கலை "
+"ஏற்பட்டது. உங்களது கணினி நிர்வாகியை தொடர்பு கொள்ளவும்."
+
+#: ../src/wired-dialog.c:99
+msgid "Wired 802.1X authentication"
+msgstr "ஒயர்டு 802.1X அங்கீகாரம்"
+
+#: ../src/wireless-dialog.c:474
+msgid "New..."
+msgstr "புதிய..."
+
+#: ../src/wireless-dialog.c:1094
+msgid "C_reate"
+msgstr "உருவாக்கு (_r)"
+
+#: ../src/wireless-dialog.c:1175
+#, c-format
+msgid ""
+"Passwords or encryption keys are required to access the wireless network '%"
+"s'."
+msgstr ""
+"கடவுச்சொல் அல்லது மறைகுறியாக்க விசைகள் ஒயர்லெஸ் பிணைய '%s'ஐ அணுகுவதற்கு "
+"தேவைப்படுகிறது."
+
+#: ../src/wireless-dialog.c:1177
+msgid "Wireless Network Authentication Required"
+msgstr "ஒயர்லெஸ் பிணைய அங்கீகாரம் தேவைப்படுகிறது"
+
+#: ../src/wireless-dialog.c:1179
+msgid "Authentication required by wireless network"
+msgstr "அங்கீகார ஒயர்லெஸ் பிணையம் தேவைப்படுகிறது"
+
+#: ../src/wireless-dialog.c:1184
+msgid "Create New Wireless Network"
+msgstr "புதிய ஒர்லெஸ் பிணையத்தை உருவாக்கவும்"
+
+#: ../src/wireless-dialog.c:1186
+msgid "New wireless network"
+msgstr "புதிய ஒயர்லெஸ் பிணையம்"
+
+#: ../src/wireless-dialog.c:1187
+msgid "Enter a name for the wireless network you wish to create."
+msgstr "ஒயர்லெஸ் பிணையத்தை உருவாக்க ஒரு பெயரை உள்ளிடவும்."
+
+#: ../src/wireless-dialog.c:1189
+msgid "Connect to Hidden Wireless Network"
+msgstr "மறைக்கப்பட்ட ஒயர்லெஸ் பிணையத்தை இணைக்கவும்"
+
+#: ../src/wireless-dialog.c:1191
+msgid "Hidden wireless network"
+msgstr "மறைக்கட்ட ஒழர்லெஸ் பிணையம்"
+
+#: ../src/wireless-dialog.c:1192
+msgid ""
+"Enter the name and security details of the hidden wireless network you wish "
+"to connect to."
+msgstr ""
+"நீங்கள் இணைக்க விரும்பினால் மறைக்கப்பட்ட ஒயர்லெஸ் பிணையத்திற்கு பெயர் மற்றும்பாதுகாப்பு "
+"விவரங்களை உள்ளிடவும்."
+
+#: ../src/wireless-security/eap-method.c:190
+msgid "No Certificate Authority certificate chosen"
+msgstr "இங்கீகார சான்றிதழ் தேர்ந்தெடுக்கப்படவில்லை"
+
+#: ../src/wireless-security/eap-method.c:191
+msgid ""
+"Not using a Certificate Authority (CA) certificate can result in connections "
+"to insecure, rogue wireless networks.  Would you like to choose a "
+"Certificate Authority certificate?"
+msgstr ""
+" Not using a Certificate Authority (CA) certificate can result in "
+"connections to insecure, rogue wireless networks.  Would you like to choose "
+"a Certificate Authority certificate?"
+
+#: ../src/wireless-security/eap-method.c:200
+msgid "Choose CA Certificate"
+msgstr "CA சான்றிதழை தேர்ந்தெடுக்கவும்"
+
+#: ../src/wireless-security/eap-method.c:515
+msgid "DER, PEM, or PKCS#12 private keys (*.der, *.pem, *.p12)"
+msgstr "DER, PEM, or PKCS#12 தனிப்பட்ட விசைகள் (*.der, *.pem, *.p12)"
+
+#: ../src/wireless-security/eap-method.c:518
+msgid "DER or PEM certificates (*.der, *.pem, *.crt, *.cer)"
+msgstr "DER அல்லது PEM சான்றிதழ்கள் (*.der, *.pem, *.crt, *.cer)"
+
+#: ../src/wireless-security/eap-method-peap.c:261
+msgid "MD5"
+msgstr "MD5"
+
+#: ../src/wireless-security/eap-method-peap.c:277
+msgid "GTC"
+msgstr "GTC"
+
+#: ../src/wireless-security/eap-method-peap.c:366
+#: ../src/wireless-security/eap-method-tls.c:457
+#: ../src/wireless-security/eap-method-ttls.c:365
+msgid "Choose a Certificate Authority certificate..."
+msgstr "அங்கீகார சான்றிதழைத் தேர்ந்தெடு..."
+
+#: ../src/wireless-security/eap-method-tls.c:263
+msgid "Unencrypted private keys are insecure"
+msgstr "மறைகுறியாக்கப்படாத தனிபட்ட விசைகள் பாதுகாப்பில்லாதது"
+
+#: ../src/wireless-security/eap-method-tls.c:266
+msgid ""
+"The selected private key does not appear to be protected by a password.  "
+"This could allow your security credentials to be compromised.  Please select "
+"a password-protected private key.\n"
+"\n"
+"(You can password-protect your private key with openssl)"
+msgstr ""
+"The selected private key does not appear to be protected by a password.  "
+"This could allow your security credentials to be compromised.  Please select "
+"a password-protected private key.\n"
+"\n"
+"(You can password-protect your private key with openssl)"
+
+#: ../src/wireless-security/eap-method-tls.c:451
+msgid "Choose your personal certificate..."
+msgstr "உங்கள் தனிப்பட்ட சான்றிதழை தேர்ந்தெடுக்கவும்..."
+
+#: ../src/wireless-security/eap-method-tls.c:463
+msgid "Choose your private key..."
+msgstr "உங்கள் தனிப்பட்ட விசையை தேர்ந்தெடுக்கவும்..."
+
+#: ../src/wireless-security/wireless-security.c:329
+msgid "TLS"
+msgstr "TLS"
+
+#: ../src/wireless-security/wireless-security.c:353
+msgid "Tunneled TLS"
+msgstr "Tunneled TLS"
+
+#: ../src/wireless-security/wireless-security.c:364
+msgid "Protected EAP (PEAP)"
+msgstr "பாதுகாக்கப்பட்ட EAP (PEAP)"
+
+#~ msgid "_Routes…"
+#~ msgstr "வழிகள் (_R)…"
+
+#~ msgid ""
+#~ "The NetworkManager applet could not find some required resources.  It "
+#~ "cannot continue.\n"
+#~ msgstr "பிணைய மேலாளர் அப்லெட் தேவையான மூலங்களைத் தேடவில்லை. இது தொடர முடியாது.\n"
+
+#~ msgid "Select A File"
+#~ msgstr "ஒரு கோப்பினை தேர்ந்தெடு"
+
+#~ msgid "_Band:"
+#~ msgstr "பிணைப்பு (_B):"
