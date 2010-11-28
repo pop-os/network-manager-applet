@@ -1,0 +1,64 @@
+Source: network-manager-applet
+Section: gnome
+Priority: optional
+Maintainer: Utopia Maintenance Team <pkg-utopia-maintainers@lists.alioth.debian.org>
+Uploaders: Michael Biebl <biebl@debian.org>
+Build-Depends:
+ cdbs,
+ debhelper (>= 7),
+ autotools-dev,
+ intltool,
+ libdbus-glib-1-dev (>= 0.74),
+ libiw-dev(>= 27+28pre9),
+ libgnome-keyring-dev,
+ libglade2-dev,
+ libgtk2.0-dev (>= 2.14),
+ libglib2.0-dev (>= 2.16),
+ libgconf2-dev,
+ libnotify-dev (>= 0.4.3),
+ libnm-util-dev (>= 0.8.1),
+ libnm-glib-dev (>= 0.8.1),
+ libnm-glib-vpn-dev (>= 0.8.1),
+ network-manager-dev (>= 0.8.1),
+ docbook-to-man,
+ libpolkit-gobject-1-dev (>= 0.92),
+ libgnome-bluetooth-dev (>= 2.27.6)
+Standards-Version: 3.9.1
+Vcs-Svn: svn://svn.debian.org/pkg-utopia/packages/unstable/network-manager-applet/
+Vcs-Browser: http://svn.debian.org/wsvn/pkg-utopia/packages/unstable/network-manager-applet/
+Homepage: http://www.gnome.org/projects/NetworkManager/
+
+Package: network-manager-gnome
+Architecture: any
+Section: gnome
+Depends:
+ ${shlibs:Depends},
+ ${misc:Depends},
+ network-manager (>= 0.8.1),
+ policykit-1-gnome,
+ gnome-icon-theme,
+ dbus-x11
+Recommends:
+ notification-daemon,
+ libpam-keyring,
+ mobile-broadband-provider-info,
+ gnome-bluetooth
+Suggests:
+ network-manager-openvpn-gnome,
+ network-manager-vpnc-gnome,
+ network-manager-pptp-gnome
+Description: network management framework (GNOME frontend)
+ NetworkManager attempts to keep an active network connection available at all
+ times. It is intended only for the desktop use-case, and is not intended for
+ usage on servers. The point of NetworkManager is to make networking
+ configuration and setup as painless and automatic as possible.  If using DHCP,
+ NetworkManager is _intended_ to replace default routes, obtain IP addresses
+ from a DHCP server, and change nameservers whenever it sees fit.
+ .
+ This package contains a systray applet for GNOME's notification area but it
+ also works for other desktop environments which provide a systray like KDE
+ or Xfce.
+ It displays the available networks and allows to easily switch between them.
+ For encrypted networks it will prompt the user for the key/passphrase and it
+ can optionally store them in the gnome-keyring.
+

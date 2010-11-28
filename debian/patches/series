@@ -1,0 +1,5 @@
+# Debian patches for network-manager-applet
+01-dbus_access_nm_applet.patch
+02-hide-pin-in-pin-puk-dialog-by-default.patch
+03-enter-closes-pin-puk-dialog.patch
+04-autostart.patch
