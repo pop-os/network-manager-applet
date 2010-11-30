@@ -482,6 +482,7 @@ applet_new_menu_item_helper (NMConnection *connection,
 static gboolean
 menu_title_item_expose (GtkWidget *widget, GdkEventExpose *event)
 {
+	GtkAllocation allocation;
 	GtkStyle *style;
 	GtkWidget *label;
 	PangoFontDescription *desc;
@@ -496,7 +497,7 @@ menu_title_item_expose (GtkWidget *widget, GdkEventExpose *event)
 
 	label = gtk_bin_get_child (GTK_BIN (widget));
 
-	cr = gdk_cairo_create (widget->window);
+	cr = gdk_cairo_create (gtk_widget_get_window (widget));
 
 	/* The drawing area we get is the whole menu; clip the drawing to the
 	 * event area, which should just be our menu item.
@@ -509,6 +510,11 @@ menu_title_item_expose (GtkWidget *widget, GdkEventExpose *event)
 	/* We also need to reposition the cairo context so that (0, 0) is the
 	 * top-left of where we're supposed to start drawing.
 	 */
+#if GTK_CHECK_VERSION(2,18,0)
+	gtk_widget_get_allocation (widget, &allocation);
+#else
+	allocation = widget->allocation;
+#endif
 	cairo_translate (cr, widget->allocation.x, widget->allocation.y);
 
 	text = gtk_label_get_text (GTK_LABEL (label));
@@ -575,14 +581,10 @@ applet_clear_notify (NMApplet *applet)
 }
 
 static gboolean
-applet_notify_server_has_actions ()
+applet_notify_server_has_actions (void)
 {
-	static gboolean queried = FALSE;
-	static gboolean has_actions = FALSE;
+	gboolean has_actions = FALSE;
 	GList *server_caps, *iter;
-
-	if (queried)
-		return has_actions;
 
 	server_caps = notify_get_server_caps();
 	for (iter = server_caps; iter; iter = g_list_next (iter)) {
@@ -591,10 +593,8 @@ applet_notify_server_has_actions ()
 			break;
 		}
 	}
-
 	g_list_foreach (server_caps, (GFunc) g_free, NULL);
 	g_list_free (server_caps);
-	queried = TRUE;
 
 	return has_actions;
 }
@@ -635,7 +635,7 @@ applet_do_notify (NMApplet *applet,
 	notify_notification_set_urgency (notify, urgency);
 	notify_notification_set_timeout (notify, NOTIFY_EXPIRES_DEFAULT);
 
-	if (applet_notify_server_has_actions () && action1) {
+	if (applet->notify_actions && action1) {
 		notify_notification_add_action (notify, action1, action1_label,
 		                                action1_cb, action1_user_data, NULL);
 	}
@@ -872,13 +872,15 @@ vpn_connection_state_changed (NMVPNConnection *vpn,
 		break;
 	case NM_VPN_CONNECTION_STATE_ACTIVATED:
 		banner = nm_vpn_connection_get_banner (vpn);
-		if (banner && strlen (banner)) {
-			title = _("VPN Login Message");
-			msg = g_strdup_printf ("%s\n", banner);
-			applet_do_notify (applet, NOTIFY_URGENCY_LOW, title, msg,
-			                  "gnome-lockscreen", NULL, NULL, NULL, NULL);
-			g_free (msg);
-		}
+		if (banner && strlen (banner))
+			msg = g_strdup_printf ("VPN connection has been successfully established.\n\n%s\n", banner);
+		else
+			msg = g_strdup ("VPN connection has been successfully established.\n");
+
+		title = _("VPN Login Message");
+		applet_do_notify (applet, NOTIFY_URGENCY_LOW, title, msg,
+		                  "gnome-lockscreen", NULL, NULL, NULL, NULL);
+		g_free (msg);
 
 		connection = applet_get_connection_for_active (applet, NM_ACTIVE_CONNECTION (vpn));
 		if (connection)
@@ -1292,8 +1294,12 @@ nma_menu_device_get_menu_item (NMDevice *device,
 	GtkWidget *item = NULL;
 	gboolean managed = TRUE;
 
-	if (!unavailable_msg)
-		unavailable_msg = _("device not ready");
+	if (!unavailable_msg) {
+		if (nm_device_get_firmware_missing (device))
+			unavailable_msg = _("device not ready (firmware missing)");
+		else
+			unavailable_msg = _("device not ready");
+	}
 
 	switch (nm_device_get_state (device)) {
 	case NM_DEVICE_STATE_UNKNOWN:
@@ -1690,6 +1696,14 @@ static gboolean nma_menu_clear (NMApplet *applet)
 	return FALSE;
 }
 
+static gboolean
+is_permission_yes (NMApplet *applet, NMClientPermission perm)
+{
+	if (   applet->permissions[perm] == NM_CLIENT_PERMISSION_RESULT_YES
+	    || applet->permissions[perm] == NM_CLIENT_PERMISSION_RESULT_AUTH)
+		return TRUE;
+	return FALSE;
+}
 
 /*
  * nma_context_menu_update
@@ -1722,6 +1736,8 @@ nma_context_menu_update (NMApplet *applet)
 	                                net_enabled && (state != NM_STATE_ASLEEP));
 	g_signal_handler_unblock (G_OBJECT (applet->networking_enabled_item),
 	                          applet->networking_enabled_toggled_id);
+	gtk_widget_set_sensitive (applet->networking_enabled_item,
+	                          is_permission_yes (applet, NM_CLIENT_PERMISSION_ENABLE_DISABLE_NETWORK));
 
 	/* Enabled Wireless */
 	g_signal_handler_block (G_OBJECT (applet->wifi_enabled_item),
@@ -1733,7 +1749,7 @@ nma_context_menu_update (NMApplet *applet)
 
 	wireless_hw_enabled = nm_client_wireless_hardware_get_enabled (applet->nm_client);
 	gtk_widget_set_sensitive (GTK_WIDGET (applet->wifi_enabled_item),
-	                          wireless_hw_enabled);
+	                          wireless_hw_enabled && is_permission_yes (applet, NM_CLIENT_PERMISSION_ENABLE_DISABLE_WIFI));
 
 	/* Enabled Mobile Broadband */
 	g_signal_handler_block (G_OBJECT (applet->wwan_enabled_item),
@@ -1745,7 +1761,7 @@ nma_context_menu_update (NMApplet *applet)
 
 	wwan_hw_enabled = nm_client_wwan_hardware_get_enabled (applet->nm_client);
 	gtk_widget_set_sensitive (GTK_WIDGET (applet->wwan_enabled_item),
-	                          wwan_hw_enabled);
+	                          wwan_hw_enabled && is_permission_yes (applet, NM_CLIENT_PERMISSION_ENABLE_DISABLE_WWAN));
 
 	/* Enabled notifications */
 	g_signal_handler_block (G_OBJECT (applet->notifications_enabled_item),
@@ -2156,6 +2172,18 @@ foo_active_connections_changed_cb (NMClient *client,
 	applet_schedule_update_icon (applet);
 }
 
+static void
+foo_manager_permission_changed (NMClient *client,
+                                NMClientPermission permission,
+                                NMClientPermissionResult result,
+                                gpointer user_data)
+{
+	NMApplet *applet = NM_APPLET (user_data);
+
+	if (permission <= NM_CLIENT_PERMISSION_LAST)
+		applet->permissions[permission] = result;
+}
+
 static gboolean
 foo_set_initial_state (gpointer data)
 {
@@ -2193,6 +2221,15 @@ foo_client_setup (NMApplet *applet)
 	g_signal_connect (applet->nm_client, "notify::manager-running",
 	                  G_CALLBACK (foo_manager_running_cb),
 	                  applet);
+
+	g_signal_connect (applet->nm_client, "permission-changed",
+	                  G_CALLBACK (foo_manager_permission_changed),
+	                  applet);
+	/* Initialize permissions - the initial 'permission-changed' signal is emitted from NMClient constructor, and thus not caught */
+	applet->permissions[NM_CLIENT_PERMISSION_ENABLE_DISABLE_NETWORK] = nm_client_get_permission_result (applet->nm_client, NM_CLIENT_PERMISSION_ENABLE_DISABLE_NETWORK);
+	applet->permissions[NM_CLIENT_PERMISSION_ENABLE_DISABLE_WIFI] = nm_client_get_permission_result (applet->nm_client, NM_CLIENT_PERMISSION_ENABLE_DISABLE_WIFI);
+	applet->permissions[NM_CLIENT_PERMISSION_ENABLE_DISABLE_WWAN] = nm_client_get_permission_result (applet->nm_client, NM_CLIENT_PERMISSION_ENABLE_DISABLE_WWAN);
+	applet->permissions[NM_CLIENT_PERMISSION_USE_USER_CONNECTIONS] = nm_client_get_permission_result (applet->nm_client, NM_CLIENT_PERMISSION_USE_USER_CONNECTIONS);
 
 	if (nm_client_get_manager_running (applet->nm_client))
 		g_idle_add (foo_set_initial_state, applet);
@@ -2892,9 +2929,12 @@ applet_pre_keyring_callback (gpointer user_data)
 	NMApplet *applet = NM_APPLET (user_data);
 	GdkScreen *screen;
 	GdkDisplay *display;
+	GdkWindow *window = NULL;
 
-	if (applet->menu && applet->menu->window) {
-		screen = gdk_drawable_get_screen (applet->menu->window);
+	if (applet->menu)
+		window = gtk_widget_get_window (applet->menu);
+	if (window) {
+		screen = gdk_drawable_get_screen (window);
 		display = gdk_screen_get_display (screen);
 		g_object_ref (display);
 
@@ -2911,8 +2951,11 @@ applet_pre_keyring_callback (gpointer user_data)
 		g_object_unref (display);
 	}
 
-	if (applet->context_menu && applet->context_menu->window) {
-		screen = gdk_drawable_get_screen (applet->context_menu->window);
+	window = NULL;
+	if (applet->context_menu)
+		window = gtk_widget_get_window (applet->context_menu);
+	if (window) {
+		screen = gdk_drawable_get_screen (window);
 		display = gdk_screen_get_display (screen);
 		g_object_ref (display);
 
@@ -2934,6 +2977,15 @@ exit_cb (GObject *ignored, gpointer user_data)
 	NMApplet *applet = user_data;
 
 	g_main_loop_quit (applet->loop);
+}
+
+static void
+applet_embedded_cb (GObject *object, GParamSpec *pspec, gpointer user_data)
+{
+	gboolean embedded = gtk_status_icon_is_embedded (GTK_STATUS_ICON (object));
+
+	g_message ("applet now %s the notification area",
+	           embedded ? "embedded in" : "removed from");
 }
 
 static GObject *
@@ -2964,6 +3016,12 @@ constructor (GType type,
 	applet->gconf_client = gconf_client_get_default ();
 	if (!applet->gconf_client)
 		goto error;
+
+	/* Note that we don't care about change notifications for prefs values... */
+	gconf_client_add_dir (applet->gconf_client,
+	                      APPLET_PREFS_PATH,
+	                      GCONF_CLIENT_PRELOAD_ONELEVEL,
+	                      NULL);
 
 	/* Load pixmaps and create applet widgets */
 	if (!setup_widgets (applet))
@@ -3020,6 +3078,15 @@ constructor (GType type,
 
 	nm_gconf_set_pre_keyring_callback (applet_pre_keyring_callback, applet);
 
+	/* Track embedding to help debug issues where user has removed the
+	 * notification area applet from the panel, and thus nm-applet too.
+	 */
+	g_signal_connect (applet->status_icon, "notify::embedded",
+	                  G_CALLBACK (applet_embedded_cb), NULL);
+	applet_embedded_cb (G_OBJECT (applet->status_icon), NULL, NULL);
+
+	applet->notify_actions = applet_notify_server_has_actions ();
+
 	return G_OBJECT (applet);
 
 error:
@@ -3057,8 +3124,12 @@ static void finalize (GObject *object)
 	if (applet->info_dialog_xml)
 		g_object_unref (applet->info_dialog_xml);
 
-	if (applet->gconf_client)
+	if (applet->gconf_client) {
+		gconf_client_remove_dir (applet->gconf_client,
+		                         APPLET_PREFS_PATH,
+		                         NULL);
 		g_object_unref (applet->gconf_client);
+	}
 
 	if (applet->status_icon)
 		g_object_unref (applet->status_icon);

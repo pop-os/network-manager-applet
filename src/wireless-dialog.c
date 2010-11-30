@@ -916,7 +916,7 @@ security_combo_init (NMAWirelessDialog *self, gboolean auth_only)
 	if (nm_utils_security_valid (NMU_SEC_NONE, dev_caps, !!priv->ap, is_adhoc, ap_flags, ap_wpa, ap_rsn)) {
 		gtk_list_store_append (sec_model, &iter);
 		gtk_list_store_set (sec_model, &iter,
-		                    S_NAME_COLUMN, C_("No wifi security used", "None"),
+		                    S_NAME_COLUMN, C_("Wifi/wired security", "None"),
 		                    -1);
 		if (default_type == NMU_SEC_NONE)
 			active = item;
@@ -933,7 +933,7 @@ security_combo_init (NMAWirelessDialog *self, gboolean auth_only)
 		ws_wep = ws_wep_key_new (priv->glade_file, priv->connection, NM_WEP_KEY_TYPE_KEY, priv->adhoc_create, auth_only);
 		if (ws_wep) {
 			add_security_item (self, WIRELESS_SECURITY (ws_wep), sec_model,
-			                   &iter, _("WEP 40/128-bit Key"));
+			                   &iter, _("WEP 40/128-bit Key (Hex or ASCII)"));
 			if ((active < 0) && (default_type == NMU_SEC_STATIC_WEP) && (wep_type == NM_WEP_KEY_TYPE_KEY))
 				active = item;
 			item++;
@@ -1069,7 +1069,6 @@ internal_init (NMAWirelessDialog *self,
 	gtk_container_set_border_width (GTK_CONTAINER (self), 6);
 	gtk_window_set_default_size (GTK_WINDOW (self), 488, -1);
 	gtk_window_set_resizable (GTK_WINDOW (self), FALSE);
-	gtk_dialog_set_has_separator (GTK_DIALOG (self), FALSE);
 
 	priv->auth_only = auth_only;
 	if (auth_only)
@@ -1084,7 +1083,7 @@ internal_init (NMAWirelessDialog *self,
 	gtk_box_set_spacing (GTK_BOX (gtk_dialog_get_content_area (GTK_DIALOG (self))), 2);
 
 	widget = gtk_dialog_add_button (GTK_DIALOG (self), GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL);
-	gtk_box_set_child_packing (GTK_BOX (GTK_DIALOG (self)->action_area), widget,
+	gtk_box_set_child_packing (GTK_BOX (gtk_dialog_get_action_area (GTK_DIALOG (self))), widget,
 	                           FALSE, TRUE, 0, GTK_PACK_END);
 
 	/* Connect/Create button */
@@ -1100,7 +1099,7 @@ internal_init (NMAWirelessDialog *self,
 	} else
 		widget = gtk_dialog_add_button (GTK_DIALOG (self), GTK_STOCK_CONNECT, GTK_RESPONSE_OK);
 
-	gtk_box_set_child_packing (GTK_BOX (GTK_DIALOG (self)->action_area), widget,
+	gtk_box_set_child_packing (GTK_BOX (gtk_dialog_get_action_area (GTK_DIALOG (self))), widget,
 	                           FALSE, TRUE, 0, GTK_PACK_END);
 	g_object_set (G_OBJECT (widget), "can-default", TRUE, NULL);
 	gtk_widget_grab_default (widget);

@@ -33,6 +33,8 @@
 
 #include <nm-setting-connection.h>
 #include <nm-setting-ip6-config.h>
+#include <nm-setting-wired.h>
+#include <nm-setting-wireless.h>
 #include <nm-setting-gsm.h>
 #include <nm-setting-cdma.h>
 #include <nm-setting-pppoe.h>
@@ -94,9 +96,10 @@ typedef struct {
 #define IP6_METHOD_IGNORE          0
 #define IP6_METHOD_AUTO            1
 #define IP6_METHOD_AUTO_ADDRESSES  2
-#define IP6_METHOD_MANUAL          3
-#define IP6_METHOD_LINK_LOCAL      4
-#define IP6_METHOD_SHARED          5
+#define IP6_METHOD_AUTO_DHCP_ONLY  3
+#define IP6_METHOD_MANUAL          4
+#define IP6_METHOD_LINK_LOCAL      5
+#define IP6_METHOD_SHARED          6
 
 static void
 ip6_private_init (CEPageIP6 *self, NMConnection *connection)
@@ -160,6 +163,17 @@ ip6_private_init (CEPageIP6 *self, NMConnection *connection)
 	                    METHOD_COL_NUM, IP6_METHOD_AUTO_ADDRESSES,
 						METHOD_COL_ENABLED, TRUE,
 	                    -1);
+
+	/* DHCP only used on wifi and wired for now */
+	if (   priv->connection_type == NM_TYPE_SETTING_WIRED
+	    || priv->connection_type == NM_TYPE_SETTING_WIRELESS) {
+		gtk_list_store_append (priv->method_store, &iter);
+		gtk_list_store_set (priv->method_store, &iter,
+		                    METHOD_COL_NAME, _("Automatic, DHCP only"),
+		                    METHOD_COL_NUM, IP6_METHOD_AUTO_DHCP_ONLY,
+							METHOD_COL_ENABLED, TRUE,
+		                    -1);
+	}
 
 	/* Manual is pointless for Mobile Broadband */
 	if (   priv->connection_type != NM_TYPE_SETTING_GSM
@@ -242,6 +256,10 @@ method_changed (GtkComboBox *combo, gpointer user_data)
 		addr_enabled = FALSE;
 		dns_enabled = routes_enabled = TRUE;
 		break;
+	case IP6_METHOD_AUTO_DHCP_ONLY:
+		addr_enabled = FALSE;
+		routes_enabled = TRUE;
+		break;
 	case IP6_METHOD_MANUAL:
 		addr_enabled = dns_enabled = routes_enabled = TRUE;
 		break;
@@ -318,6 +336,8 @@ populate_ui (CEPageIP6 *self)
 	if (str_method) {
 		if (!strcmp (str_method, NM_SETTING_IP6_CONFIG_METHOD_AUTO))
 			method = IP6_METHOD_AUTO;
+		if (!strcmp (str_method, NM_SETTING_IP6_CONFIG_METHOD_DHCP))
+			method = IP6_METHOD_AUTO_DHCP_ONLY;
 		else if (!strcmp (str_method, NM_SETTING_IP6_CONFIG_METHOD_LINK_LOCAL))
 			method = IP6_METHOD_LINK_LOCAL;
 		else if (!strcmp (str_method, NM_SETTING_IP6_CONFIG_METHOD_MANUAL))
@@ -483,12 +503,19 @@ list_selection_changed (GtkTreeSelection *selection, gpointer user_data)
 static void
 cell_editing_canceled (GtkCellRenderer *renderer, gpointer user_data)
 {
-	CEPageIP6 *self = CE_PAGE_IP6 (user_data);
-	CEPageIP6Private *priv = CE_PAGE_IP6_GET_PRIVATE (self);
+	CEPageIP6 *self;
+	CEPageIP6Private *priv;
 	GtkTreeModel *model = NULL;
 	GtkTreeSelection *selection;
 	GtkTreeIter iter;
 	guint32 column;
+
+	/* user_data disposed? */
+	if (GPOINTER_TO_UINT (g_object_get_data (G_OBJECT (renderer), "ce-page-not-valid")))
+		return;
+
+	self = CE_PAGE_IP6 (user_data);
+	priv = CE_PAGE_IP6_GET_PRIVATE (self);
 
 	if (priv->last_edited) {
 		selection = gtk_tree_view_get_selection (priv->addr_list);
@@ -840,6 +867,9 @@ ui_to_setting (CEPageIP6 *self)
 	case IP6_METHOD_SHARED:
 		method = NM_SETTING_IP6_CONFIG_METHOD_SHARED;
 		break;
+	case IP6_METHOD_AUTO_DHCP_ONLY:
+		method = NM_SETTING_IP6_CONFIG_METHOD_DHCP;
+		break;
 	case IP6_METHOD_AUTO_ADDRESSES:
 		ignore_auto_dns = TRUE;
 		/* fall through */
@@ -989,9 +1019,14 @@ dispose (GObject *object)
 {
 	CEPageIP6 *self = CE_PAGE_IP6 (object);
 	CEPageIP6Private *priv = CE_PAGE_IP6_GET_PRIVATE (self);
+	int i;
 
 	if (priv->window_group)
 		g_object_unref (priv->window_group);
+
+	/* Mark CEPageIP6 object as invalid; store this indication to cells to be usable in callbacks */
+	for (i = 0; i <= COL_LAST; i++)
+		g_object_set_data (G_OBJECT (priv->addr_cells[i]), "ce-page-not-valid", GUINT_TO_POINTER (1));
 
 	g_free (priv->connection_id);
 

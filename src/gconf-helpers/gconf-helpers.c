@@ -17,7 +17,7 @@
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  *
- * (C) Copyright 2005 - 2009 Red Hat, Inc.
+ * (C) Copyright 2005 - 2010 Red Hat, Inc.
  */
 
 #include <string.h>
@@ -51,6 +51,8 @@
 #include "gconf-upgrade.h"
 #include "utils.h"
 #include "applet.h"
+
+#define S390_OPT_KEY_PREFIX "s390-opt-"
 
 #define DBUS_TYPE_G_ARRAY_OF_OBJECT_PATH    (dbus_g_type_get_collection ("GPtrArray", DBUS_TYPE_G_OBJECT_PATH))
 #define DBUS_TYPE_G_ARRAY_OF_STRING         (dbus_g_type_get_collection ("GPtrArray", G_TYPE_STRING))
@@ -272,6 +274,50 @@ nm_gconf_get_stringlist_helper (GConfClient *client,
 			const char *string = gconf_value_get_string ((GConfValue *) elt->data);
 
 			*value = g_slist_append (*value, g_strdup (string));
+		}
+
+		success = TRUE;
+	}
+
+out:
+	if (gc_value)
+		gconf_value_free (gc_value);
+	g_free (gc_key);
+	return success;
+}
+
+gboolean
+nm_gconf_get_stringarray_helper (GConfClient *client,
+                                 const char *path,
+                                 const char *key,
+                                 const char *setting,
+                                 GPtrArray **value)
+{
+	char *gc_key;
+	GConfValue *gc_value;
+	gboolean success = FALSE;
+
+	g_return_val_if_fail (key != NULL, FALSE);
+	g_return_val_if_fail (setting != NULL, FALSE);
+	g_return_val_if_fail (value != NULL, FALSE);
+	g_return_val_if_fail (*value == NULL, FALSE);
+
+	gc_key = g_strdup_printf ("%s/%s/%s", path, setting, key);
+	if (!(gc_value = gconf_client_get (client, gc_key, NULL)))
+		goto out;
+
+	if (gc_value->type == GCONF_VALUE_LIST
+	    && gconf_value_get_list_type (gc_value) == GCONF_VALUE_STRING)
+	{
+		GSList *iter, *list;
+		const char *string;
+
+		*value = g_ptr_array_sized_new (3);
+
+		list = gconf_value_get_list (gc_value);
+		for (iter = list; iter != NULL; iter = g_slist_next (iter)) {
+			string = gconf_value_get_string ((GConfValue *) iter->data);
+			g_ptr_array_add (*value, g_strdup (string));
 		}
 
 		success = TRUE;
@@ -530,24 +576,30 @@ nm_gconf_get_valuehash_helper (GConfClient *client,
 gboolean
 nm_gconf_get_stringhash_helper (GConfClient *client,
                                 const char *path,
+                                const char *key,
                                 const char *setting,
                                 GHashTable **value)
 {
 	char *gc_key;
 	GSList *gconf_entries;
 	GSList *iter;
-	int prefix_len;
+	int path_len;
+	const char *key_prefix = NULL;
 
 	g_return_val_if_fail (setting != NULL, FALSE);
 	g_return_val_if_fail (value != NULL, FALSE);
 
 	gc_key = g_strdup_printf ("%s/%s", path, setting);
-	prefix_len = strlen (gc_key);
+	path_len = strlen (gc_key);
 	gconf_entries = gconf_client_all_entries (client, gc_key, NULL);
 	g_free (gc_key);
 
 	if (!gconf_entries)
 		return FALSE;
+
+	if (   !strcmp (setting, NM_SETTING_WIRED_SETTING_NAME)
+	    && !strcmp (key, NM_SETTING_WIRED_S390_OPTIONS))
+		key_prefix = S390_OPT_KEY_PREFIX;
 
 	*value = g_hash_table_new_full (g_str_hash, g_str_equal,
 	                                (GDestroyNotify) g_free,
@@ -557,7 +609,7 @@ nm_gconf_get_stringhash_helper (GConfClient *client,
 		GConfEntry *entry = (GConfEntry *) iter->data;
 
 		gc_key = (char *) gconf_entry_get_key (entry);
-		gc_key += prefix_len + 1; /* get rid of the full path */
+		gc_key += path_len + 1; /* get rid of the full path */
 
 		if (   !strcmp (setting, NM_SETTING_VPN_SETTING_NAME)
 		    && (!strcmp (gc_key, NM_SETTING_VPN_SERVICE_TYPE) || !strcmp (gc_key, NM_SETTING_NAME))) {
@@ -566,8 +618,20 @@ nm_gconf_get_stringhash_helper (GConfClient *client,
 			 */
 		} else {
 			GConfValue *gc_val = gconf_entry_get_value (entry);
+			gboolean ignore = FALSE;
 
-			if (gc_val) {
+			/* If we have a key prefix and the GConf item has that prefix,
+			 * strip off the prefix.  Otherwise, if the GConf items does not
+			 * have this prefix, it's not for this key and we should ignore it.
+			 */
+			if (key_prefix) {
+				if (g_str_has_prefix (gc_key, key_prefix))
+					gc_key += strlen (key_prefix);
+				else
+					ignore = TRUE;
+			}
+
+			if (gc_val && (ignore == FALSE)) {
 				const char *gc_str = gconf_value_get_string (gc_val);
 
 				if (gc_str && strlen (gc_str))
@@ -1027,6 +1091,35 @@ nm_gconf_set_stringlist_helper (GConfClient *client,
 	return TRUE;
 }
 
+gboolean
+nm_gconf_set_stringarray_helper (GConfClient *client,
+                                 const char *path,
+                                 const char *key,
+                                 const char *setting,
+                                 GPtrArray *value)
+{
+	char *gc_key;
+	GSList *list = NULL;
+	int i;
+
+	g_return_val_if_fail (key != NULL, FALSE);
+	g_return_val_if_fail (setting != NULL, FALSE);
+
+	gc_key = g_strdup_printf ("%s/%s/%s", path, setting, key);
+	if (!gc_key) {
+		g_warning ("Not enough memory to create gconf path");
+		return FALSE;
+	}
+
+	for (i = 0; i < value->len; i++)
+		list = g_slist_append (list, g_ptr_array_index (value, i));
+
+	gconf_client_set_list (client, gc_key, GCONF_VALUE_STRING, list, NULL);
+	g_slist_free (list);
+	g_free (gc_key);
+	return TRUE;
+}
+
 static gboolean
 nm_gconf_set_mac_address_helper (GConfClient *client,
                                  const char *path,
@@ -1197,47 +1290,18 @@ nm_gconf_set_valuehash_helper (GConfClient *client,
 }
 #endif
 
-static void
-write_properties_stringhash (gpointer key, gpointer value, gpointer user_data)
-{
-	WritePropertiesInfo *info = (WritePropertiesInfo *) user_data;
-	char *esc_key;
-	char *full_key;
-	const char *str_value = (const char *) value;
-
-	if (!str_value || !strlen (str_value))
-		return;
-
-	esc_key = gconf_escape_key ((char *) key, -1);
-	full_key = g_strconcat (info->path, "/", esc_key, NULL);
-	gconf_client_set_string (info->client, full_key, (char *) str_value, NULL);
-	g_free (esc_key);
-	g_free (full_key);
-}
-
-typedef struct {
-	const char *key;
-	gboolean found;
-} FindKeyInfo;
-
-static void
-find_gconf_key (gpointer key, gpointer value, gpointer user_data)
-{
-	FindKeyInfo *info = (FindKeyInfo *) user_data;
-
-	if (!info->found && !strcmp ((char *) key, info->key))
-		info->found = TRUE;
-}
-
 gboolean
 nm_gconf_set_stringhash_helper (GConfClient *client,
                                 const char *path,
+                                const char *key,
                                 const char *setting,
                                 GHashTable *value)
 {
 	char *gc_key;
 	GSList *existing, *iter;
-	WritePropertiesInfo info;
+	const char *key_prefix = NULL;
+	GHashTableIter hash_iter;
+	gpointer name, data;
 
 	g_return_val_if_fail (setting != NULL, FALSE);
 	g_return_val_if_fail (value != NULL, FALSE);
@@ -1248,28 +1312,57 @@ nm_gconf_set_stringhash_helper (GConfClient *client,
 		return FALSE;
 	}
 
+	if (   !strcmp (setting, NM_SETTING_WIRED_SETTING_NAME)
+	    && !strcmp (key, NM_SETTING_WIRED_S390_OPTIONS))
+		key_prefix = S390_OPT_KEY_PREFIX;
+
 	/* Delete GConf entries that are not in the hash table to be written */
 	existing = gconf_client_all_entries (client, gc_key, NULL);
 	for (iter = existing; iter; iter = g_slist_next (iter)) {
 		GConfEntry *entry = (GConfEntry *) iter->data;
-		char *basename = g_path_get_basename (entry->key);
-		FindKeyInfo fk_info = { basename, FALSE };
+		const char *basename = strrchr (entry->key, '/');
 
-		g_hash_table_foreach (value, find_gconf_key, &fk_info);
-		/* Be sure to never delete "special" VPN keys */
-		if (   (fk_info.found == FALSE)
-		    && strcmp ((char *) basename, NM_SETTING_VPN_SERVICE_TYPE)
-			&& strcmp ((char *) basename, NM_SETTING_VPN_USER_NAME))
-			gconf_client_unset (client, entry->key, NULL);
+		if (!basename) {
+			g_warning ("GConf key '%s' had no basename", entry->key);
+			continue;
+		}
+		basename++; /* Advance past the '/' */
+
+		/* Don't delete special VPN keys that aren't part of the VPN-plugin
+		 * specific data.
+		 */
+		if (!strcmp (setting, NM_SETTING_VPN_SETTING_NAME)) {
+			if (!strcmp (basename, NM_SETTING_VPN_SERVICE_TYPE))
+				continue;
+			if (!strcmp (basename, NM_SETTING_VPN_USER_NAME))
+				continue;
+		}
+
+		/* And if we have a key prefix, don't delete anything that does not
+		 * have the prefix.
+		 */
+		if (key_prefix && (g_str_has_prefix (basename, key_prefix) == FALSE))
+			continue;
+
+		gconf_client_unset (client, entry->key, NULL);
 		gconf_entry_unref (entry);
-		g_free (basename);
 	}
 	g_slist_free (existing);
 
 	/* Now update entries and write new ones */
-	info.client = client;
-	info.path = gc_key;
-	g_hash_table_foreach (value, write_properties_stringhash, &info);
+	g_hash_table_iter_init (&hash_iter, value);
+	while (g_hash_table_iter_next (&hash_iter, &name, &data)) {
+		char *esc_key, *full_key;
+
+		esc_key = gconf_escape_key ((char *) name, -1);
+		full_key = g_strdup_printf ("%s/%s%s",
+		                            gc_key,
+		                            key_prefix ? key_prefix : "",
+		                            esc_key);
+		gconf_client_set_string (client, full_key, (char *) data, NULL);
+		g_free (esc_key);
+		g_free (full_key);
+	}
 
 	g_free (gc_key);
 	return TRUE;
@@ -1762,9 +1855,17 @@ read_one_setting_value_from_gconf (NMSetting *setting,
 	} else if (type == DBUS_TYPE_G_MAP_OF_STRING) {
 		GHashTable *sh_val = NULL;
 
-		if (nm_gconf_get_stringhash_helper (info->client, info->dir, setting_name, &sh_val)) {
+		if (nm_gconf_get_stringhash_helper (info->client, info->dir, key, setting_name, &sh_val)) {
 			g_object_set (setting, key, sh_val, NULL);
 			g_hash_table_destroy (sh_val);
+		}
+	} else if (type == DBUS_TYPE_G_ARRAY_OF_STRING) {
+		GPtrArray *pa_val = NULL;
+
+		if (nm_gconf_get_stringarray_helper (info->client, info->dir, key, setting_name, &pa_val)) {
+			g_object_set (setting, key, pa_val, NULL);
+			g_ptr_array_foreach (pa_val, (GFunc) g_free, NULL);
+			g_ptr_array_free (pa_val, TRUE);
 		}
 	} else if (type == DBUS_TYPE_G_UINT_ARRAY) {
 		GArray *a_val = NULL;
@@ -2508,9 +2609,13 @@ copy_one_setting_value_to_gconf (NMSetting *setting,
 								 (GHashTable *) g_value_get_boxed (value));
 #endif
 	} else if (type == DBUS_TYPE_G_MAP_OF_STRING) {
-		nm_gconf_set_stringhash_helper (info->client, info->dir,
+		nm_gconf_set_stringhash_helper (info->client, info->dir, key,
 		                                setting_name,
 		                                (GHashTable *) g_value_get_boxed (value));
+	} else if (type == DBUS_TYPE_G_ARRAY_OF_STRING) {
+		nm_gconf_set_stringarray_helper (info->client, info->dir, key,
+		                                setting_name,
+		                                (GPtrArray *) g_value_get_boxed (value));
 	} else if (type == DBUS_TYPE_G_UINT_ARRAY) {
 		nm_gconf_set_uint_array_helper (info->client, info->dir,
 								  key, setting_name,

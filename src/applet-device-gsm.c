@@ -504,32 +504,6 @@ typedef struct {
 
 
 static void
-pin_entry_changed (GtkEditable *editable, gpointer user_data)
-{
-	GtkWidget *ok_button = GTK_WIDGET (user_data);
-	const char *s;
-	int i;
-	gboolean valid = FALSE;
-	guint32 len;
-
-	s = gtk_entry_get_text (GTK_ENTRY (editable));
-	if (s) {
-		len = strlen (s);
-		if ((len >= 4) && (len <= 8)) {
-			valid = TRUE;
-			for (i = 0; i < len; i++) {
-				if (!g_ascii_isdigit (s[i])) {
-					valid = FALSE;
-					break;
-				}
-			}
-		}
-	}
-
-	gtk_widget_set_sensitive (ok_button, valid);
-}
-
-static void
 secrets_dialog_destroy (gpointer user_data, GObject *finalized)
 {
 	NMGsmSecretsInfo *info = user_data;
@@ -694,45 +668,61 @@ get_gsm_secrets_cb (GtkDialog *dialog,
 	}
 }
 
+static void
+pin_entry_changed (GtkEditable *editable, gpointer user_data)
+{
+	GtkWidget *ok_button = GTK_WIDGET (user_data);
+	const char *s;
+	int i;
+	gboolean valid = FALSE;
+	guint32 len;
+
+	s = gtk_entry_get_text (GTK_ENTRY (editable));
+	if (s) {
+		len = strlen (s);
+		if ((len >= 4) && (len <= 8)) {
+			valid = TRUE;
+			for (i = 0; i < len; i++) {
+				if (!g_ascii_isdigit (s[i])) {
+					valid = FALSE;
+					break;
+				}
+			}
+		}
+	}
+
+	gtk_widget_set_sensitive (ok_button, valid);
+}
+
 static GtkWidget *
-ask_for_pin_puk (NMDevice *device,
-                 const char *secret_name,
-                 GtkEntry **out_secret_entry)
+ask_for_pin (NMDevice *device, GtkEntry **out_secret_entry)
 {
 	GtkDialog *dialog;
-	GtkWidget *w = NULL, *ok_button;
-	GtkBox *box;
+	GtkWidget *w = NULL, *ok_button = NULL;
+	GtkBox *box = NULL, *vbox = NULL;
 	char *dev_str;
 
 	dialog = GTK_DIALOG (gtk_dialog_new ());
 	gtk_window_set_modal (GTK_WINDOW (dialog), TRUE);
-
-	if (!strcmp (secret_name, NM_SETTING_GSM_PIN))
-		gtk_window_set_title (GTK_WINDOW (dialog), _("PIN code required"));
-	else if (!strcmp (secret_name, NM_SETTING_GSM_PUK))
-		gtk_window_set_title (GTK_WINDOW (dialog), _("PUK code required"));
-	else
-		g_assert_not_reached ();
+	gtk_window_set_title (GTK_WINDOW (dialog), _("PIN code required"));
 
 	ok_button = gtk_dialog_add_button (dialog, GTK_STOCK_CANCEL, GTK_RESPONSE_REJECT);
 	ok_button = gtk_dialog_add_button (dialog, GTK_STOCK_OK, GTK_RESPONSE_OK);
 	gtk_window_set_default (GTK_WINDOW (dialog), ok_button);
 
-	if (!strcmp (secret_name, NM_SETTING_GSM_PIN))
-		w = gtk_label_new (_("PIN code is needed for the mobile broadband device"));
-	else if (!strcmp (secret_name, NM_SETTING_GSM_PUK))
-		w = gtk_label_new (_("PUK code is needed for the mobile broadband device"));
-	if (w)
-		gtk_box_pack_start (GTK_BOX (dialog->vbox), w, TRUE, TRUE, 0);
+	vbox = GTK_BOX (gtk_dialog_get_content_area (dialog));
+
+	w = gtk_label_new (_("PIN code is needed for the mobile broadband device"));
+	gtk_box_pack_start (vbox, w, TRUE, TRUE, 0);
 
 	dev_str = g_strdup_printf ("<b>%s</b>", utils_get_device_description (device));
 	w = gtk_label_new (NULL);
 	gtk_label_set_markup (GTK_LABEL (w), dev_str);
 	g_free (dev_str);
-	gtk_box_pack_start (GTK_BOX (dialog->vbox), w, TRUE, TRUE, 0);
+	gtk_box_pack_start (vbox, w, TRUE, TRUE, 0);
 
 	w = gtk_alignment_new (0.5, 0.5, 0, 1.0);
-	gtk_box_pack_start (GTK_BOX (dialog->vbox), w, TRUE, TRUE, 0);
+	gtk_box_pack_start (vbox, w, TRUE, TRUE, 0);
 
 	box = GTK_BOX (gtk_hbox_new (FALSE, 6));
 	gtk_container_set_border_width (GTK_CONTAINER (box), 6);
@@ -745,11 +735,12 @@ ask_for_pin_puk (NMDevice *device,
 	gtk_entry_set_max_length (GTK_ENTRY (w), 8);
 	gtk_entry_set_width_chars (GTK_ENTRY (w), 8);
 	gtk_entry_set_activates_default (GTK_ENTRY (w), TRUE);
+	gtk_entry_set_visibility (GTK_ENTRY (w), FALSE);
 	gtk_box_pack_start (box, w, FALSE, FALSE, 0);
 	g_signal_connect (w, "changed", G_CALLBACK (pin_entry_changed), ok_button);
 	pin_entry_changed (GTK_EDITABLE (w), ok_button);
 
-	gtk_widget_show_all (dialog->vbox);
+	gtk_widget_show_all (GTK_WIDGET (vbox));
 	return GTK_WIDGET (dialog);
 }
 
@@ -777,8 +768,7 @@ gsm_get_secrets (NMDevice *device,
 		return FALSE;
 	}
 
-	if (   !strcmp (hints[0], NM_SETTING_GSM_PIN)
-	    || !strcmp (hints[0], NM_SETTING_GSM_PUK)) {
+	if (!strcmp (hints[0], NM_SETTING_GSM_PIN)) {
 		GsmDeviceInfo *info = g_object_get_data (G_OBJECT (device), "devinfo");
 
 		g_assert (info);
@@ -786,7 +776,7 @@ gsm_get_secrets (NMDevice *device,
 		if (info->dialog)
 			unlock_dialog_destroy (info);
 
-		widget = ask_for_pin_puk (device, hints[0], &secret_entry);
+		widget = ask_for_pin (device, &secret_entry);
 	} else if (!strcmp (hints[0], NM_SETTING_GSM_PASSWORD))
 		widget = applet_mobile_password_dialog_new (device, NM_CONNECTION (connection), &secret_entry);
 	else {
@@ -923,9 +913,11 @@ unlock_dialog_response (GtkDialog *dialog,
 
 	/* Send the code to ModemManager */
 	if (unlock_code == UNLOCK_CODE_PIN) {
-		dbus_g_proxy_begin_call (info->card_proxy, "SendPin",
-		                         unlock_pin_reply, info, NULL,
-		                         G_TYPE_STRING, code1, G_TYPE_INVALID);
+		dbus_g_proxy_begin_call_with_timeout (info->card_proxy, "SendPin",
+		                                      unlock_pin_reply, info, NULL,
+		                                      12000,  /* 12 seconds */
+		                                      G_TYPE_STRING, code1,
+		                                      G_TYPE_INVALID);
 	} else if (unlock_code == UNLOCK_CODE_PUK) {
 		code2 = applet_mobile_pin_dialog_get_entry2 (info->dialog);
 		if (!code2) {
@@ -934,11 +926,12 @@ unlock_dialog_response (GtkDialog *dialog,
 			return;
 		}
 
-		dbus_g_proxy_begin_call (info->card_proxy, "SendPuk",
-		                         unlock_puk_reply, info, NULL,
-		                         G_TYPE_STRING, code1,
-		                         G_TYPE_STRING, code2,
-		                         G_TYPE_INVALID);
+		dbus_g_proxy_begin_call_with_timeout (info->card_proxy, "SendPuk",
+		                                      unlock_puk_reply, info, NULL,
+		                                      12000,  /* 12 seconds */
+		                                      G_TYPE_STRING, code1,
+		                                      G_TYPE_STRING, code2,
+		                                      G_TYPE_INVALID);
 	}
 }
 
@@ -947,6 +940,7 @@ unlock_dialog_new (NMDevice *device, GsmDeviceInfo *info)
 {
 	const char *header = NULL;
 	const char *title = NULL;
+	const char *show_pass_label = NULL;
 	char *desc = NULL;
 	const char *label1 = NULL, *label2 = NULL, *label3 = NULL;
 	const char *device_desc;
@@ -967,22 +961,30 @@ unlock_dialog_new (NMDevice *device, GsmDeviceInfo *info)
 		header = _("SIM PIN Unlock Required");
 		/* FIXME: some warning about # of times you can enter incorrect PIN */
 		desc = g_strdup_printf (_("The mobile broadband device '%s' requires a SIM PIN code before it can be used."), device_desc);
+		/* Translators: PIN code entry label */
 		label1 = _("PIN code:");
 		label1_min = 4;
 		label1_max = 8;
+		/* Translators: Show/obscure PIN checkbox label */
+		show_pass_label = _("Show PIN code");
 		unlock_code = UNLOCK_CODE_PIN;
 	} else if (!strcmp (info->unlock_required, "sim-puk")) {
 		title = _("SIM PUK unlock required");
 		header = _("SIM PUK Unlock Required");
 		/* FIXME: some warning about # of times you can enter incorrect PUK */
 		desc = g_strdup_printf (_("The mobile broadband device '%s' requires a SIM PUK code before it can be used."), device_desc);
+		/* Translators: PUK code entry label */
 		label1 = _("PUK code:");
 		label1_min = label1_max = 8;
+		/* Translators: New PIN entry label */
 		label2 = _("New PIN code:");
+		/* Translators: New PIN verification entry label */
 		label3 = _("Re-enter new PIN code:");
 		label2_min = label3_min = 4;
 		label2_max = label3_max = 8;
 		match23 = TRUE;
+		/* Translators: Show/obscure PIN/PUK checkbox label */
+		show_pass_label = _("Show PIN/PUK codes");
 		unlock_code = UNLOCK_CODE_PUK;
 	} else {
 		g_warning ("Unhandled unlock request for '%s'", info->unlock_required);
@@ -990,7 +992,7 @@ unlock_dialog_new (NMDevice *device, GsmDeviceInfo *info)
 	}
 
 	/* Construct and run the dialog */
-	info->dialog = applet_mobile_pin_dialog_new (title, header, desc);
+	info->dialog = applet_mobile_pin_dialog_new (title, header, desc, show_pass_label);
 	g_free (desc);
 	g_return_if_fail (info->dialog != NULL);
 
