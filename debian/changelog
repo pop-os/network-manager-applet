@@ -2,6 +2,9 @@ network-manager-applet (0.8.2-1) UNRELEASED; urgency=low
 
   * New upstream release.
   * Update Vcs-* fields: Move packaging from svn to git.
+  * Remove patches, merged upstream
+    - debian/patches/02-hide-pin-in-pin-puk-dialog-by-default.patch
+    - debian/patches/03-enter-closes-pin-puk-dialog.patch
 
  -- Michael Biebl <biebl@debian.org>  Wed, 01 Dec 2010 00:07:23 +0100
 
