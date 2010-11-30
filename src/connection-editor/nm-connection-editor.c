@@ -260,7 +260,7 @@ system_checkbutton_toggled_cb (GtkWidget *widget, NMConnectionEditor *editor)
 {
 	gboolean use_polkit = TRUE;
 
-	/* The only time the Apply button does not need to use polkit is when the
+	/* The only time the Save button does not need to use polkit is when the
 	 * original connection scope was USER and the "system" checkbutton is
 	 * unchecked.
 	 */
@@ -409,20 +409,21 @@ nm_connection_editor_new (NMConnection *connection,
 	                  editor);
 
 	/* If this is a system connection that we can't ever modify,
-	 * set the editor's Apply button always insensitive.
+	 * set the editor's Save button always insensitive.
 	 */
 	if (nm_connection_get_scope (connection) == NM_CONNECTION_SCOPE_SYSTEM) {
 		sensitive = editor->system_settings_can_modify;
 		use_polkit = TRUE;
 	}
 
-	editor->ok_button = ce_polkit_button_new (_("Apply"),
+	editor->ok_button = ce_polkit_button_new (_("_Save"),
 	                                          _("Save any changes made to this connection."),
-	                                          _("Apply..."),
+	                                          _("_Save..."),
 	                                          _("Authenticate to save this connection for all users of this machine."),
 	                                          GTK_STOCK_APPLY,
 	                                          settings,
 	                                          NM_SETTINGS_SYSTEM_PERMISSION_CONNECTION_MODIFY);
+	gtk_button_set_use_underline (GTK_BUTTON (editor->ok_button), TRUE);
 	ce_polkit_button_set_use_polkit (CE_POLKIT_BUTTON (editor->ok_button), use_polkit);
 
 	g_signal_connect (editor->ok_button, "actionable",

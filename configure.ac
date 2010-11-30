@@ -1,6 +1,6 @@
 AC_PREREQ([2.63])
 AC_INIT([nm-applet],
-        [0.8.1],
+        [0.8.2],
         [https://bugzilla.gnome.org/enter_bug.cgi?product=NetworkManager],
         [network-manager-applet])
 
@@ -8,6 +8,7 @@ AC_CONFIG_HEADERS([config.h])
 AC_CONFIG_MACRO_DIR([m4])
 
 AM_INIT_AUTOMAKE([1.10 subdir-objects no-dist-gzip dist-bzip2])
+m4_ifdef([AM_SILENT_RULES], [AM_SILENT_RULES([no])])
 AM_MAINTAINER_MODE([enable])
 
 # Support silent build rules, requires at least automake-1.11. Disable
@@ -68,10 +69,10 @@ PKG_CHECK_MODULES(GOBJECT, gobject-2.0)
 PKG_CHECK_MODULES(NMA,
 		[dbus-glib-1 >= 0.74
 		 glib-2.0 >= 2.16
-		 NetworkManager >= 0.8.1
-		 libnm-glib >= 0.8.1
-		 libnm-util >= 0.8.1
-		 libnm-glib-vpn >= 0.8.1
+		 NetworkManager >= 0.8.2
+		 libnm-glib >= 0.8.2
+		 libnm-util >= 0.8.2
+		 libnm-glib-vpn >= 0.8.2
 		 gtk+-2.0 >= 2.14
 		 libglade-2.0
 		 gmodule-export-2.0
@@ -96,12 +97,24 @@ fi
 AC_SUBST(DBUS_SYS_DIR)
 
 dnl Check for gnome-bluetooth
-PKG_CHECK_MODULES(GNOME_BLUETOOTH,
-		  gconf-2.0
-		  gnome-bluetooth-1.0 >= 2.27.6
-		  libnm-util >= 0.8.1
-		  libnm-glib >= 0.8.1,
-		  have_gbt=yes, have_gbt=no)
+AC_ARG_WITH([bluetooth],
+	    AS_HELP_STRING([--with-bluetooth|--without-bluetooth], [Enable Bluetooth support]),
+	    with_bluetooth="$withval",with_bluetooth=yes)
+have_gbt=no
+case "${with_bluetooth}" in
+	no)	AC_MSG_NOTICE(Bluetooth support disabled)
+		;;
+	*)
+		AC_MSG_CHECKING(for gnome-bluetooth)
+		PKG_CHECK_MODULES(GNOME_BLUETOOTH,
+				  gconf-2.0
+				  gnome-bluetooth-1.0 >= 2.27.6
+				  libnm-util >= 0.8.2
+				  libnm-glib >= 0.8.2,
+				  have_gbt=yes, have_gbt=no)
+		;;
+esac
+
 AM_CONDITIONAL(HAVE_GBT, test x"$have_gbt" = "xyes")
 
 AC_PATH_PROG(GLIB_GENMARSHAL, glib-genmarshal)

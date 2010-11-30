@@ -57,7 +57,8 @@ show_ignore_focus_stealing_prevention (GtkWidget *widget)
 {
 	gtk_widget_realize (widget);
 	gtk_widget_show (widget);
-	gtk_window_present_with_time (GTK_WINDOW (widget), gdk_x11_get_server_time (widget->window));
+	gtk_window_present_with_time (GTK_WINDOW (widget),
+		gdk_x11_get_server_time (gtk_widget_get_window (widget)));
 }
 
 static void
@@ -1045,7 +1046,9 @@ idle_check_avail_access_point_notification (gpointer datap)
 	applet_do_notify (applet,
 	                  NOTIFY_URGENCY_LOW,
 	                  _("Wireless Networks Available"),
-	                  _("Click on this icon to connect to a wireless network"),
+	                  applet->notify_actions ?
+	                        _("Click on this icon to connect to a wireless network") :
+	                        _("Use the network menu to connect to a wireless network"),
 	                  "nm-device-wireless",
 	                  "dont-show",
 	                  _("Don't show this message again"),
@@ -1356,6 +1359,13 @@ wireless_dialog_close (gpointer user_data)
 }
 
 static void
+wireless_dialog_destroyed (gpointer data, GObject *dialog_ptr)
+{
+	/* remove the idle function; for not to call wireless_dialog_close() on invalid pointer */
+	g_idle_remove_by_data (dialog_ptr);
+}
+
+static void
 nag_dialog_response_cb (GtkDialog *nag_dialog,
                         gint response,
                         gpointer user_data)
@@ -1365,6 +1375,7 @@ nag_dialog_response_cb (GtkDialog *nag_dialog,
 	if (response == GTK_RESPONSE_NO) {  /* user opted not to correct the warning */
 		nma_wireless_dialog_set_nag_ignored (wireless_dialog, TRUE);
 		g_idle_add (wireless_dialog_close, wireless_dialog);
+		g_object_weak_ref (G_OBJECT (wireless_dialog), wireless_dialog_destroyed, NULL);
 	}
 }
 

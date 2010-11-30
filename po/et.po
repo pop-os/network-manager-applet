@@ -1,23 +1,24 @@
-# Networkmanageri tõlge eesti keelde.
-# Estonian translation of Networkmanager.
+# VõrguHalduri eesti keele tõlge.
+# Estonian translation of NetworkManager.
 #
 # Copyright (C) 2006 Free Software Foundation, Inc.
-# Copyright (C) 2007 The GNOME Project
+# Copyright (C) 2007-2010 The GNOME Project
 # This file is distributed under the same license as the Networkmanager package.
 #
 # Priit Laes <amd store20 com>, 2006.
-# Ivar Smolin <okul at linux.ee>, 2006-2007.
+# Ivar Smolin <okul at linux.ee>, 2006-2007, 2010.
 # Mattias Põldaru <mahfiaz gmail com>, 2008-2010.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Networkmanager\n"
+"Project-Id-Version: Network Manager MASTER\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=NetworkManager&component=nm-applet\n"
-"POT-Creation-Date: 2010-05-15 20:17+0000\n"
-"PO-Revision-Date: 2010-05-17 13:36+0300\n"
+"POT-Creation-Date: 2010-10-15 18:17+0000\n"
+"PO-Revision-Date: 2010-10-17 19:11+0300\n"
 "Last-Translator: Mattias Põldaru <mahfiaz gmail com>\n"
 "Language-Team: Estonian <gnome-et@linux.ee>\n"
+"Language: et\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -80,7 +81,7 @@ msgstr "nm-applet juba töötab.\n"
 
 #, c-format
 msgid "Could not acquire the %s service. (%d)\n"
-msgstr "%s teenust ei suudetud hankida. (%d)\n"
+msgstr "%s teenust pole võimalik hankida. (%d)\n"
 
 msgid "Available"
 msgstr "Saadaval"
@@ -152,14 +153,8 @@ msgstr "Nüüd oled ühendatud GSM-võrku."
 msgid "PIN code required"
 msgstr "Vajalik on PIN-kood"
 
-msgid "PUK code required"
-msgstr "Vajalik on PUK-kood"
-
 msgid "PIN code is needed for the mobile broadband device"
 msgstr "Mobiiliühenduse seadmele on vaja PIN-koodi"
-
-msgid "PUK code is needed for the mobile broadband device"
-msgstr "Mobiiliühenduse seadmele on vaja PUK-koodi"
 
 msgid "Wrong PIN code; please contact your provider."
 msgstr "Vale PIN-kood; võta ühendust oma teenusepakkujaga."
@@ -185,8 +180,13 @@ msgid ""
 msgstr ""
 "Mobiiliühenduse seadme '%s' kasutamiseks on vajalik SIM-kaardi PIN-kood."
 
+#. Translators: PIN code entry label
 msgid "PIN code:"
 msgstr "PIN-kood:"
+
+#. Translators: Show/obscure PIN checkbox label
+msgid "Show PIN code"
+msgstr "Näita PIN-koodi"
 
 msgid "SIM PUK unlock required"
 msgstr "Vajalik on SIM-kaardi PUK-kood"
@@ -202,14 +202,21 @@ msgid ""
 msgstr ""
 "Mobiiliühenduse seadme '%s' kasutamiseks on vajalik SIM-kaardi PUK-kood."
 
+#. Translators: PUK code entry label
 msgid "PUK code:"
 msgstr "PUK-kood:"
 
+#. Translators: New PIN entry label
 msgid "New PIN code:"
 msgstr "Uus PIN-kood:"
 
+#. Translators: New PIN verification entry label
 msgid "Re-enter new PIN code:"
 msgstr "Uus PIN-kood uuesti:"
+
+#. Translators: Show/obscure PIN/PUK checkbox label
+msgid "Show PIN/PUK codes"
+msgstr "Näita PIN/PUK-koodi"
 
 msgid "Auto Ethernet"
 msgstr "Automaatne ethernet ühendus"
@@ -289,6 +296,9 @@ msgstr "Saadaval juhtmeta võrgud"
 msgid "Click on this icon to connect to a wireless network"
 msgstr "Klõpsa sellel ikoonil juhtmeta võrku ühendumiseks"
 
+msgid "Use the network menu to connect to a wireless network"
+msgstr "Juhtmeta võrku ühendumiseks kasuta võrgumenüüd"
+
 msgid "Don't show this message again"
 msgstr "Ära seda uuesti näita"
 
@@ -338,15 +348,11 @@ msgstr "WPA/WPA2"
 msgid "WEP"
 msgstr "WEP"
 
-msgctxt "No wifi security used"
+msgctxt "Wifi/wired security"
 msgid "None"
 msgstr "Puudub"
 
-msgctxt "No wired security used"
-msgid "None"
-msgstr "Puudub"
-
-msgctxt "Unknown/unrecognized wired or wifi security"
+msgctxt "Wifi/wired security"
 msgid "Unknown"
 msgstr "Tundmatu"
 
@@ -354,6 +360,7 @@ msgstr "Tundmatu"
 msgid "%u Mb/s"
 msgstr "%u Mb/s"
 
+msgctxt "Speed"
 msgid "Unknown"
 msgstr "Tundmatu"
 
@@ -391,11 +398,19 @@ msgstr "Turvalisus:"
 msgid "IP Address:"
 msgstr "IP-aadress:"
 
+msgctxt "Address"
+msgid "Unknown"
+msgstr "Tundmatu"
+
 msgid "Broadcast Address:"
-msgstr "Eetriaadress:"
+msgstr "Eetri aadress:"
 
 msgid "Subnet Mask:"
 msgstr "Alamvõrgu mask:"
+
+msgctxt "Subnet Mask"
+msgid "Unknown"
+msgstr "Tundmatu"
 
 msgid "Default Route:"
 msgstr "Vaikimisi marsruut:"
@@ -427,7 +442,7 @@ msgstr "Võrguhalduri veebileht"
 msgid "translator-credits"
 msgstr ""
 "Priit Laes <amd store20 com>, 2006.\n"
-"Ivar Smolin <okul linux ee>, 2006, 2007.\n"
+"Ivar Smolin <okul linux ee>, 2006, 2007, 2010.\n"
 "Mattias Põldaru <mahfiaz gmail com>, 2008-2010."
 
 msgid "Missing resources"
@@ -572,6 +587,9 @@ msgstr ""
 "\n"
 "%s"
 
+msgid "device not ready (firmware missing)"
+msgstr "seade pole valmis (puudub püsivara)"
+
 msgid "device not ready"
 msgstr "seade pole valmis"
 
@@ -625,14 +643,14 @@ msgstr "Ühenduste muutmine..."
 
 #. Help item
 msgid "_Help"
-msgstr "_Abi"
+msgstr "A_bi"
 
 #. About item
 msgid "_About"
 msgstr "_Programmist lähemalt"
 
 msgid "Disconnected"
-msgstr "Ühendamata"
+msgstr "Ühendus katkestatud"
 
 msgid "The network connection has been disconnected."
 msgstr "Võrguühendus katkes."
@@ -675,7 +693,8 @@ msgid ""
 "The NetworkManager Applet could not find some required resources (the glade "
 "file was not found)."
 msgstr ""
-"NetworkManager rakend ei leidnud vajalikke allikaid (glade faili ei leitud)."
+"Võrguhalduri rakend ei suutnud leida vajalikke allikaid (glade faili ei "
+"leitud)."
 
 msgid " "
 msgstr " "
@@ -747,10 +766,10 @@ msgid "Private _key:"
 msgstr "Privaat_võti:"
 
 msgid "Sho_w key"
-msgstr "Näita _võtit"
+msgstr "_Näita võtit"
 
 msgid "Sho_w password"
-msgstr "Näita _parooli"
+msgstr "_Näita parooli"
 
 msgid "WEP inde_x:"
 msgstr "WEP inde_ks:"
@@ -883,8 +902,8 @@ msgstr "_DNS-serverid:"
 msgid "_Method:"
 msgstr "_Meetod:"
 
-msgid "_Routes&#x2026;"
-msgstr "_Marsruudid&#x2026;"
+msgid "_Routes…"
+msgstr "_Marsruudid..."
 
 msgid "_Search domains:"
 msgstr "_Otsidomeenid:"
@@ -1051,8 +1070,27 @@ msgstr "_Täisdupleks"
 msgid "MT_U:"
 msgstr "MT_U:"
 
-msgid "_MAC address:"
-msgstr "_MAC-aadress:"
+msgid ""
+"The MAC address entered here will be used as hardware address for the "
+"network device this connection is activated on.  This feature is known as "
+"MAC cloning or spoofing.  Example: 00:11:22:33:44:55"
+msgstr ""
+"Siia sisestatud MAC-aadressit kasutatakse selle ühendusega kasutatava seadme "
+"raudvaralise aadressina. Seda võimalust tuntakse ka MAC-i kloonimise või "
+"petmisena. Näiteks: 00:11:22:33:44:55"
+
+msgid ""
+"This option locks this connection to the network device specified by its "
+"permanent MAC address entered here.  Example: 00:11:22:33:44:55"
+msgstr ""
+"See valik lubab ühendumise ainult seadmel, mille raudvaraline MAC-aadress on "
+"siia sisestatud. Näiteks: 00:11:22:33:44:55"
+
+msgid "_Cloned MAC address:"
+msgstr "_Kloonitud MAC-aadress:"
+
+msgid "_Device MAC address:"
+msgstr "_Seadme MAC-aadress:"
 
 msgid "_Port:"
 msgstr "_Port:"
@@ -1092,13 +1130,6 @@ msgid "Mb/s"
 msgstr "Mb/s"
 
 msgid ""
-"This option locks this connection to the network device specified by the MAC "
-"address entered here.  Example: 00:11:22:33:44:55"
-msgstr ""
-"See valik lubab ühenduda ainult siia sisestatud MAC aadressiga seadmega. "
-"Näiteks: 00:11:22:33:44:55"
-
-msgid ""
 "This option locks this connection to the wireless access point (AP) "
 "specified by the BSSID entered here.  Example: 00:11:22:33:44:55"
 msgstr ""
@@ -1130,9 +1161,9 @@ msgid ""
 "of VPN connection you wish to create does not appear in the list, you may "
 "not have the correct VPN plugin installed."
 msgstr ""
-"<span weight=\"bold\" size=\"larger\">Vali VPN ühenduse tüüp</span>\n"
+"<span weight=\"bold\" size=\"larger\">VPN ühenduse tüübi valimine</span>\n"
 "\n"
-"Vali, mis tüüpi VPN ühendust kasutada. Kui soovitavat VPN ühenduse tüüpi "
+"Vali, mis tüüpi VPN ühendust kasutada. Kui soovitud VPN ühenduse tüüpi "
 "nimekirjas ei leidu, võib vajalik VPN plugin olla paigaldamata."
 
 msgid "Create…"
@@ -1250,11 +1281,12 @@ msgstr ""
 
 msgid "My provider uses _GSM-based technology (i.e. GPRS, EDGE, UMTS, HSDPA)"
 msgstr ""
-"Minu teenusepakkuja kasutab _GSM-baasil tehnoloogiat (nt GPRS, EDGE, UMTS, "
-"HSDPA)"
+"Minu teenusepakkuja kasutab _GSM-il põhinevat tehnoloogiat (nt GPRS, EDGE, "
+"UMTS, HSDPA)"
 
-msgid "My provider uses _CDMA-based technology (i.e. 1xRTT, EVDO)"
-msgstr "Minu teenusepakkuja kasutab _CDMA-baasil tehnoloogiat (nt 1xRTT, EVDO)"
+msgid "My provider uses C_DMA-based technology (i.e. 1xRTT, EVDO)"
+msgstr ""
+"Minu teenusepakkuja kasutab C_DMA-l põhinevat tehnoloogiat (nt 1xRTT, EVDO)"
 
 msgid "EAP"
 msgstr "EAP"
@@ -1312,6 +1344,7 @@ msgstr "802.1x turvalisus"
 msgid "Use 802.1X security for this connection"
 msgstr "Sellel ühendusel 802.1X turvalisuse kasutamine"
 
+#, c-format
 msgid "default"
 msgstr "vaikimisi"
 
@@ -1329,8 +1362,8 @@ msgstr "Juhtmeta võrk"
 msgid "Wireless connection %d"
 msgstr "Juhtmeta võrgu ühendus %d"
 
-msgid "WEP 40/128-bit Key"
-msgstr "WEP 40/128-bitine võti"
+msgid "WEP 40/128-bit Key (Hex or ASCII)"
+msgstr "WEP 40/128-bitine võti (Hex või ASCII)"
 
 msgid "WEP 128-bit Passphrase"
 msgstr "WEP 128-bitine parool"
@@ -1357,7 +1390,7 @@ msgstr "Juhtmeta võrgu turvalisus"
 
 #, c-format
 msgid "Editing %s"
-msgstr "%s redigeerimine"
+msgstr "Ühenduse %s muutmine"
 
 msgid "Editing un-named connection"
 msgstr "Nimetu ühenduse muutmine"
@@ -1366,26 +1399,27 @@ msgid ""
 "The connection editor could not find some required resources (the "
 "NetworkManager applet glade file was not found)."
 msgstr ""
-"Ühenduse redigeerija ei leidnud vajalikke allikaid (NetworkManager rakendi "
-"glade faili ei leitud)."
+"Ühenduse redigeerija ei suutnud leida vajalikke allikaid (Võrguhalduri "
+"rakendi glade faili ei leitud)."
 
 msgid ""
 "The connection editor could not find some required resources (the glade file "
 "was not found)."
 msgstr ""
-"Ühenduste redigeerija ei leidnud vajalikke allikaid (glade faili ei leitud)."
+"Ühenduste redigeerija ei suutnud leida vajalikke allikaid (glade faili ei "
+"leitud)."
 
 msgid "Error creating connection editor dialog."
 msgstr "Viga ühenduse muutmise dialoogi loomisel."
 
-msgid "Apply"
-msgstr "Rakenda"
+msgid "_Save"
+msgstr "_Salvesta"
 
-msgid "Save this connection for all users of this machine."
-msgstr "Salvesta see ühendus kõigi selle arvuti kasutajate jaoks."
+msgid "Save any changes made to this connection."
+msgstr "Salvesta kõik sellele ühendusele tehtud muudatused."
 
-msgid "Apply..."
-msgstr "Rakenda..."
+msgid "_Save..."
+msgstr "_Salvesta..."
 
 msgid "Authenticate to save this connection for all users of this machine."
 msgstr ""
@@ -1500,26 +1534,26 @@ msgstr "Nimi"
 msgid "Last Used"
 msgstr "Viimati kasutatud"
 
-msgid "Edit"
-msgstr "Muuda"
+msgid "_Edit"
+msgstr "_Muuda"
 
 msgid "Edit the selected connection"
 msgstr "Valitud ühenduse muutmine"
 
-msgid "Edit..."
-msgstr "Muuda..."
+msgid "_Edit..."
+msgstr "_Muuda..."
 
 msgid "Authenticate to edit the selected connection"
 msgstr "Valitud ühenduse muutmiseks pead end autentima"
 
-msgid "Delete"
-msgstr "Kustuta"
+msgid "_Delete"
+msgstr "_Kustuta"
 
 msgid "Delete the selected connection"
 msgstr "Valitud ühenduse kustutamine"
 
-msgid "Delete..."
-msgstr "Kustuta..."
+msgid "_Delete..."
+msgstr "_Kustuta..."
 
 msgid "Authenticate to delete the selected connection"
 msgstr "Valitud ühenduse kustutamiseks pead end autentima"
@@ -1536,8 +1570,9 @@ msgstr ""
 "\n"
 "Viga: %s."
 
+# importimise dialoogi pealkiri
 msgid "Select file to import"
-msgstr "Vali fail. mida importida"
+msgstr "Importimiseks faili valimine"
 
 #, c-format
 msgid "A file named \"%s\" already exists."
@@ -1563,8 +1598,9 @@ msgstr ""
 "\n"
 "Viga: %s."
 
+# eksportimise faili valiku pealkiri
 msgid "Export VPN connection..."
-msgstr "Ekspordi VPN-ühendus..."
+msgstr "VPN-ühenduse eksportimine..."
 
 #, c-format
 msgid "%s Network"
@@ -1620,7 +1656,7 @@ msgstr "Bluetoothi seadistamine pole võimalik (D-Bus'i proksi loomine nurjus)."
 msgid ""
 "Bluetooth configuration not possible (error finding NetworkManager: %s)."
 msgstr ""
-"Bluetoothi seadistamine pole võimalik (tõrge NetworkManageri otsimisel: %s)."
+"Bluetoothi seadistamine pole võimalik (tõrge võrguhalduri otsimisel: %s)."
 
 msgid "Use your mobile phone as a network device (PAN/NAP)"
 msgstr "Mobiiltelefoni kasutamine võrguseadmena (PAN/NAP)"
@@ -1635,8 +1671,7 @@ msgid ""
 "This program is a component of NetworkManager (http://projects.gnome.org/"
 "NetworkManager)."
 msgstr ""
-"See rakendus on NetworkManageri osa (http://projects.gnome.org/"
-"NetworkManager)."
+"See rakendus on võrguhalduri osa (http://projects.gnome.org/NetworkManager)."
 
 msgid ""
 "It is not intended for command-line interaction but instead runs in the "
@@ -1871,8 +1906,8 @@ msgstr "_Loo"
 
 #, c-format
 msgid ""
-"Passwords or encryption keys are required to access the wireless network '%"
-"s'."
+"Passwords or encryption keys are required to access the wireless network "
+"'%s'."
 msgstr ""
 "Ligipääsuks juhtmeta võrgule '%s' on vaja paroole või krüpteerimisvõtmeid."
 
@@ -1962,9 +1997,3 @@ msgstr "Tunnelis TLS"
 
 msgid "Protected EAP (PEAP)"
 msgstr "Kaitstud EAP (PEAP)"
-
-#~ msgid "_Routes…"
-#~ msgstr "_Marsruudid..."
-
-#~ msgid "_Band:"
-#~ msgstr "_Sagedus:"

@@ -21,6 +21,7 @@
  */
 
 #include <string.h>
+#include <ctype.h>
 
 #include <gtk/gtk.h>
 #include <glib/gi18n.h>
@@ -145,10 +146,6 @@ populate_gsm_ui (CEPageMobile *self, NMConnection *connection)
 	s = nm_setting_gsm_get_pin (setting);
 	if (s)
 		gtk_entry_set_text (priv->pin, s);
-
-	s = nm_setting_gsm_get_puk (setting);
-	if (s)
-		gtk_entry_set_text (priv->pin, s);
 }
 
 static void
@@ -253,6 +250,66 @@ apn_button_clicked (GtkButton *button, gpointer user_data)
 }
 
 static void
+network_id_filter_cb (GtkEntry *   entry,
+                      const gchar *text,
+                      gint         length,
+                      gint *       position,
+                      gpointer     user_data)
+{
+	GtkEditable *editable = GTK_EDITABLE (entry);
+	int i, count = 0;
+	gchar *result = g_new0 (gchar, length);
+
+	for (i = 0; i < length; i++) {
+		if (isdigit (text[i]))
+			result[count++] = text[i];
+	}
+
+	if (count > 0) {
+		g_signal_handlers_block_by_func (G_OBJECT (editable),
+		                                 G_CALLBACK (network_id_filter_cb),
+		                                 user_data);
+		gtk_editable_insert_text (editable, result, count, position);
+		g_signal_handlers_unblock_by_func (G_OBJECT (editable),
+		                                   G_CALLBACK (network_id_filter_cb),
+		                                   user_data);
+	}
+
+	g_signal_stop_emission_by_name (G_OBJECT (editable), "insert-text");
+	g_free (result);
+}
+
+static void
+apn_filter_cb (GtkEntry *   entry,
+               const gchar *text,
+               gint         length,
+               gint *       position,
+               gpointer     user_data)
+{
+	GtkEditable *editable = GTK_EDITABLE (entry);
+	int i, count = 0;
+	gchar *result = g_new0 (gchar, length);
+
+	for (i = 0; i < length; i++) {
+		if (isalnum (text[i]) || (text[i] == '.') || (text[i] == '-'))
+			result[count++] = text[i];
+	}
+
+	if (count > 0) {
+		g_signal_handlers_block_by_func (G_OBJECT (editable),
+		                                 G_CALLBACK (apn_filter_cb),
+		                                 user_data);
+		gtk_editable_insert_text (editable, result, count, position);
+		g_signal_handlers_unblock_by_func (G_OBJECT (editable),
+		                                   G_CALLBACK (apn_filter_cb),
+		                                   user_data);
+	}
+
+	g_signal_stop_emission_by_name (G_OBJECT (editable), "insert-text");
+	g_free (result);
+}
+
+static void
 finish_setup (CEPageMobile *self, gpointer unused, GError *error, gpointer user_data)
 {
 	CEPage *parent = CE_PAGE (self);
@@ -271,9 +328,16 @@ finish_setup (CEPageMobile *self, gpointer unused, GError *error, gpointer user_
 	g_signal_connect (priv->number, "changed", G_CALLBACK (stuff_changed), self);
 	g_signal_connect (priv->username, "changed", G_CALLBACK (stuff_changed), self);
 	g_signal_connect (priv->password, "changed", G_CALLBACK (stuff_changed), self);
+
 	g_signal_connect (priv->apn, "changed", G_CALLBACK (stuff_changed), self);
+	gtk_entry_set_max_length (priv->apn, 64);  /* APNs are max 64 chars */
+	g_signal_connect (priv->apn, "insert-text", G_CALLBACK (apn_filter_cb), self);
 	g_signal_connect (priv->apn_button, "clicked", G_CALLBACK (apn_button_clicked), self);
+
 	g_signal_connect (priv->network_id, "changed", G_CALLBACK (stuff_changed), self);
+	gtk_entry_set_max_length (priv->network_id, 6);  /* MCC/MNCs are max 6 chars */
+	g_signal_connect (priv->network_id, "insert-text", G_CALLBACK (network_id_filter_cb), self);
+
 	g_signal_connect (priv->network_type, "changed", G_CALLBACK (stuff_changed), self);
 	g_signal_connect (priv->pin, "changed", G_CALLBACK (stuff_changed), self);
 	g_signal_connect (priv->roaming_allowed, "toggled", G_CALLBACK (stuff_changed), self);
@@ -607,8 +671,10 @@ mobile_connection_new (GtkWindow *parent,
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (gsm_radio), TRUE);
 	gtk_box_pack_start (GTK_BOX (vbox), gsm_radio, FALSE, FALSE, 6);
 
+	/* Translators: CDMA has 'D' accelerator key; 'C' collides with 'Cancel' button.
+	                You may need to change it according to your language. */
 	cdma_radio = gtk_radio_button_new_with_mnemonic_from_widget (GTK_RADIO_BUTTON (gsm_radio),
-                                           _("My provider uses _CDMA-based technology (i.e. 1xRTT, EVDO)"));
+                                           _("My provider uses C_DMA-based technology (i.e. 1xRTT, EVDO)"));
 	gtk_box_pack_start (GTK_BOX (vbox), cdma_radio, FALSE, FALSE, 6);
 
 	gtk_widget_show_all (dialog);

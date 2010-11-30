@@ -195,7 +195,7 @@ create_info_label_security (NMConnection *connection)
 			else
 				label = get_eap_label (s_wireless_sec, s_8021x);
 		} else {
-			label = g_strdup (C_("No wifi security used", "None"));
+			label = g_strdup (C_("Wifi/wired security", "None"));
 		}
 	} else if (!strcmp (connection_type, NM_SETTING_WIRED_SETTING_NAME)) {
 		NMSetting8021x *s_8021x;
@@ -204,10 +204,10 @@ create_info_label_security (NMConnection *connection)
 		if (s_8021x)
 			label = get_eap_label (NULL, s_8021x);
 		else
-			label = g_strdup (C_("No wired security used", "None"));
+			label = g_strdup (C_("Wifi/wired security", "None"));
 	}
 
-	w = create_info_label (label ? label : C_("Unknown/unrecognized wired or wifi security", "Unknown"), TRUE);
+	w = create_info_label (label ? label : C_("Wifi/wired security", "Unknown"), TRUE);
 	g_free (label);
 
 	return w;
@@ -279,7 +279,7 @@ bitrate_changed_cb (GObject *device, GParamSpec *pspec, gpointer user_data)
 	if (bitrate)
 		str = g_strdup_printf (_("%u Mb/s"), bitrate);
 
-	gtk_label_set_text (GTK_LABEL (speed_label), str ? str : _("Unknown"));
+	gtk_label_set_text (GTK_LABEL (speed_label), str ? str : C_("Speed", "Unknown"));
 	g_free (str);
 }
 
@@ -381,7 +381,7 @@ info_dialog_add_page (GtkNotebook *notebook,
 	if (speed)
 		str = g_strdup_printf (_("%u Mb/s"), speed);
 
-	gtk_label_set_text (GTK_LABEL(speed_label), str ? str : _("Unknown"));
+	gtk_label_set_text (GTK_LABEL(speed_label), str ? str : C_("Speed", "Unknown"));
 	g_free (str);
 
 	gtk_table_attach_defaults (table,
@@ -418,7 +418,7 @@ info_dialog_add_page (GtkNotebook *notebook,
 	gtk_table_attach_defaults (table,
 							   create_info_label (_("IP Address:"), FALSE),
 							   0, 1, row, row + 1);
-	str = def_addr ? ip4_address_as_string (nm_ip4_address_get_address (def_addr)) : g_strdup (_("Unknown"));
+	str = def_addr ? ip4_address_as_string (nm_ip4_address_get_address (def_addr)) : g_strdup (C_("Address", "Unknown"));
 	gtk_table_attach_defaults (table,
 							   create_info_label (str, TRUE),
 							   1, 2, row, row + 1);
@@ -436,7 +436,7 @@ info_dialog_add_page (GtkNotebook *notebook,
 	gtk_table_attach_defaults (table,
 							   create_info_label (_("Broadcast Address:"), FALSE),
 							   0, 1, row, row + 1);
-	str = def_addr ? ip4_address_as_string (bcast) : g_strdup (_("Unknown"));
+	str = def_addr ? ip4_address_as_string (bcast) : g_strdup (C_("Address", "Unknown"));
 	gtk_table_attach_defaults (table,
 							   create_info_label (str, TRUE),
 							   1, 2, row, row + 1);
@@ -447,7 +447,7 @@ info_dialog_add_page (GtkNotebook *notebook,
 	gtk_table_attach_defaults (table,
 							   create_info_label (_("Subnet Mask:"), FALSE),
 							   0, 1, row, row + 1);
-	str = def_addr ? ip4_address_as_string (netmask) : g_strdup (_("Unknown"));
+	str = def_addr ? ip4_address_as_string (netmask) : g_strdup (C_("Subnet Mask", "Unknown"));
 	gtk_table_attach_defaults (table,
 							   create_info_label (str, TRUE),
 							   1, 2, row, row + 1);
@@ -564,7 +564,8 @@ applet_info_dialog_show (NMApplet *applet)
 	g_signal_connect (dialog, "delete-event", G_CALLBACK (gtk_widget_hide_on_delete), dialog);
 	g_signal_connect_swapped (dialog, "response", G_CALLBACK (gtk_widget_hide), dialog);
 	gtk_widget_realize (dialog);
-	gtk_window_present_with_time (GTK_WINDOW (dialog), gdk_x11_get_server_time (dialog->window));
+	gtk_window_present_with_time (GTK_WINDOW (dialog),
+		gdk_x11_get_server_time (gtk_widget_get_window (dialog)));
 }
 
 static void 
@@ -697,7 +698,8 @@ applet_warning_dialog_show (const char *message)
 	gtk_window_set_title (GTK_WINDOW (dialog), _("Missing resources"));
 	gtk_widget_realize (dialog);
 	gtk_widget_show (dialog);
-	gtk_window_present_with_time (GTK_WINDOW (dialog), gdk_x11_get_server_time (dialog->window));
+	gtk_window_present_with_time (GTK_WINDOW (dialog),
+		gdk_x11_get_server_time (gtk_widget_get_window (dialog)));
 
 	g_signal_connect_swapped (dialog, "response",
 	                          G_CALLBACK (gtk_widget_destroy),
@@ -712,7 +714,7 @@ applet_mobile_password_dialog_new (NMDevice *device,
 {
 	GtkDialog *dialog;
 	GtkWidget *w;
-	GtkBox *box;
+	GtkBox *box = NULL, *vbox = NULL;
 	char *dev_str;
 	NMSettingConnection *s_con;
 	char *tmp;
@@ -732,16 +734,19 @@ applet_mobile_password_dialog_new (NMDevice *device,
 	tmp = g_strdup_printf (_("A password is required to connect to '%s'."), id);
 	w = gtk_label_new (tmp);
 	g_free (tmp);
-	gtk_box_pack_start (GTK_BOX (dialog->vbox), w, TRUE, TRUE, 0);
+
+	vbox = GTK_BOX (gtk_dialog_get_content_area (dialog));
+
+	gtk_box_pack_start (vbox, w, TRUE, TRUE, 0);
 
 	dev_str = g_strdup_printf ("<b>%s</b>", utils_get_device_description (device));
 	w = gtk_label_new (NULL);
 	gtk_label_set_markup (GTK_LABEL (w), dev_str);
 	g_free (dev_str);
-	gtk_box_pack_start (GTK_BOX (dialog->vbox), w, TRUE, TRUE, 0);
+	gtk_box_pack_start (vbox, w, TRUE, TRUE, 0);
 
 	w = gtk_alignment_new (0.5, 0.5, 0, 1.0);
-	gtk_box_pack_start (GTK_BOX (dialog->vbox), w, TRUE, TRUE, 0);
+	gtk_box_pack_start (vbox, w, TRUE, TRUE, 0);
 
 	box = GTK_BOX (gtk_hbox_new (FALSE, 6));
 	gtk_container_set_border_width (GTK_CONTAINER (box), 6);
@@ -754,7 +759,7 @@ applet_mobile_password_dialog_new (NMDevice *device,
 	gtk_entry_set_activates_default (GTK_ENTRY (w), TRUE);
 	gtk_box_pack_start (box, w, FALSE, FALSE, 0);
 
-	gtk_widget_show_all (dialog->vbox);
+	gtk_widget_show_all (GTK_WIDGET (vbox));
 	return GTK_WIDGET (dialog);
 }
 
@@ -831,10 +836,32 @@ mpd_cancel_dialog (GtkDialog *dialog)
 	gtk_dialog_response (dialog, GTK_RESPONSE_CANCEL);
 }
 
+static void
+show_toggled_cb (GtkWidget *button, gpointer user_data)
+{
+	GtkWidget *dialog = GTK_WIDGET (user_data);
+	gboolean show;
+	GtkWidget *widget;
+	GladeXML *xml;
+
+	xml = g_object_get_data (G_OBJECT (dialog), "xml");
+	g_return_if_fail (xml != NULL);
+
+	show = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (button));
+
+	widget = glade_xml_get_widget (xml, "code1_entry");
+	gtk_entry_set_visibility (GTK_ENTRY (widget), show);
+	widget = glade_xml_get_widget (xml, "code2_entry");
+	gtk_entry_set_visibility (GTK_ENTRY (widget), show);
+	widget = glade_xml_get_widget (xml, "code3_entry");
+	gtk_entry_set_visibility (GTK_ENTRY (widget), show);
+}
+
 GtkWidget *
 applet_mobile_pin_dialog_new (const char *title,
                               const char *header,
-                              const char *desc)
+                              const char *desc,
+                              const char *show_password_label)
 {
 	char *glade_file, *str;
 	GladeXML *xml;
@@ -844,6 +871,7 @@ applet_mobile_pin_dialog_new (const char *title,
 	g_return_val_if_fail (title != NULL, NULL);
 	g_return_val_if_fail (header != NULL, NULL);
 	g_return_val_if_fail (desc != NULL, NULL);
+	g_return_val_if_fail (show_password_label != NULL, NULL);
 
 	glade_file = g_build_filename (GLADEDIR, "applet.glade", NULL);
 	g_return_val_if_fail (glade_file != NULL, NULL);
@@ -869,6 +897,12 @@ applet_mobile_pin_dialog_new (const char *title,
 
 	widget = glade_xml_get_widget (xml, "desc_label");
 	gtk_label_set_text (GTK_LABEL (widget), desc);
+
+	widget = glade_xml_get_widget (xml, "show_password_checkbutton");
+	gtk_button_set_label (GTK_BUTTON (widget), show_password_label);
+	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (widget), FALSE);
+	g_signal_connect (widget, "toggled", G_CALLBACK (show_toggled_cb), dialog);
+	show_toggled_cb (widget, dialog);
 
 	g_signal_connect (dialog, "delete-event", G_CALLBACK (mpd_cancel_dialog), NULL);
 
@@ -914,7 +948,8 @@ applet_mobile_pin_dialog_present (GtkWidget *dialog, gboolean now)
 	/* Show the dialog */
 	gtk_widget_realize (dialog);
 	if (now)
-		gtk_window_present_with_time (GTK_WINDOW (dialog), gdk_x11_get_server_time (dialog->window));
+		gtk_window_present_with_time (GTK_WINDOW (dialog),
+			gdk_x11_get_server_time (gtk_widget_get_window (dialog)));
 	else
 		gtk_window_present (GTK_WINDOW (dialog));
 }
@@ -1099,6 +1134,9 @@ applet_mobile_pin_dialog_start_spinner (GtkWidget *dialog, const char *text)
 	gtk_widget_set_sensitive (widget, FALSE);
 	widget = glade_xml_get_widget (xml, "unlock_cancel_button");
 	gtk_widget_set_sensitive (widget, FALSE);
+
+	widget = glade_xml_get_widget (xml, "show_password_checkbutton");
+	gtk_widget_set_sensitive (widget, FALSE);
 }
 
 void
@@ -1138,6 +1176,9 @@ applet_mobile_pin_dialog_stop_spinner (GtkWidget *dialog, const char *text)
 	widget = glade_xml_get_widget (xml, "unlock_button");
 	gtk_widget_set_sensitive (widget, TRUE);
 	widget = glade_xml_get_widget (xml, "unlock_cancel_button");
+	gtk_widget_set_sensitive (widget, TRUE);
+
+	widget = glade_xml_get_widget (xml, "show_password_checkbutton");
 	gtk_widget_set_sensitive (widget, TRUE);
 }
 
