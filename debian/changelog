@@ -1,8 +1,9 @@
-network-manager-applet (0.8.1-3) UNRELEASED; urgency=low
+network-manager-applet (0.8.2-1) UNRELEASED; urgency=low
 
+  * New upstream release.
   * Update Vcs-* fields: Move packaging from svn to git.
 
- -- Michael Biebl <biebl@debian.org>  Sun, 28 Nov 2010 23:47:41 +0100
+ -- Michael Biebl <biebl@debian.org>  Wed, 01 Dec 2010 00:07:23 +0100
 
 network-manager-applet (0.8.1-2) unstable; urgency=low
 
