@@ -1,21 +1,24 @@
 #!/usr/bin/make -f
 
-include /usr/share/cdbs/1/rules/debhelper.mk
-include /usr/share/cdbs/1/class/gnome.mk
-include /usr/share/cdbs/1/rules/utils.mk
+%:
+	dh $@
 
-DEB_INSTALL_DOCS_ALL := CONTRIBUTING
+export LDFLAGS := $(shell dpkg-buildflags --get LDFLAGS) -Wl,-z,defs -Wl,--as-needed
 
-DEB_CONFIGURE_LIBEXECDIR := "\$$(prefix)/lib/NetworkManager"
+override_dh_auto_configure:
+	dh_auto_configure -- \
+		--libexecdir=/usr/lib/NetworkManager
 
-LDFLAGS += -Wl,-z,defs -Wl,--as-needed
-
-clean::
+override_dh_auto_clean:
+	dh_auto_clean
 	rm -f debian/*.1
 
+override_dh_auto_build:
+	dh_auto_build
+	docbook-to-man debian/nm-applet.sgml > debian/nm-applet.1
 
-build/network-manager-gnome::
-	/usr/bin/docbook-to-man debian/nm-applet.sgml > debian/nm-applet.1
-
-common-binary-post-install-arch::
+override_dh_auto_install:
+	dh_auto_install
 	find debian/network-manager-gnome/ -name \*.la -o -name \*.a | xargs rm -f
+
+override_dh_auto_test:

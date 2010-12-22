@@ -1,3 +1,13 @@
+network-manager-applet (0.8.2-2) UNRELEASED; urgency=low
+
+  * Switch from cdbs to dh
+    - Drop Build-Depends on cdbs.
+    - Bump Build-Depends on debhelper to (>= 7.0.50~) for override targets.
+    - Convert debian/rules to use dh.
+    - Add debian/network-manager-gnome.docs.
+
+ -- Michael Biebl <biebl@debian.org>  Wed, 22 Dec 2010 04:32:55 +0100
+
 network-manager-applet (0.8.2-1) experimental; urgency=low
 
   * New upstream release.
