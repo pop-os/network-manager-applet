@@ -17,8 +17,8 @@ override_dh_auto_build:
 	dh_auto_build
 	docbook-to-man debian/nm-applet.sgml > debian/nm-applet.1
 
-override_dh_auto_install:
-	dh_auto_install
+override_dh_install:
+	dh_install
 	find debian/network-manager-gnome/ -name \*.la -o -name \*.a | xargs rm -f
 
 override_dh_auto_test:
