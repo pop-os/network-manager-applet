@@ -1,3 +1,10 @@
+network-manager-applet (0.8.2-4) UNRELEASED; urgency=low
+
+  * debian/control
+    - Drop Build-Depends on libiw-dev. No longer needed.
+
+ -- Michael Biebl <biebl@debian.org>  Mon, 07 Mar 2011 01:35:22 +0100
+
 network-manager-applet (0.8.2-3) unstable; urgency=low
 
   * Upload to unstable.
