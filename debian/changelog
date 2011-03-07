@@ -2,6 +2,8 @@ network-manager-applet (0.8.2-4) UNRELEASED; urgency=low
 
   * debian/control
     - Drop Build-Depends on libiw-dev. No longer needed.
+    - Bump Build-Depends on debhelper to (>= 8).
+  * Bump debhelper compatibility level to 8.
 
  -- Michael Biebl <biebl@debian.org>  Mon, 07 Mar 2011 01:35:22 +0100
 

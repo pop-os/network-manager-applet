@@ -4,7 +4,7 @@ Priority: optional
 Maintainer: Utopia Maintenance Team <pkg-utopia-maintainers@lists.alioth.debian.org>
 Uploaders: Michael Biebl <biebl@debian.org>
 Build-Depends:
- debhelper (>= 7.0.50~),
+ debhelper (>= 8),
  autotools-dev,
  intltool,
  libdbus-glib-1-dev (>= 0.74),
