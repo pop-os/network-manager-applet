@@ -183,6 +183,8 @@ INTLTOOL_PERL = @INTLTOOL_PERL@
 INTLTOOL_UPDATE = @INTLTOOL_UPDATE@
 LD = @LD@
 LDFLAGS = @LDFLAGS@
+LIBNOTIFY_07_CFLAGS = @LIBNOTIFY_07_CFLAGS@
+LIBNOTIFY_07_LIBS = @LIBNOTIFY_07_LIBS@
 LIBOBJS = @LIBOBJS@
 LIBS = @LIBS@
 LIBTOOL = @LIBTOOL@
@@ -294,7 +296,7 @@ libutils_la_SOURCES = \
 
 libutils_la_CPPFLAGS = \
 	$(NMA_CFLAGS) \
-	-DGLADEDIR=\""$(gladedir)"\" \
+	-DUIDIR=\""$(uidir)"\" \
 	-DDATADIR=\""$(datadir)"\" \
 	$(DISABLE_DEPRECATED) \
 	-I${top_srcdir}/src/gconf-helpers \

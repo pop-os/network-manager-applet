@@ -25,7 +25,6 @@
 #include "config.h"
 
 #include <glib-object.h>
-#include <glade/glade-xml.h>
 
 #include "nm-remote-settings-system.h"
 
@@ -53,19 +52,20 @@ typedef struct {
 
 	GSList *initializing_pages;
 	GSList *pages;
-	GladeXML *xml;
+	GtkBuilder *builder;
 	GtkWidget *window;
 	GtkWidget *ok_button;
 	GtkWidget *cancel_button;
 
 	gboolean busy;
+	gboolean init_run;
 } NMConnectionEditor;
 
 typedef struct {
 	GObjectClass parent_class;
 
 	/* Signals */
-	void (*done)  (NMConnectionEditor *editor, gint result);
+	void (*done)  (NMConnectionEditor *editor, gint result, GError *error);
 } NMConnectionEditorClass;
 
 GType               nm_connection_editor_get_type (void);

@@ -621,7 +621,8 @@ add_response_cb (NMConnectionEditor *editor, gint response, GError *error, gpoin
 			return;
 		} else {
 			error_dialog (GTK_WINDOW (editor->window),
-			              _("Error editing connection: property '%s' / '%s' invalid: %d"),
+			              _("Error saving connection"),
+			              _("The property '%s' / '%s' is invalid: %d"),
 			              g_type_name (nm_connection_lookup_setting_type_by_quark (add_error->domain)),
 			              (add_error && add_error->message) ? add_error->message : "(unknown)",
 			              add_error ? add_error->code : -1);
@@ -1157,7 +1158,7 @@ add_connection_treeview (NMConnectionList *self, const char *prefix)
 	GtkTreeView *treeview;
 
 	name = g_strdup_printf ("%s_list", prefix);
-	treeview = GTK_TREE_VIEW (glade_xml_get_widget (self->gui, name));
+	treeview = GTK_TREE_VIEW (GTK_WIDGET (gtk_builder_get_object (self->gui, name)));
 	g_free (name);
 	gtk_tree_view_set_headers_visible (treeview, TRUE);
 
@@ -1265,22 +1266,26 @@ add_connection_buttons (NMConnectionList *self,
 
 	/* Add */
 	name = g_strdup_printf ("%s_add", prefix);
-	button = glade_xml_get_widget (self->gui, name);
+	button = GTK_WIDGET (gtk_builder_get_object (self->gui, name));
 	g_free (name);
 	info = action_info_new (self, treeview, GTK_WINDOW (self->dialog), NULL);
 	g_signal_connect (button, "clicked", G_CALLBACK (add_clicked), info);
 	if (ctype == NM_TYPE_SETTING_VPN) {
 		GHashTable *plugins;
+		gboolean have_plugins;
 
 		/* disable the "Add..." button if there aren't any VPN plugins */
 		plugins = vpn_get_plugins (NULL);
-		gtk_widget_set_sensitive (button, (plugins && g_hash_table_size (plugins)));
+		have_plugins = plugins && g_hash_table_size (plugins);
+		gtk_widget_set_sensitive (button, have_plugins);
+		if (!have_plugins)
+			gtk_widget_set_tooltip_text (button, _("No VPN plugin available. Please install one to enable this button."));
 	}
 	if (new_func)
 		action_info_set_new_func (info, new_func);
 
 	name = g_strdup_printf ("%s_button_box", prefix);
-	hbox = glade_xml_get_widget (self->gui, name);
+	hbox = GTK_WIDGET (gtk_builder_get_object (self->gui, name));
 	g_free (name);
 
 	/* Edit */
@@ -1320,7 +1325,7 @@ add_connection_buttons (NMConnectionList *self,
 
 	/* Import */
 	name = g_strdup_printf ("%s_import", prefix);
-	button = glade_xml_get_widget (self->gui, name);
+	button = GTK_WIDGET (gtk_builder_get_object (self->gui, name));
 	g_free (name);
 	if (button) {
 		gboolean import_supported = FALSE;
@@ -1337,7 +1342,7 @@ add_connection_buttons (NMConnectionList *self,
 
 	/* Export */
 	name = g_strdup_printf ("%s_export", prefix);
-	button = glade_xml_get_widget (self->gui, name);
+	button = GTK_WIDGET (gtk_builder_get_object (self->gui, name));
 	g_free (name);
 	if (button) {
 		info = action_info_new (self, treeview, GTK_WINDOW (self->dialog), button);
@@ -1362,7 +1367,7 @@ add_connection_tab (NMConnectionList *self,
 	int pnum;
 
 	name = g_strdup_printf ("%s_child", prefix);
-	child = glade_xml_get_widget (self->gui, name);
+	child = GTK_WIDGET (gtk_builder_get_object (self->gui, name));
 	g_free (name);
 
 	/* Notebook tab */
@@ -1376,7 +1381,7 @@ add_connection_tab (NMConnectionList *self,
 	gtk_box_pack_start (GTK_BOX (hbox), gtk_label_new (label_text), FALSE, FALSE, 0);
 	gtk_widget_show_all (hbox);
 
-	notebook = glade_xml_get_widget (self->gui, "list_notebook");
+	notebook = GTK_WIDGET (gtk_builder_get_object (self->gui, "list_notebook"));
 	gtk_notebook_set_tab_label (GTK_NOTEBOOK (notebook), child, hbox);
 
 	treeview = add_connection_treeview (self, prefix);
@@ -1493,9 +1498,11 @@ nm_connection_list_new (GType def_type)
 		return NULL;
 
 	/* load GUI */
-	list->gui = glade_xml_new (GLADEDIR "/nm-connection-editor.glade", "NMConnectionList", NULL);
-	if (!list->gui) {
-		g_warning ("Could not load Glade file for connection list");
+	list->gui = gtk_builder_new ();
+
+	if (!gtk_builder_add_from_file (list->gui, UIDIR "/nm-connection-editor.ui", &error)) {
+		g_warning ("Couldn't load builder file: %s", error->message);
+		g_error_free (error);
 		goto error;
 	}
 
@@ -1538,7 +1545,7 @@ nm_connection_list_new (GType def_type)
 
 	list->editors = g_hash_table_new_full (g_direct_hash, g_direct_equal, NULL, g_object_unref);
 
-	list->dialog = glade_xml_get_widget (list->gui, "NMConnectionList");
+	list->dialog = GTK_WIDGET (gtk_builder_get_object (list->gui, "NMConnectionList"));
 	if (!list->dialog)
 		goto error;
 	g_signal_connect (G_OBJECT (list->dialog), "response", G_CALLBACK (dialog_response_cb), list);
@@ -1574,7 +1581,7 @@ nm_connection_list_set_type (NMConnectionList *self, GType ctype)
 	/* If a notebook page is found that owns the requested type, set it
 	 * as the current page.
 	 */
-	notebook = GTK_NOTEBOOK (glade_xml_get_widget (self->gui, "list_notebook"));
+	notebook = GTK_NOTEBOOK (GTK_WIDGET (gtk_builder_get_object (self->gui, "list_notebook")));
 	for (i = 0; i < gtk_notebook_get_n_pages (notebook); i++) {
 		GtkWidget *child;
 		GType child_type;

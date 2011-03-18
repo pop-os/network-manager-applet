@@ -6,7 +6,7 @@ nm_applet_CPPFLAGS = \
 	$(NMA_CFLAGS) \
 	$(NOTIFY_CFLAGS) \
 	-DICONDIR=\""$(datadir)/icons"\"						\
-	-DGLADEDIR=\""$(gladedir)"\"							\
+	-DUIDIR=\""$(uidir)"\"							\
 	-DBINDIR=\""$(bindir)"\"								\
 	-DSYSCONFDIR=\""$(sysconfdir)"\"						\
 	-DLIBEXECDIR=\""$(libexecdir)"\" \
@@ -49,7 +49,8 @@ nm_applet_SOURCES =			\
 	mobile-helpers.c \
 	mobile-helpers.h \
 	applet-device-bt.h \
-	applet-device-bt.c
+	applet-device-bt.c \
+	fallback-icon.h
 
 nm_applet_LDADD = \
 	-lm \
@@ -60,11 +61,11 @@ nm_applet_LDADD = \
 	${top_builddir}/src/gconf-helpers/libgconf-helpers.la \
 	${top_builddir}/src/wireless-security/libwireless-security.la
 
-gladedir = $(datadir)/nm-applet
-glade_DATA = applet.glade keyring.png
+uidir = $(datadir)/nm-applet
+ui_DATA = applet.ui keyring.png
 
-CLEANFILES = *.bak *.gladep
+CLEANFILES = *.bak
 
 EXTRA_DIST = 				\
-	$(glade_DATA)
+	$(ui_DATA)
 

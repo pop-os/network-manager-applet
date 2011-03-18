@@ -124,7 +124,7 @@ nag_dialog_response_cb (GtkDialog *nag_dialog,
 
 	if (response == GTK_RESPONSE_NO) {
 		/* Grab the value of the "don't bother me" checkbox */
-		widget = glade_xml_get_widget (method->nag_dialog_xml, "ignore_checkbox");
+		widget = GTK_WIDGET (gtk_builder_get_object (method->nag_builder, "ignore_checkbox"));
 		g_assert (widget);
 
 		method->ignore_ca_cert = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget));
@@ -144,8 +144,6 @@ nag_dialog_delete_event_cb (GtkDialog *nag_dialog, GdkEvent *e, gpointer user_da
 	//g_signal_emit_by_name (nag_dialog, "response", GTK_RESPONSE_NO, user_data);
 	return TRUE;  /* do not destroy */
 } 
- 
-
 
 GtkWidget *
 eap_method_nag_user (EAPMethod *method)
@@ -159,12 +157,12 @@ eap_method_nag_user (EAPMethod *method)
 		return NULL;
 
 	/* Checkbox should be unchecked each time dialog comes up */
-	widget = glade_xml_get_widget (method->nag_dialog_xml, "ignore_checkbox");
+	widget = GTK_WIDGET (gtk_builder_get_object (method->nag_builder, "ignore_checkbox"));
 	g_assert (widget);
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (widget), FALSE);
 
 	/* Nag the user if the CA Cert is blank, since it's a security risk. */
-	widget = glade_xml_get_widget (method->xml, method->ca_cert_chooser);
+	widget = GTK_WIDGET (gtk_builder_get_object (method->builder, method->ca_cert_chooser));
 	g_assert (widget);
 	filename = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (widget));
 	if (filename != NULL) {
@@ -176,24 +174,27 @@ eap_method_nag_user (EAPMethod *method)
 	return method->nag_dialog;
 }
 
+#define NAG_DIALOG_UI UIDIR "/nag-user-dialog.ui"
+
 gboolean
 eap_method_nag_init (EAPMethod *method,
-                     const char *glade_file,
                      const char *ca_cert_chooser,
                      NMConnection *connection,
                      gboolean phase2)
 {
 	GtkWidget *dialog, *widget;
-	char *text;
 	NagDialogResponseInfo *info;
+	GError *error = NULL;
+	char *text;
 
 	g_return_val_if_fail (method != NULL, FALSE);
-	g_return_val_if_fail (glade_file != NULL, FALSE);
 	g_return_val_if_fail (ca_cert_chooser != NULL, FALSE);
 
-	method->nag_dialog_xml = glade_xml_new (glade_file, "nag_user_dialog", NULL);
-	if (method->nag_dialog_xml == NULL) {
-		g_warning ("Couldn't get nag_user_dialog from glade xml");
+	method->nag_builder = gtk_builder_new ();
+	if (!gtk_builder_add_from_file (method->nag_builder, NAG_DIALOG_UI, &error)) {
+		g_warning ("Couldn't load UI builder file " NAG_DIALOG_UI ": %s",
+		           error->message);
+		g_error_free (error);
 		return FALSE;
 	}
 
@@ -214,13 +215,13 @@ eap_method_nag_init (EAPMethod *method,
 	info->method = method;
 	info->connection = connection;
 
-	dialog = glade_xml_get_widget (method->nag_dialog_xml, "nag_user_dialog");
+	dialog = GTK_WIDGET (gtk_builder_get_object (method->nag_builder, "nag_user_dialog"));
 	g_assert (dialog);
 	g_signal_connect (dialog, "response", G_CALLBACK (nag_dialog_response_cb), info);
 	g_signal_connect (dialog, "delete-event", G_CALLBACK (nag_dialog_delete_event_cb), info);
 	g_object_weak_ref (G_OBJECT (dialog), nag_dialog_destroyed, info);
 
-	widget = glade_xml_get_widget (method->nag_dialog_xml, "content_label");
+	widget = GTK_WIDGET (gtk_builder_get_object (method->nag_builder, "content_label"));
 	g_assert (widget);
 
 	text = g_strdup_printf ("<span weight=\"bold\" size=\"larger\">%s</span>\n\n%s",
@@ -229,11 +230,11 @@ eap_method_nag_init (EAPMethod *method,
 	gtk_label_set_markup (GTK_LABEL (widget), text);
 	g_free (text);
 
-	widget = glade_xml_get_widget (method->nag_dialog_xml, "ignore_button");
+	widget = GTK_WIDGET (gtk_builder_get_object (method->nag_builder, "ignore_button"));
 	gtk_button_set_label (GTK_BUTTON (widget), _("Ignore"));
 	g_assert (widget);
 
-	widget = glade_xml_get_widget (method->nag_dialog_xml, "change_button");
+	widget = GTK_WIDGET (gtk_builder_get_object (method->nag_builder, "change_button"));
 	gtk_button_set_label (GTK_BUTTON (widget), _("Choose CA Certificate"));
 	g_assert (widget);
 
@@ -263,7 +264,7 @@ eap_method_phase2_update_secrets_helper (EAPMethod *method,
 	g_return_if_fail (connection != NULL);
 	g_return_if_fail (combo_name != NULL);
 
-	combo = glade_xml_get_widget (method->xml, combo_name);
+	combo = GTK_WIDGET (gtk_builder_get_object (method->builder, combo_name));
 	g_assert (combo);
 
 	/* Let each EAP phase2 method try to update its secrets */
@@ -281,28 +282,54 @@ eap_method_phase2_update_secrets_helper (EAPMethod *method,
 	}
 }
 
-void
-eap_method_init (EAPMethod *method,
+EAPMethod *
+eap_method_init (gsize obj_size,
                  EMValidateFunc validate,
                  EMAddToSizeGroupFunc add_to_size_group,
                  EMFillConnectionFunc fill_connection,
                  EMUpdateSecretsFunc update_secrets,
                  EMDestroyFunc destroy,
-                 GladeXML *xml,
-                 GtkWidget *ui_widget,
+                 const char *ui_file,
+                 const char *ui_widget_name,
                  const char *default_field)
 {                 
-	method->refcount = 1;
+	EAPMethod *method;
+	GError *error = NULL;
 
+	g_return_val_if_fail (obj_size > 0, NULL);
+	g_return_val_if_fail (ui_file != NULL, NULL);
+	g_return_val_if_fail (ui_widget_name != NULL, NULL);
+
+	method = g_slice_alloc0 (obj_size);
+	g_assert (method);
+
+	method->refcount = 1;
+	method->obj_size = obj_size;
 	method->validate = validate;
 	method->add_to_size_group = add_to_size_group;
 	method->fill_connection = fill_connection;
 	method->update_secrets = update_secrets;
 	method->destroy = destroy;
-
-	method->xml = xml;
-	method->ui_widget = ui_widget;
 	method->default_field = default_field;
+
+	method->builder = gtk_builder_new ();
+	if (!gtk_builder_add_from_file (method->builder, ui_file, &error)) {
+		g_warning ("Couldn't load UI builder file %s: %s",
+		           ui_file, error->message);
+		eap_method_unref (method);
+		return NULL;
+	}
+
+	method->ui_widget = GTK_WIDGET (gtk_builder_get_object (method->builder, ui_widget_name));
+	if (!method->ui_widget) {
+		g_warning ("Couldn't load UI widget '%s' from UI file %s",
+		           ui_widget_name, ui_file);
+		eap_method_unref (method);
+		return NULL;
+	}
+	g_object_ref_sink (method->ui_widget);
+
+	return method;
 }
 
 
@@ -322,23 +349,27 @@ eap_method_unref (EAPMethod *method)
 	g_return_if_fail (method != NULL);
 	g_return_if_fail (method->refcount > 0);
 
-	g_assert (method->destroy);
-
 	method->refcount--;
 	if (method->refcount == 0) {
+		if (method->destroy)
+			method->destroy (method);
+
 		if (method->nag_dialog)
 			gtk_widget_destroy (method->nag_dialog);
-		if (method->nag_dialog_xml)
-			g_object_unref (method->nag_dialog_xml);
+		if (method->nag_builder)
+			g_object_unref (method->nag_builder);
 		g_free (method->ca_cert_chooser);
-		g_object_unref (method->xml);
-		g_object_unref (method->ui_widget);
-		(*(method->destroy)) (method);
+		if (method->builder)
+			g_object_unref (method->builder);
+		if (method->ui_widget)
+			g_object_unref (method->ui_widget);
+
+		g_slice_free1 (method->obj_size, method);
 	}
 }
 
 gboolean
-eap_method_validate_filepicker (GladeXML *xml,
+eap_method_validate_filepicker (GtkBuilder *builder,
                                 const char *name,
                                 guint32 item_type,
                                 const char *password,
@@ -355,7 +386,7 @@ eap_method_validate_filepicker (GladeXML *xml,
 		g_return_val_if_fail (strlen (password), FALSE);
 	}
 
-	widget = glade_xml_get_widget (xml, name);
+	widget = GTK_WIDGET (gtk_builder_get_object (builder, name));
 	g_assert (widget);
 	filename = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (widget));
 	if (!filename)
@@ -452,7 +483,6 @@ file_is_der_or_pem (const char *filename,
 	int fd;
 	unsigned char buffer[8192];
 	ssize_t bytes_read;
-	guint16 der_tag = 0x8230;
 	gboolean success = FALSE;
 	gboolean encrypted = FALSE;
 
@@ -466,7 +496,7 @@ file_is_der_or_pem (const char *filename,
 	buffer[bytes_read] = '\0';
 
 	/* Check for DER signature */
-	if (!memcmp (buffer, &der_tag, 2)) {
+	if (bytes_read > 2 && buffer[0] == 0x30 && buffer[1] == 0x82) {
 		success = TRUE;
 		goto out;
 	}

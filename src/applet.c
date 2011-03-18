@@ -15,7 +15,7 @@
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  *
- * Copyright (C) 2004 - 2010 Red Hat, Inc.
+ * Copyright (C) 2004 - 2011 Red Hat, Inc.
  * Copyright (C) 2005 - 2008 Novell, Inc.
  *
  * This applet used the GNOME Wireless Applet as a skeleton to build from.
@@ -53,7 +53,6 @@
 #include <nm-active-connection.h>
 #include <nm-setting-wireless.h>
 
-#include <glade/glade.h>
 #include <gconf/gconf-client.h>
 #include <gnome-keyring.h>
 #include <libnotify/notify.h>
@@ -626,12 +625,18 @@ applet_do_notify (NMApplet *applet,
 	escaped = utils_escape_notify_message (message);
 	notify = notify_notification_new (summary,
 	                                  escaped,
-	                                  icon ? icon : GTK_STOCK_NETWORK,
-	                                  NULL);
+	                                  icon ? icon : GTK_STOCK_NETWORK
+#if HAVE_LIBNOTIFY_07
+	                                  );
+#else
+	                                  , NULL);
+#endif
 	g_free (escaped);
 	applet->notification = notify;
 
+#if !HAVE_LIBNOTIFY_07
 	notify_notification_attach_to_status_icon (notify, applet->status_icon);
+#endif
 	notify_notification_set_urgency (notify, urgency);
 	notify_notification_set_timeout (notify, NOTIFY_EXPIRES_DEFAULT);
 
@@ -648,9 +653,9 @@ applet_do_notify (NMApplet *applet,
 }
 
 static void
-notify_connected_dont_show_cb (NotifyNotification *notify,
-			                   gchar *id,
-			                   gpointer user_data)
+notify_dont_show_cb (NotifyNotification *notify,
+                     gchar *id,
+                     gpointer user_data)
 {
 	NMApplet *applet = NM_APPLET (user_data);
 
@@ -658,7 +663,8 @@ notify_connected_dont_show_cb (NotifyNotification *notify,
 		return;
 
 	if (   strcmp (id, PREF_DISABLE_CONNECTED_NOTIFICATIONS)
-	    && strcmp (id, PREF_DISABLE_DISCONNECTED_NOTIFICATIONS))
+	    && strcmp (id, PREF_DISABLE_DISCONNECTED_NOTIFICATIONS)
+	    && strcmp (id, PREF_DISABLE_VPN_NOTIFICATIONS))
 		return;
 
 	gconf_client_set_bool (applet->gconf_client, id, TRUE, NULL);
@@ -675,7 +681,7 @@ void applet_do_notify_with_pref (NMApplet *applet,
 	
 	applet_do_notify (applet, NOTIFY_URGENCY_LOW, summary, message, icon, pref,
 	                  _("Don't show this message again"),
-	                  notify_connected_dont_show_cb,
+	                  notify_dont_show_cb,
 	                  applet);
 }
 
@@ -878,8 +884,8 @@ vpn_connection_state_changed (NMVPNConnection *vpn,
 			msg = g_strdup ("VPN connection has been successfully established.\n");
 
 		title = _("VPN Login Message");
-		applet_do_notify (applet, NOTIFY_URGENCY_LOW, title, msg,
-		                  "gnome-lockscreen", NULL, NULL, NULL, NULL);
+		applet_do_notify_with_pref (applet, title, msg, "gnome-lockscreen",
+		                            PREF_DISABLE_VPN_NOTIFICATIONS);
 		g_free (msg);
 
 		connection = applet_get_connection_for_active (applet, NM_ACTIVE_CONNECTION (vpn));
@@ -889,16 +895,16 @@ vpn_connection_state_changed (NMVPNConnection *vpn,
 	case NM_VPN_CONNECTION_STATE_FAILED:
 		title = _("VPN Connection Failed");
 		msg = make_vpn_failure_message (vpn, reason, applet);
-		applet_do_notify (applet, NOTIFY_URGENCY_LOW, title, msg,
-		                  "gnome-lockscreen", NULL, NULL, NULL, NULL);
+		applet_do_notify_with_pref (applet, title, msg, "gnome-lockscreen",
+		                            PREF_DISABLE_VPN_NOTIFICATIONS);
 		g_free (msg);
 		break;
 	case NM_VPN_CONNECTION_STATE_DISCONNECTED:
 		if (reason != NM_VPN_CONNECTION_STATE_REASON_USER_DISCONNECTED) {
 			title = _("VPN Connection Failed");
 			msg = make_vpn_disconnection_message (vpn, reason, applet);
-			applet_do_notify (applet, NOTIFY_URGENCY_LOW, title, msg,
-			                  "gnome-lockscreen", NULL, NULL, NULL, NULL);
+			applet_do_notify_with_pref (applet, title, msg, "gnome-lockscreen",
+			                            PREF_DISABLE_VPN_NOTIFICATIONS);
 			g_free (msg);
 		}
 		break;
@@ -956,8 +962,8 @@ activate_vpn_cb (gpointer user_data, const char *path, GError *error)
 			                       info->vpn_name, error->message);
 		}
 
-		applet_do_notify (info->applet, NOTIFY_URGENCY_LOW, title, msg,
-		                  "gnome-lockscreen", NULL, NULL, NULL, NULL);
+		applet_do_notify_with_pref (info->applet, title, msg, "gnome-lockscreen",
+		                            PREF_DISABLE_VPN_NOTIFICATIONS);
 		g_free (msg);
 
 		nm_warning ("VPN Connection activation failed: (%s) %s", name, error->message);
@@ -1591,6 +1597,10 @@ nma_set_notifications_enabled_cb (GtkWidget *widget, NMApplet *applet)
 	                       !state,
 	                       NULL);
 	gconf_client_set_bool (applet->gconf_client,
+	                       PREF_DISABLE_VPN_NOTIFICATIONS,
+	                       !state,
+	                       NULL);
+	gconf_client_set_bool (applet->gconf_client,
 	                       PREF_SUPPRESS_WIRELESS_NETWORKS_AVAILABLE,
 	                       !state,
 	                       NULL);
@@ -1768,6 +1778,7 @@ nma_context_menu_update (NMApplet *applet)
 	                        applet->notifications_enabled_toggled_id);
 	if (   gconf_client_get_bool (applet->gconf_client, PREF_DISABLE_CONNECTED_NOTIFICATIONS, NULL)
 	    && gconf_client_get_bool (applet->gconf_client, PREF_DISABLE_DISCONNECTED_NOTIFICATIONS, NULL)
+	    && gconf_client_get_bool (applet->gconf_client, PREF_DISABLE_VPN_NOTIFICATIONS, NULL)
 	    && gconf_client_get_bool (applet->gconf_client, PREF_SUPPRESS_WIRELESS_NETWORKS_AVAILABLE, NULL))
 		notifications_enabled = FALSE;
 	gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM (applet->notifications_enabled_item), notifications_enabled);
@@ -2775,32 +2786,46 @@ nma_icon_check_and_load (const char *name, GdkPixbuf **icon, NMApplet *applet)
 	return *icon;
 }
 
-#define FALLBACK_ICON_NAME "gtk-dialog-error"
+#include "fallback-icon.h"
 
 static gboolean
 nma_icons_reload (NMApplet *applet)
 {
 	GError *error = NULL;
+	GdkPixbufLoader *loader;
 
 	g_return_val_if_fail (applet->icon_size > 0, FALSE);
 
 	nma_icons_free (applet);
 
-	applet->fallback_icon = gtk_icon_theme_load_icon (applet->icon_theme,
-	                                                  FALLBACK_ICON_NAME,
-	                                                  applet->icon_size, 0,
-	                                                  &error);
-	if (!applet->fallback_icon) {
-		g_warning ("Fallback icon '%s' missing: (%d) %s",
-		           FALLBACK_ICON_NAME,
-		           error ? error->code : -1,
-			       (error && error->message) ? error->message : "(unknown)");
-		g_clear_error (&error);
-		/* Die if we can't get even a fallback icon */
-		g_assert (applet->fallback_icon);
-	}
+	loader = gdk_pixbuf_loader_new_with_type ("png", &error);
+	if (!loader)
+		goto error;
+
+	if (!gdk_pixbuf_loader_write (loader,
+	                              fallback_icon_data,
+	                              sizeof (fallback_icon_data),
+	                              &error))
+		goto error;
+
+	if (!gdk_pixbuf_loader_close (loader, &error))
+		goto error;
+
+	applet->fallback_icon = gdk_pixbuf_loader_get_pixbuf (loader);
+	g_object_ref (applet->fallback_icon);
+	g_assert (applet->fallback_icon);
+	g_object_unref (loader);
 
 	return TRUE;
+
+error:
+	g_warning ("Could not load fallback icon: (%d) %s",
+	           error ? error->code : -1,
+		       (error && error->message) ? error->message : "(unknown)");
+	g_clear_error (&error);
+	/* Die if we can't get a fallback icon */
+	g_assert (FALSE);
+	return FALSE;
 }
 
 static void nma_icon_theme_changed (GtkIconTheme *icon_theme, NMApplet *applet)
@@ -2934,7 +2959,11 @@ applet_pre_keyring_callback (gpointer user_data)
 	if (applet->menu)
 		window = gtk_widget_get_window (applet->menu);
 	if (window) {
+#if GTK_CHECK_VERSION(2,23,0)
+		screen = gdk_window_get_screen (window);
+#else
 		screen = gdk_drawable_get_screen (window);
+#endif
 		display = gdk_screen_get_display (screen);
 		g_object_ref (display);
 
@@ -2955,7 +2984,11 @@ applet_pre_keyring_callback (gpointer user_data)
 	if (applet->context_menu)
 		window = gtk_widget_get_window (applet->context_menu);
 	if (window) {
+#if GTK_CHECK_VERSION(2,23,0)
+		screen = gdk_window_get_screen (window);
+#else
 		screen = gdk_drawable_get_screen (window);
+#endif
 		display = gdk_screen_get_display (screen);
 		g_object_ref (display);
 
@@ -2995,23 +3028,29 @@ constructor (GType type,
 {
 	NMApplet *applet;
 	AppletDBusManager *dbus_mgr;
+	GError* error = NULL;
 
 	applet = NM_APPLET (G_OBJECT_CLASS (nma_parent_class)->constructor (type, n_props, construct_props));
 
 	g_set_application_name (_("NetworkManager Applet"));
 	gtk_window_set_default_icon_name (GTK_STOCK_NETWORK);
 
-	applet->glade_file = g_build_filename (GLADEDIR, "applet.glade", NULL);
-	if (!applet->glade_file || !g_file_test (applet->glade_file, G_FILE_TEST_IS_REGULAR)) {
+	applet->ui_file = g_build_filename (UIDIR, "/applet.ui", NULL);
+	if (!applet->ui_file || !g_file_test (applet->ui_file, G_FILE_TEST_IS_REGULAR)) {
 		GtkWidget *dialog;
-		dialog = applet_warning_dialog_show (_("The NetworkManager Applet could not find some required resources (the glade file was not found)."));
+		dialog = applet_warning_dialog_show (_("The NetworkManager Applet could not find some required resources (the .ui file was not found)."));
 		gtk_dialog_run (GTK_DIALOG (dialog));
 		goto error;
 	}
 
-	applet->info_dialog_xml = glade_xml_new (applet->glade_file, "info_dialog", NULL);
-	if (!applet->info_dialog_xml)
+	applet->info_dialog_ui = gtk_builder_new ();
+
+	if (!gtk_builder_add_from_file (applet->info_dialog_ui, applet->ui_file, &error))
+	{
+		g_warning ("Couldn't load builder file: %s", error->message);
+		g_error_free (error);
 		goto error;
+	}
 
 	applet->gconf_client = gconf_client_get_default ();
 	if (!applet->gconf_client)
@@ -3120,9 +3159,9 @@ static void finalize (GObject *object)
 		g_object_unref (applet->notification);
 	}
 
-	g_free (applet->glade_file);
-	if (applet->info_dialog_xml)
-		g_object_unref (applet->info_dialog_xml);
+	g_free (applet->ui_file);
+	if (applet->info_dialog_ui)
+		g_object_unref (applet->info_dialog_ui);
 
 	if (applet->gconf_client) {
 		gconf_client_remove_dir (applet->gconf_client,

@@ -172,6 +172,8 @@ INTLTOOL_PERL = @INTLTOOL_PERL@
 INTLTOOL_UPDATE = @INTLTOOL_UPDATE@
 LD = @LD@
 LDFLAGS = @LDFLAGS@
+LIBNOTIFY_07_CFLAGS = @LIBNOTIFY_07_CFLAGS@
+LIBNOTIFY_07_LIBS = @LIBNOTIFY_07_LIBS@
 LIBOBJS = @LIBOBJS@
 LIBS = @LIBS@
 LIBTOOL = @LIBTOOL@
@@ -269,7 +271,6 @@ target_alias = @target_alias@
 top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
-plugindir = $(libdir)/gnome-bluetooth/plugins
 INCLUDES = \
 	-DDATADIR=\"$(datadir)\" \
 	-DICONDIR=\"$(icondir)\" \
@@ -283,6 +284,7 @@ INCLUDES = \
 	$(WARN_CFLAGS)
 
 BT_WIDGET_SOURCES = bt-widget.c
+@HAVE_GBT_TRUE@plugindir = $(libdir)/gnome-bluetooth/plugins
 @HAVE_GBT_TRUE@plugin_LTLIBRARIES = libnma.la
 @HAVE_GBT_TRUE@libnma_la_SOURCES = $(BT_WIDGET_SOURCES)
 @HAVE_GBT_TRUE@libnma_la_LDFLAGS = -module -avoid-version

@@ -762,10 +762,10 @@ out:
 
 gboolean
 nm_gconf_get_ip6addr_array_helper (GConfClient *client,
-								   const char *path,
-								   const char *key,
-								   const char *setting,
-								   GPtrArray **value)
+                                   const char *path,
+                                   const char *key,
+                                   const char *setting,
+                                   GPtrArray **value)
 {
 	char *gc_key;
 	GConfValue *gc_value = NULL;
@@ -818,16 +818,17 @@ nm_gconf_get_ip6addr_array_helper (GConfClient *client,
 			g_free (addr);
 			continue;
 		}
-		g_free (addr);
 
 		memset (&rawgw, 0, sizeof (rawgw));
 		if (gw) {
 			if (inet_pton (AF_INET6, gw, &rawgw) <= 0) {
 				g_warning ("%s: %s contained bad gateway address: %s",
 						   __func__, gc_key, gw);
+				g_free (addr);
 				continue;
 			}
 		}
+		g_free (addr);
 
 		valarr = g_value_array_new (3);
 
@@ -1635,6 +1636,31 @@ out:
 	g_slist_free (list);
 	g_free (gc_key);
 	return success;
+}
+
+
+gboolean
+nm_gconf_key_is_set (GConfClient *client,
+                     const char *path,
+                     const char *key,
+                     const char *setting)
+{
+	char *gc_key;
+	GConfValue *gc_value;
+	gboolean exists = FALSE;
+
+	g_return_val_if_fail (path != NULL, FALSE);
+	g_return_val_if_fail (key != NULL, FALSE);
+	g_return_val_if_fail (setting != NULL, FALSE);
+
+	gc_key = g_strdup_printf ("%s/%s/%s", path, setting, key);
+	gc_value = gconf_client_get (client, gc_key, NULL);
+	if (gc_value) {
+		exists = TRUE;
+		gconf_value_free (gc_value);
+	}
+	g_free (gc_key);
+	return exists;
 }
 
 GSList *
