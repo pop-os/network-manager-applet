@@ -1,4 +1,4 @@
-network-manager-applet (0.8.3.998-1) UNRELEASED; urgency=low
+network-manager-applet (0.8.3.998-1) unstable; urgency=low
 
   * New upstream release (0.8.4 rc1).
     - Show IPv6 information in Connection Information dialog.
@@ -8,7 +8,7 @@ network-manager-applet (0.8.3.998-1) UNRELEASED; urgency=low
     - Bump Build-Depends on libnm-*-dev and network-manager-dev to
       (>= 0.8.3.995).
 
- -- Michael Biebl <biebl@debian.org>  Fri, 18 Mar 2011 20:57:59 +0100
+ -- Michael Biebl <biebl@debian.org>  Fri, 18 Mar 2011 21:37:12 +0100
 
 network-manager-applet (0.8.2-4) unstable; urgency=low
 
