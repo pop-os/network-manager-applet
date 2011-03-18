@@ -17,10 +17,9 @@
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  *
- * (C) Copyright 2007 - 2009 Red Hat, Inc.
+ * (C) Copyright 2007 - 2010 Red Hat, Inc.
  */
 
-#include <glade/glade.h>
 #include <ctype.h>
 #include <string.h>
 #include <nm-setting-8021x.h>
@@ -31,25 +30,25 @@
 #include "gconf-helpers.h"
 #include "helpers.h"
 
+struct _EAPMethodSimple {
+	EAPMethod parent;
+
+	EAPMethodSimpleType type;
+	gboolean is_editor;
+	gboolean phase2;
+};
+
 static void
 show_toggled_cb (GtkCheckButton *button, EAPMethod *method)
 {
 	GtkWidget *widget;
 	gboolean visible;
 
-	widget = glade_xml_get_widget (method->xml, "eap_simple_password_entry");
+	widget = GTK_WIDGET (gtk_builder_get_object (method->builder, "eap_simple_password_entry"));
 	g_assert (widget);
 
 	visible = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (button));
 	gtk_entry_set_visibility (GTK_ENTRY (widget), visible);
-}
-
-static void
-destroy (EAPMethod *parent)
-{
-	EAPMethodSimple *method = (EAPMethodSimple *) parent;
-
-	g_slice_free (EAPMethodSimple, method);
 }
 
 static gboolean
@@ -58,19 +57,19 @@ validate (EAPMethod *parent)
 	GtkWidget *widget;
 	const char *text;
 
-	widget = glade_xml_get_widget (parent->xml, "eap_simple_username_entry");
+	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_simple_username_entry"));
 	g_assert (widget);
 	text = gtk_entry_get_text (GTK_ENTRY (widget));
 	if (!text || !strlen (text))
 		return FALSE;
 
 	/* Check if the password should always be requested */
-	widget = glade_xml_get_widget (parent->xml, "eap_password_always_ask");
+	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_password_always_ask"));
 	g_assert (widget);
 	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget)))
 		return TRUE;
 
-	widget = glade_xml_get_widget (parent->xml, "eap_simple_password_entry");
+	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_simple_password_entry"));
 	g_assert (widget);
 	text = gtk_entry_get_text (GTK_ENTRY (widget));
 	if (!text || !strlen (text))
@@ -84,11 +83,11 @@ add_to_size_group (EAPMethod *parent, GtkSizeGroup *group)
 {
 	GtkWidget *widget;
 
-	widget = glade_xml_get_widget (parent->xml, "eap_simple_username_label");
+	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_simple_username_label"));
 	g_assert (widget);
 	gtk_size_group_add_widget (group, widget);
 
-	widget = glade_xml_get_widget (parent->xml, "eap_simple_password_label");
+	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_simple_password_label"));
 	g_assert (widget);
 	gtk_size_group_add_widget (group, widget);
 }
@@ -101,40 +100,52 @@ fill_connection (EAPMethod *parent, NMConnection *connection)
 	GtkWidget *widget;
 	NMSettingConnection *s_con;
 	gboolean always_ask;
+	const char *eap = NULL;
 
 	s_8021x = NM_SETTING_802_1X (nm_connection_get_setting (connection, NM_TYPE_SETTING_802_1X));
 	g_assert (s_8021x);
 
+	/* If this is the main EAP method, clear any existing methods because the
+	 * user-selected on will replace it.
+	 */
+	if (method->phase2 == FALSE)
+		nm_setting_802_1x_clear_eap_methods (s_8021x);
+
 	switch (method->type) {
 		case EAP_METHOD_SIMPLE_TYPE_PAP:
-			g_object_set (s_8021x, NM_SETTING_802_1X_PHASE2_AUTH, "pap", NULL);
+			eap = "pap";
 			break;
 		case EAP_METHOD_SIMPLE_TYPE_MSCHAP:
-			g_object_set (s_8021x, NM_SETTING_802_1X_PHASE2_AUTH, "mschap", NULL);
+			eap = "mschap";
 			break;
 		case EAP_METHOD_SIMPLE_TYPE_MSCHAP_V2:
-			g_object_set (s_8021x, NM_SETTING_802_1X_PHASE2_AUTH, "mschapv2", NULL);
+			eap = "mschapv2";
 			break;
 		case EAP_METHOD_SIMPLE_TYPE_MD5:
-			g_object_set (s_8021x, NM_SETTING_802_1X_PHASE2_AUTH, "md5", NULL);
+			eap = "md5";
 			break;
 		case EAP_METHOD_SIMPLE_TYPE_CHAP:
-			g_object_set (s_8021x, NM_SETTING_802_1X_PHASE2_AUTH, "chap", NULL);
+			eap = "chap";
 			break;
 		case EAP_METHOD_SIMPLE_TYPE_GTC:
-			g_object_set (s_8021x, NM_SETTING_802_1X_PHASE2_AUTH, "gtc", NULL);
+			eap = "gtc";
 			break;
 		default:
 			g_assert_not_reached ();
 			break;
 	}
 
-	widget = glade_xml_get_widget (parent->xml, "eap_simple_username_entry");
+	if (method->phase2)
+		g_object_set (s_8021x, NM_SETTING_802_1X_PHASE2_AUTH, eap, NULL);
+	else
+		nm_setting_802_1x_add_eap_method (s_8021x, eap);
+
+	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_simple_username_entry"));
 	g_assert (widget);
 	g_object_set (s_8021x, NM_SETTING_802_1X_IDENTITY, gtk_entry_get_text (GTK_ENTRY (widget)), NULL);
 
 	/* Save the password always ask setting */
-	widget = glade_xml_get_widget (parent->xml, "eap_password_always_ask");
+	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_password_always_ask"));
 	g_assert (widget);
 	always_ask = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget));
 
@@ -148,7 +159,7 @@ fill_connection (EAPMethod *parent, NMConnection *connection)
 	 * user checked "Always Ask".
 	 */
 	if (method->is_editor == FALSE || always_ask == FALSE) {
-		widget = glade_xml_get_widget (parent->xml, "eap_simple_password_entry");
+		widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_simple_password_entry"));
 		g_assert (widget);
 		g_object_set (s_8021x, NM_SETTING_802_1X_PASSWORD, gtk_entry_get_text (GTK_ENTRY (widget)), NULL);
 	}
@@ -158,7 +169,7 @@ static void
 update_secrets (EAPMethod *parent, NMConnection *connection)
 {
 	helper_fill_secret_entry (connection,
-	                          parent->xml,
+	                          parent->builder,
 	                          "eap_simple_password_entry",
 	                          NM_TYPE_SETTING_802_1X,
 	                          (HelperSecretFunc) nm_setting_802_1x_get_password);
@@ -174,10 +185,10 @@ password_always_ask_changed (GtkButton *button, EAPMethodSimple *method)
 
 	always_ask = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (button));
 
-	password_entry = glade_xml_get_widget (parent->xml, "eap_simple_password_entry");
+	password_entry = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_simple_password_entry"));
 	g_assert (password_entry);
 
-	show_checkbox = glade_xml_get_widget (parent->xml, "show_checkbutton");
+	show_checkbox = GTK_WIDGET (gtk_builder_get_object (parent->builder, "show_checkbutton_eapsimple"));
 	g_assert (show_checkbox);
 
 	if (always_ask) {
@@ -190,54 +201,39 @@ password_always_ask_changed (GtkButton *button, EAPMethodSimple *method)
 }
 
 EAPMethodSimple *
-eap_method_simple_new (const char *glade_file,
-                       WirelessSecurity *parent,
+eap_method_simple_new (WirelessSecurity *ws_parent,
                        NMConnection *connection,
                        EAPMethodSimpleType type,
+                       gboolean phase2,
                        gboolean is_editor)
 {
+	EAPMethod *parent;
 	EAPMethodSimple *method;
 	GtkWidget *widget;
-	GladeXML *xml;
 	gboolean always_ask = FALSE;
 
-	g_return_val_if_fail (glade_file != NULL, NULL);
-
-	xml = glade_xml_new (glade_file, "eap_simple_notebook", NULL);
-	if (xml == NULL) {
-		g_warning ("Couldn't get eap_simple_widget from glade xml");
+	parent = eap_method_init (sizeof (EAPMethodSimple),
+	                          validate,
+	                          add_to_size_group,
+	                          fill_connection,
+	                          update_secrets,
+	                          NULL,
+	                          UIDIR "/eap-method-simple.ui",
+	                          "eap_simple_notebook",
+	                          "eap_simple_username_entry");
+	if (!parent)
 		return NULL;
-	}
 
-	widget = glade_xml_get_widget (xml, "eap_simple_notebook");
-	g_assert (widget);
-	g_object_ref_sink (widget);
-
-	method = g_slice_new0 (EAPMethodSimple);
-	if (!method) {
-		g_object_unref (xml);
-		g_object_unref (widget);
-		return NULL;
-	}
-
-	eap_method_init (EAP_METHOD (method),
-	                 validate,
-	                 add_to_size_group,
-	                 fill_connection,
-	                 update_secrets,
-	                 destroy,
-	                 xml,
-	                 widget,
-	                 "eap_simple_username_entry");
-
+	method = (EAPMethodSimple *) parent;
 	method->type = type;
 	method->is_editor = is_editor;
+	method->phase2 = phase2;
 
-	widget = glade_xml_get_widget (xml, "eap_simple_username_entry");
+	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_simple_username_entry"));
 	g_assert (widget);
 	g_signal_connect (G_OBJECT (widget), "changed",
 	                  (GCallback) wireless_security_changed_cb,
-	                  parent);
+	                  ws_parent);
 	if (connection) {
 		NMSetting8021x *s_8021x;
 
@@ -246,17 +242,17 @@ eap_method_simple_new (const char *glade_file,
 			gtk_entry_set_text (GTK_ENTRY (widget), nm_setting_802_1x_get_identity (s_8021x));
 	}
 
-	widget = glade_xml_get_widget (xml, "eap_simple_password_entry");
+	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_simple_password_entry"));
 	g_assert (widget);
 	g_signal_connect (G_OBJECT (widget), "changed",
 	                  (GCallback) wireless_security_changed_cb,
-	                  parent);
+	                  ws_parent);
 
-	widget = glade_xml_get_widget (xml, "eap_password_always_ask");
+	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_password_always_ask"));
 	g_assert (widget);
 	g_signal_connect (G_OBJECT (widget), "toggled",
 	                  (GCallback) wireless_security_changed_cb,
-	                  parent);
+	                  ws_parent);
 	if (is_editor) {
 		/* We only desensitize the password entry from the editor, because
 		 * from nm-applet if the entry was desensitized, there'd be no way to
@@ -286,7 +282,7 @@ eap_method_simple_new (const char *glade_file,
 	if (connection && !always_ask)
 		update_secrets (EAP_METHOD (method), connection);
 
-	widget = glade_xml_get_widget (xml, "show_checkbutton");
+	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "show_checkbutton_eapsimple"));
 	g_assert (widget);
 	g_signal_connect (G_OBJECT (widget), "toggled",
 	                  (GCallback) show_toggled_cb,

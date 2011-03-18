@@ -32,7 +32,6 @@
 #include <gdk/gdkx.h>
 
 #include <gconf/gconf-client.h>
-#include <glade/glade.h>
 #include <dbus/dbus.h>
 #include <dbus/dbus-glib.h>
 #include <net/ethernet.h>
@@ -65,6 +64,7 @@ typedef struct
 #define APPLET_PREFS_PATH "/apps/nm-applet"
 #define PREF_DISABLE_CONNECTED_NOTIFICATIONS      APPLET_PREFS_PATH "/disable-connected-notifications"
 #define PREF_DISABLE_DISCONNECTED_NOTIFICATIONS   APPLET_PREFS_PATH "/disable-disconnected-notifications"
+#define PREF_DISABLE_VPN_NOTIFICATIONS            APPLET_PREFS_PATH "/disable-vpn-notifications"
 #define PREF_DISABLE_WIFI_CREATE                  APPLET_PREFS_PATH "/disable-wifi-create"
 #define PREF_SUPPRESS_WIRELESS_NETWORKS_AVAILABLE APPLET_PREFS_PATH "/suppress-wireless-networks-available"
 
@@ -89,7 +89,7 @@ typedef struct
 	NMAGConfSettings *gconf_settings;
 
 	GConfClient *	gconf_client;
-	char	*		glade_file;
+	char	*		ui_file;
 
 	guint update_timestamps_id;
 
@@ -164,7 +164,7 @@ typedef struct
 	GtkWidget *		info_menu_item;
 	GtkWidget *		connections_menu_item;
 
-	GladeXML *		info_dialog_xml;
+	GtkBuilder *	info_dialog_ui;
 	NotifyNotification*	notification;
 	gboolean        notify_actions;
 } NMApplet;

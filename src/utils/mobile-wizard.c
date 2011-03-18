@@ -17,7 +17,7 @@
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  *
- * (C) Copyright 2008 - 2009 Red Hat, Inc.
+ * (C) Copyright 2008 - 2011 Red Hat, Inc.
  */
 
 #include <stdlib.h>
@@ -25,7 +25,6 @@
 #include <glib.h>
 #include <glib/gi18n.h>
 
-#include <glade/glade.h>
 #include <gtk/gtk.h>
 
 #include <NetworkManager.h>
@@ -747,11 +746,23 @@ providers_setup (MobileWizard *self)
 	gtk_table_attach (GTK_TABLE (unlisted_table), alignment,
 	                  1, 2, 0, 1, GTK_EXPAND | GTK_FILL, 0, 6, 6);
 
+#if GTK_CHECK_VERSION(2,23,0)
+	self->provider_unlisted_type_combo = gtk_combo_box_text_new ();
+#else
 	self->provider_unlisted_type_combo = gtk_combo_box_new_text ();
+#endif
 	gtk_label_set_mnemonic_widget (GTK_LABEL (label), self->provider_unlisted_type_combo);
+#if GTK_CHECK_VERSION(2,23,0)
+	gtk_combo_box_text_append_text (GTK_COMBO_BOX_TEXT (self->provider_unlisted_type_combo),
+#else
 	gtk_combo_box_append_text (GTK_COMBO_BOX (self->provider_unlisted_type_combo),
+#endif
 	                           _("My provider uses GSM technology (GPRS, EDGE, UMTS, HSPA)"));
+#if GTK_CHECK_VERSION(2,23,0)
+	gtk_combo_box_text_append_text (GTK_COMBO_BOX_TEXT (self->provider_unlisted_type_combo),
+#else
 	gtk_combo_box_append_text (GTK_COMBO_BOX (self->provider_unlisted_type_combo),
+#endif
 	                           _("My provider uses CDMA technology (1xRTT, EVDO)"));
 	gtk_combo_box_set_active (GTK_COMBO_BOX (self->provider_unlisted_type_combo), 0);
 
@@ -1009,7 +1020,7 @@ country_setup (MobileWizard *self)
 
 	vbox = gtk_vbox_new (FALSE, 6);
 	gtk_container_set_border_width (GTK_CONTAINER (vbox), 12);
-	label = gtk_label_new (_("Country List:"));
+	label = gtk_label_new (_("Country or Region List:"));
 	gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
 	gtk_box_pack_start (GTK_BOX (vbox), label, FALSE, TRUE, 0);
 
@@ -1021,7 +1032,7 @@ country_setup (MobileWizard *self)
 	self->country_view = gtk_tree_view_new_with_model (GTK_TREE_MODEL (self->country_sort));
 
 	renderer = gtk_cell_renderer_text_new ();
-	column = gtk_tree_view_column_new_with_attributes (_("Country"), renderer, "text", 0, NULL);
+	column = gtk_tree_view_column_new_with_attributes (_("Country or region"), renderer, "text", 0, NULL);
 	gtk_tree_view_append_column (GTK_TREE_VIEW (self->country_view), column);
 	gtk_tree_view_column_set_clickable (column, TRUE);
 
@@ -1074,7 +1085,7 @@ country_setup (MobileWizard *self)
 	gtk_box_pack_start (GTK_BOX (vbox), alignment, TRUE, TRUE, 6);
 
 	self->country_idx = gtk_assistant_append_page (GTK_ASSISTANT (self->assistant), vbox);
-	gtk_assistant_set_page_title (GTK_ASSISTANT (self->assistant), vbox, _("Choose your Provider's Country"));
+	gtk_assistant_set_page_title (GTK_ASSISTANT (self->assistant), vbox, _("Choose your Provider's Country or Region"));
 	gtk_assistant_set_page_type (GTK_ASSISTANT (self->assistant), vbox, GTK_ASSISTANT_PAGE_CONTENT);
 	gtk_assistant_set_page_complete (GTK_ASSISTANT (self->assistant), vbox, TRUE);
 	gtk_widget_show_all (vbox);

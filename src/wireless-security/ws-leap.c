@@ -17,10 +17,9 @@
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  *
- * (C) Copyright 2007 - 2009 Red Hat, Inc.
+ * (C) Copyright 2007 - 2010 Red Hat, Inc.
  */
 
-#include <glade/glade.h>
 #include <string.h>
 #include <nm-setting-wireless.h>
 
@@ -29,6 +28,9 @@
 #include "gconf-helpers.h"
 #include "helpers.h"
 
+struct _WirelessSecurityLEAP {
+	WirelessSecurity parent;
+};
 
 static void
 show_toggled_cb (GtkCheckButton *button, WirelessSecurity *sec)
@@ -36,19 +38,11 @@ show_toggled_cb (GtkCheckButton *button, WirelessSecurity *sec)
 	GtkWidget *widget;
 	gboolean visible;
 
-	widget = glade_xml_get_widget (sec->xml, "leap_password_entry");
+	widget = GTK_WIDGET (gtk_builder_get_object (sec->builder, "leap_password_entry"));
 	g_assert (widget);
 
 	visible = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (button));
 	gtk_entry_set_visibility (GTK_ENTRY (widget), visible);
-}
-
-static void
-destroy (WirelessSecurity *parent)
-{
-	WirelessSecurityLEAP *sec = (WirelessSecurityLEAP *) parent;
-
-	g_slice_free (WirelessSecurityLEAP, sec);
 }
 
 static gboolean
@@ -57,13 +51,13 @@ validate (WirelessSecurity *parent, const GByteArray *ssid)
 	GtkWidget *entry;
 	const char *text;
 
-	entry = glade_xml_get_widget (parent->xml, "leap_username_entry");
+	entry = GTK_WIDGET (gtk_builder_get_object (parent->builder, "leap_username_entry"));
 	g_assert (entry);
 	text = gtk_entry_get_text (GTK_ENTRY (entry));
 	if (!text || !strlen (text))
 		return FALSE;
 
-	entry = glade_xml_get_widget (parent->xml, "leap_password_entry");
+	entry = GTK_WIDGET (gtk_builder_get_object (parent->builder, "leap_password_entry"));
 	g_assert (entry);
 	text = gtk_entry_get_text (GTK_ENTRY (entry));
 	if (!text || !strlen (text))
@@ -77,10 +71,10 @@ add_to_size_group (WirelessSecurity *parent, GtkSizeGroup *group)
 {
 	GtkWidget *widget;
 
-	widget = glade_xml_get_widget (parent->xml, "leap_username_label");
+	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "leap_username_label"));
 	gtk_size_group_add_widget (group, widget);
 
-	widget = glade_xml_get_widget (parent->xml, "leap_password_label");
+	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "leap_password_label"));
 	gtk_size_group_add_widget (group, widget);
 }
 
@@ -101,10 +95,10 @@ fill_connection (WirelessSecurity *parent, NMConnection *connection)
 	s_wireless_sec = (NMSettingWirelessSecurity *) nm_setting_wireless_security_new ();
 	nm_connection_add_setting (connection, (NMSetting *) s_wireless_sec);
 
-	widget = glade_xml_get_widget (parent->xml, "leap_username_entry");
+	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "leap_username_entry"));
 	leap_username = gtk_entry_get_text (GTK_ENTRY (widget));
 
-	widget = glade_xml_get_widget (parent->xml, "leap_password_entry");
+	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "leap_password_entry"));
 	leap_password = gtk_entry_get_text (GTK_ENTRY (widget));
 
 	g_object_set (s_wireless_sec,
@@ -119,48 +113,31 @@ static void
 update_secrets (WirelessSecurity *parent, NMConnection *connection)
 {
 	helper_fill_secret_entry (connection,
-	                          parent->xml,
+	                          parent->builder,
 	                          "leap_password_entry",
 	                          NM_TYPE_SETTING_WIRELESS_SECURITY,
 	                          (HelperSecretFunc) nm_setting_wireless_security_get_leap_password);
 }
 
 WirelessSecurityLEAP *
-ws_leap_new (const char *glade_file, NMConnection *connection)
+ws_leap_new (NMConnection *connection)
 {
+	WirelessSecurity *parent;
 	WirelessSecurityLEAP *sec;
 	GtkWidget *widget;
-	GladeXML *xml;
 	NMSettingWirelessSecurity *wsec = NULL;
 
-	g_return_val_if_fail (glade_file != NULL, NULL);
-
-	xml = glade_xml_new (glade_file, "leap_notebook", NULL);
-	if (xml == NULL) {
-		g_warning ("Couldn't get leap_widget from glade xml");
+	parent = wireless_security_init (sizeof (WirelessSecurityLEAP),
+	                                 validate,
+	                                 add_to_size_group,
+	                                 fill_connection,
+	                                 update_secrets,
+	                                 NULL,
+	                                 UIDIR "/ws-leap.ui",
+	                                 "leap_notebook",
+	                                 "leap_username_entry");
+	if (!parent)
 		return NULL;
-	}
-
-	widget = glade_xml_get_widget (xml, "leap_notebook");
-	g_assert (widget);
-	g_object_ref_sink (widget);
-
-	sec = g_slice_new0 (WirelessSecurityLEAP);
-	if (!sec) {
-		g_object_unref (xml);
-		g_object_unref (widget);
-		return NULL;
-	}
-
-	wireless_security_init (WIRELESS_SECURITY (sec),
-	                        validate,
-	                        add_to_size_group,
-	                        fill_connection,
-	                        update_secrets,
-	                        destroy,
-	                        xml,
-	                        widget,
-	                        "leap_username_entry");
 
 	if (connection) {
 		wsec = NM_SETTING_WIRELESS_SECURITY (nm_connection_get_setting (connection, NM_TYPE_SETTING_WIRELESS_SECURITY));
@@ -174,7 +151,9 @@ ws_leap_new (const char *glade_file, NMConnection *connection)
 		}
 	}
 
-	widget = glade_xml_get_widget (xml, "leap_password_entry");
+	sec = (WirelessSecurityLEAP *) parent;
+
+	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "leap_password_entry"));
 	g_assert (widget);
 	g_signal_connect (G_OBJECT (widget), "changed",
 	                  (GCallback) wireless_security_changed_cb,
@@ -182,7 +161,7 @@ ws_leap_new (const char *glade_file, NMConnection *connection)
 	if (wsec)
 		update_secrets (WIRELESS_SECURITY (sec), connection);
 
-	widget = glade_xml_get_widget (xml, "leap_username_entry");
+	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "leap_username_entry"));
 	g_assert (widget);
 	g_signal_connect (G_OBJECT (widget), "changed",
 	                  (GCallback) wireless_security_changed_cb,
@@ -190,7 +169,7 @@ ws_leap_new (const char *glade_file, NMConnection *connection)
 	if (wsec)
 		gtk_entry_set_text (GTK_ENTRY (widget), nm_setting_wireless_security_get_leap_username (wsec));
 
-	widget = glade_xml_get_widget (xml, "show_checkbutton");
+	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "show_checkbutton_leap"));
 	g_assert (widget);
 	g_signal_connect (G_OBJECT (widget), "toggled",
 	                  (GCallback) show_toggled_cb,

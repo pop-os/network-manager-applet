@@ -27,7 +27,6 @@
 #include <glib-object.h>
 
 #include <gtk/gtk.h>
-#include <glade/glade.h>
 
 #include <dbus/dbus-glib.h>
 #include <nm-connection.h>
@@ -55,15 +54,15 @@ typedef void (*PageNewConnectionFunc) (GtkWindow *parent,
 #define CE_IS_PAGE_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((obj), CE_TYPE_PAGE))
 #define CE_PAGE_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), CE_TYPE_PAGE, CEPageClass))
 
-#define CE_PAGE_CONNECTION "connection"
-#define CE_PAGE_INITIALIZED "initialized"
+#define CE_PAGE_CONNECTION    "connection"
+#define CE_PAGE_INITIALIZED   "initialized"
 #define CE_PAGE_PARENT_WINDOW "parent-window"
 
 typedef struct {
 	GObject parent;
 
 	gboolean initialized;
-	GladeXML *xml;
+	GtkBuilder *builder;
 	GtkWidget *page;
 	char *title;
 
@@ -84,7 +83,7 @@ typedef struct {
 
 	/* Signals */
 	void        (*changed)     (CEPage *self);
-	void        (*initialized) (CEPage *self, GHashTable *secrets, GError *error);
+	void        (*initialized) (CEPage *self, GError *error);
 } CEPageClass;
 
 
@@ -125,6 +124,13 @@ NMConnection *ce_page_new_connection (const char *format,
                                       gboolean autoconnect,
                                       PageGetConnectionsFunc get_connections_func,
                                       gpointer user_data);
+
+CEPage *ce_page_new (GType page_type,
+                     NMConnection *connection,
+                     GtkWindow *parent_window,
+                     const char *ui_file,
+                     const char *widget_name,
+                     const char *title);
 
 #endif  /* __CE_PAGE_H__ */
 

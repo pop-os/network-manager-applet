@@ -1,6 +1,6 @@
 AC_PREREQ([2.63])
 AC_INIT([nm-applet],
-        [0.8.2],
+        [0.8.3.998],
         [https://bugzilla.gnome.org/enter_bug.cgi?product=NetworkManager],
         [network-manager-applet])
 
@@ -69,12 +69,11 @@ PKG_CHECK_MODULES(GOBJECT, gobject-2.0)
 PKG_CHECK_MODULES(NMA,
 		[dbus-glib-1 >= 0.74
 		 glib-2.0 >= 2.16
-		 NetworkManager >= 0.8.2
-		 libnm-glib >= 0.8.2
-		 libnm-util >= 0.8.2
-		 libnm-glib-vpn >= 0.8.2
+		 NetworkManager >= 0.8.3.995
+		 libnm-glib >= 0.8.3.995
+		 libnm-util >= 0.8.3.995
+		 libnm-glib-vpn >= 0.8.3.995
 		 gtk+-2.0 >= 2.14
-		 libglade-2.0
 		 gmodule-export-2.0
 		 gconf-2.0
 		 gnome-keyring-1
@@ -109,13 +108,19 @@ case "${with_bluetooth}" in
 		PKG_CHECK_MODULES(GNOME_BLUETOOTH,
 				  gconf-2.0
 				  gnome-bluetooth-1.0 >= 2.27.6
-				  libnm-util >= 0.8.2
-				  libnm-glib >= 0.8.2,
+				  libnm-util >= 0.8.3.995
+				  libnm-glib >= 0.8.3.995,
 				  have_gbt=yes, have_gbt=no)
 		;;
 esac
 
 AM_CONDITIONAL(HAVE_GBT, test x"$have_gbt" = "xyes")
+
+# Check for libnotify >= 0.7
+PKG_CHECK_MODULES(LIBNOTIFY_07, [libnotify >= 0.7], [have_libnotify_07=yes],[have_libnotify_07=no])
+if test x"$have_libnotify_07" = "xyes"; then
+	AC_DEFINE(HAVE_LIBNOTIFY_07, 1, [Define if you have libnotify 0.7 or later])
+fi
 
 AC_PATH_PROG(GLIB_GENMARSHAL, glib-genmarshal)
 

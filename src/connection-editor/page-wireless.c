@@ -61,31 +61,31 @@ static void
 wireless_private_init (CEPageWireless *self)
 {
 	CEPageWirelessPrivate *priv = CE_PAGE_WIRELESS_GET_PRIVATE (self);
-	GladeXML *xml;
+	GtkBuilder *builder;
 	GtkWidget *widget;
 
-	xml = CE_PAGE (self)->xml;
+	builder = CE_PAGE (self)->builder;
 
 	priv->group = gtk_size_group_new (GTK_SIZE_GROUP_HORIZONTAL);
 
-	priv->ssid     = GTK_ENTRY (glade_xml_get_widget (xml, "wireless_ssid"));
-	priv->bssid    = GTK_ENTRY (glade_xml_get_widget (xml, "wireless_bssid"));
-	priv->device_mac = GTK_ENTRY (glade_xml_get_widget (xml, "wireless_device_mac"));
-	priv->cloned_mac = GTK_ENTRY (glade_xml_get_widget (xml, "wireless_cloned_mac"));
-	priv->mode     = GTK_COMBO_BOX (glade_xml_get_widget (xml, "wireless_mode"));
-	priv->band     = GTK_COMBO_BOX (glade_xml_get_widget (xml, "wireless_band"));
-	priv->channel  = GTK_SPIN_BUTTON (glade_xml_get_widget (xml, "wireless_channel"));
+	priv->ssid     = GTK_ENTRY (GTK_WIDGET (gtk_builder_get_object (builder, "wireless_ssid")));
+	priv->bssid    = GTK_ENTRY (GTK_WIDGET (gtk_builder_get_object (builder, "wireless_bssid")));
+	priv->device_mac = GTK_ENTRY (GTK_WIDGET (gtk_builder_get_object (builder, "wireless_device_mac")));
+	priv->cloned_mac = GTK_ENTRY (GTK_WIDGET (gtk_builder_get_object (builder, "wireless_cloned_mac")));
+	priv->mode     = GTK_COMBO_BOX (GTK_WIDGET (gtk_builder_get_object (builder, "wireless_mode")));
+	priv->band     = GTK_COMBO_BOX (GTK_WIDGET (gtk_builder_get_object (builder, "wireless_band")));
+	priv->channel  = GTK_SPIN_BUTTON (GTK_WIDGET (gtk_builder_get_object (builder, "wireless_channel")));
 
-	priv->rate     = GTK_SPIN_BUTTON (glade_xml_get_widget (xml, "wireless_rate"));
-	widget = glade_xml_get_widget (xml, "rate_units");
+	priv->rate     = GTK_SPIN_BUTTON (GTK_WIDGET (gtk_builder_get_object (builder, "wireless_rate")));
+	widget = GTK_WIDGET (gtk_builder_get_object (builder, "rate_units"));
 	gtk_size_group_add_widget (priv->group, widget);
 
-	priv->tx_power = GTK_SPIN_BUTTON (glade_xml_get_widget (xml, "wireless_tx_power"));
-	widget = glade_xml_get_widget (xml, "tx_power_units");
+	priv->tx_power = GTK_SPIN_BUTTON (GTK_WIDGET (gtk_builder_get_object (builder, "wireless_tx_power")));
+	widget = GTK_WIDGET (gtk_builder_get_object (builder, "tx_power_units"));
 	gtk_size_group_add_widget (priv->group, widget);
 
-	priv->mtu      = GTK_SPIN_BUTTON (glade_xml_get_widget (xml, "wireless_mtu"));
-	widget = glade_xml_get_widget (xml, "mtu_units");
+	priv->mtu      = GTK_SPIN_BUTTON (GTK_WIDGET (gtk_builder_get_object (builder, "wireless_mtu")));
+	widget = GTK_WIDGET (gtk_builder_get_object (builder, "mtu_units"));
 	gtk_size_group_add_widget (priv->group, widget);
 }
 
@@ -230,25 +230,25 @@ mode_combo_changed_cb (GtkComboBox *combo,
  	}
 
 	if (show) {
-		widget = glade_xml_get_widget (parent->xml, "wireless_band_label");
+		widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "wireless_band_label"));
 		gtk_widget_show (widget);
 		gtk_widget_show (GTK_WIDGET (priv->band));
-		widget = glade_xml_get_widget (parent->xml, "wireless_channel_label");
+		widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "wireless_channel_label"));
 		gtk_widget_show (widget);
 		gtk_widget_show (GTK_WIDGET (priv->channel));
 	} else {
-		widget = glade_xml_get_widget (parent->xml, "wireless_band_label");
+		widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "wireless_band_label"));
 		gtk_widget_hide (widget);
 		gtk_widget_hide (GTK_WIDGET (priv->band));
-		widget = glade_xml_get_widget (parent->xml, "wireless_channel_label");
+		widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "wireless_channel_label"));
 		gtk_widget_hide (widget);
 		gtk_widget_hide (GTK_WIDGET (priv->channel));
 	}
 
-	widget = glade_xml_get_widget (parent->xml, "wireless_band_label");
+	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "wireless_band_label"));
 	gtk_widget_set_sensitive (GTK_WIDGET (widget), show);
 	gtk_widget_set_sensitive (GTK_WIDGET (priv->band), show);
-	widget = glade_xml_get_widget (parent->xml, "wireless_channel_label");
+	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "wireless_channel_label"));
 	gtk_widget_set_sensitive (GTK_WIDGET (widget), show);
 	gtk_widget_set_sensitive (GTK_WIDGET (priv->channel), show);
 
@@ -365,14 +365,14 @@ finish_setup (CEPageWireless *self, gpointer unused, GError *error, gpointer use
 
 	populate_ui (self);
 
-	widget = glade_xml_get_widget (parent->xml, "wireless_tx_power_label");
+	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "wireless_tx_power_label"));
 	gtk_widget_hide (widget);
-	widget = glade_xml_get_widget (parent->xml, "wireless_tx_power_hbox");
+	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "wireless_tx_power_hbox"));
 	gtk_widget_hide (widget);
 
-	widget = glade_xml_get_widget (parent->xml, "wireless_rate_label");
+	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "wireless_rate_label"));
 	gtk_widget_hide (widget);
-	widget = glade_xml_get_widget (parent->xml, "wireless_rate_hbox");
+	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "wireless_rate_hbox"));
 	gtk_widget_hide (widget);
 }
 
@@ -384,32 +384,19 @@ ce_page_wireless_new (NMConnection *connection,
 {
 	CEPageWireless *self;
 	CEPageWirelessPrivate *priv;
-	CEPage *parent;
 
 	g_return_val_if_fail (NM_IS_CONNECTION (connection), NULL);
 
-	self = CE_PAGE_WIRELESS (g_object_new (CE_TYPE_PAGE_WIRELESS,
-	                                       CE_PAGE_CONNECTION, connection,
-	                                       CE_PAGE_PARENT_WINDOW, parent_window,
-	                                       NULL));
-	parent = CE_PAGE (self);
-
-	parent->xml = glade_xml_new (GLADEDIR "/ce-page-wireless.glade", "WirelessPage", NULL);
-	if (!parent->xml) {
-		g_set_error (error, 0, 0, "%s", _("Could not load WiFi user interface."));
-		g_object_unref (self);
+	self = CE_PAGE_WIRELESS (ce_page_new (CE_TYPE_PAGE_WIRELESS,
+	                                      connection,
+	                                      parent_window,
+	                                      UIDIR "/ce-page-wireless.ui",
+	                                      "WirelessPage",
+	                                      _("Wireless")));
+	if (!self) {
+		g_set_error_literal (error, 0, 0, _("Could not load WiFi user interface."));
 		return NULL;
 	}
-
-	parent->page = glade_xml_get_widget (parent->xml, "WirelessPage");
-	if (!parent->page) {
-		g_set_error (error, 0, 0, "%s", _("Could not load WiFi user interface."));
-		g_object_unref (self);
-		return NULL;
-	}
-	g_object_ref_sink (parent->page);
-
-	parent->title = g_strdup (_("Wireless"));
 
 	wireless_private_init (self);
 	priv = CE_PAGE_WIRELESS_GET_PRIVATE (self);

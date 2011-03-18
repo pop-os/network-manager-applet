@@ -50,7 +50,7 @@ mkinstalldirs = $(install_sh) -d
 CONFIG_HEADER = $(top_builddir)/config.h
 CONFIG_CLEAN_FILES =
 CONFIG_CLEAN_VPATH_FILES =
-am__installdirs = "$(DESTDIR)$(bindir)" "$(DESTDIR)$(gladedir)"
+am__installdirs = "$(DESTDIR)$(bindir)" "$(DESTDIR)$(uidir)"
 PROGRAMS = $(bin_PROGRAMS)
 am_nm_applet_OBJECTS = nm_applet-main.$(OBJEXT) \
 	nm_applet-applet.$(OBJEXT) \
@@ -133,7 +133,7 @@ am__nobase_list = $(am__nobase_strip_setup); \
 am__base_list = \
   sed '$$!N;$$!N;$$!N;$$!N;$$!N;$$!N;$$!N;s/\n/ /g' | \
   sed '$$!N;$$!N;$$!N;$$!N;s/\n/ /g'
-DATA = $(glade_DATA)
+DATA = $(ui_DATA)
 RECURSIVE_CLEAN_TARGETS = mostlyclean-recursive clean-recursive	\
   distclean-recursive maintainer-clean-recursive
 AM_RECURSIVE_TARGETS = $(RECURSIVE_TARGETS:-recursive=) \
@@ -224,6 +224,8 @@ INTLTOOL_PERL = @INTLTOOL_PERL@
 INTLTOOL_UPDATE = @INTLTOOL_UPDATE@
 LD = @LD@
 LDFLAGS = @LDFLAGS@
+LIBNOTIFY_07_CFLAGS = @LIBNOTIFY_07_CFLAGS@
+LIBNOTIFY_07_LIBS = @LIBNOTIFY_07_LIBS@
 LIBOBJS = @LIBOBJS@
 LIBS = @LIBS@
 LIBTOOL = @LIBTOOL@
@@ -326,7 +328,7 @@ nm_applet_CPPFLAGS = \
 	$(NMA_CFLAGS) \
 	$(NOTIFY_CFLAGS) \
 	-DICONDIR=\""$(datadir)/icons"\"						\
-	-DGLADEDIR=\""$(gladedir)"\"							\
+	-DUIDIR=\""$(uidir)"\"							\
 	-DBINDIR=\""$(bindir)"\"								\
 	-DSYSCONFDIR=\""$(sysconfdir)"\"						\
 	-DLIBEXECDIR=\""$(libexecdir)"\" \
@@ -369,7 +371,8 @@ nm_applet_SOURCES = \
 	mobile-helpers.c \
 	mobile-helpers.h \
 	applet-device-bt.h \
-	applet-device-bt.c
+	applet-device-bt.c \
+	fallback-icon.h
 
 nm_applet_LDADD = \
 	-lm \
@@ -380,11 +383,11 @@ nm_applet_LDADD = \
 	${top_builddir}/src/gconf-helpers/libgconf-helpers.la \
 	${top_builddir}/src/wireless-security/libwireless-security.la
 
-gladedir = $(datadir)/nm-applet
-glade_DATA = applet.glade keyring.png
-CLEANFILES = *.bak *.gladep
+uidir = $(datadir)/nm-applet
+ui_DATA = applet.ui keyring.png
+CLEANFILES = *.bak
 EXTRA_DIST = \
-	$(glade_DATA)
+	$(ui_DATA)
 
 all: all-recursive
 
@@ -761,26 +764,26 @@ mostlyclean-libtool:
 
 clean-libtool:
 	-rm -rf .libs _libs
-install-gladeDATA: $(glade_DATA)
+install-uiDATA: $(ui_DATA)
 	@$(NORMAL_INSTALL)
-	test -z "$(gladedir)" || $(MKDIR_P) "$(DESTDIR)$(gladedir)"
-	@list='$(glade_DATA)'; test -n "$(gladedir)" || list=; \
+	test -z "$(uidir)" || $(MKDIR_P) "$(DESTDIR)$(uidir)"
+	@list='$(ui_DATA)'; test -n "$(uidir)" || list=; \
 	for p in $$list; do \
 	  if test -f "$$p"; then d=; else d="$(srcdir)/"; fi; \
 	  echo "$$d$$p"; \
 	done | $(am__base_list) | \
 	while read files; do \
-	  echo " $(INSTALL_DATA) $$files '$(DESTDIR)$(gladedir)'"; \
-	  $(INSTALL_DATA) $$files "$(DESTDIR)$(gladedir)" || exit $$?; \
+	  echo " $(INSTALL_DATA) $$files '$(DESTDIR)$(uidir)'"; \
+	  $(INSTALL_DATA) $$files "$(DESTDIR)$(uidir)" || exit $$?; \
 	done
 
-uninstall-gladeDATA:
+uninstall-uiDATA:
 	@$(NORMAL_UNINSTALL)
-	@list='$(glade_DATA)'; test -n "$(gladedir)" || list=; \
+	@list='$(ui_DATA)'; test -n "$(uidir)" || list=; \
 	files=`for p in $$list; do echo $$p; done | sed -e 's|^.*/||'`; \
 	test -n "$$files" || exit 0; \
-	echo " ( cd '$(DESTDIR)$(gladedir)' && rm -f" $$files ")"; \
-	cd "$(DESTDIR)$(gladedir)" && rm -f $$files
+	echo " ( cd '$(DESTDIR)$(uidir)' && rm -f" $$files ")"; \
+	cd "$(DESTDIR)$(uidir)" && rm -f $$files
 
 # This directory's subdirectories are mostly independent; you can cd
 # into them and run `make' without going through this Makefile.
@@ -980,7 +983,7 @@ check: check-recursive
 all-am: Makefile $(PROGRAMS) $(DATA)
 installdirs: installdirs-recursive
 installdirs-am:
-	for dir in "$(DESTDIR)$(bindir)" "$(DESTDIR)$(gladedir)"; do \
+	for dir in "$(DESTDIR)$(bindir)" "$(DESTDIR)$(uidir)"; do \
 	  test -z "$$dir" || $(MKDIR_P) "$$dir"; \
 	done
 install: install-recursive
@@ -1031,7 +1034,7 @@ info: info-recursive
 
 info-am:
 
-install-data-am: install-gladeDATA
+install-data-am: install-uiDATA
 
 install-dvi: install-dvi-recursive
 
@@ -1077,7 +1080,7 @@ ps: ps-recursive
 
 ps-am:
 
-uninstall-am: uninstall-binPROGRAMS uninstall-gladeDATA
+uninstall-am: uninstall-binPROGRAMS uninstall-uiDATA
 
 .MAKE: $(RECURSIVE_CLEAN_TARGETS) $(RECURSIVE_TARGETS) ctags-recursive \
 	install-am install-strip tags-recursive
@@ -1089,14 +1092,14 @@ uninstall-am: uninstall-binPROGRAMS uninstall-gladeDATA
 	distclean-tags distdir dvi dvi-am html html-am info info-am \
 	install install-am install-binPROGRAMS install-data \
 	install-data-am install-dvi install-dvi-am install-exec \
-	install-exec-am install-gladeDATA install-html install-html-am \
-	install-info install-info-am install-man install-pdf \
-	install-pdf-am install-ps install-ps-am install-strip \
+	install-exec-am install-html install-html-am install-info \
+	install-info-am install-man install-pdf install-pdf-am \
+	install-ps install-ps-am install-strip install-uiDATA \
 	installcheck installcheck-am installdirs installdirs-am \
 	maintainer-clean maintainer-clean-generic mostlyclean \
 	mostlyclean-compile mostlyclean-generic mostlyclean-libtool \
 	pdf pdf-am ps ps-am tags tags-recursive uninstall uninstall-am \
-	uninstall-binPROGRAMS uninstall-gladeDATA
+	uninstall-binPROGRAMS uninstall-uiDATA
 
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.

@@ -157,29 +157,53 @@ wireless_menu_item_info_destroy (gpointer data)
 	g_slice_free (WirelessMenuItemInfo, data);
 }
 
-static const char * default_ssid_list[] = {
+/*
+ * NOTE: this list should *not* contain networks that you would like to
+ * automatically roam to like "Starbucks" or "AT&T" or "T-Mobile HotSpot".
+ */
+static const char *manf_default_ssids[] = {
 	"linksys",
 	"linksys-a",
 	"linksys-g",
 	"default",
 	"belkin54g",
 	"NETGEAR",
+	"o2DSL",
+	"WLAN",
+	"ALICE-WLAN",
 	NULL
 };
 
 static gboolean
-is_manufacturer_default_ssid (const GByteArray *ssid)
+is_ssid_in_list (const GByteArray *ssid, const char **list)
 {
-	const char **default_ssid = default_ssid_list;
-
-	while (*default_ssid) {
-		if (ssid->len == strlen (*default_ssid)) {
-			if (!memcmp (*default_ssid, ssid->data, ssid->len))
+	while (*list) {
+		if (ssid->len == strlen (*list)) {
+			if (!memcmp (*list, ssid->data, ssid->len))
 				return TRUE;
 		}
-		default_ssid++;
+		list++;
 	}
 	return FALSE;
+}
+
+static gboolean
+is_manufacturer_default_ssid (const GByteArray *ssid)
+{
+	return is_ssid_in_list (ssid, manf_default_ssids);
+}
+
+/* List known trojan networks that should never be shown to the user */
+static const char *blacklisted_ssids[] = {
+	/* http://www.npr.org/templates/story/story.php?storyId=130451369 */
+	"Free Public WiFi",
+	NULL
+};
+
+static gboolean
+is_blacklisted_ssid (const GByteArray *ssid)
+{
+	return is_ssid_in_list (ssid, blacklisted_ssids);
 }
 
 static void
@@ -324,31 +348,17 @@ none:
 }
 
 static void
-check_common_ssid (NMAccessPoint *ap, NMSettingWireless *s_wifi)
+clamp_ap_to_bssid (NMAccessPoint *ap, NMSettingWireless *s_wifi)
 {
 	const char *str_bssid;
 	struct ether_addr *eth_addr;
-	const GByteArray *ssid;
 	GByteArray *bssid;
-	const char *known[] = { "linksys", "o2DSL", "NETGEAR", "WLAN", "ALICE-WLAN" };
-	guint i;
 
 	/* For a certain list of known ESSIDs which are commonly preset by ISPs
 	 * and manufacturers and often unchanged by users, lock the connection
 	 * to the BSSID so that we don't try to auto-connect to your grandma's
 	 * neighbor's WiFi.
-	 *
-	 * NOTE: this list should *not* contain networks that you would like to
-	 * automatically roam to like "Starbucks" or "AT&T" or "T-Mobile HotSpot".
 	 */
-	ssid = nm_access_point_get_ssid (ap);
-	for (i = 0; i < G_N_ELEMENTS (known); i++) {
-		if (   ssid->len == strlen (known[i])
-		    && memcmp (ssid->data, known[i], ssid->len) == 0)
-			break;
-	}
-	if (i == G_N_ELEMENTS (known))
-		return;
 
 	str_bssid = nm_access_point_get_hw_address (ap);
 	if (str_bssid) {
@@ -400,7 +410,8 @@ wireless_new_auto_connection (NMDevice *device,
 	else if (mode == NM_802_11_MODE_INFRA) {
 		g_object_set (s_wireless, NM_SETTING_WIRELESS_MODE, "infrastructure", NULL);
 		/* Lock connection to this AP if it's a manufacturer-default SSID */
-		check_common_ssid (info->ap, s_wireless);
+		if (is_manufacturer_default_ssid (ap_ssid))
+			clamp_ap_to_bssid (info->ap, s_wireless);
 	} else
 		g_assert_not_reached ();
 
@@ -604,9 +615,11 @@ get_menu_item_for_ap (NMDeviceWifi *device,
 	const GByteArray *ssid;
 	struct dup_data dup_data = { NULL, NULL };
 
-	/* Don't add BSSs that hide their SSID */
+	/* Don't add BSSs that hide their SSID or are blacklisted */
 	ssid = nm_access_point_get_ssid (ap);
-	if (!ssid || nm_utils_is_empty_ssid (ssid->data, ssid->len))
+	if (   !ssid
+	    || nm_utils_is_empty_ssid (ssid->data, ssid->len)
+	    || is_blacklisted_ssid (ssid))
 		return NULL;
 
 	/* Find out if this AP is a member of a larger network that all uses the
@@ -730,6 +743,7 @@ wireless_add_menu_item (NMDevice *device,
 	NMAccessPoint *active_ap = NULL;
 	GSList *connections = NULL, *all, *iter;
 	gboolean wireless_enabled = TRUE;
+	gboolean wireless_hw_enabled = TRUE;
 	GSList *menu_items = NULL;  /* All menu items we'll be adding */
 	NMNetworkMenuItem *item, *active_item = NULL;
 	GtkWidget *widget;
@@ -780,7 +794,11 @@ wireless_add_menu_item (NMDevice *device,
 
 	/* Notify user of unmanaged or unavailable device */
 	wireless_enabled = nm_client_wireless_get_enabled (applet->nm_client);
-	widget = nma_menu_device_get_menu_item (device, applet, wireless_enabled ? NULL : _("wireless is disabled"));
+	wireless_hw_enabled = nm_client_wireless_hardware_get_enabled (applet->nm_client);
+	widget = nma_menu_device_get_menu_item (device, applet,
+	                                        wireless_hw_enabled ?
+	                                            (wireless_enabled ? NULL : _("wireless is disabled")) :
+	                                            _("wireless is disabled by hardware switch"));
 	if (widget) {
 		gtk_menu_shell_append (GTK_MENU_SHELL (menu), widget);
 		gtk_widget_show (widget);

@@ -17,7 +17,7 @@
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  *
- * (C) Copyright 2008 Red Hat, Inc.
+ * (C) Copyright 2008 - 2010 Red Hat, Inc.
  */
 
 #include <netinet/in.h>
@@ -36,10 +36,10 @@
 #include <nm-setting-wired.h>
 #include <nm-setting-8021x.h>
 #include <nm-setting-ip4-config.h>
+#include <nm-setting-ip6-config.h>
 #include <nm-utils.h>
 
 #include <gtk/gtk.h>
-#include <glade/glade.h>
 #include <glib/gi18n.h>
 
 #include "applet-dialogs.h"
@@ -69,6 +69,28 @@ ip4_address_as_string (guint32 ip)
 	if (!inet_ntop (AF_INET, &tmp_addr, ip_string, INET_ADDRSTRLEN))
 		strcpy (ip_string, "(none)");
 	return ip_string;
+}
+
+static gchar *
+ip6_address_as_string (const struct in6_addr *ip)
+{
+	char buf[INET6_ADDRSTRLEN];
+
+	memset (&buf, '\0', sizeof (buf));
+
+	if (inet_ntop (AF_INET6, ip, buf, INET6_ADDRSTRLEN)) {
+		return g_strdup (buf);
+	} else {
+		int j;
+		GString *ip6_str = g_string_new (NULL);
+		g_string_append_printf (ip6_str, "%02X", ip->s6_addr[0]);
+		for (j = 1; j < 16; j++)
+			g_string_append_printf (ip6_str, " %02X", ip->s6_addr[j]);
+		nm_warning ("%s: error converting IP6 address %s",
+		            __func__, ip6_str->str);
+		g_string_free (ip6_str, TRUE);
+		return NULL;
+	}
 }
 
 static char *
@@ -156,6 +178,20 @@ create_info_label (const char *text, gboolean selectable)
 	label = gtk_label_new (text ? text : "");
 	gtk_misc_set_alignment (GTK_MISC (label), 0.0, 0.0);
 	gtk_label_set_selectable (GTK_LABEL (label), selectable);
+	return label;
+}
+
+static GtkWidget *
+create_info_group_label (const char *text, gboolean selectable)
+{
+	GtkWidget *label;
+	char *markup;
+
+	label = create_info_label (NULL, selectable);
+	markup = g_markup_printf_escaped ("<span weight=\"bold\">%s</span>", text);
+	gtk_label_set_markup (GTK_LABEL (label), markup);
+	g_free (markup);
+
 	return label;
 }
 
@@ -285,19 +321,23 @@ bitrate_changed_cb (GObject *device, GParamSpec *pspec, gpointer user_data)
 
 static void
 info_dialog_add_page (GtkNotebook *notebook,
-					  NMConnection *connection,
-					  gboolean is_default,
-					  NMDevice *device)
+                      NMConnection *connection,
+                      gboolean is_default,
+                      NMDevice *device)
 {
 	GtkTable *table;
 	guint32 speed = 0;
 	char *str;
-	const char *iface;
+	const char *iface, *method;
 	NMIP4Config *ip4_config;
+	NMIP6Config *ip6_config;
 	const GArray *dns;
+	const GSList *dns6;
 	NMIP4Address *def_addr = NULL;
+	NMIP6Address *def6_addr = NULL;
+	NMSettingIP6Config *s_ip6;
 	guint32 hostmask, network, bcast, netmask;
-	int row = 0;
+	int i, row = 0;
 	SpeedInfo* info = NULL;
 	GtkWidget* speed_label;
 	const GSList *addresses;
@@ -320,12 +360,16 @@ info_dialog_add_page (GtkNotebook *notebook,
 	else
 		str = g_strdup (iface);
 
-	gtk_table_attach_defaults (table,
-							   create_info_label (_("Interface:"), FALSE),
-							   0, 1, row, row + 1);
-	gtk_table_attach_defaults (table,
-							   create_info_label (str, TRUE),
-							   1, 2, row, row + 1);
+
+	/*--- General ---*/
+	gtk_table_attach (table, create_info_group_label (_("General"), FALSE),
+	                  0, 1, row, row + 1, GTK_FILL, GTK_FILL, 0, 0);
+	row++;
+
+	gtk_table_attach (table, create_info_label (_("Interface:"), FALSE),
+	                  0, 1, row, row + 1, GTK_FILL, GTK_FILL, 0, 0);
+	gtk_table_attach (table, create_info_label (str, TRUE),
+	                  1, 2, row, row + 1, GTK_FILL, GTK_FILL, 0, 0);
 	g_free (str);
 	row++;
 
@@ -336,22 +380,18 @@ info_dialog_add_page (GtkNotebook *notebook,
 	else if (NM_IS_DEVICE_WIFI (device))
 		str = g_strdup (nm_device_wifi_get_hw_address (NM_DEVICE_WIFI (device)));
 
-	gtk_table_attach_defaults (table,
-							   create_info_label (_("Hardware Address:"), FALSE),
-							   0, 1, row, row + 1);
-	gtk_table_attach_defaults (table,
-							   create_info_label (str, TRUE),
-							   1, 2, row, row + 1);
+	gtk_table_attach (table, create_info_label (_("Hardware Address:"), FALSE),
+	                  0, 1, row, row + 1, GTK_FILL, GTK_FILL, 0, 0);
+	gtk_table_attach (table, create_info_label (str, TRUE),
+	                  1, 2, row, row + 1, GTK_FILL, GTK_FILL, 0, 0);
 	g_free (str);
 	row++;
 
 	/* Driver */
-	gtk_table_attach_defaults (table,
-							   create_info_label (_("Driver:"), FALSE),
-							   0, 1, row, row + 1);
-	gtk_table_attach_defaults (table,
-							   create_info_label (nm_device_get_driver (device), TRUE),
-							   1, 2, row, row + 1);
+	gtk_table_attach (table, create_info_label (_("Driver:"), FALSE),
+	                  0, 1, row, row + 1, GTK_FILL, GTK_FILL, 0, 0);
+	gtk_table_attach (table, create_info_label (nm_device_get_driver (device), TRUE),
+	                  1, 2, row, row + 1, GTK_FILL, GTK_FILL, 0, 0);
 	row++;
 
 	speed_label = create_info_label ("", TRUE);
@@ -384,30 +424,28 @@ info_dialog_add_page (GtkNotebook *notebook,
 	gtk_label_set_text (GTK_LABEL(speed_label), str ? str : C_("Speed", "Unknown"));
 	g_free (str);
 
-	gtk_table_attach_defaults (table,
-							   create_info_label (_("Speed:"), FALSE),
-							   0, 1, row, row + 1);
-	gtk_table_attach_defaults (table,
-							   speed_label,
-							   1, 2, row, row + 1);
+	gtk_table_attach (table, create_info_label (_("Speed:"), FALSE),
+	                  0, 1, row, row + 1, GTK_FILL, GTK_FILL, 0, 0);
+	gtk_table_attach (table, speed_label,
+	                  1, 2, row, row + 1, GTK_FILL, GTK_FILL, 0, 0);
 	row++;
 
 	/* Security */
-	gtk_table_attach_defaults (table,
-							   create_info_label (_("Security:"), FALSE),
-							   0, 1, row, row + 1);
-	gtk_table_attach_defaults (table,
-							   create_info_label_security (connection),
-							   1, 2, row, row + 1);
+	gtk_table_attach (table, create_info_label (_("Security:"), FALSE),
+	                  0, 1, row, row + 1, GTK_FILL, GTK_FILL, 0, 0);
+	gtk_table_attach (table, create_info_label_security (connection),
+	                  1, 2, row, row + 1, GTK_FILL, GTK_FILL, 0, 0);
 	row++;
 
 	/* Empty line */
-	gtk_table_attach_defaults (table,
-							   gtk_label_new (""),
-							   0, 2, row, row + 1);
+	gtk_table_attach (table, gtk_label_new (""), 0, 2, row, row + 1, GTK_FILL, GTK_FILL, 0, 0);
 	row++;
 
-	/* IP4 */
+	/*--- IPv4 ---*/
+	gtk_table_attach (table, create_info_group_label (_("IPv4"), FALSE),
+	                  0, 1, row, row + 1, GTK_FILL, GTK_FILL, 0, 0);
+
+	row++;
 
 	ip4_config = nm_device_get_ip4_config (device);
 	addresses = nm_ip4_config_get_addresses (ip4_config);
@@ -415,13 +453,11 @@ info_dialog_add_page (GtkNotebook *notebook,
 		def_addr = addresses->data;
 
 	/* Address */
-	gtk_table_attach_defaults (table,
-							   create_info_label (_("IP Address:"), FALSE),
-							   0, 1, row, row + 1);
+	gtk_table_attach (table, create_info_label (_("IP Address:"), FALSE),
+	                  0, 1, row, row + 1, GTK_FILL, GTK_FILL, 0, 0);
 	str = def_addr ? ip4_address_as_string (nm_ip4_address_get_address (def_addr)) : g_strdup (C_("Address", "Unknown"));
-	gtk_table_attach_defaults (table,
-							   create_info_label (str, TRUE),
-							   1, 2, row, row + 1);
+	gtk_table_attach (table, create_info_label (str, TRUE),
+	                  1, 2, row, row + 1, GTK_FILL, GTK_FILL, 0, 0);
 	g_free (str);
 	row++;
 
@@ -433,36 +469,30 @@ info_dialog_add_page (GtkNotebook *notebook,
 		bcast = htonl (network | hostmask);
 	}
 
-	gtk_table_attach_defaults (table,
-							   create_info_label (_("Broadcast Address:"), FALSE),
-							   0, 1, row, row + 1);
+	gtk_table_attach (table, create_info_label (_("Broadcast Address:"), FALSE),
+	                  0, 1, row, row + 1, GTK_FILL, GTK_FILL, 0, 0);
 	str = def_addr ? ip4_address_as_string (bcast) : g_strdup (C_("Address", "Unknown"));
-	gtk_table_attach_defaults (table,
-							   create_info_label (str, TRUE),
-							   1, 2, row, row + 1);
+	gtk_table_attach (table, create_info_label (str, TRUE),
+	                  1, 2, row, row + 1, GTK_FILL, GTK_FILL, 0, 0);
 	g_free (str);
 	row++;
 
 	/* Prefix */
-	gtk_table_attach_defaults (table,
-							   create_info_label (_("Subnet Mask:"), FALSE),
-							   0, 1, row, row + 1);
+	gtk_table_attach (table, create_info_label (_("Subnet Mask:"), FALSE),
+	                  0, 1, row, row + 1, GTK_FILL, GTK_FILL, 0, 0);
 	str = def_addr ? ip4_address_as_string (netmask) : g_strdup (C_("Subnet Mask", "Unknown"));
-	gtk_table_attach_defaults (table,
-							   create_info_label (str, TRUE),
-							   1, 2, row, row + 1);
+	gtk_table_attach (table, create_info_label (str, TRUE),
+	                  1, 2, row, row + 1, GTK_FILL, GTK_FILL, 0, 0);
 	g_free (str);
 	row++;
 
 	/* Gateway */
 	if (def_addr && nm_ip4_address_get_gateway (def_addr)) {
-		gtk_table_attach_defaults (table,
-								   create_info_label (_("Default Route:"), FALSE),
-								   0, 1, row, row + 1);
+		gtk_table_attach (table, create_info_label (_("Default Route:"), FALSE),
+		                  0, 1, row, row + 1, GTK_FILL, GTK_FILL, 0, 0);
 		str = ip4_address_as_string (nm_ip4_address_get_gateway (def_addr));
-		gtk_table_attach_defaults (table,
-								   create_info_label (str, TRUE),
-								   1, 2, row, row + 1);
+		gtk_table_attach (table, create_info_label (str, TRUE),
+		                  1, 2, row, row + 1, GTK_FILL, GTK_FILL, 0, 0);
 		g_free (str);
 		row++;
 	}
@@ -470,31 +500,107 @@ info_dialog_add_page (GtkNotebook *notebook,
 	/* DNS */
 	dns = def_addr ? nm_ip4_config_get_nameservers (ip4_config) : NULL;
 	if (dns && dns->len) {
-		gtk_table_attach_defaults (table,
-								   create_info_label (_("Primary DNS:"), FALSE),
-								   0, 1, row, row + 1);
+		gtk_table_attach (table, create_info_label (_("Primary DNS:"), FALSE),
+		                  0, 1, row, row + 1, GTK_FILL, GTK_FILL, 0, 0);
 		str = ip4_address_as_string (g_array_index (dns, guint32, 0));
-		gtk_table_attach_defaults (table,
-								   create_info_label (str, TRUE),
-								   1, 2, row, row + 1);
+		gtk_table_attach (table, create_info_label (str, TRUE),
+		                  1, 2, row, row + 1, GTK_FILL, GTK_FILL, 0, 0);
 		g_free (str);
 		row++;
 
 		if (dns->len > 1) {
-			gtk_table_attach_defaults (table,
-									   create_info_label (_("Secondary DNS:"), FALSE),
-									   0, 1, row, row + 1);
+			gtk_table_attach (table, create_info_label (_("Secondary DNS:"), FALSE),
+			                  0, 1, row, row + 1, GTK_FILL, GTK_FILL, 0, 0);
 			str = ip4_address_as_string (g_array_index (dns, guint32, 1));
-			gtk_table_attach_defaults (table,
-									   create_info_label (str, TRUE),
-									   1, 2, row, row + 1);
+			gtk_table_attach (table, create_info_label (str, TRUE),
+			                  1, 2, row, row + 1, GTK_FILL, GTK_FILL, 0, 0);
+			g_free (str);
+			row++;
+		}
+
+		if (dns->len > 2) {
+			gtk_table_attach (table, create_info_label (_("Ternary DNS:"), FALSE),
+			                  0, 1, row, row + 1, GTK_FILL, GTK_FILL, 0, 0);
+			str = ip4_address_as_string (g_array_index (dns, guint32, 2));
+			gtk_table_attach (table, create_info_label (str, TRUE),
+			                  1, 2, row, row + 1, GTK_FILL, GTK_FILL, 0, 0);
 			g_free (str);
 			row++;
 		}
 	}
 
+	/* Empty line */
+	gtk_table_attach (table, gtk_label_new (""), 0, 2, row, row + 1, GTK_FILL, GTK_FILL, 0, 0);
+	row++;
+
+	/*--- IPv6 ---*/
+	gtk_table_attach (table, create_info_group_label (_("IPv6"), FALSE),
+	                  0, 1, row, row + 1, GTK_FILL, GTK_FILL, 0, 0);
+	row++;
+
+	s_ip6 = (NMSettingIP6Config *) nm_connection_get_setting (connection, NM_TYPE_SETTING_IP6_CONFIG);
+	if (s_ip6)
+		 method = nm_setting_ip6_config_get_method (s_ip6);
+
+	if (!method || !strcmp (method, NM_SETTING_IP6_CONFIG_METHOD_IGNORE)) {
+		gtk_table_attach (table, create_info_label (_("Ignored"), FALSE),
+		                  0, 1, row, row + 1, GTK_FILL, GTK_FILL, 0, 0);
+		row++;
+	}
+
+	ip6_config = nm_device_get_ip6_config (device);
+	if (ip6_config) {
+		addresses = nm_ip6_config_get_addresses (ip6_config);
+		if (g_slist_length ((GSList *) addresses))
+			def6_addr = addresses->data;
+	}
+
+	/* Address */
+	if (def6_addr) {
+		char *tmp_addr;
+		guint32 prefix;
+
+		gtk_table_attach (table, create_info_label (_("IP Address:"), FALSE),
+		                  0, 1, row, row + 1, GTK_FILL, GTK_FILL, 0, 0);
+		tmp_addr = ip6_address_as_string (nm_ip6_address_get_address (def6_addr));
+		prefix = nm_ip6_address_get_prefix (def6_addr);
+		str = g_strdup_printf ("%s/%d", tmp_addr, prefix);
+		g_free (tmp_addr);
+
+		gtk_table_attach (table, create_info_label (str, TRUE),
+		                  1, 2, row, row + 1, GTK_FILL, GTK_FILL, 0, 0);
+		g_free (str);
+		row++;
+	}
+
+	/* Gateway */
+	if (def6_addr && nm_ip6_address_get_gateway (def6_addr)) {
+		gtk_table_attach (table, create_info_label (_("Default Route:"), FALSE),
+		                  0, 1, row, row + 1, GTK_FILL, GTK_FILL, 0, 0);
+		str = ip6_address_as_string (nm_ip6_address_get_gateway (def6_addr));
+		gtk_table_attach (table, create_info_label (str, TRUE),
+		                  1, 2, row, row + 1, GTK_FILL, GTK_FILL, 0, 0);
+		g_free (str);
+		row++;
+	}
+
+	/* DNS */
+	dns6 = def6_addr ? nm_ip6_config_get_nameservers (ip6_config) : NULL;
+
+	for (i = 0; dns6 && i < 3 ; dns6 = g_slist_next (dns6), i++) {
+		char *label[] = { "Primary DNS:", "Secondary DNS:", "Ternary DNS:" };
+
+		gtk_table_attach (table, create_info_label (_(label[i]), FALSE),
+		                  0, 1, row, row + 1, GTK_FILL, GTK_FILL, 0, 0);
+		str = ip6_address_as_string (dns6->data);
+		gtk_table_attach (table, create_info_label (str, TRUE),
+		                  1, 2, row, row + 1, GTK_FILL, GTK_FILL, 0, 0);
+		g_free (str);
+		row++;
+	}
+
 	gtk_notebook_append_page (notebook, GTK_WIDGET (table),
-							  create_info_notebook_label (connection, is_default));
+	                          create_info_notebook_label (connection, is_default));
 
 	gtk_widget_show_all (GTK_WIDGET (table));
 }
@@ -507,7 +613,7 @@ info_dialog_update (NMApplet *applet)
 	int i;
 	int pages = 0;
 
-	notebook = GTK_NOTEBOOK (glade_xml_get_widget (applet->info_dialog_xml, "info_notebook"));
+	notebook = GTK_NOTEBOOK (GTK_WIDGET (gtk_builder_get_object (applet->info_dialog_ui, "info_notebook")));
 
 	/* Remove old pages */
 	for (i = gtk_notebook_get_n_pages (notebook); i > 0; i--)
@@ -549,7 +655,7 @@ info_dialog_update (NMApplet *applet)
 		return NULL;
 	}
 
-	return glade_xml_get_widget (applet->info_dialog_xml, "info_dialog");
+	return GTK_WIDGET (gtk_builder_get_object (applet->info_dialog_ui, "info_dialog"));
 }
 
 void
@@ -568,122 +674,45 @@ applet_info_dialog_show (NMApplet *applet)
 		gdk_x11_get_server_time (gtk_widget_get_window (dialog)));
 }
 
+#if !GTK_CHECK_VERSION(2,23,0)
 static void 
 about_dialog_handle_url_cb (GtkAboutDialog *about, const gchar *url, gpointer data)
 {
-	GError *error = NULL;
 	gboolean ret;
 	char *cmdline;
-	GdkScreen *gscreen;
-	GtkWidget *error_dialog;
+	GdkScreen *screen;
 
-	gscreen = gtk_window_get_screen (GTK_WINDOW (about));
+	screen = gtk_window_get_screen (GTK_WINDOW (about));
 
 	cmdline = g_strconcat ("gnome-open ", url, NULL);
-	ret = gdk_spawn_command_line_on_screen (gscreen, cmdline, &error);
+	ret = gdk_spawn_command_line_on_screen (screen, cmdline, NULL);
 	g_free (cmdline);
 
-	if (ret == TRUE)
-		return;
-
-	g_error_free (error);
-	error = NULL;
-
-	cmdline = g_strconcat ("xdg-open ", url, NULL);
-	ret = gdk_spawn_command_line_on_screen (gscreen, cmdline, &error);
-	g_free (cmdline);
-	
 	if (ret == FALSE) {
-		error_dialog = gtk_message_dialog_new ( NULL, GTK_DIALOG_MODAL, GTK_MESSAGE_INFO, GTK_BUTTONS_OK, "Failed to show url %s", error->message); 
-		gtk_dialog_run (GTK_DIALOG (error_dialog));
-		g_error_free (error);
-	}
-
-}
-
-/* Make email in about dialog clickable */
-static void 
-about_dialog_handle_email_cb (GtkAboutDialog *about, const char *email_address, gpointer data)
-{
-	GError *error = NULL;
-	gboolean ret;
-	char *cmdline;
-	GdkScreen *gscreen;
-	GtkWidget *error_dialog;
-
-	gscreen = gtk_window_get_screen (GTK_WINDOW (about));
-
-	cmdline = g_strconcat ("gnome-open mailto:", email_address, NULL);
-	ret = gdk_spawn_command_line_on_screen (gscreen, cmdline, &error);
-	g_free (cmdline);
-
-	if (ret == TRUE)
-		return;
-
-	g_error_free (error);
-	error = NULL;
-
-	cmdline = g_strconcat ("xdg-open mailto:", email_address, NULL);
-	ret = gdk_spawn_command_line_on_screen (gscreen, cmdline, &error);
-	g_free (cmdline);
-	
-	if (ret == FALSE) {
-		error_dialog = gtk_message_dialog_new ( NULL, GTK_DIALOG_MODAL, GTK_MESSAGE_INFO, GTK_BUTTONS_OK, "Failed to show url %s", error->message); 
-		gtk_dialog_run (GTK_DIALOG (error_dialog));
-		g_error_free (error);
+		cmdline = g_strconcat ("xdg-open ", url, NULL);
+		ret = gdk_spawn_command_line_on_screen (screen, cmdline, NULL);
+		g_free (cmdline);
 	}
 }
+#endif
 
 void
 applet_about_dialog_show (NMApplet *applet)
 {
-	static const gchar *authors[] = {
-		"The Red Hat Desktop Team, including:\n",
-		"Christopher Aillon <caillon@redhat.com>",
-		"Jonathan Blandford <jrb@redhat.com>",
-		"John Palmieri <johnp@redhat.com>",
-		"Ray Strode <rstrode@redhat.com>",
-		"Colin Walters <walters@redhat.com>",
-		"Dan Williams <dcbw@redhat.com>",
-		"David Zeuthen <davidz@redhat.com>",
-		"\nAnd others, including:\n",
-		"Bill Moss <bmoss@clemson.edu>",
-		"Tom Parker",
-		"j@bootlab.org",
-		"Peter Jones <pjones@redhat.com>",
-		"Robert Love <rml@novell.com>",
-		"Tim Niemueller (http://www.niemueller.de)",
-		NULL
-	};
-
-	static const gchar *artists[] = {
-		"Diana Fong <dfong@redhat.com>",
-		NULL
-	};
-
-
-	/* FIXME: unnecessary with libgnomeui >= 2.16.0 */
-	static gboolean been_here = FALSE;
-	if (!been_here) {
-		been_here = TRUE;
-		gtk_about_dialog_set_url_hook (about_dialog_handle_url_cb, NULL, NULL);
-		gtk_about_dialog_set_email_hook (about_dialog_handle_email_cb, NULL, NULL);
-	}
-
+#if !GTK_CHECK_VERSION(2,23,0)
+	gtk_about_dialog_set_url_hook (about_dialog_handle_url_cb, NULL, NULL);
+#endif
 	gtk_show_about_dialog (NULL,
 	                       "version", VERSION,
-	                       "copyright", _("Copyright \xc2\xa9 2004-2008 Red Hat, Inc.\n"
-					                  "Copyright \xc2\xa9 2005-2008 Novell, Inc."),
+	                       "copyright", _("Copyright \xc2\xa9 2004-2011 Red Hat, Inc.\n"
+	                                      "Copyright \xc2\xa9 2005-2008 Novell, Inc.\n"
+	                                      "and many other community contributors and translators"),
 	                       "comments", _("Notification area applet for managing your network devices and connections."),
 	                       "website", "http://www.gnome.org/projects/NetworkManager/",
 	                       "website-label", _("NetworkManager Website"),
-	                       "authors", authors,
-	                       "artists", artists,
-	                       "translator-credits", _("translator-credits"),
 	                       "logo-icon-name", GTK_STOCK_NETWORK,
 	                       NULL);
 }
-
 
 GtkWidget *
 applet_warning_dialog_show (const char *message)
@@ -769,16 +798,16 @@ static void
 mpd_entry_changed (GtkWidget *widget, gpointer user_data)
 {
 	GtkWidget *dialog = GTK_WIDGET (user_data);
-	GladeXML *xml = g_object_get_data (G_OBJECT (dialog), "xml");
+	GtkBuilder *builder = g_object_get_data (G_OBJECT (dialog), "builder");
 	GtkWidget *entry;
 	guint32 minlen;
 	gboolean valid = FALSE;
 	const char *text, *text2 = NULL, *text3 = NULL;
 	gboolean match23;
 
-	g_return_if_fail (xml != NULL);
+	g_return_if_fail (builder != NULL);
 
-	entry = glade_xml_get_widget (xml, "code1_entry");
+	entry = GTK_WIDGET (gtk_builder_get_object (builder, "code1_entry"));
 	if (g_object_get_data (G_OBJECT (entry), "active")) {
 		minlen = GPOINTER_TO_UINT (g_object_get_data (G_OBJECT (entry), "minlen"));
 		text = gtk_entry_get_text (GTK_ENTRY (entry));
@@ -786,7 +815,7 @@ mpd_entry_changed (GtkWidget *widget, gpointer user_data)
 			goto done;
 	}
 
-	entry = glade_xml_get_widget (xml, "code2_entry");
+	entry = GTK_WIDGET (gtk_builder_get_object (builder, "code2_entry"));
 	if (g_object_get_data (G_OBJECT (entry), "active")) {
 		minlen = GPOINTER_TO_UINT (g_object_get_data (G_OBJECT (entry), "minlen"));
 		text2 = gtk_entry_get_text (GTK_ENTRY (entry));
@@ -794,7 +823,7 @@ mpd_entry_changed (GtkWidget *widget, gpointer user_data)
 			goto done;
 	}
 
-	entry = glade_xml_get_widget (xml, "code3_entry");
+	entry = GTK_WIDGET (gtk_builder_get_object (builder, "code3_entry"));
 	if (g_object_get_data (G_OBJECT (entry), "active")) {
 		minlen = GPOINTER_TO_UINT (g_object_get_data (G_OBJECT (entry), "minlen"));
 		text3 = gtk_entry_get_text (GTK_ENTRY (entry));
@@ -813,10 +842,10 @@ mpd_entry_changed (GtkWidget *widget, gpointer user_data)
 
 done:
 	/* Clear any error text in the progress label now that the user has changed something */
-	widget = glade_xml_get_widget (xml, "progress_label");
+	widget = GTK_WIDGET (gtk_builder_get_object (builder, "progress_label"));
 	gtk_label_set_text (GTK_LABEL (widget), "");
 
-	widget = glade_xml_get_widget (xml, "unlock_button");
+	widget = GTK_WIDGET (gtk_builder_get_object (builder, "unlock_button"));
 	g_warn_if_fail (widget != NULL);
 	gtk_widget_set_sensitive (widget, valid);
 	if (valid)
@@ -842,18 +871,18 @@ show_toggled_cb (GtkWidget *button, gpointer user_data)
 	GtkWidget *dialog = GTK_WIDGET (user_data);
 	gboolean show;
 	GtkWidget *widget;
-	GladeXML *xml;
+	GtkBuilder *builder;
 
-	xml = g_object_get_data (G_OBJECT (dialog), "xml");
-	g_return_if_fail (xml != NULL);
+	builder = g_object_get_data (G_OBJECT (dialog), "builder");
+	g_return_if_fail (builder != NULL);
 
 	show = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (button));
 
-	widget = glade_xml_get_widget (xml, "code1_entry");
+	widget = GTK_WIDGET (gtk_builder_get_object (builder, "code1_entry"));
 	gtk_entry_set_visibility (GTK_ENTRY (widget), show);
-	widget = glade_xml_get_widget (xml, "code2_entry");
+	widget = GTK_WIDGET (gtk_builder_get_object (builder, "code2_entry"));
 	gtk_entry_set_visibility (GTK_ENTRY (widget), show);
-	widget = glade_xml_get_widget (xml, "code3_entry");
+	widget = GTK_WIDGET (gtk_builder_get_object (builder, "code3_entry"));
 	gtk_entry_set_visibility (GTK_ENTRY (widget), show);
 }
 
@@ -863,42 +892,46 @@ applet_mobile_pin_dialog_new (const char *title,
                               const char *desc,
                               const char *show_password_label)
 {
-	char *glade_file, *str;
-	GladeXML *xml;
+	char *str;
 	GtkWidget *dialog;
 	GtkWidget *widget;
+	GError *error = NULL;
+	GtkBuilder *builder;
 
 	g_return_val_if_fail (title != NULL, NULL);
 	g_return_val_if_fail (header != NULL, NULL);
 	g_return_val_if_fail (desc != NULL, NULL);
 	g_return_val_if_fail (show_password_label != NULL, NULL);
 
-	glade_file = g_build_filename (GLADEDIR, "applet.glade", NULL);
-	g_return_val_if_fail (glade_file != NULL, NULL);
-	xml = glade_xml_new (glade_file, "unlock_dialog", NULL);
-	g_free (glade_file);
-	g_return_val_if_fail (xml != NULL, NULL);
+	builder = gtk_builder_new ();
 
-	dialog = glade_xml_get_widget (xml, "unlock_dialog");
+	if (!gtk_builder_add_from_file (builder, UIDIR "/applet.ui", &error)) {
+		g_warning ("Couldn't load builder file: %s", error->message);
+		g_error_free (error);
+		g_object_unref (builder);
+		return NULL;
+	}
+
+	dialog = GTK_WIDGET (gtk_builder_get_object (builder, "unlock_dialog"));
 	if (!dialog) {
-		g_object_unref (xml);
+		g_object_unref (builder);
 		g_return_val_if_fail (dialog != NULL, NULL);
 	}
 
-	g_object_set_data_full (G_OBJECT (dialog), "xml", xml, (GDestroyNotify) g_object_unref);
+	g_object_set_data_full (G_OBJECT (dialog), "builder", builder, (GDestroyNotify) g_object_unref);
 
 	gtk_window_set_title (GTK_WINDOW (dialog), title);
 
-	widget = glade_xml_get_widget (xml, "header_label");
+	widget = GTK_WIDGET (gtk_builder_get_object (builder, "header_label"));
 	str = g_strdup_printf ("<span size=\"larger\" weight=\"bold\">%s</span>", header);
 	gtk_label_set_use_markup (GTK_LABEL (widget), TRUE);
 	gtk_label_set_markup (GTK_LABEL (widget), str);
 	g_free (str);
 
-	widget = glade_xml_get_widget (xml, "desc_label");
+	widget = GTK_WIDGET (gtk_builder_get_object (builder, "desc_label"));
 	gtk_label_set_text (GTK_LABEL (widget), desc);
 
-	widget = glade_xml_get_widget (xml, "show_password_checkbutton");
+	widget = GTK_WIDGET (gtk_builder_get_object (builder, "show_password_checkbutton"));
 	gtk_button_set_label (GTK_BUTTON (widget), show_password_label);
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (widget), FALSE);
 	g_signal_connect (widget, "toggled", G_CALLBACK (show_toggled_cb), dialog);
@@ -914,31 +947,31 @@ applet_mobile_pin_dialog_new (const char *title,
 void
 applet_mobile_pin_dialog_present (GtkWidget *dialog, gboolean now)
 {
-	GladeXML *xml;
+	GtkBuilder *builder;
 	GtkWidget *widget;
 
 	g_return_if_fail (dialog != NULL);
-	xml = g_object_get_data (G_OBJECT (dialog), "xml");
-	g_return_if_fail (xml != NULL);
+	builder = g_object_get_data (G_OBJECT (dialog), "builder");
+	g_return_if_fail (builder != NULL);
 
 	gtk_widget_show_all (dialog);
 
-	widget = glade_xml_get_widget (xml, "progress_hbox");
+	widget = GTK_WIDGET (gtk_builder_get_object (builder, "progress_hbox"));
 	gtk_widget_hide (widget);
 
 	/* Hide inactive entries */
 
-	widget = glade_xml_get_widget (xml, "code2_entry");
+	widget = GTK_WIDGET (gtk_builder_get_object (builder, "code2_entry"));
 	if (!g_object_get_data (G_OBJECT (widget), "active")) {
 		gtk_widget_hide (widget);
-		widget = glade_xml_get_widget (xml, "code2_label");
+		widget = GTK_WIDGET (gtk_builder_get_object (builder, "code2_label"));
 		gtk_widget_hide (widget);
 	}
 
-	widget = glade_xml_get_widget (xml, "code3_entry");
+	widget = GTK_WIDGET (gtk_builder_get_object (builder, "code3_entry"));
 	if (!g_object_get_data (G_OBJECT (widget), "active")) {
 		gtk_widget_hide (widget);
-		widget = glade_xml_get_widget (xml, "code3_label");
+		widget = GTK_WIDGET (gtk_builder_get_object (builder, "code3_label"));
 		gtk_widget_hide (widget);
 	}
 
@@ -992,19 +1025,19 @@ mpd_set_entry (GtkWidget *dialog,
                guint32 minlen,
                guint32 maxlen)
 {
-	GladeXML *xml;
+	GtkBuilder *builder;
 	GtkWidget *widget;
 	gboolean entry2_active = FALSE;
 	gboolean entry3_active = FALSE;
 
 	g_return_if_fail (dialog != NULL);
-	xml = g_object_get_data (G_OBJECT (dialog), "xml");
-	g_return_if_fail (xml != NULL);
+	builder = g_object_get_data (G_OBJECT (dialog), "builder");
+	g_return_if_fail (builder != NULL);
 
-	widget = glade_xml_get_widget (xml, label_name);
+	widget = GTK_WIDGET (gtk_builder_get_object (builder, label_name));
 	gtk_label_set_text (GTK_LABEL (widget), label);
 
-	widget = glade_xml_get_widget (xml, entry_name);
+	widget = GTK_WIDGET (gtk_builder_get_object (builder, entry_name));
 	g_signal_connect (widget, "changed", G_CALLBACK (mpd_entry_changed), dialog);
 	g_signal_connect (widget, "insert-text", G_CALLBACK (mpd_entry_filter), NULL);
 
@@ -1016,12 +1049,12 @@ mpd_set_entry (GtkWidget *dialog,
 	g_object_set_data (G_OBJECT (widget), "active", GUINT_TO_POINTER (1));
 
 	/* Make a single-entry dialog look better */
-	widget = glade_xml_get_widget (xml, "code2_entry");
+	widget = GTK_WIDGET (gtk_builder_get_object (builder, "code2_entry"));
 	entry2_active = GPOINTER_TO_UINT (g_object_get_data (G_OBJECT (widget), "active"));
-	widget = glade_xml_get_widget (xml, "code3_entry");
+	widget = GTK_WIDGET (gtk_builder_get_object (builder, "code3_entry"));
 	entry3_active = GPOINTER_TO_UINT (g_object_get_data (G_OBJECT (widget), "active"));
 
-	widget = glade_xml_get_widget (xml, "table14");
+	widget = GTK_WIDGET (gtk_builder_get_object (builder, "table14"));
 	if (entry2_active || entry3_active)
 		gtk_table_set_row_spacings (GTK_TABLE (widget), 6);
 	else
@@ -1067,14 +1100,14 @@ void applet_mobile_pin_dialog_match_23 (GtkWidget *dialog, gboolean match)
 static const char *
 mpd_get_entry (GtkWidget *dialog, const char *entry_name)
 {
-	GladeXML *xml;
+	GtkBuilder *builder;
 	GtkWidget *widget;
 
 	g_return_val_if_fail (dialog != NULL, NULL);
-	xml = g_object_get_data (G_OBJECT (dialog), "xml");
-	g_return_val_if_fail (xml != NULL, NULL);
+	builder = g_object_get_data (G_OBJECT (dialog), "builder");
+	g_return_val_if_fail (builder != NULL, NULL);
 
-	widget = glade_xml_get_widget (xml, entry_name);
+	widget = GTK_WIDGET (gtk_builder_get_object (builder, entry_name));
 	return gtk_entry_get_text (GTK_ENTRY (widget));
 }
 
@@ -1099,56 +1132,56 @@ applet_mobile_pin_dialog_get_entry3 (GtkWidget *dialog)
 void
 applet_mobile_pin_dialog_start_spinner (GtkWidget *dialog, const char *text)
 {
-	GladeXML *xml;
+	GtkBuilder *builder;
 	GtkWidget *spinner, *widget, *hbox, *align;
 
 	g_return_if_fail (dialog != NULL);
 	g_return_if_fail (text != NULL);
 
-	xml = g_object_get_data (G_OBJECT (dialog), "xml");
-	g_return_if_fail (xml != NULL);
+	builder = g_object_get_data (G_OBJECT (dialog), "builder");
+	g_return_if_fail (builder != NULL);
 
 	spinner = nma_bling_spinner_new ();
 	g_return_if_fail (spinner != NULL);
 	g_object_set_data (G_OBJECT (dialog), "spinner", spinner);
 
-	align = glade_xml_get_widget (xml, "spinner_alignment");
+	align = GTK_WIDGET (gtk_builder_get_object (builder, "spinner_alignment"));
 	gtk_container_add (GTK_CONTAINER (align), spinner);
 	nma_bling_spinner_start (NMA_BLING_SPINNER (spinner));
 
-	widget = glade_xml_get_widget (xml, "progress_label");
+	widget = GTK_WIDGET (gtk_builder_get_object (builder, "progress_label"));
 	gtk_label_set_text (GTK_LABEL (widget), text);
 	gtk_widget_show (widget);
 
-	hbox = glade_xml_get_widget (xml, "progress_hbox");
+	hbox = GTK_WIDGET (gtk_builder_get_object (builder, "progress_hbox"));
 	gtk_widget_show_all (hbox);
 
 	/* Desensitize everything while spinning */
-	widget = glade_xml_get_widget (xml, "code1_entry");
+	widget = GTK_WIDGET (gtk_builder_get_object (builder, "code1_entry"));
 	gtk_widget_set_sensitive (widget, FALSE);
-	widget = glade_xml_get_widget (xml, "code2_entry");
+	widget = GTK_WIDGET (gtk_builder_get_object (builder, "code2_entry"));
 	gtk_widget_set_sensitive (widget, FALSE);
-	widget = glade_xml_get_widget (xml, "code3_entry");
+	widget = GTK_WIDGET (gtk_builder_get_object (builder, "code3_entry"));
 	gtk_widget_set_sensitive (widget, FALSE);
-	widget = glade_xml_get_widget (xml, "unlock_button");
+	widget = GTK_WIDGET (gtk_builder_get_object (builder, "unlock_button"));
 	gtk_widget_set_sensitive (widget, FALSE);
-	widget = glade_xml_get_widget (xml, "unlock_cancel_button");
+	widget = GTK_WIDGET (gtk_builder_get_object (builder, "unlock_cancel_button"));
 	gtk_widget_set_sensitive (widget, FALSE);
 
-	widget = glade_xml_get_widget (xml, "show_password_checkbutton");
+	widget = GTK_WIDGET (gtk_builder_get_object (builder, "show_password_checkbutton"));
 	gtk_widget_set_sensitive (widget, FALSE);
 }
 
 void
 applet_mobile_pin_dialog_stop_spinner (GtkWidget *dialog, const char *text)
 {
-	GladeXML *xml;
+	GtkBuilder *builder;
 	GtkWidget *spinner, *widget, *align;
 
 	g_return_if_fail (dialog != NULL);
 
-	xml = g_object_get_data (G_OBJECT (dialog), "xml");
-	g_return_if_fail (xml != NULL);
+	builder = g_object_get_data (G_OBJECT (dialog), "builder");
+	g_return_if_fail (builder != NULL);
 
 	spinner = g_object_get_data (G_OBJECT (dialog), "spinner");
 	g_return_if_fail (spinner != NULL);
@@ -1156,10 +1189,10 @@ applet_mobile_pin_dialog_stop_spinner (GtkWidget *dialog, const char *text)
 	g_object_set_data (G_OBJECT (dialog), "spinner", NULL);
 
 	/* Remove it from the alignment */
-	align = glade_xml_get_widget (xml, "spinner_alignment");
+	align = GTK_WIDGET (gtk_builder_get_object (builder, "spinner_alignment"));
 	gtk_container_remove (GTK_CONTAINER (align), spinner);
 
-	widget = glade_xml_get_widget (xml, "progress_label");
+	widget = GTK_WIDGET (gtk_builder_get_object (builder, "progress_label"));
 	if (text) {
 		gtk_label_set_text (GTK_LABEL (widget), text);
 		gtk_widget_show (widget);
@@ -1167,18 +1200,18 @@ applet_mobile_pin_dialog_stop_spinner (GtkWidget *dialog, const char *text)
 		gtk_widget_hide (widget);
 
 	/* Resensitize stuff */
-	widget = glade_xml_get_widget (xml, "code1_entry");
+	widget = GTK_WIDGET (gtk_builder_get_object (builder, "code1_entry"));
 	gtk_widget_set_sensitive (widget, TRUE);
-	widget = glade_xml_get_widget (xml, "code2_entry");
+	widget = GTK_WIDGET (gtk_builder_get_object (builder, "code2_entry"));
 	gtk_widget_set_sensitive (widget, TRUE);
-	widget = glade_xml_get_widget (xml, "code3_entry");
+	widget = GTK_WIDGET (gtk_builder_get_object (builder, "code3_entry"));
 	gtk_widget_set_sensitive (widget, TRUE);
-	widget = glade_xml_get_widget (xml, "unlock_button");
+	widget = GTK_WIDGET (gtk_builder_get_object (builder, "unlock_button"));
 	gtk_widget_set_sensitive (widget, TRUE);
-	widget = glade_xml_get_widget (xml, "unlock_cancel_button");
+	widget = GTK_WIDGET (gtk_builder_get_object (builder, "unlock_cancel_button"));
 	gtk_widget_set_sensitive (widget, TRUE);
 
-	widget = glade_xml_get_widget (xml, "show_password_checkbutton");
+	widget = GTK_WIDGET (gtk_builder_get_object (builder, "show_password_checkbutton"));
 	gtk_widget_set_sensitive (widget, TRUE);
 }
 
