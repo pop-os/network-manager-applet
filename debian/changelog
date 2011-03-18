@@ -1,6 +1,8 @@
 network-manager-applet (0.8.3.998-1) UNRELEASED; urgency=low
 
   * New upstream release (0.8.4 rc1).
+    - Show IPv6 information in Connection Information dialog.
+      (Closes: #606929)
   * debian/control
     - Drop Build-Depends on libglade2-dev, converted to GtkBuilder.
     - Bump Build-Depends on libnm-*-dev and network-manager-dev to
