@@ -1,9 +1,9 @@
-network-manager-applet (0.8.3.999-1) UNRELEASED; urgency=low
+network-manager-applet (0.8.3.999-1) unstable; urgency=low
 
   * New upstream release (0.8.4 rc2).
   * Update debian/watch, switch to bzip2.
 
- -- Michael Biebl <biebl@debian.org>  Mon, 04 Apr 2011 23:33:29 +0200
+ -- Michael Biebl <biebl@debian.org>  Mon, 04 Apr 2011 23:38:51 +0200
 
 network-manager-applet (0.8.3.998-1) unstable; urgency=low
 
