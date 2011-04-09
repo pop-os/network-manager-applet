@@ -55,7 +55,7 @@ Description: network management framework (GNOME frontend)
  This package contains a systray applet for GNOME's notification area but it
  also works for other desktop environments which provide a systray like KDE
  or Xfce.
- It displays the available networks and allows to easily switch between them.
- For encrypted networks it will prompt the user for the key/passphrase and it
- can optionally store them in the gnome-keyring.
+ It displays the available networks and allows users to easily switch between
+ them. For encrypted networks it will prompt the user for the key/passphrase
+ and it can optionally store them in the gnome-keyring.
 
