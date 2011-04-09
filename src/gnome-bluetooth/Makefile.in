@@ -72,7 +72,8 @@ am__base_list = \
 am__installdirs = "$(DESTDIR)$(plugindir)"
 LTLIBRARIES = $(plugin_LTLIBRARIES)
 am__DEPENDENCIES_1 =
-@HAVE_GBT_TRUE@libnma_la_DEPENDENCIES = $(top_builddir)/src/gconf-helpers/libgconf-helpers.la \
+@HAVE_GBT_TRUE@libnma_la_DEPENDENCIES = $(top_builddir)/src/marshallers/libmarshallers.la \
+@HAVE_GBT_TRUE@	$(top_builddir)/src/utils/libutils.la \
 @HAVE_GBT_TRUE@	$(am__DEPENDENCIES_1)
 am__libnma_la_SOURCES_DIST = bt-widget.c
 am__objects_1 = bt-widget.lo
@@ -139,6 +140,8 @@ DBUS_126_LIBS = @DBUS_126_LIBS@
 DBUS_SYS_DIR = @DBUS_SYS_DIR@
 DEFS = @DEFS@
 DEPDIR = @DEPDIR@
+DISABLE_DEPRECATED = @DISABLE_DEPRECATED@
+DLLTOOL = @DLLTOOL@
 DSYMUTIL = @DSYMUTIL@
 DUMPBIN = @DUMPBIN@
 ECHO_C = @ECHO_C@
@@ -148,6 +151,8 @@ EGREP = @EGREP@
 EXEEXT = @EXEEXT@
 FGREP = @FGREP@
 GCONFTOOL = @GCONFTOOL@
+GCONF_CFLAGS = @GCONF_CFLAGS@
+GCONF_LIBS = @GCONF_LIBS@
 GCONF_SCHEMA_CONFIG_SOURCE = @GCONF_SCHEMA_CONFIG_SOURCE@
 GCONF_SCHEMA_FILE_DIR = @GCONF_SCHEMA_FILE_DIR@
 GETTEXT_PACKAGE = @GETTEXT_PACKAGE@
@@ -156,9 +161,13 @@ GMOFILES = @GMOFILES@
 GMSGFMT = @GMSGFMT@
 GNOME_BLUETOOTH_CFLAGS = @GNOME_BLUETOOTH_CFLAGS@
 GNOME_BLUETOOTH_LIBS = @GNOME_BLUETOOTH_LIBS@
+GNOME_KEYRING_CFLAGS = @GNOME_KEYRING_CFLAGS@
+GNOME_KEYRING_LIBS = @GNOME_KEYRING_LIBS@
 GOBJECT_CFLAGS = @GOBJECT_CFLAGS@
 GOBJECT_LIBS = @GOBJECT_LIBS@
 GREP = @GREP@
+GTK_CFLAGS = @GTK_CFLAGS@
+GTK_LIBS = @GTK_LIBS@
 INSTALL = @INSTALL@
 INSTALL_DATA = @INSTALL_DATA@
 INSTALL_PROGRAM = @INSTALL_PROGRAM@
@@ -182,6 +191,7 @@ LN_S = @LN_S@
 LTLIBOBJS = @LTLIBOBJS@
 MAINT = @MAINT@
 MAKEINFO = @MAKEINFO@
+MANIFEST_TOOL = @MANIFEST_TOOL@
 MKDIR_P = @MKDIR_P@
 MKINSTALLDIRS = @MKINSTALLDIRS@
 MSGFMT = @MSGFMT@
@@ -191,6 +201,8 @@ NM = @NM@
 NMA_CFLAGS = @NMA_CFLAGS@
 NMA_LIBS = @NMA_LIBS@
 NMEDIT = @NMEDIT@
+NOTIFY_CFLAGS = @NOTIFY_CFLAGS@
+NOTIFY_LIBS = @NOTIFY_LIBS@
 OBJDUMP = @OBJDUMP@
 OBJEXT = @OBJEXT@
 OTOOL = @OTOOL@
@@ -224,6 +236,7 @@ abs_builddir = @abs_builddir@
 abs_srcdir = @abs_srcdir@
 abs_top_builddir = @abs_top_builddir@
 abs_top_srcdir = @abs_top_srcdir@
+ac_ct_AR = @ac_ct_AR@
 ac_ct_CC = @ac_ct_CC@
 ac_ct_DUMPBIN = @ac_ct_DUMPBIN@
 am__include = @am__include@
@@ -275,7 +288,6 @@ INCLUDES = \
 	-DDATADIR=\"$(datadir)\" \
 	-DICONDIR=\"$(icondir)\" \
 	-DLOCALEDIR="\"$(datadir)/locale\""	\
-	-I$(top_srcdir)/src/gconf-helpers/ \
 	-I$(top_builddir) \
 	-I${top_builddir}/src/marshallers \
 	-I${top_srcdir}/src/utils \
@@ -289,7 +301,8 @@ BT_WIDGET_SOURCES = bt-widget.c
 @HAVE_GBT_TRUE@libnma_la_SOURCES = $(BT_WIDGET_SOURCES)
 @HAVE_GBT_TRUE@libnma_la_LDFLAGS = -module -avoid-version
 @HAVE_GBT_TRUE@libnma_la_LIBADD = \
-@HAVE_GBT_TRUE@	$(top_builddir)/src/gconf-helpers/libgconf-helpers.la \
+@HAVE_GBT_TRUE@	$(top_builddir)/src/marshallers/libmarshallers.la \
+@HAVE_GBT_TRUE@	$(top_builddir)/src/utils/libutils.la \
 @HAVE_GBT_TRUE@	$(GNOME_BLUETOOTH_LIBS)
 
 EXTRA_DIST = $(BT_WIDGET_SOURCES)

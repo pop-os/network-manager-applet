@@ -1,6 +1,6 @@
 AC_PREREQ([2.63])
 AC_INIT([nm-applet],
-        [0.8.3.999],
+        [0.8.998],
         [https://bugzilla.gnome.org/enter_bug.cgi?product=NetworkManager],
         [network-manager-applet])
 
@@ -8,7 +8,6 @@ AC_CONFIG_HEADERS([config.h])
 AC_CONFIG_MACRO_DIR([m4])
 
 AM_INIT_AUTOMAKE([1.10 subdir-objects no-dist-gzip dist-bzip2])
-m4_ifdef([AM_SILENT_RULES], [AM_SILENT_RULES([no])])
 AM_MAINTAINER_MODE([enable])
 
 # Support silent build rules, requires at least automake-1.11. Disable
@@ -69,15 +68,41 @@ PKG_CHECK_MODULES(GOBJECT, gobject-2.0)
 PKG_CHECK_MODULES(NMA,
 		[dbus-glib-1 >= 0.74
 		 glib-2.0 >= 2.16
-		 NetworkManager >= 0.8.3.995
-		 libnm-glib >= 0.8.3.995
-		 libnm-util >= 0.8.3.995
-		 libnm-glib-vpn >= 0.8.3.995
-		 gtk+-2.0 >= 2.14
-		 gmodule-export-2.0
-		 gconf-2.0
-		 gnome-keyring-1
-		 libnotify >= 0.4.3])
+		 NetworkManager >= 0.8.998
+		 libnm-glib >= 0.8.998
+		 libnm-util >= 0.8.998
+		 libnm-glib-vpn >= 0.8.998
+		 gmodule-export-2.0])
+
+PKG_CHECK_MODULES(GCONF, [gconf-2.0])
+AC_SUBST(GCONF_CFLAGS)
+AC_SUBST(GCONF_LIBS)
+
+PKG_CHECK_MODULES(GNOME_KEYRING, [gnome-keyring-1])
+AC_SUBST(GNOME_KEYRING_CFLAGS)
+AC_SUBST(GNOME_KEYRING_LIBS)
+
+# Check for libnotify >= 0.7
+PKG_CHECK_MODULES(LIBNOTIFY_07, [libnotify >= 0.7], [have_libnotify_07=yes],[have_libnotify_07=no])
+if test x"$have_libnotify_07" = "xyes"; then
+	AC_DEFINE(HAVE_LIBNOTIFY_07, 1, [Define if you have libnotify 0.7 or later])
+fi
+PKG_CHECK_MODULES(NOTIFY, [libnotify >= 0.4.3])
+AC_SUBST(NOTIFY_CFLAGS)
+AC_SUBST(NOTIFY_LIBS)
+
+AC_ARG_WITH([gtkver], AS_HELP_STRING([--with-gtkver], [The major version of GTK+ to build with]),
+            with_gtkver="$withval",with_gtkver=3)
+case "${with_gtkver}" in
+       2) PKG_CHECK_MODULES(GTK, gtk+-2.0 >= 2.20)
+          gtkver=2
+          ;;
+       *) PKG_CHECK_MODULES(GTK, gtk+-3.0 >= 2.91.4)
+          gtkver=3
+          ;;
+esac
+AC_SUBST(GTK_CFLAGS)
+AC_SUBST(GTK_LIBS)
 
 # Check for dbus-1.2.6 or later for deny-by-default rules
 PKG_CHECK_MODULES(DBUS_126, [dbus-1 >= 1.2.6], [have_dbus_126=yes],[have_dbus_126=no])
@@ -106,21 +131,14 @@ case "${with_bluetooth}" in
 	*)
 		AC_MSG_CHECKING(for gnome-bluetooth)
 		PKG_CHECK_MODULES(GNOME_BLUETOOTH,
-				  gconf-2.0
 				  gnome-bluetooth-1.0 >= 2.27.6
-				  libnm-util >= 0.8.3.995
-				  libnm-glib >= 0.8.3.995,
+				  libnm-util >= 0.8.998
+				  libnm-glib >= 0.8.998,
 				  have_gbt=yes, have_gbt=no)
 		;;
 esac
 
 AM_CONDITIONAL(HAVE_GBT, test x"$have_gbt" = "xyes")
-
-# Check for libnotify >= 0.7
-PKG_CHECK_MODULES(LIBNOTIFY_07, [libnotify >= 0.7], [have_libnotify_07=yes],[have_libnotify_07=no])
-if test x"$have_libnotify_07" = "xyes"; then
-	AC_DEFINE(HAVE_LIBNOTIFY_07, 1, [Define if you have libnotify 0.7 or later])
-fi
 
 AC_PATH_PROG(GLIB_GENMARSHAL, glib-genmarshal)
 
@@ -143,6 +161,7 @@ src/marshallers/Makefile
 src/utils/Makefile
 src/utils/tests/Makefile
 src/gconf-helpers/Makefile
+src/gconf-helpers/tests/Makefile
 src/wireless-security/Makefile
 src/connection-editor/Makefile
 src/gnome-bluetooth/Makefile
@@ -155,3 +174,6 @@ icons/scalable/Makefile
 po/Makefile.in
 ])
 AC_OUTPUT
+
+echo Building for GTK+ version: ${gtkver}
+

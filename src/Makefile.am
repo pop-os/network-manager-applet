@@ -3,7 +3,10 @@ SUBDIRS = marshallers utils gconf-helpers wireless-security connection-editor gn
 bin_PROGRAMS = nm-applet
 
 nm_applet_CPPFLAGS = \
+	$(GTK_CFLAGS) \
 	$(NMA_CFLAGS) \
+	$(GCONF_CFLAGS) \
+	$(GNOME_KEYRING_CFLAGS) \
 	$(NOTIFY_CFLAGS) \
 	-DICONDIR=\""$(datadir)/icons"\"						\
 	-DUIDIR=\""$(uidir)"\"							\
@@ -20,14 +23,19 @@ nm_applet_CPPFLAGS = \
 	-I${top_srcdir}/src/gconf-helpers  \
 	-I${top_srcdir}/src/wireless-security
 
-nm_applet_SOURCES =			\
-	main.c				\
-	applet.c				\
-	applet.h				\
-	applet-dbus-manager.c	\
-	applet-dbus-manager.h	\
-	vpn-password-dialog.c	\
-	vpn-password-dialog.h	\
+BUILT_SOURCES = applet-dbus-bindings.h
+
+applet-dbus-bindings.h: nm-applet-introspection.xml
+	$(AM_V_GEN) dbus-binding-tool --mode=glib-server --prefix=nma --output=$@ $<
+
+nm_applet_SOURCES = \
+	main.c \
+	applet.c \
+	applet.h \
+	applet-agent.c \
+	applet-agent.h \
+	applet-vpn-request.c \
+	applet-vpn-request.h \
 	wired-dialog.h \
 	wired-dialog.c \
 	wireless-dialog.h \
@@ -50,11 +58,16 @@ nm_applet_SOURCES =			\
 	mobile-helpers.h \
 	applet-device-bt.h \
 	applet-device-bt.c \
+	applet-device-wimax.h \
+	applet-device-wimax.c \
 	fallback-icon.h
 
 nm_applet_LDADD = \
 	-lm \
+	$(GTK_LIBS) \
 	$(NMA_LIBS) \
+	$(GCONF_LIBS) \
+	$(GNOME_KEYRING_LIBS) \
 	$(NOTIFY_LIBS) \
 	${top_builddir}/src/marshallers/libmarshallers.la \
 	${top_builddir}/src/utils/libutils.la \
@@ -64,8 +77,9 @@ nm_applet_LDADD = \
 uidir = $(datadir)/nm-applet
 ui_DATA = gsm-unlock.ui info.ui wired-8021x.ui wifi.ui keyring.png
 
-CLEANFILES = *.bak
+CLEANFILES = *.bak $(BUILT_SOURCES)
 
-EXTRA_DIST = 				\
-	$(ui_DATA)
+EXTRA_DIST = \
+	$(ui_DATA) \
+	nm-applet-introspection.xml
 

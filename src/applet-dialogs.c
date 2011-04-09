@@ -20,6 +20,8 @@
  * (C) Copyright 2008 - 2010 Red Hat, Inc.
  */
 
+#include "config.h"
+
 #include <netinet/in.h>
 #include <sys/socket.h>
 #include <arpa/inet.h>
@@ -27,8 +29,8 @@
 
 #include <nm-device-ethernet.h>
 #include <nm-device-wifi.h>
-#include <nm-gsm-device.h>
-#include <nm-cdma-device.h>
+#include <nm-device-modem.h>
+#include <nm-device-wimax.h>
 
 #include <nm-setting-connection.h>
 #include <nm-setting-wireless.h>
@@ -43,8 +45,6 @@
 #include <glib/gi18n.h>
 
 #include "applet-dialogs.h"
-#include "utils.h"
-#include "nma-bling-spinner.h"
 
 
 static void
@@ -86,8 +86,7 @@ ip6_address_as_string (const struct in6_addr *ip)
 		g_string_append_printf (ip6_str, "%02X", ip->s6_addr[0]);
 		for (j = 1; j < 16; j++)
 			g_string_append_printf (ip6_str, " %02X", ip->s6_addr[j]);
-		nm_warning ("%s: error converting IP6 address %s",
-		            __func__, ip6_str->str);
+		g_warning ("%s: error converting IP6 address %s", __func__, ip6_str->str);
 		g_string_free (ip6_str, TRUE);
 		return NULL;
 	}
@@ -145,11 +144,7 @@ get_connection_for_active (NMApplet *applet, NMActiveConnection *active)
 {
 	GSList *list, *iter;
 	NMConnection *connection = NULL;
-	NMConnectionScope scope;
 	const char *path;
-
-	scope = nm_active_connection_get_scope (active);
-	g_return_val_if_fail (scope != NM_CONNECTION_SCOPE_UNKNOWN, NULL);
 
 	path = nm_active_connection_get_connection (active);
 	g_return_val_if_fail (path != NULL, NULL);
@@ -158,13 +153,11 @@ get_connection_for_active (NMApplet *applet, NMActiveConnection *active)
 	for (iter = list; iter; iter = g_slist_next (iter)) {
 		NMConnection *candidate = NM_CONNECTION (iter->data);
 
-		if (   (nm_connection_get_scope (candidate) == scope)
-			   && !strcmp (nm_connection_get_path (candidate), path)) {
+		if (!strcmp (nm_connection_get_path (candidate), path)) {
 			connection = candidate;
 			break;
 		}
 	}
-
 	g_slist_free (list);
 
 	return connection;
@@ -200,7 +193,7 @@ create_info_label_security (NMConnection *connection)
 {
 	NMSettingConnection *s_con;
 	char *label = NULL;
-	GtkWidget *w;
+	GtkWidget *w = NULL;
 	const char *connection_type;
 
 	s_con = NM_SETTING_CONNECTION (nm_connection_get_setting (connection, NM_TYPE_SETTING_CONNECTION));
@@ -243,7 +236,8 @@ create_info_label_security (NMConnection *connection)
 			label = g_strdup (C_("Wifi/wired security", "None"));
 	}
 
-	w = create_info_label (label ? label : C_("Wifi/wired security", "Unknown"), TRUE);
+	if (label)
+		w = create_info_label (label, TRUE);
 	g_free (label);
 
 	return w;
@@ -274,12 +268,12 @@ typedef struct {
 	NMDevice *device;
 	GtkWidget *label;
 	guint32 id;
-} SpeedInfo;
+} LabelInfo;
 
 static void
 device_destroyed (gpointer data, GObject *device_ptr)
 {
-	SpeedInfo *info = data;
+	LabelInfo *info = data;
 
 	/* Device is destroyed, notify handler won't fire
 	 * anymore anyway.  Let the label destroy handler
@@ -292,16 +286,33 @@ device_destroyed (gpointer data, GObject *device_ptr)
 static void
 label_destroyed (gpointer data, GObject *label_ptr)
 {
-	SpeedInfo *info = data;
+	LabelInfo *info = data;
+
 	/* Remove the notify handler from the device */
 	if (info->device) {
 		if (info->id)
 			g_signal_handler_disconnect (info->device, info->id);
 		/* destroy our info data */
 		g_object_weak_unref (G_OBJECT (info->device), device_destroyed, info);
-		memset (info, 0, sizeof (SpeedInfo));
+		memset (info, 0, sizeof (LabelInfo));
 		g_free (info);
 	}
+}
+
+static void
+label_info_new (NMDevice *device,
+                GtkWidget *label,
+                const char *notify_prop,
+                GCallback callback)
+{
+	LabelInfo *info;
+
+	info = g_malloc0 (sizeof (LabelInfo));
+	info->device = device;
+	info->label = label;
+	info->id = g_signal_connect (device, notify_prop, callback, label);
+	g_object_weak_ref (G_OBJECT (label), label_destroyed, info);
+	g_object_weak_ref (G_OBJECT (device), device_destroyed, info);
 }
 
 static void
@@ -320,6 +331,33 @@ bitrate_changed_cb (GObject *device, GParamSpec *pspec, gpointer user_data)
 }
 
 static void
+wimax_cinr_changed_cb (NMDevice *device, GParamSpec *pspec, gpointer user_data)
+{
+	GtkWidget *label = GTK_WIDGET (user_data);
+	gint cinr;
+	char *str = NULL;
+
+	cinr = nm_device_wimax_get_cinr (NM_DEVICE_WIMAX (device));
+	if (cinr)
+		str = g_strdup_printf (_("%d dB"), cinr);
+
+	gtk_label_set_text (GTK_LABEL (label), str ? str : C_("WiMAX CINR", "unknown"));
+	g_free (str);
+}
+
+static void
+wimax_bsid_changed_cb (NMDevice *device, GParamSpec *pspec, gpointer user_data)
+{
+	GtkWidget *label = GTK_WIDGET (user_data);
+	const char *str = NULL;
+
+	str = nm_device_wimax_get_bsid (NM_DEVICE_WIMAX (device));
+	if (!str)
+		str = C_("WiMAX Base Station ID", "unknown");
+	gtk_label_set_text (GTK_LABEL (label), str);
+}
+
+static void
 info_dialog_add_page (GtkNotebook *notebook,
                       NMConnection *connection,
                       gboolean is_default,
@@ -328,7 +366,7 @@ info_dialog_add_page (GtkNotebook *notebook,
 	GtkTable *table;
 	guint32 speed = 0;
 	char *str;
-	const char *iface, *method;
+	const char *iface, *method = NULL;
 	NMIP4Config *ip4_config;
 	NMIP6Config *ip6_config;
 	const GArray *dns;
@@ -338,9 +376,9 @@ info_dialog_add_page (GtkNotebook *notebook,
 	NMSettingIP6Config *s_ip6;
 	guint32 hostmask, network, bcast, netmask;
 	int i, row = 0;
-	SpeedInfo* info = NULL;
-	GtkWidget* speed_label;
+	GtkWidget* speed_label, *sec_label = NULL;
 	const GSList *addresses;
+	gboolean show_security = FALSE;
 
 	table = GTK_TABLE (gtk_table_new (12, 2, FALSE));
 	gtk_table_set_col_spacings (table, 12);
@@ -349,14 +387,24 @@ info_dialog_add_page (GtkNotebook *notebook,
 
 	/* Interface */
 	iface = nm_device_get_iface (device);
-	if (NM_IS_DEVICE_ETHERNET (device))
+	if (NM_IS_DEVICE_ETHERNET (device)) {
 		str = g_strdup_printf (_("Ethernet (%s)"), iface);
-	else if (NM_IS_DEVICE_WIFI (device))
+		show_security = TRUE;
+	} else if (NM_IS_DEVICE_WIFI (device)) {
 		str = g_strdup_printf (_("802.11 WiFi (%s)"), iface);
-	else if (NM_IS_GSM_DEVICE (device))
-		str = g_strdup_printf (_("GSM (%s)"), iface);
-	else if (NM_IS_CDMA_DEVICE (device))
-		str = g_strdup_printf (_("CDMA (%s)"), iface);
+		show_security = TRUE;
+	} else if (NM_IS_DEVICE_MODEM (device)) {
+		NMDeviceModemCapabilities caps;
+
+		caps = nm_device_modem_get_current_capabilities (NM_DEVICE_MODEM (device));
+		if (caps & NM_DEVICE_MODEM_CAPABILITY_GSM_UMTS)
+			str = g_strdup_printf (_("GSM (%s)"), iface);
+		else if (caps & NM_DEVICE_MODEM_CAPABILITY_CDMA_EVDO)
+			str = g_strdup_printf (_("CDMA (%s)"), iface);
+		else
+			str = g_strdup_printf (_("Mobile Broadband (%s)"), iface);
+	} else if (NM_IS_DEVICE_WIMAX (device))
+		str = g_strdup_printf (_("WiMAX (%s)"), iface);
 	else
 		str = g_strdup (iface);
 
@@ -379,6 +427,8 @@ info_dialog_add_page (GtkNotebook *notebook,
 		str = g_strdup (nm_device_ethernet_get_hw_address (NM_DEVICE_ETHERNET (device)));
 	else if (NM_IS_DEVICE_WIFI (device))
 		str = g_strdup (nm_device_wifi_get_hw_address (NM_DEVICE_WIFI (device)));
+	else if (NM_IS_DEVICE_WIMAX (device))
+		str = g_strdup (nm_device_wimax_get_hw_address (NM_DEVICE_WIMAX (device)));
 
 	gtk_table_attach (table, create_info_label (_("Hardware Address:"), FALSE),
 	                  0, 1, row, row + 1, GTK_FILL, GTK_FILL, 0, 0);
@@ -405,17 +455,10 @@ info_dialog_add_page (GtkNotebook *notebook,
 		/* Wireless speed in Kb/s */
 		speed = nm_device_wifi_get_bitrate (NM_DEVICE_WIFI (device)) / 1000;
 
-		/* Listen for wifi speed changes */
-		info = g_malloc0 (sizeof (SpeedInfo));
-		info->device = device;
-		info->label = speed_label;
-		info->id = g_signal_connect (device,
-		                             "notify::" NM_DEVICE_WIFI_BITRATE,
-		                             G_CALLBACK (bitrate_changed_cb),
-		                             speed_label);
-
-		g_object_weak_ref (G_OBJECT(speed_label), label_destroyed, info);
-		g_object_weak_ref (G_OBJECT(device), device_destroyed, info);
+		label_info_new (device,
+		                speed_label,
+		                "notify::" NM_DEVICE_WIFI_BITRATE,
+		                G_CALLBACK (bitrate_changed_cb));
 	}
 
 	if (speed)
@@ -431,11 +474,46 @@ info_dialog_add_page (GtkNotebook *notebook,
 	row++;
 
 	/* Security */
-	gtk_table_attach (table, create_info_label (_("Security:"), FALSE),
-	                  0, 1, row, row + 1, GTK_FILL, GTK_FILL, 0, 0);
-	gtk_table_attach (table, create_info_label_security (connection),
-	                  1, 2, row, row + 1, GTK_FILL, GTK_FILL, 0, 0);
-	row++;
+	if (show_security) {
+		sec_label = create_info_label_security (connection);
+		if (sec_label) {
+			gtk_table_attach (table, create_info_label (_("Security:"), FALSE),
+				              0, 1, row, row + 1, GTK_FILL, GTK_FILL, 0, 0);
+			gtk_table_attach (table, sec_label,
+				              1, 2, row, row + 1, GTK_FILL, GTK_FILL, 0, 0);
+			row++;
+		}
+	}
+
+	if (NM_IS_DEVICE_WIMAX (device)) {
+		GtkWidget *bsid_label, *cinr_label;
+
+		/* CINR */
+		cinr_label = create_info_label ("", TRUE);
+		gtk_table_attach (table, create_info_label (_("CINR:"), FALSE),
+			              0, 1, row, row + 1, GTK_FILL, GTK_FILL, 0, 0);
+		gtk_table_attach (table, cinr_label,
+			              1, 2, row, row + 1, GTK_FILL, GTK_FILL, 0, 0);
+		label_info_new (device,
+		                cinr_label,
+		                "notify::" NM_DEVICE_WIMAX_CINR,
+		                G_CALLBACK (wimax_cinr_changed_cb));
+		wimax_cinr_changed_cb (device, NULL, cinr_label);
+		row++;
+
+		/* Base Station ID */
+		bsid_label = create_info_label ("", TRUE);
+		gtk_table_attach (table, create_info_label (_("BSID:"), FALSE),
+			              0, 1, row, row + 1, GTK_FILL, GTK_FILL, 0, 0);
+		gtk_table_attach (table, bsid_label,
+			              1, 2, row, row + 1, GTK_FILL, GTK_FILL, 0, 0);
+		label_info_new (device,
+		                bsid_label,
+		                "notify::" NM_DEVICE_WIMAX_BSID,
+		                G_CALLBACK (wimax_bsid_changed_cb));
+		wimax_bsid_changed_cb (device, NULL, bsid_label);
+		row++;
+	}
 
 	/* Empty line */
 	gtk_table_attach (table, gtk_label_new (""), 0, 2, row, row + 1, GTK_FILL, GTK_FILL, 0, 0);
@@ -737,14 +815,12 @@ applet_warning_dialog_show (const char *message)
 }
 
 GtkWidget *
-applet_mobile_password_dialog_new (NMDevice *device,
-                                   NMConnection *connection,
+applet_mobile_password_dialog_new (NMConnection *connection,
                                    GtkEntry **out_secret_entry)
 {
 	GtkDialog *dialog;
 	GtkWidget *w;
 	GtkBox *box = NULL, *vbox = NULL;
-	char *dev_str;
 	NMSettingConnection *s_con;
 	char *tmp;
 	const char *id;
@@ -766,12 +842,6 @@ applet_mobile_password_dialog_new (NMDevice *device,
 
 	vbox = GTK_BOX (gtk_dialog_get_content_area (dialog));
 
-	gtk_box_pack_start (vbox, w, TRUE, TRUE, 0);
-
-	dev_str = g_strdup_printf ("<b>%s</b>", utils_get_device_description (device));
-	w = gtk_label_new (NULL);
-	gtk_label_set_markup (GTK_LABEL (w), dev_str);
-	g_free (dev_str);
 	gtk_box_pack_start (vbox, w, TRUE, TRUE, 0);
 
 	w = gtk_alignment_new (0.5, 0.5, 0, 1.0);
@@ -1141,13 +1211,13 @@ applet_mobile_pin_dialog_start_spinner (GtkWidget *dialog, const char *text)
 	builder = g_object_get_data (G_OBJECT (dialog), "builder");
 	g_return_if_fail (builder != NULL);
 
-	spinner = nma_bling_spinner_new ();
+	spinner = gtk_spinner_new ();
 	g_return_if_fail (spinner != NULL);
 	g_object_set_data (G_OBJECT (dialog), "spinner", spinner);
 
 	align = GTK_WIDGET (gtk_builder_get_object (builder, "spinner_alignment"));
 	gtk_container_add (GTK_CONTAINER (align), spinner);
-	nma_bling_spinner_start (NMA_BLING_SPINNER (spinner));
+	gtk_spinner_start (GTK_SPINNER (spinner));
 
 	widget = GTK_WIDGET (gtk_builder_get_object (builder, "progress_label"));
 	gtk_label_set_text (GTK_LABEL (widget), text);
@@ -1185,7 +1255,7 @@ applet_mobile_pin_dialog_stop_spinner (GtkWidget *dialog, const char *text)
 
 	spinner = g_object_get_data (G_OBJECT (dialog), "spinner");
 	g_return_if_fail (spinner != NULL);
-	nma_bling_spinner_stop (NMA_BLING_SPINNER (spinner));
+	gtk_spinner_stop (GTK_SPINNER (spinner));
 	g_object_set_data (G_OBJECT (dialog), "spinner", NULL);
 
 	/* Remove it from the alignment */
