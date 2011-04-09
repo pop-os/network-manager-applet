@@ -13,6 +13,7 @@ network-manager-applet (0.8.998-1) UNRELEASED; urgency=low
     - Drop debian/patches/01-dbus_access_nm_applet.patch, obsolete.
     - Remove /etc/dbus-1/system.d/nm-applet.conf on upgrades. Use
       dpkg-maintscript-helper to remove the conffile.
+  * Refresh debian/patches/04-autostart.patch.
 
  -- Michael Biebl <biebl@debian.org>  Sat, 09 Apr 2011 07:03:11 +0200
 
