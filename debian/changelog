@@ -6,6 +6,8 @@ network-manager-applet (0.8.998-1) UNRELEASED; urgency=low
       (>= 0.8.998).
     - Bump Build-Depends on libgtk2.0-dev to (>= 2.20).
     - Bump Depends on network-manager to (>= 0.8.998).
+  * debian/rules
+    - Build against GTK+ version 2.
 
  -- Michael Biebl <biebl@debian.org>  Sat, 09 Apr 2011 07:03:11 +0200
 
