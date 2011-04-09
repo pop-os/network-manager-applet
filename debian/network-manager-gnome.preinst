@@ -1,0 +1,10 @@
+#!/bin/sh
+
+set -e
+
+dpkg-maintscript-helper rm_conffile \
+    /etc/dbus-1/system.d/nm-applet.conf 0.8.4-1 -- "$@"
+
+#DEBHELPER#
+
+exit 0

@@ -2,14 +2,18 @@
 
 set -e
 
+dpkg-maintscript-helper rm_conffile \
+    /etc/dbus-1/system.d/nm-applet.conf 0.8.4-1 -- "$@"
+
 case "$1" in
   configure)
-  	# Ask D-Bus to reload the config file
-  	if [ -x "/etc/init.d/dbus" ]; then
+	# Ask D-Bus to reload the config file
+	if [ -x "/etc/init.d/dbus" ]; then
 		invoke-rc.d dbus force-reload || true
 	fi
 	;;
 esac
+
 
 #DEBHELPER#
 
