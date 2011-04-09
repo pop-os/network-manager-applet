@@ -9,14 +9,14 @@ Build-Depends:
  intltool,
  libdbus-glib-1-dev (>= 0.74),
  libgnome-keyring-dev,
- libgtk2.0-dev (>= 2.14),
+ libgtk2.0-dev (>= 2.20),
  libglib2.0-dev (>= 2.16),
  libgconf2-dev,
  libnotify-dev (>= 0.4.3),
- libnm-util-dev (>= 0.8.3.995),
- libnm-glib-dev (>= 0.8.3.995),
- libnm-glib-vpn-dev (>= 0.8.2.995),
- network-manager-dev (>= 0.8.2.995),
+ libnm-util-dev (>= 0.8.998),
+ libnm-glib-dev (>= 0.8.998),
+ libnm-glib-vpn-dev (>= 0.8.998),
+ network-manager-dev (>= 0.8.998),
  docbook-to-man,
  libpolkit-gobject-1-dev (>= 0.92),
  libgnome-bluetooth-dev (>= 2.27.6)
@@ -31,7 +31,7 @@ Section: gnome
 Depends:
  ${shlibs:Depends},
  ${misc:Depends},
- network-manager (>= 0.8.2),
+ network-manager (>= 0.8.998),
  policykit-1-gnome,
  gnome-icon-theme,
  dbus-x11
