@@ -49,7 +49,6 @@ struct _EAPMethod {
 	const char *default_field;
 	GtkWidget *nag_dialog;
 
-	gboolean phase2;
 	gboolean ignore_ca_cert;
 
 	EMAddToSizeGroupFunc add_to_size_group;
@@ -96,8 +95,7 @@ EAPMethod *eap_method_init (gsize obj_size,
                             EMDestroyFunc destroy,
                             const char *ui_file,
                             const char *ui_widget_name,
-                            const char *default_field,
-                            gboolean phase2);
+                            const char *default_field);
 
 GtkFileFilter * eap_method_default_file_chooser_filter_new (gboolean privkey);
 
@@ -115,7 +113,10 @@ gboolean eap_method_validate_filepicker (GtkBuilder *builder,
 
 gboolean eap_method_nag_init (EAPMethod *method,
                               const char *ca_cert_chooser,
-                              NMConnection *connection);
+                              NMConnection *connection,
+                              gboolean phase2);
+
+gboolean eap_method_get_ignore_ca_cert (EAPMethod *method);
 
 void eap_method_phase2_update_secrets_helper (EAPMethod *method,
                                               NMConnection *connection,

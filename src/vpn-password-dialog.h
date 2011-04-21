@@ -1,4 +1,3 @@
-/* -*- Mode: C; tab-width: 4; indent-tabs-mode: t; c-basic-offset: 4 -*- */
 /* NetworkManager Wireless Applet -- Display wireless access points and allow user control
  *
  * Dan Williams <dcbw@redhat.com>
@@ -17,16 +16,18 @@
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  *
- * (C) Copyright 2011 Red Hat, Inc.
+ * (C) Copyright 2004 Red Hat, Inc.
  */
 
-#ifndef __APPLET_DEVICE_WIMAX_H__
-#define __APPLET_DEVICE_WIMAX_H__
+#ifndef VPN_PASSWORD_DIALOG_H
+#define VPN_PASSWORD_DIALOG_H
 
-#include <gtk/gtk.h>
+#include <glib.h>
+#include <nma-gconf-connection.h>
 
-#include "applet.h"
+gboolean nma_vpn_request_password (NMSettingsConnectionInterface *connection,
+                                   gboolean retry,
+                                   NMANewSecretsRequestedFunc callback,
+                                   gpointer callback_data);
 
-NMADeviceClass *applet_device_wimax_get_class (NMApplet *applet);
-
-#endif /* __APPLET_DEVICE_WIMAX_H__ */
+#endif

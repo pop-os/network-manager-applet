@@ -21,6 +21,7 @@
  */
 
 #include "helpers.h"
+#include "gconf-helpers.h"
 
 void
 helper_fill_secret_entry (NMConnection *connection,

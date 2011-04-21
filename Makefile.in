@@ -90,10 +90,10 @@ am__nobase_list = $(am__nobase_strip_setup); \
 am__base_list = \
   sed '$$!N;$$!N;$$!N;$$!N;$$!N;$$!N;$$!N;s/\n/ /g' | \
   sed '$$!N;$$!N;$$!N;$$!N;s/\n/ /g'
-am__installdirs = "$(DESTDIR)$(applicationsdir)" \
-	"$(DESTDIR)$(autostartdir)" "$(DESTDIR)$(desktopdir)" \
+am__installdirs = "$(DESTDIR)$(autostartdir)" \
+	"$(DESTDIR)$(dbusservicedir)" "$(DESTDIR)$(desktopdir)" \
 	"$(DESTDIR)$(schemasdir)"
-DATA = $(applications_DATA) $(autostart_DATA) $(desktop_DATA) \
+DATA = $(autostart_DATA) $(dbusservice_DATA) $(desktop_DATA) \
 	$(schemas_DATA)
 RECURSIVE_CLEAN_TARGETS = mostlyclean-recursive clean-recursive	\
   distclean-recursive maintainer-clean-recursive
@@ -162,8 +162,6 @@ DBUS_126_LIBS = @DBUS_126_LIBS@
 DBUS_SYS_DIR = @DBUS_SYS_DIR@
 DEFS = @DEFS@
 DEPDIR = @DEPDIR@
-DISABLE_DEPRECATED = @DISABLE_DEPRECATED@
-DLLTOOL = @DLLTOOL@
 DSYMUTIL = @DSYMUTIL@
 DUMPBIN = @DUMPBIN@
 ECHO_C = @ECHO_C@
@@ -173,8 +171,6 @@ EGREP = @EGREP@
 EXEEXT = @EXEEXT@
 FGREP = @FGREP@
 GCONFTOOL = @GCONFTOOL@
-GCONF_CFLAGS = @GCONF_CFLAGS@
-GCONF_LIBS = @GCONF_LIBS@
 GCONF_SCHEMA_CONFIG_SOURCE = @GCONF_SCHEMA_CONFIG_SOURCE@
 GCONF_SCHEMA_FILE_DIR = @GCONF_SCHEMA_FILE_DIR@
 GETTEXT_PACKAGE = @GETTEXT_PACKAGE@
@@ -183,13 +179,9 @@ GMOFILES = @GMOFILES@
 GMSGFMT = @GMSGFMT@
 GNOME_BLUETOOTH_CFLAGS = @GNOME_BLUETOOTH_CFLAGS@
 GNOME_BLUETOOTH_LIBS = @GNOME_BLUETOOTH_LIBS@
-GNOME_KEYRING_CFLAGS = @GNOME_KEYRING_CFLAGS@
-GNOME_KEYRING_LIBS = @GNOME_KEYRING_LIBS@
 GOBJECT_CFLAGS = @GOBJECT_CFLAGS@
 GOBJECT_LIBS = @GOBJECT_LIBS@
 GREP = @GREP@
-GTK_CFLAGS = @GTK_CFLAGS@
-GTK_LIBS = @GTK_LIBS@
 INSTALL = @INSTALL@
 INSTALL_DATA = @INSTALL_DATA@
 INSTALL_PROGRAM = @INSTALL_PROGRAM@
@@ -213,7 +205,6 @@ LN_S = @LN_S@
 LTLIBOBJS = @LTLIBOBJS@
 MAINT = @MAINT@
 MAKEINFO = @MAKEINFO@
-MANIFEST_TOOL = @MANIFEST_TOOL@
 MKDIR_P = @MKDIR_P@
 MKINSTALLDIRS = @MKINSTALLDIRS@
 MSGFMT = @MSGFMT@
@@ -223,8 +214,6 @@ NM = @NM@
 NMA_CFLAGS = @NMA_CFLAGS@
 NMA_LIBS = @NMA_LIBS@
 NMEDIT = @NMEDIT@
-NOTIFY_CFLAGS = @NOTIFY_CFLAGS@
-NOTIFY_LIBS = @NOTIFY_LIBS@
 OBJDUMP = @OBJDUMP@
 OBJEXT = @OBJEXT@
 OTOOL = @OTOOL@
@@ -258,7 +247,6 @@ abs_builddir = @abs_builddir@
 abs_srcdir = @abs_srcdir@
 abs_top_builddir = @abs_top_builddir@
 abs_top_srcdir = @abs_top_srcdir@
-ac_ct_AR = @ac_ct_AR@
 ac_ct_CC = @ac_ct_CC@
 ac_ct_DUMPBIN = @ac_ct_DUMPBIN@
 am__include = @am__include@
@@ -310,12 +298,14 @@ ACLOCAL_AMFLAGS = -I m4 ${ACLOCAL_FLAGS}
 SUBDIRS = src icons po
 EXTRA_DIST = CONTRIBUTING intltool-extract.in intltool-merge.in \
 	intltool-update.in $(schemas_in_files) $(autostart_in_files) \
-	$(desktop_in_files)
+	$(desktop_in_files) $(DBUS_126_CONF) $(DBUS_PRE_126_CONF)
+dbusservicedir = $(DBUS_SYS_DIR)
+dbusservice_DATA = nm-applet.conf
+DBUS_126_CONF = nm-applet-dbus-126.conf
+DBUS_PRE_126_CONF = nm-applet-pre-dbus-126.conf
 autostartdir = $(sysconfdir)/xdg/autostart
 autostart_in_files = nm-applet.desktop.in
 autostart_DATA = $(autostart_in_files:.desktop.in=.desktop)
-applicationsdir = $(datadir)/applications
-applications_DATA = $(autostart_DATA)
 desktopdir = $(datadir)/applications
 desktop_in_files = nm-connection-editor.desktop.in
 desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
@@ -325,7 +315,8 @@ schemas_DATA = $(schemas_in_files:.schemas.in=.schemas)
 CLEANFILES = \
 	$(autostart_DATA) \
 	$(desktop_DATA) \
-	$(schemas_DATA)
+	$(schemas_DATA) \
+	$(dbusservice_DATA)
 
 DISTCLEANFILES = intltool-extract intltool-merge intltool-update
 all: config.h
@@ -392,26 +383,6 @@ clean-libtool:
 
 distclean-libtool:
 	-rm -f libtool config.lt
-install-applicationsDATA: $(applications_DATA)
-	@$(NORMAL_INSTALL)
-	test -z "$(applicationsdir)" || $(MKDIR_P) "$(DESTDIR)$(applicationsdir)"
-	@list='$(applications_DATA)'; test -n "$(applicationsdir)" || list=; \
-	for p in $$list; do \
-	  if test -f "$$p"; then d=; else d="$(srcdir)/"; fi; \
-	  echo "$$d$$p"; \
-	done | $(am__base_list) | \
-	while read files; do \
-	  echo " $(INSTALL_DATA) $$files '$(DESTDIR)$(applicationsdir)'"; \
-	  $(INSTALL_DATA) $$files "$(DESTDIR)$(applicationsdir)" || exit $$?; \
-	done
-
-uninstall-applicationsDATA:
-	@$(NORMAL_UNINSTALL)
-	@list='$(applications_DATA)'; test -n "$(applicationsdir)" || list=; \
-	files=`for p in $$list; do echo $$p; done | sed -e 's|^.*/||'`; \
-	test -n "$$files" || exit 0; \
-	echo " ( cd '$(DESTDIR)$(applicationsdir)' && rm -f" $$files ")"; \
-	cd "$(DESTDIR)$(applicationsdir)" && rm -f $$files
 install-autostartDATA: $(autostart_DATA)
 	@$(NORMAL_INSTALL)
 	test -z "$(autostartdir)" || $(MKDIR_P) "$(DESTDIR)$(autostartdir)"
@@ -432,6 +403,26 @@ uninstall-autostartDATA:
 	test -n "$$files" || exit 0; \
 	echo " ( cd '$(DESTDIR)$(autostartdir)' && rm -f" $$files ")"; \
 	cd "$(DESTDIR)$(autostartdir)" && rm -f $$files
+install-dbusserviceDATA: $(dbusservice_DATA)
+	@$(NORMAL_INSTALL)
+	test -z "$(dbusservicedir)" || $(MKDIR_P) "$(DESTDIR)$(dbusservicedir)"
+	@list='$(dbusservice_DATA)'; test -n "$(dbusservicedir)" || list=; \
+	for p in $$list; do \
+	  if test -f "$$p"; then d=; else d="$(srcdir)/"; fi; \
+	  echo "$$d$$p"; \
+	done | $(am__base_list) | \
+	while read files; do \
+	  echo " $(INSTALL_DATA) $$files '$(DESTDIR)$(dbusservicedir)'"; \
+	  $(INSTALL_DATA) $$files "$(DESTDIR)$(dbusservicedir)" || exit $$?; \
+	done
+
+uninstall-dbusserviceDATA:
+	@$(NORMAL_UNINSTALL)
+	@list='$(dbusservice_DATA)'; test -n "$(dbusservicedir)" || list=; \
+	files=`for p in $$list; do echo $$p; done | sed -e 's|^.*/||'`; \
+	test -n "$$files" || exit 0; \
+	echo " ( cd '$(DESTDIR)$(dbusservicedir)' && rm -f" $$files ")"; \
+	cd "$(DESTDIR)$(dbusservicedir)" && rm -f $$files
 install-desktopDATA: $(desktop_DATA)
 	@$(NORMAL_INSTALL)
 	test -z "$(desktopdir)" || $(MKDIR_P) "$(DESTDIR)$(desktopdir)"
@@ -787,7 +778,7 @@ check: check-recursive
 all-am: Makefile $(DATA) config.h
 installdirs: installdirs-recursive
 installdirs-am:
-	for dir in "$(DESTDIR)$(applicationsdir)" "$(DESTDIR)$(autostartdir)" "$(DESTDIR)$(desktopdir)" "$(DESTDIR)$(schemasdir)"; do \
+	for dir in "$(DESTDIR)$(autostartdir)" "$(DESTDIR)$(dbusservicedir)" "$(DESTDIR)$(desktopdir)" "$(DESTDIR)$(schemasdir)"; do \
 	  test -z "$$dir" || $(MKDIR_P) "$$dir"; \
 	done
 install: install-recursive
@@ -839,8 +830,9 @@ info: info-recursive
 
 info-am:
 
-install-data-am: install-applicationsDATA install-autostartDATA \
-	install-data-local install-desktopDATA install-schemasDATA
+install-data-am: install-autostartDATA install-data-local \
+	install-dbusserviceDATA install-desktopDATA \
+	install-schemasDATA
 
 install-dvi: install-dvi-recursive
 
@@ -886,7 +878,7 @@ ps: ps-recursive
 
 ps-am:
 
-uninstall-am: uninstall-applicationsDATA uninstall-autostartDATA \
+uninstall-am: uninstall-autostartDATA uninstall-dbusserviceDATA \
 	uninstall-desktopDATA uninstall-schemasDATA
 
 .MAKE: $(RECURSIVE_CLEAN_TARGETS) $(RECURSIVE_TARGETS) all \
@@ -899,20 +891,23 @@ uninstall-am: uninstall-applicationsDATA uninstall-autostartDATA \
 	distcheck distclean distclean-generic distclean-hdr \
 	distclean-libtool distclean-tags distcleancheck distdir \
 	distuninstallcheck dvi dvi-am html html-am info info-am \
-	install install-am install-applicationsDATA \
-	install-autostartDATA install-data install-data-am \
-	install-data-local install-desktopDATA install-dvi \
-	install-dvi-am install-exec install-exec-am install-html \
-	install-html-am install-info install-info-am install-man \
-	install-pdf install-pdf-am install-ps install-ps-am \
-	install-schemasDATA install-strip installcheck installcheck-am \
-	installdirs installdirs-am maintainer-clean \
-	maintainer-clean-generic mostlyclean mostlyclean-generic \
-	mostlyclean-libtool pdf pdf-am ps ps-am tags tags-recursive \
-	uninstall uninstall-am uninstall-applicationsDATA \
-	uninstall-autostartDATA uninstall-desktopDATA \
-	uninstall-schemasDATA
+	install install-am install-autostartDATA install-data \
+	install-data-am install-data-local install-dbusserviceDATA \
+	install-desktopDATA install-dvi install-dvi-am install-exec \
+	install-exec-am install-html install-html-am install-info \
+	install-info-am install-man install-pdf install-pdf-am \
+	install-ps install-ps-am install-schemasDATA install-strip \
+	installcheck installcheck-am installdirs installdirs-am \
+	maintainer-clean maintainer-clean-generic mostlyclean \
+	mostlyclean-generic mostlyclean-libtool pdf pdf-am ps ps-am \
+	tags tags-recursive uninstall uninstall-am \
+	uninstall-autostartDATA uninstall-dbusserviceDATA \
+	uninstall-desktopDATA uninstall-schemasDATA
 
+
+nm-applet.conf:
+@HAVE_DBUS_126_TRUE@	cp -f $(top_srcdir)/$(DBUS_126_CONF) nm-applet.conf
+@HAVE_DBUS_126_FALSE@	cp -f $(top_srcdir)/$(DBUS_PRE_126_CONF) nm-applet.conf
 @INTLTOOL_DESKTOP_RULE@
 @INTLTOOL_SCHEMAS_RULE@
 

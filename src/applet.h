@@ -15,7 +15,7 @@
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  *
- * Copyright (C) 2004 - 2011 Red Hat, Inc.
+ * Copyright (C) 2004 - 2010 Red Hat, Inc.
  * Copyright (C) 2005 - 2008 Novell, Inc.
  */
 
@@ -44,8 +44,10 @@
 #include <nm-device.h>
 #include <NetworkManager.h>
 #include <nm-active-connection.h>
-#include <nm-remote-settings.h>
-#include "applet-agent.h"
+#include <nm-remote-settings-system.h>
+
+#include "applet-dbus-manager.h"
+#include "nma-gconf-settings.h"
 
 #define NM_TYPE_APPLET			(nma_get_type())
 #define NM_APPLET(object)		(G_TYPE_CHECK_INSTANCE_CAST((object), NM_TYPE_APPLET, NMApplet))
@@ -81,14 +83,14 @@ typedef struct
 	GObject parent_instance;
 
 	GMainLoop *loop;
-	DBusGConnection *bus;
-	DBusGConnection *session_bus;
-
 	NMClient *nm_client;
-	NMRemoteSettings *settings;
-	AppletAgent *agent;
+
+	NMRemoteSettingsSystem *system_settings;
+	NMAGConfSettings *gconf_settings;
 
 	GConfClient *	gconf_client;
+
+	guint update_timestamps_id;
 
 	/* Permissions */
 	NMClientPermissionResult permissions[NM_CLIENT_PERMISSION_LAST + 1];
@@ -99,7 +101,6 @@ typedef struct
 	NMADeviceClass *gsm_class;
 	NMADeviceClass *cdma_class;
 	NMADeviceClass *bt_class;
-	NMADeviceClass *wimax_class;
 
 	/* Data model elements */
 	guint			update_icon_id;
@@ -155,8 +156,6 @@ typedef struct
 	guint           wifi_enabled_toggled_id;
 	GtkWidget *		wwan_enabled_item;
 	guint           wwan_enabled_toggled_id;
-	GtkWidget *		wimax_enabled_item;
-	guint           wimax_enabled_toggled_id;
 
 	GtkWidget *     notifications_enabled_item;
 	guint           notifications_enabled_toggled_id;
@@ -167,44 +166,12 @@ typedef struct
 	GtkBuilder *	info_dialog_ui;
 	NotifyNotification*	notification;
 	gboolean        notify_actions;
-
-	/* Tracker objects for secrets requests */
-	GSList *        secrets_reqs;
 } NMApplet;
 
 typedef void (*AppletNewAutoConnectionCallback) (NMConnection *connection,
                                                  gboolean created,
                                                  gboolean canceled,
                                                  gpointer user_data);
-
-typedef struct _SecretsRequest SecretsRequest;
-typedef void (*SecretsRequestFreeFunc) (SecretsRequest *req);
-
-struct _SecretsRequest {
-	size_t totsize;
-	gpointer reqid;
-	char *setting_name;
-	char **hints;
-	guint32 flags;
-	NMApplet *applet;
-	AppletAgentSecretsCallback callback;
-	gpointer callback_data;
-
-	NMConnection *connection;
-
-	/* Class-specific stuff */
-	SecretsRequestFreeFunc free_func;
-};
-
-void applet_secrets_request_set_free_func (SecretsRequest *req,
-                                           SecretsRequestFreeFunc free_func);
-void applet_secrets_request_complete (SecretsRequest *req,
-                                      GHashTable *settings,
-                                      GError *error);
-void applet_secrets_request_complete_setting (SecretsRequest *req,
-                                              const char *setting_name,
-                                              GError *error);
-void applet_secrets_request_free (SecretsRequest *req);
 
 struct NMADeviceClass {
 	gboolean       (*new_auto_connection)  (NMDevice *device,
@@ -237,8 +204,14 @@ struct NMADeviceClass {
 	                                        NMApplet *applet,
 	                                        gpointer user_data);
 
-	size_t         secrets_request_size;
-	gboolean       (*get_secrets)          (SecretsRequest *req,
+	gboolean       (*get_secrets)          (NMDevice *device,
+	                                        NMSettingsConnectionInterface *connection,
+	                                        NMActiveConnection *active_connection,
+	                                        const char *setting_name,
+	                                        const char **hints,
+	                                        NMANewSecretsRequestedFunc callback,
+	                                        gpointer callback_data,
+	                                        NMApplet *applet,
 	                                        GError **error);
 };
 
@@ -248,7 +221,7 @@ NMApplet *nm_applet_new (GMainLoop *loop);
 
 void applet_schedule_update_icon (NMApplet *applet);
 
-NMRemoteSettings *applet_get_settings (NMApplet *applet);
+NMSettingsInterface *applet_get_settings (NMApplet *applet);
 
 GSList *applet_get_all_connections (NMApplet *applet);
 
@@ -277,9 +250,7 @@ applet_menu_item_create_device_item_helper (NMDevice *device,
                                             NMApplet *applet,
                                             const gchar *text);
 
-NMRemoteConnection *applet_get_exported_connection_for_device (NMDevice *device, NMApplet *applet);
-
-NMDevice *applet_get_device_for_connection (NMApplet *applet, NMConnection *connection);
+NMSettingsConnectionInterface *applet_get_exported_connection_for_device (NMDevice *device, NMApplet *applet);
 
 void applet_do_notify (NMApplet *applet,
                        NotifyUrgency urgency,
@@ -308,9 +279,5 @@ GtkWidget * applet_new_menu_item_helper (NMConnection *connection,
 GdkPixbuf * nma_icon_check_and_load (const char *name,
                                      GdkPixbuf **icon,
                                      NMApplet *applet);
-
-gboolean applet_wifi_connect_to_hidden_network (NMApplet *applet);
-gboolean applet_wifi_create_wifi_network (NMApplet *applet);
-gboolean applet_wifi_can_create_wifi_network (NMApplet *applet);
 
 #endif

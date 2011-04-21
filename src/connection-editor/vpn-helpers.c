@@ -20,8 +20,6 @@
  * (C) Copyright 2008 Red Hat, Inc.
  */
 
-#include "config.h"
-
 #include <string.h>
 #include <glib.h>
 #include <gmodule.h>
@@ -214,11 +212,13 @@ import_vpn_from_file_cb (GtkWidget *dialog, gint response, gpointer user_data)
 	g_hash_table_foreach (plugins, try_import, (gpointer) &import_info);
 
 	connection = import_info.connection;
-	if (connection)
+	if (connection) {
+		if (nm_connection_get_scope (connection) == NM_CONNECTION_SCOPE_UNKNOWN)
+			nm_connection_set_scope (connection, NM_CONNECTION_SCOPE_USER);
 		info->callback (connection, info->user_data);
-	else {
+	} else {
 		GtkWidget *err_dialog;
-		char *bname = g_path_get_basename (filename);
+		char *basename = g_path_get_basename (filename);
 
 		err_dialog = gtk_message_dialog_new (NULL,
 		                                     GTK_DIALOG_DESTROY_WITH_PARENT,
@@ -227,8 +227,8 @@ import_vpn_from_file_cb (GtkWidget *dialog, gint response, gpointer user_data)
 		                                     _("Cannot import VPN connection"));
 		gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (err_dialog),
 		                                 _("The file '%s' could not be read or does not contain recognized VPN connection information\n\nError: %s."),
-		                                 bname, import_info.error ? import_info.error->message : "unknown error");
-		g_free (bname);
+		                                 basename, import_info.error ? import_info.error->message : "unknown error");
+		g_free (basename);
 		g_signal_connect (err_dialog, "delete-event", G_CALLBACK (gtk_widget_destroy), NULL);
 		g_signal_connect (err_dialog, "response", G_CALLBACK (gtk_widget_destroy), NULL);
 		gtk_widget_show_all (err_dialog);
@@ -299,19 +299,19 @@ export_vpn_to_file_cb (GtkWidget *dialog, gint response, gpointer user_data)
 	if (g_file_test (filename, G_FILE_TEST_EXISTS)) {
 		int replace_response;
 		GtkWidget *replace_dialog;
-		char *bname;
+		char *basename;
 
-		bname = g_path_get_basename (filename);
+		basename = g_path_get_basename (filename);
 		replace_dialog = gtk_message_dialog_new (NULL,
 		                                         GTK_DIALOG_DESTROY_WITH_PARENT,
 		                                         GTK_MESSAGE_QUESTION,
 		                                         GTK_BUTTONS_CANCEL,
 		                                         _("A file named \"%s\" already exists."),
-		                                         bname);
+		                                         basename);
 		gtk_dialog_add_buttons (GTK_DIALOG (replace_dialog), _("_Replace"), GTK_RESPONSE_OK, NULL);
 		gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (replace_dialog),
-							  _("Do you want to replace %s with the VPN connection you are saving?"), bname);
-		g_free (bname);
+							  _("Do you want to replace %s with the VPN connection you are saving?"), basename);
+		g_free (basename);
 		replace_response = gtk_dialog_run (GTK_DIALOG (replace_dialog));
 		gtk_widget_destroy (replace_dialog);
 		if (replace_response != GTK_RESPONSE_OK)
@@ -340,7 +340,7 @@ export_vpn_to_file_cb (GtkWidget *dialog, gint response, gpointer user_data)
 done:
 	if (!success) {
 		GtkWidget *err_dialog;
-		char *bname = filename ? g_path_get_basename (filename) : g_strdup ("(none)");
+		char *basename = filename ? g_path_get_basename (filename) : g_strdup ("(none)");
 
 		err_dialog = gtk_message_dialog_new (NULL,
 		                                     GTK_DIALOG_DESTROY_WITH_PARENT,
@@ -349,8 +349,8 @@ done:
 		                                     _("Cannot export VPN connection"));
 		gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (err_dialog),
 		                                 _("The VPN connection '%s' could not be exported to %s.\n\nError: %s."),
-		                                 id ? id : "(unknown)", bname, error ? error->message : "unknown error");
-		g_free (bname);
+		                                 id ? id : "(unknown)", basename, error ? error->message : "unknown error");
+		g_free (basename);
 		g_signal_connect (err_dialog, "delete-event", G_CALLBACK (gtk_widget_destroy), NULL);
 		g_signal_connect (err_dialog, "response", G_CALLBACK (gtk_widget_destroy), NULL);
 		gtk_widget_show_all (err_dialog);

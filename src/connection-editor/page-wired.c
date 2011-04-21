@@ -20,8 +20,6 @@
  * (C) Copyright 2008 - 2010 Red Hat, Inc.
  */
 
-#include "config.h"
-
 #include <string.h>
 #include <net/ethernet.h>
 

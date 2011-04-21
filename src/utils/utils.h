@@ -17,7 +17,7 @@
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  *
- * (C) Copyright 2007 - 2011 Red Hat, Inc.
+ * (C) Copyright 2007 Red Hat, Inc.
  */
 
 #ifndef UTILS_H
@@ -28,7 +28,6 @@
 #include <nm-device.h>
 #include <net/ethernet.h>
 #include <nm-access-point.h>
-#include <gnome-keyring.h>
 
 const char *utils_get_device_description (NMDevice *device);
 
@@ -44,6 +43,12 @@ gboolean utils_connection_valid_for_device (NMConnection *connection,
 
 GSList *utils_filter_connections_for_device (NMDevice *device, GSList *connections);
 
+char *utils_ether_ntop (const struct ether_addr *mac);
+
+gboolean utils_mac_valid (const struct ether_addr *addr);
+
+char *utils_next_available_name (GSList *connections, const char *format);
+
 char *utils_hash_ap (const GByteArray *ssid,
                      NM80211Mode mode,
                      guint32 flags,
@@ -51,17 +56,6 @@ char *utils_hash_ap (const GByteArray *ssid,
                      guint32 rsn_flags);
 
 char *utils_escape_notify_message (const char *src);
-
-#define KEYRING_UUID_TAG "connection-uuid"
-#define KEYRING_SN_TAG "setting-name"
-#define KEYRING_SK_TAG "setting-key"
-
-GnomeKeyringAttributeList *utils_create_keyring_add_attr_list (NMConnection *connection,
-                                                               const char *connection_uuid,
-                                                               const char *connection_id,
-                                                               const char *setting_name,
-                                                               const char *setting_key,
-                                                               char **out_display_name);
 
 #endif /* UTILS_H */
 

@@ -20,11 +20,10 @@
  * (C) Copyright 2008 - 2010 Red Hat, Inc.
  */
 
-#include "config.h"
-
 #include <string.h>
 #include <errno.h>
 #include <stdlib.h>
+#include <arpa/inet.h>
 
 #include <gtk/gtk.h>
 #include <glib/gi18n.h>
@@ -364,6 +363,7 @@ populate_ui (CEPageIP4 *self)
 		NMIP4Address *addr = nm_setting_ip4_config_get_address (setting, i);
 		struct in_addr tmp_addr;
 		char buf[INET_ADDRSTRLEN + 1];
+		const char *ignored;
 
 		if (!addr) {
 			g_warning ("%s: empty IP4 Address structure!", __func__);
@@ -373,15 +373,15 @@ populate_ui (CEPageIP4 *self)
 		gtk_list_store_append (store, &model_iter);
 
 		tmp_addr.s_addr = nm_ip4_address_get_address (addr);
-		(void) inet_ntop (AF_INET, &tmp_addr, &buf[0], sizeof (buf));
+		ignored = inet_ntop (AF_INET, &tmp_addr, &buf[0], sizeof (buf));
 		gtk_list_store_set (store, &model_iter, COL_ADDRESS, buf, -1);
 
 		tmp_addr.s_addr = nm_utils_ip4_prefix_to_netmask (nm_ip4_address_get_prefix (addr));
-		(void) inet_ntop (AF_INET, &tmp_addr, &buf[0], sizeof (buf));
+		ignored = inet_ntop (AF_INET, &tmp_addr, &buf[0], sizeof (buf));
 		gtk_list_store_set (store, &model_iter, COL_PREFIX, buf, -1);
 
 		tmp_addr.s_addr = nm_ip4_address_get_gateway (addr);
-		(void) inet_ntop (AF_INET, &tmp_addr, &buf[0], sizeof (buf));
+		ignored = inet_ntop (AF_INET, &tmp_addr, &buf[0], sizeof (buf));
 		gtk_list_store_set (store, &model_iter, COL_GATEWAY, buf, -1);
 	}
 
@@ -395,12 +395,13 @@ populate_ui (CEPageIP4 *self)
 	for (i = 0; i < nm_setting_ip4_config_get_num_dns (setting); i++) {
 		struct in_addr tmp_addr;
 		char buf[INET_ADDRSTRLEN + 1];
+		const char *ignored;
 
 		tmp_addr.s_addr = nm_setting_ip4_config_get_dns (setting, i);
 		if (!tmp_addr.s_addr)
 			continue;
 
-		(void) inet_ntop (AF_INET, &tmp_addr, &buf[0], sizeof (buf));
+		ignored = inet_ntop (AF_INET, &tmp_addr, &buf[0], sizeof (buf));
 		if (string->len)
 			g_string_append (string, ", ");
 		g_string_append (string, buf);
@@ -600,7 +601,9 @@ ip_address_filter_cb (GtkEntry *   entry,
 	CEPageIP4Private *priv = CE_PAGE_IP4_GET_PRIVATE (self);
 	GtkEditable *editable = GTK_EDITABLE (entry);
 	int i, count = 0;
-	gchar *result = g_new0 (gchar, length);
+	gchar *result;
+
+	result = g_malloc0 (length + 1);
 
 	for (i = 0; i < length; i++) {
 		if ((text[i] >= '0' && text[i] <= '9') || (text[i] == '.'))
@@ -714,11 +717,15 @@ finish_setup (CEPageIP4 *self, gpointer unused, GError *error, gpointer user_dat
 	gint offset;
 	GtkTreeViewColumn *column;
 	GtkCellRenderer *renderer;
+	GtkListStore *store;
 
 	if (error)
 		return;
 
 	populate_ui (self);
+
+	/* Address column */
+	store = GTK_LIST_STORE (gtk_tree_view_get_model (priv->addr_list));
 
 	/* IP Address column */
 	renderer = gtk_cell_renderer_text_new ();

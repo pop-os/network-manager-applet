@@ -17,7 +17,7 @@
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  *
- * (C) Copyright 2008 - 2011 Red Hat, Inc.
+ * (C) Copyright 2008 Red Hat, Inc.
  */
 
 #ifndef __CE_PAGE_H__
@@ -30,6 +30,10 @@
 
 #include <dbus/dbus-glib.h>
 #include <nm-connection.h>
+
+#if !GTK_CHECK_VERSION(2,18,0)
+#define gtk_widget_is_toplevel GTK_WIDGET_TOPLEVEL
+#endif
 
 typedef void (*PageNewConnectionResultFunc) (NMConnection *connection,
                                              gboolean canceled,
@@ -113,8 +117,6 @@ void ce_page_complete_init (CEPage *self,
                             GError *error);
 
 gboolean ce_page_get_initialized (CEPage *self);
-
-char *ce_page_get_next_available_name (GSList *connections, const char *format);
 
 /* Only for subclasses */
 NMConnection *ce_page_new_connection (const char *format,

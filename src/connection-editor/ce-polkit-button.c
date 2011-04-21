@@ -43,15 +43,17 @@ typedef struct {
 	GtkWidget *stock;
 	GtkWidget *auth;
 
-	NMClient *client;
-	NMClientPermission permission;
+	NMRemoteSettingsSystem *settings;
+	NMSettingsSystemPermissions permission;
+	gboolean use_polkit;
+	GSList *perm_calls;
 	/* authorized = TRUE if either explicitly authorized or if the action
 	 * could be performed if the user successfully authenticated to gain the
 	 * authorization.
 	 */
 	gboolean authorized;
 
-	guint perm_id;
+	guint check_id;
 } CEPolkitButtonPrivate;
 
 enum {
@@ -69,7 +71,7 @@ update_button (CEPolkitButton *self, gboolean actionable)
 
 	gtk_widget_set_sensitive (GTK_WIDGET (self), actionable);
 
-	if (priv->authorized) {
+	if (priv->use_polkit && priv->authorized) {
 		gtk_button_set_label (GTK_BUTTON (self), priv->auth_label);
 		gtk_widget_set_tooltip_text (GTK_WIDGET (self), priv->auth_tooltip);
 		gtk_button_set_image (GTK_BUTTON (self), priv->auth);
@@ -89,6 +91,19 @@ update_and_emit (CEPolkitButton *self, gboolean old_actionable)
 	update_button (self, new_actionable);
 	if (new_actionable != old_actionable)
 		g_signal_emit (self, signals[ACTIONABLE], 0, new_actionable);
+}
+
+void
+ce_polkit_button_set_use_polkit (CEPolkitButton *self, gboolean use_polkit)
+{
+	gboolean old_actionable;
+
+	g_return_if_fail (self != NULL);
+	g_return_if_fail (CE_IS_POLKIT_BUTTON (self));
+
+	old_actionable = ce_polkit_button_get_actionable (self);
+	CE_POLKIT_BUTTON_GET_PRIVATE (self)->use_polkit = use_polkit;
+	update_and_emit (self, old_actionable);
 }
 
 void
@@ -114,7 +129,14 @@ ce_polkit_button_get_actionable (CEPolkitButton *self)
 
 	priv = CE_POLKIT_BUTTON_GET_PRIVATE (self);
 
-	return priv->master_sensitive && priv->authorized;
+	if (!priv->master_sensitive)
+		return FALSE;
+
+	/* If polkit is in-use, the button is only actionable if the operation is
+	 * authorized or able to be authorized via user authentication.  If polkit
+	 * isn't in-use, the button will always be actionable unless insensitive.
+	 */
+	return priv->use_polkit ? priv->authorized : TRUE;
 }
 
 gboolean
@@ -126,23 +148,60 @@ ce_polkit_button_get_authorized (CEPolkitButton *self)
 	return CE_POLKIT_BUTTON_GET_PRIVATE (self)->authorized;
 }
 
+typedef struct {
+	CEPolkitButton *self;
+	gboolean disposed;
+} PermInfo;
+
 static void
-permission_changed_cb (NMClient *client,
-                       NMClientPermission permission,
-                       NMClientPermissionResult result,
-                       CEPolkitButton *self)
+get_permissions_cb (NMSettingsSystemInterface *settings,
+                    NMSettingsSystemPermissions permissions,
+                    GError *error,
+                    gpointer user_data)
 {
-	CEPolkitButtonPrivate *priv = CE_POLKIT_BUTTON_GET_PRIVATE (self);
+	PermInfo *info = user_data;
+	CEPolkitButton *self = info->self;
+	CEPolkitButtonPrivate *priv;
 	gboolean old_actionable, old_authorized;
+
+	/* Response might come when button is already disposed */
+	if (info->disposed)
+		goto out;
+
+	priv = CE_POLKIT_BUTTON_GET_PRIVATE (info->self);
+
+	priv->perm_calls = g_slist_remove (priv->perm_calls, info);
 
 	old_actionable = ce_polkit_button_get_actionable (self);
 	old_authorized = priv->authorized;
 
-	priv->authorized = (result == NM_CLIENT_PERMISSION_RESULT_YES || result == NM_CLIENT_PERMISSION_RESULT_AUTH);
-	update_and_emit (self, old_actionable);
+	priv->authorized = (permissions & priv->permission);
+	if (priv->use_polkit)
+		update_and_emit (self, old_actionable);
 
 	if (priv->authorized != old_authorized)
 		g_signal_emit (self, signals[AUTHORIZED], 0, priv->authorized);
+
+out:
+	g_free (info);
+}
+
+static void
+check_permissions_cb (NMRemoteSettingsSystem *settings, CEPolkitButton *self)
+{
+	PermInfo *info;
+	CEPolkitButtonPrivate *priv;
+
+	info = g_malloc0 (sizeof (PermInfo));
+	info->self = self;
+
+	priv = CE_POLKIT_BUTTON_GET_PRIVATE (info->self);
+	priv->perm_calls = g_slist_append (priv->perm_calls, info);
+
+	/* recheck permissions */
+	nm_settings_system_interface_get_permissions (NM_SETTINGS_SYSTEM_INTERFACE (settings),
+	                                              get_permissions_cb,
+	                                              info);
 }
 
 GtkWidget *
@@ -151,8 +210,8 @@ ce_polkit_button_new (const char *label,
                       const char *auth_label,
                       const char *auth_tooltip,
                       const char *stock_icon,
-                      NMClient *client,
-                      NMClientPermission permission)
+                      NMRemoteSettingsSystem *settings,
+                      NMSettingsSystemPermissions permission)
 {
 	GObject *object;
 	CEPolkitButtonPrivate *priv;
@@ -168,12 +227,13 @@ ce_polkit_button_new (const char *label,
 	priv->auth_label = g_strdup (auth_label);
 	priv->auth_tooltip = g_strdup (auth_tooltip);
 	priv->permission = permission;
+	priv->use_polkit = FALSE;
 
-	priv->client = g_object_ref (client);
-	priv->perm_id = g_signal_connect (client,
-	                                  "permission-changed",
-	                                  G_CALLBACK (permission_changed_cb),
-	                                  object);
+	priv->settings = g_object_ref (settings);
+	priv->check_id = g_signal_connect (settings,
+	                                   NM_SETTINGS_SYSTEM_INTERFACE_CHECK_PERMISSIONS,
+	                                   G_CALLBACK (check_permissions_cb),
+	                                   object);
 
 	priv->stock = gtk_image_new_from_stock (stock_icon, GTK_ICON_SIZE_BUTTON);
 	g_object_ref_sink (priv->stock);
@@ -183,10 +243,7 @@ ce_polkit_button_new (const char *label,
 	update_button (CE_POLKIT_BUTTON (object),
 	               ce_polkit_button_get_actionable (CE_POLKIT_BUTTON (object)));
 
-	permission_changed_cb (client,
-	                       permission,
-	                       nm_client_get_permission_result (client, permission),
-	                       CE_POLKIT_BUTTON (object));
+	check_permissions_cb (settings, CE_POLKIT_BUTTON (object));
 
 	return GTK_WIDGET (object);
 }
@@ -195,21 +252,22 @@ static void
 dispose (GObject *object)
 {
 	CEPolkitButtonPrivate *priv = CE_POLKIT_BUTTON_GET_PRIVATE (object);
+	GSList *iter;
 
-	if (priv->disposed) {
-		g_warning ("%s: CEPolkitButton object %p disposed twice", __func__, object);
-		G_OBJECT_CLASS (ce_polkit_button_parent_class)->dispose (object);
-		return;
+	if (priv->disposed == FALSE) {
+		priv->disposed = TRUE;
+
+		/* Mark any ongoing permissions calls as disposed */
+		for (iter = priv->perm_calls; iter; iter = g_slist_next (iter))
+			((PermInfo *) iter->data)->disposed = TRUE;
+
+		if (priv->check_id)
+			g_signal_handler_disconnect (priv->settings, priv->check_id);
+
+		g_object_unref (priv->settings);
+		g_object_unref (priv->auth);
+		g_object_unref (priv->stock);
 	}
-
-	priv->disposed = TRUE;
-
-	if (priv->perm_id)
-		g_signal_handler_disconnect (priv->client, priv->perm_id);
-
-	g_object_unref (priv->client);
-	g_object_unref (priv->auth);
-	g_object_unref (priv->stock);
 
 	G_OBJECT_CLASS (ce_polkit_button_parent_class)->dispose (object);
 }
@@ -223,6 +281,7 @@ finalize (GObject *object)
 	g_free (priv->auth_label);
 	g_free (priv->tooltip);
 	g_free (priv->auth_tooltip);
+	g_slist_free (priv->perm_calls);
 
 	G_OBJECT_CLASS (ce_polkit_button_parent_class)->finalize (object);
 }

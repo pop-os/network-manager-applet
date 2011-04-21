@@ -32,6 +32,7 @@
 #include <nm-utils.h>
 #include "ap-menu-item.h"
 #include "nm-access-point.h"
+#include "utils.h"
 
 
 G_DEFINE_TYPE (NMNetworkMenuItem, nm_network_menu_item, GTK_TYPE_IMAGE_MENU_ITEM);
@@ -89,7 +90,6 @@ nm_network_menu_item_class_dispose (GObject *object)
 
 	item->destroyed = TRUE;
 	g_free (item->hash);
-	g_free (item->ssid_string);
 
 	g_slist_foreach (item->dupes, (GFunc) g_free, NULL);
 	g_slist_free (item->dupes);
@@ -115,7 +115,7 @@ nm_network_menu_item_set_ssid (NMNetworkMenuItem *item, GByteArray *ssid)
 
 	g_free (item->ssid_string);
 
-	item->ssid_string = nm_utils_ssid_to_utf8 (ssid);
+	item->ssid_string = nm_utils_ssid_to_utf8 ((const char *) ssid->data, ssid->len);
 	if (!item->ssid_string) {
 		// FIXME: shouldn't happen; always coerce the SSID to _something_
 		item->ssid_string = g_strdup ("<unknown>");

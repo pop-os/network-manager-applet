@@ -26,6 +26,7 @@
 
 #include "eap-method.h"
 #include "wireless-security.h"
+#include "gconf-helpers.h"
 #include "helpers.h"
 
 struct _EAPMethodLEAP {
@@ -125,8 +126,7 @@ eap_method_leap_new (WirelessSecurity *ws_parent,
 	                          NULL,
 	                          UIDIR "/eap-method-leap.ui",
 	                          "eap_leap_notebook",
-	                          "eap_leap_username_entry",
-	                          FALSE);
+	                          "eap_leap_username_entry");
 	if (!parent)
 		return NULL;
 

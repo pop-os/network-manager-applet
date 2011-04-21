@@ -49,7 +49,6 @@ GType	   nm_mb_menu_item_get_type (void) G_GNUC_CONST;
 GtkWidget *nm_mb_menu_item_new (const char *connection_name,
                                 guint32 strength,
                                 const char *provider,
-                                gboolean active,
                                 guint32 technology,
                                 guint32 state,
                                 gboolean enabled,

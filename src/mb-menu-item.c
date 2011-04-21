@@ -30,6 +30,7 @@
 #include <string.h>
 
 #include "mb-menu-item.h"
+#include "utils.h"
 
 G_DEFINE_TYPE (NMMbMenuItem, nm_mb_menu_item, GTK_TYPE_IMAGE_MENU_ITEM);
 
@@ -69,8 +70,6 @@ get_tech_name (guint32 tech)
 		return _("HSUPA");
 	case MB_TECH_HSPA:
 		return _("HSPA");
-	case MB_TECH_WIMAX:
-		return _("WiMAX");
 	default:
 		break;
 	}
@@ -81,7 +80,6 @@ GtkWidget *
 nm_mb_menu_item_new (const char *connection_name,
                      guint32 strength,
                      const char *provider,
-                     gboolean active,
                      guint32 technology,
                      guint32 state,
                      gboolean enabled,
@@ -89,7 +87,7 @@ nm_mb_menu_item_new (const char *connection_name,
 {
 	NMMbMenuItem *item;
 	NMMbMenuItemPrivate *priv;
-	const char *tech_name = NULL;
+	const char *tech_name;
 
 	item = g_object_new (NM_TYPE_MB_MENU_ITEM, NULL);
 	if (!item)
@@ -98,11 +96,8 @@ nm_mb_menu_item_new (const char *connection_name,
 	priv = NM_MB_MENU_ITEM_GET_PRIVATE (item);
 	priv->int_strength = strength;
 
-	/* WiMAX doesn't show tech name */
-	if (technology != MB_TECH_WIMAX)
-		tech_name = get_tech_name (technology);
-
 	/* Construct the description string */
+	tech_name = get_tech_name (technology);
 	switch (state) {
 	default:
 	case MB_STATE_UNKNOWN:
@@ -167,17 +162,20 @@ nm_mb_menu_item_new (const char *connection_name,
 		break;
 	}
 
-	if (enabled && connection_name && active) {
+	/* Assume a connection name means the label should be active */
+	if (enabled && connection_name) {
 		char *markup;
 
 		gtk_label_set_use_markup (GTK_LABEL (priv->desc), TRUE);
 		markup = g_markup_printf_escaped ("<b>%s</b>", priv->desc_string);
 		gtk_label_set_markup (GTK_LABEL (priv->desc), markup);
 		g_free (markup);
+		gtk_widget_set_sensitive (GTK_WIDGET (item), TRUE);
 	} else {
 		/* Disconnected and disabled states */
 		gtk_label_set_use_markup (GTK_LABEL (priv->desc), FALSE);
 		gtk_label_set_text (GTK_LABEL (priv->desc), priv->desc_string);
+		gtk_widget_set_sensitive (GTK_WIDGET (item), FALSE);
 	}
 
 	/* And the strength icon, if we have strength information at all */

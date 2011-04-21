@@ -8,12 +8,22 @@ EXTRA_DIST =				\
 	intltool-merge.in		\
 	intltool-update.in
 
+dbusservicedir = $(DBUS_SYS_DIR)
+dbusservice_DATA = nm-applet.conf
+
+DBUS_126_CONF = nm-applet-dbus-126.conf
+DBUS_PRE_126_CONF = nm-applet-pre-dbus-126.conf
+
+nm-applet.conf:
+if HAVE_DBUS_126
+	cp -f $(top_srcdir)/$(DBUS_126_CONF) nm-applet.conf
+else
+	cp -f $(top_srcdir)/$(DBUS_PRE_126_CONF) nm-applet.conf
+endif
+
 autostartdir = $(sysconfdir)/xdg/autostart
 autostart_in_files = nm-applet.desktop.in
 autostart_DATA = $(autostart_in_files:.desktop.in=.desktop)
-
-applicationsdir = $(datadir)/applications
-applications_DATA = $(autostart_DATA)
 
 desktopdir = $(datadir)/applications
 desktop_in_files = nm-connection-editor.desktop.in
@@ -29,12 +39,15 @@ schemas_DATA = $(schemas_in_files:.schemas.in=.schemas)
 EXTRA_DIST += \
 	$(schemas_in_files) \
 	$(autostart_in_files) \
-	$(desktop_in_files)
+	$(desktop_in_files) \
+	$(DBUS_126_CONF) \
+	$(DBUS_PRE_126_CONF)
 
 CLEANFILES = \
 	$(autostart_DATA) \
 	$(desktop_DATA) \
-	$(schemas_DATA)
+	$(schemas_DATA) \
+	$(dbusservice_DATA)
 
 DISTCLEANFILES = intltool-extract intltool-merge intltool-update
 

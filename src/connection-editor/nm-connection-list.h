@@ -24,10 +24,11 @@
 #define NM_CONNECTION_LIST_H
 
 #include <glib-object.h>
+#include <gconf/gconf-client.h>
 #include <gdk/gdk.h>
 #include <gtk/gtk.h>
-#include <nm-client.h>
-#include <nm-remote-settings.h>
+#include <nm-remote-settings-system.h>
+#include "nma-gconf-settings.h"
 
 #define NM_TYPE_CONNECTION_LIST    (nm_connection_list_get_type ())
 #define NM_IS_CONNECTION_LIST(obj) (G_TYPE_CHECK_INSTANCE_TYPE ((obj), NM_TYPE_CONNECTION_LIST))
@@ -40,10 +41,9 @@ typedef struct {
 	GHashTable *editors;
 	GSList *treeviews;
 
-	GHashTable *actions;
-
-	NMClient *nm_client;
-	NMRemoteSettings *settings;
+	GConfClient *client;
+	NMAGConfSettings *gconf_settings;
+	NMRemoteSettingsSystem *system_settings;
 
 	GtkBuilder *gui;
 	GtkWidget *dialog;
@@ -54,8 +54,6 @@ typedef struct {
 	GdkPixbuf *vpn_icon;
 	GdkPixbuf *unknown_icon;
 	GtkIconTheme *icon_theme;
-
-	gboolean signals_connected;
 } NMConnectionList;
 
 typedef struct {
@@ -63,16 +61,15 @@ typedef struct {
 
 	/* Signals */
 	void (*done)  (NMConnectionList *list, gint result);
-	void (*editing_done)  (NMConnectionList *list, gint result);
 } NMConnectionListClass;
 
 GType             nm_connection_list_get_type (void);
-NMConnectionList *nm_connection_list_new (void);
+NMConnectionList *nm_connection_list_new (GType def_type);
+
+void              nm_connection_list_run (NMConnectionList *list);
 
 void              nm_connection_list_set_type (NMConnectionList *list, GType ctype);
 
 void              nm_connection_list_present (NMConnectionList *list);
-void              nm_connection_list_create (NMConnectionList *list, GType ctype);
-void              nm_connection_list_edit (NMConnectionList *list, const gchar *uuid);
 
 #endif

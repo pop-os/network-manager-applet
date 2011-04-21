@@ -20,8 +20,6 @@
  * (C) Copyright 2008 - 2011 Red Hat, Inc.
  */
 
-#include "config.h"
-
 #include <netinet/in.h>
 #include <sys/types.h>
 #include <sys/socket.h>
@@ -276,7 +274,9 @@ ip_address_filter_cb (GtkEntry *   entry,
 	GtkWidget *ok_button = user_data;
 	GtkEditable *editable = GTK_EDITABLE (entry);
 	int i, count = 0;
-	gchar *result = g_new (gchar, length);
+	gchar *result;
+
+	result = g_malloc0 (length + 1);
 
 	for (i = 0; i < length; i++) {
 		if (g_ascii_isxdigit(text[i]) || (text[i] == ':'))

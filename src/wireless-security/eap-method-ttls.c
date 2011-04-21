@@ -20,8 +20,6 @@
  * (C) Copyright 2007 - 2010 Red Hat, Inc.
  */
 
-#include "config.h"
-
 #include <glib/gi18n.h>
 #include <ctype.h>
 #include <string.h>
@@ -31,6 +29,7 @@
 
 #include "eap-method.h"
 #include "wireless-security.h"
+#include "gconf-helpers.h"
 
 #define I_NAME_COLUMN   0
 #define I_METHOD_COLUMN 1
@@ -147,6 +146,10 @@ fill_connection (EAPMethod *parent, NMConnection *connection)
 		g_warning ("Couldn't read CA certificate '%s': %s", filename, error ? error->message : "(unknown)");
 		g_clear_error (&error);
 	}
+
+	nm_gconf_set_ignore_ca_cert (nm_setting_connection_get_uuid (s_con),
+	                             FALSE,
+	                             eap_method_get_ignore_ca_cert (parent));
 
 	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_ttls_inner_auth_combo"));
 	model = gtk_combo_box_get_model (GTK_COMBO_BOX (widget));
@@ -328,12 +331,14 @@ eap_method_ttls_new (WirelessSecurity *ws_parent,
 	                          destroy,
 	                          UIDIR "/eap-method-ttls.ui",
 	                          "eap_ttls_notebook",
-	                          "eap_ttls_anon_identity_entry",
-	                          FALSE);
+	                          "eap_ttls_anon_identity_entry");
 	if (!parent)
 		return NULL;
 
-	eap_method_nag_init (parent, "eap_ttls_ca_cert_button", connection);
+	eap_method_nag_init (parent,
+	                     "eap_ttls_ca_cert_button",
+	                     connection,
+	                     FALSE);
 
 	method = (EAPMethodTTLS *) parent;
 	method->sec_parent = ws_parent;

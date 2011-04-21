@@ -17,7 +17,7 @@
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  *
- * (C) Copyright 2007 - 2011 Red Hat, Inc.
+ * (C) Copyright 2007 - 2010 Red Hat, Inc.
  */
 
 #include <config.h>
@@ -28,8 +28,8 @@
 #include <nm-device-ethernet.h>
 #include <nm-device-wifi.h>
 #include <nm-device-bt.h>
-#include <nm-device-modem.h>
-#include <nm-device-wimax.h>
+#include <nm-gsm-device.h>
+#include <nm-cdma-device.h>
 #include <nm-access-point.h>
 
 #include <nm-setting-connection.h>
@@ -41,10 +41,10 @@
 #include <nm-setting-cdma.h>
 #include <nm-setting-pppoe.h>
 #include <nm-setting-bluetooth.h>
-#include <nm-setting-wimax.h>
 #include <nm-utils.h>
 
 #include "utils.h"
+#include "gconf-helpers.h"
 
 static char *ignored_words[] = {
 	"Semiconductor",
@@ -538,46 +538,6 @@ connection_valid_for_bt (NMConnection *connection,
 	return addr_match;
 }
 
-static gboolean
-connection_valid_for_wimax (NMConnection *connection,
-                            NMSettingConnection *s_con,
-                            NMDevice *device,
-                            gpointer specific_object)
-{
-	NMDeviceWimax *wimax = NM_DEVICE_WIMAX (device);
-	NMSettingWimax *s_wimax;
-	const char *str_mac;
-	struct ether_addr *bin_mac;
-	const char *connection_type;
-	const GByteArray *setting_mac;
-
-	connection_type = nm_setting_connection_get_connection_type (s_con);
-	if (strcmp (connection_type, NM_SETTING_WIMAX_SETTING_NAME))
-		return FALSE;
-
-	s_wimax = (NMSettingWimax *) nm_connection_get_setting (connection, NM_TYPE_SETTING_WIMAX);
-	if (!s_wimax)
-		return FALSE;
-
-	if (s_wimax) {
-		/* Match MAC address */
-		setting_mac = nm_setting_wimax_get_mac_address (s_wimax);
-		if (!setting_mac)
-			return TRUE;
-
-		str_mac = nm_device_wimax_get_hw_address (wimax);
-		g_return_val_if_fail (str_mac != NULL, FALSE);
-
-		bin_mac = ether_aton (str_mac);
-		g_return_val_if_fail (bin_mac != NULL, FALSE);
-
-		if (memcmp (bin_mac->ether_addr_octet, setting_mac->data, ETH_ALEN))
-			return FALSE;
-	}
-
-	return TRUE;
-}
-
 gboolean
 utils_connection_valid_for_device (NMConnection *connection,
                                    NMDevice *device,
@@ -596,20 +556,12 @@ utils_connection_valid_for_device (NMConnection *connection,
 		return connection_valid_for_wired (connection, s_con, device, specific_object);
 	else if (NM_IS_DEVICE_WIFI (device))
 		return connection_valid_for_wireless (connection, s_con, device, specific_object);
-	else if (NM_IS_DEVICE_MODEM (device)) {
-		NMDeviceModemCapabilities caps;
-
-		caps = nm_device_modem_get_current_capabilities (NM_DEVICE_MODEM (device));
-		if (caps & NM_DEVICE_MODEM_CAPABILITY_GSM_UMTS)
-			return connection_valid_for_gsm (connection, s_con, device, specific_object);
-		else if (caps & NM_DEVICE_MODEM_CAPABILITY_CDMA_EVDO)
-			return connection_valid_for_cdma (connection, s_con, device, specific_object);
-		else
-			g_warning ("Unhandled modem capabilities 0x%X", caps);
-	} else if (NM_IS_DEVICE_BT (device))
+	else if (NM_IS_GSM_DEVICE (device))
+		return connection_valid_for_gsm (connection, s_con, device, specific_object);
+	else if (NM_IS_CDMA_DEVICE (device))
+		return connection_valid_for_cdma (connection, s_con, device, specific_object);
+	else if (NM_IS_DEVICE_BT (device))
 		return connection_valid_for_bt (connection, s_con, device, specific_object);
-	else if (NM_IS_DEVICE_WIMAX (device))
-		return connection_valid_for_wimax (connection, s_con, device, specific_object);
 	else
 		g_warning ("Unknown device type '%s'", g_type_name (G_OBJECT_TYPE(device)));
 
@@ -630,6 +582,88 @@ utils_filter_connections_for_device (NMDevice *device, GSList *connections)
 	}
 
 	return filtered;
+}
+
+gboolean
+utils_mac_valid (const struct ether_addr *addr)
+{
+	guint8 invalid1[ETH_ALEN] = {0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF};
+	guint8 invalid2[ETH_ALEN] = {0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
+	guint8 invalid3[ETH_ALEN] = {0x44, 0x44, 0x44, 0x44, 0x44, 0x44};
+	guint8 invalid4[ETH_ALEN] = {0x00, 0x30, 0xb4, 0x00, 0x00, 0x00}; /* prism54 dummy MAC */
+
+	g_return_val_if_fail (addr != NULL, FALSE);
+
+	/* Compare the AP address the card has with invalid ethernet MAC addresses. */
+	if (!memcmp (addr->ether_addr_octet, &invalid1, ETH_ALEN))
+		return FALSE;
+
+	if (!memcmp (addr->ether_addr_octet, &invalid2, ETH_ALEN))
+		return FALSE;
+
+	if (!memcmp (addr->ether_addr_octet, &invalid3, ETH_ALEN))
+		return FALSE;
+
+	if (!memcmp (addr->ether_addr_octet, &invalid4, ETH_ALEN))
+		return FALSE;
+
+	if (addr->ether_addr_octet[0] & 1) /* Multicast addresses */
+		return FALSE;
+	
+	return TRUE;
+}
+
+char *
+utils_ether_ntop (const struct ether_addr *mac)
+{
+	/* we like leading zeros and all-caps, instead
+	 * of what glibc's ether_ntop() gives us
+	 */
+	return g_strdup_printf ("%02X:%02X:%02X:%02X:%02X:%02X",
+	                        mac->ether_addr_octet[0], mac->ether_addr_octet[1],
+	                        mac->ether_addr_octet[2], mac->ether_addr_octet[3],
+	                        mac->ether_addr_octet[4], mac->ether_addr_octet[5]);
+}
+
+
+char *
+utils_next_available_name (GSList *connections, const char *format)
+{
+	GSList *names = NULL, *iter;
+	char *cname = NULL;
+	int i = 0;
+
+	for (iter = connections; iter; iter = g_slist_next (iter)) {
+		NMConnection *candidate = NM_CONNECTION (iter->data);
+		NMSettingConnection *s_con;
+		const char *id;
+
+		s_con = NM_SETTING_CONNECTION (nm_connection_get_setting (candidate, NM_TYPE_SETTING_CONNECTION));
+		id = nm_setting_connection_get_id (s_con);
+		g_assert (id);
+		names = g_slist_append (names, (gpointer) id);
+	}	
+
+	/* Find the next available unique connection name */
+	while (!cname && (i++ < 10000)) {
+		char *temp;
+		gboolean found = FALSE;
+
+		temp = g_strdup_printf (format, i);
+		for (iter = names; iter; iter = g_slist_next (iter)) {
+			if (!strcmp (iter->data, temp)) {
+				found = TRUE;
+				break;
+			}
+		}
+		if (!found)
+			cname = temp;
+		else
+			g_free (temp);
+	}
+
+	g_slist_free (names);
+	return cname;
 }
 
 char *
@@ -725,48 +759,5 @@ utils_escape_notify_message (const char *src)
 	}
 
 	return g_string_free (escaped, FALSE);
-}
-
-GnomeKeyringAttributeList *
-utils_create_keyring_add_attr_list (NMConnection *connection,
-                                    const char *connection_uuid,
-                                    const char *connection_id,
-                                    const char *setting_name,
-                                    const char *setting_key,
-                                    char **out_display_name)
-{
-	GnomeKeyringAttributeList *attrs = NULL;
-	NMSettingConnection *s_con;
-
-	if (connection) {
-		s_con = (NMSettingConnection *) nm_connection_get_setting (connection, NM_TYPE_SETTING_CONNECTION);
-		g_return_val_if_fail (s_con != NULL, NULL);
-		connection_uuid = nm_setting_connection_get_uuid (s_con);
-		connection_id = nm_setting_connection_get_id (s_con);
-	}
-
-	g_return_val_if_fail (connection_uuid != NULL, NULL);
-	g_return_val_if_fail (connection_id != NULL, NULL);
-	g_return_val_if_fail (setting_name != NULL, NULL);
-	g_return_val_if_fail (setting_key != NULL, NULL);
-
-	if (out_display_name) {
-		*out_display_name = g_strdup_printf ("Network secret for %s/%s/%s",
-		                                     connection_id,
-		                                     setting_name,
-		                                     setting_key);
-	}
-
-	attrs = gnome_keyring_attribute_list_new ();
-	gnome_keyring_attribute_list_append_string (attrs,
-	                                            KEYRING_UUID_TAG,
-	                                            connection_uuid);
-	gnome_keyring_attribute_list_append_string (attrs,
-	                                            KEYRING_SN_TAG,
-	                                            setting_name);
-	gnome_keyring_attribute_list_append_string (attrs,
-	                                            KEYRING_SK_TAG,
-	                                            setting_key);
-	return attrs;
 }
 

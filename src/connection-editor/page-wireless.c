@@ -20,8 +20,6 @@
  * (C) Copyright 2008 - 2010 Red Hat, Inc.
  */
 
-#include "config.h"
-
 #include <string.h>
 #include <math.h>
 
@@ -33,6 +31,7 @@
 #include <nm-utils.h>
 
 #include "page-wireless.h"
+#include "utils.h"
 
 G_DEFINE_TYPE (CEPageWireless, ce_page_wireless, CE_TYPE_PAGE)
 
@@ -295,7 +294,7 @@ populate_ui (CEPageWireless *self)
 				  NULL);
 
 	if (ssid)
-		utf8_ssid = nm_utils_ssid_to_utf8 (ssid);
+		utf8_ssid = nm_utils_ssid_to_utf8 ((const char *) ssid->data, ssid->len);
 	else
 		utf8_ssid = g_strdup ("");
 	gtk_entry_set_text (priv->ssid, utf8_ssid);

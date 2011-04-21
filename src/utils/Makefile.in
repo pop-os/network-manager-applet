@@ -50,11 +50,10 @@ CONFIG_CLEAN_FILES =
 CONFIG_CLEAN_VPATH_FILES =
 LTLIBRARIES = $(noinst_LTLIBRARIES)
 am__DEPENDENCIES_1 =
-libutils_la_DEPENDENCIES = $(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
-	$(am__DEPENDENCIES_1)
+libutils_la_DEPENDENCIES = $(am__DEPENDENCIES_1)
 am_libutils_la_OBJECTS = libutils_la-utils.lo \
 	libutils_la-nmn-mobile-providers.lo \
-	libutils_la-mobile-wizard.lo
+	libutils_la-mobile-wizard.lo libutils_la-nma-bling-spinner.lo
 libutils_la_OBJECTS = $(am_libutils_la_OBJECTS)
 AM_V_lt = $(am__v_lt_$(V))
 am__v_lt_ = $(am__v_lt_$(AM_DEFAULT_VERBOSITY))
@@ -151,8 +150,6 @@ DBUS_126_LIBS = @DBUS_126_LIBS@
 DBUS_SYS_DIR = @DBUS_SYS_DIR@
 DEFS = @DEFS@
 DEPDIR = @DEPDIR@
-DISABLE_DEPRECATED = @DISABLE_DEPRECATED@
-DLLTOOL = @DLLTOOL@
 DSYMUTIL = @DSYMUTIL@
 DUMPBIN = @DUMPBIN@
 ECHO_C = @ECHO_C@
@@ -162,8 +159,6 @@ EGREP = @EGREP@
 EXEEXT = @EXEEXT@
 FGREP = @FGREP@
 GCONFTOOL = @GCONFTOOL@
-GCONF_CFLAGS = @GCONF_CFLAGS@
-GCONF_LIBS = @GCONF_LIBS@
 GCONF_SCHEMA_CONFIG_SOURCE = @GCONF_SCHEMA_CONFIG_SOURCE@
 GCONF_SCHEMA_FILE_DIR = @GCONF_SCHEMA_FILE_DIR@
 GETTEXT_PACKAGE = @GETTEXT_PACKAGE@
@@ -172,13 +167,9 @@ GMOFILES = @GMOFILES@
 GMSGFMT = @GMSGFMT@
 GNOME_BLUETOOTH_CFLAGS = @GNOME_BLUETOOTH_CFLAGS@
 GNOME_BLUETOOTH_LIBS = @GNOME_BLUETOOTH_LIBS@
-GNOME_KEYRING_CFLAGS = @GNOME_KEYRING_CFLAGS@
-GNOME_KEYRING_LIBS = @GNOME_KEYRING_LIBS@
 GOBJECT_CFLAGS = @GOBJECT_CFLAGS@
 GOBJECT_LIBS = @GOBJECT_LIBS@
 GREP = @GREP@
-GTK_CFLAGS = @GTK_CFLAGS@
-GTK_LIBS = @GTK_LIBS@
 INSTALL = @INSTALL@
 INSTALL_DATA = @INSTALL_DATA@
 INSTALL_PROGRAM = @INSTALL_PROGRAM@
@@ -202,7 +193,6 @@ LN_S = @LN_S@
 LTLIBOBJS = @LTLIBOBJS@
 MAINT = @MAINT@
 MAKEINFO = @MAKEINFO@
-MANIFEST_TOOL = @MANIFEST_TOOL@
 MKDIR_P = @MKDIR_P@
 MKINSTALLDIRS = @MKINSTALLDIRS@
 MSGFMT = @MSGFMT@
@@ -212,8 +202,6 @@ NM = @NM@
 NMA_CFLAGS = @NMA_CFLAGS@
 NMA_LIBS = @NMA_LIBS@
 NMEDIT = @NMEDIT@
-NOTIFY_CFLAGS = @NOTIFY_CFLAGS@
-NOTIFY_LIBS = @NOTIFY_LIBS@
 OBJDUMP = @OBJDUMP@
 OBJEXT = @OBJEXT@
 OTOOL = @OTOOL@
@@ -247,7 +235,6 @@ abs_builddir = @abs_builddir@
 abs_srcdir = @abs_srcdir@
 abs_top_builddir = @abs_top_builddir@
 abs_top_srcdir = @abs_top_srcdir@
-ac_ct_AR = @ac_ct_AR@
 ac_ct_CC = @ac_ct_CC@
 ac_ct_DUMPBIN = @ac_ct_DUMPBIN@
 am__include = @am__include@
@@ -303,18 +290,19 @@ libutils_la_SOURCES = \
 	nmn-mobile-providers.h \
 	nmn-mobile-providers.c \
 	mobile-wizard.h \
-	mobile-wizard.c
+	mobile-wizard.c \
+	nma-bling-spinner.h \
+	nma-bling-spinner.c
 
 libutils_la_CPPFLAGS = \
-	$(GTK_CFLAGS) \
 	$(NMA_CFLAGS) \
-	$(GNOME_KEYRING_CFLAGS) \
 	-DUIDIR=\""$(uidir)"\" \
 	-DDATADIR=\""$(datadir)"\" \
 	$(DISABLE_DEPRECATED) \
+	-I${top_srcdir}/src/gconf-helpers \
 	-I${top_srcdir}/src
 
-libutils_la_LIBADD = $(GTK_LIBS) $(NMA_LIBS) $(GNOME_KEYRING_LIBS)
+libutils_la_LIBADD = $(NMA_LIBS)
 all: all-recursive
 
 .SUFFIXES:
@@ -368,6 +356,7 @@ distclean-compile:
 	-rm -f *.tab.c
 
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libutils_la-mobile-wizard.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libutils_la-nma-bling-spinner.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libutils_la-nmn-mobile-providers.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libutils_la-utils.Plo@am__quote@
 
@@ -421,6 +410,14 @@ libutils_la-mobile-wizard.lo: mobile-wizard.c
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	source='mobile-wizard.c' object='libutils_la-mobile-wizard.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libutils_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o libutils_la-mobile-wizard.lo `test -f 'mobile-wizard.c' || echo '$(srcdir)/'`mobile-wizard.c
+
+libutils_la-nma-bling-spinner.lo: nma-bling-spinner.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libutils_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT libutils_la-nma-bling-spinner.lo -MD -MP -MF $(DEPDIR)/libutils_la-nma-bling-spinner.Tpo -c -o libutils_la-nma-bling-spinner.lo `test -f 'nma-bling-spinner.c' || echo '$(srcdir)/'`nma-bling-spinner.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libutils_la-nma-bling-spinner.Tpo $(DEPDIR)/libutils_la-nma-bling-spinner.Plo
+@am__fastdepCC_FALSE@	$(AM_V_CC) @AM_BACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='nma-bling-spinner.c' object='libutils_la-nma-bling-spinner.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libutils_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o libutils_la-nma-bling-spinner.lo `test -f 'nma-bling-spinner.c' || echo '$(srcdir)/'`nma-bling-spinner.c
 
 mostlyclean-libtool:
 	-rm -f *.lo

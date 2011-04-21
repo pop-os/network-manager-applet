@@ -17,7 +17,7 @@
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  *
- * (C) Copyright 2008 - 2011 Red Hat, Inc.
+ * (C) Copyright 2008 Red Hat, Inc.
  * (C) Copyright 2008 Novell, Inc.
  */
 
@@ -40,6 +40,7 @@
 #include "applet-device-wired.h"
 #include "wired-dialog.h"
 #include "utils.h"
+#include "gconf-helpers.h"
 
 typedef struct {
 	NMApplet *applet;
@@ -80,11 +81,11 @@ wired_new_auto_connection (NMDevice *device,
 	s_con = NM_SETTING_CONNECTION (nm_setting_connection_new ());
 	uuid = nm_utils_uuid_generate ();
 	g_object_set (s_con,
-				  NM_SETTING_CONNECTION_ID, DEFAULT_WIRED_NAME,
-				  NM_SETTING_CONNECTION_TYPE, nm_setting_get_name (NM_SETTING (s_wired)),
-				  NM_SETTING_CONNECTION_AUTOCONNECT, TRUE,
-				  NM_SETTING_CONNECTION_UUID, uuid,
-				  NULL);
+	              NM_SETTING_CONNECTION_ID, DEFAULT_WIRED_NAME,
+	              NM_SETTING_CONNECTION_TYPE, NM_SETTING_WIRED_SETTING_NAME,
+	              NM_SETTING_CONNECTION_AUTOCONNECT, TRUE,
+	              NM_SETTING_CONNECTION_UUID, uuid,
+	              NULL);
 	g_free (uuid);
 
 	nm_connection_add_setting (connection, NM_SETTING (s_con));
@@ -322,13 +323,18 @@ wired_get_icon (NMDevice *device,
 /* PPPoE */
 
 typedef struct {
-	SecretsRequest req;
-
-	GtkWidget *dialog;
 	GtkEntry *username_entry;
 	GtkEntry *service_entry;
 	GtkEntry *password_entry;
 	GtkWidget *ok_button;
+
+	NMApplet *applet;
+	NMSettingsConnectionInterface *connection;
+	NMANewSecretsRequestedFunc callback;
+	gpointer callback_data;
+
+	GtkWidget *dialog;
+	NMActiveConnection *active_connection;
 } NMPppoeInfo;
 
 static void
@@ -392,60 +398,129 @@ pppoe_update_ui (NMConnection *connection, NMPppoeInfo *info)
 		gtk_entry_set_text (info->password_entry, s);
 }
 
-static void
-free_pppoe_info (SecretsRequest *req)
+static NMPppoeInfo *
+pppoe_info_new (GtkBuilder *builder,
+                NMApplet *applet,
+				NMANewSecretsRequestedFunc callback,
+				gpointer callback_data,
+                NMSettingsConnectionInterface *connection,
+                NMActiveConnection *active_connection)
 {
-	NMPppoeInfo *info = (NMPppoeInfo *) req;
+	NMPppoeInfo *info;
 
-	if (info->dialog) {
-		gtk_widget_hide (info->dialog);
-		gtk_widget_destroy (info->dialog);
-	}
+	info = g_new0 (NMPppoeInfo, 1);
+	
+	info->username_entry = GTK_ENTRY (GTK_WIDGET (gtk_builder_get_object (builder, "dsl_username")));
+	g_signal_connect (info->username_entry, "changed", G_CALLBACK (pppoe_verify), info);
+
+	info->service_entry = GTK_ENTRY (GTK_WIDGET (gtk_builder_get_object (builder, "dsl_service")));
+
+	info->password_entry = GTK_ENTRY (GTK_WIDGET (gtk_builder_get_object (builder, "dsl_password")));
+	g_signal_connect (info->password_entry, "changed", G_CALLBACK (pppoe_verify), info);
+
+	info->applet = applet;
+	info->callback = callback;
+	info->callback_data = callback_data;
+	info->connection = g_object_ref (connection);
+	info->active_connection = active_connection;
+
+	return info;
 }
 
 static void
-get_pppoe_secrets_cb (GtkDialog *dialog, gint response, gpointer user_data)
+pppoe_info_destroy (gpointer data, GObject *destroyed_object)
 {
-	SecretsRequest *req = user_data;
-	NMPppoeInfo *info = (NMPppoeInfo *) req;
+	NMPppoeInfo *info = (NMPppoeInfo *) data;
+
+	g_object_unref (info->connection);	
+	g_free (info);
+}
+
+static void
+destroy_pppoe_dialog (gpointer data, GObject *finalized)
+{
+	NMPppoeInfo *info = data;
+
+	/* When the active connection object is destroyed, try to destroy the
+	 * dialog too, if it's still around.
+	 */
+	gtk_widget_hide (info->dialog);
+	gtk_widget_destroy (info->dialog);
+	pppoe_info_destroy (info, NULL);
+}
+
+static void
+update_cb (NMSettingsConnectionInterface *connection,
+           GError *error,
+           gpointer user_data)
+{
+	if (error)
+		g_warning ("Error saving connection secrets: (%d) %s", error->code, error->message);
+}
+
+static void
+get_pppoe_secrets_cb (GtkDialog *dialog,
+					  gint response,
+					  gpointer user_data)
+{
+	NMPppoeInfo *info = (NMPppoeInfo *) user_data;
 	NMSetting *setting;
-	GHashTable *settings = NULL;
+	GHashTable *settings_hash;
 	GHashTable *secrets;
 	GError *error = NULL;
 
+	/* Got a user response, clear the NMActiveConnection destroy handler for
+	 * this dialog since this function will now take over dialog destruction.
+	 */
+	g_object_weak_unref (G_OBJECT (info->active_connection), destroy_pppoe_dialog, info);
+
 	if (response != GTK_RESPONSE_OK) {
 		g_set_error (&error,
-		             NM_SECRET_AGENT_ERROR,
-		             NM_SECRET_AGENT_ERROR_USER_CANCELED,
+		             NM_SETTINGS_INTERFACE_ERROR,
+		             NM_SETTINGS_INTERFACE_ERROR_SECRETS_REQUEST_CANCELED,
 		             "%s.%d (%s): canceled",
 		             __FILE__, __LINE__, __func__);
 		goto done;
 	}
 
-	setting = nm_connection_get_setting (req->connection, NM_TYPE_SETTING_PPPOE);
+	setting = nm_connection_get_setting (NM_CONNECTION (info->connection), NM_TYPE_SETTING_PPPOE);
 	pppoe_update_setting (NM_SETTING_PPPOE (setting), info);
 
-	secrets = nm_setting_to_hash (setting, NM_SETTING_HASH_FLAG_ONLY_SECRETS);
+	secrets = nm_setting_to_hash (setting);
 	if (!secrets) {
 		g_set_error (&error,
-		             NM_SECRET_AGENT_ERROR,
-		             NM_SECRET_AGENT_ERROR_INTERNAL_ERROR,
-					 "%s.%d (%s): failed to hash setting " NM_SETTING_PPPOE_SETTING_NAME,
-					 __FILE__, __LINE__, __func__);
-	} else {
-		/* Returned secrets are a{sa{sv}}; this is the outer a{s...} hash that
-		 * will contain all the individual settings hashes.
-		 */
-		settings = g_hash_table_new_full (g_str_hash, g_str_equal, NULL, (GDestroyNotify) g_hash_table_destroy);
-		g_hash_table_insert (settings, NM_SETTING_PPPOE_SETTING_NAME, secrets);
+		             NM_SETTINGS_INTERFACE_ERROR,
+		             NM_SETTINGS_INTERFACE_ERROR_INTERNAL_ERROR,
+					 "%s.%d (%s): failed to hash setting '%s'.",
+					 __FILE__, __LINE__, __func__, nm_setting_get_name (setting));
+		goto done;
 	}
 
-done:
-	applet_secrets_request_complete (req, settings, error);
-	applet_secrets_request_free (req);
+	/* Returned secrets are a{sa{sv}}; this is the outer a{s...} hash that
+	 * will contain all the individual settings hashes.
+	 */
+	settings_hash = g_hash_table_new_full (g_str_hash, g_str_equal,
+										   g_free, (GDestroyNotify) g_hash_table_destroy);
 
-	if (settings)
-		g_hash_table_destroy (settings);
+	g_hash_table_insert (settings_hash, g_strdup (nm_setting_get_name (setting)), secrets);
+	info->callback (info->connection, settings_hash, NULL, info->callback_data);
+	g_hash_table_destroy (settings_hash);
+
+	/* Save the connection back to GConf _after_ hashing it, because
+	 * saving to GConf might trigger the GConf change notifiers, resulting
+	 * in the connection being read back in from GConf which clears secrets.
+	 */
+	nm_settings_connection_interface_update (info->connection, update_cb, NULL);
+
+done:
+	if (error) {
+		g_warning ("%s", error->message);
+		info->callback (info->connection, NULL, error, info->callback_data);
+		g_error_free (error);
+	}
+
+	nm_connection_clear_secrets (NM_CONNECTION (info->connection));
+	destroy_pppoe_dialog (info, NULL);
 }
 
 static void
@@ -460,34 +535,33 @@ show_password_toggled (GtkToggleButton *button, gpointer user_data)
 }
 
 static gboolean
-pppoe_get_secrets (SecretsRequest *req, GError **error)
+pppoe_get_secrets (NMDevice *device,
+				   NMSettingsConnectionInterface *connection,
+				   NMActiveConnection *active_connection,
+				   const char *setting_name,
+				   NMANewSecretsRequestedFunc callback,
+				   gpointer callback_data,
+				   NMApplet *applet,
+				   GError **error)
 {
-	NMPppoeInfo *info = (NMPppoeInfo *) req;
+	NMPppoeInfo *info;
 	GtkWidget *w;
 	GtkBuilder* builder;
-	GError *tmp_error = NULL;
 
 	builder = gtk_builder_new ();
 
-	if (!gtk_builder_add_from_file (builder, UIDIR "/ce-page-dsl.ui", &tmp_error)) {
+	if (!gtk_builder_add_from_file (builder, UIDIR "/ce-page-dsl.ui", error))
+	{
+		g_warning ("Couldn't load builder file: %s", (*error)->message);
 		g_set_error (error,
-		             NM_SECRET_AGENT_ERROR,
-		             NM_SECRET_AGENT_ERROR_INTERNAL_ERROR,
-					 "%s.%d (%s): couldn't display secrets UI: %s",
-		             __FILE__, __LINE__, __func__, tmp_error->message);
-		g_error_free (tmp_error);
+		             NM_SETTINGS_INTERFACE_ERROR,
+		             NM_SETTINGS_INTERFACE_ERROR_INTERNAL_ERROR,
+					 "%s.%d (%s): couldn't display secrets UI",
+		             __FILE__, __LINE__, __func__);
 		return FALSE;
 	}
 
-	applet_secrets_request_set_free_func (req, free_pppoe_info);
-
-	info->username_entry = GTK_ENTRY (gtk_builder_get_object (builder, "dsl_username"));
-	g_signal_connect (info->username_entry, "changed", G_CALLBACK (pppoe_verify), info);
-
-	info->service_entry = GTK_ENTRY (gtk_builder_get_object (builder, "dsl_service"));
-
-	info->password_entry = GTK_ENTRY (gtk_builder_get_object (builder, "dsl_password"));
-	g_signal_connect (info->password_entry, "changed", G_CALLBACK (pppoe_verify), info);
+	info = pppoe_info_new (builder, applet, callback, callback_data, connection, active_connection);
 
 	/* Create the dialog */
 	info->dialog = gtk_dialog_new ();
@@ -502,12 +576,19 @@ pppoe_get_secrets (SecretsRequest *req, GError **error)
 	                    GTK_WIDGET (gtk_builder_get_object (builder, "DslPage")),
 	                    TRUE, TRUE, 0);
 
-	pppoe_update_ui (req->connection, info);
+	pppoe_update_ui (NM_CONNECTION (connection), info);
 
 	w = GTK_WIDGET (gtk_builder_get_object (builder, "dsl_show_password"));
-	g_signal_connect (w, "toggled", G_CALLBACK (show_password_toggled), info);
+	g_signal_connect (G_OBJECT (w), "toggled", G_CALLBACK (show_password_toggled), info);
 
-	g_signal_connect (info->dialog, "response", G_CALLBACK (get_pppoe_secrets_cb), info);
+	g_signal_connect (info->dialog, "response",
+	                  G_CALLBACK (get_pppoe_secrets_cb),
+	                  info);
+
+	/* Attach a destroy notifier to the NMActiveConnection so we can destroy
+	 * the dialog when the active connection goes away.
+	 */
+	g_object_weak_ref (G_OBJECT (active_connection), destroy_pppoe_dialog, info);
 
 	gtk_window_set_position (GTK_WINDOW (info->dialog), GTK_WIN_POS_CENTER_ALWAYS);
 	gtk_widget_realize (info->dialog);
@@ -519,34 +600,44 @@ pppoe_get_secrets (SecretsRequest *req, GError **error)
 /* 802.1x */
 
 typedef struct {
-	SecretsRequest req;
+	NMApplet *applet;
+	NMActiveConnection *active_connection;
 	GtkWidget *dialog;
+	NMANewSecretsRequestedFunc callback;
+	gpointer callback_data;
 } NM8021xInfo;
 
 static void
-free_8021x_info (SecretsRequest *req)
+destroy_8021x_dialog (gpointer user_data, GObject *finalized)
 {
-	NM8021xInfo *info = (NM8021xInfo *) req;
+	NM8021xInfo *info = user_data;
 
-	if (info->dialog) {
-		gtk_widget_hide (info->dialog);
-		gtk_widget_destroy (info->dialog);
-	}
+	gtk_widget_hide (info->dialog);
+	gtk_widget_destroy (info->dialog);
+	g_free (info);
 }
 
 static void
-get_8021x_secrets_cb (GtkDialog *dialog, gint response, gpointer user_data)
+get_8021x_secrets_cb (GtkDialog *dialog,
+					  gint response,
+					  gpointer user_data)
 {
-	SecretsRequest *req = user_data;
-	NM8021xInfo *info = (NM8021xInfo *) req;
-	NMConnection *connection = NULL;
+	NM8021xInfo *info = user_data;
+	NMSettingsConnectionInterface *connection = NULL;
 	NMSetting *setting;
+	GHashTable *settings_hash;
+	GHashTable *secrets;
 	GError *error = NULL;
+
+	/* Got a user response, clear the NMActiveConnection destroy handler for
+	 * this dialog since this function will now take over dialog destruction.
+	 */
+	g_object_weak_unref (G_OBJECT (info->active_connection), destroy_8021x_dialog, info);
 
 	if (response != GTK_RESPONSE_OK) {
 		g_set_error (&error,
-		             NM_SECRET_AGENT_ERROR,
-		             NM_SECRET_AGENT_ERROR_USER_CANCELED,
+		             NM_SETTINGS_INTERFACE_ERROR,
+		             NM_SETTINGS_INTERFACE_ERROR_SECRETS_REQUEST_CANCELED,
 		             "%s.%d (%s): canceled",
 		             __FILE__, __LINE__, __func__);
 		goto done;
@@ -555,87 +646,154 @@ get_8021x_secrets_cb (GtkDialog *dialog, gint response, gpointer user_data)
 	connection = nma_wired_dialog_get_connection (info->dialog);
 	if (!connection) {
 		g_set_error (&error,
-		             NM_SECRET_AGENT_ERROR,
-		             NM_SECRET_AGENT_ERROR_INTERNAL_ERROR,
+		             NM_SETTINGS_INTERFACE_ERROR,
+		             NM_SETTINGS_INTERFACE_ERROR_INTERNAL_ERROR,
 		             "%s.%d (%s): couldn't get connection from wired dialog.",
 		             __FILE__, __LINE__, __func__);
 		goto done;
 	}
 
-	setting = nm_connection_get_setting (connection, NM_TYPE_SETTING_802_1X);
-	if (setting) {
-		nm_connection_add_setting (req->connection, g_object_ref (setting));
-	} else {
+	setting = nm_connection_get_setting (NM_CONNECTION (connection), NM_TYPE_SETTING_802_1X);
+	if (!setting) {
 		g_set_error (&error,
-		             NM_SECRET_AGENT_ERROR,
-		             NM_SECRET_AGENT_ERROR_INTERNAL_ERROR,
+		             NM_SETTINGS_INTERFACE_ERROR,
+		             NM_SETTINGS_INTERFACE_ERROR_INVALID_CONNECTION,
 					 "%s.%d (%s): requested setting '802-1x' didn't"
 					 " exist in the connection.",
 					 __FILE__, __LINE__, __func__);
+		goto done;
 	}
 
+	secrets = nm_setting_to_hash (setting);
+	if (!secrets) {
+		g_set_error (&error,
+		             NM_SETTINGS_INTERFACE_ERROR,
+		             NM_SETTINGS_INTERFACE_ERROR_INTERNAL_ERROR,
+					 "%s.%d (%s): failed to hash setting '%s'.",
+					 __FILE__, __LINE__, __func__, nm_setting_get_name (setting));
+		goto done;
+	}
+
+	/* Returned secrets are a{sa{sv}}; this is the outer a{s...} hash that
+	 * will contain all the individual settings hashes.
+	 */
+	settings_hash = g_hash_table_new_full (g_str_hash, g_str_equal,
+										   g_free, (GDestroyNotify) g_hash_table_destroy);
+
+	g_hash_table_insert (settings_hash, g_strdup (nm_setting_get_name (setting)), secrets);
+	info->callback (connection, settings_hash, NULL, info->callback_data);
+	g_hash_table_destroy (settings_hash);
+
+	/* Save the connection back to GConf _after_ hashing it, because
+	 * saving to GConf might trigger the GConf change notifiers, resulting
+	 * in the connection being read back in from GConf which clears secrets.
+	 */
+	nm_settings_connection_interface_update (connection, update_cb, NULL);
+
 done:
-	applet_secrets_request_complete_setting (req, NM_SETTING_802_1X_SETTING_NAME, error);
-	applet_secrets_request_free (req);
-	g_clear_error (&error);
+	if (error) {
+		g_warning ("%s", error->message);
+		info->callback (connection, NULL, error, info->callback_data);
+		g_error_free (error);
+	}
+
+	if (connection)
+		nm_connection_clear_secrets (NM_CONNECTION (connection));
+
+	destroy_8021x_dialog (info, NULL);
 }
 
 static gboolean
-nm_8021x_get_secrets (SecretsRequest *req, GError **error)
+nm_8021x_get_secrets (NMDevice *device,
+					  NMSettingsConnectionInterface *connection,
+					  NMActiveConnection *active_connection,
+					  const char *setting_name,
+					  NMANewSecretsRequestedFunc callback,
+					  gpointer callback_data,
+					  NMApplet *applet,
+					  GError **error)
 {
-	NM8021xInfo *info = (NM8021xInfo *) req;
+	GtkWidget *dialog;
+	NM8021xInfo *info;
 
-	applet_secrets_request_set_free_func (req, free_8021x_info);
-
-	info->dialog = nma_wired_dialog_new (g_object_ref (req->connection));
-	if (!info->dialog) {
+	dialog = nma_wired_dialog_new (applet->nm_client, g_object_ref (connection), device);
+	if (!dialog) {
 		g_set_error (error,
-		             NM_SECRET_AGENT_ERROR,
-		             NM_SECRET_AGENT_ERROR_INTERNAL_ERROR,
+		             NM_SETTINGS_INTERFACE_ERROR,
+		             NM_SETTINGS_INTERFACE_ERROR_INTERNAL_ERROR,
 		             "%s.%d (%s): couldn't display secrets UI",
 		             __FILE__, __LINE__, __func__);
 		return FALSE;
 	}
 
-	g_signal_connect (info->dialog, "response", G_CALLBACK (get_8021x_secrets_cb), info);
+	info = g_malloc0 (sizeof (NM8021xInfo));
+	info->applet = applet;
+	info->active_connection = active_connection;
+	info->dialog = dialog;
+	info->callback = callback;
+	info->callback_data = callback_data;
 
-	gtk_window_set_position (GTK_WINDOW (info->dialog), GTK_WIN_POS_CENTER_ALWAYS);
-	gtk_widget_realize (info->dialog);
-	gtk_window_present (GTK_WINDOW (info->dialog));
+	g_signal_connect (dialog, "response", G_CALLBACK (get_8021x_secrets_cb), info);
+
+	/* Attach a destroy notifier to the NMActiveConnection so we can destroy
+	 * the dialog when the active connection goes away.
+	 */
+	g_object_weak_ref (G_OBJECT (active_connection), destroy_8021x_dialog, info);
+
+	gtk_window_set_position (GTK_WINDOW (dialog), GTK_WIN_POS_CENTER_ALWAYS);
+	gtk_widget_realize (dialog);
+	gtk_window_present (GTK_WINDOW (dialog));
 
 	return TRUE;
 }
 
 static gboolean
-wired_get_secrets (SecretsRequest *req, GError **error)
+wired_get_secrets (NMDevice *device,
+				   NMSettingsConnectionInterface *connection,
+				   NMActiveConnection *active_connection,
+				   const char *setting_name,
+				   const char **hints,
+				   NMANewSecretsRequestedFunc callback,
+				   gpointer callback_data,
+				   NMApplet *applet,
+				   GError **error)
 {
 	NMSettingConnection *s_con;
-	const char *ctype;
+	const char *connection_type;
+	gboolean success = FALSE;
 
-	s_con = NM_SETTING_CONNECTION (nm_connection_get_setting (req->connection, NM_TYPE_SETTING_CONNECTION));
+	s_con = NM_SETTING_CONNECTION (nm_connection_get_setting (NM_CONNECTION (connection), NM_TYPE_SETTING_CONNECTION));
 	if (!s_con) {
 		g_set_error (error,
-		             NM_SECRET_AGENT_ERROR,
-		             NM_SECRET_AGENT_ERROR_INVALID_CONNECTION,
+		             NM_SETTINGS_INTERFACE_ERROR,
+		             NM_SETTINGS_INTERFACE_ERROR_INVALID_CONNECTION,
 		             "%s.%d (%s): Invalid connection",
 		             __FILE__, __LINE__, __func__);
 		return FALSE;
 	}
 
-	ctype = nm_setting_connection_get_connection_type (s_con);
-	if (!strcmp (ctype, NM_SETTING_WIRED_SETTING_NAME))
-		return nm_8021x_get_secrets (req, error);
-	else if (!strcmp (ctype, NM_SETTING_PPPOE_SETTING_NAME))
-		return pppoe_get_secrets (req, error);
-	else {
-		g_set_error (error,
-		             NM_SECRET_AGENT_ERROR,
-		             NM_SECRET_AGENT_ERROR_INTERNAL_ERROR,
-		             "%s.%d (%s): unhandled wired connection type '%s'",
-		             __FILE__, __LINE__, __func__, ctype);
+	connection_type = nm_setting_connection_get_connection_type (s_con);
+	if (!strcmp (connection_type, NM_SETTING_WIRED_SETTING_NAME)) {
+		success = nm_8021x_get_secrets (device,
+		                                connection,
+		                                active_connection,
+		                                setting_name,
+		                                callback,
+		                                callback_data,
+		                                applet,
+		                                error);
+	} else if (!strcmp (connection_type, NM_SETTING_PPPOE_SETTING_NAME)) {
+		success = pppoe_get_secrets (device,
+		                             connection,
+		                             active_connection,
+		                             setting_name,
+		                             callback,
+		                             callback_data,
+		                             applet,
+		                             error);
 	}
 
-	return FALSE;
+	return success;
 }
 
 NMADeviceClass *
@@ -652,7 +810,6 @@ applet_device_wired_get_class (NMApplet *applet)
 	dclass->device_state_changed = wired_device_state_changed;
 	dclass->get_icon = wired_get_icon;
 	dclass->get_secrets = wired_get_secrets;
-	dclass->secrets_request_size = MAX (sizeof (NM8021xInfo), sizeof (NMPppoeInfo));
 
 	return dclass;
 }

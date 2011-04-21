@@ -18,7 +18,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  *
  * (C) Copyright 2008 Novell, Inc.
- * (C) Copyright 2008 - 2011 Red Hat, Inc.
+ * (C) Copyright 2008 - 2010 Red Hat, Inc.
  */
 
 #ifdef HAVE_CONFIG_H
@@ -33,6 +33,7 @@
 #include "wired-dialog.h"
 #include "wireless-security.h"
 #include "applet-dialogs.h"
+#include "gconf-helpers.h"
 
 static void
 stuff_changed_cb (WirelessSecurity *sec, gpointer user_data)
@@ -76,7 +77,9 @@ dialog_set_security (NMConnection *connection,
 }
 
 GtkWidget *
-nma_wired_dialog_new (NMConnection *connection)
+nma_wired_dialog_new (NMClient *nm_client,
+                      NMSettingsConnectionInterface *connection,
+                      NMDevice *device)
 {
 	GtkBuilder *builder;
 	GtkWidget *dialog;
@@ -95,7 +98,7 @@ nma_wired_dialog_new (NMConnection *connection)
 
 	dialog = (GtkWidget *) gtk_builder_get_object (builder, "wired_8021x_dialog");
 	if (!dialog) {
-		g_warning ("Couldn't find wireless_dialog widget.");
+		nm_warning ("Couldn't find wired_8021x_dialog widget.");
 		applet_warning_dialog_show (_("The NetworkManager Applet could not find some required resources (the .ui file was not found)."));
 		g_object_unref (builder);
 		return NULL;
@@ -103,9 +106,9 @@ nma_wired_dialog_new (NMConnection *connection)
 
 	gtk_window_set_title (GTK_WINDOW (dialog), _("Wired 802.1X authentication"));
 	gtk_window_set_icon_name (GTK_WINDOW (dialog), "dialog-password");
-	dialog_set_network_name (connection, GTK_ENTRY (gtk_builder_get_object (builder, "network_name_entry")));
+	dialog_set_network_name (NM_CONNECTION (connection), GTK_ENTRY (gtk_builder_get_object (builder, "network_name_entry")));
 
-	security = dialog_set_security (connection, builder, GTK_BOX (gtk_builder_get_object (builder, "security_vbox")));
+	security = dialog_set_security (NM_CONNECTION (connection), builder, GTK_BOX (gtk_builder_get_object (builder, "security_vbox")));
 	wireless_security_set_changed_notify (security, stuff_changed_cb, GTK_WIDGET (gtk_builder_get_object (builder, "ok_button")));
 	g_object_set_data_full (G_OBJECT (dialog),
 	                        "security", security,
@@ -123,11 +126,12 @@ nma_wired_dialog_new (NMConnection *connection)
 	return dialog;
 }
 					  
-NMConnection *
+NMSettingsConnectionInterface *
 nma_wired_dialog_get_connection (GtkWidget *dialog)
 {
-	NMConnection *connection, *tmp_connection;
+	NMSettingsConnectionInterface *connection;
 	WirelessSecurity *security;
+	NMConnection *tmp_connection;
 	NMSetting *s_8021x, *s_con;
 
 	g_return_val_if_fail (dialog != NULL, NULL);
@@ -141,7 +145,7 @@ nma_wired_dialog_get_connection (GtkWidget *dialog)
 	tmp_connection = nm_connection_new ();
 
 	/* Add the fake connection setting (mainly for the UUID for cert ignore checking) */
-	s_con = nm_connection_get_setting (connection, NM_TYPE_SETTING_CONNECTION);
+	s_con = nm_connection_get_setting (NM_CONNECTION (connection), NM_TYPE_SETTING_CONNECTION);
 	g_assert (s_con);
 	nm_connection_add_setting (tmp_connection, NM_SETTING (g_object_ref (s_con)));
 
@@ -153,7 +157,7 @@ nma_wired_dialog_get_connection (GtkWidget *dialog)
 
 	/* Grab it and add it to our original connection */
 	s_8021x = nm_connection_get_setting (tmp_connection, NM_TYPE_SETTING_802_1X);
-	nm_connection_add_setting (connection, NM_SETTING (g_object_ref (s_8021x)));
+	nm_connection_add_setting (NM_CONNECTION (connection), NM_SETTING (g_object_ref (s_8021x)));
 
 	g_object_unref (tmp_connection);
 

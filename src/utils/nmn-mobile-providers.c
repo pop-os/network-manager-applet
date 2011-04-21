@@ -21,8 +21,6 @@
  * Copyright (C) 2009 - 2010 Red Hat, Inc.
  */
 
-#include "config.h"
-
 #include <string.h>
 #include <errno.h>
 #include <stdlib.h>

@@ -20,8 +20,6 @@
  * (C) Copyright 2008 - 2010 Red Hat, Inc.
  */
 
-#include "config.h"
-
 #include <string.h>
 #include <ctype.h>
 
@@ -36,6 +34,7 @@
 
 #include "page-mobile.h"
 #include "nm-connection-editor.h"
+#include "gconf-helpers.h"
 #include "mobile-wizard.h"
 
 G_DEFINE_TYPE (CEPageMobile, ce_page_mobile, CE_TYPE_PAGE)
@@ -118,19 +117,19 @@ populate_gsm_ui (CEPageMobile *self, NMConnection *connection)
 		gtk_entry_set_text (priv->network_id, s);
 
 	switch (nm_setting_gsm_get_network_type (setting)) {
-	case NM_SETTING_GSM_NETWORK_TYPE_UMTS_HSPA:
+	case NM_GSM_NETWORK_UMTS_HSPA:
 		type_idx = NET_TYPE_3G;
 		break;
-	case NM_SETTING_GSM_NETWORK_TYPE_GPRS_EDGE:
+	case NM_GSM_NETWORK_GPRS_EDGE:
 		type_idx = NET_TYPE_2G;
 		break;
-	case NM_SETTING_GSM_NETWORK_TYPE_PREFER_UMTS_HSPA:
+	case NM_GSM_NETWORK_PREFER_UMTS_HSPA:
 		type_idx = NET_TYPE_PREFER_3G;
 		break;
-	case NM_SETTING_GSM_NETWORK_TYPE_PREFER_GPRS_EDGE:
+	case NM_GSM_NETWORK_PREFER_GPRS_EDGE:
 		type_idx = NET_TYPE_PREFER_2G;
 		break;
-	case NM_SETTING_GSM_NETWORK_TYPE_ANY:
+	case NM_GSM_NETWORK_ANY:
 	default:
 		type_idx = NET_TYPE_ANY;
 		break;
@@ -207,19 +206,13 @@ apn_button_mobile_wizard_done (MobileWizard *wizard,
 
 	if (!canceled && method) {
 		switch (method->devtype) {
-		case NM_DEVICE_MODEM_CAPABILITY_GSM_UMTS:
+		case NM_DEVICE_TYPE_GSM:
 			gtk_entry_set_text (GTK_ENTRY (priv->username),
 			                    method->username ? method->username : "");
 			gtk_entry_set_text (GTK_ENTRY (priv->password),
 			                    method->password ? method->password : "");
 			gtk_entry_set_text (GTK_ENTRY (priv->apn),
 			                    method->gsm_apn ? method->gsm_apn : "");
-			break;
-		case NM_DEVICE_MODEM_CAPABILITY_CDMA_EVDO:
-			gtk_entry_set_text (GTK_ENTRY (priv->username),
-			                    method->username ? method->username : "");
-			gtk_entry_set_text (GTK_ENTRY (priv->password),
-			                    method->password ? method->password : "");
 			break;
 		default:
 			g_assert_not_reached ();
@@ -248,7 +241,7 @@ apn_button_clicked (GtkButton *button, gpointer user_data)
 
 	wizard = mobile_wizard_new (GTK_WINDOW (toplevel),
 	                            priv->window_group,
-	                            NM_DEVICE_MODEM_CAPABILITY_GSM_UMTS,
+	                            NM_DEVICE_TYPE_GSM,
 	                            FALSE,
 	                            apn_button_mobile_wizard_done,
 	                            self);
@@ -265,7 +258,9 @@ network_id_filter_cb (GtkEntry *   entry,
 {
 	GtkEditable *editable = GTK_EDITABLE (entry);
 	int i, count = 0;
-	gchar *result = g_new0 (gchar, length);
+	gchar *result;
+
+	result = g_malloc0 (length + 1);
 
 	for (i = 0; i < length; i++) {
 		if (isdigit (text[i]))
@@ -419,20 +414,20 @@ gsm_ui_to_setting (CEPageMobile *self)
 
 	switch (gtk_combo_box_get_active (priv->network_type)) {
 	case NET_TYPE_3G:
-		net_type = NM_SETTING_GSM_NETWORK_TYPE_UMTS_HSPA;
+		net_type = NM_GSM_NETWORK_UMTS_HSPA;
 		break;
 	case NET_TYPE_2G:
-		net_type = NM_SETTING_GSM_NETWORK_TYPE_GPRS_EDGE;
+		net_type = NM_GSM_NETWORK_GPRS_EDGE;
 		break;
 	case NET_TYPE_PREFER_3G:
-		net_type = NM_SETTING_GSM_NETWORK_TYPE_PREFER_UMTS_HSPA;
+		net_type = NM_GSM_NETWORK_PREFER_UMTS_HSPA;
 		break;
 	case NET_TYPE_PREFER_2G:
-		net_type = NM_SETTING_GSM_NETWORK_TYPE_PREFER_GPRS_EDGE;
+		net_type = NM_GSM_NETWORK_PREFER_GPRS_EDGE;
 		break;
 	case NET_TYPE_ANY:
 	default:
-		net_type = NM_SETTING_GSM_NETWORK_TYPE_ANY;
+		net_type = NM_GSM_NETWORK_ANY;
 		break;
 	}
 
@@ -552,7 +547,7 @@ new_connection_mobile_wizard_done (MobileWizard *wizard,
 		char *detail = NULL;
 
 		switch (method->devtype) {
-		case NM_DEVICE_MODEM_CAPABILITY_GSM_UMTS:
+		case NM_DEVICE_TYPE_GSM:
 			ctype = NM_SETTING_GSM_SETTING_NAME;
 			type_setting = nm_setting_gsm_new ();
 			/* De-facto standard for GSM */
@@ -563,7 +558,7 @@ new_connection_mobile_wizard_done (MobileWizard *wizard,
 			              NM_SETTING_GSM_APN, method->gsm_apn,
 			              NULL);
 			break;
-		case NM_DEVICE_MODEM_CAPABILITY_CDMA_EVDO:
+		case NM_DEVICE_TYPE_CDMA:
 			ctype = NM_SETTING_CDMA_SETTING_NAME;
 			type_setting = nm_setting_cdma_new ();
 			/* De-facto standard for CDMA */
@@ -621,7 +616,7 @@ mobile_connection_new (GtkWindow *parent,
 	info->get_connections_func = get_connections_func;
 	info->user_data = user_data;
 
-	wizard = mobile_wizard_new (parent, NULL, NM_DEVICE_MODEM_CAPABILITY_NONE, FALSE,
+	wizard = mobile_wizard_new (parent, NULL, NM_DEVICE_TYPE_UNKNOWN, FALSE,
 	                            new_connection_mobile_wizard_done, info);
 	if (wizard) {
 		mobile_wizard_present (wizard);
@@ -677,10 +672,10 @@ mobile_connection_new (GtkWindow *parent,
 	response = gtk_dialog_run (GTK_DIALOG (dialog));
 	if (response == GTK_RESPONSE_OK) {
 		if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (cdma_radio))) {
-			method.devtype = NM_DEVICE_MODEM_CAPABILITY_CDMA_EVDO;
+			method.devtype = NM_DEVICE_TYPE_CDMA;
 			method.provider_name = _("CDMA");
 		} else {
-			method.devtype = NM_DEVICE_MODEM_CAPABILITY_GSM_UMTS;
+			method.devtype = NM_DEVICE_TYPE_GSM;
 			method.provider_name = _("GSM");
 		}
 	}
