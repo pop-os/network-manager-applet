@@ -45,17 +45,16 @@ Suggests:
  network-manager-vpnc-gnome,
  network-manager-pptp-gnome
 Description: network management framework (GNOME frontend)
- NetworkManager attempts to keep an active network connection available at all
- times. It is intended only for the desktop use-case, and is not intended for
- usage on servers. The point of NetworkManager is to make networking
- configuration and setup as painless and automatic as possible.  If using DHCP,
- NetworkManager is _intended_ to replace default routes, obtain IP addresses
- from a DHCP server, and change nameservers whenever it sees fit.
+ NetworkManager is a system network service that manages your network devices
+ and connections, attempting to keep active network connectivity when
+ available. It manages ethernet, WiFi, mobile broadband (WWAN), and PPPoE
+ devices, and provides VPN integration with a variety of different VPN
+ services.
  .
  This package contains a systray applet for GNOME's notification area but it
  also works for other desktop environments which provide a systray like KDE
  or Xfce.
- It displays the available networks and allows to easily switch between them.
- For encrypted networks it will prompt the user for the key/passphrase and it
- can optionally store them in the gnome-keyring.
+ It displays the available networks and allows users to easily switch between
+ them. For encrypted networks it will prompt the user for the key/passphrase
+ and it can optionally store them in the gnome-keyring.
 
