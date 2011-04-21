@@ -1,6 +1,8 @@
 network-manager-applet (0.8.4-1) UNRELEASED; urgency=low
 
   * New upstream release.
+  * debian/control
+    - Bump Build-Depends on libnm-*-dev and network-manager-dev to (>= 0.8.4).
 
  -- Michael Biebl <biebl@debian.org>  Thu, 21 Apr 2011 12:11:39 +0200
 
