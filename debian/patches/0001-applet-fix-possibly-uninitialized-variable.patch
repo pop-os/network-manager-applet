@@ -1,0 +1,26 @@
+From bbe547f7985498e0bc353ccd2e8e6f9a4a89249b Mon Sep 17 00:00:00 2001
+From: Dan Williams <dcbw@redhat.com>
+Date: Mon, 2 May 2011 18:44:18 -0500
+Subject: [PATCH] applet: fix possibly uninitialized variable
+
+Thanks to Michael Biebl.
+---
+ src/applet-dialogs.c |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
+
+diff --git a/src/applet-dialogs.c b/src/applet-dialogs.c
+index 42f3d2b..5965a75 100644
+--- a/src/applet-dialogs.c
++++ b/src/applet-dialogs.c
+@@ -328,7 +328,7 @@ info_dialog_add_page (GtkNotebook *notebook,
+ 	GtkTable *table;
+ 	guint32 speed = 0;
+ 	char *str;
+-	const char *iface, *method;
++	const char *iface, *method = NULL;
+ 	NMIP4Config *ip4_config;
+ 	NMIP6Config *ip6_config;
+ 	const GArray *dns;
+-- 
+1.7.4.4
+

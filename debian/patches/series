@@ -1,3 +1,4 @@
 # Debian patches for network-manager-applet
 01-dbus_access_nm_applet.patch
 04-autostart.patch
+0001-applet-fix-possibly-uninitialized-variable.patch

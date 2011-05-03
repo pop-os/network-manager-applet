@@ -1,3 +1,11 @@
+network-manager-applet (0.8.4-2) UNRELEASED; urgency=low
+
+  * debian/patches/0001-applet-fix-possibly-uninitialized-variable.patch
+    - Cherry-pick patch from upstream Git to fix possibly uninitialized
+      variable. (Closes: #625016)
+
+ -- Michael Biebl <biebl@debian.org>  Tue, 03 May 2011 03:05:51 +0200
+
 network-manager-applet (0.8.4-1) unstable; urgency=low
 
   * New upstream release.
