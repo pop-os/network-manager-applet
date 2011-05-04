@@ -1,9 +1,9 @@
-network-manager-applet (0.8.999-1) UNRELEASED; urgency=low
+network-manager-applet (0.8.999-1) experimental; urgency=low
 
   * New upstream release (0.9 rc2).
   * Merge changes from unstable branch.
 
- -- Michael Biebl <biebl@debian.org>  Wed, 04 May 2011 23:15:19 +0200
+ -- Michael Biebl <biebl@debian.org>  Wed, 04 May 2011 23:27:46 +0200
 
 network-manager-applet (0.8.998-1) experimental; urgency=low
 
