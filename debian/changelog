@@ -1,6 +1,7 @@
 network-manager-applet (0.8.999-1) UNRELEASED; urgency=low
 
   * New upstream release (0.9 rc2).
+  * Merge changes from unstable branch.
 
  -- Michael Biebl <biebl@debian.org>  Wed, 04 May 2011 23:15:19 +0200
 
@@ -22,6 +23,24 @@ network-manager-applet (0.8.998-1) experimental; urgency=low
   * Refresh debian/patches/04-autostart.patch.
 
  -- Michael Biebl <biebl@debian.org>  Sat, 09 Apr 2011 20:18:31 +0200
+
+network-manager-applet (0.8.4-2) unstable; urgency=low
+
+  * debian/patches/0001-applet-fix-possibly-uninitialized-variable.patch
+    - Cherry-pick patch from upstream Git to fix possibly uninitialized
+      variable. (Closes: #625016)
+
+ -- Michael Biebl <biebl@debian.org>  Tue, 03 May 2011 03:09:15 +0200
+
+network-manager-applet (0.8.4-1) unstable; urgency=low
+
+  * New upstream release.
+  * debian/control
+    - Bump Build-Depends on libnm-*-dev and network-manager-dev to (>= 0.8.4).
+    - Bump Standards-Version to 3.9.2. No further changes.
+    - Update package description.
+
+ -- Michael Biebl <biebl@debian.org>  Thu, 21 Apr 2011 17:17:22 +0200
 
 network-manager-applet (0.8.3.999-1) unstable; urgency=low
 
