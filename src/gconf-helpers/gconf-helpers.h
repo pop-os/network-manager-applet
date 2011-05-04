@@ -27,18 +27,7 @@
 #include <glib.h>
 #include <nm-connection.h>
 
-#include "nma-gconf-connection.h"
-
 #define GCONF_PATH_CONNECTIONS "/system/networking/connections"
-
-/* The stamp is a mechanism for determining which applet version last
- * updated GConf for various GConf update tasks in newer applet versions.
- */
-#define APPLET_CURRENT_STAMP 1
-#define APPLET_PREFS_STAMP "/apps/nm-applet/stamp"
-
-#define IGNORE_CA_CERT_TAG "ignore-ca-cert"
-#define IGNORE_PHASE2_CA_CERT_TAG "ignore-phase2-ca-cert"
 
 #define KEYRING_UUID_TAG "connection-uuid"
 #define KEYRING_SN_TAG "setting-name"
@@ -253,9 +242,6 @@ nm_gconf_key_is_set (GConfClient *client,
                      const char *key,
                      const char *setting);
 
-GSList *
-nm_gconf_get_all_connections (GConfClient *client);
-
 NMConnection *
 nm_gconf_read_connection (GConfClient *client,
                           const char *dir);
@@ -273,15 +259,10 @@ nm_gconf_add_keyring_item (const char *connection_uuid,
                            const char *setting_key,
                            const char *secret);
 
-typedef void (*PreKeyringCallback) (gpointer user_data);
-void nm_gconf_set_pre_keyring_callback (PreKeyringCallback func, gpointer user_data);
-void pre_keyring_callback (void);
+typedef void (*AddToSettingsFunc) (NMConnection *connection, gpointer user_data);
 
-gboolean nm_gconf_get_ignore_ca_cert (const char *uuid, gboolean phase2);
-void nm_gconf_set_ignore_ca_cert (const char *uuid, gboolean phase2, gboolean ignore);
-
-gboolean nm_gconf_get_8021x_password_always_ask (const char *uuid);
-void nm_gconf_set_8021x_password_always_ask (const char *uuid, gboolean always_ask);
+void nm_gconf_move_connections_to_system (AddToSettingsFunc add_func,
+                                          gpointer user_data);
 
 #endif	/* GCONF_HELPERS_H */
 

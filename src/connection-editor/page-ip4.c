@@ -17,15 +17,17 @@
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  *
- * (C) Copyright 2008 - 2010 Red Hat, Inc.
+ * (C) Copyright 2008 - 2011 Red Hat, Inc.
  */
+
+#include "config.h"
 
 #include <string.h>
 #include <errno.h>
 #include <stdlib.h>
-#include <arpa/inet.h>
 
 #include <gtk/gtk.h>
+#include <gdk/gdkkeysyms.h>
 #include <glib/gi18n.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
@@ -90,7 +92,12 @@ typedef struct {
 	gboolean window_added;
 
 	/* Cached tree view entry for editing-canceled */
-	char *last_edited;
+	/* Used also for saving old value when switching between cells via mouse
+	 * clicks - GTK3 produces neither editing-canceled nor editing-done for
+	 * that :( */
+	char *last_edited; /* cell text */
+	char *last_path;   /* row in treeview */
+	int last_column;   /* column in treeview */
 } CEPageIP4Private;
 
 #define METHOD_COL_NAME 0
@@ -363,7 +370,6 @@ populate_ui (CEPageIP4 *self)
 		NMIP4Address *addr = nm_setting_ip4_config_get_address (setting, i);
 		struct in_addr tmp_addr;
 		char buf[INET_ADDRSTRLEN + 1];
-		const char *ignored;
 
 		if (!addr) {
 			g_warning ("%s: empty IP4 Address structure!", __func__);
@@ -373,15 +379,15 @@ populate_ui (CEPageIP4 *self)
 		gtk_list_store_append (store, &model_iter);
 
 		tmp_addr.s_addr = nm_ip4_address_get_address (addr);
-		ignored = inet_ntop (AF_INET, &tmp_addr, &buf[0], sizeof (buf));
+		(void) inet_ntop (AF_INET, &tmp_addr, &buf[0], sizeof (buf));
 		gtk_list_store_set (store, &model_iter, COL_ADDRESS, buf, -1);
 
 		tmp_addr.s_addr = nm_utils_ip4_prefix_to_netmask (nm_ip4_address_get_prefix (addr));
-		ignored = inet_ntop (AF_INET, &tmp_addr, &buf[0], sizeof (buf));
+		(void) inet_ntop (AF_INET, &tmp_addr, &buf[0], sizeof (buf));
 		gtk_list_store_set (store, &model_iter, COL_PREFIX, buf, -1);
 
 		tmp_addr.s_addr = nm_ip4_address_get_gateway (addr);
-		ignored = inet_ntop (AF_INET, &tmp_addr, &buf[0], sizeof (buf));
+		(void) inet_ntop (AF_INET, &tmp_addr, &buf[0], sizeof (buf));
 		gtk_list_store_set (store, &model_iter, COL_GATEWAY, buf, -1);
 	}
 
@@ -395,13 +401,12 @@ populate_ui (CEPageIP4 *self)
 	for (i = 0; i < nm_setting_ip4_config_get_num_dns (setting); i++) {
 		struct in_addr tmp_addr;
 		char buf[INET_ADDRSTRLEN + 1];
-		const char *ignored;
 
 		tmp_addr.s_addr = nm_setting_ip4_config_get_dns (setting, i);
 		if (!tmp_addr.s_addr)
 			continue;
 
-		ignored = inet_ntop (AF_INET, &tmp_addr, &buf[0], sizeof (buf));
+		(void) inet_ntop (AF_INET, &tmp_addr, &buf[0], sizeof (buf));
 		if (string->len)
 			g_string_append (string, ", ");
 		g_string_append (string, buf);
@@ -536,6 +541,10 @@ cell_editing_canceled (GtkCellRenderer *renderer, gpointer user_data)
 
 		ce_page_changed (CE_PAGE (self));
 	}
+
+	g_free (priv->last_path);
+	priv->last_path = NULL;
+	priv->last_column = -1;
 }
 
 static void
@@ -552,8 +561,12 @@ cell_edited (GtkCellRendererText *cell,
 	guint32 column;
 	GtkTreeViewColumn *next_col;
 
+	/* Free auxiliary stuff */
 	g_free (priv->last_edited);
 	priv->last_edited = NULL;
+	g_free (priv->last_path);
+	priv->last_path = NULL;
+	priv->last_column = -1;
 
 	column = GPOINTER_TO_UINT (g_object_get_data (G_OBJECT (cell), "column"));
 	gtk_tree_model_get_iter (GTK_TREE_MODEL (store), &iter, path);
@@ -584,7 +597,6 @@ cell_edited (GtkCellRendererText *cell,
 	column = (column >= COL_LAST) ? 0 : column + 1;
 	next_col = gtk_tree_view_get_column (priv->addr_list, column);
 	gtk_tree_view_set_cursor_on_cell (priv->addr_list, path, next_col, priv->addr_cells[column], TRUE);
-	gtk_widget_grab_focus (GTK_WIDGET (priv->addr_list));
 
 	gtk_tree_path_free (path);
 	ce_page_changed (CE_PAGE (self));
@@ -627,6 +639,106 @@ ip_address_filter_cb (GtkEntry *   entry,
 }
 
 static void
+delete_text_cb (GtkEditable *editable,
+                    gint start_pos,
+                    gint end_pos,
+                    gpointer user_data)
+{
+	CEPageIP4 *self = CE_PAGE_IP4 (user_data);
+	CEPageIP4Private *priv = CE_PAGE_IP4_GET_PRIVATE (self);
+
+	/* Keep last_edited up-to-date */
+	g_free (priv->last_edited);
+	priv->last_edited = g_strdup (gtk_editable_get_chars (editable, 0, -1));
+}
+
+static gboolean
+parse_netmask (const char *str, guint32 *prefix)
+{
+	struct in_addr tmp_addr;
+	glong tmp_prefix;
+
+	errno = 0;
+
+	/* Is it a prefix? */
+	if (!strchr (str, '.')) {
+		tmp_prefix = strtol (str, NULL, 10);
+		if (!errno && tmp_prefix >= 0 && tmp_prefix <= 32) {
+			*prefix = tmp_prefix;
+			return TRUE;
+		}
+	}
+
+	/* Is it a netmask? */
+	if (inet_pton (AF_INET, str, &tmp_addr) > 0) {
+		*prefix = nm_utils_ip4_netmask_to_prefix (tmp_addr.s_addr);
+		return TRUE;
+	}
+
+	return FALSE;
+}
+
+static gboolean
+cell_changed_cb (GtkEditable *editable,
+                 gpointer user_data)
+{
+	char *cell_text;
+	guint column;
+#if GTK_CHECK_VERSION(3,0,0)
+	GdkRGBA rgba;
+#else
+	GdkColor color;
+#endif
+	gboolean value_valid = FALSE;
+	const char *colorname = NULL;
+
+	cell_text = gtk_editable_get_chars (editable, 0, -1);
+
+	/* The COL_PREFIX can contain IP address or prefix */
+	column = GPOINTER_TO_UINT (g_object_get_data (G_OBJECT (user_data), "column"));
+	if (column == COL_PREFIX) {
+		guint32 tmp_prefix;
+
+		value_valid = parse_netmask (cell_text, &tmp_prefix);
+	} else {
+		struct in_addr tmp_addr;
+
+		if (inet_pton (AF_INET, cell_text, &tmp_addr) > 0)
+			value_valid = TRUE;
+	}
+
+	/* Change cell's background color while editing */
+	colorname = value_valid ? "lightgreen" : "red";
+
+#if GTK_CHECK_VERSION(3,0,0)
+	gdk_rgba_parse (&rgba, colorname);
+	gtk_widget_override_background_color (GTK_WIDGET (editable), GTK_STATE_NORMAL, &rgba);
+#else
+	gdk_color_parse (colorname, &color);
+	gtk_widget_modify_base (GTK_WIDGET (editable), GTK_STATE_NORMAL, &color);
+#endif
+
+	g_free (cell_text);
+	return FALSE;
+}
+
+static gboolean
+key_pressed_cb (GtkWidget *widget,
+                GdkEvent *event,
+                gpointer user_data)
+{
+#if !GDK_KEY_Tab
+	#define GDK_KEY_Tab GDK_Tab
+#endif
+
+	/* Tab should behave the same way as Enter (finish editing) */
+	if (event->type == GDK_KEY_PRESS && event->key.keyval == GDK_KEY_Tab)
+		gtk_cell_editable_editing_done (GTK_CELL_EDITABLE (widget));
+
+	return FALSE;
+}
+
+static void
 cell_editing_started (GtkCellRenderer *cell,
                       GtkCellEditable *editable,
                       const gchar     *path,
@@ -640,12 +752,30 @@ cell_editing_started (GtkCellRenderer *cell,
 		return;
 	}
 
+	/* Initialize last_path and last_column, last_edited is initialized when the cell is edited */
 	g_free (priv->last_edited);
 	priv->last_edited = NULL;
+	g_free (priv->last_path);
+	priv->last_path = g_strdup (path);
+	priv->last_column = GPOINTER_TO_UINT (g_object_get_data (G_OBJECT (cell), "column"));
 
 	/* Set up the entry filter */
 	g_signal_connect (G_OBJECT (editable), "insert-text",
 	                  (GCallback) ip_address_filter_cb,
+	                  user_data);
+
+	g_signal_connect_after (G_OBJECT (editable), "delete-text",
+	                        (GCallback) delete_text_cb,
+	                        user_data);
+
+	/* Set up handler for IP verifying and changing cell background */
+	g_signal_connect (G_OBJECT (editable), "changed",
+	                  (GCallback) cell_changed_cb,
+	                  cell);
+
+	/* Set up key pressed handler - need to handle Tab key */
+	g_signal_connect (G_OBJECT (editable), "key-press-event",
+	                  (GCallback) key_pressed_cb,
 	                  user_data);
 }
 
@@ -709,6 +839,41 @@ routes_button_clicked_cb (GtkWidget *button, gpointer user_data)
 	gtk_widget_show_all (dialog);
 }
 
+static gboolean
+tree_view_button_pressed_cb (GtkWidget *widget,
+                             GdkEvent *event,
+                             gpointer user_data)
+{
+	CEPageIP4 *self = CE_PAGE_IP4 (user_data);
+	CEPageIP4Private *priv = CE_PAGE_IP4_GET_PRIVATE (self);
+
+	/* last_edited can be set e.g. when we get here by clicking an cell while
+	 * editing another cell. GTK3 issue neither editing-canceled nor editing-done
+	 * for cell renderer. Thus the previous cell value isn't saved. Store it now. */
+	if (priv->last_edited && priv->last_path) {
+		GtkTreeIter iter;
+		GtkListStore *store = GTK_LIST_STORE (gtk_tree_view_get_model (priv->addr_list));
+		GtkTreePath *last_treepath = gtk_tree_path_new_from_string (priv->last_path);
+
+		gtk_tree_model_get_iter (GTK_TREE_MODEL (store), &iter, last_treepath);
+		gtk_list_store_set (store, &iter, priv->last_column, priv->last_edited, -1);
+		gtk_tree_path_free (last_treepath);
+
+		g_free (priv->last_edited);
+		priv->last_edited = NULL;
+		g_free (priv->last_path);
+		priv->last_path = NULL;
+		priv->last_column = -1;
+	}
+
+	/* Ignore double clicks events. (They are issued after the single clicks, see GdkEventButton) */
+	if (event->type == GDK_2BUTTON_PRESS)
+		return TRUE;
+
+	gtk_widget_grab_focus (GTK_WIDGET (priv->addr_list));
+	return FALSE;
+}
+
 static void
 finish_setup (CEPageIP4 *self, gpointer unused, GError *error, gpointer user_data)
 {
@@ -717,15 +882,11 @@ finish_setup (CEPageIP4 *self, gpointer unused, GError *error, gpointer user_dat
 	gint offset;
 	GtkTreeViewColumn *column;
 	GtkCellRenderer *renderer;
-	GtkListStore *store;
 
 	if (error)
 		return;
 
 	populate_ui (self);
-
-	/* Address column */
-	store = GTK_LIST_STORE (gtk_tree_view_get_model (priv->addr_list));
 
 	/* IP Address column */
 	renderer = gtk_cell_renderer_text_new ();
@@ -777,6 +938,8 @@ finish_setup (CEPageIP4 *self, gpointer unused, GError *error, gpointer user_dat
 	column = gtk_tree_view_get_column (GTK_TREE_VIEW (priv->addr_list), offset - 1);
 	gtk_tree_view_column_set_expand (GTK_TREE_VIEW_COLUMN (column), TRUE);
 	gtk_tree_view_column_set_clickable (GTK_TREE_VIEW_COLUMN (column), TRUE);
+
+	g_signal_connect (priv->addr_list, "button-press-event", G_CALLBACK (tree_view_button_pressed_cb), self);
 
 	gtk_widget_set_sensitive (GTK_WIDGET (priv->addr_add), TRUE);
 	gtk_widget_set_sensitive (GTK_WIDGET (priv->addr_delete), FALSE);
@@ -847,32 +1010,6 @@ free_one_addr (gpointer data)
 }
 
 static gboolean
-parse_netmask (const char *str, guint32 *prefix)
-{
-	struct in_addr tmp_addr;
-	glong tmp_prefix;
-
-	errno = 0;
-
-	/* Is it a prefix? */
-	if (!strchr (str, '.')) {
-		tmp_prefix = strtol (str, NULL, 10);
-		if (!errno && tmp_prefix >= 0 && tmp_prefix <= 32) {
-			*prefix = tmp_prefix;
-			return TRUE;
-		}
-	}
-
-	/* Is it a netmask? */
-	if (inet_pton (AF_INET, str, &tmp_addr) > 0) {
-		*prefix = nm_utils_ip4_netmask_to_prefix (tmp_addr.s_addr);
-		return TRUE;
-	}
-
-	return FALSE;
-}
-
-static gboolean
 ui_to_setting (CEPageIP4 *self)
 {
 	CEPageIP4Private *priv = CE_PAGE_IP4_GET_PRIVATE (self);
@@ -929,7 +1066,7 @@ ui_to_setting (CEPageIP4 *self)
 		guint32 empty_val = 0, prefix;
 
 		gtk_tree_model_get (model, &tree_iter, COL_ADDRESS, &item, -1);
-		if (!item || !inet_aton (item, &tmp_addr)) {
+		if (!item || inet_pton (AF_INET, item, &tmp_addr) <= 0) {
 			g_warning ("%s: IPv4 address '%s' missing or invalid!",
 			           __func__, item ? item : "<none>");
 			g_free (item);
@@ -954,7 +1091,7 @@ ui_to_setting (CEPageIP4 *self)
 
 		/* Gateway is optional... */
 		gtk_tree_model_get (model, &tree_iter, COL_GATEWAY, &item, -1);
-		if (item && !inet_aton (item, &tmp_gateway)) {
+		if (item && inet_pton (AF_INET, item, &tmp_gateway) <= 0) {
 			g_warning ("%s: IPv4 gateway '%s' invalid!",
 			           __func__, item ? item : "<none>");
 			g_free (item);
@@ -1070,6 +1207,9 @@ validate (CEPage *page, NMConnection *connection, GError **error)
 static void
 ce_page_ip4_init (CEPageIP4 *self)
 {
+	CEPageIP4Private *priv = CE_PAGE_IP4_GET_PRIVATE (self);
+
+	priv->last_column = -1;
 }
 
 static void

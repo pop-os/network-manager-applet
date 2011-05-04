@@ -20,6 +20,8 @@
  * (C) Copyright 2008 - 2010 Red Hat, Inc.
  */
 
+#include "config.h"
+
 #include <string.h>
 
 #include <gtk/gtk.h>
@@ -32,7 +34,6 @@
 
 #include "page-dsl.h"
 #include "nm-connection-editor.h"
-#include "gconf-helpers.h"
 
 G_DEFINE_TYPE (CEPageDsl, ce_page_dsl, CE_TYPE_PAGE)
 

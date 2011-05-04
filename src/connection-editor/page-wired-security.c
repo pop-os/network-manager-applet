@@ -20,6 +20,8 @@
  * (C) Copyright 2008 - 2010 Red Hat, Inc.
  */
 
+#include "config.h"
+
 #include <string.h>
 
 #include <gtk/gtk.h>
@@ -36,7 +38,6 @@
 #include "page-wired.h"
 #include "page-wired-security.h"
 #include "nm-connection-editor.h"
-#include "gconf-helpers.h"
 
 G_DEFINE_TYPE (CEPageWiredSecurity, ce_page_wired_security, CE_TYPE_PAGE)
 

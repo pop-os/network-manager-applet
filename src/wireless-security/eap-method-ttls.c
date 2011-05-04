@@ -20,6 +20,8 @@
  * (C) Copyright 2007 - 2010 Red Hat, Inc.
  */
 
+#include "config.h"
+
 #include <glib/gi18n.h>
 #include <ctype.h>
 #include <string.h>
@@ -29,7 +31,6 @@
 
 #include "eap-method.h"
 #include "wireless-security.h"
-#include "gconf-helpers.h"
 
 #define I_NAME_COLUMN   0
 #define I_METHOD_COLUMN 1
@@ -114,7 +115,6 @@ add_to_size_group (EAPMethod *parent, GtkSizeGroup *group)
 static void
 fill_connection (EAPMethod *parent, NMConnection *connection)
 {
-	NMSettingConnection *s_con;
 	NMSetting8021x *s_8021x;
 	NMSetting8021xCKFormat format = NM_SETTING_802_1X_CK_FORMAT_UNKNOWN;
 	GtkWidget *widget;
@@ -124,9 +124,6 @@ fill_connection (EAPMethod *parent, NMConnection *connection)
 	GtkTreeModel *model;
 	GtkTreeIter iter;
 	GError *error = NULL;
-
-	s_con = NM_SETTING_CONNECTION (nm_connection_get_setting (connection, NM_TYPE_SETTING_CONNECTION));
-	g_assert (s_con);
 
 	s_8021x = NM_SETTING_802_1X (nm_connection_get_setting (connection, NM_TYPE_SETTING_802_1X));
 	g_assert (s_8021x);
@@ -146,10 +143,6 @@ fill_connection (EAPMethod *parent, NMConnection *connection)
 		g_warning ("Couldn't read CA certificate '%s': %s", filename, error ? error->message : "(unknown)");
 		g_clear_error (&error);
 	}
-
-	nm_gconf_set_ignore_ca_cert (nm_setting_connection_get_uuid (s_con),
-	                             FALSE,
-	                             eap_method_get_ignore_ca_cert (parent));
 
 	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_ttls_inner_auth_combo"));
 	model = gtk_combo_box_get_model (GTK_COMBO_BOX (widget));
@@ -331,14 +324,12 @@ eap_method_ttls_new (WirelessSecurity *ws_parent,
 	                          destroy,
 	                          UIDIR "/eap-method-ttls.ui",
 	                          "eap_ttls_notebook",
-	                          "eap_ttls_anon_identity_entry");
+	                          "eap_ttls_anon_identity_entry",
+	                          FALSE);
 	if (!parent)
 		return NULL;
 
-	eap_method_nag_init (parent,
-	                     "eap_ttls_ca_cert_button",
-	                     connection,
-	                     FALSE);
+	eap_method_nag_init (parent, "eap_ttls_ca_cert_button", connection);
 
 	method = (EAPMethodTTLS *) parent;
 	method->sec_parent = ws_parent;

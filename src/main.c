@@ -37,6 +37,7 @@
 #include "applet.h"
 
 static GMainLoop *loop = NULL;
+gboolean shell_debug = FALSE;
 
 static void
 signal_handler (int signo, siginfo_t *info, void *data)
@@ -86,6 +87,8 @@ int main (int argc, char *argv[])
 			usage (argv[0]);
 			exit (0);
 		}
+		if (!strcmp (argv[i], "--shell-debug"))
+			shell_debug = TRUE;
 	}
 
 	bindtextdomain (GETTEXT_PACKAGE, NMALOCALEDIR);
