@@ -81,6 +81,8 @@
 
 #define NOTIFY_CAPS_ACTIONS_KEY "actions"
 
+extern gboolean shell_debug;
+
 G_DEFINE_TYPE(NMApplet, nma, G_TYPE_OBJECT)
 
 /********************************************************************/
@@ -116,6 +118,87 @@ impl_dbus_create_wifi_network (NMApplet *applet, GError **error)
 		                     NM_SECRET_AGENT_ERROR,
 		                     NM_SECRET_AGENT_ERROR_INTERNAL_ERROR,
 		                     "Failed to create wireless dialog");
+		return FALSE;
+	}
+
+	return TRUE;
+}
+
+static gboolean
+impl_dbus_connect_to_8021x_network (NMApplet *applet,
+                                    const char *device_path,
+                                    const char *ap_path,
+                                    GError **error)
+{
+	NMDevice *device;
+	NMAccessPoint *ap;
+
+	device = nm_client_get_device_by_path (applet->nm_client, device_path);
+	if (!device || NM_IS_DEVICE_WIFI (device) == FALSE) {
+		g_set_error_literal (error,
+		                     NM_SECRET_AGENT_ERROR,
+		                     NM_SECRET_AGENT_ERROR_INTERNAL_ERROR,
+		                     "The device could not be found.");
+		return FALSE;
+	}
+
+	ap = nm_device_wifi_get_access_point_by_path (NM_DEVICE_WIFI (device), ap_path);
+	if (!ap) {
+		g_set_error_literal (error,
+		                     NM_SECRET_AGENT_ERROR,
+		                     NM_SECRET_AGENT_ERROR_INTERNAL_ERROR,
+		                     "The access point could not be found.");
+		return FALSE;
+	}
+
+	/* FIXME: this doesn't account for Dynamic WEP */
+	if (   !(nm_access_point_get_wpa_flags (ap) & NM_802_11_AP_SEC_KEY_MGMT_802_1X)
+	    && !(nm_access_point_get_rsn_flags (ap) & NM_802_11_AP_SEC_KEY_MGMT_802_1X)) {
+		g_set_error_literal (error,
+		                     NM_SECRET_AGENT_ERROR,
+		                     NM_SECRET_AGENT_ERROR_INTERNAL_ERROR,
+		                     "The access point had no 802.1x capabilities");
+		return FALSE;
+	}
+
+	if (!applet_wifi_connect_to_8021x_network (applet, device, ap)) {
+		g_set_error_literal (error,
+		                     NM_SECRET_AGENT_ERROR,
+		                     NM_SECRET_AGENT_ERROR_INTERNAL_ERROR,
+		                     "Failed to create wireless dialog");
+		return FALSE;
+	}
+
+	return TRUE;
+}
+
+static gboolean
+impl_dbus_connect_to_3g_network (NMApplet *applet,
+                                 const char *device_path,
+                                 GError **error)
+{
+	NMDevice *device;
+	NMDeviceModemCapabilities caps;
+
+	device = nm_client_get_device_by_path (applet->nm_client, device_path);
+	if (!device || NM_IS_DEVICE_MODEM (device) == FALSE) {
+		g_set_error_literal (error,
+		                     NM_SECRET_AGENT_ERROR,
+		                     NM_SECRET_AGENT_ERROR_INTERNAL_ERROR,
+		                     "The device could not be found.");
+		return FALSE;
+	}
+
+	caps = nm_device_modem_get_current_capabilities (NM_DEVICE_MODEM (device));
+	if (caps & NM_DEVICE_MODEM_CAPABILITY_GSM_UMTS) {
+		applet_gsm_connect_network (applet, device);
+	} else if (caps & NM_DEVICE_MODEM_CAPABILITY_CDMA_EVDO) {
+		applet_cdma_connect_network (applet, device);
+	} else {
+		g_set_error_literal (error,
+		                     NM_SECRET_AGENT_ERROR,
+		                     NM_SECRET_AGENT_ERROR_INTERNAL_ERROR,
+		                     "The device had no GSM or CDMA capabilities.");
 		return FALSE;
 	}
 
@@ -1523,8 +1606,8 @@ get_vpn_connections (NMApplet *applet)
 			continue;
 
 		if (!nm_connection_get_setting (connection, NM_TYPE_SETTING_VPN)) {
-			g_warning ("%s: VPN connection '%s' didn't have requires vpn setting.", __func__,
-					   nm_setting_get_name (NM_SETTING (s_con)));
+			g_warning ("%s: VPN connection '%s' didn't have required vpn setting.", __func__,
+			           nm_setting_connection_get_id (s_con));
 			continue;
 		}
 
@@ -3056,6 +3139,8 @@ setup_widgets (NMApplet *applet)
 	applet->status_icon = gtk_status_icon_new ();
 	if (!applet->status_icon)
 		return FALSE;
+	if (shell_debug)
+		gtk_status_icon_set_name (applet->status_icon, "adsfasdfasdfadfasdf");
 
 	g_signal_connect (applet->status_icon, "notify::screen",
 			  G_CALLBACK (status_icon_screen_changed_cb), applet);

@@ -2026,13 +2026,16 @@ nm_gconf_migrate_0_7_certs (GConfClient *client)
 #define NM_VPNC_PW_TYPE_UNUSED "unused"
 
 static NMSettingSecretFlags
-vpnc_type_to_flag (const char *vpnc_type)
+vpnc_type_to_flag (NMSettingVPN *s_vpn, const char *type_key)
 {
-	if (g_strcmp0 (vpnc_type, NM_VPNC_PW_TYPE_SAVE) == 0)
+	const char *tmp;
+
+	tmp = nm_setting_vpn_get_data_item (s_vpn, type_key);
+	if (g_strcmp0 (tmp, NM_VPNC_PW_TYPE_SAVE) == 0)
 		return NM_SETTING_SECRET_FLAG_NONE;
-	if (g_strcmp0 (vpnc_type, NM_VPNC_PW_TYPE_ASK) == 0)
+	if (g_strcmp0 (tmp, NM_VPNC_PW_TYPE_ASK) == 0)
 		return NM_SETTING_SECRET_FLAG_NOT_SAVED;
-	if (g_strcmp0 (vpnc_type, NM_VPNC_PW_TYPE_UNUSED) == 0)
+	if (g_strcmp0 (tmp, NM_VPNC_PW_TYPE_UNUSED) == 0)
 		return NM_SETTING_SECRET_FLAG_NOT_REQUIRED;
 	return NM_SETTING_SECRET_FLAG_NONE;
 }
@@ -2047,19 +2050,14 @@ static void
 migrate_vpnc (NMConnection *connection, NMSettingVPN *s_vpn)
 {
 	NMSettingSecretFlags flags;
-	const char *tmp;
 
-	tmp = nm_setting_vpn_get_data_item (s_vpn, NM_VPNC_KEY_SECRET_TYPE);
-	if (tmp) {
-		flags = vpnc_type_to_flag (tmp) | NM_SETTING_SECRET_FLAG_AGENT_OWNED;
-		nm_setting_set_secret_flags (NM_SETTING (s_vpn), NM_VPNC_KEY_SECRET, flags, NULL);
-	}
+	flags = NM_SETTING_SECRET_FLAG_AGENT_OWNED;
+	flags |= vpnc_type_to_flag (s_vpn, NM_VPNC_KEY_SECRET_TYPE);
+	nm_setting_set_secret_flags (NM_SETTING (s_vpn), NM_VPNC_KEY_SECRET, flags, NULL);
 
-	tmp = nm_setting_vpn_get_data_item (s_vpn, NM_VPNC_KEY_XAUTH_PASSWORD_TYPE);
-	if (tmp) {
-		flags = vpnc_type_to_flag (tmp) | NM_SETTING_SECRET_FLAG_AGENT_OWNED;
-		nm_setting_set_secret_flags (NM_SETTING (s_vpn), NM_VPNC_KEY_XAUTH_PASSWORD, flags, NULL);
-	}
+	flags = NM_SETTING_SECRET_FLAG_AGENT_OWNED;
+	flags |= vpnc_type_to_flag (s_vpn, NM_VPNC_KEY_XAUTH_PASSWORD_TYPE);
+	nm_setting_set_secret_flags (NM_SETTING (s_vpn), NM_VPNC_KEY_XAUTH_PASSWORD, flags, NULL);
 }
 
 #define NM_DBUS_SERVICE_OPENVPN "org.freedesktop.NetworkManager.openvpn"
@@ -2141,6 +2139,45 @@ migrate_openvpn (NMConnection *connection, NMSettingVPN *s_vpn)
 	}
 }
 
+#define NM_OPENSWAN_PW_TYPE_SAVE   "save"
+#define NM_OPENSWAN_PW_TYPE_ASK    "ask"
+#define NM_OPENSWAN_PW_TYPE_UNUSED "unused"
+
+static NMSettingSecretFlags
+openswan_type_to_flag (NMSettingVPN *s_vpn, const char *flags_key)
+{
+	const char *tmp;
+
+	tmp = nm_setting_vpn_get_data_item (s_vpn, flags_key);
+	if (g_strcmp0 (tmp, NM_OPENSWAN_PW_TYPE_SAVE) == 0)
+		return NM_SETTING_SECRET_FLAG_NONE;
+	if (g_strcmp0 (tmp, NM_OPENSWAN_PW_TYPE_ASK) == 0)
+		return NM_SETTING_SECRET_FLAG_NOT_SAVED;
+	if (g_strcmp0 (tmp, NM_OPENSWAN_PW_TYPE_UNUSED) == 0)
+		return NM_SETTING_SECRET_FLAG_NOT_REQUIRED;
+	return NM_SETTING_SECRET_FLAG_NONE;
+}
+
+#define NM_DBUS_SERVICE_OPENSWAN "org.freedesktop.NetworkManager.openswan"
+#define NM_OPENSWAN_PSK_VALUE "pskvalue"
+#define NM_OPENSWAN_PSK_INPUT_MODES "pskinputmodes"
+#define NM_OPENSWAN_XAUTH_PASSWORD "xauthpassword"
+#define NM_OPENSWAN_XAUTH_PASSWORD_INPUT_MODES "xauthpasswordinputmodes"
+
+static void
+migrate_openswan (NMConnection *connection, NMSettingVPN *s_vpn)
+{
+	NMSettingSecretFlags flags;
+
+	flags = NM_SETTING_SECRET_FLAG_AGENT_OWNED;
+	flags |= openswan_type_to_flag (s_vpn, NM_OPENSWAN_PSK_INPUT_MODES);
+	nm_setting_set_secret_flags (NM_SETTING (s_vpn), NM_OPENSWAN_PSK_VALUE, flags, NULL);
+
+	flags = NM_SETTING_SECRET_FLAG_AGENT_OWNED;
+	flags |= openswan_type_to_flag (s_vpn, NM_OPENSWAN_XAUTH_PASSWORD_INPUT_MODES);
+	nm_setting_set_secret_flags (NM_SETTING (s_vpn), NM_OPENSWAN_XAUTH_PASSWORD, flags, NULL);
+}
+
 #define NM_DBUS_SERVICE_PPTP "org.freedesktop.NetworkManager.pptp"
 #define NM_PPTP_KEY_PASSWORD "password"
 
@@ -2176,6 +2213,9 @@ nm_gconf_migrate_09_secret_flags (GConfClient *client,
 			return;
 		} else if (g_strcmp0 (service, NM_DBUS_SERVICE_OPENVPN) == 0) {
 			migrate_openvpn (connection, s_vpn);
+			return;
+		} else if (g_strcmp0 (service, NM_DBUS_SERVICE_OPENSWAN) == 0) {
+			migrate_openswan (connection, s_vpn);
 			return;
 		}
 

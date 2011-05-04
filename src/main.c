@@ -29,6 +29,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <signal.h>
+#include <unistd.h>
 
 #include <gtk/gtk.h>
 #include <glib/gi18n.h>
@@ -36,12 +37,14 @@
 #include "applet.h"
 
 static GMainLoop *loop = NULL;
+gboolean shell_debug = FALSE;
 
 static void
-signal_handler (int signo)
+signal_handler (int signo, siginfo_t *info, void *data)
 {
 	if (signo == SIGINT || signo == SIGTERM) {
-		g_message ("Caught signal %d, shutting down...", signo);
+		g_message ("PID %d (we are %d) sent signal %d, shutting down...",
+		           info->si_pid, getpid (), signo);
 		g_main_loop_quit (loop);
 	}
 }
@@ -53,9 +56,9 @@ setup_signals (void)
 	sigset_t mask;
 
 	sigemptyset (&mask);
-	action.sa_handler = signal_handler;
+	action.sa_sigaction = signal_handler;
 	action.sa_mask = mask;
-	action.sa_flags = 0;
+	action.sa_flags = SA_SIGINFO;
 	sigaction (SIGTERM,  &action, NULL);
 	sigaction (SIGINT,  &action, NULL);
 }
@@ -84,6 +87,8 @@ int main (int argc, char *argv[])
 			usage (argv[0]);
 			exit (0);
 		}
+		if (!strcmp (argv[i], "--shell-debug"))
+			shell_debug = TRUE;
 	}
 
 	bindtextdomain (GETTEXT_PACKAGE, NMALOCALEDIR);

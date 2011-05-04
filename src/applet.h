@@ -232,11 +232,6 @@ struct NMADeviceClass {
 	                                        char **tip,
 	                                        NMApplet *applet);
 
-	void           (*get_more_info)        (NMDevice *device,
-	                                        NMConnection *connection,
-	                                        NMApplet *applet,
-	                                        gpointer user_data);
-
 	size_t         secrets_request_size;
 	gboolean       (*get_secrets)          (SecretsRequest *req,
 	                                        GError **error);
@@ -310,6 +305,9 @@ GdkPixbuf * nma_icon_check_and_load (const char *name,
                                      NMApplet *applet);
 
 gboolean applet_wifi_connect_to_hidden_network (NMApplet *applet);
+gboolean applet_wifi_connect_to_8021x_network (NMApplet *applet,
+                                               NMDevice *device,
+                                               NMAccessPoint *ap);
 gboolean applet_wifi_create_wifi_network (NMApplet *applet);
 gboolean applet_wifi_can_create_wifi_network (NMApplet *applet);
 
