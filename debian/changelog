@@ -1,6 +1,7 @@
 network-manager-applet (0.8.9997-1) UNRELEASED; urgency=low
 
   * New upstream release (0.9 rc3).
+    - Fixes unused-but-set-variable warnings. (Closes: #625400)
 
  -- Michael Biebl <biebl@debian.org>  Sun, 29 May 2011 21:17:01 +0200
 
