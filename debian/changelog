@@ -1,10 +1,10 @@
-network-manager-applet (0.8.4-3) UNRELEASED; urgency=low
+network-manager-applet (0.8.4-3) unstable; urgency=low
 
   * debian/rules
     - Disable additional compiler warnings (including -Werror) as it causes
       build failures with GCC 4.6. (Closes: #634392)
 
- -- Michael Biebl <biebl@debian.org>  Sun, 31 Jul 2011 16:56:48 +0200
+ -- Michael Biebl <biebl@debian.org>  Sun, 31 Jul 2011 17:00:14 +0200
 
 network-manager-applet (0.8.4-2) unstable; urgency=low
 
