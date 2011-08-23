@@ -63,7 +63,6 @@
 #include <nm-secret-agent.h>
 
 #include <gconf/gconf-client.h>
-#include <gnome-keyring.h>
 #include <libnotify/notify.h>
 
 #include "applet.h"
@@ -602,18 +601,30 @@ applet_menu_item_add_complex_separator_helper (GtkWidget *menu,
                                                int pos)
 {
 	GtkWidget *menu_item = gtk_image_menu_item_new ();
+#if GTK_CHECK_VERSION(3,1,6)
+        GtkWidget *box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
+#else
 	GtkWidget *box = gtk_hbox_new (FALSE, 0);
+#endif
 	GtkWidget *xlabel = NULL;
 
 	if (label) {
 		xlabel = gtk_label_new (NULL);
 		gtk_label_set_markup (GTK_LABEL (xlabel), label);
 
+#if GTK_CHECK_VERSION(3,1,6)
+		gtk_box_pack_start (GTK_BOX (box), gtk_separator_new (GTK_ORIENTATION_HORIZONTAL), TRUE, TRUE, 0);
+#else
 		gtk_box_pack_start (GTK_BOX (box), gtk_hseparator_new (), TRUE, TRUE, 0);
+#endif
 		gtk_box_pack_start (GTK_BOX (box), xlabel, FALSE, FALSE, 2);
 	}
 
+#if GTK_CHECK_VERSION(3,1,6)
+	gtk_box_pack_start (GTK_BOX (box), gtk_separator_new (GTK_ORIENTATION_HORIZONTAL), TRUE, TRUE, 0);
+#else
 	gtk_box_pack_start (GTK_BOX (box), gtk_hseparator_new (), TRUE, TRUE, 0);
+#endif
 
 	g_object_set (G_OBJECT (menu_item),
 	              "child", box,
@@ -839,7 +850,9 @@ applet_do_notify (NMApplet *applet,
 	g_free (escaped);
 	applet->notification = notify;
 
-#if !HAVE_LIBNOTIFY_07
+#if HAVE_LIBNOTIFY_07
+	notify_notification_set_hint (notify, "transient", g_variant_new_boolean (TRUE));
+#else
 	notify_notification_attach_to_status_icon (notify, applet->status_icon);
 #endif
 	notify_notification_set_urgency (notify, urgency);
@@ -1206,7 +1219,7 @@ nma_menu_vpn_item_clicked (GtkMenuItem *item, gpointer user_data)
 static void
 nma_menu_configure_vpn_item_activate (GtkMenuItem *item, gpointer user_data)
 {
-	const char *argv[] = { BINDIR "/nm-connection-editor", "--type", NM_SETTING_VPN_SETTING_NAME, NULL};
+	const char *argv[] = { BINDIR "/nm-connection-editor", "--show", "--type", NM_SETTING_VPN_SETTING_NAME, NULL};
 
 	g_spawn_async (NULL, (gchar **) argv, NULL, 0, NULL, NULL, NULL, NULL);
 
