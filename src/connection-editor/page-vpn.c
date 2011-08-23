@@ -17,7 +17,7 @@
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  *
- * (C) Copyright 2008 - 2010 Red Hat, Inc.
+ * (C) Copyright 2008 - 2011 Red Hat, Inc.
  */
 
 #include "config.h"
@@ -92,6 +92,7 @@ finish_setup (CEPageVpn *self, gpointer unused, GError *error, gpointer user_dat
 CEPage *
 ce_page_vpn_new (NMConnection *connection,
                  GtkWindow *parent_window,
+                 NMClient *client,
                  const char **out_secrets_setting_name,
                  GError **error)
 {
@@ -102,6 +103,7 @@ ce_page_vpn_new (NMConnection *connection,
 	self = CE_PAGE_VPN (ce_page_new (CE_TYPE_PAGE_VPN,
 	                                 connection,
 	                                 parent_window,
+	                                 client,
 	                                 NULL,
 	                                 NULL,
 	                                 _("VPN")));
@@ -131,25 +133,6 @@ ce_page_vpn_new (NMConnection *connection,
 	*out_secrets_setting_name = NM_SETTING_VPN_SETTING_NAME;
 
 	return CE_PAGE (self);
-}
-
-gboolean
-ce_page_vpn_save_secrets (CEPage *page, NMConnection *connection)
-{
-	CEPageVpn *self = CE_PAGE_VPN (page);
-	CEPageVpnPrivate *priv = CE_PAGE_VPN_GET_PRIVATE (self);
-	GError *error = NULL;
-	gboolean success = FALSE;
-
-	success = nm_vpn_plugin_ui_widget_interface_save_secrets (priv->ui, connection, &error);
-	if (!success) {
-		g_warning ("%s: couldn't save VPN secrets: (%d) %s", __func__,
-		           error ? error->code : -1, error ? error->message : "unknown");
-		if (error)
-			g_error_free (error);
-	}
-
-	return success;
 }
 
 static gboolean

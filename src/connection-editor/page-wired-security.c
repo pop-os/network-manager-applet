@@ -17,7 +17,7 @@
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  *
- * (C) Copyright 2008 - 2010 Red Hat, Inc.
+ * (C) Copyright 2008 - 2011 Red Hat, Inc.
  */
 
 #include "config.h"
@@ -77,7 +77,7 @@ finish_setup (CEPageWiredSecurity *self, gpointer unused, GError *error, gpointe
 	if (error)
 		return;
 
-	priv->security = (WirelessSecurity *) ws_wpa_eap_new (parent->connection, TRUE);
+	priv->security = (WirelessSecurity *) ws_wpa_eap_new (parent->connection, TRUE, FALSE);
 	if (!priv->security) {
 		g_warning ("Could not load wired 802.1x user interface.");
 		return;
@@ -99,6 +99,7 @@ finish_setup (CEPageWiredSecurity *self, gpointer unused, GError *error, gpointe
 CEPage *
 ce_page_wired_security_new (NMConnection *connection,
                             GtkWindow *parent_window,
+                            NMClient *client,
                             const char **out_secrets_setting_name,
                             GError **error)
 {
@@ -109,6 +110,7 @@ ce_page_wired_security_new (NMConnection *connection,
 	self = CE_PAGE_WIRED_SECURITY (ce_page_new (CE_TYPE_PAGE_WIRED_SECURITY,
 	                                            connection,
 	                                            parent_window,
+	                                            client,
 	                                            NULL,
 	                                            NULL,
 	                                            _("802.1x Security")));
@@ -120,7 +122,11 @@ ce_page_wired_security_new (NMConnection *connection,
 	parent = CE_PAGE (self);
 	priv = CE_PAGE_WIRED_SECURITY_GET_PRIVATE (self);
 
+#if GTK_CHECK_VERSION (3,1,6)
+	parent->page = gtk_box_new (GTK_ORIENTATION_VERTICAL, 6);
+#else
 	parent->page = gtk_vbox_new (FALSE, 6);
+#endif
 	g_object_ref_sink (G_OBJECT (parent->page));
 	gtk_container_set_border_width (GTK_CONTAINER (parent->page), 6);
 
