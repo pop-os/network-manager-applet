@@ -1,4 +1,4 @@
-network-manager-applet (0.9.0-1) UNRELEASED; urgency=low
+network-manager-applet (0.9.0-1) experimental; urgency=low
 
   * New upstream release.
   * debian/control
@@ -7,7 +7,7 @@ network-manager-applet (0.9.0-1) UNRELEASED; urgency=low
     - Bump Depends on network-manager to (>= 0.9).
     - Restrict Build-Depends on libgnome-bluetooth-dev to (<< 3.0.0).
 
- -- Michael Biebl <biebl@debian.org>  Wed, 24 Aug 2011 13:38:19 +0200
+ -- Michael Biebl <biebl@debian.org>  Wed, 24 Aug 2011 15:00:38 +0200
 
 network-manager-applet (0.8.9997-1) experimental; urgency=low
 
