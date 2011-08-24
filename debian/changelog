@@ -4,8 +4,9 @@ network-manager-applet (0.9.0-1) UNRELEASED; urgency=low
   * debian/control
     - Bump Build-Depends on libnm-*-dev and network-manager-dev to (>= 0.9).
     - Bump Build-Depends on libnotify-dev to (>= 0.7).
+    - Bump Depends on network-manager to (>= 0.9).
 
- -- Michael Biebl <biebl@debian.org>  Wed, 24 Aug 2011 01:32:36 +0200
+ -- Michael Biebl <biebl@debian.org>  Wed, 24 Aug 2011 13:38:19 +0200
 
 network-manager-applet (0.8.9997-1) experimental; urgency=low
 

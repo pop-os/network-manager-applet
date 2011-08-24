@@ -31,7 +31,7 @@ Section: gnome
 Depends:
  ${shlibs:Depends},
  ${misc:Depends},
- network-manager (>= 0.8.998),
+ network-manager (>= 0.9),
  policykit-1-gnome,
  gnome-icon-theme,
  dbus-x11
