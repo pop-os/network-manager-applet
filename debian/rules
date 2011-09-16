@@ -8,6 +8,7 @@ export LDFLAGS := $(shell dpkg-buildflags --get LDFLAGS) -Wl,-z,defs -Wl,--as-ne
 override_dh_auto_configure:
 	dh_auto_configure -- \
 		--libexecdir=/usr/lib/NetworkManager \
+		--disable-more-warnings \
 		--with-gtkver=2
 
 override_dh_auto_clean:

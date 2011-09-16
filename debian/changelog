@@ -42,6 +42,14 @@ network-manager-applet (0.8.998-1) experimental; urgency=low
 
  -- Michael Biebl <biebl@debian.org>  Sat, 09 Apr 2011 20:18:31 +0200
 
+network-manager-applet (0.8.4-3) unstable; urgency=low
+
+  * debian/rules
+    - Disable additional compiler warnings (including -Werror) as it causes
+      build failures with GCC 4.6. (Closes: #634392)
+
+ -- Michael Biebl <biebl@debian.org>  Sun, 31 Jul 2011 17:00:14 +0200
+
 network-manager-applet (0.8.4-2) unstable; urgency=low
 
   * debian/patches/0001-applet-fix-possibly-uninitialized-variable.patch
