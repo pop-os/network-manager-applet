@@ -1,9 +1,9 @@
-network-manager-applet (0.9.0-3) UNRELEASED; urgency=low
+network-manager-applet (0.9.0-3) unstable; urgency=low
 
   * Build against GTK 3 and gnome-bluetooth 3. (Closes: #623781)
   * Add Breaks against gnome-bluetooth (<< 3.0).
 
- -- Michael Biebl <biebl@debian.org>  Thu, 13 Oct 2011 19:22:35 +0200
+ -- Michael Biebl <biebl@debian.org>  Thu, 13 Oct 2011 19:44:10 +0200
 
 network-manager-applet (0.9.0-2) unstable; urgency=low
 
