@@ -3,6 +3,8 @@ network-manager-applet (0.9.0-4) UNRELEASED; urgency=low
   * debian/watch: Track .xz tarballs.
   * Use the new maintscript facility in dh_installdeb to remove the obsolete
     conffile.
+  * Update the last unfixed version to 0.9.0-3 as we missed to remove the old
+    conffile for users upgrading from 0.8.4-2 or 0.8.4-3. (Closes: #645450)
 
  -- Michael Biebl <biebl@debian.org>  Wed, 19 Oct 2011 09:55:08 +0200
 
