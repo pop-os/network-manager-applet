@@ -4,7 +4,7 @@ Priority: optional
 Maintainer: Utopia Maintenance Team <pkg-utopia-maintainers@lists.alioth.debian.org>
 Uploaders: Michael Biebl <biebl@debian.org>
 Build-Depends:
- debhelper (>= 8),
+ debhelper (>= 8.1.0~),
  autotools-dev,
  intltool,
  libdbus-glib-1-dev (>= 0.74),
@@ -28,6 +28,7 @@ Homepage: http://www.gnome.org/projects/NetworkManager/
 Package: network-manager-gnome
 Architecture: any
 Section: gnome
+Pre-Depends: ${misc:Pre-Depends}
 Depends:
  ${shlibs:Depends},
  ${misc:Depends},
