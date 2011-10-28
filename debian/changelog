@@ -1,6 +1,7 @@
 network-manager-applet (0.9.1.95-1) UNRELEASED; urgency=low
 
   * New upstream release.
+  * Bump Build-Depends on libnm-*-dev and network-manager-dev to (>= 0.9.1).
 
  -- Michael Biebl <biebl@debian.org>  Fri, 28 Oct 2011 23:51:40 +0200
 
