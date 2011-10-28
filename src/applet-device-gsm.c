@@ -41,7 +41,7 @@
 #include "applet.h"
 #include "applet-device-gsm.h"
 #include "utils.h"
-#include "mobile-wizard.h"
+#include "nm-mobile-wizard.h"
 #include "applet-dialogs.h"
 #include "mb-menu-item.h"
 #include "nma-marshal.h"
@@ -73,6 +73,8 @@ typedef struct {
 	gboolean quality_valid;
 	guint32 quality;
 	char *unlock_required;
+	char *devid;
+	char *simid;
 	gboolean modem_enabled;
 	MMModemGsmAccessTech act;
 
@@ -90,6 +92,7 @@ typedef struct {
 
 	/* Unlock dialog stuff */
 	GtkWidget *dialog;
+	gpointer keyring_id;
 } GsmDeviceInfo;
 
 static void unlock_dialog_destroy (GsmDeviceInfo *info);
@@ -119,9 +122,9 @@ typedef struct {
 } AutoGsmWizardInfo;
 
 static void
-mobile_wizard_done (MobileWizard *wizard,
+mobile_wizard_done (NMAMobileWizard *wizard,
                     gboolean canceled,
-                    MobileWizardAccessMethod *method,
+                    NMAMobileWizardAccessMethod *method,
                     gpointer user_data)
 {
 	AutoGsmWizardInfo *info = user_data;
@@ -181,7 +184,7 @@ done:
 	(*(info->callback)) (connection, TRUE, canceled, info->callback_data);
 
 	if (wizard)
-		mobile_wizard_destroy (wizard);
+		nma_mobile_wizard_destroy (wizard);
 	g_free (info);
 }
 
@@ -189,23 +192,23 @@ static gboolean
 do_mobile_wizard (AppletNewAutoConnectionCallback callback,
                   gpointer callback_data)
 {
-	MobileWizard *wizard;
+	NMAMobileWizard *wizard;
 	AutoGsmWizardInfo *info;
-	MobileWizardAccessMethod *method;
+	NMAMobileWizardAccessMethod *method;
 
 	info = g_malloc0 (sizeof (AutoGsmWizardInfo));
 	info->callback = callback;
 	info->callback_data = callback_data;
 
-	wizard = mobile_wizard_new (NULL, NULL, NM_DEVICE_MODEM_CAPABILITY_GSM_UMTS, FALSE,
-	                            mobile_wizard_done, info);
+	wizard = nma_mobile_wizard_new (NULL, NULL, NM_DEVICE_MODEM_CAPABILITY_GSM_UMTS, FALSE,
+									mobile_wizard_done, info);
 	if (wizard) {
-		mobile_wizard_present (wizard);
+		nma_mobile_wizard_present (wizard);
 		return TRUE;
 	}
 
 	/* Fall back to something */
-	method = g_malloc0 (sizeof (MobileWizardAccessMethod));
+	method = g_malloc0 (sizeof (NMAMobileWizardAccessMethod));
 	method->devtype = NM_DEVICE_MODEM_CAPABILITY_GSM_UMTS;
 	method->provider_name = _("GSM");
 	mobile_wizard_done (NULL, FALSE, method, info);
@@ -761,6 +764,89 @@ gsm_get_secrets (SecretsRequest *req, GError **error)
 /********************************************************************/
 
 static void
+save_pin_cb (GnomeKeyringResult result, guint32 val, gpointer user_data)
+{
+	if (result != GNOME_KEYRING_RESULT_OK)
+		g_warning ("%s: result %d", (const char *) user_data, result);
+}
+
+static void
+set_pin_in_keyring (const char *devid,
+                    const char *simid,
+                    const char *pin)
+{
+	GnomeKeyringAttributeList *attributes;
+	GnomeKeyringAttribute attr;
+	const char *name;
+	char *error_msg;
+
+	name = g_strdup_printf (_("PIN code for SIM card '%s' on '%s'"),
+	                        simid ? simid : "unknown",
+	                        devid);
+
+	attributes = gnome_keyring_attribute_list_new ();
+	attr.name = g_strdup ("devid");
+	attr.type = GNOME_KEYRING_ATTRIBUTE_TYPE_STRING;
+	attr.value.string = g_strdup (devid);
+	g_array_append_val (attributes, attr);
+
+	if (simid) {
+		attr.name = g_strdup ("simid");
+		attr.type = GNOME_KEYRING_ATTRIBUTE_TYPE_STRING;
+		attr.value.string = g_strdup (simid);
+		g_array_append_val (attributes, attr);
+	}
+
+	error_msg = g_strdup_printf ("Saving PIN code in keyring for devid:%s simid:%s failed",
+	                             devid, simid ? simid : "(unknown)");
+
+	gnome_keyring_item_create (NULL,
+	                           GNOME_KEYRING_ITEM_GENERIC_SECRET,
+	                           name,
+	                           attributes,
+	                           pin,
+	                           TRUE,
+	                           save_pin_cb,
+	                           error_msg,
+	                           (GDestroyNotify) g_free);
+
+	gnome_keyring_attribute_list_free (attributes);
+}
+
+static void
+delete_pin_cb (GnomeKeyringResult result, gpointer user_data)
+{
+	/* nothing to do */
+}
+
+static void
+delete_pins_find_cb (GnomeKeyringResult result, GList *list, gpointer user_data)
+{
+	GList *iter;
+
+	if (result == GNOME_KEYRING_RESULT_OK) {
+		for (iter = list; iter; iter = g_list_next (iter)) {
+			GnomeKeyringFound *found = iter->data;
+
+			gnome_keyring_item_delete (found->keyring, found->item_id, delete_pin_cb, NULL, NULL);
+		}
+	}
+}
+
+static void
+delete_pins_in_keyring (const char *devid)
+{
+	gnome_keyring_find_itemsv (GNOME_KEYRING_ITEM_GENERIC_SECRET,
+	                           delete_pins_find_cb,
+	                           NULL,
+	                           NULL,
+	                           "devid",
+	                           GNOME_KEYRING_ATTRIBUTE_TYPE_STRING,
+	                           devid,
+	                           NULL);
+}
+
+static void
 unlock_dialog_destroy (GsmDeviceInfo *info)
 {
 	applet_mobile_pin_dialog_destroy (info->dialog);
@@ -772,9 +858,14 @@ unlock_pin_reply (DBusGProxy *proxy, DBusGProxyCall *call, gpointer user_data)
 {
 	GsmDeviceInfo *info = user_data;
 	GError *error = NULL;
-	const char *dbus_error, *msg = NULL;
+	const char *dbus_error, *msg = NULL, *code1;
 
 	if (dbus_g_proxy_end_call (proxy, call, &error, G_TYPE_INVALID)) {
+		if (applet_mobile_pin_dialog_get_auto_unlock (info->dialog)) {
+			code1 = applet_mobile_pin_dialog_get_entry1 (info->dialog);
+			set_pin_in_keyring (info->devid, info->simid, code1);
+		} else
+			delete_pins_in_keyring (info->devid);
 		unlock_dialog_destroy (info);
 		return;
 	}
@@ -929,7 +1020,11 @@ unlock_dialog_new (NMDevice *device, GsmDeviceInfo *info)
 	}
 
 	/* Construct and run the dialog */
-	info->dialog = applet_mobile_pin_dialog_new (title, header, desc, show_pass_label);
+	info->dialog = applet_mobile_pin_dialog_new (title,
+	                                             header,
+	                                             desc,
+	                                             show_pass_label,
+	                                             (unlock_code == UNLOCK_CODE_PIN) ? TRUE : FALSE);
 	g_free (desc);
 	g_return_if_fail (info->dialog != NULL);
 
@@ -962,6 +1057,9 @@ gsm_device_info_free (gpointer data)
 	if (info->bus)
 		dbus_g_connection_unref (info->bus);
 
+	if (info->keyring_id)
+		gnome_keyring_cancel_request (info->keyring_id);
+
 	if (info->providers)
 		g_hash_table_destroy (info->providers);
 
@@ -971,6 +1069,8 @@ gsm_device_info_free (gpointer data)
 	if (info->dialog)
 		unlock_dialog_destroy (info);
 
+	g_free (info->devid);
+	g_free (info->simid);
 	g_free (info->op_code);
 	g_free (info->op_name);
 	memset (info, 0, sizeof (GsmDeviceInfo));
@@ -1193,7 +1293,86 @@ parse_unlock_required (GValue *value)
 }
 
 static void
-unlock_reply (DBusGProxy *proxy, DBusGProxyCall *call, gpointer user_data)
+keyring_unlock_pin_reply (DBusGProxy *proxy, DBusGProxyCall *call, gpointer user_data)
+{
+	GsmDeviceInfo *info = user_data;
+	GError *error = NULL;
+
+	if (!dbus_g_proxy_end_call (proxy, call, &error, G_TYPE_INVALID)) {
+		g_warning ("Failed to auto-unlock devid:%s simid:%s : (%s) %s",
+		           info->devid ? info->devid : "(unknown)",
+		           info->simid ? info->simid : "(unknown)",
+		           dbus_g_error_get_name (error),
+		           error->message);
+		/* Ask the user */
+		unlock_dialog_new (info->device, info);
+		g_clear_error (&error);
+	}
+}
+
+static void
+keyring_pin_check_cb (GnomeKeyringResult result, GList *list, gpointer user_data)
+{
+	GsmDeviceInfo *info = user_data;
+	GList *iter;
+	const char *pin = NULL;
+
+	info->keyring_id = NULL;
+
+	if (result != GNOME_KEYRING_RESULT_OK) {
+		/* No saved PIN, just ask the user */
+		unlock_dialog_new (info->device, info);
+		return;
+	}
+
+	/* Look for a result with a matching "simid" attribute since that's
+	 * better than just using a matching "devid".  The PIN is really tied
+	 * to the SIM, not the modem itself.
+	 */
+	for (iter = list;
+	     info->simid && (pin == NULL) && iter;
+	     iter = g_list_next (iter)) {
+		GnomeKeyringFound *found = iter->data;
+		int i;
+
+		/* Look for a matching "simid" attribute */
+		for (i = 0; (pin == NULL) && i < found->attributes->len; i++) {
+			GnomeKeyringAttribute attr = gnome_keyring_attribute_list_index (found->attributes, i);
+
+			if (   g_strcmp0 (attr.name, "simid") == 0
+			    && attr.type == GNOME_KEYRING_ATTRIBUTE_TYPE_STRING
+			    && g_strcmp0 (attr.value.string, info->simid) == 0) {
+				pin = found->secret;
+				break;
+			}
+		}
+	}
+
+	if (pin == NULL) {
+		/* Fall back to the first result's PIN */
+		pin = ((GnomeKeyringFound *) list->data)->secret;
+		if (pin == NULL) {
+			/* Should never get here */
+			g_warn_if_fail (pin != NULL);
+			unlock_dialog_new (info->device, info);
+			return;
+		}
+	}
+
+	/* Send the PIN code to ModemManager */
+	if (!dbus_g_proxy_begin_call_with_timeout (info->card_proxy, "SendPin",
+	                                           keyring_unlock_pin_reply, info, NULL,
+	                                           15000,  /* 15 seconds */
+	                                           G_TYPE_STRING, pin,
+	                                           G_TYPE_INVALID)) {
+		g_warning ("Failed to auto-unlock devid:%s simid:%s",
+		           info->devid ? info->devid : "(unknown)",
+		           info->simid ? info->simid : "(unknown)");
+	}
+}
+
+static void
+simid_reply (DBusGProxy *proxy, DBusGProxyCall *call, gpointer user_data)
 {
 	GsmDeviceInfo *info = user_data;
 	GError *error = NULL;
@@ -1203,14 +1382,71 @@ unlock_reply (DBusGProxy *proxy, DBusGProxyCall *call, gpointer user_data)
 	                           G_TYPE_VALUE, &value,
 	                           G_TYPE_INVALID)) {
 		if (G_VALUE_HOLDS_STRING (&value)) {
-			g_free (info->unlock_required);
-			info->unlock_required = parse_unlock_required (&value);
-
-			/* Show the unlock dialog if an unlock is now required */
-			if (info->unlock_required)
-				unlock_dialog_new (info->device, info);
+			g_free (info->simid);
+			info->simid = g_value_dup_string (&value);
 		}
 		g_value_unset (&value);
+	}
+	g_clear_error (&error);
+
+	/* Procure unlock code and apply it if an unlock is now required. */
+	if (info->unlock_required) {
+		/* If we have a device ID ask the keyring for any saved SIM-PIN codes */
+		if (info->devid && (g_strcmp0 (info->unlock_required, "sim-pin") == 0)) {
+			g_warn_if_fail (info->keyring_id == NULL);
+			info->keyring_id = gnome_keyring_find_itemsv (GNOME_KEYRING_ITEM_GENERIC_SECRET,
+			                                              keyring_pin_check_cb,
+			                                              info,
+			                                              NULL,
+			                                              "devid",
+			                                              GNOME_KEYRING_ATTRIBUTE_TYPE_STRING,
+			                                              info->devid,
+			                                              NULL);
+		} else {
+			/* Couldn't get a device ID, but unlock required; present dialog */
+			unlock_dialog_new (info->device, info);
+		}
+	}
+
+	check_start_polling (info);
+}
+
+#define MM_DBUS_INTERFACE_MODEM_GSM_CARD "org.freedesktop.ModemManager.Modem.Gsm.Card"
+
+static void
+unlock_reply (DBusGProxy *proxy, DBusGProxyCall *call, gpointer user_data)
+{
+	GsmDeviceInfo *info = user_data;
+	GError *error = NULL;
+	GHashTable *props = NULL;
+
+	if (dbus_g_proxy_end_call (proxy, call, &error,
+	                           DBUS_TYPE_G_MAP_OF_VARIANT, &props,
+	                           G_TYPE_INVALID)) {
+		GHashTableIter iter;
+		const char *prop_name;
+		GValue *value;
+
+		g_hash_table_iter_init (&iter, props);
+		while (g_hash_table_iter_next (&iter, (gpointer) &prop_name, (gpointer) &value)) {
+			if ((strcmp (prop_name, "UnlockRequired") == 0) && G_VALUE_HOLDS_STRING (value)) {
+				g_free (info->unlock_required);
+				info->unlock_required = parse_unlock_required (value);
+			}
+
+			if ((strcmp (prop_name, "DeviceIdentifier") == 0) && G_VALUE_HOLDS_STRING (value)) {
+				g_free (info->devid);
+				info->devid = g_value_dup_string (value);
+			}
+		}
+		g_hash_table_destroy (props);
+
+		/* Get SIM card identifier */
+		dbus_g_proxy_begin_call (info->props_proxy, "Get",
+		                         simid_reply, info, NULL,
+		                         G_TYPE_STRING, MM_DBUS_INTERFACE_MODEM_GSM_CARD,
+		                         G_TYPE_STRING, "SimIdentifier",
+		                         G_TYPE_INVALID);
 	}
 
 	g_clear_error (&error);
@@ -1465,10 +1701,9 @@ gsm_device_added (NMDevice *device, NMApplet *applet)
 	                             info, NULL);
 
 	/* Ask whether the device needs to be unlocked */
-	dbus_g_proxy_begin_call (info->props_proxy, "Get",
+	dbus_g_proxy_begin_call (info->props_proxy, "GetAll",
 	                         unlock_reply, info, NULL,
 	                         G_TYPE_STRING, MM_DBUS_INTERFACE_MODEM,
-	                         G_TYPE_STRING, "UnlockRequired",
 	                         G_TYPE_INVALID);
 
 	/* Ask whether the device is enabled */

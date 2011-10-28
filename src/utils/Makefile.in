@@ -53,8 +53,7 @@ am__DEPENDENCIES_1 =
 libutils_la_DEPENDENCIES = $(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
 	$(am__DEPENDENCIES_1)
 am_libutils_la_OBJECTS = libutils_la-utils.lo \
-	libutils_la-nmn-mobile-providers.lo \
-	libutils_la-mobile-wizard.lo
+	libutils_la-nmn-mobile-providers.lo
 libutils_la_OBJECTS = $(am_libutils_la_OBJECTS)
 AM_V_lt = $(am__v_lt_$(V))
 am__v_lt_ = $(am__v_lt_$(AM_DEFAULT_VERBOSITY))
@@ -190,6 +189,8 @@ INTLTOOL_EXTRACT = @INTLTOOL_EXTRACT@
 INTLTOOL_MERGE = @INTLTOOL_MERGE@
 INTLTOOL_PERL = @INTLTOOL_PERL@
 INTLTOOL_UPDATE = @INTLTOOL_UPDATE@
+ISO_CODES_CFLAGS = @ISO_CODES_CFLAGS@
+ISO_CODES_LIBS = @ISO_CODES_LIBS@
 LD = @LD@
 LDFLAGS = @LDFLAGS@
 LIBNOTIFY_07_CFLAGS = @LIBNOTIFY_07_CFLAGS@
@@ -301,15 +302,12 @@ libutils_la_SOURCES = \
 	utils.c \
 	utils.h \
 	nmn-mobile-providers.h \
-	nmn-mobile-providers.c \
-	mobile-wizard.h \
-	mobile-wizard.c
+	nmn-mobile-providers.c
 
 libutils_la_CPPFLAGS = \
 	$(GTK_CFLAGS) \
 	$(NMA_CFLAGS) \
 	$(GNOME_KEYRING_CFLAGS) \
-	-DUIDIR=\""$(uidir)"\" \
 	-DDATADIR=\""$(datadir)"\" \
 	$(DISABLE_DEPRECATED) \
 	-I${top_srcdir}/src
@@ -367,7 +365,6 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libutils_la-mobile-wizard.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libutils_la-nmn-mobile-providers.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libutils_la-utils.Plo@am__quote@
 
@@ -413,14 +410,6 @@ libutils_la-nmn-mobile-providers.lo: nmn-mobile-providers.c
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	source='nmn-mobile-providers.c' object='libutils_la-nmn-mobile-providers.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libutils_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o libutils_la-nmn-mobile-providers.lo `test -f 'nmn-mobile-providers.c' || echo '$(srcdir)/'`nmn-mobile-providers.c
-
-libutils_la-mobile-wizard.lo: mobile-wizard.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libutils_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT libutils_la-mobile-wizard.lo -MD -MP -MF $(DEPDIR)/libutils_la-mobile-wizard.Tpo -c -o libutils_la-mobile-wizard.lo `test -f 'mobile-wizard.c' || echo '$(srcdir)/'`mobile-wizard.c
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libutils_la-mobile-wizard.Tpo $(DEPDIR)/libutils_la-mobile-wizard.Plo
-@am__fastdepCC_FALSE@	$(AM_V_CC) @AM_BACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='mobile-wizard.c' object='libutils_la-mobile-wizard.lo' libtool=yes @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libutils_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o libutils_la-mobile-wizard.lo `test -f 'mobile-wizard.c' || echo '$(srcdir)/'`mobile-wizard.c
 
 mostlyclean-libtool:
 	-rm -f *.lo
