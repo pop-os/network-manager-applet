@@ -78,6 +78,7 @@ nm_connection_editor_DEPENDENCIES =  \
 	${top_builddir}/src/wireless-security/libwireless-security.la \
 	${top_builddir}/src/utils/libutils.la \
 	${top_builddir}/src/marshallers/libmarshallers.la \
+	${top_builddir}/src/libnm-gtk/libnm-gtk.la \
 	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1)
 AM_V_lt = $(am__v_lt_$(V))
 am__v_lt_ = $(am__v_lt_$(AM_DEFAULT_VERBOSITY))
@@ -197,6 +198,8 @@ INTLTOOL_EXTRACT = @INTLTOOL_EXTRACT@
 INTLTOOL_MERGE = @INTLTOOL_MERGE@
 INTLTOOL_PERL = @INTLTOOL_PERL@
 INTLTOOL_UPDATE = @INTLTOOL_UPDATE@
+ISO_CODES_CFLAGS = @ISO_CODES_CFLAGS@
+ISO_CODES_LIBS = @ISO_CODES_LIBS@
 LD = @LD@
 LDFLAGS = @LDFLAGS@
 LIBNOTIFY_07_CFLAGS = @LIBNOTIFY_07_CFLAGS@
@@ -316,6 +319,7 @@ nm_connection_editor_CPPFLAGS = \
 	$(DISABLE_DEPRECATED) \
 	-I${top_srcdir}/src/utils \
 	-I${top_srcdir}/src/wireless-security \
+	-I${top_srcdir}/src/libnm-gtk \
 	-I${top_builddir}/src/marshallers
 
 nm_connection_editor_SOURCES = \
@@ -361,6 +365,7 @@ nm_connection_editor_LDADD = \
 	${top_builddir}/src/wireless-security/libwireless-security.la \
 	${top_builddir}/src/utils/libutils.la \
 	${top_builddir}/src/marshallers/libmarshallers.la \
+	${top_builddir}/src/libnm-gtk/libnm-gtk.la \
 	$(GTK_LIBS) \
 	$(NMA_LIBS) \
 	-lm
