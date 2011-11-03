@@ -2,6 +2,11 @@ network-manager-applet (0.9.1.95-1) UNRELEASED; urgency=low
 
   * New upstream release.
   * Bump Build-Depends on libnm-*-dev and network-manager-dev to (>= 0.9.1).
+  * Provide libnm-gtk as a private library for wireless and mobile dialogs:
+    - Add packages for libnm-gtk0, libnm-gtk-dev and libnm-gtk-common.
+    - Add debian/patches/01-export-symbols.patch to restrict the number of
+      exported symbols.
+    - Use dh-autoreconf to update the build system.
 
  -- Michael Biebl <biebl@debian.org>  Fri, 28 Oct 2011 23:51:40 +0200
 

@@ -6,6 +6,7 @@ Uploaders: Michael Biebl <biebl@debian.org>
 Build-Depends:
  debhelper (>= 8.1.0~),
  autotools-dev,
+ dh-autoreconf,
  intltool,
  libdbus-glib-1-dev (>= 0.74),
  libgnome-keyring-dev,
@@ -61,3 +62,34 @@ Description: network management framework (GNOME frontend)
  them. For encrypted networks it will prompt the user for the key/passphrase
  and it can optionally store them in the gnome-keyring.
 
+Package: libnm-gtk0
+Architecture: any
+Section: libs
+Depends:
+ ${shlibs:Depends},
+ ${misc:Depends},
+ libnm-gtk-common (= ${source:Version})
+Description: library for wireless and mobile dialogs
+ This library provides Gtk+ dialogs for NetworkManager.
+
+Package: libnm-gtk-common
+Architecture: all
+Section: libs
+Depends:
+ ${misc:Depends}
+Description: library for wireless and mobile dialogs - common files
+ The libnm-gtk library provides Gtk+ dialogs for NetworkManager.
+ .
+ This package contains data files used by libnm-gtk.
+
+Package: libnm-gtk-dev
+Architecture: any
+Section: libdevel
+Depends:
+ ${shlibs:Depends},
+ ${misc:Depends},
+ libnm-gtk0 (= ${binary:Version})
+Description: library for wireless and mobile dialogs - development files
+ The libnm-gtk library provides Gtk+ dialogs for NetworkManager.
+ .
+ This package contains the development files.

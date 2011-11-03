@@ -1,0 +1,8 @@
+usr/bin/
+usr/share/icons/
+usr/share/locale/
+usr/share/applications/
+usr/share/nm-applet/
+usr/lib/gnome-bluetooth/
+etc/gconf/
+etc/xdg/
