@@ -42,7 +42,8 @@ Recommends:
  notification-daemon,
  libpam-keyring,
  mobile-broadband-provider-info,
- gnome-bluetooth
+ gnome-bluetooth,
+ iso-codes
 Suggests:
  network-manager-openvpn-gnome,
  network-manager-vpnc-gnome,
