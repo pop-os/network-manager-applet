@@ -1,3 +1,2 @@
 # Debian patches for network-manager-applet
-01-export-symbols.patch
 04-autostart.patch
