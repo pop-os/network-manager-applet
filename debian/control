@@ -14,10 +14,10 @@ Build-Depends:
  libglib2.0-dev (>= 2.16),
  libgconf2-dev,
  libnotify-dev (>= 0.7),
- libnm-util-dev (>= 0.9.1),
- libnm-glib-dev (>= 0.9.1),
- libnm-glib-vpn-dev (>= 0.9.1),
- network-manager-dev (>= 0.9.1),
+ libnm-util-dev (>= 0.9.2),
+ libnm-glib-dev (>= 0.9.2),
+ libnm-glib-vpn-dev (>= 0.9.2),
+ network-manager-dev (>= 0.9.2),
  docbook-to-man,
  libpolkit-gobject-1-dev (>= 0.92),
  libgnome-bluetooth-dev (>= 3.0.0),
@@ -34,7 +34,7 @@ Pre-Depends: ${misc:Pre-Depends}
 Depends:
  ${shlibs:Depends},
  ${misc:Depends},
- network-manager (>= 0.9),
+ network-manager (>= 0.9.2),
  policykit-1-gnome,
  gnome-icon-theme,
  dbus-x11
