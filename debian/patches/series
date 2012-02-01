@@ -1,2 +1,3 @@
 # Debian patches for network-manager-applet
+01-editor-policykit-authentication.patch
 04-autostart.patch

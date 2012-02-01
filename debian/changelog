@@ -2,6 +2,9 @@ network-manager-applet (0.9.2.0-2) UNRELEASED; urgency=low
 
   * Fix versioned Build-Depends on dpkg-dev.
     The buildflags.mk snippet was added in version 1.16.1, not 1.6.1.
+  * debian/patches/01-editor-policykit-authentication.patch
+    - Fix interaction of single-edit mode with PolicyKit authentication.
+      Patch cherry-picked from upstream Git. (Closes: #652961)
 
  -- Michael Biebl <biebl@debian.org>  Thu, 05 Jan 2012 14:31:52 +0100
 
