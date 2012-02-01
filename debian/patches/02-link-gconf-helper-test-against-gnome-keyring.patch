@@ -1,0 +1,20 @@
+commit 9c01a7a03b0914453308affe68ceee8ccd5324cd
+Author: Kjartan Maraas <kmaraas@gnome.org>
+Date:   Tue Jan 24 12:32:24 2012 +0100
+
+    Fix linking with gnome-keyring in a gconf-helpers test program.
+
+diff --git a/src/gconf-helpers/tests/Makefile.am b/src/gconf-helpers/tests/Makefile.am
+index b046859..8226347 100644
+--- a/src/gconf-helpers/tests/Makefile.am
++++ b/src/gconf-helpers/tests/Makefile.am
+@@ -18,7 +18,8 @@ test_upgrade_CPPFLAGS = \
+ 
+ test_upgrade_LDADD = \
+ 	${builddir}/../libgconf-helpers-test.la \
+-	$(NMA_LIBS)
++	$(NMA_LIBS) \
++	$(GNOME_KEYRING_LIBS)
+ 
+ check-local: test-upgrade
+ 	$(abs_builddir)/test-upgrade
