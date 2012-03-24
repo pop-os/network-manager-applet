@@ -3,10 +3,14 @@ network-manager-applet (0.9.4.1-1) UNRELEASED; urgency=low
   * New upstream release.
   * Bump Build-Depends on libnm-*-dev and network-manager-dev to (>= 0.9.4).
   * Drop unused Build-Depends on libpolkit-gobject-1-dev.
+  * Remove patches, all merged upstream:
+    - debian/patches/01-editor-policykit-authentication.patch
+    - debian/patches/02-link-gconf-helper-test-against-gnome-keyring.patch
+    - debian/patches/04-autostart.patch
   * Update debian/copyright using the machine-readable copyright format 1.0.
   * Bump Standards-Version to 3.9.3.
 
- -- Michael Biebl <biebl@debian.org>  Sat, 24 Mar 2012 18:55:18 +0100
+ -- Michael Biebl <biebl@debian.org>  Sat, 24 Mar 2012 19:05:52 +0100
 
 network-manager-applet (0.9.2.0-2) unstable; urgency=low
 

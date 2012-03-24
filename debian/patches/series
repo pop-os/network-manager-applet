@@ -1,4 +1,1 @@
 # Debian patches for network-manager-applet
-01-editor-policykit-authentication.patch
-02-link-gconf-helper-test-against-gnome-keyring.patch
-04-autostart.patch
