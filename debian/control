@@ -22,7 +22,7 @@ Build-Depends:
  docbook-to-man,
  libgnome-bluetooth-dev (>= 3.0.0),
  iso-codes
-Standards-Version: 3.9.2
+Standards-Version: 3.9.3
 Vcs-Git: git://git.debian.org/git/pkg-utopia/network-manager-applet.git
 Vcs-Browser: http://git.debian.org/?p=pkg-utopia/network-manager-applet.git;a=summary
 Homepage: http://www.gnome.org/projects/NetworkManager/
