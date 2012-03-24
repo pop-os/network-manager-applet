@@ -56,6 +56,7 @@ am_test_upgrade_OBJECTS = test_upgrade-test-upgrade.$(OBJEXT) \
 test_upgrade_OBJECTS = $(am_test_upgrade_OBJECTS)
 am__DEPENDENCIES_1 =
 test_upgrade_DEPENDENCIES = ${builddir}/../libgconf-helpers-test.la \
+	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
 	$(am__DEPENDENCIES_1)
 AM_V_lt = $(am__v_lt_$(V))
 am__v_lt_ = $(am__v_lt_$(AM_DEFAULT_VERBOSITY))
@@ -195,8 +196,6 @@ PKG_CONFIG = @PKG_CONFIG@
 PKG_CONFIG_LIBDIR = @PKG_CONFIG_LIBDIR@
 PKG_CONFIG_PATH = @PKG_CONFIG_PATH@
 POFILES = @POFILES@
-POLKIT_CFLAGS = @POLKIT_CFLAGS@
-POLKIT_LIBS = @POLKIT_LIBS@
 POSUB = @POSUB@
 PO_IN_DATADIR_FALSE = @PO_IN_DATADIR_FALSE@
 PO_IN_DATADIR_TRUE = @PO_IN_DATADIR_TRUE@
@@ -271,13 +270,16 @@ test_upgrade_SOURCES = \
 test_upgrade_CPPFLAGS = \
 	-I ${srcdir}/../ \
 	-DTESTDIR=\"$(srcdir)\" \
+	$(GTK_CFLAGS) \
 	$(NMA_CFLAGS) \
 	$(GCONF_CFLAGS) \
 	$(GNOME_KEYRING_CFLAGS)
 
 test_upgrade_LDADD = \
 	${builddir}/../libgconf-helpers-test.la \
-	$(NMA_LIBS)
+	$(GTK_CFLAGS) \
+	$(NMA_LIBS) \
+	$(GNOME_KEYRING_LIBS)
 
 EXTRA_DIST = \
 	test-import.xml \

@@ -64,6 +64,7 @@ am_libwireless_security_la_OBJECTS =  \
 	libwireless_security_la-eap-method.lo \
 	libwireless_security_la-eap-method-tls.lo \
 	libwireless_security_la-eap-method-leap.lo \
+	libwireless_security_la-eap-method-fast.lo \
 	libwireless_security_la-eap-method-ttls.lo \
 	libwireless_security_la-eap-method-peap.lo \
 	libwireless_security_la-eap-method-simple.lo \
@@ -231,8 +232,6 @@ PKG_CONFIG = @PKG_CONFIG@
 PKG_CONFIG_LIBDIR = @PKG_CONFIG_LIBDIR@
 PKG_CONFIG_PATH = @PKG_CONFIG_PATH@
 POFILES = @POFILES@
-POLKIT_CFLAGS = @POLKIT_CFLAGS@
-POLKIT_LIBS = @POLKIT_LIBS@
 POSUB = @POSUB@
 PO_IN_DATADIR_FALSE = @PO_IN_DATADIR_FALSE@
 PO_IN_DATADIR_TRUE = @PO_IN_DATADIR_TRUE@
@@ -316,6 +315,8 @@ libwireless_security_la_SOURCES = \
 	eap-method-tls.c \
 	eap-method-leap.h \
 	eap-method-leap.c \
+	eap-method-fast.h \
+	eap-method-fast.c \
 	eap-method-ttls.h \
 	eap-method-ttls.c \
 	eap-method-peap.h \
@@ -342,6 +343,7 @@ libwireless_security_la_LIBADD = \
 uidir = $(datadir)/nm-applet
 ui_DATA = \
 	eap-method-leap.ui \
+	eap-method-fast.ui \
 	eap-method-peap.ui \
 	eap-method-simple.ui \
 	eap-method-tls.ui \
@@ -408,6 +410,7 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libwireless_security_la-eap-method-fast.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libwireless_security_la-eap-method-leap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libwireless_security_la-eap-method-peap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libwireless_security_la-eap-method-simple.Plo@am__quote@
@@ -520,6 +523,14 @@ libwireless_security_la-eap-method-leap.lo: eap-method-leap.c
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	source='eap-method-leap.c' object='libwireless_security_la-eap-method-leap.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libwireless_security_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o libwireless_security_la-eap-method-leap.lo `test -f 'eap-method-leap.c' || echo '$(srcdir)/'`eap-method-leap.c
+
+libwireless_security_la-eap-method-fast.lo: eap-method-fast.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libwireless_security_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT libwireless_security_la-eap-method-fast.lo -MD -MP -MF $(DEPDIR)/libwireless_security_la-eap-method-fast.Tpo -c -o libwireless_security_la-eap-method-fast.lo `test -f 'eap-method-fast.c' || echo '$(srcdir)/'`eap-method-fast.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libwireless_security_la-eap-method-fast.Tpo $(DEPDIR)/libwireless_security_la-eap-method-fast.Plo
+@am__fastdepCC_FALSE@	$(AM_V_CC) @AM_BACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='eap-method-fast.c' object='libwireless_security_la-eap-method-fast.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libwireless_security_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o libwireless_security_la-eap-method-fast.lo `test -f 'eap-method-fast.c' || echo '$(srcdir)/'`eap-method-fast.c
 
 libwireless_security_la-eap-method-ttls.lo: eap-method-ttls.c
 @am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libwireless_security_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT libwireless_security_la-eap-method-ttls.lo -MD -MP -MF $(DEPDIR)/libwireless_security_la-eap-method-ttls.Tpo -c -o libwireless_security_la-eap-method-ttls.lo `test -f 'eap-method-ttls.c' || echo '$(srcdir)/'`eap-method-ttls.c

@@ -17,7 +17,7 @@
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  *
- * (C) Copyright 2008 - 2011 Red Hat, Inc.
+ * (C) Copyright 2008 - 2012 Red Hat, Inc.
  * (C) Copyright 2008 Novell, Inc.
  */
 
@@ -378,7 +378,7 @@ gsm_add_menu_item (NMDevice *device,
 	info = g_object_get_data (G_OBJECT (device), "devinfo");
 
 	all = applet_get_all_connections (applet);
-	connections = utils_filter_connections_for_device (device, all);
+	connections = nm_device_filter_connections (device, all);
 	g_slist_free (all);
 
 	if (n_devices > 1) {
@@ -404,7 +404,7 @@ gsm_add_menu_item (NMDevice *device,
 	if (active) {
 		NMSettingConnection *s_con;
 
-		s_con = (NMSettingConnection *) nm_connection_get_setting (active, NM_TYPE_SETTING_CONNECTION);
+		s_con = nm_connection_get_setting_connection (active);
 		g_assert (s_con);
 
 		item = nm_mb_menu_item_new (nm_setting_connection_get_id (s_con),
@@ -482,7 +482,7 @@ gsm_device_state_changed (NMDevice *device,
 		if (connection) {
 			const char *id;
 
-			s_con = NM_SETTING_CONNECTION (nm_connection_get_setting (connection, NM_TYPE_SETTING_CONNECTION));
+			s_con = nm_connection_get_setting_connection (connection);
 			id = s_con ? nm_setting_connection_get_id (s_con) : NULL;
 			if (id)
 				str = g_strdup_printf (_("You are now connected to '%s'."), id);
@@ -519,7 +519,7 @@ gsm_get_icon (NMDevice *device,
 
 	id = nm_device_get_iface (NM_DEVICE (device));
 	if (connection) {
-		s_con = NM_SETTING_CONNECTION (nm_connection_get_setting (connection, NM_TYPE_SETTING_CONNECTION));
+		s_con = nm_connection_get_setting_connection (connection);
 		id = nm_setting_connection_get_id (s_con);
 	}
 
@@ -589,11 +589,11 @@ get_gsm_secrets_cb (GtkDialog *dialog,
 {
 	SecretsRequest *req = user_data;
 	NMGsmSecretsInfo *info = (NMGsmSecretsInfo *) req;
-	NMSetting *setting;
+	NMSettingGsm *setting;
 	GError *error = NULL;
 
 	if (response == GTK_RESPONSE_OK) {
-		setting = nm_connection_get_setting (req->connection, NM_TYPE_SETTING_GSM);
+		setting = nm_connection_get_setting_gsm (req->connection);
 		if (setting) {
 			g_object_set (G_OBJECT (setting),
 				          info->secret_name, gtk_entry_get_text (info->secret_entry),
@@ -1249,7 +1249,9 @@ reg_info_reply (DBusGProxy *proxy, DBusGProxyCall *call, gpointer user_data)
 		notify_user_of_gsm_reg_change (info);
 	}
 
+	g_free (info->op_code);
 	info->op_code = new_op_code;
+	g_free (info->op_name);
 	info->op_name = new_op_name;
 
 	g_clear_error (&error);

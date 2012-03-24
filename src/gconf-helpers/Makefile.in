@@ -241,8 +241,6 @@ PKG_CONFIG = @PKG_CONFIG@
 PKG_CONFIG_LIBDIR = @PKG_CONFIG_LIBDIR@
 PKG_CONFIG_PATH = @PKG_CONFIG_PATH@
 POFILES = @POFILES@
-POLKIT_CFLAGS = @POLKIT_CFLAGS@
-POLKIT_LIBS = @POLKIT_LIBS@
 POSUB = @POSUB@
 PO_IN_DATADIR_FALSE = @PO_IN_DATADIR_FALSE@
 PO_IN_DATADIR_TRUE = @PO_IN_DATADIR_TRUE@
@@ -319,6 +317,7 @@ HELPERS_SOURCES = \
 
 libgconf_helpers_la_SOURCES = $(HELPERS_SOURCES)
 libgconf_helpers_la_CPPFLAGS = \
+	-I$(top_srcdir)/src/utils \
 	$(GTK_CFLAGS) \
 	$(NMA_CFLAGS) \
 	$(GCONF_CFLAGS) \
@@ -337,6 +336,7 @@ libgconf_helpers_la_LIBADD = \
 #########################
 libgconf_helpers_test_la_SOURCES = $(HELPERS_SOURCES)
 libgconf_helpers_test_la_CPPFLAGS = \
+	-I$(top_srcdir)/src/utils \
 	$(GTK_CFLAGS) \
 	$(NMA_CFLAGS) \
 	$(GCONF_CFLAGS) \

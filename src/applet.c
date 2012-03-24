@@ -38,7 +38,9 @@
 #include <glib/gi18n.h>
 #include <unistd.h>
 #include <sys/socket.h>
+#include <stdlib.h>
 
+#include <gio/gio.h>
 #include <dbus/dbus-glib.h>
 #include <dbus/dbus-glib-lowlevel.h>
 
@@ -434,7 +436,7 @@ get_device_class_from_connection (NMConnection *connection, NMApplet *applet)
 	g_return_val_if_fail (connection != NULL, NULL);
 	g_return_val_if_fail (applet != NULL, NULL);
 
-	s_con = (NMSettingConnection *) nm_connection_get_setting (connection, NM_TYPE_SETTING_CONNECTION);
+	s_con = nm_connection_get_setting_connection (connection);
 	g_return_val_if_fail (s_con != NULL, NULL);
 
 	ctype = nm_setting_connection_get_connection_type (s_con);
@@ -483,8 +485,15 @@ add_and_activate_cb (NMClient *client,
                      GError *error,
                      gpointer user_data)
 {
-	if (error)
-		g_warning ("Failed to add/activate connection: (%d) %s", error->code, error->message);
+	if (error) {
+		const char *text = _("Failed to add/activate connection");
+		char *err_text = g_strdup_printf ("(%d) %s", error->code,
+		                                  error->message ? error->message : _("Unknown error"));
+
+		g_warning ("%s: %s", text, err_text);
+		utils_show_error_dialog (_("Connection failure"), text, err_text, FALSE, NULL);
+		g_free (err_text);
+	}
 
 	applet_schedule_update_icon (NM_APPLET (user_data));
 }
@@ -521,10 +530,13 @@ static void
 disconnect_cb (NMDevice *device, GError *error, gpointer user_data)
 {
 	if (error) {
-		g_warning ("%s: device disconnect failed: (%d) %s",
-		           __func__,
-		           error ? error->code : -1,
-		           error && error->message ? error->message : "(unknown)");
+		const char *text = _("Device disconnect failed");
+		char *err_text = g_strdup_printf ("(%d) %s", error->code,
+		                                  error->message ? error->message : _("Unknown error"));
+
+		g_warning ("%s: %s: %s", __func__, text, err_text);
+		utils_show_error_dialog (_("Disconnect failure"), text, err_text, FALSE, NULL);
+		g_free (err_text);
 	}
 }
 
@@ -543,8 +555,15 @@ activate_connection_cb (NMClient *client,
                         GError *error,
                         gpointer user_data)
 {
-	if (error)
-		g_warning ("Connection activation failed: %s", error->message);
+	if (error) {
+		const char *text = _("Connection activation failed");
+		char *err_text = g_strdup_printf ("(%d) %s", error->code,
+		                                  error->message ? error->message : _("Unknown error"));
+
+		g_warning ("%s: %s", text, err_text);
+		utils_show_error_dialog (_("Connection failure"), text, err_text, FALSE, NULL);
+		g_free (err_text);
+	}
 
 	applet_schedule_update_icon (NM_APPLET (user_data));
 }
@@ -647,7 +666,7 @@ applet_new_menu_item_helper (NMConnection *connection,
 	char *markup;
 	GtkWidget *label;
 
-	s_con = NM_SETTING_CONNECTION (nm_connection_get_setting (connection, NM_TYPE_SETTING_CONNECTION));
+	s_con = nm_connection_get_setting_connection (connection);
 	item = gtk_image_menu_item_new_with_label ("");
 	if (add_active && (active == connection)) {
 		/* Pure evil */
@@ -798,8 +817,13 @@ applet_clear_notify (NMApplet *applet)
 static gboolean
 applet_notify_server_has_actions (void)
 {
-	gboolean has_actions = FALSE;
+	static gboolean has_actions = FALSE;
+	static gboolean initialized = FALSE;
 	GList *server_caps, *iter;
+
+	if (initialized)
+		return has_actions;
+	initialized = TRUE;
 
 	server_caps = notify_get_server_caps();
 	for (iter = server_caps; iter; iter = g_list_next (iter)) {
@@ -858,7 +882,7 @@ applet_do_notify (NMApplet *applet,
 	notify_notification_set_urgency (notify, urgency);
 	notify_notification_set_timeout (notify, NOTIFY_EXPIRES_DEFAULT);
 
-	if (applet->notify_actions && action1) {
+	if (applet_notify_server_has_actions () && action1) {
 		notify_notification_add_action (notify, action1, action1_label,
 		                                action1_cb, action1_user_data, NULL);
 	}
@@ -983,7 +1007,7 @@ make_vpn_failure_message (NMVPNConnection *vpn,
 	g_return_val_if_fail (vpn != NULL, NULL);
 
 	connection = applet_get_connection_for_active (applet, NM_ACTIVE_CONNECTION (vpn));
-	s_con = NM_SETTING_CONNECTION (nm_connection_get_setting (connection, NM_TYPE_SETTING_CONNECTION));
+	s_con = nm_connection_get_setting_connection (connection);
 
 	switch (reason) {
 	case NM_VPN_CONNECTION_STATE_REASON_DEVICE_DISCONNECTED:
@@ -1029,7 +1053,7 @@ make_vpn_disconnection_message (NMVPNConnection *vpn,
 	g_return_val_if_fail (vpn != NULL, NULL);
 
 	connection = applet_get_connection_for_active (applet, NM_ACTIVE_CONNECTION (vpn));
-	s_con = NM_SETTING_CONNECTION (nm_connection_get_setting (connection, NM_TYPE_SETTING_CONNECTION));
+	s_con = nm_connection_get_setting_connection (connection);
 
 	switch (reason) {
 	case NM_VPN_CONNECTION_STATE_REASON_DEVICE_DISCONNECTED:
@@ -1117,7 +1141,7 @@ get_connection_id (NMConnection *connection)
 	g_return_val_if_fail (connection != NULL, NULL);
 	g_return_val_if_fail (NM_IS_CONNECTION (connection), NULL);
 
-	s_con = NM_SETTING_CONNECTION (nm_connection_get_setting (connection, NM_TYPE_SETTING_CONNECTION));
+	s_con = nm_connection_get_setting_connection (connection);
 	g_return_val_if_fail (s_con != NULL, NULL);
 
 	return nm_setting_connection_get_id (s_con);
@@ -1192,7 +1216,7 @@ nma_menu_vpn_item_clicked (GtkMenuItem *item, gpointer user_data)
 		/* Connection already active; do nothing */
 		return;
 
-	s_con = NM_SETTING_CONNECTION (nm_connection_get_setting (connection, NM_TYPE_SETTING_CONNECTION));
+	s_con = nm_connection_get_setting_connection (connection);
 	info = g_malloc0 (sizeof (VPNActivateInfo));
 	info->applet = applet;
 	info->vpn_name = g_strdup (nm_setting_connection_get_id (s_con));
@@ -1245,7 +1269,7 @@ applet_get_first_active_vpn_connection (NMApplet *applet,
 		if (!connection)
 			continue;
 
-		s_con = NM_SETTING_CONNECTION (nm_connection_get_setting (connection, NM_TYPE_SETTING_CONNECTION));
+		s_con = nm_connection_get_setting_connection (connection);
 		g_assert (s_con);
 
 		if (!strcmp (nm_setting_connection_get_connection_type (s_con), NM_SETTING_VPN_SETTING_NAME)) {
@@ -1613,12 +1637,12 @@ get_vpn_connections (NMApplet *applet)
 		NMConnection *connection = NM_CONNECTION (iter->data);
 		NMSettingConnection *s_con;
 
-		s_con = NM_SETTING_CONNECTION (nm_connection_get_setting (connection, NM_TYPE_SETTING_CONNECTION));
+		s_con = nm_connection_get_setting_connection (connection);
 		if (strcmp (nm_setting_connection_get_connection_type (s_con), NM_SETTING_VPN_SETTING_NAME))
 			/* Not a VPN connection */
 			continue;
 
-		if (!nm_connection_get_setting (connection, NM_TYPE_SETTING_VPN)) {
+		if (!nm_connection_get_setting_vpn (connection)) {
 			g_warning ("%s: VPN connection '%s' didn't have required vpn setting.", __func__,
 			           nm_setting_connection_get_id (s_con));
 			continue;
@@ -2463,7 +2487,7 @@ get_tip_for_device_state (NMDevice *device,
 
 	id = nm_device_get_iface (device);
 	if (connection) {
-		s_con = (NMSettingConnection *) nm_connection_get_setting (connection, NM_TYPE_SETTING_CONNECTION);
+		s_con = nm_connection_get_setting_connection (connection);
 		id = nm_setting_connection_get_id (s_con);
 	}
 
@@ -2517,14 +2541,19 @@ applet_get_device_icon_for_state (NMApplet *applet, char **tip)
 		NMConnection *connection;
 
 		connection = applet_find_active_connection_for_device (device, applet, NULL);
+		/* device class returns a referenced pixbuf */
 		pixbuf = dclass->get_icon (device, state, connection, tip, applet);
 		if (!*tip)
 			*tip = get_tip_for_device_state (device, state, connection);
 	}
 
 out:
-	if (!pixbuf)
+	if (!pixbuf) {
 		pixbuf = applet_common_get_device_icon (state, applet);
+		/* reference the pixbuf to match the device class' get_icon() function behavior */
+		if (pixbuf)
+			g_object_ref (pixbuf);
+	}
 	return pixbuf;
 }
 
@@ -2544,7 +2573,7 @@ get_tip_for_vpn (NMActiveConnection *active, NMVPNConnectionState state, NMApple
 		NMSettingConnection *s_con;
 
 		if (!strcmp (nm_connection_get_path (candidate), path)) {
-			s_con = NM_SETTING_CONNECTION (nm_connection_get_setting (candidate, NM_TYPE_SETTING_CONNECTION));
+			s_con = nm_connection_get_setting_connection (candidate);
 			id = nm_setting_connection_get_id (s_con);
 			break;
 		}
@@ -2601,10 +2630,12 @@ applet_update_icon (gpointer user_data)
 	case NM_STATE_UNKNOWN:
 	case NM_STATE_ASLEEP:
 		pixbuf = nma_icon_check_and_load ("nm-no-connection", &applet->no_connection_icon, applet);
+		g_object_ref (pixbuf);
 		dev_tip = g_strdup (_("Networking disabled"));
 		break;
 	case NM_STATE_DISCONNECTED:
 		pixbuf = nma_icon_check_and_load ("nm-no-connection", &applet->no_connection_icon, applet);
+		g_object_ref (pixbuf);
 		dev_tip = g_strdup (_("No network connection"));
 		break;
 	default:
@@ -2613,6 +2644,8 @@ applet_update_icon (gpointer user_data)
 	}
 
 	foo_set_icon (applet, pixbuf, ICON_LAYER_LINK);
+	if (pixbuf)
+		g_object_unref (pixbuf);
 
 	/* VPN state next */
 	pixbuf = NULL;
@@ -2827,7 +2860,7 @@ applet_agent_get_secrets_cb (AppletAgent *agent,
 	GError *error = NULL;
 	SecretsRequest *req = NULL;
 
-	s_con = (NMSettingConnection *) nm_connection_get_setting (connection, NM_TYPE_SETTING_CONNECTION);
+	s_con = nm_connection_get_setting_connection (connection);
 	g_return_if_fail (s_con != NULL);
 
 	/* VPN secrets get handled a bit differently */
@@ -2911,6 +2944,21 @@ applet_agent_cancel_secrets_cb (AppletAgent *agent,
 			/* cancel and free this password request */
 			applet_secrets_request_free (req);
 		}
+	}
+}
+
+static void
+applet_agent_registered_cb (AppletAgent *agent,
+                            GParamSpec *pspec,
+                            gpointer user_data)
+{
+	NMApplet *applet = NM_APPLET (user_data);
+
+	/* If the shell is running and the agent just got registered, unregister it */
+	if (   (applet->shell_version >= 3.4)
+	    && nm_secret_agent_get_registered (NM_SECRET_AGENT (agent))) {
+		g_message ("Stopping registered applet secret agent because GNOME Shell is running");
+		nm_secret_agent_unregister (NM_SECRET_AGENT (agent));
 	}
 }
 
@@ -3180,6 +3228,94 @@ applet_embedded_cb (GObject *object, GParamSpec *pspec, gpointer user_data)
 	           embedded ? "embedded in" : "removed from");
 }
 
+#if GLIB_CHECK_VERSION(2,26,0)
+static gboolean
+delayed_start_agent (gpointer user_data)
+{
+	NMApplet *applet = user_data;
+
+	applet->agent_start_id = 0;
+
+	g_assert (applet->agent);
+
+	/* If the agent is already running, there's nothing to do. */
+	if (nm_secret_agent_get_registered (NM_SECRET_AGENT (applet->agent)) == TRUE)
+		return FALSE;
+
+	if (nm_secret_agent_register (NM_SECRET_AGENT (applet->agent)))
+		g_message ("Starting applet secret agent because GNOME Shell disappeared");
+	else
+		g_warning ("Failed to start applet secret agent!");
+	return FALSE;
+}
+
+static gboolean
+get_shell_version (GDBusProxy *proxy, gdouble *out_version)
+{
+	GVariant *v;
+	char *version, *p;
+	gboolean success = FALSE;
+	gdouble converted;
+
+	/* Ask for the shell's version */
+	v = g_dbus_proxy_get_cached_property (proxy, "ShellVersion");
+	if (v) {
+		g_warn_if_fail (g_variant_is_of_type (v, G_VARIANT_TYPE_STRING));
+		version = g_variant_dup_string (v, NULL);
+		if (version) {
+			/* Terminate at the second dot if there is one */
+			p = strchr (version, '.');
+			if (p && (p = strchr (p + 1, '.')))
+				*p = '\0';
+
+			converted = strtod (version, NULL);
+			g_warn_if_fail (converted > 0);
+			g_warn_if_fail (converted < 1000);
+			if (converted > 0 && converted < 1000) {
+				*out_version = converted;
+				success = TRUE;
+			}
+			g_free (version);
+		}
+		g_variant_unref (v);
+	}
+	return success;
+}
+
+static void
+name_owner_changed_cb (GDBusProxy *proxy, GParamSpec *pspec, gpointer user_data)
+{
+	NMApplet *applet = user_data;
+	char *owner;
+
+	owner = g_dbus_proxy_get_name_owner (proxy);
+	if (owner) {
+		applet->shell_version = 0;
+		if (applet->agent_start_id)
+			g_source_remove (applet->agent_start_id);
+
+		if (   get_shell_version (proxy, &applet->shell_version)
+		    && applet->shell_version >= 3.4
+		    && applet->agent
+		    && nm_secret_agent_get_registered (NM_SECRET_AGENT (applet->agent))) {
+			g_message ("Stopping applet secret agent because GNOME Shell appeared");
+			nm_secret_agent_unregister (NM_SECRET_AGENT (applet->agent));
+		}
+	} else {
+		/* If the shell quit and our agent wasn't already registered, do it
+		 * now on a delay (just in case the shell is restarting.
+		 */
+		applet->shell_version = 0;
+		if (applet->agent_start_id)
+			g_source_remove (applet->agent_start_id);
+
+		if (nm_secret_agent_get_registered (NM_SECRET_AGENT (applet->agent)) == FALSE)
+			applet->agent_start_id = g_timeout_add_seconds (4, delayed_start_agent, applet);
+	}
+	g_free (owner);
+}
+#endif
+
 static gboolean
 dbus_setup (NMApplet *applet, GError **error)
 {
@@ -3300,6 +3436,8 @@ constructor (GType type,
 	                  G_CALLBACK (applet_agent_get_secrets_cb), applet);
 	g_signal_connect (applet->agent, APPLET_AGENT_CANCEL_SECRETS,
 	                  G_CALLBACK (applet_agent_cancel_secrets_cb), applet);
+	g_signal_connect (applet->agent, "notify::" NM_SECRET_AGENT_REGISTERED,
+	                  G_CALLBACK (applet_agent_registered_cb), applet);
 
 	/* Initialize device classes */
 	applet->wired_class = applet_device_wired_get_class (applet);
@@ -3329,7 +3467,22 @@ constructor (GType type,
 	                  G_CALLBACK (applet_embedded_cb), NULL);
 	applet_embedded_cb (G_OBJECT (applet->status_icon), NULL, NULL);
 
-	applet->notify_actions = applet_notify_server_has_actions ();
+#if GLIB_CHECK_VERSION(2,26,0)
+	/* Watch GNOME Shell so we can unregister our applet agent if it appears */
+	applet->shell_proxy = g_dbus_proxy_new_for_bus_sync (G_BUS_TYPE_SESSION,
+	                                                     G_DBUS_PROXY_FLAGS_DO_NOT_AUTO_START,
+	                                                     NULL,
+	                                                     "org.gnome.Shell",
+	                                                     "/org/gnome/Shell",
+	                                                     "org.gnome.Shell",
+	                                                     NULL,
+	                                                     NULL);
+	g_signal_connect (applet->shell_proxy,
+	                  "notify::g-name-owner",
+	                  G_CALLBACK (name_owner_changed_cb),
+	                  applet);
+	name_owner_changed_cb (applet->shell_proxy, NULL, applet);
+#endif
 
 	return G_OBJECT (applet);
 
@@ -3396,6 +3549,13 @@ static void finalize (GObject *object)
 
 	if (applet->session_bus)
 		dbus_g_connection_unref (applet->session_bus);
+
+#if GLIB_CHECK_VERSION(2,26,0)
+	if (applet->shell_proxy)
+		g_object_unref (applet->shell_proxy);
+#endif
+	if (applet->agent_start_id)
+		g_source_remove (applet->agent_start_id);
 
 	G_OBJECT_CLASS (nma_parent_class)->finalize (object);
 }

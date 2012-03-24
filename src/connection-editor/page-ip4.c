@@ -17,7 +17,7 @@
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  *
- * (C) Copyright 2008 - 2011 Red Hat, Inc.
+ * (C) Copyright 2008 - 2012 Red Hat, Inc.
  */
 
 #include "config.h"
@@ -122,7 +122,7 @@ ip4_private_init (CEPageIP4 *self, NMConnection *connection)
 
 	builder = CE_PAGE (self)->builder;
 
-	s_con = NM_SETTING_CONNECTION (nm_connection_get_setting (connection, NM_TYPE_SETTING_CONNECTION));
+	s_con = nm_connection_get_setting_connection (connection);
 	g_assert (s_con);
 	connection_type = nm_setting_connection_get_connection_type (s_con);
 	g_assert (connection_type);
@@ -834,7 +834,6 @@ routes_button_clicked_cb (GtkWidget *button, gpointer user_data)
 	g_free (tmp);
 
 	g_signal_connect (G_OBJECT (dialog), "response", G_CALLBACK (routes_dialog_response_cb), self);
-	g_signal_connect (G_OBJECT (dialog), "close", G_CALLBACK (routes_dialog_close_cb), self);
 
 	gtk_widget_show_all (dialog);
 }
@@ -981,7 +980,7 @@ ce_page_ip4_new (NMConnection *connection,
 	                                 "IP4Page",
 	                                 _("IPv4 Settings")));
 	if (!self) {
-		g_set_error_literal (error, 0, 0, _("Could not load IPv4 user interface."));
+		g_set_error_literal (error, NMA_ERROR, NMA_ERROR_GENERIC, _("Could not load IPv4 user interface."));
 		return NULL;
 	}
 
@@ -990,11 +989,11 @@ ce_page_ip4_new (NMConnection *connection,
 
 	priv->window_group = gtk_window_group_new ();
 
-	s_con = NM_SETTING_CONNECTION (nm_connection_get_setting (connection, NM_TYPE_SETTING_CONNECTION));
+	s_con = nm_connection_get_setting_connection (connection);
 	g_assert (s_con);
 	priv->connection_id = g_strdup (nm_setting_connection_get_id (s_con));
 
-	priv->setting = (NMSettingIP4Config *) nm_connection_get_setting (connection, NM_TYPE_SETTING_IP4_CONFIG);
+	priv->setting = nm_connection_get_setting_ip4_config (connection);
 	if (!priv->setting) {
 		priv->setting = NM_SETTING_IP4_CONFIG (nm_setting_ip4_config_new ());
 		nm_connection_add_setting (connection, NM_SETTING (priv->setting));

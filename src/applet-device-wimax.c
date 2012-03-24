@@ -17,7 +17,7 @@
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  *
- * (C) Copyright 2008 - 2011 Red Hat, Inc.
+ * (C) Copyright 2008 - 2012 Red Hat, Inc.
  */
 
 #ifdef HAVE_CONFIG_H
@@ -179,7 +179,7 @@ get_connection_for_nsp (GSList *connections, NMWimaxNsp *nsp)
 		NMConnection *candidate = NM_CONNECTION (iter->data);
 		NMSettingWimax *s_wimax;
 
-		s_wimax = (NMSettingWimax *) nm_connection_get_setting (candidate, NM_TYPE_SETTING_WIMAX);
+		s_wimax = nm_connection_get_setting_wimax (candidate);
 		if (s_wimax) {
 			candidate_name = nm_setting_wimax_get_network_name (s_wimax);
 			if (g_strcmp0 (nsp_name, candidate_name) == 0)
@@ -279,7 +279,7 @@ wimax_add_menu_item (NMDevice *device,
 		applet_menu_item_add_complex_separator_helper (menu, applet, _("Available"), -1);
 
 		all = applet_get_all_connections (applet);
-		connections = utils_filter_connections_for_device (device, all);
+		connections = nm_device_filter_connections (device, all);
 		g_slist_free (all);
 
 		/* And add menu items for each NSP */
@@ -363,7 +363,7 @@ active_nsp_changed_cb (NMDeviceWimax *device,
 	if (!connection)
 		return;
 
-	s_wimax = (NMSettingWimax *) nm_connection_get_setting (NM_CONNECTION (connection), NM_TYPE_SETTING_WIMAX);
+	s_wimax = nm_connection_get_setting_wimax (NM_CONNECTION (connection));
 	if (!s_wimax)
 		return;
 
@@ -417,7 +417,7 @@ wimax_device_state_changed (NMDevice *device,
 		if (connection) {
 			const char *id;
 
-			s_con = NM_SETTING_CONNECTION (nm_connection_get_setting (connection, NM_TYPE_SETTING_CONNECTION));
+			s_con = nm_connection_get_setting_connection (connection);
 			id = s_con ? nm_setting_connection_get_id (s_con) : NULL;
 			if (id)
 				str = g_strdup_printf (_("You are now connected to '%s'."), id);
@@ -449,7 +449,7 @@ wimax_get_icon (NMDevice *device,
 
 	id = nm_device_get_iface (NM_DEVICE (device));
 	if (connection) {
-		s_con = NM_SETTING_CONNECTION (nm_connection_get_setting (connection, NM_TYPE_SETTING_CONNECTION));
+		s_con = nm_connection_get_setting_connection (connection);
 		id = nm_setting_connection_get_id (s_con);
 	}
 
