@@ -24,24 +24,9 @@
 #include <string.h>
 #include <netinet/ether.h>
 #include <glib.h>
-
-#include <nm-device-ethernet.h>
-#include <nm-device-wifi.h>
-#include <nm-device-bt.h>
-#include <nm-device-modem.h>
-#include <nm-device-wimax.h>
-#include <nm-access-point.h>
+#include <gtk/gtk.h>
 
 #include <nm-setting-connection.h>
-#include <nm-setting-wired.h>
-#include <nm-setting-wireless.h>
-#include <nm-setting-wireless-security.h>
-#include <nm-setting-8021x.h>
-#include <nm-setting-gsm.h>
-#include <nm-setting-cdma.h>
-#include <nm-setting-pppoe.h>
-#include <nm-setting-bluetooth.h>
-#include <nm-setting-wimax.h>
 #include <nm-utils.h>
 
 #include "utils.h"
@@ -232,406 +217,6 @@ utils_ether_addr_valid (const struct ether_addr *test_addr)
 	return TRUE;
 }
 
-static gboolean
-utils_check_ap_compatible (NMAccessPoint *ap,
-                           NMConnection *connection)
-{
-	NMSettingWireless *s_wireless;
-	NMSettingWirelessSecurity *s_wireless_sec;
-	const GByteArray *setting_bssid;
-	const char *setting_mode;
-	const char *setting_band;
-	NM80211Mode ap_mode;
-	guint32 freq, channel;
-
-	g_return_val_if_fail (NM_IS_ACCESS_POINT (ap), FALSE);
-	g_return_val_if_fail (NM_IS_CONNECTION (connection), FALSE);
-
-	s_wireless = NM_SETTING_WIRELESS (nm_connection_get_setting (connection, NM_TYPE_SETTING_WIRELESS));
-	if (s_wireless == NULL)
-		return FALSE;
-	
-	if (!nm_utils_same_ssid (nm_setting_wireless_get_ssid (s_wireless), nm_access_point_get_ssid (ap), TRUE))
-		return FALSE;
-
-	setting_bssid = nm_setting_wireless_get_bssid (s_wireless);
-	if (setting_bssid) {
-		struct ether_addr ap_addr;
-		const char *hw_addr;
-
-		hw_addr = nm_access_point_get_hw_address (ap);
-		if (hw_addr && ether_aton_r (hw_addr, &ap_addr)) {
-			if (memcmp (setting_bssid->data, &ap_addr, ETH_ALEN))
-				return FALSE;
-		}
-	}
-
-	ap_mode = nm_access_point_get_mode (ap);
-	setting_mode = nm_setting_wireless_get_mode (s_wireless);
-	if (setting_mode) {
-		if (   !strcmp (setting_mode, "infrastructure")
-		    && (ap_mode != NM_802_11_MODE_INFRA))
-			return FALSE;
-		if (   !strcmp (setting_mode, "adhoc")
-		    && (ap_mode != NM_802_11_MODE_ADHOC))
-			return FALSE;
-	}
-
-	freq = nm_access_point_get_frequency (ap);
-	setting_band = nm_setting_wireless_get_band (s_wireless);
-	if (setting_band) {
-		if (!strcmp (setting_band, "a")) {
-			if (freq < 4915 || freq > 5825)
-				return FALSE;
-		} else if (!strcmp (setting_band, "bg")) {
-			if (freq < 2412 || freq > 2484)
-				return FALSE;
-		}
-	}
-
-	channel = nm_setting_wireless_get_channel (s_wireless);
-	if (channel) {
-		guint32 ap_chan = nm_utils_wifi_freq_to_channel (freq);
-
-		if (channel != ap_chan)
-			return FALSE;
-	}
-
-	s_wireless_sec = (NMSettingWirelessSecurity *) nm_connection_get_setting (connection,
-	                                                                          NM_TYPE_SETTING_WIRELESS_SECURITY);
-
-	return nm_setting_wireless_ap_security_compatible (s_wireless,
-	                                                   s_wireless_sec,
-	                                                   nm_access_point_get_flags (ap),
-	                                                   nm_access_point_get_wpa_flags (ap),
-	                                                   nm_access_point_get_rsn_flags (ap),
-	                                                   nm_access_point_get_mode (ap));
-}
-
-static gboolean
-connection_valid_for_wired (NMConnection *connection,
-                            NMSettingConnection *s_con,
-                            NMDevice *device,
-                            gpointer specific_object)
-{
-	NMDeviceEthernet *ethdev = NM_DEVICE_ETHERNET (device);
-	NMSettingWired *s_wired;
-	const char *str_mac;
-	struct ether_addr *bin_mac;
-	const char *connection_type;
-	const GByteArray *setting_mac;
-	gboolean is_pppoe = FALSE;
-
-	connection_type = nm_setting_connection_get_connection_type (s_con);
-	if (!strcmp (connection_type, NM_SETTING_PPPOE_SETTING_NAME))
-		is_pppoe = TRUE;
-	
-	if (!is_pppoe && strcmp (connection_type, NM_SETTING_WIRED_SETTING_NAME))
-		return FALSE;
-
-	s_wired = NM_SETTING_WIRED (nm_connection_get_setting (connection, NM_TYPE_SETTING_WIRED));
-	if (!is_pppoe && !s_wired)
-		return FALSE;
-
-	if (s_wired) {
-		/* Match MAC address */
-		setting_mac = nm_setting_wired_get_mac_address (s_wired);
-		if (!setting_mac)
-			return TRUE;
-
-		str_mac = nm_device_ethernet_get_permanent_hw_address (ethdev);
-		g_return_val_if_fail (str_mac != NULL, FALSE);
-
-		bin_mac = ether_aton (str_mac);
-		g_return_val_if_fail (bin_mac != NULL, FALSE);
-
-		if (memcmp (bin_mac->ether_addr_octet, setting_mac->data, ETH_ALEN))
-			return FALSE;
-	}
-
-	return TRUE;
-}
-
-static gboolean
-connection_valid_for_wireless (NMConnection *connection,
-                               NMSettingConnection *s_con,
-                               NMDevice *device,
-                               gpointer specific_object)
-{
-	NMDeviceWifi *wdev = NM_DEVICE_WIFI (device);
-	NMSettingWireless *s_wireless;
-	NMSettingWirelessSecurity *s_wireless_sec;
-	const GByteArray *setting_mac;
-	const char *setting_security, *key_mgmt;
-	guint32 wcaps;
-	NMAccessPoint *ap;
-
-	if (strcmp (nm_setting_connection_get_connection_type (s_con), NM_SETTING_WIRELESS_SETTING_NAME))
-		return FALSE;
-
-	s_wireless = NM_SETTING_WIRELESS (nm_connection_get_setting (connection, NM_TYPE_SETTING_WIRELESS));
-	g_return_val_if_fail (s_wireless != NULL, FALSE);
-
-	/* Match MAC address */
-	setting_mac = nm_setting_wireless_get_mac_address (s_wireless);
-	if (setting_mac) {
-		const char *str_mac;
-		struct ether_addr *bin_mac;
-
-		str_mac = nm_device_wifi_get_permanent_hw_address (wdev);
-		g_return_val_if_fail (str_mac != NULL, FALSE);
-
-		bin_mac = ether_aton (str_mac);
-		g_return_val_if_fail (bin_mac != NULL, FALSE);
-
-		if (memcmp (bin_mac->ether_addr_octet, setting_mac->data, ETH_ALEN))
-			return FALSE;
-	}
-
-	/* If an AP was given make sure that's compatible with the connection first */
-	if (specific_object) {
-		ap = NM_ACCESS_POINT (specific_object);
-		g_assert (ap);
-
-		if (!utils_check_ap_compatible (ap, connection))
-			return FALSE;
-	}
-
-	setting_security = nm_setting_wireless_get_security (s_wireless);
-	if (!setting_security || strcmp (setting_security, NM_SETTING_WIRELESS_SECURITY_SETTING_NAME))
-		return TRUE; /* all devices can do unencrypted networks */
-
-	s_wireless_sec = NM_SETTING_WIRELESS_SECURITY (nm_connection_get_setting (connection, NM_TYPE_SETTING_WIRELESS_SECURITY));
-	if (!s_wireless_sec)
-		return TRUE; /* all devices can do unencrypted networks */
-
-	key_mgmt = nm_setting_wireless_security_get_key_mgmt (s_wireless_sec);
-
-	/* All devices should support static WEP */
-	if (!strcmp (key_mgmt, "none"))
-		return TRUE;
-
-	/* All devices should support legacy LEAP and Dynamic WEP */
-	if (!strcmp (key_mgmt, "ieee8021x"))
-		return TRUE;
-
-	/* Match security with device capabilities */
-	wcaps = nm_device_wifi_get_capabilities (wdev);
-
-	/* At this point, the device better have basic WPA support. */
-	if (   !(wcaps & NM_WIFI_DEVICE_CAP_WPA)
-	    || !(wcaps & NM_WIFI_DEVICE_CAP_CIPHER_TKIP))
-		return FALSE;
-
-	/* Check for only RSN */
-	if (   (nm_setting_wireless_security_get_num_protos (s_wireless_sec) == 1)
-	    && !strcmp (nm_setting_wireless_security_get_proto (s_wireless_sec, 0), "rsn")
-	    && !(wcaps & NM_WIFI_DEVICE_CAP_RSN))
-		return FALSE;
-
-	/* Check for only pairwise CCMP */
-	if (   (nm_setting_wireless_security_get_num_pairwise (s_wireless_sec) == 1)
-	    && !strcmp (nm_setting_wireless_security_get_pairwise (s_wireless_sec, 0), "ccmp")
-	    && !(wcaps & NM_WIFI_DEVICE_CAP_CIPHER_CCMP))
-		return FALSE;
-
-	/* Check for only group CCMP */
-	if (   (nm_setting_wireless_security_get_num_groups (s_wireless_sec) == 1)
-	    && !strcmp (nm_setting_wireless_security_get_group (s_wireless_sec, 0), "ccmp")
-	    && !(wcaps & NM_WIFI_DEVICE_CAP_CIPHER_CCMP))
-		return FALSE;
-
-	return TRUE;
-}
-
-static gboolean
-connection_valid_for_gsm (NMConnection *connection,
-                          NMSettingConnection *s_con,
-                          NMDevice *device,
-                          gpointer specific_object)
-{
-	NMSettingGsm *s_gsm;
-	
-	if (strcmp (nm_setting_connection_get_connection_type (s_con), NM_SETTING_GSM_SETTING_NAME))
-		return FALSE;
-
-	s_gsm = NM_SETTING_GSM (nm_connection_get_setting (connection, NM_TYPE_SETTING_GSM));
-	g_return_val_if_fail (s_gsm != NULL, FALSE);
-
-	return TRUE;
-}
-
-static gboolean
-connection_valid_for_cdma (NMConnection *connection,
-                           NMSettingConnection *s_con,
-                           NMDevice *device,
-                           gpointer specific_object)
-{
-	NMSettingCdma *s_cdma;
-	
-	if (strcmp (nm_setting_connection_get_connection_type (s_con), NM_SETTING_CDMA_SETTING_NAME))
-		return FALSE;
-
-	s_cdma = NM_SETTING_CDMA (nm_connection_get_setting (connection, NM_TYPE_SETTING_CDMA));
-	g_return_val_if_fail (s_cdma != NULL, FALSE);
-
-	return TRUE;
-}
-
-static guint32
-get_connection_bt_type (NMConnection *connection)
-{
-	NMSettingBluetooth *s_bt;
-	const char *bt_type;
-
-	s_bt = (NMSettingBluetooth *) nm_connection_get_setting (connection, NM_TYPE_SETTING_BLUETOOTH);
-	if (!s_bt)
-		return NM_BT_CAPABILITY_NONE;
-
-	bt_type = nm_setting_bluetooth_get_connection_type (s_bt);
-	g_assert (bt_type);
-
-	if (!strcmp (bt_type, NM_SETTING_BLUETOOTH_TYPE_DUN))
-		return NM_BT_CAPABILITY_DUN;
-	else if (!strcmp (bt_type, NM_SETTING_BLUETOOTH_TYPE_PANU))
-		return NM_BT_CAPABILITY_NAP;
-
-	return NM_BT_CAPABILITY_NONE;
-}
-
-static gboolean
-connection_valid_for_bt (NMConnection *connection,
-                         NMSettingConnection *s_con,
-                         NMDevice *device,
-                         gpointer specific_object)
-{
-	NMSettingBluetooth *s_bt;
-	const GByteArray *array;
-	char *str;
-	const char *hw_addr;
-	int addr_match = FALSE;
-	guint32 bt_type;
-
-	if (strcmp (nm_setting_connection_get_connection_type (s_con), NM_SETTING_BLUETOOTH_SETTING_NAME))
-		return FALSE;
-
-	s_bt = NM_SETTING_BLUETOOTH (nm_connection_get_setting (connection, NM_TYPE_SETTING_BLUETOOTH));
-	if (!s_bt)
-		return FALSE;
-
-	array = nm_setting_bluetooth_get_bdaddr (s_bt);
-	if (!array || (array->len != ETH_ALEN))
-		return FALSE;
-
-	bt_type = get_connection_bt_type (connection);
-	if (!(bt_type & nm_device_bt_get_capabilities (NM_DEVICE_BT (device))))
-		return FALSE;
-
-	str = g_strdup_printf ("%02X:%02X:%02X:%02X:%02X:%02X",
-	                       array->data[0], array->data[1], array->data[2],
-	                       array->data[3], array->data[4], array->data[5]);
-	hw_addr = nm_device_bt_get_hw_address (NM_DEVICE_BT (device));
-	if (hw_addr)
-		addr_match = !g_ascii_strcasecmp (hw_addr, str);
-	g_free (str);
-
-	return addr_match;
-}
-
-static gboolean
-connection_valid_for_wimax (NMConnection *connection,
-                            NMSettingConnection *s_con,
-                            NMDevice *device,
-                            gpointer specific_object)
-{
-	NMDeviceWimax *wimax = NM_DEVICE_WIMAX (device);
-	NMSettingWimax *s_wimax;
-	const char *str_mac;
-	struct ether_addr *bin_mac;
-	const char *connection_type;
-	const GByteArray *setting_mac;
-
-	connection_type = nm_setting_connection_get_connection_type (s_con);
-	if (strcmp (connection_type, NM_SETTING_WIMAX_SETTING_NAME))
-		return FALSE;
-
-	s_wimax = (NMSettingWimax *) nm_connection_get_setting (connection, NM_TYPE_SETTING_WIMAX);
-	if (!s_wimax)
-		return FALSE;
-
-	if (s_wimax) {
-		/* Match MAC address */
-		setting_mac = nm_setting_wimax_get_mac_address (s_wimax);
-		if (!setting_mac)
-			return TRUE;
-
-		str_mac = nm_device_wimax_get_hw_address (wimax);
-		g_return_val_if_fail (str_mac != NULL, FALSE);
-
-		bin_mac = ether_aton (str_mac);
-		g_return_val_if_fail (bin_mac != NULL, FALSE);
-
-		if (memcmp (bin_mac->ether_addr_octet, setting_mac->data, ETH_ALEN))
-			return FALSE;
-	}
-
-	return TRUE;
-}
-
-gboolean
-utils_connection_valid_for_device (NMConnection *connection,
-                                   NMDevice *device,
-                                   gpointer specific_object)
-{
-	NMSettingConnection *s_con;
-
-	g_return_val_if_fail (connection != NULL, FALSE);
-	g_return_val_if_fail (device != NULL, FALSE);
-
-	s_con = NM_SETTING_CONNECTION (nm_connection_get_setting (connection, NM_TYPE_SETTING_CONNECTION));
-	g_return_val_if_fail (s_con != NULL, FALSE);
-	g_return_val_if_fail (nm_setting_connection_get_connection_type (s_con) != NULL, FALSE);
-
-	if (NM_IS_DEVICE_ETHERNET (device))
-		return connection_valid_for_wired (connection, s_con, device, specific_object);
-	else if (NM_IS_DEVICE_WIFI (device))
-		return connection_valid_for_wireless (connection, s_con, device, specific_object);
-	else if (NM_IS_DEVICE_MODEM (device)) {
-		NMDeviceModemCapabilities caps;
-
-		caps = nm_device_modem_get_current_capabilities (NM_DEVICE_MODEM (device));
-		if (caps & NM_DEVICE_MODEM_CAPABILITY_GSM_UMTS)
-			return connection_valid_for_gsm (connection, s_con, device, specific_object);
-		else if (caps & NM_DEVICE_MODEM_CAPABILITY_CDMA_EVDO)
-			return connection_valid_for_cdma (connection, s_con, device, specific_object);
-		else
-			g_warning ("Unhandled modem capabilities 0x%X", caps);
-	} else if (NM_IS_DEVICE_BT (device))
-		return connection_valid_for_bt (connection, s_con, device, specific_object);
-	else if (NM_IS_DEVICE_WIMAX (device))
-		return connection_valid_for_wimax (connection, s_con, device, specific_object);
-	else
-		g_warning ("Unknown device type '%s'", g_type_name (G_OBJECT_TYPE(device)));
-
-	return FALSE;
-}
-
-GSList *
-utils_filter_connections_for_device (NMDevice *device, GSList *connections)
-{
-	GSList *iter;
-	GSList *filtered = NULL;
-
-	for (iter = connections; iter; iter = g_slist_next (iter)) {
-		NMConnection *connection = NM_CONNECTION (iter->data);
-
-		if (utils_connection_valid_for_device (connection, device, NULL))
-			filtered = g_slist_append (filtered, connection);
-	}
-
-	return filtered;
-}
-
 char *
 utils_hash_ap (const GByteArray *ssid,
                NM80211Mode mode,
@@ -739,7 +324,7 @@ utils_create_keyring_add_attr_list (NMConnection *connection,
 	NMSettingConnection *s_con;
 
 	if (connection) {
-		s_con = (NMSettingConnection *) nm_connection_get_setting (connection, NM_TYPE_SETTING_CONNECTION);
+		s_con = nm_connection_get_setting_connection (connection);
 		g_return_val_if_fail (s_con != NULL, NULL);
 		connection_uuid = nm_setting_connection_get_uuid (s_con);
 		connection_id = nm_setting_connection_get_id (s_con);
@@ -768,5 +353,40 @@ utils_create_keyring_add_attr_list (NMConnection *connection,
 	                                            KEYRING_SK_TAG,
 	                                            setting_key);
 	return attrs;
+}
+
+void
+utils_show_error_dialog (const char *title,
+                         const char *text1,
+                         const char *text2,
+                         gboolean modal,
+                         GtkWindow *parent)
+{
+	GtkWidget *err_dialog;
+
+	g_return_if_fail (text1 != NULL);
+
+	err_dialog = gtk_message_dialog_new (parent,
+	                                     GTK_DIALOG_DESTROY_WITH_PARENT,
+	                                     GTK_MESSAGE_ERROR,
+	                                     GTK_BUTTONS_CLOSE,
+	                                     "%s",
+	                                     text1);
+
+	if (text2)
+		gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (err_dialog), text2);
+	if (title)
+		gtk_window_set_title (GTK_WINDOW (err_dialog), title);
+
+	if (modal) {
+		gtk_dialog_run (GTK_DIALOG (err_dialog));
+		gtk_widget_destroy (err_dialog);
+	} else {
+		g_signal_connect (err_dialog, "delete-event", G_CALLBACK (gtk_widget_destroy), NULL);
+		g_signal_connect (err_dialog, "response", G_CALLBACK (gtk_widget_destroy), NULL);
+
+		gtk_widget_show_all (err_dialog);
+		gtk_window_present (GTK_WINDOW (err_dialog));
+	}
 }
 

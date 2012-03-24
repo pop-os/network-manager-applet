@@ -1,149 +1,149 @@
-# translation of eu_to_be_translate.po to Basque
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
+# Malay translation for network-manager-applet.
+# Copyright (C) 2011 network-manager-applet's COPYRIGHT HOLDER
+# This file is distributed under the same license as the network-manager-applet package.
+# Ahmed Noor Kader Mustajir Md Eusoff <sir.ade@gmail.com>, 2011.
 #
-# Iñaki Larrañaga Murgoitio <dooteo@euskalgnu.org>, 2008, 2009, 2010, 2011, 2012.
 msgid ""
 msgstr ""
-"Project-Id-Version: eu_to_be_translate\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-03-06 17:55+0100\n"
-"PO-Revision-Date: 2012-03-06 18:06+0100\n"
-"Last-Translator: Iñaki Larrañaga Murgoitio <dooteo@euskalgnu.org>\n"
-"Language-Team: American English <itzulpena@euskalgnu.org>\n"
-"Language: \n"
+"Project-Id-Version: network-manager-applet master\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
+"product=NetworkManager&keywords=I18N+L10N&component=nm-applet\n"
+"POT-Creation-Date: 2011-11-12 10:53+0000\n"
+"PO-Revision-Date: 2011-11-14 13:25+0730\n"
+"Last-Translator: Umarzuki Bin Mochlis Moktar <umarzuki@gmail.com>\n"
+"Language-Team: Malay <gnome-ms@googlegroups.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"\n"
-"X-Generator: Lokalize 1.0\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Poedit-Language: Malay\n"
+"X-Poedit-Country: MALAYSIA\n"
 
 #: ../nm-applet.desktop.in.h:1
 msgid "Manage your network connections"
-msgstr "Kudeatu sareko konexioak"
+msgstr "Urus sambungan-sambungan rangkaian anda"
 
 #: ../nm-applet.desktop.in.h:2
 msgid "Network"
-msgstr "Sarea"
+msgstr "Rangkaian"
 
 #: ../nm-applet.schemas.in.h:1
 msgid "Disable WiFi Create"
-msgstr "Desgaitu WiFiaren sorrera"
+msgstr "Lumpuhkan Cipta WiFi"
 
 #: ../nm-applet.schemas.in.h:2
 msgid "Disable connected notifications"
-msgstr "Desgaitu konektatutako jakinarazpenak"
+msgstr "Lumpuhkan pemberitahuan apabila telah tersambung"
 
 #: ../nm-applet.schemas.in.h:3
 msgid "Disable disconnected notifications"
-msgstr "Desgaitu deskonektatutako jakinarazpenak"
+msgstr "Lumpuhkan pemberitahuan apabila telah terputus"
 
 #: ../nm-applet.schemas.in.h:4
 msgid "Set this to TRUE to disable notifications when connecting to a network."
 msgstr ""
-"Ezarri hau TRUE (egia) gisa jakinarazpenak desgaitzeko sare batera "
-"konektatzean."
+"Set ini ke TRUE untuk mematikan pemberitahuan apabila menyambung kepada "
+"rangkaian"
 
 #: ../nm-applet.schemas.in.h:5
 msgid ""
 "Set this to TRUE to disable notifications when disconnecting from a network."
 msgstr ""
-"Ezarri hau TRUE (egia) gisa jakinarazpenak desgaitzeko sare batetik "
-"deskonektatzean."
+"Set ini ke TRUE untuk mematikan pemberitahuan apabila memutuskan dari "
+"rangkaian."
 
 #: ../nm-applet.schemas.in.h:6
 msgid ""
 "Set this to TRUE to disable notifications when wireless networks are "
 "available."
 msgstr ""
-"Ezarri hau TRUE (egia) gisa jakinarazpenak desgaitzeko haririk gabeko sareak "
-"erabilgarri daudenean."
+"Set ini ke TRUE untuk mematikan pemberitahuan apabila rangkaian wayarles "
+"boleh didapati."
 
 #: ../nm-applet.schemas.in.h:7
 msgid ""
 "Set to TRUE to disable creation of adhoc networks when using the applet."
 msgstr ""
-"Ezarri hau TRUE (egia) gisa bereziki prestatutako sareen sorrera desgaitzeko "
-"miniaplikazioa erabiltzean."
+"Set ke TRUE untuk mematikan penciptaan rangkaian Adhoc apabila menggunakan "
+"applet."
 
 #: ../nm-applet.schemas.in.h:8
 msgid "Stamp"
-msgstr "Zigilua"
+msgstr "Cop"
 
 #: ../nm-applet.schemas.in.h:9
 msgid "Suppress networks available notifications"
-msgstr "Ezabatu sare erabilgarrien jakinarazpenak"
+msgstr "Redam notifikasi rangkaian tersedia"
 
 #: ../nm-applet.schemas.in.h:10
 msgid "Used to determine whether settings should be migrated to a new version."
 msgstr ""
-"Ezarpenak bertsio berrira migratuko diren edo ez  ezartzeko erabiltzen da."
+"Diguna untuk menentukan sama ada tetapan sedia ada patut dipindahkan ke "
+"versi baharu."
 
 #: ../nm-connection-editor.desktop.in.h:1
 msgid "Manage and change your network connection settings"
-msgstr "Kudeatu eta aldatu sareko konexioen ezarpenak"
+msgstr "Urus dan pinda tetapan sambungan rangkaian anda"
 
 #: ../nm-connection-editor.desktop.in.h:2
 #: ../src/connection-editor/nm-connection-editor.ui.h:7
 msgid "Network Connections"
-msgstr "Sareko konexioak"
+msgstr "Sambungan-sambungan Rangkaian"
 
 #: ../src/applet-device-bt.c:174 ../src/applet-device-cdma.c:399
 #: ../src/applet-device-gsm.c:446 ../src/applet-device-wired.c:240
 #: ../src/applet-device-wifi.c:875 ../src/applet-device-wimax.c:279
 msgid "Available"
-msgstr "Erabilgarri"
+msgstr "Tersedia"
 
 #: ../src/applet-device-bt.c:200 ../src/applet-device-cdma.c:441
 #: ../src/applet-device-gsm.c:488 ../src/applet-device-wired.c:269
 #: ../src/applet-device-wimax.c:423
 #, c-format
 msgid "You are now connected to '%s'."
-msgstr "Orain '%s' sarera konektatuta zaude."
+msgstr "Anda sekarang sambung ke '%s'."
 
 #: ../src/applet-device-bt.c:204 ../src/applet-device-cdma.c:445
 #: ../src/applet-device-gsm.c:492 ../src/applet-device-wired.c:273
-#: ../src/applet-device-wifi.c:1278 ../src/applet-device-wimax.c:427
+#: ../src/applet-device-wifi.c:1280 ../src/applet-device-wimax.c:427
 msgid "Connection Established"
-msgstr "Konektatuta"
+msgstr "Sambungan Ditubuhkan"
 
 #: ../src/applet-device-bt.c:205
 msgid "You are now connected to the mobile broadband network."
-msgstr "Bandazabal mugikorren sarera konektatuta zaude."
+msgstr "Anda telah tersambung ke rangkaian jalurlebar mudahalih."
 
 #: ../src/applet-device-bt.c:231 ../src/applet-device-cdma.c:481
 #: ../src/applet-device-gsm.c:528 ../src/applet-device-wimax.c:464
 #, c-format
 msgid "Preparing mobile broadband connection '%s'..."
-msgstr "'%s' banda-zabalera mugikorraren konexioa prestatzen..."
+msgstr "Menyediakan sambungan jalurlebar mudahalih '%s'..."
 
 #: ../src/applet-device-bt.c:234 ../src/applet-device-cdma.c:484
 #: ../src/applet-device-gsm.c:531 ../src/applet-device-wimax.c:467
 #, c-format
 msgid "Configuring mobile broadband connection '%s'..."
-msgstr "'%s' banda-zabalera mugikorraren konexioa konfiguratzen..."
+msgstr "Mengkonfigurasi sambungan jalurlebar mudahalih '%s'..."
 
 #: ../src/applet-device-bt.c:237 ../src/applet-device-cdma.c:487
 #: ../src/applet-device-gsm.c:534 ../src/applet-device-wimax.c:470
 #, c-format
 msgid "User authentication required for mobile broadband connection '%s'..."
 msgstr ""
-"Erabiltzailearen autentifikazioa behar da '%s' banda-zabal mugikorrera "
-"konektatzeko..."
+"Pengesahan pengguna diperlukan untuk sambungan jalurlebar mudahalih '%s'..."
 
 #: ../src/applet-device-bt.c:240 ../src/applet-device-cdma.c:490
 #: ../src/applet-device-gsm.c:537 ../src/applet-device-wimax.c:473
 #: ../src/applet.c:2479
 #, c-format
 msgid "Requesting a network address for '%s'..."
-msgstr "Sareko helbide bat eskatzen '%s' sareari..."
+msgstr "Meminta alamat rangkaian untuk '%s'..."
 
 #: ../src/applet-device-bt.c:244 ../src/applet-device-cdma.c:508
 #: ../src/applet-device-gsm.c:555
 #, c-format
 msgid "Mobile broadband connection '%s' active"
-msgstr "'%s' banda-zabal mugikorraren konexioa aktibo dago"
+msgstr "Sambungan jalurlebar mudahalih '%s' aktif"
 
 #: ../src/applet-device-cdma.c:184 ../src/connection-editor/page-mobile.c:696
 #: ../src/mb-menu-item.c:54
@@ -154,46 +154,46 @@ msgstr "CDMA"
 #: ../src/applet-dialogs.c:430
 #, c-format
 msgid "Mobile Broadband (%s)"
-msgstr "Bandazabal mugikorra (%s)"
+msgstr "Jalurlebar Mudahalih (%s)"
 
 #: ../src/applet-device-cdma.c:347 ../src/applet-device-gsm.c:394
 #: ../src/connection-editor/page-mobile.c:379
 #: ../src/connection-editor/nm-connection-editor.ui.h:6
-#: ../src/connection-editor/nm-connection-list.c:1511
+#: ../src/connection-editor/nm-connection-list.c:1474
 msgid "Mobile Broadband"
-msgstr "Bandazabal mugikorra"
+msgstr "Jalurlebar Mudahalih"
 
 #. Default connection item
 #: ../src/applet-device-cdma.c:412
 msgid "New Mobile Broadband (CDMA) connection..."
-msgstr "Bandazabal mugikor (CDMA) konexio berria"
+msgstr "Sambungan Jalurlebar Mudahalih (CDMA) baharu..."
 
 #: ../src/applet-device-cdma.c:446
 msgid "You are now connected to the CDMA network."
-msgstr "CDMA sarera konektatuta."
+msgstr "Anda telah tersambung ke rangkaian CDMA."
 
 #: ../src/applet-device-cdma.c:503 ../src/applet-device-gsm.c:550
 #: ../src/applet-device-wimax.c:482
 #, c-format
 msgid "Mobile broadband connection '%s' active: (%d%%%s%s)"
-msgstr "'%s' banda-zabal mugikorraren konexioa aktibo dago: (%% %d%s%s)"
+msgstr "Sambungan jalurlebar mudahalih '%s' aktif: (%d%%%s%s)"
 
 #: ../src/applet-device-cdma.c:506 ../src/applet-device-gsm.c:553
 #: ../src/applet-device-wimax.c:485
 msgid "roaming"
-msgstr "ibiltaritza"
+msgstr "merantau"
 
 #: ../src/applet-device-cdma.c:647 ../src/applet-device-cdma.c:653
 msgid "CDMA network."
-msgstr "CDMA sarea."
+msgstr "Rangkaian CDMA."
 
 #: ../src/applet-device-cdma.c:648 ../src/applet-device-gsm.c:1198
 msgid "You are now registered on the home network."
-msgstr "Etxeko sarera harpidetuta zaude orain."
+msgstr "Anda telah didaftarkan pada rangkaian rumah."
 
 #: ../src/applet-device-cdma.c:654 ../src/applet-device-gsm.c:1204
 msgid "You are now registered on a roaming network."
-msgstr "Sare ibiltarian harpidetuta zaude orain."
+msgstr "Anda telah didaftarkan pada rangkaian perantauan."
 
 #: ../src/applet-device-gsm.c:213 ../src/connection-editor/page-mobile.c:699
 #: ../src/mb-menu-item.c:59
@@ -203,45 +203,45 @@ msgstr "GSM"
 #. Default connection item
 #: ../src/applet-device-gsm.c:459
 msgid "New Mobile Broadband (GSM) connection..."
-msgstr "Bandazabal mugikorraren  (GSM) konexio berria..."
+msgstr "Sambungan Jalurlebar Mudahalih (GSM) baharu..."
 
 #: ../src/applet-device-gsm.c:493
 msgid "You are now connected to the GSM network."
-msgstr "Orain GSM sarera konektatuta zaude."
+msgstr "Anda telah tersambung ke rangkaian (GSM)."
 
 #: ../src/applet-device-gsm.c:654
 msgid "PIN code required"
-msgstr "PIN kodea behar da"
+msgstr "Kod PIN diperlukan"
 
 #: ../src/applet-device-gsm.c:662
 msgid "PIN code is needed for the mobile broadband device"
-msgstr "PIN kodea behar da banda-zabal mugikorreko gailuarentzako"
+msgstr "Kod PIN diperlukan untuk peranti jalurlebar mudahalih"
 
 #: ../src/applet-device-gsm.c:783
 #, c-format
 msgid "PIN code for SIM card '%s' on '%s'"
-msgstr "'%s' SIM txartelaren PIN kodea '%s'(e)n"
+msgstr "Kod PIN untuk kad SIM '%s' on '%s'"
 
 #: ../src/applet-device-gsm.c:875
 msgid "Wrong PIN code; please contact your provider."
-msgstr "Okerreko PIN kodea. Jar zaitez hornitzailearekin harremanetan."
+msgstr "Kod PIN salah; sila hubungi pembekal peranti."
 
 #: ../src/applet-device-gsm.c:898
 msgid "Wrong PUK code; please contact your provider."
-msgstr "Okerreko PUK kodea. Jar zaitez hornitzailearekin harremanetan."
+msgstr "Kod PUK salah; sila hubungi pembekal peranti."
 
 #. Start the spinner to show the progress of the unlock
 #: ../src/applet-device-gsm.c:925
 msgid "Sending unlock code..."
-msgstr "Desblokeatzeko kodea bidaltzen..."
+msgstr "Menghantar kod membuka kunci..."
 
 #: ../src/applet-device-gsm.c:988
 msgid "SIM PIN unlock required"
-msgstr "SIMa desblokeatzeko PIN kodea behar da"
+msgstr "PIN nyahkunci SIM diperlukan"
 
 #: ../src/applet-device-gsm.c:989
 msgid "SIM PIN Unlock Required"
-msgstr "SIMa desblokeatzeko PIN kodea behar da"
+msgstr "PIN Nyahkunci SIM Diperlukan"
 
 #. FIXME: some warning about # of times you can enter incorrect PIN
 #: ../src/applet-device-gsm.c:991
@@ -250,25 +250,26 @@ msgid ""
 "The mobile broadband device '%s' requires a SIM PIN code before it can be "
 "used."
 msgstr ""
-"'%s' banda-zabaleko gailuak SIMaren PIN kodea behar du erabili ahal izateko."
+"Peranti jalurlebar mudahalih '%s' memerlukan kod PIN SIM sebelum boleh "
+"digunakan."
 
 #. Translators: PIN code entry label
 #: ../src/applet-device-gsm.c:993
 msgid "PIN code:"
-msgstr "PIN kodea:"
+msgstr "Kod PIN:"
 
 #. Translators: Show/obscure PIN checkbox label
 #: ../src/applet-device-gsm.c:997
 msgid "Show PIN code"
-msgstr "Erakutsi PIN kodea"
+msgstr "Tunjuk kod PIN"
 
 #: ../src/applet-device-gsm.c:1000
 msgid "SIM PUK unlock required"
-msgstr "SIMa desblokeatzeko PUK kodea behar da"
+msgstr "PUK nyahkunci SIM diperlukan"
 
 #: ../src/applet-device-gsm.c:1001
 msgid "SIM PUK Unlock Required"
-msgstr "SIMa desblokeatzeko PUK kodea behar da"
+msgstr "PUK Nyahkunci SIM Diperlukan"
 
 #. FIXME: some warning about # of times you can enter incorrect PUK
 #: ../src/applet-device-gsm.c:1003
@@ -277,216 +278,219 @@ msgid ""
 "The mobile broadband device '%s' requires a SIM PUK code before it can be "
 "used."
 msgstr ""
-"'%s' banda-zabaleko gailuak SIMaren PUK kodea behar du erabili ahal izateko."
+"Peranti jalurlebar mudahalih '%s' memerlukan kod PUK SIM sebelum boleh "
+"digunakan."
 
 #. Translators: PUK code entry label
 #: ../src/applet-device-gsm.c:1005
 msgid "PUK code:"
-msgstr "PUK kodea:"
+msgstr "Kod PUK:"
 
 #. Translators: New PIN entry label
 #: ../src/applet-device-gsm.c:1008
 msgid "New PIN code:"
-msgstr "PIN kode berria:"
+msgstr "PIN kod baru:"
 
 #. Translators: New PIN verification entry label
 #: ../src/applet-device-gsm.c:1010
 msgid "Re-enter new PIN code:"
-msgstr "Sartu berriro PIN kode berria:"
+msgstr "Masukkan semula kod PIN baharu:"
 
 #. Translators: Show/obscure PIN/PUK checkbox label
 #: ../src/applet-device-gsm.c:1015
 msgid "Show PIN/PUK codes"
-msgstr "Erakutsi PIN/PUK kodeak"
+msgstr "Tunjukkan kod-kod PIN/PUK"
 
 #: ../src/applet-device-gsm.c:1197 ../src/applet-device-gsm.c:1203
 msgid "GSM network."
-msgstr "GSM sarea."
+msgstr "Rangkaian GSM."
 
 #: ../src/applet-device-wired.c:62
 msgid "Auto Ethernet"
-msgstr "Ethernet automatikoa"
+msgstr "Ethernet Automatik"
 
 #: ../src/applet-device-wired.c:205
 #, c-format
 msgid "Wired Networks (%s)"
-msgstr "Haridun sareak (%s)"
+msgstr "Rangkaian-rangkaian Berwayar (%s)"
 
 #: ../src/applet-device-wired.c:207
 #, c-format
 msgid "Wired Network (%s)"
-msgstr "Haridun sarea (%s)"
+msgstr "Rangkaian Berwayar (%s)"
 
 #: ../src/applet-device-wired.c:210
 msgid "Wired Networks"
-msgstr "Haridun sareak"
+msgstr "Rangkaian-rangkaian Berwayar"
 
 #: ../src/applet-device-wired.c:212
 msgid "Wired Network"
-msgstr "Haridun sarea"
+msgstr "Rangkaian Berwayar"
 
 #. Notify user of unmanaged or unavailable device
 #: ../src/applet-device-wired.c:232 ../src/applet.c:1485
 msgid "disconnected"
-msgstr "deskonektatuta"
+msgstr "terputus"
 
 #: ../src/applet-device-wired.c:274
 msgid "You are now connected to the wired network."
-msgstr "Haridun sarera konektatuta."
+msgstr "Anda telah tersambung ke rangkaian berwayar."
 
 #: ../src/applet-device-wired.c:300
 #, c-format
 msgid "Preparing wired network connection '%s'..."
-msgstr "Haridun '%s' sareko konexioa prestatzen..."
+msgstr "Menyediakan sambungan rangkaian '%s'..."
 
 #: ../src/applet-device-wired.c:303
 #, c-format
 msgid "Configuring wired network connection '%s'..."
-msgstr "Haridun '%s' sareko konexioa konfiguratzen..."
+msgstr "Mengkonfigur sambungan rangkaian '%s'..."
 
 #: ../src/applet-device-wired.c:306
 #, c-format
 msgid "User authentication required for wired network connection '%s'..."
 msgstr ""
-"Erabiltzailearen autentifikazioa behar da haridun '%s' sareko konexiorako..."
+"Pengesahan pengguna diperlukan untuk sambungan rangkaian berwayar '%s'..."
 
 #: ../src/applet-device-wired.c:309
 #, c-format
 msgid "Requesting a wired network address for '%s'..."
-msgstr "Sareko helbide bat eskatzen haridun '%s' sareari..."
+msgstr "Meminta alamat untuk rangkaian berwayar '%s'..."
 
 #: ../src/applet-device-wired.c:313
 #, c-format
 msgid "Wired network connection '%s' active"
-msgstr "Haridun '%s' sareko konexioa aktibo dago"
+msgstr "Sambungan rangkaian '%s' aktif"
 
 #: ../src/applet-device-wired.c:494
 msgid "DSL authentication"
-msgstr "DSL autentifikazioa"
+msgstr "Pengesahan DSL"
 
 #: ../src/applet-device-wifi.c:97
 msgid "_Connect to Hidden Wireless Network..."
-msgstr "_Konektatu ezkutuko haririk gabeko sarera..."
+msgstr "_Sambung ke Rangkaian Wayarles Tersembunyi... "
 
 #: ../src/applet-device-wifi.c:150
 msgid "Create _New Wireless Network..."
-msgstr "_Sortu haririk gabeko sare berria..."
+msgstr "Cipta Rangkaian Wayarles _Baharu..."
 
 #: ../src/applet-device-wifi.c:294
 msgid "(none)"
-msgstr "(bat ere ez)"
+msgstr "(tiada)"
 
 #: ../src/applet-device-wifi.c:803
 #, c-format
 msgid "Wireless Networks (%s)"
-msgstr "Haririk gabeko sareak (%s)"
+msgstr "Rangkaian-rangkaian Wayarles (%s)"
 
 #: ../src/applet-device-wifi.c:805
 #, c-format
 msgid "Wireless Network (%s)"
-msgstr "Haririk gabeko sarea (%s)"
+msgstr "Rangkaian Wayarles (%s) "
 
 #: ../src/applet-device-wifi.c:807
 msgid "Wireless Network"
 msgid_plural "Wireless Networks"
-msgstr[0] "Haririk gabeko sarea"
-msgstr[1] "Haririk gabeko sareak"
+msgstr[0] "Rangkaian Wayarles"
 
 #: ../src/applet-device-wifi.c:840
 msgid "wireless is disabled"
-msgstr "haririk gabeko sarea desgaituta"
+msgstr "wayarles dilumpuhkan"
 
 #: ../src/applet-device-wifi.c:841
 msgid "wireless is disabled by hardware switch"
-msgstr "hardwarearen aldatzaileak desgaitu du haririk gabeko sarea"
+msgstr "wayarles dilumpuhkan oleh suis perkakasan"
 
 #: ../src/applet-device-wifi.c:902
 msgid "More networks"
-msgstr "Sare gehiago"
+msgstr "Lagi rangkaian-rangkain"
 
 #: ../src/applet-device-wifi.c:1081
 msgid "Wireless Networks Available"
-msgstr "Haririk gabeko sare erabilgarriak"
+msgstr "Rangkaian Wayarles Tersedia"
 
-#: ../src/applet-device-wifi.c:1082
+#: ../src/applet-device-wifi.c:1083
+msgid "Click on this icon to connect to a wireless network"
+msgstr "Klik pada ikon ini untuk sambung ke rangkaian wayarles"
+
+#: ../src/applet-device-wifi.c:1084
 msgid "Use the network menu to connect to a wireless network"
-msgstr "Erabili sarearen menua haririk gabeko sare batera konektatzeko"
+msgstr "Guna menu rangkaian utuk sambung ke rangkaian wayarles"
 
-#: ../src/applet-device-wifi.c:1085 ../src/applet.c:901
+#: ../src/applet-device-wifi.c:1087 ../src/applet.c:901
 msgid "Don't show this message again"
-msgstr "Ez erakutsi mezu hau berriro"
+msgstr "Jangan paparkan mesej ini lagi"
 
-#: ../src/applet-device-wifi.c:1277
+#: ../src/applet-device-wifi.c:1279
 #, c-format
 msgid "You are now connected to the wireless network '%s'."
-msgstr "Haririk gabeko '%s' sarera konektatuta."
+msgstr "Anda telah tersambung ke rangkaian wayarles '%s'."
 
-#: ../src/applet-device-wifi.c:1308
+#: ../src/applet-device-wifi.c:1310
 #, c-format
 msgid "Preparing wireless network connection '%s'..."
-msgstr "Haririk gabeko '%s' sareko konexioa prestatzen..."
+msgstr "Menyediakan sambungan rangkaian wayarles '%s'..."
 
-#: ../src/applet-device-wifi.c:1311
+#: ../src/applet-device-wifi.c:1313
 #, c-format
 msgid "Configuring wireless network connection '%s'..."
-msgstr "Haririk gabeko '%s' sareko konexioa konfiguratzen..."
+msgstr "Mengkonfigur sambungan rangkaian wayarles '%s'..."
 
-#: ../src/applet-device-wifi.c:1314
+#: ../src/applet-device-wifi.c:1316
 #, c-format
 msgid "User authentication required for wireless network '%s'..."
-msgstr ""
-"Erabiltzailearen autentifikazioa behar da haririk gabeko '%s' sarerako..."
+msgstr "Pengesahan pengguna diperlukan untuk rangkaian wayarles '%s'..."
 
-#: ../src/applet-device-wifi.c:1317
+#: ../src/applet-device-wifi.c:1319
 #, c-format
 msgid "Requesting a wireless network address for '%s'..."
-msgstr "Sareko helbide bat eskatzen haririk gabeko '%s' sareari..."
+msgstr "Meminta alamat rangkaian wayarles untuk '%s'..."
 
-#: ../src/applet-device-wifi.c:1338
+#: ../src/applet-device-wifi.c:1340
 #, c-format
 msgid "Wireless network connection '%s' active: %s (%d%%)"
-msgstr "'%s' haririk gabeko sareko konexioa aktiboa: %s (%% %d)"
+msgstr "Sambungan rangkaian wayarles '%s' aktif: %s (%d%%)"
 
-#: ../src/applet-device-wifi.c:1343
+#: ../src/applet-device-wifi.c:1345
 #, c-format
 msgid "Wireless network connection '%s' active"
-msgstr "'%s' haririk gabeko sareko konexioa aktibo"
+msgstr "Sambungan rangkaian wayarles '%s' aktif"
 
 #: ../src/applet-device-wimax.c:231
 #, c-format
 msgid "WiMAX Mobile Broadband (%s)"
-msgstr "WiMAX banda zabal mugikorra (%s)"
+msgstr "Jalurlebar Mudahalih WiMAX (%s)"
 
 #: ../src/applet-device-wimax.c:233
 msgid "WiMAX Mobile Broadband"
-msgstr "WiMAX banda zabal mugikorra"
+msgstr "Jalurlebar Mudahalih WiMAX"
 
 #: ../src/applet-device-wimax.c:259
 msgid "WiMAX is disabled"
-msgstr "WiMAX desgaituta dago"
+msgstr "WiMAX dilumpuhkan"
 
 #: ../src/applet-device-wimax.c:260
 msgid "WiMAX is disabled by hardware switch"
-msgstr "Hardwarearen aldatzaileak desgaitu du WiMAX"
+msgstr "WiMAX dilumpuhkan oleh suis perkakasan"
 
 #: ../src/applet-device-wimax.c:428
 msgid "You are now connected to the WiMAX network."
-msgstr "Orain WiMAX sarera konektatuta zaude."
+msgstr "Anda telah tersambungan ke rangkaian WiMAX."
 
 #: ../src/applet-dialogs.c:57
 msgid "Error displaying connection information:"
-msgstr "Errorea konexioaren informazioa bistaratzean:"
+msgstr "Ralat memaparkan maklumat sambungan:"
 
 #: ../src/applet-dialogs.c:109
 #: ../src/connection-editor/page-wireless-security.c:285
 #: ../src/libnm-gtk/nm-wireless-dialog.c:949
-#: ../src/wireless-security/wireless-security.c:397
+#: ../src/wireless-security/wireless-security.c:396
 msgid "LEAP"
 msgstr "LEAP"
 
 #: ../src/applet-dialogs.c:111
 msgid "Dynamic WEP"
-msgstr "WEP dinamikoa"
+msgstr "WEP Dinamik"
 
 #: ../src/applet-dialogs.c:113 ../src/applet-dialogs.c:246
 #: ../src/applet-dialogs.c:248
@@ -502,7 +506,7 @@ msgstr "WEP"
 #: ../src/libnm-gtk/nm-wireless-dialog.c:906
 msgctxt "Wifi/wired security"
 msgid "None"
-msgstr "Bat ere ez"
+msgstr "Tiada"
 
 #: ../src/applet-dialogs.c:352 ../src/applet-dialogs.c:490
 #, c-format
@@ -512,7 +516,7 @@ msgstr "%u Mb/s"
 #: ../src/applet-dialogs.c:354 ../src/applet-dialogs.c:492
 msgctxt "Speed"
 msgid "Unknown"
-msgstr "Ezezaguna"
+msgstr "Tidak diketahui"
 
 #: ../src/applet-dialogs.c:367
 #, c-format
@@ -522,12 +526,12 @@ msgstr "%d dB"
 #: ../src/applet-dialogs.c:369
 msgctxt "WiMAX CINR"
 msgid "unknown"
-msgstr "ezezaguna"
+msgstr "tidak diketahui"
 
 #: ../src/applet-dialogs.c:381
 msgctxt "WiMAX Base Station ID"
 msgid "unknown"
-msgstr "ezezaguna"
+msgstr "tidak diketahui"
 
 #: ../src/applet-dialogs.c:416
 #, c-format
@@ -537,7 +541,7 @@ msgstr "Ethernet (%s)"
 #: ../src/applet-dialogs.c:419
 #, c-format
 msgid "802.11 WiFi (%s)"
-msgstr "802.11 WiFi-a (%s)"
+msgstr "802.11 WiFi (%s)"
 
 #: ../src/applet-dialogs.c:426
 #, c-format
@@ -557,28 +561,28 @@ msgstr "WiMAX (%s)"
 #. --- General ---
 #: ../src/applet-dialogs.c:438 ../src/applet-dialogs.c:797
 msgid "General"
-msgstr "Orokorra"
+msgstr "Am"
 
 #: ../src/applet-dialogs.c:442
 msgid "Interface:"
-msgstr "Interfazea:"
+msgstr "Antaramuka:"
 
 #: ../src/applet-dialogs.c:458
 msgid "Hardware Address:"
-msgstr "Hardwarearen helbidea:"
+msgstr "Alamat Perkakasan:"
 
 #. Driver
 #: ../src/applet-dialogs.c:466
 msgid "Driver:"
-msgstr "Kontrolatzailea:"
+msgstr "Pemacu:"
 
 #: ../src/applet-dialogs.c:495
 msgid "Speed:"
-msgstr "Abiadura:"
+msgstr "Kelajuan:"
 
 #: ../src/applet-dialogs.c:505
 msgid "Security:"
-msgstr "Segurtasuna:"
+msgstr "Keselamatan:"
 
 #: ../src/applet-dialogs.c:518
 msgid "CINR:"
@@ -596,42 +600,42 @@ msgstr "IPv4"
 #. Address
 #: ../src/applet-dialogs.c:559 ../src/applet-dialogs.c:666
 msgid "IP Address:"
-msgstr "IP helbidea:"
+msgstr "Alamat IP:"
 
 #: ../src/applet-dialogs.c:561 ../src/applet-dialogs.c:577
 msgctxt "Address"
 msgid "Unknown"
-msgstr "Ezezaguna"
+msgstr "Tidak diketahui"
 
 #: ../src/applet-dialogs.c:575
 msgid "Broadcast Address:"
-msgstr "Difusio-helbidea:"
+msgstr "Alamat Siar:"
 
 #. Prefix
 #: ../src/applet-dialogs.c:584
 msgid "Subnet Mask:"
-msgstr "Azpisare-maskara:"
+msgstr "Tapisan Subrangkaian:"
 
 #: ../src/applet-dialogs.c:586
 msgctxt "Subnet Mask"
 msgid "Unknown"
-msgstr "Ezezaguna"
+msgstr "Tidak diketahui"
 
 #: ../src/applet-dialogs.c:594 ../src/applet-dialogs.c:681
 msgid "Default Route:"
-msgstr "Bide lehenetsia:"
+msgstr "Pelayan Route:"
 
 #: ../src/applet-dialogs.c:606
 msgid "Primary DNS:"
-msgstr "DNS nagusia:"
+msgstr "DNS Utama:"
 
 #: ../src/applet-dialogs.c:615
 msgid "Secondary DNS:"
-msgstr "Bigarren mailako DNSa:"
+msgstr "DNS Kedua:"
 
 #: ../src/applet-dialogs.c:625
 msgid "Ternary DNS:"
-msgstr "Hirugarren mailako DNSa:"
+msgstr "DNS Ketiga:"
 
 #. --- IPv6 ---
 #: ../src/applet-dialogs.c:640
@@ -640,36 +644,36 @@ msgstr "IPv6"
 
 #: ../src/applet-dialogs.c:649
 msgid "Ignored"
-msgstr "Ez ikusi eginda"
+msgstr "Diabaikan"
 
 #: ../src/applet-dialogs.c:802
 msgid "VPN Type:"
-msgstr "VPN mota:"
+msgstr "Jenis VPN:"
 
 #: ../src/applet-dialogs.c:809
 msgid "VPN Gateway:"
-msgstr "VPNren atebidea:"
+msgstr "Get laluan VPN:"
 
 #: ../src/applet-dialogs.c:815
 msgid "VPN Username:"
-msgstr "VPNren erabiltzaile-izena:"
+msgstr "Namapengguna VPN:"
 
 #: ../src/applet-dialogs.c:821
 msgid "VPN Banner:"
-msgstr "VPNren iragarkia:"
+msgstr "Banner VPN:"
 
 #: ../src/applet-dialogs.c:827
 msgid "Base Connection:"
-msgstr "Oinarrizko konexioa:"
+msgstr "Sambungan Asas:"
 
 #: ../src/applet-dialogs.c:829
 msgid "Unknown"
-msgstr "Ezezaguna"
+msgstr "Tidak diketahui"
 
 #. Shouldn't really happen but ...
 #: ../src/applet-dialogs.c:892
 msgid "No valid active connections found!"
-msgstr "Ez da konexio aktiborik aurkitu."
+msgstr "Tiada sambungan aktif yang sah ditemui!"
 
 #: ../src/applet-dialogs.c:945
 msgid ""
@@ -677,36 +681,38 @@ msgid ""
 "Copyright © 2005-2008 Novell, Inc.\n"
 "and many other community contributors and translators"
 msgstr ""
-"Copyright-a © 2004-2011 Red Hat, Inc.\n"
-"Copyright-a © 2005-2008 Novell, Inc. eta komunitateko beste laguntzaile eta "
-"itzultzaileak"
+"Hakcipta © 2004-2011 Red Hat, Inc.\n"
+"Hakcipta © 2005-2008 Novell, Inc.\n"
+"dan ramai lagi penyumbang-pemyumbang dari komuniti dan penterjemah-"
+"penterjemah"
 
 #: ../src/applet-dialogs.c:948
 msgid ""
 "Notification area applet for managing your network devices and connections."
 msgstr ""
-"Jakinarazpen-areako miniaplikazioa sareko gailuak eta konexioak kudeatzeko."
+"Kawasan aplet notifikasi untuk menguruskan peranti-peranti rangkaian anda "
+"dan sambungan."
 
 #: ../src/applet-dialogs.c:950
 msgid "NetworkManager Website"
-msgstr "NetworkManager-en web gunea"
+msgstr "Laman sesawang NetworkManager"
 
 #: ../src/applet-dialogs.c:965
 msgid "Missing resources"
-msgstr "Baliabideak falta dira"
+msgstr "Sumber-sumber hilang"
 
 #: ../src/applet-dialogs.c:990
 msgid "Mobile broadband network password"
-msgstr "Bandazabal mugikorreko sarearen pasahitza"
+msgstr "Kata laluan rangkaian jalurlebar mudahalih "
 
 #: ../src/applet-dialogs.c:999
 #, c-format
 msgid "A password is required to connect to '%s'."
-msgstr "Pasahitza behar da '%s'(e)ra konektatzeko."
+msgstr "Kata laluan diperlukan untuk sambung ke '%s'."
 
 #: ../src/applet-dialogs.c:1018
 msgid "Password:"
-msgstr "Pasahitza:"
+msgstr "Katalaluan:"
 
 #: ../src/applet.c:990
 #, c-format
@@ -716,7 +722,7 @@ msgid ""
 "interrupted."
 msgstr ""
 "\n"
-"'%s' VPN konexioak huts egin du, sareko konexioa eten egin delako."
+"Sambungan VPN '%s' gagal kerana terganggu."
 
 #: ../src/applet.c:993
 #, c-format
@@ -725,7 +731,7 @@ msgid ""
 "The VPN connection '%s' failed because the VPN service stopped unexpectedly."
 msgstr ""
 "\n"
-"'%s' VPN konexioak huts egin du, VPN zerbitzua ustekabean gelditu delako."
+"Sambungan VPN '%s' gagal kerana servis VPN tiba-tiba terhenti. "
 
 #: ../src/applet.c:996
 #, c-format
@@ -735,8 +741,7 @@ msgid ""
 "configuration."
 msgstr ""
 "\n"
-"'%s' VPN konexioak huts egin du, VPN zerbitzuak konfigurazio baliogabea "
-"itzuli duelako."
+"Sambungan VPN '%s' gagal kerana servis VPN mempunyai konfigurasi tidak sah."
 
 #: ../src/applet.c:999
 #, c-format
@@ -745,7 +750,7 @@ msgid ""
 "The VPN connection '%s' failed because the connection attempt timed out."
 msgstr ""
 "\n"
-"'%s' VPN konexioak huts egin du, konexio-saiakeren denbora iraungitu delako."
+"Sambungan VPN '%s' gagal kerana telah tamat masa menyambung."
 
 #: ../src/applet.c:1002
 #, c-format
@@ -754,7 +759,7 @@ msgid ""
 "The VPN connection '%s' failed because the VPN service did not start in time."
 msgstr ""
 "\n"
-"'%s' VPN konexioak huts egin du, VPN zerbitzua ez delako garaiz hasi."
+"Sambungan VPN '%s' gagal kerana servis VPN tidak dimulakan tepat pada masa."
 
 #: ../src/applet.c:1005
 #, c-format
@@ -763,8 +768,7 @@ msgid ""
 "The VPN connection '%s' failed because the VPN service failed to start."
 msgstr ""
 "\n"
-"'%s' VPN konexioak huts egin du, VPN zerbitzuak huts egin duelako "
-"abiaraztean."
+"Sambungan VPN '%s' gagal keranan servis VPN gagal dimulakan."
 
 #: ../src/applet.c:1008
 #, c-format
@@ -773,7 +777,7 @@ msgid ""
 "The VPN connection '%s' failed because there were no valid VPN secrets."
 msgstr ""
 "\n"
-"'%s' VPN konexioak huts egin du, ez dagoelako baliozko VPN sekreturik."
+"Sambungan VPN '%s' gagal kerana tiada rahsia-rahsia VPN yang sah."
 
 #: ../src/applet.c:1011
 #, c-format
@@ -782,7 +786,7 @@ msgid ""
 "The VPN connection '%s' failed because of invalid VPN secrets."
 msgstr ""
 "\n"
-"'%s' VPN konexioak huts egin du, ez dagoelako baliozko VPN sekreturik."
+"Sambungan VPN '%s' gagal kerana rahsia-rahsia VPN tidak sah."
 
 #: ../src/applet.c:1018
 #, c-format
@@ -791,7 +795,7 @@ msgid ""
 "The VPN connection '%s' failed."
 msgstr ""
 "\n"
-"'%s' VPN konexioak huts egin du."
+"Sambungan VPN '%s' gagal."
 
 #: ../src/applet.c:1036
 #, c-format
@@ -801,7 +805,8 @@ msgid ""
 "interrupted."
 msgstr ""
 "\n"
-"'%s' VPN konexioa deskonektatu egin da, sareko konexioa eten egin delako."
+"Sambungan VPN '%s' terputus disebabkan oleh sambungan rangkaian telah "
+"diganggu."
 
 #: ../src/applet.c:1039
 #, c-format
@@ -810,7 +815,7 @@ msgid ""
 "The VPN connection '%s' disconnected because the VPN service stopped."
 msgstr ""
 "\n"
-"'%s' VPN konexioa deskonektatu egin da, VPN zerbitzua gelditu egin delako."
+"Sambungan VPN '%s' terputus disebabkan oleh servis VPN berhenti."
 
 #: ../src/applet.c:1045
 #, c-format
@@ -819,15 +824,15 @@ msgid ""
 "The VPN connection '%s' disconnected."
 msgstr ""
 "\n"
-"'%s' VPN konexioa deskonektatu egin da."
+"Sambungan VPN '%s' terputus."
 
 #: ../src/applet.c:1079
 msgid "VPN Login Message"
-msgstr "VPN saio-hasierako mezua"
+msgstr "Mesej Logmasuk VPN"
 
 #: ../src/applet.c:1085 ../src/applet.c:1093 ../src/applet.c:1143
 msgid "VPN Connection Failed"
-msgstr "VPN konexioak huts egin du"
+msgstr "Sambungan VPN Gagal"
 
 #: ../src/applet.c:1150
 #, c-format
@@ -838,8 +843,7 @@ msgid ""
 "%s"
 msgstr ""
 "\n"
-"'%s' VPN konexioak huts egin du, VPN zerbitzuak huts egin duelako "
-"abiaraztean.\n"
+"Sambungan VPN '%s' gagal kerana servis VPN gagal dimulakan.\n"
 "\n"
 "%s"
 
@@ -852,178 +856,179 @@ msgid ""
 "%s"
 msgstr ""
 "\n"
-"'%s' VPN konexioak huts egin du abiaraztean.\n"
+"Sambungan VPN '%s' gagal dimulakan.\n"
 "\n"
 "%s"
 
 #: ../src/applet.c:1473
 msgid "device not ready (firmware missing)"
-msgstr "gailua ez dago prest (firmwarea falta da)"
+msgstr "peranti tidak sedia (perisian tegar tiada)"
 
 #: ../src/applet.c:1475
 msgid "device not ready"
-msgstr "gailua ez dago prest"
+msgstr "peranti belum bersedia"
 
 #: ../src/applet.c:1501
 msgid "Disconnect"
-msgstr "Deskonektatu"
+msgstr "Putuskan"
 
 #: ../src/applet.c:1515
 msgid "device not managed"
-msgstr "gailua ez dago kudeatuta"
+msgstr "peranti tidak diuruskan"
 
 #: ../src/applet.c:1559
 msgid "No network devices available"
-msgstr "Ez dago sareko gailurik erabilgarri"
+msgstr "Tiada peranti rangkaian tersedia"
 
 #: ../src/applet.c:1647
 msgid "_VPN Connections"
-msgstr "_VPN konexioak"
+msgstr "Sambungan _VPN"
 
 #: ../src/applet.c:1704
 msgid "_Configure VPN..."
-msgstr "_Konfiguratu VPN..."
+msgstr "_Konfigur VPN..."
 
 #: ../src/applet.c:1708
 msgid "_Disconnect VPN"
-msgstr "_Deskonektatu VPNa"
+msgstr "_Putuskan VPN"
 
 #: ../src/applet.c:1806
 msgid "NetworkManager is not running..."
-msgstr "NetworkManager ez da exekutatzen ari..."
+msgstr "NetworkManager tidak berjalan..."
 
 #: ../src/applet.c:1811 ../src/applet.c:2604
 msgid "Networking disabled"
-msgstr "Sarea desgaituta"
+msgstr "Rangkaian dilumpuhkan"
 
 #. 'Enable Networking' item
 #: ../src/applet.c:2032
 msgid "Enable _Networking"
-msgstr "Gaitu _sarea"
+msgstr "Benarkan Ra_ngkaian"
 
 #. 'Enable Wireless' item
 #: ../src/applet.c:2041
 msgid "Enable _Wireless"
-msgstr "Gaitu _haririk gabekoa"
+msgstr "Benarkan _Wayarles"
 
 #. 'Enable Mobile Broadband' item
 #: ../src/applet.c:2050
 msgid "Enable _Mobile Broadband"
-msgstr "Gaitu _banda-zabal mugikorra"
+msgstr "Benarkan Jalurlebar _Mudahalih"
 
 #. 'Enable WiMAX Mobile Broadband' item
 #: ../src/applet.c:2059
 msgid "Enable WiMA_X Mobile Broadband"
-msgstr "Gaitu _WiMAX banda zabal mugikorra"
+msgstr "Benarkan Jalurlebar Mudahalih WiMA_X"
 
 #. Toggle notifications item
 #: ../src/applet.c:2070
 msgid "Enable N_otifications"
-msgstr "Gaitu _jakinarazpenak"
+msgstr "Benarkan _Pemberitahuan"
 
 #. 'Connection Information' item
 #: ../src/applet.c:2081
 msgid "Connection _Information"
-msgstr "Konexioaren _informazioa"
+msgstr "Maklumat Sambungan"
 
 #. 'Edit Connections...' item
 #: ../src/applet.c:2091
 msgid "Edit Connections..."
-msgstr "Editatu konexioak..."
+msgstr "Edit Sambungan..."
 
 #. Help item
 #: ../src/applet.c:2105
 msgid "_Help"
-msgstr "_Laguntza"
+msgstr "_Bantuan"
 
 #. About item
 #: ../src/applet.c:2114
 msgid "_About"
-msgstr "Honi _buruz"
+msgstr "_Mengenai"
 
 #: ../src/applet.c:2291
 msgid "Disconnected"
-msgstr "Deskonektatuta"
+msgstr "Terputus"
 
 #: ../src/applet.c:2292
 msgid "The network connection has been disconnected."
-msgstr "Sareko konexioa deskonektatu egin da."
+msgstr "Sambungan rangkaian telah diputuskan."
 
 #: ../src/applet.c:2473
 #, c-format
 msgid "Preparing network connection '%s'..."
-msgstr "'%s' sareko konexioa prestatzen..."
+msgstr "Menyediakan sambungan rangkaian '%s'..."
 
 #: ../src/applet.c:2476
 #, c-format
 msgid "User authentication required for network connection '%s'..."
-msgstr "Erabiltzailearen autentifikazioa behar da '%s' sareko konexiorako..."
+msgstr "Pengesahan pengguna diperlukan untuk sambungan rangkaian '%s'..."
 
 #: ../src/applet.c:2482
 #, c-format
 msgid "Network connection '%s' active"
-msgstr "'%s' sareko konexioa aktiboa"
+msgstr "Sambungan rangkaian '%s' aktif"
 
 #: ../src/applet.c:2560
 #, c-format
 msgid "Starting VPN connection '%s'..."
-msgstr "'%s' VPN konexioa hasieratzen..."
+msgstr "Memulakan sambungan VPN '%s'..."
 
 #: ../src/applet.c:2563
 #, c-format
 msgid "User authentication required for VPN connection '%s'..."
-msgstr "Erabiltzailearen autentifikazioa behar da '%s' VPN konexiorako..."
+msgstr "Pengesahan pengguna diperlukan untuk sambungan VPN '%s'..."
 
 #: ../src/applet.c:2566
 #, c-format
 msgid "Requesting a VPN address for '%s'..."
-msgstr "Sareko helbide bat eskatzen VPN '%s' sareari..."
+msgstr "Meminta satu alamat VPN untuk '%s'..."
 
 #: ../src/applet.c:2569
 #, c-format
 msgid "VPN connection '%s' active"
-msgstr "'%s' VPN konexioa aktiboa"
+msgstr "Sambungan VPN '%s' aktif"
 
 #: ../src/applet.c:2608
 msgid "No network connection"
-msgstr "Ez dago sareko konexiorik"
+msgstr "Tiada sambungan rangkaian"
 
 #: ../src/applet.c:3258
 msgid "NetworkManager Applet"
-msgstr "NetworkManager miniaplikazioa"
+msgstr "Aplet NetworkManager"
 
 #: ../src/gsm-unlock.ui.h:1
 msgid "Automatically unlock this device"
-msgstr "Desblokeatu automatikoki gailu hau"
+msgstr "Automatik kunci peranti ini"
 
 #: ../src/gsm-unlock.ui.h:2
 msgid "_Unlock"
-msgstr "_Desblokeatu"
+msgstr "Buka k_unci"
 
 #: ../src/info.ui.h:1
 msgid "Active Network Connections"
-msgstr "Aktibatu sareko konexioak"
+msgstr "Sambungan-sangbungan Rangkaian Aktif"
 
 #: ../src/info.ui.h:2
 msgid "Connection Information"
-msgstr "Konexioaren informazioa"
+msgstr "Maklumat Sambungan"
 
 #: ../src/wired-8021x.ui.h:1 ../src/wired-dialog.c:104
 msgid "Wired 802.1X authentication"
-msgstr "Haridun 802.1X autentifikazioa"
+msgstr "Pengesahan 802.1X berwayar"
 
 #: ../src/wired-8021x.ui.h:2 ../src/libnm-gtk/wifi.ui.h:4
 msgid "_Network name:"
-msgstr "_Sarearen izena:"
+msgstr "_Nama Rangkain:"
 
 #: ../src/connection-editor/ce-page.c:72
 msgid "automatic"
-msgstr "automatikoa"
+msgstr "automatik"
 
 #: ../src/connection-editor/ce-page.c:310
 msgid "Failed to update connection secrets due to an unknown error."
 msgstr ""
-"Huts egin du konexioaren sekretua eguneratzean errore ezezagun bat dela eta."
+"Gagal mengemaskini rahsia-rahsia sambungan disebabkan ralat yang tidak "
+"diketahui."
 
 #: ../src/connection-editor/ce-ip4-routes.ui.h:1
 #: ../src/connection-editor/ce-ip6-routes.ui.h:1
@@ -1033,8 +1038,8 @@ msgid ""
 "IP addresses identify your computer on the network.  Click the \"Add\" "
 "button to add an IP address."
 msgstr ""
-"IP helbideak ordenagailua identifikatzen du sarearen barruan. Egin klik "
-"\"Gehitu\" botoian IP helbide bat gehitzeko."
+"Alamat-alamat IP mengenalpasti komputer anda pada rangkaian. Klik butang "
+"\"Tambah\" untuk menambah alamat IP."
 
 #: ../src/connection-editor/ce-ip4-routes.ui.h:2
 #: ../src/connection-editor/ce-ip6-routes.ui.h:2
@@ -1042,18 +1047,18 @@ msgid ""
 "If enabled, this connection will never be used as the default network "
 "connection."
 msgstr ""
-"Gaituta badago, konexio hau ez da inoiz ere erabiliko sareko konexio "
-"lehenetsi gisa."
+"Jika dipasang, sambungan ini tidak akan digunakan sebagai sambungan "
+"rangkaian lalai."
 
 #: ../src/connection-editor/ce-ip4-routes.ui.h:3
 #: ../src/connection-editor/ce-ip6-routes.ui.h:3
 msgid "Ig_nore automatically obtained routes"
-msgstr "_Ezikusi egin automatikoki lortutako bideei"
+msgstr "Abaikan route-route yang didapatkan secara automatik"
 
 #: ../src/connection-editor/ce-ip4-routes.ui.h:4
 #: ../src/connection-editor/ce-ip6-routes.ui.h:4
-msgid "_Use this connection only for resources on its network"
-msgstr "Erabili _konexio hau soilik bere sareko baliabideentzako"
+msgid "Use this c_onnection only for resources on its network"
+msgstr "Guna s_ambungan ini hanya untuk sumber pada rangkaian terbabit"
 
 #: ../src/connection-editor/ce-page-dsl.ui.h:1
 #: ../src/wireless-security/eap-method-leap.ui.h:1
@@ -1062,7 +1067,7 @@ msgstr "Erabili _konexio hau soilik bere sareko baliabideentzako"
 #: ../src/wireless-security/ws-leap.ui.h:1
 #: ../src/wireless-security/ws-wpa-psk.ui.h:1
 msgid "Sho_w password"
-msgstr "Erakutsi _pasahitza"
+msgstr "_Tunjuk katalaluan"
 
 #: ../src/connection-editor/ce-page-dsl.ui.h:2
 #: ../src/connection-editor/ce-page-mobile.ui.h:15
@@ -1071,11 +1076,11 @@ msgstr "Erakutsi _pasahitza"
 #: ../src/wireless-security/ws-leap.ui.h:2
 #: ../src/wireless-security/ws-wpa-psk.ui.h:2
 msgid "_Password:"
-msgstr "_Pasahitza:"
+msgstr "_Katalaluan:"
 
 #: ../src/connection-editor/ce-page-dsl.ui.h:3
 msgid "_Service:"
-msgstr "_Zerbitzua:"
+msgstr "_Servis:"
 
 #: ../src/connection-editor/ce-page-dsl.ui.h:4
 #: ../src/connection-editor/ce-page-mobile.ui.h:17
@@ -1083,12 +1088,12 @@ msgstr "_Zerbitzua:"
 #: ../src/wireless-security/eap-method-simple.ui.h:4
 #: ../src/wireless-security/ws-leap.ui.h:3
 msgid "_Username:"
-msgstr "Erabiltzaile-_izena:"
+msgstr "_Namapengguna:"
 
 #: ../src/connection-editor/ce-page-ip4.ui.h:1
 #: ../src/connection-editor/ce-page-ip6.ui.h:1
 msgid "Addresses"
-msgstr "Helbideak"
+msgstr "Alamat-alamat"
 
 #: ../src/connection-editor/ce-page-ip4.ui.h:2
 #: ../src/connection-editor/ce-page-ip6.ui.h:2
@@ -1097,16 +1102,16 @@ msgstr "Helbideak"
 #: ../src/connection-editor/page-ip6.c:142
 #: ../src/wireless-security/eap-method-peap.ui.h:3
 msgid "Automatic"
-msgstr "Automatikoa"
+msgstr "Automatik"
 
 #: ../src/connection-editor/ce-page-ip4.ui.h:3
 #: ../src/connection-editor/ce-page-ip6.ui.h:3
 msgid "Automatic with manual DNS settings"
-msgstr "Automatikoa DNSren eskuzko ezarpenekin"
+msgstr "Automatik dengan tetapan DNS manual"
 
 #: ../src/connection-editor/ce-page-ip4.ui.h:4
 msgid "D_HCP client ID:"
-msgstr "D_HCP bezeroaren IDa:"
+msgstr "ID klien D_HCP:"
 
 #: ../src/connection-editor/ce-page-ip4.ui.h:5
 #: ../src/connection-editor/ce-page-ip6.ui.h:4
@@ -1114,8 +1119,8 @@ msgid ""
 "Domains used when resolving host names. Use commas to separate multiple "
 "domains."
 msgstr ""
-"Ostalari-izenak ebaztean erabiliko den domeinua. Erabili komak hainbat "
-"domeinu bereizteko."
+"Domain-domain digunakan untuk menyelesaikan nama-nama hos. Guna koma untuk "
+"memisahkan domain-domain yang pelbagai."
 
 #: ../src/connection-editor/ce-page-ip4.ui.h:7
 #: ../src/connection-editor/ce-page-ip6.ui.h:6
@@ -1123,85 +1128,85 @@ msgid ""
 "IP addresses of domain name servers used to resolve host names. Use commas "
 "to separate multiple domain name server addresses."
 msgstr ""
-"Domeinuen izenen zerbitzarien IP helbideak ostalari-izenak ebazteko.  "
-"Erabili komak hainbat DNS helbide bereizteko."
+"Alamat IP pelayan nama domain yang digunakan untuk menyelesaikan nama hos. "
+"Gunakan koma untuk mengasingkan alamat nama domain pelayan berbilang."
 
 #: ../src/connection-editor/ce-page-ip4.ui.h:8
 #: ../src/connection-editor/ce-page-ip6.ui.h:7
 msgid "Link-Local"
-msgstr "Esteka lokalak"
+msgstr "Pautan-Lokal"
 
 #: ../src/connection-editor/ce-page-ip4.ui.h:9
 #: ../src/connection-editor/ce-page-ip6.ui.h:8
 #: ../src/connection-editor/page-ip4.c:169
 #: ../src/connection-editor/page-ip6.c:191
 msgid "Manual"
-msgstr "Eskuz"
+msgstr "Manual"
 
 #: ../src/connection-editor/ce-page-ip4.ui.h:10
-msgid "Require IPv_4 addressing for this connection to complete"
-msgstr "IPv_4 helbide mota behar da konexio hau osatzeko"
+msgid "Require IPv4 addressing for this connection to complete"
+msgstr "Memerlukan alamat IPv4 untuk sambungan ini disempurnakan"
 
 #: ../src/connection-editor/ce-page-ip4.ui.h:11
 #: ../src/connection-editor/ce-page-ip6.ui.h:10
-msgid "S_earch domains:"
-msgstr "_Bilaketako domeinuak:"
-
-#: ../src/connection-editor/ce-page-ip4.ui.h:12
-#: ../src/connection-editor/ce-page-ip6.ui.h:11
 #: ../src/connection-editor/page-ip4.c:187
 #: ../src/connection-editor/page-ip6.c:211
 msgid "Shared to other computers"
-msgstr "Beste ordenagailuekin partekatua"
+msgstr "Dikongsi dengan komputer lain"
 
-#: ../src/connection-editor/ce-page-ip4.ui.h:13
+#: ../src/connection-editor/ce-page-ip4.ui.h:12
 msgid ""
 "The DHCP client identifier allows the network administrator to customize "
 "your computer's configuration.  If you wish to use a DHCP client identifier, "
 "enter it here."
 msgstr ""
-"DHCP bezeroaren identifikatzaileak sareko administratzaileari ordenagailuen "
-"konfigurazioa pertsonalizatzea eskaintzen dio. DHCP bezero baten "
-"identifikatzailea erabiltzea nahi baduzu, sartu hemen."
+"Pengecam DHCP client membolehkan pentadbir rangkaian untuk menyesuaikan "
+"konfigurasi komputer anda. Jika anda mahu menggunakan pengecam klient DHCP, "
+"masukkan di sini."
 
-#: ../src/connection-editor/ce-page-ip4.ui.h:14
+#: ../src/connection-editor/ce-page-ip4.ui.h:13
 msgid ""
 "When connecting to IPv6-capable networks, allows the connection to complete "
 "if IPv4 configuration fails but IPv6 configuration succeeds."
 msgstr ""
-"IPv6 gaitasuneko sareekin konektatzean, konexioa osatzea baimentzen du IPv4 "
-"konfigurazioak huts egiten badu baina IPv6 konfigurazioa ongi lantzen denean."
+"Apabila menyambung kepada rangkaian IPv6-mampu, membolehkan sambungan untuk "
+"melengkapkan jika IPv4 konfigurasi gagal tetapi konfigurasi IPv6 berjaya."
+
+#: ../src/connection-editor/ce-page-ip4.ui.h:14
+#: ../src/connection-editor/ce-page-ip6.ui.h:12
+msgid "_DNS servers:"
+msgstr "_Pelayan-pelayan DNS:"
 
 #: ../src/connection-editor/ce-page-ip4.ui.h:15
 #: ../src/connection-editor/ce-page-ip6.ui.h:13
-msgid "_DNS servers:"
-msgstr "_DNS zerbitzariak:"
+msgid "_Method:"
+msgstr "_Kaedah:"
 
 #: ../src/connection-editor/ce-page-ip4.ui.h:16
 #: ../src/connection-editor/ce-page-ip6.ui.h:14
-msgid "_Method:"
-msgstr "_Metodoa:"
+msgid "_Routes…"
+msgstr "_Routes…"
 
 #: ../src/connection-editor/ce-page-ip4.ui.h:17
 #: ../src/connection-editor/ce-page-ip6.ui.h:15
-msgid "_Routes…"
-msgstr "_Bideak..."
+msgid "_Search domains:"
+msgstr "_Cari domain:"
 
 #: ../src/connection-editor/ce-page-ip6.ui.h:9
-msgid "Require IPv_6 addressing for this connection to complete"
-msgstr "IPv_6 helbide mota behar da konexio hau osatzeko"
+msgid "Require IPv6 addressing for this connection to complete"
+msgstr "Memerlukan alamat IPv6 untuk sambungan ini lengkap"
 
-#: ../src/connection-editor/ce-page-ip6.ui.h:12
+#: ../src/connection-editor/ce-page-ip6.ui.h:11
 msgid ""
 "When connecting to IPv4-capable networks, allows the connection to complete "
 "if IPv6 configuration fails but IPv4 configuration succeeds."
 msgstr ""
-"IPv4 gaitasuneko sareekin konektatzean, konexioa osatzea baimentzen du IPv6 "
-"konfigurazioak huts egiten badu baina IPv4 konfigurazioa ongi lantzen denean."
+"Apabila menyambung kepada rangkaian IPv4-mampu, membolehkan sambungan untuk "
+"melengkapkan jika konfigurasi IPv6 gagal tetapi IPv4 konfigurasi berjaya."
 
 #: ../src/connection-editor/ce-page-mobile.ui.h:1
 msgid "2G (GPRS/EDGE)"
-msgstr "2G (GPRS/EDGE)"
+msgstr "2G (GPRS/EDGE"
 
 #: ../src/connection-editor/ce-page-mobile.ui.h:2
 msgid "3G (UMTS/HSPA)"
@@ -1209,47 +1214,47 @@ msgstr "3G (UMTS/HSPA)"
 
 #: ../src/connection-editor/ce-page-mobile.ui.h:3
 msgid "Advanced"
-msgstr "Aurreratua"
+msgstr "Lanjutan"
 
 #: ../src/connection-editor/ce-page-mobile.ui.h:4
-msgid "Allow _roaming if home network is not available"
-msgstr "Baimendu '_ibiltaritza' etxeko sarea ez badago erabilgarri"
+msgid "Allow roaming if home network is not available"
+msgstr "Benarkan perantauan jika rangkaian rumah tidak tersedia"
 
 #: ../src/connection-editor/ce-page-mobile.ui.h:5
 msgid "Any"
-msgstr "Edozer"
+msgstr "Mana-mana"
 
 #: ../src/connection-editor/ce-page-mobile.ui.h:6
 msgid "Basic"
-msgstr "Oinarrizkoa"
+msgstr "Asas"
 
 #: ../src/connection-editor/ce-page-mobile.ui.h:7
 msgid "Change..."
-msgstr "Aldatu..."
+msgstr "Tukar..."
 
 #: ../src/connection-editor/ce-page-mobile.ui.h:8
 msgid "N_etwork ID:"
-msgstr "_Sareko IDa:"
+msgstr "ID Ra_ngkaian:"
 
 #: ../src/connection-editor/ce-page-mobile.ui.h:9
 msgid "Nu_mber:"
-msgstr "_Zenbakia:"
+msgstr "No_mbor:"
 
 #: ../src/connection-editor/ce-page-mobile.ui.h:10
-msgid "P_IN:"
-msgstr "_PINa:"
+msgid "PI_N:"
+msgstr "PI_N:"
 
 #: ../src/connection-editor/ce-page-mobile.ui.h:11
 msgid "Prefer 2G (GPRS/EDGE)"
-msgstr "Hobetsi 2G (GPRS/EDGE)"
+msgstr "Utamakan  2G (GPRS/EDGE)"
 
 #: ../src/connection-editor/ce-page-mobile.ui.h:12
 msgid "Prefer 3G (UMTS/HSPA)"
-msgstr "Hobetsi 3G (UMTS/HSPA)"
+msgstr "Utamakan 3G (UMTS/HSPA)"
 
 #: ../src/connection-editor/ce-page-mobile.ui.h:13
 msgid "Sho_w passwords"
-msgstr "Erakutsi _pasahitzak"
+msgstr "_Tunjuk katalaluan"
 
 #: ../src/connection-editor/ce-page-mobile.ui.h:14
 msgid "_APN:"
@@ -1258,55 +1263,55 @@ msgstr "_APN:"
 #: ../src/connection-editor/ce-page-mobile.ui.h:16
 #: ../src/wireless-security/ws-wpa-psk.ui.h:3
 msgid "_Type:"
-msgstr "_Mota:"
+msgstr "_Jenis:"
 
 #: ../src/connection-editor/ce-page-ppp.ui.h:1
 msgid "Allow _BSD data compression"
-msgstr "Baimendu _BSD datu-konpresioa"
+msgstr "Benarkan pemampatan data _BSD"
 
 #: ../src/connection-editor/ce-page-ppp.ui.h:2
 msgid "Allow _Deflate data compression"
-msgstr "Baimendu _Deflate datu-konpresioa"
+msgstr "Benarkan _Mengempis pemampatan data"
 
 #: ../src/connection-editor/ce-page-ppp.ui.h:3
 msgid "Allowed methods:"
-msgstr "Baimendutako metodoak:"
+msgstr "Kaedah-kaedah dibenarkan:"
 
 #: ../src/connection-editor/ce-page-ppp.ui.h:4
 msgid "Authentication"
-msgstr "Autentifikazioa"
+msgstr "Pengesahan"
 
 #: ../src/connection-editor/ce-page-ppp.ui.h:5
 msgid "Compression"
-msgstr "Konpresioa"
+msgstr "Pemampatan"
 
 #: ../src/connection-editor/ce-page-ppp.ui.h:6
 msgid "Configure _Methods…"
-msgstr "Konfiguratu _metodoak..."
+msgstr "Kaedah _Konfigur..."
 
 #: ../src/connection-editor/ce-page-ppp.ui.h:7
 msgid "Echo"
-msgstr "Oihartzuna"
+msgstr "Gema"
 
 #: ../src/connection-editor/ce-page-ppp.ui.h:8
 msgid "Send PPP _echo packets"
-msgstr "Bidali PPP _echo paketeak"
+msgstr "Hantar peket-peket g_ema PPP"
 
 #: ../src/connection-editor/ce-page-ppp.ui.h:9
 msgid "Use TCP _header compression"
-msgstr "Erabili TCP _goiburu-konpresioa"
+msgstr "Guna _pemampatan pengepala TCP"
 
 #: ../src/connection-editor/ce-page-ppp.ui.h:10
 msgid "Use _stateful MPPE"
-msgstr "Erabili MPPE _egoerarekin"
+msgstr "Guna MPPE stateful"
 
 #: ../src/connection-editor/ce-page-ppp.ui.h:11
 msgid "_Require 128-bit encryption"
-msgstr "_128 bit-eko enkriptazioa behar da"
+msgstr "Memerlukan enkripsi 128-bit"
 
 #: ../src/connection-editor/ce-page-ppp.ui.h:12
 msgid "_Use point-to-point encryption (MPPE)"
-msgstr "_Erabili puntutik punturako enkriptazioa (MPPE)"
+msgstr "_Guna enkripsi point-to-point (MPPE)"
 
 #: ../src/connection-editor/ce-page-wired.ui.h:1
 msgid "1 Gb/s"
@@ -1326,66 +1331,66 @@ msgstr "100 Mb/s"
 
 #: ../src/connection-editor/ce-page-wired.ui.h:5
 msgid "Attachment Unit Interface (AUI)"
-msgstr "Interfaze-unitate erantsia (AUI)"
+msgstr "Attachment Unit Interface (AUI)"
 
 #: ../src/connection-editor/ce-page-wired.ui.h:6
 msgid "Aut_onegotiate"
-msgstr "_Auto-negoziatu"
+msgstr "Runding aut_o"
 
 #: ../src/connection-editor/ce-page-wired.ui.h:8
 msgid "BNC"
 msgstr "BNC"
 
 #: ../src/connection-editor/ce-page-wired.ui.h:9
-#: ../src/connection-editor/ce-page-wireless.ui.h:7
-msgid "C_loned MAC address:"
-msgstr "_Klonatutako MAC helbidea:"
+msgid "Full duple_x"
+msgstr "Duplek_s penuh"
 
 #: ../src/connection-editor/ce-page-wired.ui.h:10
-msgid "Full duple_x"
-msgstr "Erabateko _duplexa"
+#: ../src/connection-editor/ce-page-wireless.ui.h:8
+msgid "MT_U:"
+msgstr "MT_U:"
 
 #: ../src/connection-editor/ce-page-wired.ui.h:11
 msgid "Media Independent Interface (MII)"
-msgstr "Euskarri independenteen interfazea (MII)"
+msgstr "Media Independent Interface (MII)"
 
 #: ../src/connection-editor/ce-page-wired.ui.h:12
-#: ../src/connection-editor/ce-page-wireless.ui.h:12
+#: ../src/connection-editor/ce-page-wireless.ui.h:11
 msgid ""
 "The MAC address entered here will be used as hardware address for the "
 "network device this connection is activated on.  This feature is known as "
 "MAC cloning or spoofing.  Example: 00:11:22:33:44:55"
 msgstr ""
-"Hemen sartutako MAC helbidea erabiliko da konexio hau aktibatzen den sareko "
-"gailuaren hardwarearen helbide gisa. Eginbide hau MAC helbidea klonatzea edo "
-"iruzurtzea bezala ezagutzen da. Adibidez: 00:11:22:33:44:55"
+"Alamat MAC yang dibuat di sini akan digunakan sebagai alamat perkakasan "
+"untuk peranti rangkaian hubungan ini diaktifkan. Ciri ini dikenali sebagai "
+"MAC pengklonan atau menipu. Contoh: 00:11:22:33:44:55"
 
 #: ../src/connection-editor/ce-page-wired.ui.h:13
 msgid "Twisted Pair (TP)"
-msgstr "Pare bihurritua (TP)"
+msgstr "Pasangan Terpiuh"
 
 #: ../src/connection-editor/ce-page-wired.ui.h:14
-#: ../src/connection-editor/ce-page-wireless.ui.h:16
-msgid "_Device MAC address:"
-msgstr "_Gailuaren MAC helbidea:"
+#: ../src/connection-editor/ce-page-wireless.ui.h:15
+msgid "_Cloned MAC address:"
+msgstr "Alamat MAC _Diklon:"
 
 #: ../src/connection-editor/ce-page-wired.ui.h:15
-#: ../src/connection-editor/ce-page-wireless.ui.h:17
-msgid "_MTU:"
-msgstr "_MTU:"
+#: ../src/connection-editor/ce-page-wireless.ui.h:16
+msgid "_Device MAC address:"
+msgstr "Alamat MAC _Peranti: "
 
 #: ../src/connection-editor/ce-page-wired.ui.h:16
 msgid "_Port:"
-msgstr "_Ataka:"
+msgstr "_Liang:"
 
 #: ../src/connection-editor/ce-page-wired.ui.h:17
 msgid "_Speed:"
-msgstr "Abia_dura:"
+msgstr "_Kelajuan:"
 
 #: ../src/connection-editor/ce-page-wired.ui.h:18
 #: ../src/connection-editor/ce-page-wireless.ui.h:19
 msgid "bytes"
-msgstr "byte"
+msgstr "bytes"
 
 #: ../src/connection-editor/ce-page-wireless.ui.h:1
 msgid "A (5 GHz)"
@@ -1401,80 +1406,80 @@ msgstr "B/G (2.4 GHz)"
 
 #: ../src/connection-editor/ce-page-wireless.ui.h:5
 msgid "Ban_d:"
-msgstr "_Banda:"
+msgstr "J_alur:"
 
 #: ../src/connection-editor/ce-page-wireless.ui.h:6
 msgid "C_hannel:"
-msgstr "_Kanala:"
+msgstr "Salura_n:"
 
-#: ../src/connection-editor/ce-page-wireless.ui.h:8
+#: ../src/connection-editor/ce-page-wireless.ui.h:7
 msgid "Infrastructure"
-msgstr "Azpiegitura"
+msgstr "Infrastruktur"
 
 #: ../src/connection-editor/ce-page-wireless.ui.h:9
 msgid "M_ode:"
-msgstr "_Modua:"
+msgstr "M_od:"
 
 #: ../src/connection-editor/ce-page-wireless.ui.h:10
 msgid "Mb/s"
 msgstr "Mb/s"
 
-#: ../src/connection-editor/ce-page-wireless.ui.h:11
-msgid "SS_ID:"
-msgstr "SS_ID:"
-
-#: ../src/connection-editor/ce-page-wireless.ui.h:13
+#: ../src/connection-editor/ce-page-wireless.ui.h:12
 msgid ""
 "This option locks this connection to the wireless access point (AP) "
 "specified by the BSSID entered here.  Example: 00:11:22:33:44:55"
 msgstr ""
-"Aukera honek haririk gabeko sareko sarbidetza puntuaren (AP) konexioa "
-"blokeatzen du hemen sartutako BSSIDek zehaztuta. Adibidez: 00:11:22:33:44:55"
+"Pilihan ini mengunci ini sambungan ke pusat akses tanpa wayar (AP) yang "
+"dinyatakan oleh BSSID itu memasuki di sini. Contoh: 00:11:22:33:44:55"
+
+#: ../src/connection-editor/ce-page-wireless.ui.h:13
+msgid "Transmission po_wer:"
+msgstr "Kuasa Trans_misi:"
 
 #: ../src/connection-editor/ce-page-wireless.ui.h:14
-msgid "Transmission po_wer:"
-msgstr "Transmisio-indarra:"
-
-#: ../src/connection-editor/ce-page-wireless.ui.h:15
 msgid "_BSSID:"
 msgstr "_BSSID:"
 
-#: ../src/connection-editor/ce-page-wireless.ui.h:18
+#: ../src/connection-editor/ce-page-wireless.ui.h:17
 msgid "_Rate:"
-msgstr "_Tasa:"
+msgstr "_Kadar:"
+
+#: ../src/connection-editor/ce-page-wireless.ui.h:18
+msgid "_SSID:"
+msgstr "_SSID:"
 
 #: ../src/connection-editor/ce-page-wireless.ui.h:20
 msgid "mW"
 msgstr "mW"
 
 #: ../src/connection-editor/ce-page-wireless-security.ui.h:1
-msgid "S_ecurity:"
-msgstr "_Segurtasuna:"
+msgid "_Security:"
+msgstr "_Keselamatan:"
 
 #: ../src/connection-editor/ce-ppp-auth-methods.ui.h:1
 msgid "Allowed Authentication Methods"
-msgstr "Baimendutako autentifikazio metodoak"
+msgstr "Kaedah-kaedah Pengesahan Yang Dibenarkan"
 
 #: ../src/connection-editor/ce-ppp-auth-methods.ui.h:2
 msgid "C_HAP"
-msgstr "_CHAP"
+msgstr "C_HAP"
 
 #: ../src/connection-editor/ce-ppp-auth-methods.ui.h:3
 msgid "Challenge Handshake Authentication Protocol"
-msgstr "Challenge Handshake Authentication protokoloa"
+msgstr "Protokol Pengesahan Handshake Challange"
 
 #: ../src/connection-editor/ce-ppp-auth-methods.ui.h:4
 msgid "Extensible Authentication Protocol"
-msgstr "Autentifikazio protokolo hedagarria"
+msgstr "Protokol Pengesahan Boleh Perluas"
 
 #: ../src/connection-editor/ce-ppp-auth-methods.ui.h:5
 msgid ""
 "In most cases, the provider's PPP servers will support all authentication "
 "methods.  If connections fail, try disabling support for some methods."
 msgstr ""
-"Kasu gehienetan, hornitzailearen PPP zerbitzariek autentifikazio metodo "
-"guztiak onartzen dituzte. Konexioak huts egiten badu, saiatu metodo "
-"batzuentzako euskarria desgaituz."
+"Dalam kebanyakan kes, pelayan PPP pembekal akan menyokong semua kaedah "
+"pengesahan. Jika sambungan gagal, cuba melumpuhkan sokongan untuk beberapa "
+"kaedah."
 
 #: ../src/connection-editor/ce-ppp-auth-methods.ui.h:6
 msgid "MSCHAP v_2"
@@ -1482,15 +1487,15 @@ msgstr "MSCHAP v_2"
 
 #: ../src/connection-editor/ce-ppp-auth-methods.ui.h:7
 msgid "Microsoft Challenge Handshake Authentication Protocol"
-msgstr "Microsoft-en Challenge Handshake Authentication protokoloa"
+msgstr "Protokol Pengesahan Handshake Microsoft Challange"
 
 #: ../src/connection-editor/ce-ppp-auth-methods.ui.h:8
 msgid "Microsoft Challenge Handshake Authentication Protocol version 2"
-msgstr "Microsoft-en Challenge Handshake Authentication protokoloa 2. bertsioa"
+msgstr "Protokol Pengesahan Handshake Microsoft Challange versi 2"
 
 #: ../src/connection-editor/ce-ppp-auth-methods.ui.h:9
 msgid "Password Authentication Protocol"
-msgstr "Pasahitzaren autentifikazioa protokoloa"
+msgstr "Protokol Pengesahan Katalaluan"
 
 #: ../src/connection-editor/ce-ppp-auth-methods.ui.h:10
 msgid "_EAP"
@@ -1505,7 +1510,6 @@ msgid "_PAP"
 msgstr "_PAP"
 
 #: ../src/connection-editor/ce-vpn-wizard.ui.h:1 ../src/libnm-gtk/wifi.ui.h:1
-#: ../src/wireless-security/eap-method-fast.ui.h:1
 #: ../src/wireless-security/eap-method-peap.ui.h:1
 #: ../src/wireless-security/eap-method-ttls.ui.h:1
 #: ../src/wireless-security/ws-dynamic-wep.ui.h:1
@@ -1515,11 +1519,11 @@ msgstr " "
 
 #: ../src/connection-editor/ce-vpn-wizard.ui.h:2
 msgid "Choose a VPN Connection Type"
-msgstr "Aukeratu VPN konexio mota"
+msgstr "Pilih Satu Jenis Sambungan VPN"
 
 #: ../src/connection-editor/ce-vpn-wizard.ui.h:3
 msgid "Create…"
-msgstr "Sortu..."
+msgstr "Cipta..."
 
 #: ../src/connection-editor/ce-vpn-wizard.ui.h:4
 msgid ""
@@ -1527,172 +1531,171 @@ msgid ""
 "of VPN connection you wish to create does not appear in the list, you may "
 "not have the correct VPN plugin installed."
 msgstr ""
-"Hautatu konexio berrian erabiltzea nahi duzun VPN mota. Sortzea nahi duzun "
-"VPN konexio mota ez bada zerrendan agertzen baliteke VPN plugina ongi "
-"instalatuta ez egotea."
+"Pilih jenis VPN yang anda ingin gunakan untuk sambungan baru. Jika jenis "
+"sambungan VPN anda mahu mencipta tidak muncul dalam senarai, anda mungkin "
+"tidak mempunyai plugin VPN yang betul dipasang."
 
 #: ../src/connection-editor/ip4-routes-dialog.c:745
 #: ../src/connection-editor/ip6-routes-dialog.c:687
-#: ../src/connection-editor/page-ip4.c:900
-#: ../src/connection-editor/page-ip6.c:866
+#: ../src/connection-editor/page-ip4.c:901
+#: ../src/connection-editor/page-ip6.c:867
 msgid "Address"
-msgstr "Helbidea"
+msgstr "Alamat"
 
 #: ../src/connection-editor/ip4-routes-dialog.c:762
-#: ../src/connection-editor/page-ip4.c:917
+#: ../src/connection-editor/page-ip4.c:918
 msgid "Netmask"
-msgstr "Sare-maskara"
+msgstr "Topeng Internet"
 
 #: ../src/connection-editor/ip4-routes-dialog.c:779
 #: ../src/connection-editor/ip6-routes-dialog.c:721
-#: ../src/connection-editor/page-ip4.c:934
-#: ../src/connection-editor/page-ip6.c:900
+#: ../src/connection-editor/page-ip4.c:935
+#: ../src/connection-editor/page-ip6.c:901
 msgid "Gateway"
-msgstr "Atebidea"
+msgstr "Get laluan"
 
 #: ../src/connection-editor/ip4-routes-dialog.c:796
 #: ../src/connection-editor/ip6-routes-dialog.c:738
 msgid "Metric"
-msgstr "Metrika"
+msgstr "Metrik"
 
 #: ../src/connection-editor/ip6-routes-dialog.c:704
-#: ../src/connection-editor/page-ip6.c:883
+#: ../src/connection-editor/page-ip6.c:884
 msgid "Prefix"
-msgstr "Aurrizkia"
+msgstr "Awalan"
 
 #: ../src/connection-editor/page-dsl.c:139
 #: ../src/connection-editor/nm-connection-editor.ui.h:4
-#: ../src/connection-editor/nm-connection-list.c:1519
+#: ../src/connection-editor/nm-connection-list.c:1482
 msgid "DSL"
 msgstr "DSL"
 
 #: ../src/connection-editor/page-dsl.c:141
 msgid "Could not load DSL user interface."
-msgstr "Ezin izan da DSLrentzako erabiltzailearen interfazea kargatu."
+msgstr "Tidak dapat memuatkan antaramuka pengguna DSL."
 
 #: ../src/connection-editor/page-dsl.c:231
 #, c-format
 msgid "DSL connection %d"
-msgstr "DSL %d. konexioa"
+msgstr "Sambungan DSL %d"
 
 #: ../src/connection-editor/page-ip4.c:133
 #: ../src/connection-editor/page-ip6.c:132
 msgid "Automatic (VPN)"
-msgstr "Automatikoa (VPN)"
+msgstr "Automatik (VPN)"
 
 #: ../src/connection-editor/page-ip4.c:134
 #: ../src/connection-editor/page-ip6.c:133
 msgid "Automatic (VPN) addresses only"
-msgstr "Helbide automatikoak soilik (VPN)"
+msgstr "Alamat-alamat automatik (VPN) sahaja "
 
 #: ../src/connection-editor/page-ip4.c:137
 #: ../src/connection-editor/page-ip6.c:136
 msgid "Automatic (PPP)"
-msgstr "Automatikoa (PPP)"
+msgstr "Automatik (PPP)"
 
 #: ../src/connection-editor/page-ip4.c:138
 #: ../src/connection-editor/page-ip6.c:137
 msgid "Automatic (PPP) addresses only"
-msgstr "Helbide automatikoak soilik (PPP)"
+msgstr "Alamat-alamat (PPP) automatik sahaja"
 
 #: ../src/connection-editor/page-ip4.c:140
 #: ../src/connection-editor/page-ip6.c:139
 msgid "Automatic (PPPoE)"
-msgstr "Automatikoa (PPPoE)"
+msgstr "Automatik (PPPoE)"
 
 #: ../src/connection-editor/page-ip4.c:141
 #: ../src/connection-editor/page-ip6.c:140
 msgid "Automatic (PPPoE) addresses only"
-msgstr "Helbide automatikoak soilik (PPPoE)"
+msgstr "Alamat-alamat (PPoE) automatik sahaja"
 
 #: ../src/connection-editor/page-ip4.c:143
 msgid "Automatic (DHCP)"
-msgstr "Automatikoa (DHCP)"
+msgstr "Automatik (DHCP)"
 
 #: ../src/connection-editor/page-ip4.c:144
 msgid "Automatic (DHCP) addresses only"
-msgstr "Helbide automatikoak soilik (DHCP)"
+msgstr "Alamat automatik (DHCP) sahaja"
 
 #: ../src/connection-editor/page-ip4.c:181
 #: ../src/connection-editor/page-ip6.c:204
 msgid "Link-Local Only"
-msgstr "Esteka lokalak soilik"
+msgstr "Pautan-Lokal Sahaja"
 
 #: ../src/connection-editor/page-ip4.c:197
 msgid "Disabled"
-msgstr "Desgaituta"
+msgstr "Dilumpuhkan"
 
 #: ../src/connection-editor/page-ip4.c:832
 #, c-format
 msgid "Editing IPv4 routes for %s"
-msgstr "'%s'(r)en IPv4 bideak editatzea"
+msgstr "Menyunting route IPv4 untuk %s"
 
-#: ../src/connection-editor/page-ip4.c:981
+#: ../src/connection-editor/page-ip4.c:982
 msgid "IPv4 Settings"
-msgstr "IPv4 ezarpenak"
+msgstr "Tetapan IPv4"
 
-#: ../src/connection-editor/page-ip4.c:983
+#: ../src/connection-editor/page-ip4.c:984
 msgid "Could not load IPv4 user interface."
-msgstr "Ezin izan da IPv4rentzako erabiltzailearen interfazea kargatu."
+msgstr "Tidak dapat memuatkan antaramuka pengguna IPv4."
 
 #: ../src/connection-editor/page-ip6.c:143
 msgid "Automatic, addresses only"
-msgstr "Automatikoa, helbideak soilik"
+msgstr "Automatik, alamat sahaja"
 
 #: ../src/connection-editor/page-ip6.c:155
 #: ../src/wireless-security/eap-method.c:285
 msgid "Ignore"
-msgstr "Ez ikusi egin"
+msgstr "Abai"
 
 #: ../src/connection-editor/page-ip6.c:179
 msgid "Automatic, DHCP only"
-msgstr "Automatikoa (DHCP soilik)"
+msgstr "Automatik, DHCP sahaja"
 
 #: ../src/connection-editor/page-ip6.c:798
 #, c-format
 msgid "Editing IPv6 routes for %s"
-msgstr "'%s'(r)en IPv6 bideak editatzea"
+msgstr "Menyunting route IPv6 untuk %s"
 
-#: ../src/connection-editor/page-ip6.c:945
+#: ../src/connection-editor/page-ip6.c:946
 msgid "IPv6 Settings"
-msgstr "IPv6 ezarpenak"
+msgstr "Tetapan IPv6"
 
-#: ../src/connection-editor/page-ip6.c:947
+#: ../src/connection-editor/page-ip6.c:948
 msgid "Could not load IPv6 user interface."
-msgstr "Ezin izan da IPv6rentzako erabiltzailearen interfazea kargatu."
+msgstr "Tidak dapat memuatkan antaramuka pengguna IPv6."
 
 #: ../src/connection-editor/page-mobile.c:381
 msgid "Could not load mobile broadband user interface."
-msgstr ""
-"Ezin izan da banda-zabal mugikorrentzako erabiltzailearen interfazea kargatu."
+msgstr "Tidak dapat memuatkan "
 
 #: ../src/connection-editor/page-mobile.c:398
 msgid "Unsupported mobile broadband connection type."
-msgstr "Bandazabalera mugikorraren konexio mota onartu gabea."
+msgstr "Jenis sambungan jalurlebar mudahalih Tidak disokong."
 
 #. Fall back to just asking for GSM vs. CDMA
 #: ../src/connection-editor/page-mobile.c:639
 msgid "Select Mobile Broadband Provider Type"
-msgstr "Hautatu banda-zabal mugikorraren hornitzaile mota"
+msgstr "Pilih Jenis Pembekal Jalurlebar Mudahalih"
 
 #: ../src/connection-editor/page-mobile.c:674
 msgid ""
 "Select the technology your mobile broadband provider uses.  If you are "
 "unsure, ask your provider."
 msgstr ""
-"Hautatu banda-zabal mugikorraren hornitzaileak erabiltzen duen teknologia. "
-"Ez bazaude ziur, galdetu hornitzaileari."
+"Pilih teknologi pembekal jalur lebar mudah alih anda menggunakan. Jika anda "
+"tidak pasti, tanya pembekal anda."
 
 #: ../src/connection-editor/page-mobile.c:679
 msgid "My provider uses _GSM-based technology (i.e. GPRS, EDGE, UMTS, HSDPA)"
 msgstr ""
-"Hornitzaileak _GSMen oinarritutako teknologia darabil (adib. GPRS, EDGE, "
-"UMTS, HSDPA)"
+"Pembekal saya menggunakan teknologi berasaskan _GSM-(iaitu GPRS, EDGE, UMTS, "
+"HSDPA)"
 
 #: ../src/connection-editor/page-mobile.c:686
 msgid "My provider uses C_DMA-based technology (i.e. 1xRTT, EVDO)"
 msgstr ""
-"Hornitzaileak C_DMAn oinarritutako teknologia darabil (adib. 1xRTT, EVDO)"
+"Pembekal saya menggunakan teknologi berasaskan C_DMA (iaitu 1xRTT, EVDO)"
 
 #: ../src/connection-editor/page-ppp.c:134
 msgid "EAP"
@@ -1709,7 +1712,6 @@ msgid "CHAP"
 msgstr "CHAP"
 
 #: ../src/connection-editor/page-ppp.c:137
-#: ../src/wireless-security/eap-method-fast.c:277
 #: ../src/wireless-security/eap-method-peap.c:246
 #: ../src/wireless-security/eap-method-ttls.c:263
 msgid "MSCHAPv2"
@@ -1723,388 +1725,383 @@ msgstr "MSCHAP"
 #. Translators: "none" refers to authentication methods
 #: ../src/connection-editor/page-ppp.c:141
 msgid "none"
-msgstr "bat ere ez"
+msgstr "tiada"
 
 #: ../src/connection-editor/page-ppp.c:201
 #, c-format
 msgid "Editing PPP authentication methods for %s"
-msgstr "'%s'(r)en PPP autentifikazio metodoak editatzea"
+msgstr "Menyunting kaedah pengesahan PPP untuk %s"
 
-#: ../src/connection-editor/page-ppp.c:282
+#: ../src/connection-editor/page-ppp.c:283
 msgid "PPP Settings"
-msgstr "PPP ezarpenak"
+msgstr "Tetapan PPP"
 
-#: ../src/connection-editor/page-ppp.c:284
+#: ../src/connection-editor/page-ppp.c:285
 msgid "Could not load PPP user interface."
-msgstr "Ezin izan da PPPrentzako erabiltzailearen interfazea kargatu."
+msgstr "Tidak dapat memuatkan antaramuka pengguna PPP."
 
 #: ../src/connection-editor/page-vpn.c:109
 #: ../src/connection-editor/nm-connection-editor.ui.h:8
-#: ../src/connection-editor/nm-connection-list.c:1515
+#: ../src/connection-editor/nm-connection-list.c:1478
 msgid "VPN"
 msgstr "VPN"
 
 #: ../src/connection-editor/page-vpn.c:111
 msgid "Could not load VPN user interface."
-msgstr "Ezin izan da VPNren interfazea kargatu."
+msgstr "Tidak dapat memuatkan antaramuka pengguna IPv4."
 
 #: ../src/connection-editor/page-vpn.c:126
 #, c-format
 msgid "Could not find VPN plugin service for '%s'."
-msgstr "Ezin izan da VPN pluginaren zerbitzurik aurkitu '%s'(r)entzako."
+msgstr "Tidak dapat jumpa pemalam servis VPN untuk '%s'."
 
 #: ../src/connection-editor/page-vpn.c:201
-#: ../src/connection-editor/nm-connection-list.c:900
+#: ../src/connection-editor/nm-connection-list.c:884
 #, c-format
 msgid "VPN connection %d"
-msgstr "VPN %d. konexioa"
+msgstr "Sambungan VPN %d"
 
-#: ../src/connection-editor/page-wired.c:89
-#: ../src/connection-editor/page-wireless.c:94
+#: ../src/connection-editor/page-wired.c:88
+#: ../src/connection-editor/page-wireless.c:93
 msgid ""
 "This option locks this connection to the network device specified by its "
 "permanent MAC address entered here.  Example: 00:11:22:33:44:55"
 msgstr ""
-"Aukera honek sareko gailuaren konexioa blokeatzen du hemen sartutako bere "
-"betirako MAC helbideak zehaztuta. Adibidez: 00:11:22:33:44:55"
+"Pilihan ini mengunci ini sambungan ke peranti rangkaian yang dinyatakan oleh "
+"alamat MAC tetap masuk di sini. Contoh: 00:11:22:33:44:55"
 
-#: ../src/connection-editor/page-wired.c:272
+#: ../src/connection-editor/page-wired.c:267
 #: ../src/connection-editor/nm-connection-editor.ui.h:9
-#: ../src/connection-editor/nm-connection-list.c:1503
+#: ../src/connection-editor/nm-connection-list.c:1466
 msgid "Wired"
-msgstr "Hariduna"
+msgstr "Berwayar"
 
-#: ../src/connection-editor/page-wired.c:274
+#: ../src/connection-editor/page-wired.c:269
 msgid "Could not load wired user interface."
-msgstr "Ezin izan da kablearentzako erabiltzailearen interfazea kargatu."
+msgstr "Tidak dapat memuatkan antaramuka pengguna sambungan berwayar."
 
-#: ../src/connection-editor/page-wired.c:449
+#: ../src/connection-editor/page-wired.c:444
 #, c-format
 msgid "Wired connection %d"
-msgstr "Haridun %d. konexioa"
+msgstr "Sambungan berwayar %d"
 
 #: ../src/connection-editor/page-wired-security.c:116
 msgid "802.1x Security"
-msgstr "802.1x segurtasuna"
+msgstr "Keselamatan 802.1x"
 
 #: ../src/connection-editor/page-wired-security.c:118
 msgid "Could not load Wired Security security user interface."
-msgstr "Ezin izan da WiFiaren segurtasunerako interfazea kargatu."
+msgstr "Tidak dapat memuatkan sekuriti antaramuka Sekuriti Rangkaian Berwayar."
 
 #: ../src/connection-editor/page-wired-security.c:136
-msgid "Use 802.1_X security for this connection"
-msgstr "Erabili 802.1_X segurtasuna konexio honetan"
+msgid "Use 802.1X security for this connection"
+msgstr "Guna sekuriti 802.1X untuk sambungan ini"
 
-#: ../src/connection-editor/page-wireless.c:171
-#: ../src/connection-editor/page-wireless.c:175
-#: ../src/connection-editor/page-wireless.c:196
+#: ../src/connection-editor/page-wireless.c:166
+#: ../src/connection-editor/page-wireless.c:170
+#: ../src/connection-editor/page-wireless.c:191
 #, c-format
 msgid "default"
-msgstr "lehenetsia"
+msgstr "piawai"
 
-#: ../src/connection-editor/page-wireless.c:200
+#: ../src/connection-editor/page-wireless.c:195
 #, c-format
 msgid "%u (%u MHz)"
 msgstr "%u (%u MHz)"
 
-#: ../src/connection-editor/page-wireless.c:457
+#: ../src/connection-editor/page-wireless.c:452
 #: ../src/connection-editor/nm-connection-editor.ui.h:10
-#: ../src/connection-editor/nm-connection-list.c:1507
+#: ../src/connection-editor/nm-connection-list.c:1470
 msgid "Wireless"
-msgstr "Haririk gabekoa"
+msgstr "Wayarles"
 
-#: ../src/connection-editor/page-wireless.c:459
+#: ../src/connection-editor/page-wireless.c:454
 msgid "Could not load WiFi user interface."
-msgstr "Ezin izan da WiFiarentzako erabiltzailearen interfazea kargatu."
+msgstr "Tidak dapat memuatkan antaramuka pengguna WiFi."
 
-#: ../src/connection-editor/page-wireless.c:663
+#: ../src/connection-editor/page-wireless.c:658
 #, c-format
 msgid "Wireless connection %d"
-msgstr "Haririk gabeko %d. konexioa"
+msgstr "Sambungan wayarles %d"
 
 #: ../src/connection-editor/page-wireless-security.c:263
 #: ../src/libnm-gtk/nm-wireless-dialog.c:923
 msgid "WEP 40/128-bit Key (Hex or ASCII)"
-msgstr "WEP 40/128 bit-eko gakoa (hamaseitarra edo ASCII)"
+msgstr "Kunci WEP 40/128-bit (Hex atau ASCII)"
 
 #: ../src/connection-editor/page-wireless-security.c:272
 #: ../src/libnm-gtk/nm-wireless-dialog.c:932
 msgid "WEP 128-bit Passphrase"
-msgstr "WEP 128 bit-eko pasaesaldia"
+msgstr "Frasalaluan WEP 128-bit"
 
 #: ../src/connection-editor/page-wireless-security.c:298
 #: ../src/libnm-gtk/nm-wireless-dialog.c:962
 msgid "Dynamic WEP (802.1x)"
-msgstr "WEP dinamikoa (802.1x)"
+msgstr "WEP (802.1x) Dinamik"
 
 #: ../src/connection-editor/page-wireless-security.c:312
 #: ../src/libnm-gtk/nm-wireless-dialog.c:976
 msgid "WPA & WPA2 Personal"
-msgstr "WPA eta WPA2 pertsonala"
+msgstr "WPA & WPA2 Peribadi"
 
 #: ../src/connection-editor/page-wireless-security.c:326
 #: ../src/libnm-gtk/nm-wireless-dialog.c:990
 msgid "WPA & WPA2 Enterprise"
-msgstr "WPA eta WPA2 enpresa"
+msgstr "WPA & WPA2 Perusahaan"
 
 #: ../src/connection-editor/page-wireless-security.c:360
 msgid "Could not load WiFi security user interface; missing WiFi setting."
 msgstr ""
-"Ezin izan da WiFIaren segurtasunerako erabiltzailearen interfazea kargatu. "
-"Haririk gabekoaren ezarpenak falta dira"
+"Tidak dapat memuatkan antaramuka keselamatan pengguna WiFi; tetapan WiFi "
+"hilang."
 
 #: ../src/connection-editor/page-wireless-security.c:370
 msgid "Wireless Security"
-msgstr "Haririk gabearen segurtasuna:"
+msgstr "Sekuriti Wayarles"
 
 #: ../src/connection-editor/page-wireless-security.c:372
 msgid "Could not load WiFi security user interface."
-msgstr ""
-"Ezin izan da WiFiaren segurtasunerako erabiltzailearen interfazea kargatu."
+msgstr "Tidak dapat memuatkan antaramuka pengguna keselamatan WiFi."
 
 #: ../src/connection-editor/nm-connection-editor.c:101
 #, c-format
 msgid "Editing %s"
-msgstr "%s editatzen"
+msgstr "Menyunting %s"
 
 #: ../src/connection-editor/nm-connection-editor.c:105
 msgid "Editing un-named connection"
-msgstr "Izenik gabeko konexioa editatzea"
+msgstr "Menyunting sambungan yang tidak dinamakan"
 
 #: ../src/connection-editor/nm-connection-editor.c:288
 msgid ""
 "The connection editor could not find some required resources (the .ui file "
 "was not found)."
 msgstr ""
-"Konexioen editoreak ezin izan du beharrezko baliabide batzuk aurkitu (.ui "
-"fitxategia ez da aurkitu)."
+"Editor sambungan tidak dapat mencari beberapa sumber yang diperlukan (fail. "
+"Ui adalah tidak dijumpai)."
 
 #: ../src/connection-editor/nm-connection-editor.c:391
 msgid "Error creating connection editor dialog."
-msgstr "Errorea konexioaren editorearen elkarrizketa-koadroa sortzean."
+msgstr "Ralat mencipta dialog penyunting sambungan."
 
 #: ../src/connection-editor/nm-connection-editor.c:403
 msgid "_Save"
-msgstr "_Gorde"
+msgstr "_Simpan"
 
 #: ../src/connection-editor/nm-connection-editor.c:404
 msgid "Save any changes made to this connection."
-msgstr "Gorde konexio honetan egindako edozer aldaketa."
+msgstr "Simpan sebarang perubahan yang telah dibuat pada sambungan ini."
 
 #: ../src/connection-editor/nm-connection-editor.c:405
 msgid "_Save..."
-msgstr "_Gorde..."
+msgstr "_Simpan..."
 
 #: ../src/connection-editor/nm-connection-editor.c:406
 msgid "Authenticate to save this connection for all users of this machine."
 msgstr ""
-"Autentifikatu konexio hau gordetzeko ordenagailuko erabiltzaile guztientzako."
+"Sahkan untuk menyimpan sambungan ini bagi semua pengguna pada komputer ini."
 
 #: ../src/connection-editor/nm-connection-editor.ui.h:1
 msgid "Available to all users"
-msgstr "Erabiltzaile guztientzako erabilgarri"
+msgstr "Tersedia untuk semua pengguna"
 
 #: ../src/connection-editor/nm-connection-editor.ui.h:2
 msgid "Connect _automatically"
-msgstr "Konektatu _automatikoki"
+msgstr "Sambung secara _automatik"
 
 #: ../src/connection-editor/nm-connection-editor.ui.h:3
 msgid "Connection _name:"
-msgstr "Konexioaren _izena:"
+msgstr "Nama _sambungan:"
 
 #: ../src/connection-editor/nm-connection-editor.ui.h:5
 msgid "E_xport"
-msgstr "E_sportatu"
+msgstr "E_ksport"
 
 #: ../src/connection-editor/nm-connection-editor.ui.h:11
 msgid "_Import"
-msgstr "_Inportatu"
+msgstr "_Import"
 
 #: ../src/connection-editor/nm-connection-list.c:216
 msgid "never"
-msgstr "inoiz ez"
+msgstr "jangan sesekali"
 
 #: ../src/connection-editor/nm-connection-list.c:227
 #: ../src/connection-editor/nm-connection-list.c:238
 msgid "now"
-msgstr "orain"
+msgstr "sekarang"
 
 #. less than an hour ago
 #: ../src/connection-editor/nm-connection-list.c:245
 #, c-format
 msgid "%d minute ago"
 msgid_plural "%d minutes ago"
-msgstr[0] "duela minutu %d"
-msgstr[1] "duela %d minutu"
+msgstr[0] "%d minit yang lalu"
 
 #: ../src/connection-editor/nm-connection-list.c:249
 #, c-format
 msgid "%d hour ago"
 msgid_plural "%d hours ago"
-msgstr[0] "duela ordu %d"
-msgstr[1] "duela %d ordu"
+msgstr[0] "%d jam yang lalu"
 
 #: ../src/connection-editor/nm-connection-list.c:261
 #, c-format
 msgid "%d day ago"
 msgid_plural "%d days ago"
-msgstr[0] "duela egun %d"
-msgstr[1] "duela %d egun"
+msgstr[0] "%d hari yang lalu"
 
 #: ../src/connection-editor/nm-connection-list.c:267
 #, c-format
 msgid "%d month ago"
 msgid_plural "%d months ago"
-msgstr[0] "duela hilabete %d"
-msgstr[1] "duela %d hilabete"
+msgstr[0] "%d bulan yang lalu"
 
 #: ../src/connection-editor/nm-connection-list.c:271
 #, c-format
 msgid "%d year ago"
 msgid_plural "%d years ago"
-msgstr[0] "duela urte %d"
-msgstr[1] "duela %d urte"
+msgstr[0] "%d tahun yang lalu"
 
 #: ../src/connection-editor/nm-connection-list.c:486
 msgid "Connection add failed"
-msgstr "Konexioa gehitzean huts egin du"
+msgstr "Gagal menambah sambungan"
 
 #: ../src/connection-editor/nm-connection-list.c:515
 msgid "Error saving connection"
-msgstr "Errorea konexioaren gordetzean"
+msgstr "Ralat menyimpan sambungan"
 
 #: ../src/connection-editor/nm-connection-list.c:516
 #, c-format
 msgid "The property '%s' / '%s' is invalid: %d"
-msgstr "'%s' / '%s' propietatea baliogabea da: %d"
+msgstr "Nilai '%s' / '%s' tidak sah: %d"
 
 #: ../src/connection-editor/nm-connection-list.c:523
-#: ../src/connection-editor/nm-connection-list.c:662
+#: ../src/connection-editor/nm-connection-list.c:642
 msgid "An unknown error occurred."
-msgstr "Errore ezezagun bat gertatu da."
+msgstr "Ralat tidak dikenalpasti telah berlaku."
 
 #: ../src/connection-editor/nm-connection-list.c:528
-#: ../src/connection-editor/nm-connection-list.c:702
+#: ../src/connection-editor/nm-connection-list.c:686
 msgid "Error initializing editor"
-msgstr "Errorea editorea hasieratzean"
+msgstr "Ralat memulakan penyunting"
 
 #: ../src/connection-editor/nm-connection-list.c:546
-#: ../src/connection-editor/nm-connection-list.c:719
-#: ../src/connection-editor/nm-connection-list.c:886
+#: ../src/connection-editor/nm-connection-list.c:703
+#: ../src/connection-editor/nm-connection-list.c:870
 msgid ""
 "The connection editor dialog could not be initialized due to an unknown "
 "error."
 msgstr ""
-"Ezin izan da konexioaren editorearen elkarrizketa-koadroa hasieratu errore "
-"ezezagun bat gertatu delako."
+"Dialog penyunting sambungan tidak dapat dimulakan kerana ralat yang tidak "
+"diketahui."
 
 #: ../src/connection-editor/nm-connection-list.c:557
 msgid "Could not create new connection"
-msgstr "Ezin izan da konexio berria sortu"
+msgstr "Tidak dapat mencipta sambungan baharu"
 
 #: ../src/connection-editor/nm-connection-list.c:569
 msgid "Could not edit new connection"
-msgstr "Ezin izan da konexio berria editatu"
+msgstr "Tidak dapat menyunting rangkaian baharu"
 
-#: ../src/connection-editor/nm-connection-list.c:733
+#: ../src/connection-editor/nm-connection-list.c:717
 msgid "Could not edit connection"
-msgstr "Ezin izan da konexioa editatu"
+msgstr "Tidak dapat menyunting rangkaian"
 
-#: ../src/connection-editor/nm-connection-list.c:763
+#: ../src/connection-editor/nm-connection-list.c:747
 msgid "Connection delete failed"
-msgstr "Huts egin du konexioa ezabatzean"
+msgstr "Gagal memadam sambungan"
 
-#: ../src/connection-editor/nm-connection-list.c:795
+#: ../src/connection-editor/nm-connection-list.c:779
 #, c-format
 msgid "Are you sure you wish to delete the connection %s?"
-msgstr "Ziur zaude %s konexioa ezabatu nahi duzula?"
+msgstr "Anda pasti hendak membuang sambungan %s?"
 
-#: ../src/connection-editor/nm-connection-list.c:930
+#: ../src/connection-editor/nm-connection-list.c:914
 #: ../src/connection-editor/vpn-helpers.c:227
 msgid "Cannot import VPN connection"
-msgstr "Ezin da VPN konexioa inportatu"
+msgstr "Tidak dapat mengimport sambungan VPN"
 
-#: ../src/connection-editor/nm-connection-list.c:932
+#: ../src/connection-editor/nm-connection-list.c:916
 msgid ""
 "The VPN plugin failed to import the VPN connection correctly\n"
 "\n"
 "Error: no VPN service type."
 msgstr ""
-"VPN pluginak huts egin du VPN konexioa zuzen inportatzean\n"
+"Plugin VPN gagal untuk mengimport sambungan VPN betul \n"
 "\n"
-"Errorea: ez da VPN zerbitzu mota."
+"Ralat: tiada jenis perkhidmatan VPN."
 
-#: ../src/connection-editor/nm-connection-list.c:945
+#: ../src/connection-editor/nm-connection-list.c:929
 msgid "Could not edit imported connection"
-msgstr "Ezin izan da inportatutako konexioa editatu"
+msgstr "Tidak dapat menyunting sambungan yang diimport"
 
-#: ../src/connection-editor/nm-connection-list.c:1126
+#: ../src/connection-editor/nm-connection-list.c:1099
 msgid "Name"
-msgstr "Izena"
+msgstr "Nama"
 
-#: ../src/connection-editor/nm-connection-list.c:1138
+#: ../src/connection-editor/nm-connection-list.c:1111
 msgid "Last Used"
-msgstr "Erabilitako azkena"
+msgstr "Kali Terakhir Digunakan"
 
-#: ../src/connection-editor/nm-connection-list.c:1264
+#: ../src/connection-editor/nm-connection-list.c:1227
 msgid "No VPN plugin available. Please install one to enable this button."
-msgstr "Ez dago VPC plugin erabilgarririk. Instalatu bat botoi hau gaitzeko."
+msgstr ""
+"Tiada pemalam VPN tersedia. Sila pasang satu untuk membenarkan butang ini."
 
-#: ../src/connection-editor/nm-connection-list.c:1275
+#: ../src/connection-editor/nm-connection-list.c:1238
 msgid "_Edit"
-msgstr "_Editatu"
+msgstr "_Sunting"
 
-#: ../src/connection-editor/nm-connection-list.c:1276
+#: ../src/connection-editor/nm-connection-list.c:1239
 msgid "Edit the selected connection"
-msgstr "Editatu hautatutako konexioa"
+msgstr "Sunting sambungan dipilih"
 
-#: ../src/connection-editor/nm-connection-list.c:1277
+#: ../src/connection-editor/nm-connection-list.c:1240
 msgid "_Edit..."
-msgstr "_Editatu..."
+msgstr "_Sunting"
 
-#: ../src/connection-editor/nm-connection-list.c:1278
+#: ../src/connection-editor/nm-connection-list.c:1241
 msgid "Authenticate to edit the selected connection"
-msgstr "Autentifikatu hautatutako konexioa editatzeko"
+msgstr "Sahkan untuk menyunting sambungan dipilih"
 
-#: ../src/connection-editor/nm-connection-list.c:1293
+#: ../src/connection-editor/nm-connection-list.c:1256
 msgid "_Delete"
-msgstr "E_zabatu"
+msgstr "_Padam"
 
-#: ../src/connection-editor/nm-connection-list.c:1294
+#: ../src/connection-editor/nm-connection-list.c:1257
 msgid "Delete the selected connection"
-msgstr "Ezabatu hautatutako konexioa"
+msgstr "Padam sambungan yang dipilih"
 
-#: ../src/connection-editor/nm-connection-list.c:1295
+#: ../src/connection-editor/nm-connection-list.c:1258
 msgid "_Delete..."
-msgstr "E_zabatu..."
+msgstr "_Padam..."
 
-#: ../src/connection-editor/nm-connection-list.c:1296
+#: ../src/connection-editor/nm-connection-list.c:1259
 msgid "Authenticate to delete the selected connection"
-msgstr "Autentifikatu hautatutako konexioa ezabatzeko"
+msgstr "Sahkan untuk memadam sambungan dipilih"
 
-#: ../src/connection-editor/nm-connection-list.c:1575
+#: ../src/connection-editor/nm-connection-list.c:1538
 msgid "Error creating connection"
-msgstr "Errorea konexioa sortzean."
+msgstr "Ralat mencipta sambungan"
 
-#: ../src/connection-editor/nm-connection-list.c:1576
+#: ../src/connection-editor/nm-connection-list.c:1539
 #, c-format
 msgid "Don't know how to create '%s' connections"
-msgstr "Ez daki nola sortu '%s' konexioak"
+msgstr "Tidak tahu bagaimana mencipta sambungan-sambungan '%s'"
 
-#: ../src/connection-editor/nm-connection-list.c:1631
-#: ../src/connection-editor/nm-connection-list.c:1643
+#: ../src/connection-editor/nm-connection-list.c:1594
+#: ../src/connection-editor/nm-connection-list.c:1606
 msgid "Error editing connection"
-msgstr "Errorea konexioa editatzean"
+msgstr "Ralat semasa menyunting sambungan"
 
-#: ../src/connection-editor/nm-connection-list.c:1632
+#: ../src/connection-editor/nm-connection-list.c:1595
 #, c-format
 msgid "Don't know how to edit '%s' connections"
-msgstr "Ez daki nola editatu '%s' konexioak"
+msgstr "Tidak tahu bagaimana menyunting sambungan-sambungan '%s'"
 
-#: ../src/connection-editor/nm-connection-list.c:1644
+#: ../src/connection-editor/nm-connection-list.c:1607
 #, c-format
 msgid "Did not find a connection with UUID '%s'"
-msgstr "Ez da konexiorik aurkitu '%s' UUIDrekin"
+msgstr "Tidak menjumpai sambungan dengan UUID '%s'"
 
 #: ../src/connection-editor/vpn-helpers.c:229
 #, c-format
@@ -2114,32 +2111,34 @@ msgid ""
 "\n"
 "Error: %s."
 msgstr ""
-"Ezin izan da '%s' fitxategia irakurri, edo ez dauka VPN konexioaren "
-"informazio ezagunik.\n"
+"Fail '%s' tidak dapat dibaca atau tidak mengandungi maklumat VPN yang dapat "
+"dikenalpasti\n"
 "\n"
-"Errorea: %s."
+"Ralat: %s."
 
 #: ../src/connection-editor/vpn-helpers.c:262
 msgid "Select file to import"
-msgstr "Hautatu fitxategia inportatzeko"
+msgstr "Pilih fail untuk diimport"
 
 #: ../src/connection-editor/vpn-helpers.c:313
 #, c-format
 msgid "A file named \"%s\" already exists."
-msgstr "\"%s\" izeneko fitxategia badago lehendik ere."
+msgstr "Fail dengan nama \"%s\" sudah wujud."
 
 #: ../src/connection-editor/vpn-helpers.c:315
 msgid "_Replace"
-msgstr "_Ordeztu"
+msgstr "_Ganti"
 
 #: ../src/connection-editor/vpn-helpers.c:317
 #, c-format
 msgid "Do you want to replace %s with the VPN connection you are saving?"
-msgstr "Nahi duzu gordetzen ari zaren VPN konexioarekin '%s' ordeztea?"
+msgstr ""
+"Adakah anda ingin menggantikan %s dengan sambungan VPN yang anda hendak "
+"simpan?"
 
 #: ../src/connection-editor/vpn-helpers.c:353
 msgid "Cannot export VPN connection"
-msgstr "Ezin da VPN konexioa esportatu"
+msgstr "Tidak dapat mengeksport sambungan VPN"
 
 #: ../src/connection-editor/vpn-helpers.c:355
 #, c-format
@@ -2148,120 +2147,122 @@ msgid ""
 "\n"
 "Error: %s."
 msgstr ""
-"Ezin izan da '%s' VPN konexioa %s(e)ra esportatu.\n"
+"Sambungan VPN '%s' tidak dapat dieksport ke %s.\n"
 "\n"
-"Errorea: %s."
+"Ralat: %s."
 
 #: ../src/connection-editor/vpn-helpers.c:390
 msgid "Export VPN connection..."
-msgstr "Esportatu VPN konexioa..."
+msgstr "Eksport sambungan VPN..."
 
 #: ../src/gnome-bluetooth/bt-widget.c:220
 #, c-format
 msgid "Failed to create PAN connection: %s"
-msgstr "Huts egin du PAN konexioa sortzean: %s"
+msgstr "Gagal mencipta sambungan PAN: %s"
 
 #: ../src/gnome-bluetooth/bt-widget.c:225
 #: ../src/gnome-bluetooth/bt-widget.c:493
 msgid "Your phone is now ready to use!"
-msgstr "Telefonoa prest dago erabiltzeko."
+msgstr "Telefon anda sedia untuk digunakan!"
 
 #: ../src/gnome-bluetooth/bt-widget.c:249
 #, c-format
 msgid "%s Network"
-msgstr "%s sarea"
+msgstr "%s Rangkaian"
 
 #: ../src/gnome-bluetooth/bt-widget.c:375
 #, c-format
 msgid "Error: %s"
-msgstr "Errorea: %s"
+msgstr "Ralat: %s"
 
 #: ../src/gnome-bluetooth/bt-widget.c:488
 #, c-format
 msgid "Failed to create DUN connection: %s"
-msgstr "Huts egin du DUN konexioa sortzean: %s"
+msgstr "Gagal mencipta sambungan DUN: %s"
 
 #: ../src/gnome-bluetooth/bt-widget.c:511
 msgid "Mobile wizard was canceled"
-msgstr "Mugikorraren morroia bertan behera utzi da"
+msgstr "Bestari Mudahalih dibatalkan"
 
 #: ../src/gnome-bluetooth/bt-widget.c:520
 msgid "Unknown phone device type (not GSM or CDMA)"
-msgstr "Telefono gailu mota ezezaguna (ez da GSM ez CDMA)"
+msgstr "Jenis peranti telefon tidak diketahui (bukan GSM atau CDMA)"
 
 #: ../src/gnome-bluetooth/bt-widget.c:714
 #: ../src/gnome-bluetooth/bt-widget.c:720
 msgid "failed to connect to the phone."
-msgstr "huts egin du telefonoarekin konektatzean."
+msgstr "gagal menyambung ke telefon."
 
 #: ../src/gnome-bluetooth/bt-widget.c:753
 msgid "unexpectedly disconnected from the phone."
-msgstr "ustekabeki deskonektatua da telefonotik."
+msgstr "terputus dari telefon tanpa diduga."
 
 #: ../src/gnome-bluetooth/bt-widget.c:762
 msgid "timed out detecting phone details."
-msgstr "denbora-muga iraungituta telefonoaren xehetasunak detektatzean."
+msgstr "tamat masa mengesan perincian telefon."
 
 #: ../src/gnome-bluetooth/bt-widget.c:774
 msgid "Detecting phone configuration..."
-msgstr "Telefonoaren konfigurazioa detektatzen..."
+msgstr "Mengesan konfigurasi telefon..."
 
 #: ../src/gnome-bluetooth/bt-widget.c:840
 msgid "could not find the Bluetooth device."
-msgstr "ezin izan da Bluetooth gailua aurkitu."
+msgstr "tidak dapat mencari peranti Bluetooth."
 
 #: ../src/gnome-bluetooth/bt-widget.c:980
 msgid ""
 "The default Bluetooth adapter must be enabled before setting up a Dial-Up-"
 "Networking connection."
 msgstr ""
-"Bluetooth moldagailu lehenetsia gaitu behar da sareko deia konexioa "
-"konfiguratu aurretik."
+"Adapter lalai Bluetooth mestilah digiatkan sebelum membuat tetapan sambungan "
+"rangkaian Dial-Up."
 
 #: ../src/gnome-bluetooth/bt-widget.c:1012
 #, c-format
 msgid "Bluetooth configuration not possible (failed to connect to D-Bus: %s)."
 msgstr ""
-"Ezin da Bluetooth konfiguratu (huts egin du 'D-Bus'-ekin konektatzean: %s)."
+"Kongfigurasi Bluetooth tidak boleh (gagal untuk sambung kepada D-Bus: %s)."
 
 #: ../src/gnome-bluetooth/bt-widget.c:1022
 msgid "Bluetooth configuration not possible (failed to create D-Bus proxy)."
 msgstr ""
-"Ezin da Bluetooth konfiguratu (huts egin du 'D-Bus'-aren proxya sortzean)."
+"Konfigurasi Bluetooth tidak mungkin (gagal untuk mencipta proksi D-Bus)."
 
 #: ../src/gnome-bluetooth/bt-widget.c:1031
 #, c-format
 msgid ""
 "Bluetooth configuration not possible (error finding NetworkManager: %s)."
-msgstr "Ezin da Bluetooth konfiguratu (errorea NetworkManager bilatzean: %s)."
+msgstr "Kongfigurasi Bluetooth tidak boleh (ralat mencari NetworkManager: %s)."
 
 #: ../src/gnome-bluetooth/bt-widget.c:1098
 msgid "Use your mobile phone as a network device (PAN/NAP)"
-msgstr "Erabili mugikorra sareko gailu gisa (PAN/NAP)"
+msgstr "Guna telefon mudahalih anda sebagai peranti rangkaian (PAN/NAP)"
 
 #: ../src/gnome-bluetooth/bt-widget.c:1107
 msgid "Access the Internet using your mobile phone (DUN)"
-msgstr "Sarbidetu internetera telefono mugikorra erabiliz (DUN)"
+msgstr "Akses Internet menggunakan telefon mudah alih anda (DUN)"
 
 #: ../src/libnm-gtk/nm-mobile-wizard.c:198
 msgid ""
 "Your mobile broadband connection is configured with the following settings:"
-msgstr "Bandazabal mugikorraren konexioa honako ezarpenekin konfiguratu da:"
+msgstr ""
+"Sambungan jalurlebar mudahalih anda dikonfigurasi dengan tetapan-tetapan "
+"berikut:"
 
 #. Device
 #: ../src/libnm-gtk/nm-mobile-wizard.c:205
 msgid "Your Device:"
-msgstr "Gailua:"
+msgstr "Peranti Anda:"
 
 #. Provider
 #: ../src/libnm-gtk/nm-mobile-wizard.c:216
 msgid "Your Provider:"
-msgstr "Hornitzailea:"
+msgstr "Pengendali Anda:"
 
 #. Plan and APN
 #: ../src/libnm-gtk/nm-mobile-wizard.c:227
 msgid "Your Plan:"
-msgstr "Plana:"
+msgstr "Plan Anda:"
 
 #: ../src/libnm-gtk/nm-mobile-wizard.c:252
 msgid ""
@@ -2271,27 +2272,27 @@ msgid ""
 "connection settings, choose \"Network Connections\" from the System >> "
 "Preferences menu."
 msgstr ""
-"Hautatutako ezarpenekin banda-zabal mugikorraren hornitzailearekin konexioa "
-"egin daiteke. Konexioak huts egiten badu, edo ezin baduzu sareko "
-"baliabideetara sarbidetu, begiratu itzazu ezarpenak. Bandazabal mugikorreko "
-"konexioaren ezarpenak aldatzeko, aukeratu Sistema >> Hobespenak menuko "
-"\"Sareko konexioak\" elementua."
+"Sambungan kini akan dibuat kepada pembekal jalur lebar mudah alih anda "
+"menggunakan tetapan yang anda pilih. Jika sambungan gagal atau anda tidak "
+"boleh mengakses sumber-sumber rangkaian, periksa tetapan anda. Untuk "
+"mengubah suai tetapan sambungan jalur lebar mudah alih anda, pilih "
+"\"Sambungan Rangkaian \" daripada Sistem>> Pilihan menu."
 
 #: ../src/libnm-gtk/nm-mobile-wizard.c:264
 msgid "Confirm Mobile Broadband Settings"
-msgstr "Berretsi banda-zabal mugikorraren ezarpenak"
+msgstr "Sahkan Tetapan Jalurlebar Mudahalih"
 
 #: ../src/libnm-gtk/nm-mobile-wizard.c:325
 msgid "Unlisted"
-msgstr "Zerrendatu gabea"
+msgstr "Tidak tersenarai"
 
 #: ../src/libnm-gtk/nm-mobile-wizard.c:480
 msgid "_Select your plan:"
-msgstr "_Hautatu zure plana:"
+msgstr "_Pilih plan anda:"
 
 #: ../src/libnm-gtk/nm-mobile-wizard.c:504
 msgid "Selected plan _APN (Access Point Name):"
-msgstr "Hautatu _APL (sarbidetzeko puntuaren izena) plana:"
+msgstr "Memilih pelan _APN (Access Point Name):"
 
 #: ../src/libnm-gtk/nm-mobile-wizard.c:528
 msgid ""
@@ -2300,187 +2301,189 @@ msgid ""
 "\n"
 "If you are unsure of your plan please ask your provider for your plan's APN."
 msgstr ""
-"Abisua: okerreko plan bat hautatzeak zure banda-zabaleraren kontuaren "
-"fakturan arazoak eragin lezake, edo ezin konektatu izatea.\n"
+"Amaran: Memilih plan yang salah boleh menyebabkan masalah bil akaun jalur "
+"lebar atau menghalang sambungan .\n"
 "\n"
-"Ez bazaude ziur planari buruz, galdetu ezaiozu hornitzaileari planaren "
-"APLari buruz."
+"Jika anda tidak pasti sila tanya pembekal plan APN anda."
 
 #: ../src/libnm-gtk/nm-mobile-wizard.c:535
 msgid "Choose your Billing Plan"
-msgstr "Aukeratu prezioen plana"
+msgstr "Pilih Pelan Bil Anda"
 
 #: ../src/libnm-gtk/nm-mobile-wizard.c:583
 msgid "My plan is not listed..."
-msgstr "Nire plana ez dago zerrendatuta..."
+msgstr "Plan saya tidak disenaraikan..."
 
 #: ../src/libnm-gtk/nm-mobile-wizard.c:740
 msgid "Select your provider from a _list:"
-msgstr "Hautatu hornitzailea _zerrendatik:"
+msgstr "Pilih pembekal anda dari _senarai:"
 
 #: ../src/libnm-gtk/nm-mobile-wizard.c:753
 msgid "Provider"
-msgstr "Hornitzailea"
+msgstr "Pengendali"
 
 #: ../src/libnm-gtk/nm-mobile-wizard.c:778
 msgid "I can't find my provider and I wish to enter it _manually:"
-msgstr "Ezin dut hornitzailea aurkitu eta _eskuz sartzea nahiko nuke:"
+msgstr ""
+"Saya tidak menjumpai nama pembekal saya dan memilih untuk memasukkannya "
+"secara _manual:"
 
 #: ../src/libnm-gtk/nm-mobile-wizard.c:789
 msgid "Provider:"
-msgstr "Hornitzailea:"
+msgstr "Pengendali:"
 
 #: ../src/libnm-gtk/nm-mobile-wizard.c:813
 msgid "My provider uses GSM technology (GPRS, EDGE, UMTS, HSPA)"
-msgstr "Hornitzaileak GSM teknologia darabil (GPRS, EDGE, UMTS, HSPA)"
+msgstr "Pembekal saya menggunakan teknoloji GSM (GPRS, EDGE, UMTS, HSPA)"
 
 #: ../src/libnm-gtk/nm-mobile-wizard.c:819
 msgid "My provider uses CDMA technology (1xRTT, EVDO)"
-msgstr "Hornitzaileak CDMA teknologia darabil (1xRTT, EVDO)"
+msgstr "Pembekal saya menggunakan teknoloji CDMA (1xRTT, EVDO)"
 
 #: ../src/libnm-gtk/nm-mobile-wizard.c:830
 msgid "Choose your Provider"
-msgstr "Aukeratu hornitzailea"
+msgstr "Pilih pengendali anda"
 
-#: ../src/libnm-gtk/nm-mobile-wizard.c:1081
+#: ../src/libnm-gtk/nm-mobile-wizard.c:1080
 msgid "Country or Region List:"
-msgstr "Herrialde edo eskualdearen zerrenda:"
+msgstr "Senarai Negara atau Kawasan:"
 
-#: ../src/libnm-gtk/nm-mobile-wizard.c:1093
+#: ../src/libnm-gtk/nm-mobile-wizard.c:1092
 msgid "Country or region"
-msgstr "Herrialde edo eskualdea"
+msgstr "Negara atau kawasan"
 
-#: ../src/libnm-gtk/nm-mobile-wizard.c:1100
+#: ../src/libnm-gtk/nm-mobile-wizard.c:1099
 msgid "My country is not listed"
-msgstr "Nire herrialdea ez dago zerrendatuta"
+msgstr "Negara saya tidak tersenarai"
 
-#: ../src/libnm-gtk/nm-mobile-wizard.c:1146
+#: ../src/libnm-gtk/nm-mobile-wizard.c:1145
 msgid "Choose your Provider's Country or Region"
-msgstr "Aukeratu hornitzailearen herrialde edo eskualdea"
+msgstr "Plih Negara Pembekal anda atau Kawasan"
 
-#: ../src/libnm-gtk/nm-mobile-wizard.c:1200
+#: ../src/libnm-gtk/nm-mobile-wizard.c:1199
 msgid "Installed GSM device"
-msgstr "Instalatutako GSM gailua"
+msgstr "Terpasang peranti GSM"
 
-#: ../src/libnm-gtk/nm-mobile-wizard.c:1203
+#: ../src/libnm-gtk/nm-mobile-wizard.c:1202
 msgid "Installed CDMA device"
-msgstr "Instalatutako CDMA gailua"
+msgstr "Terpasang peranti CDMA"
 
-#: ../src/libnm-gtk/nm-mobile-wizard.c:1375
+#: ../src/libnm-gtk/nm-mobile-wizard.c:1374
 msgid ""
 "This assistant helps you easily set up a mobile broadband connection to a "
 "cellular (3G) network."
 msgstr ""
-"Morroi honek banda-zabal mugikorraren konexioa mugikorren sarera (3G) "
-"konfiguratzen lagunduko dizu."
+"Pembantu ini membantu anda untuk menetapkan sambungan broadban mudah alih ke "
+"rangkaian selular (3G)."
 
-#: ../src/libnm-gtk/nm-mobile-wizard.c:1380
+#: ../src/libnm-gtk/nm-mobile-wizard.c:1379
 msgid "You will need the following information:"
-msgstr "Honako informazioa beharko duzu:"
+msgstr "Anda akan memerlukan maklumat berikut:"
 
-#: ../src/libnm-gtk/nm-mobile-wizard.c:1395
+#: ../src/libnm-gtk/nm-mobile-wizard.c:1394
 msgid "Your broadband provider's name"
-msgstr "Bandazabalaren hornitzailearen izena"
+msgstr "Nama pembekal jalurlebar anda"
 
-#: ../src/libnm-gtk/nm-mobile-wizard.c:1401
+#: ../src/libnm-gtk/nm-mobile-wizard.c:1400
 msgid "Your broadband billing plan name"
-msgstr "Bandazabaleko prezioen planaren izena"
+msgstr "Nama pelan bil jalurlebar anda"
 
-#: ../src/libnm-gtk/nm-mobile-wizard.c:1407
+#: ../src/libnm-gtk/nm-mobile-wizard.c:1406
 msgid "(in some cases) Your broadband billing plan APN (Access Point Name)"
-msgstr "(zenbait kasutan) banda-zabalaren APN prezioen plana"
+msgstr ""
+"(dalam sesetengah kes) Pelan bil APN (Access Point Name) jalurlebar anda"
 
-#: ../src/libnm-gtk/nm-mobile-wizard.c:1434
+#: ../src/libnm-gtk/nm-mobile-wizard.c:1433
 msgid "Create a connection for _this mobile broadband device:"
-msgstr "Sortu konexio bat banda-zabal mugikor gailu _honentzako:"
+msgstr "Cipta satu sambungan untuk peranti jalurlebar mudah alih _ini:"
 
-#: ../src/libnm-gtk/nm-mobile-wizard.c:1449
+#: ../src/libnm-gtk/nm-mobile-wizard.c:1448
 msgid "Any device"
-msgstr "Edozein gailu"
+msgstr "Mana-mana peranti"
 
-#: ../src/libnm-gtk/nm-mobile-wizard.c:1462
+#: ../src/libnm-gtk/nm-mobile-wizard.c:1461
 msgid "Set up a Mobile Broadband Connection"
-msgstr "Konfiguratu banda-zabal mugikorraren konexioa"
+msgstr "Tetapkan satu Sambungan Jalurlebar"
 
-#: ../src/libnm-gtk/nm-mobile-wizard.c:1626
+#: ../src/libnm-gtk/nm-mobile-wizard.c:1625
 msgid "New Mobile Broadband Connection"
-msgstr "Bandazabal mugikorraren konexio berria"
+msgstr "Sambungan Baharu Jalurlebar Mudahalih"
 
 #: ../src/libnm-gtk/nm-wireless-dialog.c:457
 msgid "New..."
-msgstr "Berria..."
+msgstr "Baru..."
 
 #: ../src/libnm-gtk/nm-wireless-dialog.c:1077
 msgid "C_reate"
-msgstr "_Sortu"
+msgstr "C_ipta"
 
 #: ../src/libnm-gtk/nm-wireless-dialog.c:1161
 #, c-format
 msgid ""
-"Passwords or encryption keys are required to access the wireless network "
-"'%s'."
+"Passwords or encryption keys are required to access the wireless network '%"
+"s'."
 msgstr ""
-"Pasahitzak edo enkriptatze-gakoak behar dira haririk gabeko '%s' sarera "
-"sarbidetzeko."
+"Kata laluan atau kunci penyulitan diperlukan untuk mengakses rangkaian tanpa "
+"wayar '% s'."
 
 #: ../src/libnm-gtk/nm-wireless-dialog.c:1163
 msgid "Wireless Network Authentication Required"
-msgstr "Haririk gabeko sarearen autentifikazio beharrezkoa"
+msgstr "Pengesahan Rangkaian Wayarles Diperlukan"
 
 #: ../src/libnm-gtk/nm-wireless-dialog.c:1165
 msgid "Authentication required by wireless network"
-msgstr "Haririk gabeko sareak autentifikazioa eskatzen du"
+msgstr "Pengesahan diperlukan oleh rangkaian wayarles"
 
 #: ../src/libnm-gtk/nm-wireless-dialog.c:1170
 msgid "Create New Wireless Network"
-msgstr "Sortu haririk gabeko sare berria"
+msgstr "Cipta Sambungan Wayarles Baharu"
 
 #: ../src/libnm-gtk/nm-wireless-dialog.c:1172
 msgid "New wireless network"
-msgstr "Haririk gabeko sare berria"
+msgstr "Rangkaian wayarles baharu"
 
 #: ../src/libnm-gtk/nm-wireless-dialog.c:1173
 msgid "Enter a name for the wireless network you wish to create."
-msgstr "Sartu haririk gabeko sarearen izena sortzeko."
+msgstr "Masukkan nama untuk rangkaian wayarles yang anda mahu buat."
 
 #: ../src/libnm-gtk/nm-wireless-dialog.c:1175
 msgid "Connect to Hidden Wireless Network"
-msgstr "Konektatu ezkutuko haririk gabeko sarera"
+msgstr "Sambung ke Rangkaian Wayarles Tersembunyi"
 
 #: ../src/libnm-gtk/nm-wireless-dialog.c:1177
 msgid "Hidden wireless network"
-msgstr "Ezkutuko haririk gabeko sarea"
+msgstr "Rangkaian wayarles tersembunyi"
 
 #: ../src/libnm-gtk/nm-wireless-dialog.c:1178
 msgid ""
 "Enter the name and security details of the hidden wireless network you wish "
 "to connect to."
 msgstr ""
-"Sartu konektatzea nahi duzun ezkutuko haririk gabeko sarearen izena eta "
-"segurtasuneko xehetasunak."
+"Masukkan nama dan perincian keselamatan rangkaian tanpa wayar yang "
+"tersembunyi yang anda ingin sambungkan ke."
 
 #: ../src/libnm-gtk/wifi.ui.h:2
 msgid "Co_nnection:"
-msgstr "_Konexioa:"
+msgstr "S_ambungan:"
 
 #: ../src/libnm-gtk/wifi.ui.h:3
 msgid "Wireless _adapter:"
-msgstr "Haririk gabeko _moldagailua:"
+msgstr "Penyesuai w_ayarles:"
 
 #: ../src/libnm-gtk/wifi.ui.h:5
 msgid "_Wireless security:"
-msgstr "_Haririk gabearen segurtasuna:"
+msgstr "Sekuriti _wayarles"
 
 #: ../src/main.c:73
 msgid "Usage:"
-msgstr "Erabilera:"
+msgstr "Pengunaan:"
 
 #: ../src/main.c:75
 msgid ""
 "This program is a component of NetworkManager (http://projects.gnome.org/"
 "NetworkManager)."
 msgstr ""
-"Programa hau NetworkManager-ren osagai bat da (http://projects.gnome.org/"
+"Program ini adalah komponen NetworkManager (http://projects.gnome.org/"
 "NetworkManager)."
 
 #: ../src/main.c:76
@@ -2488,8 +2491,8 @@ msgid ""
 "It is not intended for command-line interaction but instead runs in the "
 "GNOME desktop environment."
 msgstr ""
-"Ez du komando-lerroan elkarreragiteko helbururik, baizik eta GNOME "
-"mahaigaineko ingurunean exekutatzea da bere helburua."
+"Ia tidak bertujuan untuk interaksi baris arahan, tetapi sebaliknya berjalan "
+"dalam persekitaran desktop GNOME."
 
 #: ../src/mb-menu-item.c:57
 msgid "EVDO"
@@ -2525,65 +2528,65 @@ msgstr "WiMAX"
 
 #: ../src/mb-menu-item.c:109
 msgid "not enabled"
-msgstr "ez dago gaituta"
+msgstr "tidak dihidupkan"
 
 #: ../src/mb-menu-item.c:115
 msgid "not registered"
-msgstr "erregistratu gabe"
+msgstr "tidak didaftarkan"
 
 #: ../src/mb-menu-item.c:133
 #, c-format
 msgid "Home network (%s)"
-msgstr "Etxeko sarea (%s)"
+msgstr "Rangkaian rumah (%s)"
 
 #: ../src/mb-menu-item.c:135
 #, c-format
 msgid "Home network"
-msgstr "Etxeko sarea"
+msgstr "Rangkaian rumah"
 
 #: ../src/mb-menu-item.c:143
 msgid "searching"
-msgstr "bilatzen"
+msgstr "mencari"
 
 #: ../src/mb-menu-item.c:146
 msgid "registration denied"
-msgstr "erregistratzea ukatuta"
+msgstr "pendaftaran dinafikan"
 
 #: ../src/mb-menu-item.c:151 ../src/mb-menu-item.c:157
 #, c-format
 msgid "%s (%s roaming)"
-msgstr "%s (%s ibiltaritza)"
+msgstr "%s (%s merantau)"
 
 #: ../src/mb-menu-item.c:153 ../src/mb-menu-item.c:159
 #, c-format
 msgid "%s (roaming)"
-msgstr "%s (ibiltaritza)"
+msgstr "%s (merantau)"
 
 #: ../src/mb-menu-item.c:162
 #, c-format
 msgid "Roaming network (%s)"
-msgstr "Ibiltaritza sarea (%s)"
+msgstr "Rangkaian perantaun (%s)"
 
 #: ../src/mb-menu-item.c:164
 #, c-format
 msgid "Roaming network"
-msgstr "Ibiltaritza sarea"
+msgstr "Rangkaian perantaun"
 
 #: ../src/utils/nmn-mobile-providers.c:531
 msgid "Default"
-msgstr "Lehenetsia"
+msgstr "Piawai"
 
 #: ../src/wired-dialog.c:91 ../src/wired-dialog.c:99
 msgid ""
 "The NetworkManager Applet could not find some required resources (the .ui "
 "file was not found)."
 msgstr ""
-"NetworkManager miniaplikazioak ezin izan du behar diren baliabide batzuk "
-"aurkitu (.ui fitxategia ez da aurkitu)."
+"Aplet NetworkManager tidak dapat mencari beberapa sumber-sumber yang "
+"diperlukan (fail .ui tidak dijumpai)."
 
 #: ../src/wireless-security/eap-method.c:279
 msgid "No Certificate Authority certificate chosen"
-msgstr "Ez da Ziurtagiri-Emailearen ziurtagirik aukeratu"
+msgstr "Tiada sijil Penguasa Sijil dipilih"
 
 #: ../src/wireless-security/eap-method.c:280
 msgid ""
@@ -2591,107 +2594,72 @@ msgid ""
 "to insecure, rogue wireless networks.  Would you like to choose a "
 "Certificate Authority certificate?"
 msgstr ""
-"Ziurtagiri-Emailearen (CA) ziurtagiria ez erabiltzeak konexio ez-seguru bat "
-"izatea eragin dezake, batiz bat haririk gabeko sare gaizkilea. Nahi duzu "
-"Ziurtagiri-Emailearen ziurtagiria aukeratu?"
+"Tidak menggunakan sijil Sijil Authority (CA) boleh menyebabkan sambungan ke "
+"rangkaian tidak selamat, Rangkaian penyangak tanpa wayar. Adakah anda ingin "
+"untuk memilih perakuan Lembaga Sijil?"
 
 #: ../src/wireless-security/eap-method.c:289
 msgid "Choose CA Certificate"
-msgstr "Aukeratu ZE ziurtagiria"
+msgstr "Pilih sijil CA"
 
 #: ../src/wireless-security/eap-method.c:648
 msgid "DER, PEM, or PKCS#12 private keys (*.der, *.pem, *.p12)"
-msgstr "DER, PEM, edo PKCS#12 gako pribatuak (*.der, *.pem, *.p12)"
+msgstr "Kekunci peribadi DER, PEM, atau PKCS#12 (*.der, *.pem, *.p12)"
 
 #: ../src/wireless-security/eap-method.c:651
 msgid "DER or PEM certificates (*.der, *.pem, *.crt, *.cer)"
-msgstr "DER edo PEM ziurtagiriak (*.der, *.pem, *.crt, *.cer)"
+msgstr "Sijil-sijil DER atau PEM (*.der, *.pem, *.crt, *.cer)"
 
-#: ../src/wireless-security/eap-method-fast.ui.h:2
-msgid "Allow automatic PAC pro_visioning"
-msgstr "Baimendu PAC automatikoa _aldi baterako"
+#: ../src/wireless-security/eap-method-peap.c:263
+#: ../src/wireless-security/wireless-security.c:372
+msgid "MD5"
+msgstr "MD5"
 
-#: ../src/wireless-security/eap-method-fast.ui.h:3
-#: ../src/wireless-security/eap-method-peap.ui.h:2
-#: ../src/wireless-security/eap-method-ttls.ui.h:2
-msgid "Anony_mous identity:"
-msgstr "Nortasun _anonimoa:"
-
-#: ../src/wireless-security/eap-method-fast.ui.h:4
-msgid "Anonymous"
-msgstr "Anonimoa"
-
-#: ../src/wireless-security/eap-method-fast.ui.h:5
-msgid "Authenticated"
-msgstr "Autentifikatuta"
-
-#: ../src/wireless-security/eap-method-fast.ui.h:6
-msgid "Both"
-msgstr "Biak"
-
-#: ../src/wireless-security/eap-method-fast.ui.h:7
-msgid "PAC _file:"
-msgstr "PAC _fitxategia:"
-
-#: ../src/wireless-security/eap-method-fast.ui.h:8
-#: ../src/wireless-security/eap-method-peap.ui.h:8
-#: ../src/wireless-security/eap-method-ttls.ui.h:4
-msgid "_Inner authentication:"
-msgstr "_Barneko autentifikazioa:"
-
-#: ../src/wireless-security/eap-method-fast.c:261
 #: ../src/wireless-security/eap-method-peap.c:280
 msgid "GTC"
 msgstr "GTC"
-
-#: ../src/wireless-security/eap-method-fast.c:399
-msgid "Choose a PAC file..."
-msgstr "Aukeratu PAC fitxategia..."
-
-#: ../src/wireless-security/eap-method-fast.c:406
-msgid "PAC files (*.pac)"
-msgstr "PAC fitxategiak (*.pac)"
-
-#: ../src/wireless-security/eap-method-fast.c:410
-msgid "All files"
-msgstr "Fitxategi guztiak"
-
-#: ../src/wireless-security/eap-method-peap.c:263
-#: ../src/wireless-security/wireless-security.c:373
-msgid "MD5"
-msgstr "MD5"
 
 #: ../src/wireless-security/eap-method-peap.c:350
 #: ../src/wireless-security/eap-method-tls.c:416
 #: ../src/wireless-security/eap-method-ttls.c:350
 msgid "Choose a Certificate Authority certificate..."
-msgstr "Aukeratu Ziurtagiri-Emailearen ziurtagiria..."
+msgstr "Pilih sijil Penguasa Sijil..."
+
+#: ../src/wireless-security/eap-method-peap.ui.h:2
+#: ../src/wireless-security/eap-method-ttls.ui.h:2
+msgid "Anony_mous identity:"
+msgstr "_Identiti tidak diketahui:"
 
 #: ../src/wireless-security/eap-method-peap.ui.h:4
 #: ../src/wireless-security/eap-method-tls.ui.h:1
 #: ../src/wireless-security/eap-method-ttls.ui.h:3
 msgid "C_A certificate:"
-msgstr "_ZE ziurtagiria:"
+msgstr "Sijil C_A"
 
 #: ../src/wireless-security/eap-method-peap.ui.h:5
-msgid "PEAP _version:"
-msgstr "PEAP _bertsioa:"
+#: ../src/wireless-security/eap-method-ttls.ui.h:4
+msgid "I_nner authentication:"
+msgstr "Pengesahan Dalaman:"
 
 #: ../src/wireless-security/eap-method-peap.ui.h:6
 msgid "Version 0"
-msgstr "0 bertsioa"
+msgstr "Versi 0"
 
 #: ../src/wireless-security/eap-method-peap.ui.h:7
 msgid "Version 1"
-msgstr "1 bertsioa"
+msgstr "Versi 1"
+
+#: ../src/wireless-security/eap-method-peap.ui.h:8
+msgid "_PEAP version:"
+msgstr "_PEAP versi:"
 
 #: ../src/wireless-security/eap-method-simple.ui.h:1
 msgid "As_k for this password every time"
-msgstr "Eskatu pasahitz hau aldiro"
+msgstr "_Tanya kata laluan ini setiap kali"
 
 #: ../src/wireless-security/eap-method-tls.c:246
 msgid "Unencrypted private keys are insecure"
-msgstr "Enkriptatu gabeko gako pribatuak ez dira seguruak"
+msgstr "Kekunci peribadi tidak disulitkan adalah tidak selamat"
 
 #: ../src/wireless-security/eap-method-tls.c:249
 msgid ""
@@ -2701,73 +2669,69 @@ msgid ""
 "\n"
 "(You can password-protect your private key with openssl)"
 msgstr ""
-"Hautatutako gako pribatua ez dirudi pasahitz batekin babestuta dagoenik. "
-"Honek zure segurtasun kredentzialak arriskuan jar ditzake. Hautatu "
-"pasahitzarekin babestutako gako pribatu bat.\n"
+"Kunci persendirian yang dipilih tidak muncul dilindungi oleh kata laluan. "
+"Ini boleh membenarkan data keselamatan anda akan terjejas. Sila pilih "
+"kekunci peribadi yang dilindungi kata laluan. \n"
 "\n"
-"(Zure gako pribatua pasahitz batekin babes dezakezu openssl-rekin)"
+"(Anda boleh kata laluan melindungi kunci persendirian anda dengan openssl)"
 
 #: ../src/wireless-security/eap-method-tls.c:410
 msgid "Choose your personal certificate..."
-msgstr "Aukeratu ziurtagiri pertsonala..."
+msgstr "Pilih sijil peribadi anda..."
 
 #: ../src/wireless-security/eap-method-tls.c:422
 msgid "Choose your private key..."
-msgstr "Aukeratu gako pribatua..."
+msgstr "Pilih kunci persendirian anda..."
 
 #: ../src/wireless-security/eap-method-tls.ui.h:2
 msgid "I_dentity:"
-msgstr "_Identitatea:"
+msgstr "I_dentiti:"
 
 #: ../src/wireless-security/eap-method-tls.ui.h:3
 msgid "Private _key:"
-msgstr "_Gako pribatua:"
+msgstr "_Kekunci peribadi"
 
 #: ../src/wireless-security/eap-method-tls.ui.h:5
 msgid "_Private key password:"
-msgstr "_Gako pribatuaren pasahitza:"
+msgstr "_Katalaluan Kunci Persendirian:"
 
 #: ../src/wireless-security/eap-method-tls.ui.h:6
 msgid "_User certificate:"
-msgstr "Erabiltzailearen _ziurtagiria:"
+msgstr "_Sijil pengesahan pengguna:"
 
 #: ../src/wireless-security/nag-user-dialog.ui.h:1
 msgid "Don't _warn me again"
-msgstr "_Ez abisatu berriro"
+msgstr "Jangan beri _amaran kepada saya lagi"
 
 #: ../src/wireless-security/nag-user-dialog.ui.h:2
 msgid "No"
-msgstr "Ez"
+msgstr "Tidak"
 
 #: ../src/wireless-security/nag-user-dialog.ui.h:3
 msgid "Yes"
-msgstr "Bai"
+msgstr "Ya"
 
-#: ../src/wireless-security/wireless-security.c:385
+#: ../src/wireless-security/wireless-security.c:384
 msgid "TLS"
 msgstr "TLS"
 
-#: ../src/wireless-security/wireless-security.c:409
-msgid "FAST"
-msgstr "Bizkorra"
-
-#: ../src/wireless-security/wireless-security.c:420
+#: ../src/wireless-security/wireless-security.c:408
 msgid "Tunneled TLS"
-msgstr "Tuneldun TLS"
+msgstr "Terowong TLS"
 
-#: ../src/wireless-security/wireless-security.c:431
+#: ../src/wireless-security/wireless-security.c:419
 msgid "Protected EAP (PEAP)"
-msgstr "Babestutako EAP (PEAP)"
+msgstr "EAP Terlindung (PEAP)"
 
 #: ../src/wireless-security/ws-dynamic-wep.ui.h:2
-#: ../src/wireless-security/ws-wep-key.ui.h:5
+#: ../src/wireless-security/ws-wep-key.ui.h:9
 #: ../src/wireless-security/ws-wpa-eap.ui.h:2
-msgid "Au_thentication:"
-msgstr "_Autentifikazioa:"
+msgid "_Authentication:"
+msgstr "_Pengesahan:"
 
 #: ../src/wireless-security/ws-wep-key.ui.h:1
 msgid "1 (Default)"
-msgstr "1 (lehenetsia)"
+msgstr "1 (Piawai)"
 
 #: ../src/wireless-security/ws-wep-key.ui.h:2
 msgid "2"
@@ -2781,176 +2745,52 @@ msgstr "3"
 msgid "4"
 msgstr "4"
 
-#: ../src/wireless-security/ws-wep-key.ui.h:6
+#: ../src/wireless-security/ws-wep-key.ui.h:5
 msgid "Open System"
-msgstr "Sistema irekia"
+msgstr "Sistem Terbuka"
+
+#: ../src/wireless-security/ws-wep-key.ui.h:6
+msgid "Shared Key"
+msgstr "Kunci Dikongsi"
 
 #: ../src/wireless-security/ws-wep-key.ui.h:7
-msgid "Shared Key"
-msgstr "Partekatutako gakoa"
+msgid "Sho_w key"
+msgstr "T_unjuk Kunci"
 
 #: ../src/wireless-security/ws-wep-key.ui.h:8
-msgid "Sho_w key"
-msgstr "E_rakutsi gakoa"
-
-#: ../src/wireless-security/ws-wep-key.ui.h:9
 msgid "WEP inde_x:"
-msgstr "WEP _indizea:"
+msgstr "Inde_x WEP:"
 
 #: ../src/wireless-security/ws-wep-key.ui.h:10
 msgid "_Key:"
-msgstr "_Gakoa:"
-
-#~ msgid "Click on this icon to connect to a wireless network"
-#~ msgstr "Egin klik ikono honetan haririk gabeko sare batera konektatzeko"
-
-#~ msgid "PI_N:"
-#~ msgstr "_PINa:"
-
-#~ msgid "MT_U:"
-#~ msgstr "MT_U:"
-
-#~ msgid "_SSID:"
-#~ msgstr "_SSID:"
-
-#~ msgid "_Security:"
-#~ msgstr "_Segurtasuna:"
-
-#~ msgid "label"
-#~ msgstr "etiketa"
+msgstr "_Kekunci"
 
 #~ msgid "United Kingdom"
-#~ msgstr "Erresuma Batua"
+#~ msgstr "United Kingdom"
 
 #~ msgid "Network Manager"
-#~ msgstr "Sareko kudeatzailea"
+#~ msgstr "Pengurus Rangkaian"
 
 #~ msgid "An instance of nm-applet is already running.\n"
-#~ msgstr "'nm-applet'-en instantzia bat jadanik exekutatzen ari da.\n"
+#~ msgstr "Telah ada nm-applet sedang berjalan.\n"
 
 #~ msgid "Could not acquire the %s service. (%d)\n"
-#~ msgstr "Ezin izan da %s zerbitzua eskuratu (%d)\n"
-
-#~ msgid ""
-#~ "<span size=\"larger\" weight=\"bold\">Active Network Connections</span>"
-#~ msgstr ""
-#~ "<span weight=\"bold\" size=\"larger\">Sareko konexio aktiboak</span>"
-
-#~ msgid ""
-#~ "Automatic\n"
-#~ "Version 0\n"
-#~ "Version 1"
-#~ msgstr ""
-#~ "Automatikoa\n"
-#~ "0 bertsioa\n"
-#~ "1 bertsioa"
+#~ msgstr "Tidak dapat mencari servis %s. (%d)\n"
 
 #~ msgid "C_onnect"
-#~ msgstr "_Konektatu"
+#~ msgstr "S_ambung"
 
+#, fuzzy
 #~ msgid "Other Wireless Network..."
-#~ msgstr "Beste haririk gabeko sarea..."
+#~ msgstr "Monitor kualiti pautan rangkaian tanpa wayar"
 
-#~ msgid "<b>Addresses</b>"
-#~ msgstr "<b>Helbideak</b>"
+#~ msgid "label"
+#~ msgstr "label"
 
-#~ msgid ""
-#~ "Automatic\n"
-#~ "Automatic with manual DNS settings\n"
-#~ "Manual\n"
-#~ "Link-Local\n"
-#~ "Shared to other computers"
-#~ msgstr ""
-#~ "Automatikoa\n"
-#~ "Automatikoa (eskuzko DNS ezarpenekin)\n"
-#~ "Eskuz\n"
-#~ "Esteka lokala\n"
-#~ "Beste ordenagailuetara partekatua"
-
-#~ msgid "<b>Basic</b>"
-#~ msgstr "<b>Oinarrizkoa</b>"
-
-#~ msgid ""
-#~ "Any\n"
-#~ "3G (UMTS/HSPA)\n"
-#~ "2G (GPRS/EDGE)\n"
-#~ "Prefer 3G (UMTS/HSPA)\n"
-#~ "Prefer 2G (GPRS/EDGE)"
-#~ msgstr ""
-#~ "Edozein\n"
-#~ "3G (UMTS/HSPA)\n"
-#~ "2G (GPRS/EDGE)\n"
-#~ "3G hobetsia (UMTS/HSPA)\n"
-#~ "2G hobetsia (GPRS/EDGE)"
-
-#~ msgid "<b>Authentication</b>"
-#~ msgstr "<b>Autentifikazioa</b>"
-
-#~ msgid "<b>Echo</b>"
-#~ msgstr "<b>Echo</b>"
-
-#~ msgid ""
-#~ "Automatic\n"
-#~ "10 Mb/s\n"
-#~ "100 Mb/s\n"
-#~ "1 Gb/s\n"
-#~ "10 Gb/s"
-#~ msgstr ""
-#~ "Automatikoa\n"
-#~ "10 Mb/s\n"
-#~ "100 Mb/s\n"
-#~ "1 Gb/s\n"
-#~ "10 Gb/s"
-
-#~ msgid ""
-#~ "Automatic\n"
-#~ "Twisted Pair (TP)\n"
-#~ "Attachment Unit Interface (AUI)\n"
-#~ "BNC\n"
-#~ "Media Independent Interface (MII)"
-#~ msgstr ""
-#~ "Automatikoa\n"
-#~ "Pare bihurritua (TP)\n"
-#~ "Interfaze-unitate erantsia (AUI)\n"
-#~ "BNC\n"
-#~ "Euskarri independenteen interfazea (MII)"
-
-#~ msgid ""
-#~ "Automatic\n"
-#~ "A (5 GHz)\n"
-#~ "B/G (2.4 GHz)"
-#~ msgstr ""
-#~ "Automatikoa\n"
-#~ "A (5 GHz)\n"
-#~ "B/G (2.4 GHz)"
-
-#~ msgid ""
-#~ "The connection editor could not find some required resources (the "
-#~ "NetworkManager applet glade file was not found)."
-#~ msgstr ""
-#~ "Konexioen editoreak ezin izan du beharrezko baliabide batzuk aurkitu "
-#~ "(NetworkManager miniaplikazioaren glade fitxategia ez da aurkitu)."
-
+#, fuzzy
 #~ msgid "could not connect to the system bus."
-#~ msgstr "ezin izan da sistemako bus-arekin konektatu."
+#~ msgstr "Tidak dapat sambung ke pelayan pangkalan data \"%1\"."
 
-#~ msgid "Country"
-#~ msgstr "Herrialdea"
-
+#, fuzzy
 #~ msgid "Cannot start VPN connection '%s'"
-#~ msgstr "Ezin da '%s' VPN konexioa hasi"
-
-#~ msgid ""
-#~ "Could not find the authentication dialog for VPN connection type '%s'. "
-#~ "Contact your system administrator."
-#~ msgstr ""
-#~ "Ezin izan da '%s' VPN konexio motaren autentifikazioaren elkarrizketa-"
-#~ "koadroa aurkitu. Jar zaitez sistemako administratzailearekin harremanetan."
-
-#~ msgid ""
-#~ "There was a problem launching the authentication dialog for VPN "
-#~ "connection type '%s'. Contact your system administrator."
-#~ msgstr ""
-#~ "Arazoa egon da '%s' VPN konexio motaren autentifikazioaren elkarrizketa-"
-#~ "koadroa abiaraztean. Jar zaitez sistemako administratzailearekin "
-#~ "harremanetan."
+#~ msgstr "Tidak dapat mula program format UFS."

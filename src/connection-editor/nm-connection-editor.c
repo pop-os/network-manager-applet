@@ -93,7 +93,7 @@ nm_connection_editor_update_title (NMConnectionEditor *editor)
 
 	g_return_if_fail (editor != NULL);
 
-	s_con = NM_SETTING_CONNECTION (nm_connection_get_setting (editor->connection, NM_TYPE_SETTING_CONNECTION));
+	s_con = nm_connection_get_setting_connection (editor->connection);
 	g_assert (s_con);
 
 	id = nm_setting_connection_get_id (s_con);
@@ -154,7 +154,7 @@ update_sensitivity (NMConnectionEditor *editor)
 	GtkWidget *widget;
 	GSList *iter;
 
-	s_con = NM_SETTING_CONNECTION (nm_connection_get_setting (editor->connection, NM_TYPE_SETTING_CONNECTION));
+	s_con = nm_connection_get_setting_connection (editor->connection);
 
 	/* Can't modify read-only connections; can't modify anything before the
 	 * editor is initialized either.
@@ -199,13 +199,13 @@ static void
 connection_editor_validate (NMConnectionEditor *editor)
 {
 	NMSettingConnection *s_con;
-	gboolean valid = FALSE;
+	gboolean valid = FALSE, printed = FALSE;
 	GSList *iter;
 
 	if (!editor_is_initialized (editor))
 		goto done;
 
-	s_con = NM_SETTING_CONNECTION (nm_connection_get_setting (editor->connection, NM_TYPE_SETTING_CONNECTION));
+	s_con = nm_connection_get_setting_connection (editor->connection);
 	g_assert (s_con);
 	if (nm_setting_connection_get_read_only (s_con))
 		goto done;
@@ -213,21 +213,24 @@ connection_editor_validate (NMConnectionEditor *editor)
 	if (!ui_to_setting (editor))
 		goto done;
 
+	valid = TRUE;
 	for (iter = editor->pages; iter; iter = g_slist_next (iter)) {
 		GError *error = NULL;
 
 		if (!ce_page_validate (CE_PAGE (iter->data), editor->connection, &error)) {
-			/* FIXME: use the error to indicate which UI widgets are invalid */
-			if (error) {
-				g_warning ("Invalid setting %s: %s", CE_PAGE (iter->data)->title, error->message);
-				g_error_free (error);
-			} else
-				g_warning ("Invalid setting %s", CE_PAGE (iter->data)->title);
+			valid = FALSE;
 
-			goto done;
+			/* FIXME: use the error to indicate which UI widgets are invalid */
+			if (!printed) {
+				printed = TRUE;
+				if (error) {
+					g_warning ("Invalid setting %s: %s", CE_PAGE (iter->data)->title, error->message);
+					g_error_free (error);
+				} else
+					g_warning ("Invalid setting %s", CE_PAGE (iter->data)->title);
+			}
 		}
 	}
-	valid = TRUE;
 
 done:
 	ce_polkit_button_set_master_sensitive (CE_POLKIT_BUTTON (editor->ok_button), valid);
@@ -388,7 +391,7 @@ nm_connection_editor_new (NMConnection *connection,
 
 	editor = g_object_new (NM_TYPE_CONNECTION_EDITOR, NULL);
 	if (!editor) {
-		g_set_error (error, 0, 0, "%s", _("Error creating connection editor dialog."));
+		g_set_error (error, NMA_ERROR, NMA_ERROR_GENERIC, "%s", _("Error creating connection editor dialog."));
 		return NULL;
 	}
 
@@ -504,7 +507,7 @@ populate_connection_ui (NMConnectionEditor *editor)
 	name = GTK_WIDGET (gtk_builder_get_object (editor->builder, "connection_name"));
 	autoconnect = GTK_WIDGET (gtk_builder_get_object (editor->builder, "connection_autoconnect"));
 
-	s_con = NM_SETTING_CONNECTION (nm_connection_get_setting (editor->connection, NM_TYPE_SETTING_CONNECTION));
+	s_con = nm_connection_get_setting_connection (editor->connection);
 	if (s_con) {
 		const char *id = nm_setting_connection_get_id (s_con);
 
@@ -566,7 +569,7 @@ static void
 page_initialized (CEPage *page, GError *error, gpointer user_data)
 {
 	NMConnectionEditor *editor = NM_CONNECTION_EDITOR (user_data);
-	GtkWidget *widget;
+	GtkWidget *widget, *parent;
 	GtkNotebook *notebook;
 	GtkWidget *label;
 
@@ -580,7 +583,9 @@ page_initialized (CEPage *page, GError *error, gpointer user_data)
 	notebook = GTK_NOTEBOOK (gtk_builder_get_object (editor->builder, "notebook"));
 	label = gtk_label_new (ce_page_get_title (page));
 	widget = ce_page_get_page (page);
-	gtk_widget_unparent (widget);
+	parent = gtk_widget_get_parent (widget);
+	if (parent)
+		gtk_container_remove (GTK_CONTAINER (parent), widget);
 	gtk_notebook_append_page (notebook, widget, label);
 
 	/* Move the page from the initializing list to the main page list */
@@ -722,7 +727,7 @@ nm_connection_editor_set_connection (NMConnectionEditor *editor,
 	editor->orig_connection = g_object_ref (orig_connection);
 	nm_connection_editor_update_title (editor);
 
-	s_con = NM_SETTING_CONNECTION (nm_connection_get_setting (editor->connection, NM_TYPE_SETTING_CONNECTION));
+	s_con = nm_connection_get_setting_connection (editor->connection);
 	g_assert (s_con);
 
 	connection_type = nm_setting_connection_get_connection_type (s_con);
@@ -833,9 +838,42 @@ editor_closed_cb (GtkWidget *widget, GdkEvent *event, gpointer user_data)
 }
 
 static void
+nag_dialog_response_cb (GtkDialog *dialog,
+                        gint response,
+                        gpointer user_data)
+{
+	NMConnectionEditor *self = NM_CONNECTION_EDITOR (user_data);
+
+	gtk_widget_hide (GTK_WIDGET (dialog));
+	if (response == GTK_RESPONSE_NO) {
+		/* user opted not to correct the warning */
+		g_signal_emit (self, editor_signals[EDITOR_DONE], 0, GTK_RESPONSE_OK, NULL);
+	}
+	g_signal_handler_disconnect (dialog, self->nag_id);
+	self->nag_id = 0;
+}
+
+static void
 ok_button_clicked_cb (GtkWidget *widget, gpointer user_data)
 {
 	NMConnectionEditor *self = NM_CONNECTION_EDITOR (user_data);
+	GSList *iter;
+
+	/* Make sure the user is warned about insecure security options like no
+	 * CA certificate.
+	 */
+	g_warn_if_fail (self->nag_id == 0);
+	for (iter = self->pages; iter; iter = g_slist_next (iter)) {
+		CEPage *page = iter->data;
+		GtkWidget *nag_dialog;
+
+		nag_dialog = ce_page_nag_user (page);
+		if (nag_dialog) {
+			gtk_window_set_transient_for (GTK_WINDOW (nag_dialog), GTK_WINDOW (self->window));
+			self->nag_id = g_signal_connect (nag_dialog, "response", G_CALLBACK (nag_dialog_response_cb), self);
+			return;
+		}
+	}
 
 	g_signal_emit (self, editor_signals[EDITOR_DONE], 0, GTK_RESPONSE_OK, NULL);
 }

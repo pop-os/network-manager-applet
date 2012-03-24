@@ -190,19 +190,19 @@ get_secrets_cb (AppletAgent *self,
 		 * redundant.
 		 */
 		if (secrets && (r->flags != NM_SECRET_AGENT_GET_SECRETS_FLAG_NONE)) {
-			NMConnection *dup;
+			NMConnection *dupl;
 			GHashTableIter iter;
 			const char *setting_name;
 
 			/* Copy the existing connection and update its secrets */
-			dup = nm_connection_duplicate (r->connection);
+			dupl = nm_connection_duplicate (r->connection);
 			g_hash_table_iter_init (&iter, secrets);
 			while (g_hash_table_iter_next (&iter, (gpointer) &setting_name, NULL))
-				nm_connection_update_secrets (dup, setting_name, secrets, NULL);
+				nm_connection_update_secrets (dupl, setting_name, secrets, NULL);
 
 			/* And save updated secrets to the keyring */
-			nm_secret_agent_save_secrets (NM_SECRET_AGENT (self), dup, get_save_cb, NULL);
-			g_object_unref (dup);
+			nm_secret_agent_save_secrets (NM_SECRET_AGENT (self), dupl, get_save_cb, NULL);
+			g_object_unref (dupl);
 		}
 
 		r->get_callback (NM_SECRET_AGENT (r->agent), r->connection, secrets, error, r->callback_data);
@@ -263,7 +263,7 @@ is_connection_always_ask (NMConnection *connection)
 	/* For the given connection type, check if the secrets for that connection
 	 * are always-ask or not.
 	 */
-	s_con = (NMSettingConnection *) nm_connection_get_setting (connection, NM_TYPE_SETTING_CONNECTION);
+	s_con = nm_connection_get_setting_connection (connection);
 	g_assert (s_con);
 	ctype = nm_setting_connection_get_connection_type (s_con);
 
@@ -765,7 +765,7 @@ delete_secrets (NMSecretAgent *agent,
 	r = request_new (agent, connection, connection_path, NULL, NULL, FALSE, NULL, NULL, callback, callback_data);
 	g_hash_table_insert (priv->requests, GUINT_TO_POINTER (r->id), r);
 
-	s_con = (NMSettingConnection *) nm_connection_get_setting (connection, NM_TYPE_SETTING_CONNECTION);
+	s_con = nm_connection_get_setting_connection (connection);
 	g_assert (s_con);
 	uuid = nm_setting_connection_get_uuid (s_con);
 	g_assert (uuid);

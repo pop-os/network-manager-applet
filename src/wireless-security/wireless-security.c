@@ -17,7 +17,7 @@
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  *
- * (C) Copyright 2007 - 2010 Red Hat, Inc.
+ * (C) Copyright 2007 - 2012 Red Hat, Inc.
  */
 
 #include "config.h"
@@ -197,6 +197,8 @@ wireless_security_init (gsize obj_size,
 	}
 	g_object_ref_sink (sec->ui_widget);
 
+	sec->adhoc_compatible = TRUE;
+
 	return sec;
 }
 
@@ -210,6 +212,14 @@ wireless_security_nag_user (WirelessSecurity *sec)
 	return NULL;
 }
 
+gboolean
+wireless_security_adhoc_compatible (WirelessSecurity *sec)
+{
+	g_return_val_if_fail (sec != NULL, FALSE);
+
+	return sec->adhoc_compatible;
+}
+
 void
 wireless_security_clear_ciphers (NMConnection *connection)
 {
@@ -217,8 +227,7 @@ wireless_security_clear_ciphers (NMConnection *connection)
 
 	g_return_if_fail (connection != NULL);
 
-	s_wireless_sec = NM_SETTING_WIRELESS_SECURITY (nm_connection_get_setting (connection,
-										  NM_TYPE_SETTING_WIRELESS_SECURITY));
+	s_wireless_sec = nm_connection_get_setting_wireless_security (connection);
 	g_assert (s_wireless_sec);
 
 	nm_setting_wireless_security_clear_protos (s_wireless_sec);
@@ -335,6 +344,7 @@ ws_802_1x_auth_combo_init (WirelessSecurity *sec,
 	EAPMethodSimple *em_md5;
 	EAPMethodTLS *em_tls;
 	EAPMethodLEAP *em_leap;
+	EAPMethodFAST *em_fast;
 	EAPMethodTTLS *em_ttls;
 	EAPMethodPEAP *em_peap;
 	const char *default_method = NULL, *ctype = NULL;
@@ -353,7 +363,7 @@ ws_802_1x_auth_combo_init (WirelessSecurity *sec,
 		    || nm_connection_get_setting_wired (connection))
 			wired = TRUE;
 
-		s_8021x = (NMSetting8021x *) nm_connection_get_setting (connection, NM_TYPE_SETTING_802_1X);
+		s_8021x = nm_connection_get_setting_802_1x (connection);
 		if (s_8021x && nm_setting_802_1x_get_num_eap_methods (s_8021x))
 			default_method = nm_setting_802_1x_get_eap_method (s_8021x, 0);
 	}
@@ -401,6 +411,17 @@ ws_802_1x_auth_combo_init (WirelessSecurity *sec,
 			active = item;
 		item++;
 	}
+
+	em_fast = eap_method_fast_new (sec, connection, is_editor, secrets_only);
+	gtk_list_store_append (auth_model, &iter);
+	gtk_list_store_set (auth_model, &iter,
+	                    AUTH_NAME_COLUMN, _("FAST"),
+	                    AUTH_METHOD_COLUMN, em_fast,
+	                    -1);
+	eap_method_unref (EAP_METHOD (em_fast));
+	if (default_method && (active < 0) && !strcmp (default_method, "fast"))
+		active = item;
+	item++;
 
 	em_ttls = eap_method_ttls_new (sec, connection, is_editor, secrets_only);
 	gtk_list_store_append (auth_model, &iter);
@@ -455,7 +476,7 @@ ws_802_1x_fill_connection (WirelessSecurity *sec,
 	GtkTreeModel *model;
 	GtkTreeIter iter;
 
-	s_wireless = NM_SETTING_WIRELESS (nm_connection_get_setting (connection, NM_TYPE_SETTING_WIRELESS));
+	s_wireless = nm_connection_get_setting_wireless (connection);
 	g_assert (s_wireless);
 
 	g_object_set (s_wireless, NM_SETTING_WIRELESS_SEC, NM_SETTING_WIRELESS_SECURITY_SETTING_NAME, NULL);

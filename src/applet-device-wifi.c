@@ -17,7 +17,7 @@
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  *
- * (C) Copyright 2008 - 2011 Red Hat, Inc.
+ * (C) Copyright 2008 - 2012 Red Hat, Inc.
  */
 
 #ifdef HAVE_CONFIG_H
@@ -545,21 +545,6 @@ find_duplicate (gpointer d, gpointer user_data)
 		data->found = NM_NETWORK_MENU_ITEM (widget);
 }
 
-static GSList *
-filter_connections_for_access_point (GSList *connections, NMDeviceWifi *device, NMAccessPoint *ap)
-{
-	GSList *ap_connections = NULL;
-	GSList *iter;
-
-	for (iter = connections; iter; iter = g_slist_next (iter)) {
-		NMConnection *candidate = NM_CONNECTION (iter->data);
-
-		if (utils_connection_valid_for_device (candidate, NM_DEVICE (device), (gpointer) ap))
-			ap_connections = g_slist_append (ap_connections, candidate);
-	}
-	return ap_connections;
-}
-
 static NMNetworkMenuItem *
 create_new_ap_item (NMDeviceWifi *device,
                     NMAccessPoint *ap,
@@ -570,11 +555,15 @@ create_new_ap_item (NMDeviceWifi *device,
 	WirelessMenuItemInfo *info;
 	GSList *iter;
 	NMNetworkMenuItem *item = NULL;
+	GSList *dev_connections = NULL;
 	GSList *ap_connections = NULL;
 	const GByteArray *ssid;
 	guint32 dev_caps;
 
-	ap_connections = filter_connections_for_access_point (connections, device, ap);
+	dev_connections = nm_device_filter_connections (NM_DEVICE (device), connections);
+	ap_connections = nm_access_point_filter_connections (ap, dev_connections);
+	g_slist_free (dev_connections);
+	dev_connections = NULL;
 
 	item = NM_NETWORK_MENU_ITEM (nm_network_menu_item_new (dup_data->hash,
 	                                                       !!g_slist_length (ap_connections)));
@@ -602,7 +591,7 @@ create_new_ap_item (NMDeviceWifi *device,
 			NMSettingConnection *s_con;
 			GtkWidget *subitem;
 
-			s_con = NM_SETTING_CONNECTION (nm_connection_get_setting (connection, NM_TYPE_SETTING_CONNECTION));
+			s_con = nm_connection_get_setting_connection (connection);
 			subitem = gtk_menu_item_new_with_label (nm_setting_connection_get_id (s_con));
 
 			info = g_slice_new0 (WirelessMenuItemInfo);
@@ -814,7 +803,7 @@ wireless_add_menu_item (NMDevice *device,
 	gtk_widget_show (widget);
 
 	all = applet_get_all_connections (applet);
-	connections = utils_filter_connections_for_device (device, all);
+	connections = nm_device_filter_connections (device, all);
 	g_slist_free (all);
 
 	/* Add the active AP if we're connected to something and the device is available */
@@ -943,7 +932,7 @@ notify_active_ap_changed_cb (NMDeviceWifi *device,
 	if (!connection)
 		return;
 
-	s_wireless = NM_SETTING_WIRELESS (nm_connection_get_setting (NM_CONNECTION (connection), NM_TYPE_SETTING_WIRELESS));
+	s_wireless = nm_connection_get_setting_wireless (NM_CONNECTION (connection));
 	if (!s_wireless)
 		return;
 
@@ -1040,14 +1029,14 @@ idle_check_avail_access_point_notification (gpointer datap)
 		return FALSE;	
 
 	all_connections = applet_get_all_connections (applet);
-	connections = utils_filter_connections_for_device (NM_DEVICE (device), all_connections);
+	connections = nm_device_filter_connections (NM_DEVICE (device), all_connections);
 	g_slist_free (all_connections);	
 	all_connections = NULL;
 
 	aps = nm_device_wifi_get_access_points (device);
 	for (i = 0; aps && (i < aps->len); i++) {
 		NMAccessPoint *ap = aps->pdata[i];
-		GSList *ap_connections = filter_connections_for_access_point (connections, device, ap);
+		GSList *ap_connections = nm_access_point_filter_connections (ap, connections);
 		GSList *iter;
 		gboolean is_autoconnect = FALSE;
 
@@ -1055,7 +1044,7 @@ idle_check_avail_access_point_notification (gpointer datap)
 			NMConnection *connection = NM_CONNECTION (iter->data);
 			NMSettingConnection *s_con;
 
-			s_con = NM_SETTING_CONNECTION (nm_connection_get_setting (connection, NM_TYPE_SETTING_CONNECTION));
+			s_con = nm_connection_get_setting_connection (connection);
 			if (nm_setting_connection_get_autoconnect (s_con))  {
 				is_autoconnect = TRUE;
 				break;
@@ -1068,6 +1057,7 @@ idle_check_avail_access_point_notification (gpointer datap)
 		else
 			have_no_autoconnect_points = FALSE;
 	}
+	g_slist_free (connections);
 
 	if (!(have_unused_access_point && have_no_autoconnect_points))
 		return FALSE;
@@ -1079,9 +1069,7 @@ idle_check_avail_access_point_notification (gpointer datap)
 	applet_do_notify (applet,
 	                  NOTIFY_URGENCY_LOW,
 	                  _("Wireless Networks Available"),
-	                  applet->notify_actions ?
-	                        _("Click on this icon to connect to a wireless network") :
-	                        _("Use the network menu to connect to a wireless network"),
+	                  _("Use the network menu to connect to a wireless network"),
 	                  "nm-device-wireless",
 	                  "dont-show",
 	                  _("Don't show this message again"),
@@ -1301,7 +1289,7 @@ wireless_get_icon (NMDevice *device,
 
 	id = nm_device_get_iface (device);
 	if (connection) {
-		s_con = NM_SETTING_CONNECTION (nm_connection_get_setting (connection, NM_TYPE_SETTING_CONNECTION));
+		s_con = nm_connection_get_setting_connection (connection);
 		id = nm_setting_connection_get_id (s_con);
 	}
 
@@ -1349,7 +1337,7 @@ wireless_get_icon (NMDevice *device,
 		break;
 	}
 
-	return pixbuf;
+	return pixbuf ? g_object_ref (pixbuf) : NULL;
 }
 
 static gboolean
@@ -1389,8 +1377,15 @@ activate_existing_cb (NMClient *client,
                       GError *error,
                       gpointer user_data)
 {
-	if (error)
-		g_warning ("Failed to activate connection: (%d) %s", error->code, error->message);
+	if (error) {
+		const char *text = _("Failed to activate connection");
+		char *err_text = g_strdup_printf ("(%d) %s", error->code,
+		                                  error->message ? error->message : _("Unknown error"));
+
+		g_warning ("%s: %s", text, err_text);
+		utils_show_error_dialog (_("Connection failure"), text, err_text, FALSE, NULL);
+		g_free (err_text);
+	}
 	applet_schedule_update_icon (NM_APPLET (user_data));
 }
 
@@ -1401,8 +1396,15 @@ activate_new_cb (NMClient *client,
                  GError *error,
                  gpointer user_data)
 {
-	if (error)
-		g_warning ("Failed to add new connection: (%d) %s", error->code, error->message);
+	if (error) {
+		const char *text = _("Failed to add new connection");
+		char *err_text = g_strdup_printf ("(%d) %s", error->code,
+		                                  error->message ? error->message : _("Unknown error"));
+
+		g_warning ("%s: %s", text, err_text);
+		utils_show_error_dialog (_("Connection failure"), text, err_text, FALSE, NULL);
+		g_free (err_text);
+	}
 	applet_schedule_update_icon (NM_APPLET (user_data));
 }
 
@@ -1471,7 +1473,7 @@ wireless_dialog_response_cb (GtkDialog *foo,
 		/* Entirely new connection */
 
 		/* Don't autoconnect adhoc networks by default for now */
-		s_wifi = (NMSettingWireless *) nm_connection_get_setting (connection, NM_TYPE_SETTING_WIRELESS);
+		s_wifi = nm_connection_get_setting_wireless (connection);
 		if (s_wifi)
 			mode = nm_setting_wireless_get_mode (s_wifi);
 		if (g_strcmp0 (mode, "adhoc") == 0) {
@@ -1598,7 +1600,7 @@ get_secrets_dialog_response_cb (GtkDialog *foo,
 	}
 
 	/* Second-guess which setting NM wants secrets for. */
-	s_wireless_sec = NM_SETTING_WIRELESS_SECURITY (nm_connection_get_setting (connection, NM_TYPE_SETTING_WIRELESS_SECURITY));
+	s_wireless_sec = nm_connection_get_setting_wireless_security (connection);
 	if (!s_wireless_sec) {
 		g_set_error (&error,
 		             NM_SECRET_AGENT_ERROR,
@@ -1636,7 +1638,7 @@ get_secrets_dialog_response_cb (GtkDialog *foo,
 		if (!auth_alg || strcmp (auth_alg, "leap")) {
 			NMSetting8021x *s_8021x;
 
-			s_8021x = (NMSetting8021x *) nm_connection_get_setting (connection, NM_TYPE_SETTING_802_1X);
+			s_8021x = nm_connection_get_setting_802_1x (connection);
 			if (!s_8021x) {
 				g_set_error (&error,
 				             NM_SECRET_AGENT_ERROR,

@@ -17,7 +17,7 @@
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  *
- * (C) Copyright 2008 - 2011 Red Hat, Inc.
+ * (C) Copyright 2008 - 2012 Red Hat, Inc.
  */
 
 #include "config.h"
@@ -203,7 +203,6 @@ auth_methods_button_clicked_cb (GtkWidget *button, gpointer user_data)
 	g_free (tmp);
 
 	g_signal_connect (G_OBJECT (dialog), "response", G_CALLBACK (auth_methods_dialog_response_cb), self);
-	g_signal_connect (G_OBJECT (dialog), "close", G_CALLBACK (auth_methods_dialog_close_cb), self);
 
 	gtk_widget_show_all (dialog);
 }
@@ -282,22 +281,26 @@ ce_page_ppp_new (NMConnection *connection,
 	                                 "PppPage",
 	                                 _("PPP Settings")));
 	if (!self) {
-		g_set_error_literal (error, 0, 0, _("Could not load PPP user interface."));
+		g_set_error_literal (error, NMA_ERROR, NMA_ERROR_GENERIC, _("Could not load PPP user interface."));
 		return NULL;
 	}
 
 	ppp_private_init (self);
 	priv = CE_PAGE_PPP_GET_PRIVATE (self);
 
-	priv->setting = (NMSettingPPP *) nm_connection_get_setting (connection, NM_TYPE_SETTING_PPP);
+	priv->setting = nm_connection_get_setting_ppp (connection);
 	if (!priv->setting) {
 		priv->setting = NM_SETTING_PPP (nm_setting_ppp_new ());
+		g_object_set (G_OBJECT (priv->setting),
+		              NM_SETTING_PPP_LCP_ECHO_FAILURE, 5,
+		              NM_SETTING_PPP_LCP_ECHO_INTERVAL, 30,
+		              NULL);
 		nm_connection_add_setting (connection, NM_SETTING (priv->setting));
 	}
 
 	priv->window_group = gtk_window_group_new ();
 
-	s_con = NM_SETTING_CONNECTION (nm_connection_get_setting (connection, NM_TYPE_SETTING_CONNECTION));
+	s_con = nm_connection_get_setting_connection (connection);
 	g_assert (s_con);
 	priv->connection_id = g_strdup (nm_setting_connection_get_id (s_con));
 

@@ -12,13 +12,16 @@ test_upgrade_SOURCES = \
 test_upgrade_CPPFLAGS = \
 	-I ${srcdir}/../ \
 	-DTESTDIR=\"$(srcdir)\" \
+	$(GTK_CFLAGS) \
 	$(NMA_CFLAGS) \
 	$(GCONF_CFLAGS) \
 	$(GNOME_KEYRING_CFLAGS)
 
 test_upgrade_LDADD = \
 	${builddir}/../libgconf-helpers-test.la \
-	$(NMA_LIBS)
+	$(GTK_CFLAGS) \
+	$(NMA_LIBS) \
+	$(GNOME_KEYRING_LIBS)
 
 check-local: test-upgrade
 	$(abs_builddir)/test-upgrade

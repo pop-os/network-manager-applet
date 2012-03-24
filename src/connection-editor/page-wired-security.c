@@ -17,7 +17,7 @@
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  *
- * (C) Copyright 2008 - 2011 Red Hat, Inc.
+ * (C) Copyright 2008 - 2012 Red Hat, Inc.
  */
 
 #include "config.h"
@@ -73,6 +73,7 @@ finish_setup (CEPageWiredSecurity *self, gpointer unused, GError *error, gpointe
 {
 	CEPage *parent = CE_PAGE (self);
 	CEPageWiredSecurityPrivate *priv = CE_PAGE_WIRED_SECURITY_GET_PRIVATE (self);
+	GtkWidget *parent_container;
 
 	if (error)
 		return;
@@ -85,7 +86,9 @@ finish_setup (CEPageWiredSecurity *self, gpointer unused, GError *error, gpointe
 
 	wireless_security_set_changed_notify (priv->security, stuff_changed, self);
 	priv->security_widget = wireless_security_get_widget (priv->security);
-	gtk_widget_unparent (priv->security_widget);
+	parent_container = gtk_widget_get_parent (priv->security_widget);
+	if (parent_container)
+		gtk_container_remove (GTK_CONTAINER (parent_container), priv->security_widget);
 
 	gtk_toggle_button_set_active (priv->enabled, priv->initial_have_8021x);
 	g_signal_connect (priv->enabled, "toggled", G_CALLBACK (enable_toggled), self);
@@ -115,7 +118,7 @@ ce_page_wired_security_new (NMConnection *connection,
 	                                            NULL,
 	                                            _("802.1x Security")));
 	if (!self) {
-		g_set_error_literal (error, 0, 0, _("Could not load Wired Security security user interface."));
+		g_set_error_literal (error, NMA_ERROR, NMA_ERROR_GENERIC, _("Could not load Wired Security security user interface."));
 		return NULL;
 	}
 
@@ -130,10 +133,10 @@ ce_page_wired_security_new (NMConnection *connection,
 	g_object_ref_sink (G_OBJECT (parent->page));
 	gtk_container_set_border_width (GTK_CONTAINER (parent->page), 6);
 
-	if (nm_connection_get_setting (connection, NM_TYPE_SETTING_802_1X))
+	if (nm_connection_get_setting_802_1x (connection))
 		priv->initial_have_8021x = TRUE;
 
-	priv->enabled = GTK_TOGGLE_BUTTON (gtk_check_button_new_with_label (_("Use 802.1X security for this connection")));
+	priv->enabled = GTK_TOGGLE_BUTTON (gtk_check_button_new_with_mnemonic (_("Use 802.1_X security for this connection")));
 
 	g_signal_connect (self, "initialized", G_CALLBACK (finish_setup), NULL);
 
@@ -175,13 +178,21 @@ validate (CEPage *page, NMConnection *connection, GError **error)
 
 			g_object_unref (tmp_connection);
 		} else
-			g_set_error (error, 0, 0, "Invalid 802.1x security");
+			g_set_error (error, NMA_ERROR, NMA_ERROR_GENERIC, "Invalid 802.1x security");
 	} else {
 		nm_connection_remove_setting (connection, NM_TYPE_SETTING_802_1X);
 		valid = TRUE;
 	}
 
 	return valid;
+}
+
+static GtkWidget *
+nag_user (CEPage *page)
+{
+	CEPageWiredSecurityPrivate *priv = CE_PAGE_WIRED_SECURITY_GET_PRIVATE (page);
+
+	return priv->security ? wireless_security_nag_user (priv->security) : NULL;
 }
 
 static void
@@ -217,4 +228,5 @@ ce_page_wired_security_class_init (CEPageWiredSecurityClass *wired_security_clas
 	object_class->dispose = dispose;
 
 	parent_class->validate = validate;
+	parent_class->nag_user = nag_user;
 }

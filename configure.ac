@@ -1,6 +1,6 @@
 AC_PREREQ([2.63])
 AC_INIT([nm-applet],
-        [0.9.2.0],
+        [0.9.4.1],
         [https://bugzilla.gnome.org/enter_bug.cgi?product=NetworkManager],
         [network-manager-applet])
 
@@ -98,10 +98,10 @@ PKG_CHECK_MODULES(GOBJECT, gobject-2.0)
 PKG_CHECK_MODULES(NMA,
 		[dbus-glib-1 >= 0.74
 		 glib-2.0 >= 2.16
-		 NetworkManager >= 0.9.2
-		 libnm-glib >= 0.9.2
-		 libnm-util >= 0.9.2
-		 libnm-glib-vpn >= 0.9.2
+		 NetworkManager >= 0.9.4
+		 libnm-glib >= 0.9.4
+		 libnm-util >= 0.9.4
+		 libnm-glib-vpn >= 0.9.4
 		 gmodule-export-2.0])
 
 PKG_CHECK_MODULES(GCONF, [gconf-2.0])
@@ -143,9 +143,6 @@ AC_SUBST(GTK_LIBS)
 PKG_CHECK_MODULES(DBUS_126, [dbus-1 >= 1.2.6], [have_dbus_126=yes],[have_dbus_126=no])
 AM_CONDITIONAL(HAVE_DBUS_126, test x"$have_dbus_126" = "xyes")
 
-#### PolicyKit checks; need at least 0.92 or later
-PKG_CHECK_MODULES(POLKIT, [polkit-gobject-1 >= 0.92])
-
 AC_ARG_WITH(dbus-sys, AS_HELP_STRING([--with-dbus-sys=DIR], [where D-BUS system.d directory is]))
 
 if ! test -z "$with_dbus_sys" ; then
@@ -167,8 +164,8 @@ case "${with_bluetooth}" in
 		AC_MSG_CHECKING(for gnome-bluetooth)
 		PKG_CHECK_MODULES(GNOME_BLUETOOTH,
 				  gnome-bluetooth-1.0 >= 2.27.6
-				  libnm-util >= 0.9.2
-				  libnm-glib >= 0.9.2,
+				  libnm-util >= 0.9.4
+				  libnm-glib >= 0.9.4,
 				  have_gbt=yes, have_gbt=no)
 		;;
 esac

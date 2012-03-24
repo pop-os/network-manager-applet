@@ -17,13 +17,14 @@
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  *
- * (C) Copyright 2007 - 2011 Red Hat, Inc.
+ * (C) Copyright 2007 - 2012 Red Hat, Inc.
  */
 
 #ifndef UTILS_H
 #define UTILS_H
 
 #include <glib.h>
+#include <gtk/gtk.h>
 #include <nm-connection.h>
 #include <nm-device.h>
 #include <net/ethernet.h>
@@ -37,12 +38,6 @@ guint32 utils_channel_to_freq (guint32 channel, char *band);
 guint32 utils_find_next_channel (guint32 channel, int direction, char *band);
 
 gboolean utils_ether_addr_valid (const struct ether_addr *test_addr);
-
-gboolean utils_connection_valid_for_device (NMConnection *connection,
-                                            NMDevice *device,
-                                            gpointer specific_object);
-
-GSList *utils_filter_connections_for_device (NMDevice *device, GSList *connections);
 
 char *utils_hash_ap (const GByteArray *ssid,
                      NM80211Mode mode,
@@ -62,6 +57,18 @@ GnomeKeyringAttributeList *utils_create_keyring_add_attr_list (NMConnection *con
                                                                const char *setting_name,
                                                                const char *setting_key,
                                                                char **out_display_name);
+
+void utils_show_error_dialog (const char *title,
+                              const char *text1,
+                              const char *text2,
+                              gboolean modal,
+                              GtkWindow *parent);
+
+#define NMA_ERROR (g_quark_from_static_string ("nma-error-quark"))
+
+typedef enum  {
+	NMA_ERROR_GENERIC
+} NMAError;
 
 #endif /* UTILS_H */
 

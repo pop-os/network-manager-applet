@@ -17,7 +17,7 @@
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  *
- * (C) Copyright 2008 - 2011 Red Hat, Inc.
+ * (C) Copyright 2008 - 2012 Red Hat, Inc.
  * (C) Copyright 2008 Novell, Inc.
  */
 
@@ -141,7 +141,7 @@ bt_add_menu_item (NMDevice *device,
 	GSList *connections, *all;
 
 	all = applet_get_all_connections (applet);
-	connections = utils_filter_connections_for_device (device, all);
+	connections = nm_device_filter_connections (device, all);
 	g_slist_free (all);
 
 	text = nm_device_bt_get_name (NM_DEVICE_BT (device));
@@ -194,7 +194,7 @@ bt_device_state_changed (NMDevice *device,
 		connection = applet_find_active_connection_for_device (device, applet, NULL);
 		if (connection) {
 			const char *id;
-			s_con = NM_SETTING_CONNECTION (nm_connection_get_setting (connection, NM_TYPE_SETTING_CONNECTION));
+			s_con = nm_connection_get_setting_connection (connection);
 			id = s_con ? nm_setting_connection_get_id (s_con) : NULL;
 			if (id)
 				str = g_strdup_printf (_("You are now connected to '%s'."), id);
@@ -222,7 +222,7 @@ bt_get_icon (NMDevice *device,
 
 	id = nm_device_get_iface (NM_DEVICE (device));
 	if (connection) {
-		s_con = NM_SETTING_CONNECTION (nm_connection_get_setting (connection, NM_TYPE_SETTING_CONNECTION));
+		s_con = nm_connection_get_setting_connection (connection);
 		id = nm_setting_connection_get_id (s_con);
 	}
 
@@ -247,7 +247,7 @@ bt_get_icon (NMDevice *device,
 		break;
 	}
 
-	return pixbuf;
+	return pixbuf ? g_object_ref (pixbuf) : NULL;
 }
 
 typedef struct {

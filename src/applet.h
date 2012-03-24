@@ -84,6 +84,12 @@ typedef struct
 	DBusGConnection *bus;
 	DBusGConnection *session_bus;
 
+#if GLIB_CHECK_VERSION(2,26,0)
+	GDBusProxy *shell_proxy;
+#endif
+	guint agent_start_id;
+	gdouble shell_version;
+
 	NMClient *nm_client;
 	NMRemoteSettings *settings;
 	AppletAgent *agent;
@@ -166,7 +172,6 @@ typedef struct
 
 	GtkBuilder *	info_dialog_ui;
 	NotifyNotification*	notification;
-	gboolean        notify_actions;
 
 	/* Tracker objects for secrets requests */
 	GSList *        secrets_reqs;
@@ -226,6 +231,10 @@ struct NMADeviceClass {
 	                                        NMDeviceStateReason reason,
 	                                        NMApplet *applet);
 
+	/* Device class is expected to return a *referenced* pixbuf, which will
+	 * be unrefed by the icon code.  This allows the device class to create
+	 * a composited pixbuf if necessary and pass the reference to the caller.
+	 */
 	GdkPixbuf *    (*get_icon)             (NMDevice *device,
 	                                        NMDeviceState state,
 	                                        NMConnection *connection,

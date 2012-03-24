@@ -243,8 +243,6 @@ PKG_CONFIG = @PKG_CONFIG@
 PKG_CONFIG_LIBDIR = @PKG_CONFIG_LIBDIR@
 PKG_CONFIG_PATH = @PKG_CONFIG_PATH@
 POFILES = @POFILES@
-POLKIT_CFLAGS = @POLKIT_CFLAGS@
-POLKIT_LIBS = @POLKIT_LIBS@
 POSUB = @POSUB@
 PO_IN_DATADIR_FALSE = @PO_IN_DATADIR_FALSE@
 PO_IN_DATADIR_TRUE = @PO_IN_DATADIR_TRUE@
@@ -324,6 +322,7 @@ desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
 schemasdir = @GCONF_SCHEMA_FILE_DIR@
 schemas_in_files = nm-applet.schemas.in
 schemas_DATA = $(schemas_in_files:.schemas.in=.schemas)
+DISTCHECK_CONFIGURE_FLAGS = --enable-more-warnings=yes
 CLEANFILES = \
 	$(autostart_DATA) \
 	$(desktop_DATA) \

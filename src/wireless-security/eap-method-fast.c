@@ -1,7 +1,7 @@
 /* -*- Mode: C; tab-width: 4; indent-tabs-mode: t; c-basic-offset: 4 -*- */
-/* NetworkManager Wireless Applet -- Display wireless access points and allow user control
- *
- * Dan Williams <dcbw@redhat.com>
+/* vim: set ft=c ts=4 sts=4 sw=4 noexpandtab smartindent: */
+
+/* EAP-FAST authentication method (RFC4851)
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,7 +17,7 @@
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  *
- * (C) Copyright 2007 - 2010 Red Hat, Inc.
+ * (C) Copyright 2012 Red Hat, Inc.
  */
 
 #include "config.h"
@@ -35,7 +35,7 @@
 #define I_NAME_COLUMN   0
 #define I_METHOD_COLUMN 1
 
-struct _EAPMethodTTLS {
+struct _EAPMethodFAST {
 	EAPMethod parent;
 
 	GtkSizeGroup *size_group;
@@ -46,7 +46,7 @@ struct _EAPMethodTTLS {
 static void
 destroy (EAPMethod *parent)
 {
-	EAPMethodTTLS *method = (EAPMethodTTLS *) parent;
+	EAPMethodFAST *method = (EAPMethodFAST *) parent;
 
 	if (method->size_group)
 		g_object_unref (method->size_group);
@@ -59,14 +59,21 @@ validate (EAPMethod *parent)
 	GtkTreeModel *model;
 	GtkTreeIter iter;
 	EAPMethod *eap = NULL;
+	const char *file;
+	gboolean provisioning;
 	gboolean valid = FALSE;
 
-	if (!eap_method_validate_filepicker (parent->builder, "eap_ttls_ca_cert_button", TYPE_CA_CERT, NULL, NULL))
+	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_fast_pac_provision_checkbutton"));
+	g_assert (widget);
+	provisioning = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget));
+	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_fast_pac_file_button"));
+	g_assert (widget);
+	file = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (widget));
+	if (!provisioning && !file)
 		return FALSE;
 
-	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_ttls_inner_auth_combo"));
+	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_fast_inner_auth_combo"));
 	g_assert (widget);
-
 	model = gtk_combo_box_get_model (GTK_COMBO_BOX (widget));
 	gtk_combo_box_get_active_iter (GTK_COMBO_BOX (widget), &iter);
 	gtk_tree_model_get (model, &iter, I_METHOD_COLUMN, &eap, -1);
@@ -79,7 +86,7 @@ validate (EAPMethod *parent)
 static void
 add_to_size_group (EAPMethod *parent, GtkSizeGroup *group)
 {
-	EAPMethodTTLS *method = (EAPMethodTTLS *) parent;
+	EAPMethodFAST *method = (EAPMethodFAST *) parent;
 	GtkWidget *widget;
 	GtkTreeModel *model;
 	GtkTreeIter iter;
@@ -89,19 +96,23 @@ add_to_size_group (EAPMethod *parent, GtkSizeGroup *group)
 		g_object_unref (method->size_group);
 	method->size_group = g_object_ref (group);
 
-	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_ttls_anon_identity_label"));
+	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_fast_anon_identity_label"));
 	g_assert (widget);
 	gtk_size_group_add_widget (group, widget);
 
-	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_ttls_ca_cert_label"));
+	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_fast_pac_file_label"));
 	g_assert (widget);
 	gtk_size_group_add_widget (group, widget);
 
-	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_ttls_inner_auth_label"));
+	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_fast_pac_provision_checkbutton"));
 	g_assert (widget);
 	gtk_size_group_add_widget (group, widget);
 
-	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_ttls_inner_auth_combo"));
+	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_fast_inner_auth_label"));
+	g_assert (widget);
+	gtk_size_group_add_widget (group, widget);
+
+	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_fast_inner_auth_combo"));
 	g_assert (widget);
 
 	model = gtk_combo_box_get_model (GTK_COMBO_BOX (widget));
@@ -116,35 +127,57 @@ static void
 fill_connection (EAPMethod *parent, NMConnection *connection)
 {
 	NMSetting8021x *s_8021x;
-	NMSetting8021xCKFormat format = NM_SETTING_802_1X_CK_FORMAT_UNKNOWN;
 	GtkWidget *widget;
 	const char *text;
 	char *filename;
 	EAPMethod *eap = NULL;
 	GtkTreeModel *model;
 	GtkTreeIter iter;
-	GError *error = NULL;
+	gboolean enabled;
+	int pac_provisioning = 0;
 
 	s_8021x = nm_connection_get_setting_802_1x (connection);
 	g_assert (s_8021x);
 
-	nm_setting_802_1x_add_eap_method (s_8021x, "ttls");
+	nm_setting_802_1x_add_eap_method (s_8021x, "fast");
 
-	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_ttls_anon_identity_entry"));
+	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_fast_anon_identity_entry"));
 	g_assert (widget);
 	text = gtk_entry_get_text (GTK_ENTRY (widget));
 	if (text && strlen (text))
 		g_object_set (s_8021x, NM_SETTING_802_1X_ANONYMOUS_IDENTITY, text, NULL);
 
-	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_ttls_ca_cert_button"));
+	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_fast_pac_file_button"));
 	g_assert (widget);
 	filename = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (widget));
-	if (!nm_setting_802_1x_set_ca_cert (s_8021x, filename, NM_SETTING_802_1X_CK_SCHEME_PATH, &format, &error)) {
-		g_warning ("Couldn't read CA certificate '%s': %s", filename, error ? error->message : "(unknown)");
-		g_clear_error (&error);
+	g_object_set (s_8021x, NM_SETTING_802_1X_PAC_FILE, filename, NULL);
+
+	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_fast_pac_provision_checkbutton"));
+	enabled = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget));
+
+	if (!enabled)
+		g_object_set (G_OBJECT (s_8021x), NM_SETTING_802_1X_PHASE1_FAST_PROVISIONING, "0", NULL);
+	else {
+		widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_fast_pac_provision_combo"));
+		pac_provisioning = gtk_combo_box_get_active (GTK_COMBO_BOX (widget));
+
+		switch (pac_provisioning) {
+		case 0:  /* Anonymous */
+			g_object_set (G_OBJECT (s_8021x), NM_SETTING_802_1X_PHASE1_FAST_PROVISIONING, "1", NULL);
+			break;
+		case 1:  /* Authenticated */
+			g_object_set (G_OBJECT (s_8021x), NM_SETTING_802_1X_PHASE1_FAST_PROVISIONING, "2", NULL);
+			break;
+		case 2:  /* Both - anonymous and authenticated */
+			g_object_set (G_OBJECT (s_8021x), NM_SETTING_802_1X_PHASE1_FAST_PROVISIONING, "3", NULL);
+			break;
+		default: /* Should not happen */
+			g_object_set (G_OBJECT (s_8021x), NM_SETTING_802_1X_PHASE1_FAST_PROVISIONING, "1", NULL);
+			break;
+		}
 	}
 
-	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_ttls_inner_auth_combo"));
+	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_fast_inner_auth_combo"));
 	model = gtk_combo_box_get_model (GTK_COMBO_BOX (widget));
 	gtk_combo_box_get_active_iter (GTK_COMBO_BOX (widget), &iter);
 	gtk_tree_model_get (model, &iter, I_METHOD_COLUMN, &eap, -1);
@@ -158,7 +191,7 @@ static void
 inner_auth_combo_changed_cb (GtkWidget *combo, gpointer user_data)
 {
 	EAPMethod *parent = (EAPMethod *) user_data;
-	EAPMethodTTLS *method = (EAPMethodTTLS *) parent;
+	EAPMethodFAST *method = (EAPMethodFAST *) parent;
 	GtkWidget *vbox;
 	EAPMethod *eap = NULL;
 	GList *elt, *children;
@@ -166,7 +199,7 @@ inner_auth_combo_changed_cb (GtkWidget *combo, gpointer user_data)
 	GtkTreeIter iter;
 	GtkWidget *eap_widget;
 
-	vbox = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_ttls_inner_auth_vbox"));
+	vbox = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_fast_inner_auth_vbox"));
 	g_assert (vbox);
 
 	/* Remove any previous wireless security widgets */
@@ -194,7 +227,7 @@ inner_auth_combo_changed_cb (GtkWidget *combo, gpointer user_data)
 }
 
 static GtkWidget *
-inner_auth_combo_init (EAPMethodTTLS *method,
+inner_auth_combo_init (EAPMethodFAST *method,
                        NMConnection *connection,
                        NMSetting8021x *s_8021x,
                        gboolean secrets_only)
@@ -203,10 +236,8 @@ inner_auth_combo_init (EAPMethodTTLS *method,
 	GtkWidget *combo;
 	GtkListStore *auth_model;
 	GtkTreeIter iter;
-	EAPMethodSimple *em_pap;
-	EAPMethodSimple *em_mschap;
+	EAPMethodSimple *em_gtc;
 	EAPMethodSimple *em_mschap_v2;
-	EAPMethodSimple *em_chap;
 	guint32 active = 0;
 	const char *phase2_auth = NULL;
 
@@ -219,39 +250,22 @@ inner_auth_combo_init (EAPMethodTTLS *method,
 			phase2_auth = nm_setting_802_1x_get_phase2_autheap (s_8021x);
 	}
 
-	em_pap = eap_method_simple_new (method->sec_parent,
+	em_gtc = eap_method_simple_new (method->sec_parent,
 	                                connection,
-	                                EAP_METHOD_SIMPLE_TYPE_PAP,
+	                                EAP_METHOD_SIMPLE_TYPE_GTC,
 	                                TRUE,
 	                                method->is_editor,
 	                                secrets_only);
 	gtk_list_store_append (auth_model, &iter);
 	gtk_list_store_set (auth_model, &iter,
-	                    I_NAME_COLUMN, _("PAP"),
-	                    I_METHOD_COLUMN, em_pap,
+	                    I_NAME_COLUMN, _("GTC"),
+	                    I_METHOD_COLUMN, em_gtc,
 	                    -1);
-	eap_method_unref (EAP_METHOD (em_pap));
+	eap_method_unref (EAP_METHOD (em_gtc));
 
-	/* Check for defaulting to PAP */
-	if (phase2_auth && !strcasecmp (phase2_auth, "pap"))
+	/* Check for defaulting to GTC */
+	if (phase2_auth && !strcasecmp (phase2_auth, "gtc"))
 		active = 0;
-
-	em_mschap = eap_method_simple_new (method->sec_parent,
-	                                   connection,
-	                                   EAP_METHOD_SIMPLE_TYPE_MSCHAP,
-	                                   TRUE,
-	                                   method->is_editor,
-	                                   secrets_only);
-	gtk_list_store_append (auth_model, &iter);
-	gtk_list_store_set (auth_model, &iter,
-	                    I_NAME_COLUMN, _("MSCHAP"),
-	                    I_METHOD_COLUMN, em_mschap,
-	                    -1);
-	eap_method_unref (EAP_METHOD (em_mschap));
-
-	/* Check for defaulting to MSCHAP */
-	if (phase2_auth && !strcasecmp (phase2_auth, "mschap"))
-		active = 1;
 
 	em_mschap_v2 = eap_method_simple_new (method->sec_parent,
 	                                      connection,
@@ -267,26 +281,9 @@ inner_auth_combo_init (EAPMethodTTLS *method,
 
 	/* Check for defaulting to MSCHAPv2 */
 	if (phase2_auth && !strcasecmp (phase2_auth, "mschapv2"))
-		active = 2;
+		active = 1;
 
-	em_chap = eap_method_simple_new (method->sec_parent,
-	                                 connection,
-	                                 EAP_METHOD_SIMPLE_TYPE_CHAP,
-	                                 TRUE,
-	                                 method->is_editor,
-	                                 secrets_only);
-	gtk_list_store_append (auth_model, &iter);
-	gtk_list_store_set (auth_model, &iter,
-	                    I_NAME_COLUMN, _("CHAP"),
-	                    I_METHOD_COLUMN, em_chap,
-	                    -1);
-	eap_method_unref (EAP_METHOD (em_chap));
-
-	/* Check for defaulting to CHAP */
-	if (phase2_auth && !strcasecmp (phase2_auth, "chap"))
-		active = 3;
-
-	combo = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_ttls_inner_auth_combo"));
+	combo = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_fast_inner_auth_combo"));
 	g_assert (combo);
 
 	gtk_combo_box_set_model (GTK_COMBO_BOX (combo), GTK_TREE_MODEL (auth_model));
@@ -304,85 +301,140 @@ update_secrets (EAPMethod *parent, NMConnection *connection)
 {
 	eap_method_phase2_update_secrets_helper (parent,
 	                                         connection,
-	                                         "eap_ttls_inner_auth_combo",
+	                                         "eap_fast_inner_auth_combo",
 	                                         I_METHOD_COLUMN);
 }
 
-EAPMethodTTLS *
-eap_method_ttls_new (WirelessSecurity *ws_parent,
+static void
+pac_toggled_cb (GtkWidget *widget, gpointer user_data)
+{
+	EAPMethod *parent = (EAPMethod *) user_data;
+	EAPMethodFAST *method = (EAPMethodFAST *) parent;
+	gboolean enabled = FALSE;
+	GtkWidget *provision_combo;
+
+	provision_combo = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_fast_pac_provision_combo"));
+	g_return_if_fail (provision_combo);
+
+	enabled = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget));
+
+	gtk_widget_set_sensitive (provision_combo, enabled);
+
+	wireless_security_changed_cb (widget, method->sec_parent);
+}
+
+EAPMethodFAST *
+eap_method_fast_new (WirelessSecurity *ws_parent,
                      NMConnection *connection,
                      gboolean is_editor,
                      gboolean secrets_only)
 {
 	EAPMethod *parent;
-	EAPMethodTTLS *method;
+	EAPMethodFAST *method;
 	GtkWidget *widget;
 	GtkFileFilter *filter;
 	NMSetting8021x *s_8021x = NULL;
 	const char *filename;
+	gboolean provisioning_enabled = TRUE;
 
-	parent = eap_method_init (sizeof (EAPMethodTTLS),
+	parent = eap_method_init (sizeof (EAPMethodFAST),
 	                          validate,
 	                          add_to_size_group,
 	                          fill_connection,
 	                          update_secrets,
 	                          destroy,
-	                          UIDIR "/eap-method-ttls.ui",
-	                          "eap_ttls_notebook",
-	                          "eap_ttls_anon_identity_entry",
+	                          UIDIR "/eap-method-fast.ui",
+	                          "eap_fast_notebook",
+	                          "eap_fast_anon_identity_entry",
 	                          FALSE);
 	if (!parent)
 		return NULL;
 
-	eap_method_nag_init (parent, "eap_ttls_ca_cert_button", connection);
-
-	method = (EAPMethodTTLS *) parent;
+	method = (EAPMethodFAST *) parent;
 	method->sec_parent = ws_parent;
 	method->is_editor = is_editor;
 
 	if (connection)
 		s_8021x = nm_connection_get_setting_802_1x (connection);
 
-	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_ttls_ca_cert_button"));
+
+	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_fast_pac_provision_combo"));
 	g_assert (widget);
-	gtk_file_chooser_set_local_only (GTK_FILE_CHOOSER (widget), TRUE);
-	gtk_file_chooser_button_set_title (GTK_FILE_CHOOSER_BUTTON (widget),
-	                                   _("Choose a Certificate Authority certificate..."));
-	g_signal_connect (G_OBJECT (widget), "selection-changed",
-	                  (GCallback) wireless_security_changed_cb,
-	                  ws_parent);
-	filter = eap_method_default_file_chooser_filter_new (FALSE);
-	gtk_file_chooser_add_filter (GTK_FILE_CHOOSER (widget), filter);
-	if (connection && s_8021x) {
-		if (nm_setting_802_1x_get_ca_cert_scheme (s_8021x) == NM_SETTING_802_1X_CK_SCHEME_PATH) {
-			filename = nm_setting_802_1x_get_ca_cert_path (s_8021x);
-			if (filename)
-				gtk_file_chooser_set_filename (GTK_FILE_CHOOSER (widget), filename);
+	gtk_combo_box_set_active (GTK_COMBO_BOX (widget), 0);
+	if (s_8021x) {
+		const char *fast_prov;
+
+		fast_prov = nm_setting_802_1x_get_phase1_fast_provisioning (s_8021x);
+		if (fast_prov) {
+			if (!strcmp (fast_prov, "0"))
+				provisioning_enabled = FALSE;
+			else if (!strcmp (fast_prov, "1"))
+				gtk_combo_box_set_active (GTK_COMBO_BOX (widget), 0);
+			else if (!strcmp (fast_prov, "2"))
+				gtk_combo_box_set_active (GTK_COMBO_BOX (widget), 1);
+			else if (!strcmp (fast_prov, "3"))
+				gtk_combo_box_set_active (GTK_COMBO_BOX (widget), 2);
 		}
 	}
+	gtk_widget_set_sensitive (widget, provisioning_enabled);
+	g_signal_connect (G_OBJECT (widget), "changed",
+	                  (GCallback) wireless_security_changed_cb,
+	                  ws_parent);
 
-	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_ttls_anon_identity_entry"));
+	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_fast_pac_provision_checkbutton"));
+	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (widget), provisioning_enabled);
+	g_signal_connect (G_OBJECT (widget), "toggled", G_CALLBACK (pac_toggled_cb), parent);
+
+	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_fast_anon_identity_entry"));
 	if (s_8021x && nm_setting_802_1x_get_anonymous_identity (s_8021x))
 		gtk_entry_set_text (GTK_ENTRY (widget), nm_setting_802_1x_get_anonymous_identity (s_8021x));
 	g_signal_connect (G_OBJECT (widget), "changed",
 	                  (GCallback) wireless_security_changed_cb,
 	                  ws_parent);
 
+	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_fast_pac_file_button"));
+	g_assert (widget);
+	gtk_file_chooser_set_local_only (GTK_FILE_CHOOSER (widget), TRUE);
+	gtk_file_chooser_button_set_title (GTK_FILE_CHOOSER_BUTTON (widget),
+	                                   _("Choose a PAC file..."));
+	g_signal_connect (G_OBJECT (widget), "selection-changed",
+	                  (GCallback) wireless_security_changed_cb,
+	                  ws_parent);
+
+	filter = gtk_file_filter_new ();
+	gtk_file_filter_add_pattern (filter, "*.pac");
+	gtk_file_filter_set_name (filter, _("PAC files (*.pac)"));
+	gtk_file_chooser_add_filter (GTK_FILE_CHOOSER (widget), filter);
+	filter = gtk_file_filter_new ();
+	gtk_file_filter_add_pattern (filter, "*");
+	gtk_file_filter_set_name (filter, _("All files"));
+	gtk_file_chooser_add_filter (GTK_FILE_CHOOSER (widget), filter);
+
+	if (connection && s_8021x) {
+		filename = nm_setting_802_1x_get_pac_file (s_8021x);
+		if (filename)
+			gtk_file_chooser_set_filename (GTK_FILE_CHOOSER (widget), filename);
+	}
+
 	widget = inner_auth_combo_init (method, connection, s_8021x, secrets_only);
 	inner_auth_combo_changed_cb (widget, (gpointer) method);
 
 	if (secrets_only) {
-		widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_ttls_anon_identity_label"));
+		widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_fast_anon_identity_label"));
 		gtk_widget_hide (widget);
-		widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_ttls_anon_identity_entry"));
+		widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_fast_anon_identity_entry"));
 		gtk_widget_hide (widget);
-		widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_ttls_ca_cert_label"));
+		widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_fast_pac_provision_checkbutton"));
 		gtk_widget_hide (widget);
-		widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_ttls_ca_cert_button"));
+		widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_fast_pac_provision_combo"));
 		gtk_widget_hide (widget);
-		widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_ttls_inner_auth_label"));
+		widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_fast_pac_file_label"));
 		gtk_widget_hide (widget);
-		widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_ttls_inner_auth_combo"));
+		widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_fast_pac_file_button"));
+		gtk_widget_hide (widget);
+		widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_fast_inner_auth_label"));
+		gtk_widget_hide (widget);
+		widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_fast_inner_auth_combo"));
 		gtk_widget_hide (widget);
 	}
 

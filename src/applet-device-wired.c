@@ -17,7 +17,7 @@
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  *
- * (C) Copyright 2008 - 2011 Red Hat, Inc.
+ * (C) Copyright 2008 - 2012 Red Hat, Inc.
  * (C) Copyright 2008 Novell, Inc.
  */
 
@@ -190,7 +190,7 @@ wired_add_menu_item (NMDevice *device,
 	gboolean carrier = TRUE;
 
 	all = applet_get_all_connections (applet);
-	connections = utils_filter_connections_for_device (device, all);
+	connections = nm_device_filter_connections (device, all);
 	g_slist_free (all);
 
 	if (n_devices > 1) {
@@ -263,7 +263,7 @@ wired_device_state_changed (NMDevice *device,
 		connection = applet_find_active_connection_for_device (device, applet, NULL);
 		if (connection) {
 			const char *id;
-			s_con = NM_SETTING_CONNECTION (nm_connection_get_setting (connection, NM_TYPE_SETTING_CONNECTION));
+			s_con = nm_connection_get_setting_connection (connection);
 			id = s_con ? nm_setting_connection_get_id (s_con) : NULL;
 			if (id)
 				str = g_strdup_printf (_("You are now connected to '%s'."), id);
@@ -291,7 +291,7 @@ wired_get_icon (NMDevice *device,
 
 	id = nm_device_get_iface (NM_DEVICE (device));
 	if (connection) {
-		s_con = NM_SETTING_CONNECTION (nm_connection_get_setting (connection, NM_TYPE_SETTING_CONNECTION));
+		s_con = nm_connection_get_setting_connection (connection);
 		id = nm_setting_connection_get_id (s_con);
 	}
 
@@ -316,7 +316,7 @@ wired_get_icon (NMDevice *device,
 		break;
 	}
 
-	return pixbuf;
+	return pixbuf ? g_object_ref (pixbuf) : NULL;
 }
 
 /* PPPoE */
@@ -376,7 +376,7 @@ pppoe_update_ui (NMConnection *connection, NMPppoeInfo *info)
 	g_return_if_fail (NM_IS_CONNECTION (connection));
 	g_return_if_fail (info != NULL);
 
-	s_pppoe = (NMSettingPPPOE *) nm_connection_get_setting (connection, NM_TYPE_SETTING_PPPOE);
+	s_pppoe = nm_connection_get_setting_pppoe (connection);
 	g_return_if_fail (s_pppoe != NULL);
 
 	s = nm_setting_pppoe_get_username (s_pppoe);
@@ -408,7 +408,7 @@ get_pppoe_secrets_cb (GtkDialog *dialog, gint response, gpointer user_data)
 {
 	SecretsRequest *req = user_data;
 	NMPppoeInfo *info = (NMPppoeInfo *) req;
-	NMSetting *setting;
+	NMSettingPPPOE *setting;
 	GHashTable *settings = NULL;
 	GHashTable *secrets;
 	GError *error = NULL;
@@ -422,10 +422,10 @@ get_pppoe_secrets_cb (GtkDialog *dialog, gint response, gpointer user_data)
 		goto done;
 	}
 
-	setting = nm_connection_get_setting (req->connection, NM_TYPE_SETTING_PPPOE);
-	pppoe_update_setting (NM_SETTING_PPPOE (setting), info);
+	setting = nm_connection_get_setting_pppoe (req->connection);
+	pppoe_update_setting (setting, info);
 
-	secrets = nm_setting_to_hash (setting, NM_SETTING_HASH_FLAG_ONLY_SECRETS);
+	secrets = nm_setting_to_hash (NM_SETTING (setting), NM_SETTING_HASH_FLAG_ONLY_SECRETS);
 	if (!secrets) {
 		g_set_error (&error,
 		             NM_SECRET_AGENT_ERROR,
@@ -612,7 +612,7 @@ wired_get_secrets (SecretsRequest *req, GError **error)
 	NMSettingConnection *s_con;
 	const char *ctype;
 
-	s_con = NM_SETTING_CONNECTION (nm_connection_get_setting (req->connection, NM_TYPE_SETTING_CONNECTION));
+	s_con = nm_connection_get_setting_connection (req->connection);
 	if (!s_con) {
 		g_set_error (error,
 		             NM_SECRET_AGENT_ERROR,

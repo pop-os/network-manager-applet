@@ -18,7 +18,7 @@
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  *
- * (C) Copyright 2007 - 2011 Red Hat, Inc.
+ * (C) Copyright 2007 - 2012 Red Hat, Inc.
  */
 
 #include <config.h>
@@ -157,7 +157,7 @@ get_model_for_connection (NMConnectionList *list, NMRemoteConnection *connection
 	GtkTreeModel *model;
 	const char *str_type;
 
-	s_con = (NMSettingConnection *) nm_connection_get_setting (NM_CONNECTION (connection), NM_TYPE_SETTING_CONNECTION);
+	s_con = nm_connection_get_setting_connection (NM_CONNECTION (connection));
 	g_assert (s_con);
 	str_type = nm_setting_connection_get_connection_type (s_con);
 
@@ -285,7 +285,7 @@ update_connection_row (GtkListStore *store,
 	NMSettingConnection *s_con;
 	char *last_used;
 
-	s_con = NM_SETTING_CONNECTION (nm_connection_get_setting (NM_CONNECTION (connection), NM_TYPE_SETTING_CONNECTION));
+	s_con = nm_connection_get_setting_connection (NM_CONNECTION (connection));
 	g_assert (s_con);
 
 	last_used = format_last_used (nm_setting_connection_get_timestamp (s_con));
@@ -620,16 +620,36 @@ connection_updated_cb (NMConnectionList *list,
                        gpointer user_data)
 {
 	EditInfo *info = user_data;
+	GtkListStore *store;
+	GtkTreeIter iter;
 
-	if (!error) {
-		GtkListStore *store;
-		GtkTreeIter iter;
-
-		store = get_model_for_connection (list, connection);
-		g_assert (store);
-		if (get_iter_for_connection (GTK_TREE_MODEL (store), connection, &iter))
-			update_connection_row (store, &iter, connection);
+	if (error) {
+		/* Log the error and do nothing.  We don't want to destroy the dialog
+		 * because that's not really useful.  If there's a hard error, the user
+		 * will just have to cancel.  This better handles the case where
+		 * PolicyKit authentication is required, but the user accidentally gets
+		 * their password wrong.  Which used to close the dialog, and that's
+		 * completely unhelpful.  Instead just let them hit 'Save' again.
+		 */
+		g_warning ("Error updating connection '%s': (%d) %s",
+		           nm_connection_get_id (NM_CONNECTION (connection)),
+		           error->code,
+		           error->message);
+		return;
 	}
+
+	/* Success */
+	store = get_model_for_connection (list, connection);
+	g_assert (store);
+	if (get_iter_for_connection (GTK_TREE_MODEL (store), connection, &iter))
+		update_connection_row (store, &iter, connection);
+
+	/* This callback might be triggered long after it's caller was called,
+	 * if for example we've had to get PolicyKit authentication to perform
+	 * the update.  So only signal we're done with editing when all that is
+	 * complete.
+	 */
+	g_signal_emit (info->list, list_signals[EDITING_DONE], 0, 0);
 
 	g_hash_table_remove (list->editors, connection);
 	g_free (info);
@@ -662,7 +682,6 @@ edit_done_cb (NMConnectionEditor *editor, gint response, GError *error, gpointer
 			                   NM_REMOTE_CONNECTION (connection),
 			                   connection_updated_cb,
 			                   info);
-			g_signal_emit (info->list, list_signals[EDITING_DONE], 0, 0);
 		} else {
 			g_warning ("%s: invalid connection after update: bug in the "
 			           "'%s' / '%s' invalid: %d",
@@ -674,9 +693,6 @@ edit_done_cb (NMConnectionEditor *editor, gint response, GError *error, gpointer
 			                       edit_error,
 			                       NULL);
 			g_error_free (edit_error);
-
-			g_signal_emit (info->list, list_signals[EDITING_DONE], 0, 0);
-			g_free (info);
 		}
 		break;
 	case GTK_RESPONSE_NONE:
@@ -768,7 +784,7 @@ delete_clicked (GtkButton *button, gpointer user_data)
 		return;
 	}
 
-	s_con = (NMSettingConnection *) nm_connection_get_setting (NM_CONNECTION (connection), NM_TYPE_SETTING_CONNECTION);
+	s_con = nm_connection_get_setting_connection (NM_CONNECTION (connection));
 	g_assert (s_con);
 	id = nm_setting_connection_get_id (s_con);
 
@@ -808,8 +824,7 @@ pk_button_selection_changed_cb (GtkTreeSelection *selection, gpointer user_data)
 	if (gtk_tree_selection_get_selected (selection, &model, &iter)) {
 		connection = get_active_connection (info->treeview);
 		if (connection) {
-			s_con = (NMSettingConnection *) nm_connection_get_setting (NM_CONNECTION (connection),
-			                                                           NM_TYPE_SETTING_CONNECTION);
+			s_con = nm_connection_get_setting_connection (NM_CONNECTION (connection));
 			g_assert (s_con);
 	
 			sensitive = !nm_setting_connection_get_read_only (s_con);
@@ -839,7 +854,7 @@ vpn_list_selection_changed_cb (GtkTreeSelection *selection, gpointer user_data)
 	if (!connection)
 		goto done;
 
-	s_vpn = NM_SETTING_VPN (nm_connection_get_setting (NM_CONNECTION (connection), NM_TYPE_SETTING_VPN));
+	s_vpn = nm_connection_get_setting_vpn (NM_CONNECTION (connection));
 	service_type = s_vpn ? nm_setting_vpn_get_service_type (s_vpn) : NULL;
 
 	if (!service_type)
@@ -870,7 +885,7 @@ import_success_cb (NMConnection *connection, gpointer user_data)
 	const char *message = _("The connection editor dialog could not be initialized due to an unknown error.");
 
 	/* Basic sanity checks of the connection */
-	s_con = NM_SETTING_CONNECTION (nm_connection_get_setting (connection, NM_TYPE_SETTING_CONNECTION));
+	s_con = nm_connection_get_setting_connection (connection);
 	if (!s_con) {
 		s_con = NM_SETTING_CONNECTION (nm_setting_connection_new ());
 		nm_connection_add_setting (connection, NM_SETTING (s_con));
@@ -899,7 +914,7 @@ import_success_cb (NMConnection *connection, gpointer user_data)
 		g_free (s);
 	}
 
-	s_vpn = NM_SETTING_VPN (nm_connection_get_setting (connection, NM_TYPE_SETTING_VPN));
+	s_vpn = nm_connection_get_setting_vpn (connection);
 	service_type = s_vpn ? nm_setting_vpn_get_service_type (s_vpn) : NULL;
 
 	if (!service_type || !strlen (service_type)) {
@@ -1071,6 +1086,14 @@ nm_connection_list_class_init (NMConnectionListClass *klass)
 		              G_TYPE_NONE, 1, G_TYPE_INT);
 }
 
+static void
+column_header_clicked_cb (GtkTreeViewColumn *treeviewcolumn, gpointer user_data)
+{
+	gint sort_col_id = GPOINTER_TO_INT (user_data);
+
+	gtk_tree_view_column_set_sort_column_id (treeviewcolumn, sort_col_id);
+}
+
 static GtkTreeView *
 add_connection_treeview (NMConnectionList *self, const char *prefix)
 {
@@ -1081,15 +1104,18 @@ add_connection_treeview (NMConnectionList *self, const char *prefix)
 	GValue val = { 0, };
 	char *name;
 	GtkTreeView *treeview;
+	GtkTreeViewColumn *column1, *column2;
 
 	name = g_strdup_printf ("%s_list", prefix);
 	treeview = GTK_TREE_VIEW (GTK_WIDGET (gtk_builder_get_object (self->gui, name)));
 	g_free (name);
 	gtk_tree_view_set_headers_visible (treeview, TRUE);
 
+
 	/* Model */
 	model = GTK_TREE_MODEL (gtk_list_store_new (4, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_UINT64, G_TYPE_OBJECT));
 	sort_model = gtk_tree_model_sort_new_with_model (model);
+	gtk_tree_sortable_set_default_sort_func (GTK_TREE_SORTABLE (sort_model), NULL, NULL, NULL);
 	gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (sort_model),
 	                                      COL_TIMESTAMP, GTK_SORT_DESCENDING);
 	gtk_tree_view_set_model (treeview, sort_model);
@@ -1111,6 +1137,16 @@ add_connection_treeview (NMConnectionList *self, const char *prefix)
 	                                             -1, _("Last Used"), renderer,
 	                                             "text", COL_LAST_USED,
 	                                             NULL);
+
+	/* Make columns clickable and sortable */
+	gtk_tree_view_set_headers_clickable (treeview, TRUE);
+	column1 = gtk_tree_view_get_column (treeview, 0);
+	g_signal_connect (column1, "clicked", G_CALLBACK (column_header_clicked_cb), GINT_TO_POINTER (COL_ID));
+	gtk_tree_view_column_set_sort_column_id (column1, COL_ID);
+
+	column2 = gtk_tree_view_get_column (treeview, 1);
+	g_signal_connect (column2, "clicked", G_CALLBACK (column_header_clicked_cb), GINT_TO_POINTER (COL_TIMESTAMP));
+	gtk_tree_view_column_set_sort_column_id (column2, COL_TIMESTAMP);
 
 	/* Selection */
 	selection = gtk_tree_view_get_selection (treeview);
@@ -1377,7 +1413,7 @@ connection_added (NMRemoteSettings *settings,
 	if (!store)
 		return;
 
-	s_con = NM_SETTING_CONNECTION (nm_connection_get_setting (NM_CONNECTION (connection), NM_TYPE_SETTING_CONNECTION));
+	s_con = nm_connection_get_setting_connection (NM_CONNECTION (connection));
 
 	last_used = format_last_used (nm_setting_connection_get_timestamp (s_con));
 
@@ -1584,7 +1620,7 @@ connections_read (NMRemoteSettings *settings, EditData *data)
 		const char *type;
 		ActionInfo *info;
 
-		s_con = (NMSettingConnection *) nm_connection_get_setting (connection, NM_TYPE_SETTING_CONNECTION);
+		s_con = nm_connection_get_setting_connection (connection);
 		type = nm_setting_connection_get_connection_type (s_con);
 		info = find_action_info (data->self, nm_connection_lookup_setting_type (type), "edit");
 		if (info != NULL)

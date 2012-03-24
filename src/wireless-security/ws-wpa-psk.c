@@ -97,7 +97,7 @@ fill_connection (WirelessSecurity *parent, NMConnection *connection)
 	const char *mode;
 	gboolean is_adhoc = FALSE;
 
-	s_wireless = NM_SETTING_WIRELESS (nm_connection_get_setting (connection, NM_TYPE_SETTING_WIRELESS));
+	s_wireless = nm_connection_get_setting_wireless (connection);
 	g_assert (s_wireless);
 
 	mode = nm_setting_wireless_get_mode (s_wireless);
@@ -163,6 +163,7 @@ ws_wpa_psk_new (NMConnection *connection, gboolean secrets_only)
 	if (!parent)
 		return NULL;
 
+	parent->adhoc_compatible = FALSE;
 	sec = (WirelessSecurityWPAPSK *) parent;
 
 	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "wpa_psk_entry"));
