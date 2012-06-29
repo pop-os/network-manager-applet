@@ -12,7 +12,8 @@ override_dh_auto_configure:
 	dh_auto_configure -- \
 		--libexecdir=/usr/lib/NetworkManager \
 		--disable-more-warnings \
-		--with-gtkver=3
+		--enable-migration \
+		--with-gtkver=3 \
 
 override_dh_auto_clean:
 	dh_auto_clean
