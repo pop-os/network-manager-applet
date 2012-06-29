@@ -19,51 +19,6 @@ You have another version of autoconf.  It may work, but is not guaranteed to.
 If you have problems, you may need to regenerate the build system entirely.
 To do so, use the procedure documented by the package, typically `autoreconf'.])])
 
-dnl AM_GCONF_SOURCE_2
-dnl Defines GCONF_SCHEMA_CONFIG_SOURCE which is where you should install schemas
-dnl  (i.e. pass to gconftool-2
-dnl Defines GCONF_SCHEMA_FILE_DIR which is a filesystem directory where
-dnl  you should install foo.schemas files
-dnl
-
-AC_DEFUN([AM_GCONF_SOURCE_2],
-[
-  if test "x$GCONF_SCHEMA_INSTALL_SOURCE" = "x"; then
-    GCONF_SCHEMA_CONFIG_SOURCE=`gconftool-2 --get-default-source`
-  else
-    GCONF_SCHEMA_CONFIG_SOURCE=$GCONF_SCHEMA_INSTALL_SOURCE
-  fi
-
-  AC_ARG_WITH([gconf-source],
-	      AC_HELP_STRING([--with-gconf-source=sourceaddress],
-			     [Config database for installing schema files.]),
-	      [GCONF_SCHEMA_CONFIG_SOURCE="$withval"],)
-
-  AC_SUBST(GCONF_SCHEMA_CONFIG_SOURCE)
-  AC_MSG_RESULT([Using config source $GCONF_SCHEMA_CONFIG_SOURCE for schema installation])
-
-  if test "x$GCONF_SCHEMA_FILE_DIR" = "x"; then
-    GCONF_SCHEMA_FILE_DIR='$(sysconfdir)/gconf/schemas'
-  fi
-
-  AC_ARG_WITH([gconf-schema-file-dir],
-	      AC_HELP_STRING([--with-gconf-schema-file-dir=dir],
-			     [Directory for installing schema files.]),
-	      [GCONF_SCHEMA_FILE_DIR="$withval"],)
-
-  AC_SUBST(GCONF_SCHEMA_FILE_DIR)
-  AC_MSG_RESULT([Using $GCONF_SCHEMA_FILE_DIR as install directory for schema files])
-
-  AC_ARG_ENABLE(schemas-install,
-  	AC_HELP_STRING([--disable-schemas-install],
-		       [Disable the schemas installation]),
-     [case ${enableval} in
-       yes|no) ;;
-       *) AC_MSG_ERROR([bad value ${enableval} for --enable-schemas-install]) ;;
-      esac])
-  AM_CONDITIONAL([GCONF_SCHEMAS_INSTALL], [test "$enable_schemas_install" != no])
-])
-
 # Copyright (C) 1995-2002 Free Software Foundation, Inc.
 # Copyright (C) 2001-2003,2004 Red Hat, Inc.
 #
@@ -556,6 +511,90 @@ AC_DEFUN([GNOME_MAINTAINER_MODE_DEFINES],
 
 	AC_SUBST(DISABLE_DEPRECATED)
 ])
+
+dnl GLIB_GSETTINGS
+dnl Defines GSETTINGS_SCHEMAS_INSTALL which controls whether
+dnl the schema should be compiled
+dnl
+
+AC_DEFUN([GLIB_GSETTINGS],
+[
+  m4_pattern_allow([AM_V_GEN])
+  AC_ARG_ENABLE(schemas-compile,
+                AS_HELP_STRING([--disable-schemas-compile],
+                               [Disable regeneration of gschemas.compiled on install]),
+                [case ${enableval} in
+                  yes) GSETTINGS_DISABLE_SCHEMAS_COMPILE=""  ;;
+                  no)  GSETTINGS_DISABLE_SCHEMAS_COMPILE="1" ;;
+                  *) AC_MSG_ERROR([bad value ${enableval} for --enable-schemas-compile]) ;;
+                 esac])
+  AC_SUBST([GSETTINGS_DISABLE_SCHEMAS_COMPILE])
+  PKG_PROG_PKG_CONFIG([0.16])
+  AC_SUBST(gsettingsschemadir, [${datadir}/glib-2.0/schemas])
+  if test x$cross_compiling != xyes; then
+    GLIB_COMPILE_SCHEMAS=`$PKG_CONFIG --variable glib_compile_schemas gio-2.0`
+  else
+    AC_PATH_PROG(GLIB_COMPILE_SCHEMAS, glib-compile-schemas)
+  fi
+  AC_SUBST(GLIB_COMPILE_SCHEMAS)
+  if test "x$GLIB_COMPILE_SCHEMAS" = "x"; then
+    ifelse([$2],,[AC_MSG_ERROR([glib-compile-schemas not found.])],[$2])
+  else
+    ifelse([$1],,[:],[$1])
+  fi
+
+  GSETTINGS_RULES='
+.PHONY : uninstall-gsettings-schemas install-gsettings-schemas clean-gsettings-schemas
+
+mostlyclean-am: clean-gsettings-schemas
+
+gsettings__enum_file = $(addsuffix .enums.xml,$(gsettings_ENUM_NAMESPACE))
+
+%.gschema.valid: %.gschema.xml $(gsettings__enum_file)
+	$(AM_V_GEN) if test -f "$<"; then d=; else d="$(srcdir)/"; fi; $(GLIB_COMPILE_SCHEMAS) --strict --dry-run $(addprefix --schema-file=,$(gsettings__enum_file)) --schema-file=$${d}$< && touch [$]@
+
+all-am: $(gsettings_SCHEMAS:.xml=.valid)
+uninstall-am: uninstall-gsettings-schemas
+install-data-am: install-gsettings-schemas
+
+.SECONDARY: $(gsettings_SCHEMAS)
+
+install-gsettings-schemas: $(gsettings_SCHEMAS) $(gsettings__enum_file)
+	@$(NORMAL_INSTALL)
+	if test -n "$^"; then \
+		test -z "$(gsettingsschemadir)" || $(MKDIR_P) "$(DESTDIR)$(gsettingsschemadir)"; \
+		$(INSTALL_DATA) $^ "$(DESTDIR)$(gsettingsschemadir)"; \
+		test -n "$(GSETTINGS_DISABLE_SCHEMAS_COMPILE)$(DESTDIR)" || $(GLIB_COMPILE_SCHEMAS) $(gsettingsschemadir); \
+	fi
+
+uninstall-gsettings-schemas:
+	@$(NORMAL_UNINSTALL)
+	@list='\''$(gsettings_SCHEMAS) $(gsettings__enum_file)'\''; test -n "$(gsettingsschemadir)" || list=; \
+	files=`for p in $$list; do echo $$p; done | sed -e '\''s|^.*/||'\''`; \
+	test -n "$$files" || exit 0; \
+	echo " ( cd '\''$(DESTDIR)$(gsettingsschemadir)'\'' && rm -f" $$files ")"; \
+	cd "$(DESTDIR)$(gsettingsschemadir)" && rm -f $$files
+	test -n "$(GSETTINGS_DISABLE_SCHEMAS_COMPILE)$(DESTDIR)" || $(GLIB_COMPILE_SCHEMAS) $(gsettingsschemadir)
+
+clean-gsettings-schemas:
+	rm -f $(gsettings_SCHEMAS:.xml=.valid) $(gsettings__enum_file)
+
+ifdef gsettings_ENUM_NAMESPACE
+$(gsettings__enum_file): $(gsettings_ENUM_FILES)
+	$(AM_V_GEN) glib-mkenums --comments '\''<!-- @comment@ -->'\'' --fhead "<schemalist>" --vhead "  <@type@ id='\''$(gsettings_ENUM_NAMESPACE).@EnumName@'\''>" --vprod "    <value nick='\''@valuenick@'\'' value='\''@valuenum@'\''/>" --vtail "  </@type@>" --ftail "</schemalist>" [$]^ > [$]@.tmp && mv [$]@.tmp [$]@
+endif
+'
+  _GSETTINGS_SUBST(GSETTINGS_RULES)
+])
+
+dnl _GSETTINGS_SUBST(VARIABLE)
+dnl Abstract macro to do either _AM_SUBST_NOTMAKE or AC_SUBST
+AC_DEFUN([_GSETTINGS_SUBST],
+[
+AC_SUBST([$1])
+m4_ifdef([_AM_SUBST_NOTMAKE], [_AM_SUBST_NOTMAKE([$1])])
+]
+)
 
 # nls.m4 serial 5 (gettext-0.18)
 dnl Copyright (C) 1995-2003, 2005-2006, 2008-2010 Free Software Foundation,
@@ -1781,6 +1820,7 @@ AC_SUBST([am__untar])
 ]) # _AM_PROG_TAR
 
 m4_include([m4/compiler_warnings.m4])
+m4_include([m4/glib-makefile.m4])
 m4_include([m4/intltool.m4])
 m4_include([m4/libtool.m4])
 m4_include([m4/ltoptions.m4])

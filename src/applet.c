@@ -15,7 +15,7 @@
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  *
- * Copyright (C) 2004 - 2011 Red Hat, Inc.
+ * Copyright (C) 2004 - 2012 Red Hat, Inc.
  * Copyright (C) 2005 - 2008 Novell, Inc.
  *
  * This applet used the GNOME Wireless Applet as a skeleton to build from.
@@ -64,7 +64,6 @@
 #include <nm-active-connection.h>
 #include <nm-secret-agent.h>
 
-#include <gconf/gconf-client.h>
 #include <libnotify/notify.h>
 
 #include "applet.h"
@@ -78,7 +77,7 @@
 #include "nm-wireless-dialog.h"
 #include "applet-vpn-request.h"
 #include "utils.h"
-#include "gconf-helpers.h"
+#include "shell-watcher.h"
 
 #define NOTIFY_CAPS_ACTIONS_KEY "actions"
 
@@ -621,7 +620,7 @@ applet_menu_item_add_complex_separator_helper (GtkWidget *menu,
 {
 	GtkWidget *menu_item = gtk_image_menu_item_new ();
 #if GTK_CHECK_VERSION(3,1,6)
-        GtkWidget *box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
+	GtkWidget *box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
 #else
 	GtkWidget *box = gtk_hbox_new (FALSE, 0);
 #endif
@@ -909,7 +908,7 @@ notify_dont_show_cb (NotifyNotification *notify,
 	    && strcmp (id, PREF_DISABLE_VPN_NOTIFICATIONS))
 		return;
 
-	gconf_client_set_bool (applet->gconf_client, id, TRUE, NULL);
+	g_settings_set_boolean (applet->gsettings, id, TRUE);
 }
 
 void applet_do_notify_with_pref (NMApplet *applet,
@@ -918,7 +917,7 @@ void applet_do_notify_with_pref (NMApplet *applet,
                                  const char *icon,
                                  const char *pref)
 {
-	if (gconf_client_get_bool (applet->gconf_client, pref, NULL))
+	if (g_settings_get_boolean (applet->gsettings, pref))
 		return;
 	
 	applet_do_notify (applet, NOTIFY_URGENCY_LOW, summary, message, icon, pref,
@@ -1096,9 +1095,9 @@ vpn_connection_state_changed (NMVPNConnection *vpn,
 	case NM_VPN_CONNECTION_STATE_ACTIVATED:
 		banner = nm_vpn_connection_get_banner (vpn);
 		if (banner && strlen (banner))
-			msg = g_strdup_printf ("VPN connection has been successfully established.\n\n%s\n", banner);
+			msg = g_strdup_printf (_("VPN connection has been successfully established.\n\n%s\n"), banner);
 		else
-			msg = g_strdup ("VPN connection has been successfully established.\n");
+			msg = g_strdup (_("VPN connection has been successfully established.\n"));
 
 		title = _("VPN Login Message");
 		applet_do_notify_with_pref (applet, title, msg, "gnome-lockscreen",
@@ -1793,22 +1792,18 @@ nma_set_notifications_enabled_cb (GtkWidget *widget, NMApplet *applet)
 
 	state = gtk_check_menu_item_get_active (GTK_CHECK_MENU_ITEM (widget));
 
-	gconf_client_set_bool (applet->gconf_client,
-	                       PREF_DISABLE_CONNECTED_NOTIFICATIONS,
-	                       !state,
-	                       NULL);
-	gconf_client_set_bool (applet->gconf_client,
-	                       PREF_DISABLE_DISCONNECTED_NOTIFICATIONS,
-	                       !state,
-	                       NULL);
-	gconf_client_set_bool (applet->gconf_client,
-	                       PREF_DISABLE_VPN_NOTIFICATIONS,
-	                       !state,
-	                       NULL);
-	gconf_client_set_bool (applet->gconf_client,
-	                       PREF_SUPPRESS_WIRELESS_NETWORKS_AVAILABLE,
-	                       !state,
-	                       NULL);
+	g_settings_set_boolean (applet->gsettings,
+	                        PREF_DISABLE_CONNECTED_NOTIFICATIONS,
+	                        !state);
+	g_settings_set_boolean (applet->gsettings,
+	                        PREF_DISABLE_DISCONNECTED_NOTIFICATIONS,
+	                        !state);
+	g_settings_set_boolean (applet->gsettings,
+	                        PREF_DISABLE_VPN_NOTIFICATIONS,
+	                        !state);
+	g_settings_set_boolean (applet->gsettings,
+	                        PREF_SUPPRESS_WIRELESS_NETWORKS_AVAILABLE,
+	                        !state);
 }
 
 /*
@@ -1961,10 +1956,10 @@ nma_context_menu_update (NMApplet *applet)
 	/* Enabled notifications */
 	g_signal_handler_block (G_OBJECT (applet->notifications_enabled_item),
 	                        applet->notifications_enabled_toggled_id);
-	if (   gconf_client_get_bool (applet->gconf_client, PREF_DISABLE_CONNECTED_NOTIFICATIONS, NULL)
-	    && gconf_client_get_bool (applet->gconf_client, PREF_DISABLE_DISCONNECTED_NOTIFICATIONS, NULL)
-	    && gconf_client_get_bool (applet->gconf_client, PREF_DISABLE_VPN_NOTIFICATIONS, NULL)
-	    && gconf_client_get_bool (applet->gconf_client, PREF_SUPPRESS_WIRELESS_NETWORKS_AVAILABLE, NULL))
+	if (   g_settings_get_boolean (applet->gsettings, PREF_DISABLE_CONNECTED_NOTIFICATIONS)
+	    && g_settings_get_boolean (applet->gsettings, PREF_DISABLE_DISCONNECTED_NOTIFICATIONS)
+	    && g_settings_get_boolean (applet->gsettings, PREF_DISABLE_VPN_NOTIFICATIONS)
+	    && g_settings_get_boolean (applet->gsettings, PREF_SUPPRESS_WIRELESS_NETWORKS_AVAILABLE))
 		notifications_enabled = FALSE;
 	gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM (applet->notifications_enabled_item), notifications_enabled);
 	g_signal_handler_unblock (G_OBJECT (applet->notifications_enabled_item),
@@ -2403,6 +2398,8 @@ foo_set_initial_state (gpointer data)
 static void
 foo_client_setup (NMApplet *applet)
 {
+	NMClientPermission perm;
+
 	applet->nm_client = nm_client_new ();
 	if (!applet->nm_client)
 		return;
@@ -2423,11 +2420,11 @@ foo_client_setup (NMApplet *applet)
 	g_signal_connect (applet->nm_client, "permission-changed",
 	                  G_CALLBACK (foo_manager_permission_changed),
 	                  applet);
+
 	/* Initialize permissions - the initial 'permission-changed' signal is emitted from NMClient constructor, and thus not caught */
-	applet->permissions[NM_CLIENT_PERMISSION_ENABLE_DISABLE_NETWORK] = nm_client_get_permission_result (applet->nm_client, NM_CLIENT_PERMISSION_ENABLE_DISABLE_NETWORK);
-	applet->permissions[NM_CLIENT_PERMISSION_ENABLE_DISABLE_WIFI] = nm_client_get_permission_result (applet->nm_client, NM_CLIENT_PERMISSION_ENABLE_DISABLE_WIFI);
-	applet->permissions[NM_CLIENT_PERMISSION_ENABLE_DISABLE_WWAN] = nm_client_get_permission_result (applet->nm_client, NM_CLIENT_PERMISSION_ENABLE_DISABLE_WWAN);
-	applet->permissions[NM_CLIENT_PERMISSION_ENABLE_DISABLE_WIMAX] = nm_client_get_permission_result (applet->nm_client, NM_CLIENT_PERMISSION_ENABLE_DISABLE_WIMAX);
+	for (perm = NM_CLIENT_PERMISSION_NONE + 1; perm <= NM_CLIENT_PERMISSION_LAST; perm++) {
+		applet->permissions[perm] = nm_client_get_permission_result (applet->nm_client, perm);
+	}
 
 	if (nm_client_get_manager_running (applet->nm_client))
 		g_idle_add (foo_set_initial_state, applet);
@@ -2955,7 +2952,7 @@ applet_agent_registered_cb (AppletAgent *agent,
 	NMApplet *applet = NM_APPLET (user_data);
 
 	/* If the shell is running and the agent just got registered, unregister it */
-	if (   (applet->shell_version >= 3.4)
+	if (   (nm_shell_watcher_version_at_least (applet->shell_watcher, 3, 4))
 	    && nm_secret_agent_get_registered (NM_SECRET_AGENT (agent))) {
 		g_message ("Stopping registered applet secret agent because GNOME Shell is running");
 		nm_secret_agent_unregister (NM_SECRET_AGENT (agent));
@@ -3136,6 +3133,10 @@ status_icon_size_changed_cb (GtkStatusIcon *icon,
                              gint size,
                              NMApplet *applet)
 {
+	if (getenv ("NMA_SIZE_DEBUG")) {
+		g_message ("%s(): status icon size now %d", __func__, size);
+	}
+
 	/* icon_size may be 0 if for example the panel hasn't given us any space
 	 * yet.  We'll get resized later, but for now just load the 16x16 icons.
 	 */
@@ -3249,55 +3250,16 @@ delayed_start_agent (gpointer user_data)
 	return FALSE;
 }
 
-static gboolean
-get_shell_version (GDBusProxy *proxy, gdouble *out_version)
-{
-	GVariant *v;
-	char *version, *p;
-	gboolean success = FALSE;
-	gdouble converted;
-
-	/* Ask for the shell's version */
-	v = g_dbus_proxy_get_cached_property (proxy, "ShellVersion");
-	if (v) {
-		g_warn_if_fail (g_variant_is_of_type (v, G_VARIANT_TYPE_STRING));
-		version = g_variant_dup_string (v, NULL);
-		if (version) {
-			/* Terminate at the second dot if there is one */
-			p = strchr (version, '.');
-			if (p && (p = strchr (p + 1, '.')))
-				*p = '\0';
-
-			converted = strtod (version, NULL);
-			g_warn_if_fail (converted > 0);
-			g_warn_if_fail (converted < 1000);
-			if (converted > 0 && converted < 1000) {
-				*out_version = converted;
-				success = TRUE;
-			}
-			g_free (version);
-		}
-		g_variant_unref (v);
-	}
-	return success;
-}
-
 static void
-name_owner_changed_cb (GDBusProxy *proxy, GParamSpec *pspec, gpointer user_data)
+shell_version_changed_cb (NMShellWatcher *watcher, GParamSpec *pspec, gpointer user_data)
 {
 	NMApplet *applet = user_data;
-	char *owner;
 
-	owner = g_dbus_proxy_get_name_owner (proxy);
-	if (owner) {
-		applet->shell_version = 0;
+	if (nm_shell_watcher_version_at_least (watcher, 3, 4)) {
 		if (applet->agent_start_id)
 			g_source_remove (applet->agent_start_id);
 
-		if (   get_shell_version (proxy, &applet->shell_version)
-		    && applet->shell_version >= 3.4
-		    && applet->agent
-		    && nm_secret_agent_get_registered (NM_SECRET_AGENT (applet->agent))) {
+		if (applet->agent && nm_secret_agent_get_registered (NM_SECRET_AGENT (applet->agent))) {
 			g_message ("Stopping applet secret agent because GNOME Shell appeared");
 			nm_secret_agent_unregister (NM_SECRET_AGENT (applet->agent));
 		}
@@ -3305,14 +3267,12 @@ name_owner_changed_cb (GDBusProxy *proxy, GParamSpec *pspec, gpointer user_data)
 		/* If the shell quit and our agent wasn't already registered, do it
 		 * now on a delay (just in case the shell is restarting.
 		 */
-		applet->shell_version = 0;
 		if (applet->agent_start_id)
 			g_source_remove (applet->agent_start_id);
 
 		if (nm_secret_agent_get_registered (NM_SECRET_AGENT (applet->agent)) == FALSE)
 			applet->agent_start_id = g_timeout_add_seconds (4, delayed_start_agent, applet);
 	}
-	g_free (owner);
 }
 #endif
 
@@ -3354,33 +3314,6 @@ dbus_setup (NMApplet *applet, GError **error)
 	return success;
 }
 
-static void
-add_cb (NMRemoteSettings *settings,
-        NMRemoteConnection *connection,
-        GError *error,
-        gpointer user_data)
-{
-	NMConnection *c = user_data;
-
-	if (error) {
-		g_warning ("Failed to move connection '%s' to NetworkManager system settings: %s",
-		           nm_connection_get_id (c),
-		           error->message);
-	}
-	g_object_unref (c);
-}
-
-static void
-import_cb (NMConnection *connection, gpointer user_data)
-{
-	NMApplet *applet = user_data;
-
-	if (!nm_remote_settings_add_connection (applet->settings, connection, add_cb, g_object_ref (connection))) {
-		g_warning ("Failed to move connection '%s' to NetworkManager system settings.",
-		           nm_connection_get_id (connection));
-	}
-}
-
 static GObject *
 constructor (GType type,
              guint n_props,
@@ -3402,15 +3335,7 @@ constructor (GType type,
 		goto error;
 	}
 
-	applet->gconf_client = gconf_client_get_default ();
-	if (!applet->gconf_client)
-		goto error;
-
-	/* Note that we don't care about change notifications for prefs values... */
-	gconf_client_add_dir (applet->gconf_client,
-	                      APPLET_PREFS_PATH,
-	                      GCONF_CLIENT_PRELOAD_ONELEVEL,
-	                      NULL);
+	applet->gsettings = g_settings_new (APPLET_PREFS_SCHEMA);
 
 	/* Load pixmaps and create applet widgets */
 	if (!setup_widgets (applet))
@@ -3427,8 +3352,22 @@ constructor (GType type,
 	}
 	applet->settings = nm_remote_settings_new (applet->bus);
 
-	/* Move user connections to the system */
-	nm_gconf_move_connections_to_system (import_cb, applet);
+#ifdef BUILD_MIGRATION_TOOL
+	{
+		char *argv[2] = { LIBEXECDIR "/nm-applet-migration-tool", NULL };
+		int status;
+
+		/* Move user connections to the system */
+		if (!g_spawn_sync (NULL, argv, NULL, 0, NULL, NULL,
+						   NULL, NULL, &status, &error)) {
+			g_warning ("Could not run nm-applet-migration-tool: %s",
+					   error->message);
+			g_error_free (error);
+		} else if (!WIFEXITED (status) || WEXITSTATUS (status) != 0) {
+			g_warning ("nm-applet-migration-tool exited with error");
+		}
+	}
+#endif
 
 	applet->agent = applet_agent_new ();
 	g_assert (applet->agent);
@@ -3469,19 +3408,11 @@ constructor (GType type,
 
 #if GLIB_CHECK_VERSION(2,26,0)
 	/* Watch GNOME Shell so we can unregister our applet agent if it appears */
-	applet->shell_proxy = g_dbus_proxy_new_for_bus_sync (G_BUS_TYPE_SESSION,
-	                                                     G_DBUS_PROXY_FLAGS_DO_NOT_AUTO_START,
-	                                                     NULL,
-	                                                     "org.gnome.Shell",
-	                                                     "/org/gnome/Shell",
-	                                                     "org.gnome.Shell",
-	                                                     NULL,
-	                                                     NULL);
-	g_signal_connect (applet->shell_proxy,
-	                  "notify::g-name-owner",
-	                  G_CALLBACK (name_owner_changed_cb),
+	applet->shell_watcher = nm_shell_watcher_new ();
+	g_signal_connect (applet->shell_watcher,
+	                  "notify::shell-version",
+	                  G_CALLBACK (shell_version_changed_cb),
 	                  applet);
-	name_owner_changed_cb (applet->shell_proxy, NULL, applet);
 #endif
 
 	return G_OBJECT (applet);
@@ -3522,12 +3453,8 @@ static void finalize (GObject *object)
 	if (applet->info_dialog_ui)
 		g_object_unref (applet->info_dialog_ui);
 
-	if (applet->gconf_client) {
-		gconf_client_remove_dir (applet->gconf_client,
-		                         APPLET_PREFS_PATH,
-		                         NULL);
-		g_object_unref (applet->gconf_client);
-	}
+	if (applet->gsettings)
+		g_object_unref (applet->gsettings);
 
 	if (applet->status_icon)
 		g_object_unref (applet->status_icon);
@@ -3551,8 +3478,8 @@ static void finalize (GObject *object)
 		dbus_g_connection_unref (applet->session_bus);
 
 #if GLIB_CHECK_VERSION(2,26,0)
-	if (applet->shell_proxy)
-		g_object_unref (applet->shell_proxy);
+	if (applet->shell_watcher)
+		g_object_unref (applet->shell_watcher);
 #endif
 	if (applet->agent_start_id)
 		g_source_remove (applet->agent_start_id);

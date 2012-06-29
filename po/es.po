@@ -15,14 +15,14 @@ msgstr ""
 "Project-Id-Version: networkmanager-applet.master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=NetworkManager&keywords=I18N+L10N&component=nm-applet\n"
-"POT-Creation-Date: 2012-03-23 08:27+0000\n"
-"PO-Revision-Date: 2012-03-23 11:09+0100\n"
+"POT-Creation-Date: 2012-06-25 18:50+0000\n"
+"PO-Revision-Date: 2012-06-26 20:17+0200\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.11.4\n"
+"X-Generator: Gtranslator 2.91.4\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: ../nm-applet.desktop.in.h:1
@@ -33,59 +33,6 @@ msgstr "Red"
 msgid "Manage your network connections"
 msgstr "Gestione sus conexiones de red"
 
-#: ../nm-applet.schemas.in.h:1
-msgid "Disable connected notifications"
-msgstr "Desactivar las notificaciones de conexión"
-
-#: ../nm-applet.schemas.in.h:2
-msgid "Set this to TRUE to disable notifications when connecting to a network."
-msgstr ""
-"Establecer esto a cierto para desactivar las notificaciones al conectarse "
-"con una red."
-
-#: ../nm-applet.schemas.in.h:3
-msgid "Disable disconnected notifications"
-msgstr "Desactivar las notificaciones de desconexión"
-
-#: ../nm-applet.schemas.in.h:4
-msgid ""
-"Set this to TRUE to disable notifications when disconnecting from a network."
-msgstr ""
-"Establecer esto a cierto para desactivar las notificaciones al desconectarse "
-"de una red."
-
-#: ../nm-applet.schemas.in.h:5
-msgid "Suppress networks available notifications"
-msgstr "Suprimir notificaciones de redes disponibles"
-
-#: ../nm-applet.schemas.in.h:6
-msgid ""
-"Set this to TRUE to disable notifications when wireless networks are "
-"available."
-msgstr ""
-"Establecer esto a cierto para desactivar las notificaciones cuando hay redes "
-"inalámbricas disponibles."
-
-#: ../nm-applet.schemas.in.h:7
-msgid "Stamp"
-msgstr "Marca de tiempo"
-
-#: ../nm-applet.schemas.in.h:8
-msgid "Used to determine whether settings should be migrated to a new version."
-msgstr ""
-"Se usa para determinar si los ajustes de deben migrar a la nueva versión."
-
-#: ../nm-applet.schemas.in.h:9
-msgid "Disable WiFi Create"
-msgstr "Desactivar la creación de red inalámbrica"
-
-#: ../nm-applet.schemas.in.h:10
-msgid ""
-"Set to TRUE to disable creation of adhoc networks when using the applet."
-msgstr ""
-"Establecer esto a cierto para desactivar la creación de redes inalámbricas "
-"adhoc al usar la aplicación."
-
 #: ../nm-connection-editor.desktop.in.h:1
 #: ../src/connection-editor/nm-connection-editor.ui.h:1
 msgid "Network Connections"
@@ -95,9 +42,109 @@ msgstr "Conexiones de red"
 msgid "Manage and change your network connection settings"
 msgstr "Gestione y cambie sus ajustes de la conexión de red"
 
+#: ../org.gnome.nm-applet.gschema.xml.in.h:1
+msgid "Disable connected notifications"
+msgstr "Desactivar las notificaciones de conexión"
+
+#: ../org.gnome.nm-applet.gschema.xml.in.h:2
+#| msgid ""
+#| "Set this to TRUE to disable notifications when connecting to a network."
+msgid "Set this to true to disable notifications when connecting to a network."
+msgstr ""
+"Establecer esto a cierto para desactivar las notificaciones al conectarse "
+"con una red."
+
+#: ../org.gnome.nm-applet.gschema.xml.in.h:3
+msgid "Disable disconnected notifications"
+msgstr "Desactivar las notificaciones de desconexión"
+
+#: ../org.gnome.nm-applet.gschema.xml.in.h:4
+#| msgid ""
+#| "Set this to TRUE to disable notifications when disconnecting from a "
+#| "network."
+msgid ""
+"Set this to true to disable notifications when disconnecting from a network."
+msgstr ""
+"Establecer esto a cierto para desactivar las notificaciones al desconectarse "
+"de una red."
+
+#: ../org.gnome.nm-applet.gschema.xml.in.h:5
+#| msgid "Disable connected notifications"
+msgid "Disable VPN notifications"
+msgstr "Desactivar las notificaciones de VPN"
+
+#: ../org.gnome.nm-applet.gschema.xml.in.h:6
+#| msgid ""
+#| "Set this to TRUE to disable notifications when disconnecting from a "
+#| "network."
+msgid ""
+"Set this to true to disable notifications when connecting to or "
+"disconnecting from a VPN."
+msgstr ""
+"Establecer esto a cierto para desactivar las notificaciones al conectarse o "
+"desconectarse de una VPN."
+
+#: ../org.gnome.nm-applet.gschema.xml.in.h:7
+msgid "Suppress networks available notifications"
+msgstr "Suprimir notificaciones de redes disponibles"
+
+#: ../org.gnome.nm-applet.gschema.xml.in.h:8
+#| msgid ""
+#| "Set this to TRUE to disable notifications when wireless networks are "
+#| "available."
+msgid ""
+"Set this to true to disable notifications when wireless networks are "
+"available."
+msgstr ""
+"Establecer esto a cierto para desactivar las notificaciones cuando hay redes "
+"inalámbricas disponibles."
+
+#: ../org.gnome.nm-applet.gschema.xml.in.h:9
+msgid "Stamp"
+msgstr "Marca de tiempo"
+
+#: ../org.gnome.nm-applet.gschema.xml.in.h:10
+msgid "Used to determine whether settings should be migrated to a new version."
+msgstr ""
+"Se usa para determinar si los ajustes de deben migrar a la nueva versión."
+
+#: ../org.gnome.nm-applet.gschema.xml.in.h:11
+msgid "Disable WiFi Create"
+msgstr "Desactivar la creación de red inalámbrica"
+
+#: ../org.gnome.nm-applet.gschema.xml.in.h:12
+#| msgid ""
+#| "Set to TRUE to disable creation of adhoc networks when using the applet."
+msgid ""
+"Set to true to disable creation of adhoc networks when using the applet."
+msgstr ""
+"Establecer esto a cierto para desactivar la creación de redes inalámbricas "
+"adhoc al usar la miniaplicación."
+
+#: ../org.gnome.nm-applet.gschema.xml.in.h:13
+#| msgid "Choose CA Certificate"
+msgid "Ignore CA certificate"
+msgstr "Ignorar certificado CA"
+
+#: ../org.gnome.nm-applet.gschema.xml.in.h:14
+msgid ""
+"Set this to true to disable warnings about CA certificates in EAP "
+"authentication."
+msgstr ""
+"Establecer esto a cierto para desactivar las notificaciones sobre "
+"certificados CA en autenticación EAP."
+
+#: ../org.gnome.nm-applet.gschema.xml.in.h:15
+msgid ""
+"Set this to true to disable warnings about CA certificates in phase 2 of EAP "
+"authentication."
+msgstr ""
+"Establecer esto a cierto para desactivar las notificaciones sobre "
+"certificados CA en la fase 2 de la autenticación EAP."
+
 #: ../src/applet-device-bt.c:174 ../src/applet-device-cdma.c:399
 #: ../src/applet-device-gsm.c:446 ../src/applet-device-wired.c:240
-#: ../src/applet-device-wifi.c:864 ../src/applet-device-wimax.c:279
+#: ../src/applet-device-wifi.c:862 ../src/applet-device-wimax.c:279
 msgid "Available"
 msgstr "Disponible"
 
@@ -110,7 +157,7 @@ msgstr "Ahora está conectado a «%s»."
 
 #: ../src/applet-device-bt.c:204 ../src/applet-device-cdma.c:445
 #: ../src/applet-device-gsm.c:492 ../src/applet-device-wired.c:273
-#: ../src/applet-device-wifi.c:1268 ../src/applet-device-wimax.c:427
+#: ../src/applet-device-wifi.c:1264 ../src/applet-device-wimax.c:427
 msgid "Connection Established"
 msgstr "Se ha establecido la conexión"
 
@@ -135,12 +182,12 @@ msgstr "Configurando la conexión de banda ancha móvil «%s»…"
 #, c-format
 msgid "User authentication required for mobile broadband connection '%s'..."
 msgstr ""
-"Se necesita autenticación de usuario para la conexión de banda ancha móvil «%"
-"s»…"
+"Se necesita autenticación de usuario para la conexión de banda ancha móvil "
+"«%s»…"
 
 #: ../src/applet-device-bt.c:240 ../src/applet-device-cdma.c:490
 #: ../src/applet-device-gsm.c:537 ../src/applet-device-wimax.c:473
-#: ../src/applet.c:2503
+#: ../src/applet.c:2500
 #, c-format
 msgid "Requesting a network address for '%s'..."
 msgstr "Solicitando una dirección de red para «%s»…"
@@ -334,7 +381,7 @@ msgid "Wired Network"
 msgstr "Red cableada"
 
 #. Notify user of unmanaged or unavailable device
-#: ../src/applet-device-wired.c:232 ../src/applet.c:1509
+#: ../src/applet-device-wired.c:232 ../src/applet.c:1508
 msgid "disconnected"
 msgstr "desconectado"
 
@@ -375,108 +422,104 @@ msgstr "Autenticación DSL"
 msgid "_Connect to Hidden Wireless Network..."
 msgstr "_Conectar a una red inalámbrica oculta…"
 
-#: ../src/applet-device-wifi.c:150
+#: ../src/applet-device-wifi.c:148
 msgid "Create _New Wireless Network..."
 msgstr "Crear una red inalámbrica _nueva…"
 
-#: ../src/applet-device-wifi.c:294
+#: ../src/applet-device-wifi.c:292
 msgid "(none)"
 msgstr "(ninguna)"
 
-#: ../src/applet-device-wifi.c:792
+#: ../src/applet-device-wifi.c:790
 #, c-format
 msgid "Wireless Networks (%s)"
 msgstr "Redes inalámbricas (%s)"
 
-#: ../src/applet-device-wifi.c:794
+#: ../src/applet-device-wifi.c:792
 #, c-format
 msgid "Wireless Network (%s)"
 msgstr "Red inalámbrica (%s)"
 
-#: ../src/applet-device-wifi.c:796
+#: ../src/applet-device-wifi.c:794
 msgid "Wireless Network"
 msgid_plural "Wireless Networks"
 msgstr[0] "Red inalámbrica"
 msgstr[1] "Redes inalámbricas"
 
-#: ../src/applet-device-wifi.c:829
+#: ../src/applet-device-wifi.c:827
 msgid "wireless is disabled"
 msgstr "la red inalámbrica está desactivada"
 
-#: ../src/applet-device-wifi.c:830
+#: ../src/applet-device-wifi.c:828
 msgid "wireless is disabled by hardware switch"
 msgstr "la red inalámbrica está desactivada por el interruptor físico"
 
-#: ../src/applet-device-wifi.c:891
+#: ../src/applet-device-wifi.c:889
 msgid "More networks"
 msgstr "Más redes"
 
-#: ../src/applet-device-wifi.c:1071
+#: ../src/applet-device-wifi.c:1068
 msgid "Wireless Networks Available"
 msgstr "Redes inalámbricas disponibles"
 
-#: ../src/applet-device-wifi.c:1072
+#: ../src/applet-device-wifi.c:1069
 msgid "Use the network menu to connect to a wireless network"
 msgstr "Usar el menú de red para conectarse a una red inalámbrica"
 
-#: ../src/applet-device-wifi.c:1075 ../src/applet.c:925
+#: ../src/applet-device-wifi.c:1072 ../src/applet.c:924
 msgid "Don't show this message again"
 msgstr "No mostrar este mensaje de nuevo"
 
-#: ../src/applet-device-wifi.c:1267
+#: ../src/applet-device-wifi.c:1263
 #, c-format
 msgid "You are now connected to the wireless network '%s'."
 msgstr "Ahora está conectado a la red inalámbrica «%s»."
 
-#: ../src/applet-device-wifi.c:1298
+#: ../src/applet-device-wifi.c:1294
 #, c-format
 msgid "Preparing wireless network connection '%s'..."
 msgstr "Preparando la conexión de red inalámbrica «%s»…"
 
-#: ../src/applet-device-wifi.c:1301
+#: ../src/applet-device-wifi.c:1297
 #, c-format
 msgid "Configuring wireless network connection '%s'..."
 msgstr "Configurando la conexión de red inalámbrica «%s»…"
 
-#: ../src/applet-device-wifi.c:1304
+#: ../src/applet-device-wifi.c:1300
 #, c-format
 msgid "User authentication required for wireless network '%s'..."
 msgstr "Se necesita autenticación de usuario para la conexión de red «%s»…"
 
-#: ../src/applet-device-wifi.c:1307
+#: ../src/applet-device-wifi.c:1303
 #, c-format
 msgid "Requesting a wireless network address for '%s'..."
 msgstr "Solicitando una dirección de red inalámbrica para «%s»…"
 
-#: ../src/applet-device-wifi.c:1328
+#: ../src/applet-device-wifi.c:1324
 #, c-format
 msgid "Wireless network connection '%s' active: %s (%d%%)"
 msgstr "La conexión de red inalámbrica a «%s» está activa: %s (%d%%)"
 
-#: ../src/applet-device-wifi.c:1333
+#: ../src/applet-device-wifi.c:1329
 #, c-format
 msgid "Wireless network connection '%s' active"
 msgstr "La conexión de red «%s» está activa"
 
-#: ../src/applet-device-wifi.c:1381
-#| msgid "Failed to create PAN connection: %s"
+#: ../src/applet-device-wifi.c:1377
 msgid "Failed to activate connection"
 msgstr "Falló al activar la conexión"
 
-#: ../src/applet-device-wifi.c:1383 ../src/applet-device-wifi.c:1402
-#: ../src/applet.c:491 ../src/applet.c:535 ../src/applet.c:561
-#| msgid "Unknown"
+#: ../src/applet-device-wifi.c:1379 ../src/applet-device-wifi.c:1398
+#: ../src/applet.c:490 ../src/applet.c:534 ../src/applet.c:560
 msgid "Unknown error"
 msgstr "Error desconocido"
 
-#: ../src/applet-device-wifi.c:1386 ../src/applet-device-wifi.c:1405
-#: ../src/applet.c:494 ../src/applet.c:564
-#| msgid "Connection add failed"
+#: ../src/applet-device-wifi.c:1382 ../src/applet-device-wifi.c:1401
+#: ../src/applet.c:493 ../src/applet.c:563
 msgid "Connection failure"
 msgstr "Falló la conexión"
 
-#: ../src/applet-device-wifi.c:1400
-#| msgid "Could not edit new connection"
+#: ../src/applet-device-wifi.c:1396
 msgid "Failed to add new connection"
 msgstr "Falló al añadir la conexión nueva"
 
@@ -742,27 +785,23 @@ msgstr "Se necesita una contraseña para conectar con «%s»"
 msgid "Password:"
 msgstr "Contraseña:"
 
-#: ../src/applet.c:489
-#| msgid "Failed to create PAN connection: %s"
+#: ../src/applet.c:488
 msgid "Failed to add/activate connection"
 msgstr "Falló al añadir/activar la conexión"
 
-#: ../src/applet.c:533
-#| msgid "disconnected"
+#: ../src/applet.c:532
 msgid "Device disconnect failed"
 msgstr "Falló al desconectar el dispositivo"
 
-#: ../src/applet.c:538
-#| msgid "Disconnected"
+#: ../src/applet.c:537
 msgid "Disconnect failure"
 msgstr "Falló al desconectar"
 
-#: ../src/applet.c:559
-#| msgid "Connection add failed"
+#: ../src/applet.c:558
 msgid "Connection activation failed"
 msgstr "Falló al activar la conexión"
 
-#: ../src/applet.c:1014
+#: ../src/applet.c:1013
 #, c-format
 msgid ""
 "\n"
@@ -772,7 +811,7 @@ msgstr ""
 "\n"
 "La conexión VPN «%s» ha fallado porque se interrumpió la conexión de red."
 
-#: ../src/applet.c:1017
+#: ../src/applet.c:1016
 #, c-format
 msgid ""
 "\n"
@@ -782,7 +821,7 @@ msgstr ""
 "La conexión de red «%s» ha fallado porque el servicio VPN se interrumpió "
 "inesperadamente."
 
-#: ../src/applet.c:1020
+#: ../src/applet.c:1019
 #, c-format
 msgid ""
 "\n"
@@ -793,7 +832,7 @@ msgstr ""
 "La conexión VPN «%s» ha fallado porque el servicio VPN devolvió una "
 "configuración no válida."
 
-#: ../src/applet.c:1023
+#: ../src/applet.c:1022
 #, c-format
 msgid ""
 "\n"
@@ -802,7 +841,7 @@ msgstr ""
 "\n"
 "La conexión VPN «%s» ha fallado porque expiró el tiempo de conexión."
 
-#: ../src/applet.c:1026
+#: ../src/applet.c:1025
 #, c-format
 msgid ""
 "\n"
@@ -811,7 +850,7 @@ msgstr ""
 "\n"
 "La conexión VPN «%s» ha fallado porque el servicio VPN no se inició a tiempo."
 
-#: ../src/applet.c:1029
+#: ../src/applet.c:1028
 #, c-format
 msgid ""
 "\n"
@@ -820,7 +859,7 @@ msgstr ""
 "\n"
 "La conexión VPN «%s» ha fallado porque el servició VPN no pudo iniciarse."
 
-#: ../src/applet.c:1032
+#: ../src/applet.c:1031
 #, c-format
 msgid ""
 "\n"
@@ -829,7 +868,7 @@ msgstr ""
 "\n"
 "La conexión VPN «%s» falló porque no había secretos VPN válidos."
 
-#: ../src/applet.c:1035
+#: ../src/applet.c:1034
 #, c-format
 msgid ""
 "\n"
@@ -838,7 +877,7 @@ msgstr ""
 "\n"
 "La conexión VPN «%s» falló porque los secretos VPN no eran válidos."
 
-#: ../src/applet.c:1042
+#: ../src/applet.c:1041
 #, c-format
 msgid ""
 "\n"
@@ -847,7 +886,7 @@ msgstr ""
 "\n"
 "La conexión VPN «%s» ha fallado."
 
-#: ../src/applet.c:1060
+#: ../src/applet.c:1059
 #, c-format
 msgid ""
 "\n"
@@ -857,7 +896,7 @@ msgstr ""
 "\n"
 "La conexión VPN «%s» se desconectó porque se interrumpió la conexión de red."
 
-#: ../src/applet.c:1063
+#: ../src/applet.c:1062
 #, c-format
 msgid ""
 "\n"
@@ -866,7 +905,7 @@ msgstr ""
 "\n"
 "La conexión VPN «%s» se desconectó porque paró el servicio VPN."
 
-#: ../src/applet.c:1069
+#: ../src/applet.c:1068
 #, c-format
 msgid ""
 "\n"
@@ -875,15 +914,30 @@ msgstr ""
 "\n"
 "La conexión VPN «%s» se ha desconectado."
 
-#: ../src/applet.c:1103
+#: ../src/applet.c:1098
+#, c-format
+msgid ""
+"VPN connection has been successfully established.\n"
+"\n"
+"%s\n"
+msgstr ""
+"La conexión VPN se ha establecido con éxito.\n"
+"\n"
+"%s\n"
+
+#: ../src/applet.c:1100
+msgid "VPN connection has been successfully established.\n"
+msgstr "La conexión VPN se ha establecido con éxito.\n"
+
+#: ../src/applet.c:1102
 msgid "VPN Login Message"
 msgstr "Mensaje de acceso VPN"
 
-#: ../src/applet.c:1109 ../src/applet.c:1117 ../src/applet.c:1167
+#: ../src/applet.c:1108 ../src/applet.c:1116 ../src/applet.c:1166
 msgid "VPN Connection Failed"
 msgstr "Falló la conexión VPN"
 
-#: ../src/applet.c:1174
+#: ../src/applet.c:1173
 #, c-format
 msgid ""
 "\n"
@@ -896,7 +950,7 @@ msgstr ""
 "\n"
 "%s"
 
-#: ../src/applet.c:1177
+#: ../src/applet.c:1176
 #, c-format
 msgid ""
 "\n"
@@ -909,139 +963,139 @@ msgstr ""
 "\n"
 "%s"
 
-#: ../src/applet.c:1497
+#: ../src/applet.c:1496
 msgid "device not ready (firmware missing)"
 msgstr "el dispositivo no está listo (falta el firmware)"
 
-#: ../src/applet.c:1499
+#: ../src/applet.c:1498
 msgid "device not ready"
 msgstr "el dispositivo no está listo"
 
-#: ../src/applet.c:1525
+#: ../src/applet.c:1524
 msgid "Disconnect"
 msgstr "Desconectar"
 
-#: ../src/applet.c:1539
+#: ../src/applet.c:1538
 msgid "device not managed"
 msgstr "el dispositivo no está gestionado"
 
-#: ../src/applet.c:1583
+#: ../src/applet.c:1582
 msgid "No network devices available"
 msgstr "No hay dispositivos de red disponibles"
 
-#: ../src/applet.c:1671
+#: ../src/applet.c:1670
 msgid "_VPN Connections"
 msgstr "Conexiones _VPN"
 
-#: ../src/applet.c:1728
+#: ../src/applet.c:1727
 msgid "_Configure VPN..."
 msgstr "_Configurar VPN…"
 
-#: ../src/applet.c:1732
+#: ../src/applet.c:1731
 msgid "_Disconnect VPN"
 msgstr "_Desconectar VPN"
 
-#: ../src/applet.c:1830
+#: ../src/applet.c:1825
 msgid "NetworkManager is not running..."
 msgstr "El Gestor de la red no se está ejecutando…"
 
-#: ../src/applet.c:1835 ../src/applet.c:2634
+#: ../src/applet.c:1830 ../src/applet.c:2631
 msgid "Networking disabled"
 msgstr "Red desactivada"
 
 #. 'Enable Networking' item
-#: ../src/applet.c:2056
+#: ../src/applet.c:2051
 msgid "Enable _Networking"
 msgstr "Activar _red"
 
 #. 'Enable Wireless' item
-#: ../src/applet.c:2065
+#: ../src/applet.c:2060
 msgid "Enable _Wireless"
 msgstr "Activar _inalámbrico"
 
 #. 'Enable Mobile Broadband' item
-#: ../src/applet.c:2074
+#: ../src/applet.c:2069
 msgid "Enable _Mobile Broadband"
 msgstr "Activar la banda ancha _móvil"
 
 #. 'Enable WiMAX Mobile Broadband' item
-#: ../src/applet.c:2083
+#: ../src/applet.c:2078
 msgid "Enable WiMA_X Mobile Broadband"
 msgstr "Activar la banda ancha móvil WiMA_X"
 
 #. Toggle notifications item
-#: ../src/applet.c:2094
+#: ../src/applet.c:2089
 msgid "Enable N_otifications"
 msgstr "Activar n_otificaciones"
 
 #. 'Connection Information' item
-#: ../src/applet.c:2105
+#: ../src/applet.c:2100
 msgid "Connection _Information"
 msgstr "_Información de la conexión"
 
 #. 'Edit Connections...' item
-#: ../src/applet.c:2115
+#: ../src/applet.c:2110
 msgid "Edit Connections..."
 msgstr "Editar las conexiones…"
 
 #. Help item
-#: ../src/applet.c:2129
+#: ../src/applet.c:2124
 msgid "_Help"
 msgstr "Ay_uda"
 
 #. About item
-#: ../src/applet.c:2138
+#: ../src/applet.c:2133
 msgid "_About"
 msgstr "_Acerca de"
 
-#: ../src/applet.c:2315
+#: ../src/applet.c:2310
 msgid "Disconnected"
 msgstr "Desconectado"
 
-#: ../src/applet.c:2316
+#: ../src/applet.c:2311
 msgid "The network connection has been disconnected."
 msgstr "La conexión de red se ha desconectado."
 
-#: ../src/applet.c:2497
+#: ../src/applet.c:2494
 #, c-format
 msgid "Preparing network connection '%s'..."
 msgstr "Preparando la conexión de red «%s»…"
 
-#: ../src/applet.c:2500
+#: ../src/applet.c:2497
 #, c-format
 msgid "User authentication required for network connection '%s'..."
 msgstr "Se necesita autenticación de usuario para la conexión de red «%s»…"
 
-#: ../src/applet.c:2506
+#: ../src/applet.c:2503
 #, c-format
 msgid "Network connection '%s' active"
 msgstr "Conexión de red «%s» activa"
 
-#: ../src/applet.c:2589
+#: ../src/applet.c:2586
 #, c-format
 msgid "Starting VPN connection '%s'..."
 msgstr "Iniciando conexión VPN «%s»…"
 
-#: ../src/applet.c:2592
+#: ../src/applet.c:2589
 #, c-format
 msgid "User authentication required for VPN connection '%s'..."
 msgstr "Se necesita autenticación de usuario para la conexión VPN «%s»…"
 
-#: ../src/applet.c:2595
+#: ../src/applet.c:2592
 #, c-format
 msgid "Requesting a VPN address for '%s'..."
 msgstr "Solicitando una dirección VPN para «%s»…"
 
-#: ../src/applet.c:2598
+#: ../src/applet.c:2595
 #, c-format
 msgid "VPN connection '%s' active"
 msgstr "Conexión VPN «%s» activa"
 
-#: ../src/applet.c:2639
+#: ../src/applet.c:2636
 msgid "No network connection"
 msgstr "Sin conexión de red"
 
-#: ../src/applet.c:3394
+#: ../src/applet.c:3327
 msgid "NetworkManager Applet"
 msgstr "Miniaplicación Gestor de la red"
 
@@ -1207,11 +1261,15 @@ msgstr "ID del cliente D_HCP:"
 
 #: ../src/connection-editor/ce-page-ip4.ui.h:12
 #: ../src/connection-editor/ce-page-ip6.ui.h:10
+#: ../src/connection-editor/page-ip4.c:308
+#: ../src/connection-editor/page-ip6.c:307
 msgid "S_earch domains:"
 msgstr "Dominios de bú_squeda:"
 
 #: ../src/connection-editor/ce-page-ip4.ui.h:13
 #: ../src/connection-editor/ce-page-ip6.ui.h:11
+#: ../src/connection-editor/page-ip4.c:299
+#: ../src/connection-editor/page-ip6.c:298
 msgid "_DNS servers:"
 msgstr "Servidores _DNS:"
 
@@ -1589,20 +1647,20 @@ msgstr "Crear…"
 
 #: ../src/connection-editor/ip4-routes-dialog.c:745
 #: ../src/connection-editor/ip6-routes-dialog.c:687
-#: ../src/connection-editor/page-ip4.c:900
-#: ../src/connection-editor/page-ip6.c:866
+#: ../src/connection-editor/page-ip4.c:911
+#: ../src/connection-editor/page-ip6.c:877
 msgid "Address"
 msgstr "Dirección"
 
 #: ../src/connection-editor/ip4-routes-dialog.c:762
-#: ../src/connection-editor/page-ip4.c:917
+#: ../src/connection-editor/page-ip4.c:928
 msgid "Netmask"
 msgstr "Máscara de red"
 
 #: ../src/connection-editor/ip4-routes-dialog.c:779
 #: ../src/connection-editor/ip6-routes-dialog.c:721
-#: ../src/connection-editor/page-ip4.c:934
-#: ../src/connection-editor/page-ip6.c:900
+#: ../src/connection-editor/page-ip4.c:945
+#: ../src/connection-editor/page-ip6.c:911
 msgid "Gateway"
 msgstr "Puerta de enlace"
 
@@ -1612,7 +1670,7 @@ msgid "Metric"
 msgstr "Métrica"
 
 #: ../src/connection-editor/ip6-routes-dialog.c:704
-#: ../src/connection-editor/page-ip6.c:883
+#: ../src/connection-editor/page-ip6.c:894
 msgid "Prefix"
 msgstr "Prefijo"
 
@@ -1626,7 +1684,7 @@ msgstr "DSL"
 msgid "Could not load DSL user interface."
 msgstr "No se pudo cargar la interfaz de usuario para DSL."
 
-#: ../src/connection-editor/page-dsl.c:231
+#: ../src/connection-editor/page-dsl.c:232
 #, c-format
 msgid "DSL connection %d"
 msgstr "Conexión DSL %d"
@@ -1678,16 +1736,26 @@ msgstr "Sólo enlace local"
 msgid "Disabled"
 msgstr "Inhabilitado"
 
-#: ../src/connection-editor/page-ip4.c:832
+#: ../src/connection-editor/page-ip4.c:297
+#: ../src/connection-editor/page-ip6.c:296
+msgid "Additional _DNS servers:"
+msgstr "Servidores _DNS adicionales:"
+
+#: ../src/connection-editor/page-ip4.c:306
+#: ../src/connection-editor/page-ip6.c:305
+msgid "Additional s_earch domains:"
+msgstr "Dominios de bú_squeda adicionales:"
+
+#: ../src/connection-editor/page-ip4.c:843
 #, c-format
 msgid "Editing IPv4 routes for %s"
 msgstr "Editando las rutas IPv4 para %s"
 
-#: ../src/connection-editor/page-ip4.c:981
+#: ../src/connection-editor/page-ip4.c:992
 msgid "IPv4 Settings"
 msgstr "Ajustes de IPv4"
 
-#: ../src/connection-editor/page-ip4.c:983
+#: ../src/connection-editor/page-ip4.c:994
 msgid "Could not load IPv4 user interface."
 msgstr "No se pudo cargar la interfaz de usuario para IPv4."
 
@@ -1696,7 +1764,7 @@ msgid "Automatic, addresses only"
 msgstr "Automático, sólo direcciones"
 
 #: ../src/connection-editor/page-ip6.c:155
-#: ../src/wireless-security/eap-method.c:285
+#: ../src/wireless-security/eap-method.c:280
 msgid "Ignore"
 msgstr "Ignorar"
 
@@ -1704,16 +1772,16 @@ msgstr "Ignorar"
 msgid "Automatic, DHCP only"
 msgstr "Automático, DHCP únicamente"
 
-#: ../src/connection-editor/page-ip6.c:798
+#: ../src/connection-editor/page-ip6.c:809
 #, c-format
 msgid "Editing IPv6 routes for %s"
 msgstr "Editando las rutas IPv6 para %s"
 
-#: ../src/connection-editor/page-ip6.c:945
+#: ../src/connection-editor/page-ip6.c:956
 msgid "IPv6 Settings"
 msgstr "Ajustes de IPv6"
 
-#: ../src/connection-editor/page-ip6.c:947
+#: ../src/connection-editor/page-ip6.c:958
 msgid "Could not load IPv6 user interface."
 msgstr "No se pudo cargar la interfaz de usuario para IPv6."
 
@@ -1914,16 +1982,16 @@ msgstr "Seguridad inalámbrica"
 msgid "Could not load WiFi security user interface."
 msgstr "No se pudo cargar la interfaz de usuario de seguridad inalámbrica."
 
-#: ../src/connection-editor/nm-connection-editor.c:101
+#: ../src/connection-editor/nm-connection-editor.c:102
 #, c-format
 msgid "Editing %s"
 msgstr "Editando %s"
 
-#: ../src/connection-editor/nm-connection-editor.c:105
+#: ../src/connection-editor/nm-connection-editor.c:106
 msgid "Editing un-named connection"
 msgstr "Editando la conexión sin nombre"
 
-#: ../src/connection-editor/nm-connection-editor.c:291
+#: ../src/connection-editor/nm-connection-editor.c:292
 msgid ""
 "The connection editor could not find some required resources (the .ui file "
 "was not found)."
@@ -1931,23 +1999,23 @@ msgstr ""
 "El editor de la conexión no pudo encontrar algunos archivos de recursos (no "
 "se encontró el archivo .iu)."
 
-#: ../src/connection-editor/nm-connection-editor.c:394
+#: ../src/connection-editor/nm-connection-editor.c:395
 msgid "Error creating connection editor dialog."
 msgstr "Error al crear el diálogo del editor de conexión."
 
-#: ../src/connection-editor/nm-connection-editor.c:406
+#: ../src/connection-editor/nm-connection-editor.c:407
 msgid "_Save"
 msgstr "_Guardar"
 
-#: ../src/connection-editor/nm-connection-editor.c:407
+#: ../src/connection-editor/nm-connection-editor.c:408
 msgid "Save any changes made to this connection."
 msgstr "Guardar cualquier cambio realizado en esta conexión."
 
-#: ../src/connection-editor/nm-connection-editor.c:408
+#: ../src/connection-editor/nm-connection-editor.c:409
 msgid "_Save..."
 msgstr "_Guardar…"
 
-#: ../src/connection-editor/nm-connection-editor.c:409
+#: ../src/connection-editor/nm-connection-editor.c:410
 msgid "Authenticate to save this connection for all users of this machine."
 msgstr ""
 "Autenticar para guardar esta conexión para todos los usuarios en este equipo."
@@ -1969,8 +2037,8 @@ msgid "Connect _automatically"
 msgstr "Conectar _automáticamente"
 
 #: ../src/connection-editor/nm-connection-editor.ui.h:11
-msgid "Available to all users"
-msgstr "Disponible para todos los usuarios"
+msgid "A_vailable to all users"
+msgstr "Disponible para _todos los usuarios"
 
 #: ../src/connection-editor/nm-connection-list.c:216
 msgid "never"
@@ -2028,7 +2096,7 @@ msgstr "Error al guardar la conexión"
 #: ../src/connection-editor/nm-connection-list.c:516
 #, c-format
 msgid "The property '%s' / '%s' is invalid: %d"
-msgstr "La propiedad «%s» / «%s» es inválida: %d"
+msgstr "La propiedad «%s» / «%s» no es válida: %d"
 
 #: ../src/connection-editor/nm-connection-list.c:523
 #: ../src/connection-editor/nm-connection-list.c:662
@@ -2167,8 +2235,8 @@ msgid ""
 "\n"
 "Error: %s."
 msgstr ""
-"No se pudo leer el archivo «%s» o no contiene información de conexión VPN que "
-"se pueda reconocer\n"
+"No se pudo leer el archivo «%s» o no contiene información de conexión VPN "
+"que se pueda reconocer\n"
 "\n"
 "Error: %s."
 
@@ -2275,8 +2343,8 @@ msgstr ""
 #, c-format
 msgid "Bluetooth configuration not possible (failed to connect to D-Bus: %s)."
 msgstr ""
-"La configuración de Bluetooth no es posible (No se pudo conectar a D-Bus: %"
-"s)."
+"La configuración de Bluetooth no es posible (No se pudo conectar a D-Bus: "
+"%s)."
 
 #: ../src/gnome-bluetooth/bt-widget.c:1022
 msgid "Bluetooth configuration not possible (failed to create D-Bus proxy)."
@@ -2473,8 +2541,8 @@ msgstr "C_rear"
 #: ../src/libnm-gtk/nm-wireless-dialog.c:1160
 #, c-format
 msgid ""
-"Passwords or encryption keys are required to access the wireless network '%"
-"s'."
+"Passwords or encryption keys are required to access the wireless network "
+"'%s'."
 msgstr ""
 "Se necesitan contraseñas o claves de cifrado para acceder a la red "
 "inalámbrica «%s»."
@@ -2516,11 +2584,11 @@ msgstr ""
 "oculta a la que quiere conectarse."
 
 #: ../src/libnm-gtk/wifi.ui.h:2
-msgid "_Wireless security:"
+msgid "Wireless _security:"
 msgstr "_Seguridad inalámbrica:"
 
 #: ../src/libnm-gtk/wifi.ui.h:4
-msgid "Co_nnection:"
+msgid "C_onnection:"
 msgstr "Co_nexión:"
 
 #: ../src/libnm-gtk/wifi.ui.h:5
@@ -2637,11 +2705,11 @@ msgstr ""
 "La miniaplicación Gestor de red no pudo encontrar algunos archivos de "
 "recursos (no se encontró el archivo .ui)."
 
-#: ../src/wireless-security/eap-method.c:279
+#: ../src/wireless-security/eap-method.c:274
 msgid "No Certificate Authority certificate chosen"
 msgstr "No se ha elegido ningún certificado CA"
 
-#: ../src/wireless-security/eap-method.c:280
+#: ../src/wireless-security/eap-method.c:275
 msgid ""
 "Not using a Certificate Authority (CA) certificate can result in connections "
 "to insecure, rogue wireless networks.  Would you like to choose a "
@@ -2651,15 +2719,15 @@ msgstr ""
 "conexiones inseguras, redes inalámbricas promiscuas. ¿Quiere elegir un "
 "certificado Certificate Authority?"
 
-#: ../src/wireless-security/eap-method.c:289
+#: ../src/wireless-security/eap-method.c:284
 msgid "Choose CA Certificate"
 msgstr "Elija un certificado CA:"
 
-#: ../src/wireless-security/eap-method.c:648
+#: ../src/wireless-security/eap-method.c:643
 msgid "DER, PEM, or PKCS#12 private keys (*.der, *.pem, *.p12)"
 msgstr "Certificados DER o PEM (*.der, *.pem, *.crt, *.cer)"
 
-#: ../src/wireless-security/eap-method.c:651
+#: ../src/wireless-security/eap-method.c:646
 msgid "DER or PEM certificates (*.der, *.pem, *.crt, *.cer)"
 msgstr "Certificados DER o PEM (*.der, *.pem, *.crt, *.cer)"
 
@@ -2902,7 +2970,8 @@ msgstr "Ín_dice WEP:"
 #~ "connection type '%s'. Contact your system administrator."
 #~ msgstr ""
 #~ "Ha habido un problema al iniciar el diálogo de autenticación para el tipo "
-#~ "de conexión VPN «%s». Póngase en contacto con su administrador de sistemas."
+#~ "de conexión VPN «%s». Póngase en contacto con su administrador de "
+#~ "sistemas."
 
 #~ msgid "Country"
 #~ msgstr "País"

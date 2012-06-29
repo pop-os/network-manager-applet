@@ -3,6 +3,9 @@
 /* Define if building universal (internal helper macro) */
 #undef AC_APPLE_UNIVERSAL_BUILD
 
+/* Define when building nm-applet-migration-tool */
+#undef BUILD_MIGRATION_TOOL
+
 /* always defined to indicate that i18n is enabled */
 #undef ENABLE_NLS
 

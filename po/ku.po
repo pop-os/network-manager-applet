@@ -1832,7 +1832,7 @@ msgid "Authenticate to save this connection for all users of this machine."
 msgstr ""
 
 #: ../src/connection-editor/nm-connection-editor.ui.h:1
-msgid "Available to all users"
+msgid "A_vailable to all users"
 msgstr ""
 
 #: ../src/connection-editor/nm-connection-editor.ui.h:2
@@ -2376,7 +2376,7 @@ msgid ""
 msgstr ""
 
 #: ../src/libnm-gtk/wifi.ui.h:2
-msgid "Co_nnection:"
+msgid "C_onnection:"
 msgstr "_Girêdan:"
 
 #: ../src/libnm-gtk/wifi.ui.h:3
@@ -2384,7 +2384,7 @@ msgid "Wireless _adapter:"
 msgstr ""
 
 #: ../src/libnm-gtk/wifi.ui.h:5
-msgid "_Wireless security:"
+msgid "Wireless _security:"
 msgstr "_Ewlehiya bêqablo:"
 
 #: ../src/main.c:73
