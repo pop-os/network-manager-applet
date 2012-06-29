@@ -1,5 +1,6 @@
-network-manager-applet (0.9.4.1-2) UNRELEASED; urgency=low
+network-manager-applet (0.9.5.95-1) UNRELEASED; urgency=low
 
+  * New upstream release (0.9.6 rc1).
   * debian/network-manager-gnome.maintscript: Use versioning scheme as
     recommended by dpkg-maintscript-helper which better handles local
     modifications and (bin)NMUs.
