@@ -5,6 +5,8 @@ network-manager-applet (0.9.5.95-1) UNRELEASED; urgency=low
     recommended by dpkg-maintscript-helper which better handles local
     modifications and (bin)NMUs.
   * Bump Build-Depends on libglib2.0-dev to (>= 2.26).
+  * Install GSettings schemas, GConf conversion script and the split-off
+    migration wizard nm-applet-migration-tool.
 
  -- Michael Biebl <biebl@debian.org>  Fri, 29 Jun 2012 20:34:26 +0200
 
