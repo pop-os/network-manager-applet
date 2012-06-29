@@ -833,7 +833,7 @@ msgid "C_onnect"
 msgstr "_متصل ہوں"
 
 #: ../src/applet.glade.h:13
-msgid "Co_nnection:"
+msgid "C_onnection:"
 msgstr "ا_تصال:"
 
 #: ../src/applet.glade.h:14
@@ -939,7 +939,7 @@ msgid "_Username:"
 msgstr "صا_رف کا نام:"
 
 #: ../src/applet.glade.h:38
-msgid "_Wireless security:"
+msgid "Wireless _security:"
 msgstr "_وائیرلیس سیکورٹی:"
 
 #: ../src/connection-editor/ce-page.c:69
@@ -1664,7 +1664,7 @@ msgid "Authenticate to save this connection for all users of this machine."
 msgstr "اس اتصال کو اس مشین کے تمام صارفین کے لیے محفوظ کرنے کی تصدیق."
 
 #: ../src/connection-editor/nm-connection-editor.glade.h:1
-msgid "Available to all users"
+msgid "A_vailable to all users"
 msgstr "دستیاب برائے تمام صارفین"
 
 #: ../src/connection-editor/nm-connection-editor.glade.h:2

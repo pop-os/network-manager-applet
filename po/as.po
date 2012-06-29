@@ -899,7 +899,7 @@ msgid "C_onnect"
 msgstr "C_onnect"
 
 #: ../src/applet.glade.h:14
-msgid "Co_nnection:"
+msgid "C_onnection:"
 msgstr "Co_nnection:"
 
 #: ../src/applet.glade.h:15
@@ -1001,7 +1001,7 @@ msgid "_Username:"
 msgstr "ব্যৱহাৰকৰ্তাৰ নাম: (_U)"
 
 #: ../src/applet.glade.h:39
-msgid "_Wireless security:"
+msgid "Wireless _security:"
 msgstr "সুৰক্ষা:"
 
 #: ../src/applet.glade.h:40
@@ -1812,7 +1812,7 @@ msgid "Authenticate to save this connection for all users of this machine."
 msgstr "এই যন্ত্ৰৰ সকলো ব্যৱহাৰকৰ্তাৰ বাবে এই সংযোগ সংৰক্ষণ কৰাৰ বাবে অনুমোদন কৰক ।"
 
 #: ../src/connection-editor/nm-connection-editor.glade.h:1
-msgid "Available to all users"
+msgid "A_vailable to all users"
 msgstr "সকলো ব্যৱহাৰকৰ্তাৰ বাবে উপস্থিত"
 
 #: ../src/connection-editor/nm-connection-editor.glade.h:2

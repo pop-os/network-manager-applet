@@ -1864,7 +1864,7 @@ msgid "Connect _automatically"
 msgstr "Konekti _aŭtomate"
 
 #: ../src/connection-editor/nm-connection-editor.ui.h:11
-msgid "Available to all users"
+msgid "A_vailable to all users"
 msgstr "Disponebla al ĉiuj uzantoj"
 
 #: ../src/connection-editor/nm-connection-list.c:216
@@ -2368,11 +2368,11 @@ msgid "Enter the name and security details of the hidden wireless network you wi
 msgstr "Entajpu la nomon kaj sekurecdetalojn de la kaŝita sendrata reto al kiu vi volas fari konekton."
 
 #: ../src/libnm-gtk/wifi.ui.h:2
-msgid "_Wireless security:"
+msgid "Wireless _security:"
 msgstr "_Sendrata sekureco:"
 
 #: ../src/libnm-gtk/wifi.ui.h:4
-msgid "Co_nnection:"
+msgid "C_onnection:"
 msgstr "Ko_nekto:"
 
 #: ../src/libnm-gtk/wifi.ui.h:5

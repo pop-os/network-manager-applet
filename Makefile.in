@@ -42,10 +42,10 @@ DIST_COMMON = README $(am__configure_deps) $(srcdir)/Makefile.am \
 	missing
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/m4/compiler_warnings.m4 \
-	$(top_srcdir)/m4/intltool.m4 $(top_srcdir)/m4/libtool.m4 \
-	$(top_srcdir)/m4/ltoptions.m4 $(top_srcdir)/m4/ltsugar.m4 \
-	$(top_srcdir)/m4/ltversion.m4 $(top_srcdir)/m4/lt~obsolete.m4 \
-	$(top_srcdir)/configure.ac
+	$(top_srcdir)/m4/glib-makefile.m4 $(top_srcdir)/m4/intltool.m4 \
+	$(top_srcdir)/m4/libtool.m4 $(top_srcdir)/m4/ltoptions.m4 \
+	$(top_srcdir)/m4/ltsugar.m4 $(top_srcdir)/m4/ltversion.m4 \
+	$(top_srcdir)/m4/lt~obsolete.m4 $(top_srcdir)/configure.ac
 am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
 	$(ACLOCAL_M4)
 am__CONFIG_DISTCLEAN_FILES = config.status config.cache config.log \
@@ -91,10 +91,10 @@ am__base_list = \
   sed '$$!N;$$!N;$$!N;$$!N;$$!N;$$!N;$$!N;s/\n/ /g' | \
   sed '$$!N;$$!N;$$!N;$$!N;s/\n/ /g'
 am__installdirs = "$(DESTDIR)$(applicationsdir)" \
-	"$(DESTDIR)$(autostartdir)" "$(DESTDIR)$(desktopdir)" \
-	"$(DESTDIR)$(schemasdir)"
-DATA = $(applications_DATA) $(autostart_DATA) $(desktop_DATA) \
-	$(schemas_DATA)
+	"$(DESTDIR)$(autostartdir)" "$(DESTDIR)$(convertdir)" \
+	"$(DESTDIR)$(desktopdir)" "$(DESTDIR)$(gsettingsschemadir)"
+DATA = $(applications_DATA) $(autostart_DATA) $(convert_DATA) \
+	$(desktop_DATA) $(gsettingsschema_DATA)
 RECURSIVE_CLEAN_TARGETS = mostlyclean-recursive clean-recursive	\
   distclean-recursive maintainer-clean-recursive
 AM_RECURSIVE_TARGETS = $(RECURSIVE_TARGETS:-recursive=) \
@@ -172,13 +172,15 @@ ECHO_T = @ECHO_T@
 EGREP = @EGREP@
 EXEEXT = @EXEEXT@
 FGREP = @FGREP@
-GCONFTOOL = @GCONFTOOL@
 GCONF_CFLAGS = @GCONF_CFLAGS@
 GCONF_LIBS = @GCONF_LIBS@
-GCONF_SCHEMA_CONFIG_SOURCE = @GCONF_SCHEMA_CONFIG_SOURCE@
-GCONF_SCHEMA_FILE_DIR = @GCONF_SCHEMA_FILE_DIR@
 GETTEXT_PACKAGE = @GETTEXT_PACKAGE@
+GLIB_CFLAGS = @GLIB_CFLAGS@
+GLIB_COMPILE_SCHEMAS = @GLIB_COMPILE_SCHEMAS@
 GLIB_GENMARSHAL = @GLIB_GENMARSHAL@
+GLIB_LIBS = @GLIB_LIBS@
+GLIB_MAKEFILE = @GLIB_MAKEFILE@
+GLIB_MKENUMS = @GLIB_MKENUMS@
 GMOFILES = @GMOFILES@
 GMSGFMT = @GMSGFMT@
 GNOME_BLUETOOTH_CFLAGS = @GNOME_BLUETOOTH_CFLAGS@
@@ -188,6 +190,7 @@ GNOME_KEYRING_LIBS = @GNOME_KEYRING_LIBS@
 GOBJECT_CFLAGS = @GOBJECT_CFLAGS@
 GOBJECT_LIBS = @GOBJECT_LIBS@
 GREP = @GREP@
+GSETTINGS_DISABLE_SCHEMAS_COMPILE = @GSETTINGS_DISABLE_SCHEMAS_COMPILE@
 GTK_CFLAGS = @GTK_CFLAGS@
 GTK_LIBS = @GTK_LIBS@
 INSTALL = @INSTALL@
@@ -201,6 +204,10 @@ INTLTOOL_EXTRACT = @INTLTOOL_EXTRACT@
 INTLTOOL_MERGE = @INTLTOOL_MERGE@
 INTLTOOL_PERL = @INTLTOOL_PERL@
 INTLTOOL_UPDATE = @INTLTOOL_UPDATE@
+INTLTOOL_V_MERGE = @INTLTOOL_V_MERGE@
+INTLTOOL_V_MERGE_OPTIONS = @INTLTOOL_V_MERGE_OPTIONS@
+INTLTOOL__v_MERGE_ = @INTLTOOL__v_MERGE_@
+INTLTOOL__v_MERGE_0 = @INTLTOOL__v_MERGE_0@
 ISO_CODES_CFLAGS = @ISO_CODES_CFLAGS@
 ISO_CODES_LIBS = @ISO_CODES_LIBS@
 LD = @LD@
@@ -278,6 +285,7 @@ datarootdir = @datarootdir@
 docdir = @docdir@
 dvidir = @dvidir@
 exec_prefix = @exec_prefix@
+gsettingsschemadir = @gsettingsschemadir@
 host = @host@
 host_alias = @host_alias@
 host_cpu = @host_cpu@
@@ -287,6 +295,8 @@ htmldir = @htmldir@
 includedir = @includedir@
 infodir = @infodir@
 install_sh = @install_sh@
+intltool__v_merge_options_ = @intltool__v_merge_options_@
+intltool__v_merge_options_0 = @intltool__v_merge_options_0@
 libdir = @libdir@
 libexecdir = @libexecdir@
 localedir = @localedir@
@@ -309,8 +319,8 @@ top_srcdir = @top_srcdir@
 ACLOCAL_AMFLAGS = -I m4 ${ACLOCAL_FLAGS}
 SUBDIRS = src icons po
 EXTRA_DIST = CONTRIBUTING intltool-extract.in intltool-merge.in \
-	intltool-update.in $(schemas_in_files) $(autostart_in_files) \
-	$(desktop_in_files)
+	intltool-update.in Makefile.glib $(schema_in_files) \
+	$(convert_DATA) $(autostart_in_files) $(desktop_in_files)
 autostartdir = $(sysconfdir)/xdg/autostart
 autostart_in_files = nm-applet.desktop.in
 autostart_DATA = $(autostart_in_files:.desktop.in=.desktop)
@@ -319,14 +329,15 @@ applications_DATA = $(autostart_DATA)
 desktopdir = $(datadir)/applications
 desktop_in_files = nm-connection-editor.desktop.in
 desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
-schemasdir = @GCONF_SCHEMA_FILE_DIR@
-schemas_in_files = nm-applet.schemas.in
-schemas_DATA = $(schemas_in_files:.schemas.in=.schemas)
+schema_in_files = org.gnome.nm-applet.gschema.xml.in
+gsettingsschema_DATA = $(schema_in_files:.xml.in=.xml)
+convertdir = $(datadir)/GConf/gsettings
+convert_DATA = nm-applet.convert
 DISTCHECK_CONFIGURE_FLAGS = --enable-more-warnings=yes
 CLEANFILES = \
 	$(autostart_DATA) \
 	$(desktop_DATA) \
-	$(schemas_DATA)
+	$(gsettingsschema_DATA)
 
 DISTCLEANFILES = intltool-extract intltool-merge intltool-update
 all: config.h
@@ -433,6 +444,26 @@ uninstall-autostartDATA:
 	test -n "$$files" || exit 0; \
 	echo " ( cd '$(DESTDIR)$(autostartdir)' && rm -f" $$files ")"; \
 	cd "$(DESTDIR)$(autostartdir)" && rm -f $$files
+install-convertDATA: $(convert_DATA)
+	@$(NORMAL_INSTALL)
+	test -z "$(convertdir)" || $(MKDIR_P) "$(DESTDIR)$(convertdir)"
+	@list='$(convert_DATA)'; test -n "$(convertdir)" || list=; \
+	for p in $$list; do \
+	  if test -f "$$p"; then d=; else d="$(srcdir)/"; fi; \
+	  echo "$$d$$p"; \
+	done | $(am__base_list) | \
+	while read files; do \
+	  echo " $(INSTALL_DATA) $$files '$(DESTDIR)$(convertdir)'"; \
+	  $(INSTALL_DATA) $$files "$(DESTDIR)$(convertdir)" || exit $$?; \
+	done
+
+uninstall-convertDATA:
+	@$(NORMAL_UNINSTALL)
+	@list='$(convert_DATA)'; test -n "$(convertdir)" || list=; \
+	files=`for p in $$list; do echo $$p; done | sed -e 's|^.*/||'`; \
+	test -n "$$files" || exit 0; \
+	echo " ( cd '$(DESTDIR)$(convertdir)' && rm -f" $$files ")"; \
+	cd "$(DESTDIR)$(convertdir)" && rm -f $$files
 install-desktopDATA: $(desktop_DATA)
 	@$(NORMAL_INSTALL)
 	test -z "$(desktopdir)" || $(MKDIR_P) "$(DESTDIR)$(desktopdir)"
@@ -453,26 +484,26 @@ uninstall-desktopDATA:
 	test -n "$$files" || exit 0; \
 	echo " ( cd '$(DESTDIR)$(desktopdir)' && rm -f" $$files ")"; \
 	cd "$(DESTDIR)$(desktopdir)" && rm -f $$files
-install-schemasDATA: $(schemas_DATA)
+install-gsettingsschemaDATA: $(gsettingsschema_DATA)
 	@$(NORMAL_INSTALL)
-	test -z "$(schemasdir)" || $(MKDIR_P) "$(DESTDIR)$(schemasdir)"
-	@list='$(schemas_DATA)'; test -n "$(schemasdir)" || list=; \
+	test -z "$(gsettingsschemadir)" || $(MKDIR_P) "$(DESTDIR)$(gsettingsschemadir)"
+	@list='$(gsettingsschema_DATA)'; test -n "$(gsettingsschemadir)" || list=; \
 	for p in $$list; do \
 	  if test -f "$$p"; then d=; else d="$(srcdir)/"; fi; \
 	  echo "$$d$$p"; \
 	done | $(am__base_list) | \
 	while read files; do \
-	  echo " $(INSTALL_DATA) $$files '$(DESTDIR)$(schemasdir)'"; \
-	  $(INSTALL_DATA) $$files "$(DESTDIR)$(schemasdir)" || exit $$?; \
+	  echo " $(INSTALL_DATA) $$files '$(DESTDIR)$(gsettingsschemadir)'"; \
+	  $(INSTALL_DATA) $$files "$(DESTDIR)$(gsettingsschemadir)" || exit $$?; \
 	done
 
-uninstall-schemasDATA:
+uninstall-gsettingsschemaDATA:
 	@$(NORMAL_UNINSTALL)
-	@list='$(schemas_DATA)'; test -n "$(schemasdir)" || list=; \
+	@list='$(gsettingsschema_DATA)'; test -n "$(gsettingsschemadir)" || list=; \
 	files=`for p in $$list; do echo $$p; done | sed -e 's|^.*/||'`; \
 	test -n "$$files" || exit 0; \
-	echo " ( cd '$(DESTDIR)$(schemasdir)' && rm -f" $$files ")"; \
-	cd "$(DESTDIR)$(schemasdir)" && rm -f $$files
+	echo " ( cd '$(DESTDIR)$(gsettingsschemadir)' && rm -f" $$files ")"; \
+	cd "$(DESTDIR)$(gsettingsschemadir)" && rm -f $$files
 
 # This directory's subdirectories are mostly independent; you can cd
 # into them and run `make' without going through this Makefile.
@@ -788,7 +819,7 @@ check: check-recursive
 all-am: Makefile $(DATA) config.h
 installdirs: installdirs-recursive
 installdirs-am:
-	for dir in "$(DESTDIR)$(applicationsdir)" "$(DESTDIR)$(autostartdir)" "$(DESTDIR)$(desktopdir)" "$(DESTDIR)$(schemasdir)"; do \
+	for dir in "$(DESTDIR)$(applicationsdir)" "$(DESTDIR)$(autostartdir)" "$(DESTDIR)$(convertdir)" "$(DESTDIR)$(desktopdir)" "$(DESTDIR)$(gsettingsschemadir)"; do \
 	  test -z "$$dir" || $(MKDIR_P) "$$dir"; \
 	done
 install: install-recursive
@@ -841,7 +872,8 @@ info: info-recursive
 info-am:
 
 install-data-am: install-applicationsDATA install-autostartDATA \
-	install-data-local install-desktopDATA install-schemasDATA
+	install-convertDATA install-desktopDATA \
+	install-gsettingsschemaDATA
 
 install-dvi: install-dvi-recursive
 
@@ -888,7 +920,8 @@ ps: ps-recursive
 ps-am:
 
 uninstall-am: uninstall-applicationsDATA uninstall-autostartDATA \
-	uninstall-desktopDATA uninstall-schemasDATA
+	uninstall-convertDATA uninstall-desktopDATA \
+	uninstall-gsettingsschemaDATA
 
 .MAKE: $(RECURSIVE_CLEAN_TARGETS) $(RECURSIVE_TARGETS) all \
 	ctags-recursive install-am install-strip tags-recursive
@@ -901,28 +934,22 @@ uninstall-am: uninstall-applicationsDATA uninstall-autostartDATA \
 	distclean-libtool distclean-tags distcleancheck distdir \
 	distuninstallcheck dvi dvi-am html html-am info info-am \
 	install install-am install-applicationsDATA \
-	install-autostartDATA install-data install-data-am \
-	install-data-local install-desktopDATA install-dvi \
-	install-dvi-am install-exec install-exec-am install-html \
-	install-html-am install-info install-info-am install-man \
-	install-pdf install-pdf-am install-ps install-ps-am \
-	install-schemasDATA install-strip installcheck installcheck-am \
+	install-autostartDATA install-convertDATA install-data \
+	install-data-am install-desktopDATA install-dvi install-dvi-am \
+	install-exec install-exec-am install-gsettingsschemaDATA \
+	install-html install-html-am install-info install-info-am \
+	install-man install-pdf install-pdf-am install-ps \
+	install-ps-am install-strip installcheck installcheck-am \
 	installdirs installdirs-am maintainer-clean \
 	maintainer-clean-generic mostlyclean mostlyclean-generic \
 	mostlyclean-libtool pdf pdf-am ps ps-am tags tags-recursive \
 	uninstall uninstall-am uninstall-applicationsDATA \
-	uninstall-autostartDATA uninstall-desktopDATA \
-	uninstall-schemasDATA
+	uninstall-autostartDATA uninstall-convertDATA \
+	uninstall-desktopDATA uninstall-gsettingsschemaDATA
 
+include $(GLIB_MAKEFILE)
 @INTLTOOL_DESKTOP_RULE@
-@INTLTOOL_SCHEMAS_RULE@
-
-install-data-local:
-@GCONF_SCHEMAS_INSTALL_TRUE@	if test -z "$(DESTDIR)" ; then \
-@GCONF_SCHEMAS_INSTALL_TRUE@	for p in $(schemas_DATA) ; do \
-@GCONF_SCHEMAS_INSTALL_TRUE@	GCONF_CONFIG_SOURCE=$(GCONF_SCHEMA_CONFIG_SOURCE) $(GCONFTOOL) --makefile-install-rule $(top_builddir)/$$p >&1 > /dev/null; \
-@GCONF_SCHEMAS_INSTALL_TRUE@	done \
-@GCONF_SCHEMAS_INSTALL_TRUE@	fi
+@INTLTOOL_XML_NOMERGE_RULE@
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.

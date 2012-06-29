@@ -31,7 +31,6 @@
 #include <gtk/gtk.h>
 #include <gdk/gdkx.h>
 
-#include <gconf/gconf-client.h>
 #include <dbus/dbus.h>
 #include <dbus/dbus-glib.h>
 #include <net/ethernet.h>
@@ -46,6 +45,7 @@
 #include <nm-active-connection.h>
 #include <nm-remote-settings.h>
 #include "applet-agent.h"
+#include "shell-watcher.h"
 
 #define NM_TYPE_APPLET			(nma_get_type())
 #define NM_APPLET(object)		(G_TYPE_CHECK_INSTANCE_CAST((object), NM_TYPE_APPLET, NMApplet))
@@ -59,12 +59,12 @@ typedef struct
 	GObjectClass	parent_class;
 } NMAppletClass; 
 
-#define APPLET_PREFS_PATH "/apps/nm-applet"
-#define PREF_DISABLE_CONNECTED_NOTIFICATIONS      APPLET_PREFS_PATH "/disable-connected-notifications"
-#define PREF_DISABLE_DISCONNECTED_NOTIFICATIONS   APPLET_PREFS_PATH "/disable-disconnected-notifications"
-#define PREF_DISABLE_VPN_NOTIFICATIONS            APPLET_PREFS_PATH "/disable-vpn-notifications"
-#define PREF_DISABLE_WIFI_CREATE                  APPLET_PREFS_PATH "/disable-wifi-create"
-#define PREF_SUPPRESS_WIRELESS_NETWORKS_AVAILABLE APPLET_PREFS_PATH "/suppress-wireless-networks-available"
+#define APPLET_PREFS_SCHEMA "org.gnome.nm-applet"
+#define PREF_DISABLE_CONNECTED_NOTIFICATIONS      "disable-connected-notifications"
+#define PREF_DISABLE_DISCONNECTED_NOTIFICATIONS   "disable-disconnected-notifications"
+#define PREF_DISABLE_VPN_NOTIFICATIONS            "disable-vpn-notifications"
+#define PREF_DISABLE_WIFI_CREATE                  "disable-wifi-create"
+#define PREF_SUPPRESS_WIRELESS_NETWORKS_AVAILABLE "suppress-wireless-networks-available"
 
 #define ICON_LAYER_LINK 0
 #define ICON_LAYER_VPN 1
@@ -85,16 +85,15 @@ typedef struct
 	DBusGConnection *session_bus;
 
 #if GLIB_CHECK_VERSION(2,26,0)
-	GDBusProxy *shell_proxy;
+	NMShellWatcher *shell_watcher;
 #endif
 	guint agent_start_id;
-	gdouble shell_version;
 
 	NMClient *nm_client;
 	NMRemoteSettings *settings;
 	AppletAgent *agent;
 
-	GConfClient *	gconf_client;
+	GSettings *gsettings;
 
 	/* Permissions */
 	NMClientPermissionResult permissions[NM_CLIENT_PERMISSION_LAST + 1];
