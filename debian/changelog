@@ -8,6 +8,9 @@ network-manager-applet (0.9.5.95-1) UNRELEASED; urgency=low
   * Install GSettings schemas, GConf conversion script and the split-off
     migration wizard nm-applet-migration-tool.
   * debian/patches/01-format-security.patch: Removed, merged upstream.
+  * debian/patches/01-fix-crash-in-migration-wizard.patch: Fix a crash in
+    g_object_unref() call when running the migration wizard. Patch
+    cherry-picked from upstream Git.
 
  -- Michael Biebl <biebl@debian.org>  Fri, 29 Jun 2012 20:34:26 +0200
 

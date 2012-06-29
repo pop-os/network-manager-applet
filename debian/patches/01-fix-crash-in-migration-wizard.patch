@@ -1,0 +1,21 @@
+commit fc5482e54613968bf83db3409fd376221e61df3c
+Author: Jiří Klimeš <jklimes@redhat.com>
+Date:   Thu Jun 28 16:07:19 2012 +0200
+
+    migration: fix a crash in g_object_unref() call
+    
+    DBusGConnection has to be freed via dbus_g_connection_unref()
+
+diff --git a/src/migration-tool.c b/src/migration-tool.c
+index c06a533..f7e44ad 100644
+--- a/src/migration-tool.c
++++ b/src/migration-tool.c
+@@ -91,7 +91,7 @@ main (int argc, char **argv)
+ 	nm_gconf_move_connections_to_system (import_cb, settings);
+ 
+ 	g_object_unref (settings);
+-	g_object_unref (bus);
++	dbus_g_connection_unref (bus);
+ 
+ 	return success ? 0 : 1;
+ }
