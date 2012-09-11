@@ -1,6 +1,8 @@
 network-manager-applet (0.9.6.2-1) UNRELEASED; urgency=low
 
   * New upstream release.
+  * Bump Build-Depends on libnm-*-dev and network-manager-dev to (>= 0.9.6).
+  * Bump Depends on network-manager to (>= 0.9.6).
 
  -- Michael Biebl <biebl@debian.org>  Tue, 11 Sep 2012 22:44:38 +0200
 
