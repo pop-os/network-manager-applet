@@ -1,6 +1,8 @@
 network-manager-applet (0.9.4.1-2) UNRELEASED; urgency=low
 
   * debian/rules: Use xz compression for binary packages.
+  * debian/control: Add network-manager-openconnect-gnome to Suggests.
+    (Closes: #670724)
 
  -- Michael Biebl <biebl@debian.org>  Tue, 10 Jul 2012 15:00:38 +0200
 
