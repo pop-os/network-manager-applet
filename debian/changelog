@@ -9,6 +9,10 @@ network-manager-applet (0.9.4.1-2) UNRELEASED; urgency=low
     and only handle VPN authentication requests with GNOME Shell < 3.4
     otherwise nm-applet and the Shell fight over who gets to handle secrets.
     Patches cherry-picked from upstream Git. (Closes: #680963)
+  * debian/patches/04-gnome-bluetooth-3.4-support.patch: Add support for
+    gnome-bluetooth 3.4 which uses GDBusProxy instead of DBusGProxy. This
+    fixes the timeouts when creating DUN connections. Patch cherry-picked from
+    upstream Git. (Closes: #680866)
 
  -- Michael Biebl <biebl@debian.org>  Tue, 10 Jul 2012 15:00:38 +0200
 
