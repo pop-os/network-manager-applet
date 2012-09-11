@@ -3,6 +3,12 @@ network-manager-applet (0.9.4.1-2) UNRELEASED; urgency=low
   * debian/rules: Use xz compression for binary packages.
   * debian/control: Add network-manager-openconnect-gnome to Suggests.
     (Closes: #670724)
+  * debian/patches/02-fix-shell-version-detecting-code.patch,
+    debian/patches/03-dont-handle-VPN-secrets-with-GNOME-Shell-3.4.patch: Fix
+    race condition on session startup when detecting the GNOME Shell version
+    and only handle VPN authentication requests with GNOME Shell < 3.4
+    otherwise nm-applet and the Shell fight over who gets to handle secrets.
+    Patches cherry-picked from upstream Git. (Closes: #680963)
 
  -- Michael Biebl <biebl@debian.org>  Tue, 10 Jul 2012 15:00:38 +0200
 

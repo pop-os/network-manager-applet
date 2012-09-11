@@ -1,2 +1,4 @@
 # Debian patches for network-manager-applet
 01-format-security.patch
+02-fix-shell-version-detecting-code.patch
+03-dont-handle-VPN-secrets-with-GNOME-Shell-3.4.patch
