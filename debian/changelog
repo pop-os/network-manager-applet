@@ -1,4 +1,4 @@
-network-manager-applet (0.9.4.1-2) UNRELEASED; urgency=low
+network-manager-applet (0.9.4.1-2) unstable; urgency=low
 
   * debian/rules: Use xz compression for binary packages.
   * debian/control: Add network-manager-openconnect-gnome to Suggests.
@@ -14,7 +14,7 @@ network-manager-applet (0.9.4.1-2) UNRELEASED; urgency=low
     fixes the timeouts when creating DUN connections. Patch cherry-picked from
     upstream Git. (Closes: #680866)
 
- -- Michael Biebl <biebl@debian.org>  Tue, 10 Jul 2012 15:00:38 +0200
+ -- Michael Biebl <biebl@debian.org>  Tue, 11 Sep 2012 21:51:03 +0200
 
 network-manager-applet (0.9.4.1-1) unstable; urgency=low
 
