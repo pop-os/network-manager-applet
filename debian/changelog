@@ -1,4 +1,4 @@
-network-manager-applet (0.9.6.2-1) UNRELEASED; urgency=low
+network-manager-applet (0.9.6.2-1) experimental; urgency=low
 
   * New upstream release.
   * Bump Build-Depends on libnm-*-dev and network-manager-dev to (>= 0.9.6).
@@ -6,7 +6,7 @@ network-manager-applet (0.9.6.2-1) UNRELEASED; urgency=low
   * debian/patches/01-fix-crash-in-migration-wizard.patch: Removed, merged
     upstream.
 
- -- Michael Biebl <biebl@debian.org>  Tue, 11 Sep 2012 22:44:38 +0200
+ -- Michael Biebl <biebl@debian.org>  Tue, 11 Sep 2012 23:06:31 +0200
 
 network-manager-applet (0.9.5.95-1) experimental; urgency=low
 
