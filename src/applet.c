@@ -74,7 +74,7 @@
 #include "applet-device-bt.h"
 #include "applet-device-wimax.h"
 #include "applet-dialogs.h"
-#include "nm-wireless-dialog.h"
+#include "nm-wifi-dialog.h"
 #include "applet-vpn-request.h"
 #include "utils.h"
 #include "shell-watcher.h"
@@ -857,6 +857,10 @@ applet_do_notify (NMApplet *applet,
 	g_return_if_fail (message != NULL);
 
 	if (!gtk_status_icon_is_embedded (applet->status_icon))
+		return;
+
+	/* if we're not registered, don't notify either */
+	if (!nm_secret_agent_get_registered (NM_SECRET_AGENT (applet->agent)))
 		return;
 
 	applet_clear_notify (applet);

@@ -1,4 +1,4 @@
-/* NetworkManager Wireless Applet -- Display wireless access points and allow user control
+/* NetworkManager Applet -- allow user control over networking
  *
  * Dan Williams <dcbw@redhat.com>
  *
@@ -35,6 +35,7 @@
 #include <nm-device.h>
 #include <nm-access-point.h>
 #include <nm-remote-settings.h>
+#include <nm-wireless-dialog.h>
 
 #define NMA_TYPE_WIRELESS_DIALOG            (nma_wireless_dialog_get_type ())
 #define NMA_WIRELESS_DIALOG(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), NMA_TYPE_WIRELESS_DIALOG, NMAWirelessDialog))
@@ -44,15 +45,21 @@
 #define NMA_WIRELESS_DIALOG_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), NMA_TYPE_WIRELESS_DIALOG, NMAWirelessDialogClass))
 
 typedef struct {
-	GtkDialog parent;
+	GObject parent;
 } NMAWirelessDialog;
 
 typedef struct {
-	GtkDialogClass parent;
+	GObjectClass parent;
 } NMAWirelessDialogClass;
 
+#if !GLIB_CHECK_VERSION(2,31,0)
+#define GLIB_DEPRECATED_FOR(x)
+#endif
+
+GLIB_DEPRECATED_FOR(nma_wifi_dialog_get_type)
 GType nma_wireless_dialog_get_type (void);
 
+GLIB_DEPRECATED_FOR(nma_wifi_dialog_new)
 GtkWidget *nma_wireless_dialog_new (NMClient *client,
 				    NMRemoteSettings *settings,
                                     NMConnection *connection,
@@ -60,20 +67,26 @@ GtkWidget *nma_wireless_dialog_new (NMClient *client,
                                     NMAccessPoint *ap,
                                     gboolean secrets_only);
 
+GLIB_DEPRECATED_FOR(nma_wifi_dialog_new_for_other)
 GtkWidget *nma_wireless_dialog_new_for_other (NMClient *client,
 					      NMRemoteSettings *settings);
 
+GLIB_DEPRECATED_FOR(nma_wifi_dialog_new_for_create)
 GtkWidget *nma_wireless_dialog_new_for_create (NMClient *client,
 					       NMRemoteSettings *settings);
 
+GLIB_DEPRECATED_FOR(nma_wifi_dialog_get_connection)
 NMConnection * nma_wireless_dialog_get_connection (NMAWirelessDialog *dialog,
                                                    NMDevice **device,
                                                    NMAccessPoint **ap);
 
+GLIB_DEPRECATED_FOR(nma_wifi_dialog_nag_user)
 GtkWidget * nma_wireless_dialog_nag_user (NMAWirelessDialog *dialog);
 
+GLIB_DEPRECATED_FOR(nma_wifi_dialog_set_nag_ignored)
 void nma_wireless_dialog_set_nag_ignored (NMAWirelessDialog *dialog, gboolean ignored);
 
+GLIB_DEPRECATED_FOR(nma_wifi_dialog_get_nag_ignored)
 gboolean nma_wireless_dialog_get_nag_ignored (NMAWirelessDialog *dialog);
 
 #endif	/* NMA_WIRELESS_DIALOG_H */
