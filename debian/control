@@ -45,6 +45,7 @@ Recommends:
  gnome-bluetooth,
  iso-codes
 Suggests:
+ network-manager-openconnect-gnome,
  network-manager-openvpn-gnome,
  network-manager-vpnc-gnome,
  network-manager-pptp-gnome
