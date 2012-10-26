@@ -1,3 +1,9 @@
+network-manager-applet (0.9.6.4-1) UNRELEASED; urgency=low
+
+  * New upstream release.
+
+ -- Michael Biebl <biebl@debian.org>  Fri, 26 Oct 2012 22:41:25 +0200
+
 network-manager-applet (0.9.6.2-1) experimental; urgency=low
 
   * New upstream release.
