@@ -8,6 +8,7 @@ Build-Depends:
  dpkg-dev (>= 1.16.1),
  autotools-dev,
  dh-autoreconf,
+ gnome-common,
  intltool,
  libdbus-glib-1-dev (>= 0.74),
  libgnome-keyring-dev,
