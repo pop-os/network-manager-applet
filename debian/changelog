@@ -34,6 +34,29 @@ network-manager-applet (0.9.5.95-1) experimental; urgency=low
 
  -- Michael Biebl <biebl@debian.org>  Fri, 29 Jun 2012 21:03:59 +0200
 
+network-manager-applet (0.9.4.1-3) unstable; urgency=low
+
+  [ Michael Biebl ]
+  * Add Build-Depends on gnome-common which is required for autoreconf.
+
+  [ Josselin Mouette ]
+  * debian/patches/05-8021x-passwords-user.patch: patch from upstream git.
+    Correctly set 802.1x passwords as agent-owned, so that they are stored
+    in the user’s keyring.
+  * debian/patches/11-user-connections.patch: new patch. Set passwords as
+    agent-owned when they need to, to allow users without root permissions
+    to easily configure their connections. (Closes: #696256)
+    The logic is:
+    - Bluetooth, CDMA and GSM connections: always user-owned
+    - WEP/WPA connections: system-owned if user has the permissions
+      (with NM’s config, that is netdev or sudo membership), user-owned
+      otherwise. The password is stored in the keyring for WPA, not for
+      WEP.
+    - WiMax / Wired connections: always system-owned (with 802.1x
+      passwords in the keyring).
+
+ -- Michael Biebl <biebl@debian.org>  Sun, 06 Jan 2013 09:57:29 +0100
+
 network-manager-applet (0.9.4.1-2) unstable; urgency=low
 
   * debian/rules: Use xz compression for binary packages.
