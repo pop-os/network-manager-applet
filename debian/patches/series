@@ -3,3 +3,5 @@
 02-fix-shell-version-detecting-code.patch
 03-dont-handle-VPN-secrets-with-GNOME-Shell-3.4.patch
 04-gnome-bluetooth-3.4-support.patch
+05-8021x-passwords-user.patch
+11-user-connections.patch
