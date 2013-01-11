@@ -5,3 +5,4 @@
 04-gnome-bluetooth-3.4-support.patch
 05-8021x-passwords-user.patch
 11-user-connections.patch
+12-force-online.patch
