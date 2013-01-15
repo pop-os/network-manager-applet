@@ -41,7 +41,7 @@ Depends:
  dbus-x11
 Recommends:
  notification-daemon,
- libpam-keyring,
+ gnome-keyring,
  mobile-broadband-provider-info,
  gnome-bluetooth,
  iso-codes

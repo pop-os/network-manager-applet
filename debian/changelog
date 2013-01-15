@@ -3,6 +3,8 @@ network-manager-applet (0.9.4.1-4) UNRELEASED; urgency=low
   * debian/patches/12-force-online.patch: If NM has an active unmanaged device
     it will forcefully set the online state to CONNECTED_GLOBAL. In that case
     show a wired connection icon instead of an offline icon. (Closes: #471191)
+  * Recommend gnome-keyring instead of libpam-keyring. The former is what we
+    actually need for storing secrets in the user session. (Closes: #694695)
 
  -- Michael Biebl <biebl@debian.org>  Tue, 15 Jan 2013 00:59:19 +0100
 
