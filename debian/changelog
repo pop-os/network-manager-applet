@@ -5,6 +5,8 @@ network-manager-applet (0.9.4.1-4) UNRELEASED; urgency=low
     show a wired connection icon instead of an offline icon. (Closes: #471191)
   * Recommend gnome-keyring instead of libpam-keyring. The former is what we
     actually need for storing secrets in the user session. (Closes: #694695)
+  * debian/patches/11-user-connections.patch: Treat WEP keys like WPA secrets
+    and store them in the keyring for user-owned connections.
 
  -- Michael Biebl <biebl@debian.org>  Tue, 15 Jan 2013 00:59:19 +0100
 

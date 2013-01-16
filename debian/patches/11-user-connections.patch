@@ -1,8 +1,24 @@
 Index: network-manager-applet-0.9.4.1/src/applet-device-wifi.c
 ===================================================================
---- network-manager-applet-0.9.4.1.orig/src/applet-device-wifi.c	2012-12-17 17:42:31.554758617 +0100
-+++ network-manager-applet-0.9.4.1/src/applet-device-wifi.c	2012-12-17 19:19:20.727158212 +0100
-@@ -462,6 +462,23 @@ _do_new_auto_connection (NMApplet *apple
+--- network-manager-applet-0.9.4.1.orig/src/applet-device-wifi.c	2013-01-16 11:42:37.768055517 +0100
++++ network-manager-applet-0.9.4.1/src/applet-device-wifi.c	2013-01-16 11:42:37.752055378 +0100
+@@ -405,6 +405,7 @@ _do_new_auto_connection (NMApplet *apple
+ 	NMSettingWirelessSecurity *s_wsec = NULL;
+ 	NMSetting8021x *s_8021x = NULL;
+ 	const GByteArray *ssid;
++	NM80211ApFlags flags;
+ 	NM80211ApSecurityFlags wpa_flags, rsn_flags;
+ 	GtkWidget *dialog;
+ 	MoreInfo *more_info;
+@@ -431,6 +432,7 @@ _do_new_auto_connection (NMApplet *apple
+ 	/* If the AP is WPA[2]-Enterprise then we need to set up a minimal 802.1x
+ 	 * setting and ask the user for more information.
+ 	 */
++	flags = nm_access_point_get_flags (ap);
+ 	rsn_flags = nm_access_point_get_rsn_flags (ap);
+ 	wpa_flags = nm_access_point_get_wpa_flags (ap);
+ 	if (   (rsn_flags & NM_802_11_AP_SEC_KEY_MGMT_802_1X)
+@@ -462,6 +464,29 @@ _do_new_auto_connection (NMApplet *apple
  		nm_connection_add_setting (connection, NM_SETTING (s_8021x));
  	}
  
@@ -20,6 +36,12 @@ Index: network-manager-applet-0.9.4.1/src/applet-device-wifi.c
 +				nm_connection_add_setting (connection, NM_SETTING (s_wsec));
 +			}
 +			g_object_set (s_wsec, NM_SETTING_WIRELESS_SECURITY_PSK_FLAGS, NM_SETTING_SECRET_FLAG_AGENT_OWNED, NULL);
++		} else if (flags & NM_802_11_AP_FLAGS_PRIVACY) {
++			if (!s_wsec) {
++				s_wsec = (NMSettingWirelessSecurity *) nm_setting_wireless_security_new ();
++				nm_connection_add_setting (connection, NM_SETTING (s_wsec));
++			}
++			g_object_set (s_wsec, NM_SETTING_WIRELESS_SECURITY_WEP_KEY_FLAGS, NM_SETTING_SECRET_FLAG_AGENT_OWNED, NULL);
 +		}
 +	}
 +
@@ -28,8 +50,8 @@ Index: network-manager-applet-0.9.4.1/src/applet-device-wifi.c
  	 */
 Index: network-manager-applet-0.9.4.1/src/applet-device-gsm.c
 ===================================================================
---- network-manager-applet-0.9.4.1.orig/src/applet-device-gsm.c	2012-12-17 17:42:31.554758617 +0100
-+++ network-manager-applet-0.9.4.1/src/applet-device-gsm.c	2012-12-17 17:42:33.054765947 +0100
+--- network-manager-applet-0.9.4.1.orig/src/applet-device-gsm.c	2013-01-16 11:42:37.768055517 +0100
++++ network-manager-applet-0.9.4.1/src/applet-device-gsm.c	2013-01-16 11:42:37.752055378 +0100
 @@ -147,6 +147,7 @@ mobile_wizard_done (NMAMobileWizard *wiz
  		              NM_SETTING_GSM_NUMBER, "*99#",
  		              NM_SETTING_GSM_USERNAME, method->username,
@@ -48,8 +70,8 @@ Index: network-manager-applet-0.9.4.1/src/applet-device-gsm.c
  
 Index: network-manager-applet-0.9.4.1/src/libnm-gtk/nm-wireless-dialog.c
 ===================================================================
---- network-manager-applet-0.9.4.1.orig/src/libnm-gtk/nm-wireless-dialog.c	2012-12-17 17:42:31.554758617 +0100
-+++ network-manager-applet-0.9.4.1/src/libnm-gtk/nm-wireless-dialog.c	2012-12-17 19:23:20.988332793 +0100
+--- network-manager-applet-0.9.4.1.orig/src/libnm-gtk/nm-wireless-dialog.c	2013-01-16 11:42:37.768055517 +0100
++++ network-manager-applet-0.9.4.1/src/libnm-gtk/nm-wireless-dialog.c	2013-01-16 11:42:37.752055378 +0100
 @@ -1219,6 +1219,9 @@ nma_wireless_dialog_get_connection (NMAW
  			      NM_SETTING_CONNECTION_UUID, uuid,
  			      NULL);
@@ -62,8 +84,8 @@ Index: network-manager-applet-0.9.4.1/src/libnm-gtk/nm-wireless-dialog.c
  		s_wireless = (NMSettingWireless *) nm_setting_wireless_new ();
 Index: network-manager-applet-0.9.4.1/src/applet-device-cdma.c
 ===================================================================
---- network-manager-applet-0.9.4.1.orig/src/applet-device-cdma.c	2012-12-17 17:42:31.554758617 +0100
-+++ network-manager-applet-0.9.4.1/src/applet-device-cdma.c	2012-12-17 17:42:33.054765947 +0100
+--- network-manager-applet-0.9.4.1.orig/src/applet-device-cdma.c	2013-01-16 11:42:37.768055517 +0100
++++ network-manager-applet-0.9.4.1/src/applet-device-cdma.c	2013-01-16 11:42:37.752055378 +0100
 @@ -119,6 +119,7 @@ mobile_wizard_done (NMAMobileWizard *wiz
  		              NM_SETTING_CDMA_NUMBER, "#777",
  		              NM_SETTING_CDMA_USERNAME, method->username,
@@ -82,8 +104,8 @@ Index: network-manager-applet-0.9.4.1/src/applet-device-cdma.c
  
 Index: network-manager-applet-0.9.4.1/src/gnome-bluetooth/bt-widget.c
 ===================================================================
---- network-manager-applet-0.9.4.1.orig/src/gnome-bluetooth/bt-widget.c	2012-12-17 17:42:31.554758617 +0100
-+++ network-manager-applet-0.9.4.1/src/gnome-bluetooth/bt-widget.c	2012-12-17 17:42:33.058765971 +0100
+--- network-manager-applet-0.9.4.1.orig/src/gnome-bluetooth/bt-widget.c	2013-01-16 11:42:37.768055517 +0100
++++ network-manager-applet-0.9.4.1/src/gnome-bluetooth/bt-widget.c	2013-01-16 11:42:37.756055413 +0100
 @@ -256,6 +256,7 @@ add_pan_connection (PluginInfo *info)
  	              NULL);
  	g_free (id);
@@ -126,8 +148,8 @@ Index: network-manager-applet-0.9.4.1/src/gnome-bluetooth/bt-widget.c
  	return connection;
 Index: network-manager-applet-0.9.4.1/src/utils/utils.c
 ===================================================================
---- network-manager-applet-0.9.4.1.orig/src/utils/utils.c	2012-12-17 17:42:31.554758617 +0100
-+++ network-manager-applet-0.9.4.1/src/utils/utils.c	2012-12-17 19:45:35.022854558 +0100
+--- network-manager-applet-0.9.4.1.orig/src/utils/utils.c	2013-01-16 11:42:37.768055517 +0100
++++ network-manager-applet-0.9.4.1/src/utils/utils.c	2013-01-16 11:42:37.756055413 +0100
 @@ -390,3 +390,10 @@ utils_show_error_dialog (const char *tit
  	}
  }
@@ -141,8 +163,8 @@ Index: network-manager-applet-0.9.4.1/src/utils/utils.c
 +}
 Index: network-manager-applet-0.9.4.1/src/utils/utils.h
 ===================================================================
---- network-manager-applet-0.9.4.1.orig/src/utils/utils.h	2012-12-17 17:42:31.554758617 +0100
-+++ network-manager-applet-0.9.4.1/src/utils/utils.h	2012-12-17 19:20:42.087555979 +0100
+--- network-manager-applet-0.9.4.1.orig/src/utils/utils.h	2013-01-16 11:42:37.768055517 +0100
++++ network-manager-applet-0.9.4.1/src/utils/utils.h	2013-01-16 11:42:37.756055413 +0100
 @@ -27,6 +27,7 @@
  #include <gtk/gtk.h>
  #include <nm-connection.h>
@@ -162,8 +184,8 @@ Index: network-manager-applet-0.9.4.1/src/utils/utils.h
  typedef enum  {
 Index: network-manager-applet-0.9.4.1/src/connection-editor/nm-connection-list.c
 ===================================================================
---- network-manager-applet-0.9.4.1.orig/src/connection-editor/nm-connection-list.c	2012-12-17 17:42:31.554758617 +0100
-+++ network-manager-applet-0.9.4.1/src/connection-editor/nm-connection-list.c	2012-12-17 21:25:44.500233404 +0100
+--- network-manager-applet-0.9.4.1.orig/src/connection-editor/nm-connection-list.c	2013-01-16 11:42:37.768055517 +0100
++++ network-manager-applet-0.9.4.1/src/connection-editor/nm-connection-list.c	2013-01-16 11:42:37.756055413 +0100
 @@ -605,6 +605,7 @@ add_clicked (GtkButton *button, gpointer
  	info->new_func (GTK_WINDOW (list->dialog),
  	                really_add_connection,
@@ -182,8 +204,8 @@ Index: network-manager-applet-0.9.4.1/src/connection-editor/nm-connection-list.c
  }
 Index: network-manager-applet-0.9.4.1/src/wireless-security/ws-wpa-psk.c
 ===================================================================
---- network-manager-applet-0.9.4.1.orig/src/wireless-security/ws-wpa-psk.c	2012-12-17 17:42:31.554758617 +0100
-+++ network-manager-applet-0.9.4.1/src/wireless-security/ws-wpa-psk.c	2012-12-17 19:35:09.479796428 +0100
+--- network-manager-applet-0.9.4.1.orig/src/wireless-security/ws-wpa-psk.c	2013-01-16 11:42:37.768055517 +0100
++++ network-manager-applet-0.9.4.1/src/wireless-security/ws-wpa-psk.c	2013-01-16 11:42:37.756055413 +0100
 @@ -92,11 +92,13 @@ fill_connection (WirelessSecurity *paren
  {
  	GtkWidget *widget;
@@ -202,16 +224,16 @@ Index: network-manager-applet-0.9.4.1/src/wireless-security/ws-wpa-psk.c
  	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "wpa_psk_entry"));
  	key = gtk_entry_get_text (GTK_ENTRY (widget));
  	g_object_set (s_wireless_sec, NM_SETTING_WIRELESS_SECURITY_PSK, key, NULL);
-+	if (s_con && nm_setting_connection_get_num_permissions (s_con)) {
++	/* If the connection is user-owned, mark the secrets as agent-owned */
++	if (s_con && nm_setting_connection_get_num_permissions (s_con))
 +		g_object_set (s_wireless_sec, NM_SETTING_WIRELESS_SECURITY_PSK_FLAGS, NM_SETTING_SECRET_FLAG_AGENT_OWNED, NULL);
-+	}
  
  	wireless_security_clear_ciphers (connection);
  	if (is_adhoc) {
 Index: network-manager-applet-0.9.4.1/src/connection-editor/page-mobile.c
 ===================================================================
---- network-manager-applet-0.9.4.1.orig/src/connection-editor/page-mobile.c	2012-03-14 00:03:59.000000000 +0100
-+++ network-manager-applet-0.9.4.1/src/connection-editor/page-mobile.c	2012-12-17 21:16:37.749560464 +0100
+--- network-manager-applet-0.9.4.1.orig/src/connection-editor/page-mobile.c	2013-01-16 11:42:37.768055517 +0100
++++ network-manager-applet-0.9.4.1/src/connection-editor/page-mobile.c	2013-01-16 11:42:37.760055448 +0100
 @@ -554,6 +554,7 @@ new_connection_mobile_wizard_done (NMAMo
  	NMConnection *connection = NULL;
  
@@ -260,8 +282,8 @@ Index: network-manager-applet-0.9.4.1/src/connection-editor/page-mobile.c
  	NMAMobileWizard *wizard;
 Index: network-manager-applet-0.9.4.1/src/connection-editor/page-vpn.c
 ===================================================================
---- network-manager-applet-0.9.4.1.orig/src/connection-editor/page-vpn.c	2012-03-14 00:03:59.000000000 +0100
-+++ network-manager-applet-0.9.4.1/src/connection-editor/page-vpn.c	2012-12-17 21:17:31.889825149 +0100
+--- network-manager-applet-0.9.4.1.orig/src/connection-editor/page-vpn.c	2013-01-16 11:42:37.768055517 +0100
++++ network-manager-applet-0.9.4.1/src/connection-editor/page-vpn.c	2013-01-16 11:42:37.760055448 +0100
 @@ -186,10 +186,12 @@ void
  vpn_connection_new (GtkWindow *parent,
                      PageNewConnectionResultFunc result_func,
@@ -292,8 +314,8 @@ Index: network-manager-applet-0.9.4.1/src/connection-editor/page-vpn.c
  	g_free (service);
 Index: network-manager-applet-0.9.4.1/src/connection-editor/ce-page.h
 ===================================================================
---- network-manager-applet-0.9.4.1.orig/src/connection-editor/ce-page.h	2012-03-14 00:03:59.000000000 +0100
-+++ network-manager-applet-0.9.4.1/src/connection-editor/ce-page.h	2012-12-17 21:12:11.904260821 +0100
+--- network-manager-applet-0.9.4.1.orig/src/connection-editor/ce-page.h	2013-01-16 11:42:37.768055517 +0100
++++ network-manager-applet-0.9.4.1/src/connection-editor/ce-page.h	2013-01-16 11:42:37.760055448 +0100
 @@ -43,6 +43,7 @@ typedef GSList * (*PageGetConnectionsFun
  typedef void (*PageNewConnectionFunc) (GtkWindow *parent,
                                         PageNewConnectionResultFunc result_func,
@@ -304,8 +326,8 @@ Index: network-manager-applet-0.9.4.1/src/connection-editor/ce-page.h
  #define CE_TYPE_PAGE            (ce_page_get_type ())
 Index: network-manager-applet-0.9.4.1/src/connection-editor/page-dsl.c
 ===================================================================
---- network-manager-applet-0.9.4.1.orig/src/connection-editor/page-dsl.c	2012-03-14 00:03:59.000000000 +0100
-+++ network-manager-applet-0.9.4.1/src/connection-editor/page-dsl.c	2012-12-17 21:15:30.873233525 +0100
+--- network-manager-applet-0.9.4.1.orig/src/connection-editor/page-dsl.c	2013-01-16 11:42:37.768055517 +0100
++++ network-manager-applet-0.9.4.1/src/connection-editor/page-dsl.c	2013-01-16 11:42:37.760055448 +0100
 @@ -224,6 +224,7 @@ void
  dsl_connection_new (GtkWindow *parent,
                      PageNewConnectionResultFunc result_func,
@@ -316,8 +338,8 @@ Index: network-manager-applet-0.9.4.1/src/connection-editor/page-dsl.c
  	NMConnection *connection;
 Index: network-manager-applet-0.9.4.1/src/connection-editor/page-dsl.h
 ===================================================================
---- network-manager-applet-0.9.4.1.orig/src/connection-editor/page-dsl.h	2012-03-14 00:03:59.000000000 +0100
-+++ network-manager-applet-0.9.4.1/src/connection-editor/page-dsl.h	2012-12-17 21:15:51.177332808 +0100
+--- network-manager-applet-0.9.4.1.orig/src/connection-editor/page-dsl.h	2013-01-16 11:42:37.768055517 +0100
++++ network-manager-applet-0.9.4.1/src/connection-editor/page-dsl.h	2013-01-16 11:42:37.760055448 +0100
 @@ -56,6 +56,7 @@ CEPage *ce_page_dsl_new (NMConnection *c
  void dsl_connection_new (GtkWindow *parent,
                           PageNewConnectionResultFunc callback,
@@ -328,8 +350,8 @@ Index: network-manager-applet-0.9.4.1/src/connection-editor/page-dsl.h
  #endif  /* __PAGE_DSL_H__ */
 Index: network-manager-applet-0.9.4.1/src/connection-editor/page-mobile.h
 ===================================================================
---- network-manager-applet-0.9.4.1.orig/src/connection-editor/page-mobile.h	2012-03-14 00:03:59.000000000 +0100
-+++ network-manager-applet-0.9.4.1/src/connection-editor/page-mobile.h	2012-12-17 21:16:52.353631835 +0100
+--- network-manager-applet-0.9.4.1.orig/src/connection-editor/page-mobile.h	2013-01-16 11:42:37.768055517 +0100
++++ network-manager-applet-0.9.4.1/src/connection-editor/page-mobile.h	2013-01-16 11:42:37.760055448 +0100
 @@ -56,6 +56,7 @@ CEPage *ce_page_mobile_new (NMConnection
  void mobile_connection_new (GtkWindow *parent,
                              PageNewConnectionResultFunc result_func,
@@ -340,8 +362,8 @@ Index: network-manager-applet-0.9.4.1/src/connection-editor/page-mobile.h
  #endif  /* __PAGE_MOBILE_H__ */
 Index: network-manager-applet-0.9.4.1/src/connection-editor/page-vpn.h
 ===================================================================
---- network-manager-applet-0.9.4.1.orig/src/connection-editor/page-vpn.h	2012-03-14 00:03:59.000000000 +0100
-+++ network-manager-applet-0.9.4.1/src/connection-editor/page-vpn.h	2012-12-17 21:17:45.065889589 +0100
+--- network-manager-applet-0.9.4.1.orig/src/connection-editor/page-vpn.h	2013-01-16 11:42:37.768055517 +0100
++++ network-manager-applet-0.9.4.1/src/connection-editor/page-vpn.h	2013-01-16 11:42:37.760055448 +0100
 @@ -56,6 +56,7 @@ CEPage *ce_page_vpn_new (NMConnection *c
  void vpn_connection_new (GtkWindow *parent,
                           PageNewConnectionResultFunc result_func,
@@ -352,8 +374,8 @@ Index: network-manager-applet-0.9.4.1/src/connection-editor/page-vpn.h
  #endif  /* __PAGE_VPN_H__ */
 Index: network-manager-applet-0.9.4.1/src/connection-editor/page-wired.c
 ===================================================================
---- network-manager-applet-0.9.4.1.orig/src/connection-editor/page-wired.c	2012-03-14 00:03:59.000000000 +0100
-+++ network-manager-applet-0.9.4.1/src/connection-editor/page-wired.c	2012-12-17 21:18:53.906226101 +0100
+--- network-manager-applet-0.9.4.1.orig/src/connection-editor/page-wired.c	2013-01-16 11:42:37.768055517 +0100
++++ network-manager-applet-0.9.4.1/src/connection-editor/page-wired.c	2013-01-16 11:42:37.760055448 +0100
 @@ -442,6 +442,7 @@ void
  wired_connection_new (GtkWindow *parent,
                        PageNewConnectionResultFunc result_func,
@@ -364,8 +386,8 @@ Index: network-manager-applet-0.9.4.1/src/connection-editor/page-wired.c
  	NMConnection *connection;
 Index: network-manager-applet-0.9.4.1/src/connection-editor/page-wired.h
 ===================================================================
---- network-manager-applet-0.9.4.1.orig/src/connection-editor/page-wired.h	2012-03-14 00:03:59.000000000 +0100
-+++ network-manager-applet-0.9.4.1/src/connection-editor/page-wired.h	2012-12-17 21:19:04.122276042 +0100
+--- network-manager-applet-0.9.4.1.orig/src/connection-editor/page-wired.h	2013-01-16 11:42:37.768055517 +0100
++++ network-manager-applet-0.9.4.1/src/connection-editor/page-wired.h	2013-01-16 11:42:37.760055448 +0100
 @@ -56,6 +56,7 @@ CEPage *ce_page_wired_new (NMConnection
  void wired_connection_new (GtkWindow *parent,
                             PageNewConnectionResultFunc result_func,
@@ -376,8 +398,8 @@ Index: network-manager-applet-0.9.4.1/src/connection-editor/page-wired.h
  #endif  /* __PAGE_WIRED_H__ */
 Index: network-manager-applet-0.9.4.1/src/connection-editor/page-wireless.c
 ===================================================================
---- network-manager-applet-0.9.4.1.orig/src/connection-editor/page-wireless.c	2012-03-14 00:03:59.000000000 +0100
-+++ network-manager-applet-0.9.4.1/src/connection-editor/page-wireless.c	2012-12-17 21:21:16.646923928 +0100
+--- network-manager-applet-0.9.4.1.orig/src/connection-editor/page-wireless.c	2013-01-16 11:42:37.768055517 +0100
++++ network-manager-applet-0.9.4.1/src/connection-editor/page-wireless.c	2013-01-16 11:42:37.760055448 +0100
 @@ -33,6 +33,8 @@
  #include <nm-device-wifi.h>
  #include <nm-utils.h>
@@ -415,8 +437,8 @@ Index: network-manager-applet-0.9.4.1/src/connection-editor/page-wireless.c
  	nm_connection_add_setting (connection, s_wifi);
 Index: network-manager-applet-0.9.4.1/src/connection-editor/page-wireless.h
 ===================================================================
---- network-manager-applet-0.9.4.1.orig/src/connection-editor/page-wireless.h	2012-03-14 00:03:59.000000000 +0100
-+++ network-manager-applet-0.9.4.1/src/connection-editor/page-wireless.h	2012-12-17 21:19:22.602366384 +0100
+--- network-manager-applet-0.9.4.1.orig/src/connection-editor/page-wireless.h	2013-01-16 11:42:37.768055517 +0100
++++ network-manager-applet-0.9.4.1/src/connection-editor/page-wireless.h	2013-01-16 11:42:37.760055448 +0100
 @@ -60,6 +60,7 @@ GByteArray *ce_page_wireless_get_ssid (C
  void wifi_connection_new (GtkWindow *parent,
                            PageNewConnectionResultFunc result_func,
@@ -425,3 +447,35 @@ Index: network-manager-applet-0.9.4.1/src/connection-editor/page-wireless.h
                            gpointer user_data);
  
  #endif  /* __PAGE_WIRELESS_H__ */
+Index: network-manager-applet-0.9.4.1/src/wireless-security/ws-wep-key.c
+===================================================================
+--- network-manager-applet-0.9.4.1.orig/src/wireless-security/ws-wep-key.c	2013-01-16 11:42:37.768055517 +0100
++++ network-manager-applet-0.9.4.1/src/wireless-security/ws-wep-key.c	2013-01-16 11:42:37.764055482 +0100
+@@ -142,6 +142,7 @@ static void
+ fill_connection (WirelessSecurity *parent, NMConnection *connection)
+ {
+ 	WirelessSecurityWEPKey *sec = (WirelessSecurityWEPKey *) parent;
++	NMSettingConnection *s_con;
+ 	NMSettingWireless *s_wireless;
+ 	NMSettingWirelessSecurity *s_wsec;
+ 	GtkWidget *widget;
+@@ -156,6 +157,8 @@ fill_connection (WirelessSecurity *paren
+ 	key = gtk_entry_get_text (GTK_ENTRY (widget));
+ 	strcpy (sec->keys[sec->cur_index], key);
+ 
++	s_con = nm_connection_get_setting_connection (connection);
++
+ 	s_wireless = nm_connection_get_setting_wireless (connection);
+ 	g_assert (s_wireless);
+ 
+@@ -172,6 +175,10 @@ fill_connection (WirelessSecurity *paren
+ 	              NM_SETTING_WIRELESS_SECURITY_WEP_KEY_TYPE, sec->type,
+ 	              NULL);
+ 
++	 /* If the connection is user-owned, mark the secrets as agent-owned */
++	if (s_con && nm_setting_connection_get_num_permissions)
++		g_object_set (s_wsec, NM_SETTING_WIRELESS_SECURITY_WEP_KEY_FLAGS, NM_SETTING_SECRET_FLAG_AGENT_OWNED, NULL);
++
+ 	for (i = 0; i < 4; i++) {
+ 		if (strlen (sec->keys[i]))
+ 			nm_setting_wireless_security_set_wep_key (s_wsec, i, sec->keys[i]);
