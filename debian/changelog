@@ -1,9 +1,9 @@
-network-manager-applet (0.9.6.4-3) UNRELEASED; urgency=low
+network-manager-applet (0.9.6.4-3) experimental; urgency=low
 
   * Merge changes from unstable branch.
   * Update debian/patches/11-user-connections.patch again.
 
- -- Michael Biebl <biebl@debian.org>  Thu, 17 Jan 2013 11:33:34 +0100
+ -- Michael Biebl <biebl@debian.org>  Thu, 17 Jan 2013 12:02:16 +0100
 
 network-manager-applet (0.9.6.4-2) experimental; urgency=low
 
