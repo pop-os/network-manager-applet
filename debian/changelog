@@ -1,3 +1,10 @@
+network-manager-applet (0.9.6.4-3) UNRELEASED; urgency=low
+
+  * Merge changes from unstable branch.
+  * Update debian/patches/11-user-connections.patch again.
+
+ -- Michael Biebl <biebl@debian.org>  Thu, 17 Jan 2013 11:33:34 +0100
+
 network-manager-applet (0.9.6.4-2) experimental; urgency=low
 
   * Merge changes from unstable branch.
@@ -40,6 +47,18 @@ network-manager-applet (0.9.5.95-1) experimental; urgency=low
     cherry-picked from upstream Git.
 
  -- Michael Biebl <biebl@debian.org>  Fri, 29 Jun 2012 21:03:59 +0200
+
+network-manager-applet (0.9.4.1-4) unstable; urgency=low
+
+  * debian/patches/12-force-online.patch: If NM has an active unmanaged device
+    it will forcefully set the online state to CONNECTED_GLOBAL. In that case
+    show a wired connection icon instead of an offline icon. (Closes: #471191)
+  * Recommend gnome-keyring instead of libpam-keyring. The former is what we
+    actually need for storing secrets in the user session. (Closes: #694695)
+  * debian/patches/11-user-connections.patch: Treat WEP keys like WPA secrets
+    and store them in the keyring for user-owned connections.
+
+ -- Michael Biebl <biebl@debian.org>  Thu, 17 Jan 2013 10:58:23 +0100
 
 network-manager-applet (0.9.4.1-3) unstable; urgency=low
 
