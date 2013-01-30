@@ -472,8 +472,8 @@ Index: network-manager-applet-0.9.4.1/src/wireless-security/ws-wep-key.c
  	              NM_SETTING_WIRELESS_SECURITY_WEP_KEY_TYPE, sec->type,
  	              NULL);
  
-+	 /* If the connection is user-owned, mark the secrets as agent-owned */
-+	if (s_con && nm_setting_connection_get_num_permissions)
++	/* If the connection is user-owned, mark the secrets as agent-owned */
++	if (s_con && nm_setting_connection_get_num_permissions (s_con))
 +		g_object_set (s_wsec, NM_SETTING_WIRELESS_SECURITY_WEP_KEY_FLAGS, NM_SETTING_SECRET_FLAG_AGENT_OWNED, NULL);
 +
  	for (i = 0; i < 4; i++) {
