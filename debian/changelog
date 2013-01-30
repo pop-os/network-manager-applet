@@ -1,3 +1,9 @@
+network-manager-applet (0.9.6.4-4) UNRELEASED; urgency=low
+
+  * Merge bug fix from unstable branch.
+
+ -- Michael Biebl <biebl@debian.org>  Wed, 30 Jan 2013 02:44:31 +0100
+
 network-manager-applet (0.9.6.4-3) experimental; urgency=low
 
   * Merge changes from unstable branch.
