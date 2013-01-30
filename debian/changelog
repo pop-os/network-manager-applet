@@ -48,6 +48,13 @@ network-manager-applet (0.9.5.95-1) experimental; urgency=low
 
  -- Michael Biebl <biebl@debian.org>  Fri, 29 Jun 2012 21:03:59 +0200
 
+network-manager-applet (0.9.4.1-5) unstable; urgency=low
+
+  * debian/patches/11-user-connections.patch: Fix a bug in the check for
+    whether to mark WEP keys as agent-owned.
+
+ -- Michael Biebl <biebl@debian.org>  Wed, 30 Jan 2013 02:33:26 +0100
+
 network-manager-applet (0.9.4.1-4) unstable; urgency=low
 
   * debian/patches/12-force-online.patch: If NM has an active unmanaged device
