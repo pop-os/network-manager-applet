@@ -1,5 +1,5 @@
 /* -*- Mode: C; tab-width: 4; indent-tabs-mode: t; c-basic-offset: 4 -*- */
-/* NetworkManager Wireless Applet -- Display wireless access points and allow user control
+/* NetworkManager Applet -- allow user control over networking
  *
  * Dan Williams <dcbw@redhat.com>
  *
@@ -29,8 +29,6 @@
 #include <nm-device.h>
 #include <net/ethernet.h>
 #include <nm-access-point.h>
-
-const char *utils_get_device_description (NMDevice *device);
 
 guint32 utils_freq_to_channel (guint32 freq);
 guint32 utils_channel_to_freq (guint32 channel, char *band);

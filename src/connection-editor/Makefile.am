@@ -26,14 +26,20 @@ nm_connection_editor_SOURCES = \
 	main.c \
 	ce-page.h \
 	ce-page.c \
-	page-wired.h \
-	page-wired.c \
-	page-wired-security.h \
-	page-wired-security.c \
-	page-wireless.h \
-	page-wireless.c \
-	page-wireless-security.h \
-	page-wireless-security.c \
+	page-general.h \
+	page-general.c \
+	page-ethernet.h \
+	page-ethernet.c \
+	page-8021x-security.h \
+	page-8021x-security.c \
+	page-wifi.h \
+	page-wifi.c \
+	page-wifi-security.h \
+	page-wifi-security.c \
+	page-wimax.h \
+	page-wimax.c \
+	page-infiniband.h \
+	page-infiniband.c \
 	page-ip4.h \
 	page-ip4.c \
 	page-ip6.h \
@@ -46,6 +52,16 @@ nm_connection_editor_SOURCES = \
 	page-ppp.c \
 	page-vpn.h \
 	page-vpn.c \
+	page-master.h \
+	page-master.c \
+	page-bond.h \
+	page-bond.c \
+	page-bridge.h \
+	page-bridge.c \
+	page-bridge-port.h \
+	page-bridge-port.c \
+	page-vlan.h \
+	page-vlan.c \
 	vpn-helpers.h \
 	vpn-helpers.c \
 	ip4-routes-dialog.h \
@@ -55,7 +71,9 @@ nm_connection_editor_SOURCES = \
 	ppp-auth-methods-dialog.c \
 	ppp-auth-methods-dialog.h \
 	ce-polkit-button.c \
-	ce-polkit-button.h
+	ce-polkit-button.h \
+	new-connection.c \
+	new-connection.h
 
 nm-connection-editor-service-glue.h: $(top_srcdir)/src/connection-editor/nm-connection-editor-service.xml
 	$(AM_V_GEN) dbus-binding-tool --prefix=nm_connection_editor_service --mode=glib-server --output=$@ $<
@@ -72,9 +90,16 @@ nm_connection_editor_LDADD = \
 uidir = $(datadir)/nm-applet
 ui_DATA = \
 	nm-connection-editor.ui \
-	ce-page-wired.ui \
-	ce-page-wireless.ui \
-	ce-page-wireless-security.ui \
+	ce-new-connection.ui \
+	ce-page-general.ui \
+	ce-page-ethernet.ui \
+	ce-page-wifi.ui \
+	ce-page-wifi-security.ui \
+	ce-page-wimax.ui \
+	ce-page-infiniband.ui \
+	ce-page-bond.ui \
+	ce-page-bridge.ui \
+	ce-page-bridge-port.ui \
 	ce-page-ip4.ui \
 	ce-ip4-routes.ui \
 	ce-page-ip6.ui \
@@ -83,7 +108,7 @@ ui_DATA = \
 	ce-page-mobile.ui \
 	ce-page-ppp.ui \
 	ce-ppp-auth-methods.ui \
-	ce-vpn-wizard.ui
+	ce-page-vlan.ui
 
 BUILT_SOURCES = nm-connection-editor-service-glue.h
 

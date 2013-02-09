@@ -1,5 +1,5 @@
 /* -*- Mode: C; tab-width: 4; indent-tabs-mode: t; c-basic-offset: 4 -*- */
-/* NetworkManager Wireless Applet -- Display wireless access points and allow user control
+/* NetworkManager Applet -- allow user control over networking
  *
  * Dan Williams <dcbw@redhat.com>
  *
@@ -42,11 +42,11 @@
 #include "applet.h"
 #include "applet-device-gsm.h"
 #include "utils.h"
-#include "nm-mobile-wizard.h"
 #include "applet-dialogs.h"
 #include "mb-menu-item.h"
 #include "nma-marshal.h"
-#include "nmn-mobile-providers.h"
+#include "nm-mobile-providers.h"
+#include "nm-ui-utils.h"
 
 typedef enum {
     MM_MODEM_GSM_ACCESS_TECH_UNKNOWN     = 0,
@@ -58,8 +58,10 @@ typedef enum {
     MM_MODEM_GSM_ACCESS_TECH_HSDPA       = 6,  /* UTRAN w/HSDPA */
     MM_MODEM_GSM_ACCESS_TECH_HSUPA       = 7,  /* UTRAN w/HSUPA */
     MM_MODEM_GSM_ACCESS_TECH_HSPA        = 8,  /* UTRAN w/HSDPA and HSUPA */
+    MM_MODEM_GSM_ACCESS_TECH_HSPA_PLUS   = 9,
+    MM_MODEM_GSM_ACCESS_TECH_LTE         = 10,
 
-    MM_MODEM_GSM_ACCESS_TECH_LAST = MM_MODEM_GSM_ACCESS_TECH_HSPA
+    MM_MODEM_GSM_ACCESS_TECH_LAST = MM_MODEM_GSM_ACCESS_TECH_LTE
 } MMModemGsmAccessTech;
 
 typedef struct {
@@ -85,7 +87,7 @@ typedef struct {
 	guint reg_state;
 	char *op_code;
 	char *op_name;
-	GHashTable *providers;
+	NMAMobileProvidersDatabase *mobile_providers_database;
 
 	guint32 poll_id;
 	gboolean skip_reg_poll;
@@ -117,111 +119,15 @@ gsm_menu_item_info_destroy (gpointer data)
 	g_slice_free (GSMMenuItemInfo, data);
 }
 
-typedef struct {
-	AppletNewAutoConnectionCallback callback;
-	gpointer callback_data;
-} AutoGsmWizardInfo;
-
-static void
-mobile_wizard_done (NMAMobileWizard *wizard,
-                    gboolean canceled,
-                    NMAMobileWizardAccessMethod *method,
-                    gpointer user_data)
-{
-	AutoGsmWizardInfo *info = user_data;
-	NMConnection *connection = NULL;
-
-	if (!canceled && method) {
-		NMSetting *setting;
-		char *uuid, *id;
-
-		if (method->devtype != NM_DEVICE_MODEM_CAPABILITY_GSM_UMTS) {
-			g_warning ("Unexpected device type (not GSM).");
-			canceled = TRUE;
-			goto done;
-		}
-
-		connection = nm_connection_new ();
-
-		setting = nm_setting_gsm_new ();
-		g_object_set (setting,
-		              NM_SETTING_GSM_NUMBER, "*99#",
-		              NM_SETTING_GSM_USERNAME, method->username,
-		              NM_SETTING_GSM_PASSWORD, method->password,
-		              NM_SETTING_GSM_APN, method->gsm_apn,
-		              NULL);
-		nm_connection_add_setting (connection, setting);
-
-		/* Serial setting */
-		setting = nm_setting_serial_new ();
-		g_object_set (setting,
-		              NM_SETTING_SERIAL_BAUD, 115200,
-		              NM_SETTING_SERIAL_BITS, 8,
-		              NM_SETTING_SERIAL_PARITY, 'n',
-		              NM_SETTING_SERIAL_STOPBITS, 1,
-		              NULL);
-		nm_connection_add_setting (connection, setting);
-
-		nm_connection_add_setting (connection, nm_setting_ppp_new ());
-
-		setting = nm_setting_connection_new ();
-		id = utils_create_mobile_connection_id (method->provider_name, method->plan_name);
-		uuid = nm_utils_uuid_generate ();
-		g_object_set (setting,
-		              NM_SETTING_CONNECTION_ID, id,
-		              NM_SETTING_CONNECTION_TYPE, NM_SETTING_GSM_SETTING_NAME,
-		              NM_SETTING_CONNECTION_AUTOCONNECT, FALSE,
-		              NM_SETTING_CONNECTION_UUID, uuid,
-		              NULL);
-		g_free (uuid);
-		g_free (id);
-		nm_connection_add_setting (connection, setting);
-	}
-
-done:
-	(*(info->callback)) (connection, TRUE, canceled, info->callback_data);
-
-	if (wizard)
-		nma_mobile_wizard_destroy (wizard);
-	g_free (info);
-}
-
-static gboolean
-do_mobile_wizard (AppletNewAutoConnectionCallback callback,
-                  gpointer callback_data)
-{
-	NMAMobileWizard *wizard;
-	AutoGsmWizardInfo *info;
-	NMAMobileWizardAccessMethod *method;
-
-	info = g_malloc0 (sizeof (AutoGsmWizardInfo));
-	info->callback = callback;
-	info->callback_data = callback_data;
-
-	wizard = nma_mobile_wizard_new (NULL, NULL, NM_DEVICE_MODEM_CAPABILITY_GSM_UMTS, FALSE,
-									mobile_wizard_done, info);
-	if (wizard) {
-		nma_mobile_wizard_present (wizard);
-		return TRUE;
-	}
-
-	/* Fall back to something */
-	method = g_malloc0 (sizeof (NMAMobileWizardAccessMethod));
-	method->devtype = NM_DEVICE_MODEM_CAPABILITY_GSM_UMTS;
-	method->provider_name = _("GSM");
-	mobile_wizard_done (NULL, FALSE, method, info);
-	g_free (method);
-
-	return TRUE;
-}
-
 static gboolean
 gsm_new_auto_connection (NMDevice *device,
                          gpointer dclass_data,
                          AppletNewAutoConnectionCallback callback,
                          gpointer callback_data)
 {
-	return do_mobile_wizard (callback, callback_data);
+	return mobile_helper_wizard (NM_DEVICE_MODEM_CAPABILITY_GSM_UMTS,
+	                             callback,
+	                             callback_data);
 }
 
 static void
@@ -276,7 +182,14 @@ applet_gsm_connect_network (NMApplet *applet, NMDevice *device)
 	info->applet = applet;
 	info->device = g_object_ref (device);
 
-	do_mobile_wizard (dbus_connect_3g_cb, info);
+
+	if (!mobile_helper_wizard (NM_DEVICE_MODEM_CAPABILITY_GSM_UMTS,
+	                           dbus_connect_3g_cb,
+	                           info)) {
+		g_warning ("Couldn't run mobile wizard for CDMA device");
+		g_object_unref (info->device);
+		g_free (info);
+	}
 }
 
 static void
@@ -354,6 +267,10 @@ gsm_act_to_mb_act (GsmDeviceInfo *info)
 		return MB_TECH_HSUPA;
 	case MM_MODEM_GSM_ACCESS_TECH_HSPA:
 		return MB_TECH_HSPA;
+	case MM_MODEM_GSM_ACCESS_TECH_HSPA_PLUS:
+		return MB_TECH_HSPA_PLUS;
+	case MM_MODEM_GSM_ACCESS_TECH_LTE:
+		return MB_TECH_LTE;
 	default:
 		break;
 	}
@@ -380,13 +297,9 @@ gsm_add_menu_item (NMDevice *device,
 	g_slist_free (all);
 
 	if (n_devices > 1) {
-		char *desc;
+		const char *desc;
 
-		desc = (char *) utils_get_device_description (device);
-		if (!desc)
-			desc = (char *) nm_device_get_iface (device);
-		g_assert (desc);
-
+		desc = nma_utils_get_device_description (device);
 		text = g_strdup_printf (_("Mobile Broadband (%s)"), desc);
 	} else {
 		text = g_strdup (_("Mobile Broadband"));
@@ -506,255 +419,47 @@ gsm_get_icon (NMDevice *device,
               char **tip,
               NMApplet *applet)
 {
-	NMSettingConnection *s_con;
-	GdkPixbuf *pixbuf = NULL;
-	const char *id;
 	GsmDeviceInfo *info;
-	guint32 mb_state;
 
 	info = g_object_get_data (G_OBJECT (device), "devinfo");
 	g_assert (info);
 
-	id = nm_device_get_iface (NM_DEVICE (device));
-	if (connection) {
-		s_con = nm_connection_get_setting_connection (connection);
-		id = nm_setting_connection_get_id (s_con);
-	}
-
-	switch (state) {
-	case NM_DEVICE_STATE_PREPARE:
-		*tip = g_strdup_printf (_("Preparing mobile broadband connection '%s'..."), id);
-		break;
-	case NM_DEVICE_STATE_CONFIG:
-		*tip = g_strdup_printf (_("Configuring mobile broadband connection '%s'..."), id);
-		break;
-	case NM_DEVICE_STATE_NEED_AUTH:
-		*tip = g_strdup_printf (_("User authentication required for mobile broadband connection '%s'..."), id);
-		break;
-	case NM_DEVICE_STATE_IP_CONFIG:
-		*tip = g_strdup_printf (_("Requesting a network address for '%s'..."), id);
-		break;
-	case NM_DEVICE_STATE_ACTIVATED:
-		mb_state = gsm_state_to_mb_state (info);
-		pixbuf = mobile_helper_get_status_pixbuf (info->quality,
-		                                          info->quality_valid,
-		                                          mb_state,
-		                                          gsm_act_to_mb_act (info),
-		                                          applet);
-
-		if ((mb_state != MB_STATE_UNKNOWN) && info->quality_valid) {
-			gboolean roaming = (mb_state == MB_STATE_ROAMING);
-
-			*tip = g_strdup_printf (_("Mobile broadband connection '%s' active: (%d%%%s%s)"),
-			                        id, info->quality,
-			                        roaming ? ", " : "",
-			                        roaming ? _("roaming") : "");
-		} else
-			*tip = g_strdup_printf (_("Mobile broadband connection '%s' active"), id);
-		break;
-	default:
-		break;
-	}
-
-	return pixbuf;
-}
-
-typedef struct {
-	SecretsRequest req;
-
-	GtkWidget *dialog;
-	GtkEntry *secret_entry;
-	char *secret_name;
-} NMGsmSecretsInfo;
-
-static void
-free_gsm_secrets_info (SecretsRequest *req)
-{
-	NMGsmSecretsInfo *info = (NMGsmSecretsInfo *) req;
-
-	if (info->dialog) {
-		gtk_widget_hide (info->dialog);
-		gtk_widget_destroy (info->dialog);
-	}
-
-	g_free (info->secret_name);
-}
-
-static void
-get_gsm_secrets_cb (GtkDialog *dialog,
-                    gint response,
-                    gpointer user_data)
-{
-	SecretsRequest *req = user_data;
-	NMGsmSecretsInfo *info = (NMGsmSecretsInfo *) req;
-	NMSettingGsm *setting;
-	GError *error = NULL;
-
-	if (response == GTK_RESPONSE_OK) {
-		setting = nm_connection_get_setting_gsm (req->connection);
-		if (setting) {
-			g_object_set (G_OBJECT (setting),
-				          info->secret_name, gtk_entry_get_text (info->secret_entry),
-				          NULL);
-		} else {
-			error = g_error_new (NM_SECRET_AGENT_ERROR,
-				                 NM_SECRET_AGENT_ERROR_INTERNAL_ERROR,
-				                 "%s.%d (%s): no GSM setting",
-				                 __FILE__, __LINE__, __func__);
-		}
-	} else {
-		error = g_error_new (NM_SECRET_AGENT_ERROR,
-		                     NM_SECRET_AGENT_ERROR_USER_CANCELED,
-		                     "%s.%d (%s): canceled",
-		                     __FILE__, __LINE__, __func__);
-	}
-
-	applet_secrets_request_complete_setting (req, NM_SETTING_GSM_SETTING_NAME, error);
-	applet_secrets_request_free (req);
-	g_clear_error (&error);
-}
-
-static void
-pin_entry_changed (GtkEditable *editable, gpointer user_data)
-{
-	GtkWidget *ok_button = GTK_WIDGET (user_data);
-	const char *s;
-	int i;
-	gboolean valid = FALSE;
-	guint32 len;
-
-	s = gtk_entry_get_text (GTK_ENTRY (editable));
-	if (s) {
-		len = strlen (s);
-		if ((len >= 4) && (len <= 8)) {
-			valid = TRUE;
-			for (i = 0; i < len; i++) {
-				if (!g_ascii_isdigit (s[i])) {
-					valid = FALSE;
-					break;
-				}
-			}
-		}
-	}
-
-	gtk_widget_set_sensitive (ok_button, valid);
-}
-
-static GtkWidget *
-ask_for_pin (GtkEntry **out_secret_entry)
-{
-	GtkDialog *dialog;
-	GtkWidget *w = NULL, *ok_button = NULL;
-	GtkBox *box = NULL, *vbox = NULL;
-
-	dialog = GTK_DIALOG (gtk_dialog_new ());
-	gtk_window_set_modal (GTK_WINDOW (dialog), TRUE);
-	gtk_window_set_title (GTK_WINDOW (dialog), _("PIN code required"));
-
-	ok_button = gtk_dialog_add_button (dialog, GTK_STOCK_CANCEL, GTK_RESPONSE_REJECT);
-	ok_button = gtk_dialog_add_button (dialog, GTK_STOCK_OK, GTK_RESPONSE_OK);
-	gtk_window_set_default (GTK_WINDOW (dialog), ok_button);
-
-	vbox = GTK_BOX (gtk_dialog_get_content_area (dialog));
-
-	w = gtk_label_new (_("PIN code is needed for the mobile broadband device"));
-	gtk_box_pack_start (vbox, w, TRUE, TRUE, 0);
-
-	w = gtk_alignment_new (0.5, 0.5, 0, 1.0);
-	gtk_box_pack_start (vbox, w, TRUE, TRUE, 0);
-
-#if GTK_CHECK_VERSION(3,1,6)
-        box = GTK_BOX (gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 6));
-#else
-	box = GTK_BOX (gtk_hbox_new (FALSE, 6));
-#endif
-	gtk_container_set_border_width (GTK_CONTAINER (box), 6);
-	gtk_container_add (GTK_CONTAINER (w), GTK_WIDGET (box));
-
-	gtk_box_pack_start (box, gtk_label_new ("PIN:"), FALSE, FALSE, 0);
-
-	w = gtk_entry_new ();
-	*out_secret_entry = GTK_ENTRY (w);
-	gtk_entry_set_max_length (GTK_ENTRY (w), 8);
-	gtk_entry_set_width_chars (GTK_ENTRY (w), 8);
-	gtk_entry_set_activates_default (GTK_ENTRY (w), TRUE);
-	gtk_entry_set_visibility (GTK_ENTRY (w), FALSE);
-	gtk_box_pack_start (box, w, FALSE, FALSE, 0);
-	g_signal_connect (w, "changed", G_CALLBACK (pin_entry_changed), ok_button);
-	pin_entry_changed (GTK_EDITABLE (w), ok_button);
-
-	gtk_widget_show_all (GTK_WIDGET (vbox));
-	return GTK_WIDGET (dialog);
+	return mobile_helper_get_icon (device,
+	                               state,
+	                               connection,
+	                               tip,
+	                               applet,
+	                               gsm_state_to_mb_state (info),
+	                               gsm_act_to_mb_act (info),
+	                               info->quality,
+	                               info->quality_valid);
 }
 
 static gboolean
 gsm_get_secrets (SecretsRequest *req, GError **error)
 {
-	NMGsmSecretsInfo *info = (NMGsmSecretsInfo *) req;
-	GtkWidget *widget;
-	GtkEntry *secret_entry = NULL;
+	NMDevice *device;
+	GsmDeviceInfo *devinfo;
 
-	applet_secrets_request_set_free_func (req, free_gsm_secrets_info);
-
-	if (!req->hints || !g_strv_length (req->hints)) {
-		g_set_error (error,
-		             NM_SECRET_AGENT_ERROR,
-		             NM_SECRET_AGENT_ERROR_INTERNAL_ERROR,
-		             "%s.%d (%s): missing secrets hints.",
-		             __FILE__, __LINE__, __func__);
+	if (!mobile_helper_get_secrets (NM_DEVICE_MODEM_CAPABILITY_GSM_UMTS, req, error))
 		return FALSE;
-	}
-	info->secret_name = g_strdup (req->hints[0]);
 
-	if (!strcmp (info->secret_name, NM_SETTING_GSM_PIN)) {
-		NMDevice *device;
-		GsmDeviceInfo *devinfo;
-
-		device = applet_get_device_for_connection (req->applet, req->connection);
-		if (!device) {
-			g_set_error (error,
-				         NM_SECRET_AGENT_ERROR,
-				         NM_SECRET_AGENT_ERROR_INTERNAL_ERROR,
-				         "%s.%d (%s): failed to find device for active connection.",
-				         __FILE__, __LINE__, __func__);
-			return FALSE;
-		}
-
-		devinfo = g_object_get_data (G_OBJECT (device), "devinfo");
-		g_assert (devinfo);
-
-		/* A GetSecrets PIN dialog overrides the initial unlock dialog */
-		if (devinfo->dialog)
-			unlock_dialog_destroy (devinfo);
-
-		widget = ask_for_pin (&secret_entry);
-	} else if (!strcmp (info->secret_name, NM_SETTING_GSM_PASSWORD))
-		widget = applet_mobile_password_dialog_new (req->connection, &secret_entry);
-	else {
+	device = applet_get_device_for_connection (req->applet, req->connection);
+	if (!device) {
 		g_set_error (error,
 		             NM_SECRET_AGENT_ERROR,
 		             NM_SECRET_AGENT_ERROR_INTERNAL_ERROR,
-		             "%s.%d (%s): unknown secrets hint '%s'.",
-		             __FILE__, __LINE__, __func__, info->secret_name);
-		return FALSE;
-	}
-	info->dialog = widget;
-	info->secret_entry = secret_entry;
-
-	if (!widget || !secret_entry) {
-		g_set_error (error,
-		             NM_SECRET_AGENT_ERROR,
-		             NM_SECRET_AGENT_ERROR_INTERNAL_ERROR,
-		             "%s.%d (%s): error asking for GSM secrets.",
+		             "%s.%d (%s): failed to find device for active connection.",
 		             __FILE__, __LINE__, __func__);
 		return FALSE;
 	}
 
-	g_signal_connect (widget, "response", G_CALLBACK (get_gsm_secrets_cb), info);
+	devinfo = g_object_get_data (G_OBJECT (device), "devinfo");
+	g_assert (devinfo);
 
-	gtk_window_set_position (GTK_WINDOW (widget), GTK_WIN_POS_CENTER_ALWAYS);
-	gtk_widget_realize (GTK_WIDGET (widget));
-	gtk_window_present (GTK_WINDOW (widget));
+	/* A GetSecrets PIN dialog overrides the initial unlock dialog */
+	if (devinfo->dialog)
+		unlock_dialog_destroy (devinfo);
 
 	return TRUE;
 }
@@ -762,92 +467,9 @@ gsm_get_secrets (SecretsRequest *req, GError **error)
 /********************************************************************/
 
 static void
-save_pin_cb (GnomeKeyringResult result, guint32 val, gpointer user_data)
-{
-	if (result != GNOME_KEYRING_RESULT_OK)
-		g_warning ("%s: result %d", (const char *) user_data, result);
-}
-
-static void
-set_pin_in_keyring (const char *devid,
-                    const char *simid,
-                    const char *pin)
-{
-	GnomeKeyringAttributeList *attributes;
-	GnomeKeyringAttribute attr;
-	const char *name;
-	char *error_msg;
-
-	name = g_strdup_printf (_("PIN code for SIM card '%s' on '%s'"),
-	                        simid ? simid : "unknown",
-	                        devid);
-
-	attributes = gnome_keyring_attribute_list_new ();
-	attr.name = g_strdup ("devid");
-	attr.type = GNOME_KEYRING_ATTRIBUTE_TYPE_STRING;
-	attr.value.string = g_strdup (devid);
-	g_array_append_val (attributes, attr);
-
-	if (simid) {
-		attr.name = g_strdup ("simid");
-		attr.type = GNOME_KEYRING_ATTRIBUTE_TYPE_STRING;
-		attr.value.string = g_strdup (simid);
-		g_array_append_val (attributes, attr);
-	}
-
-	error_msg = g_strdup_printf ("Saving PIN code in keyring for devid:%s simid:%s failed",
-	                             devid, simid ? simid : "(unknown)");
-
-	gnome_keyring_item_create (NULL,
-	                           GNOME_KEYRING_ITEM_GENERIC_SECRET,
-	                           name,
-	                           attributes,
-	                           pin,
-	                           TRUE,
-	                           save_pin_cb,
-	                           error_msg,
-	                           (GDestroyNotify) g_free);
-
-	gnome_keyring_attribute_list_free (attributes);
-}
-
-static void
-delete_pin_cb (GnomeKeyringResult result, gpointer user_data)
-{
-	/* nothing to do */
-}
-
-static void
-delete_pins_find_cb (GnomeKeyringResult result, GList *list, gpointer user_data)
-{
-	GList *iter;
-
-	if (result == GNOME_KEYRING_RESULT_OK) {
-		for (iter = list; iter; iter = g_list_next (iter)) {
-			GnomeKeyringFound *found = iter->data;
-
-			gnome_keyring_item_delete (found->keyring, found->item_id, delete_pin_cb, NULL, NULL);
-		}
-	}
-}
-
-static void
-delete_pins_in_keyring (const char *devid)
-{
-	gnome_keyring_find_itemsv (GNOME_KEYRING_ITEM_GENERIC_SECRET,
-	                           delete_pins_find_cb,
-	                           NULL,
-	                           NULL,
-	                           "devid",
-	                           GNOME_KEYRING_ATTRIBUTE_TYPE_STRING,
-	                           devid,
-	                           NULL);
-}
-
-static void
 unlock_dialog_destroy (GsmDeviceInfo *info)
 {
-	applet_mobile_pin_dialog_destroy (info->dialog);
+	gtk_widget_destroy (info->dialog);
 	info->dialog = NULL;
 }
 
@@ -861,9 +483,9 @@ unlock_pin_reply (DBusGProxy *proxy, DBusGProxyCall *call, gpointer user_data)
 	if (dbus_g_proxy_end_call (proxy, call, &error, G_TYPE_INVALID)) {
 		if (applet_mobile_pin_dialog_get_auto_unlock (info->dialog)) {
 			code1 = applet_mobile_pin_dialog_get_entry1 (info->dialog);
-			set_pin_in_keyring (info->devid, info->simid, code1);
+			mobile_helper_save_pin_in_keyring (info->devid, info->simid, code1);
 		} else
-			delete_pins_in_keyring (info->devid);
+			mobile_helper_delete_pin_in_keyring (info->devid);
 		unlock_dialog_destroy (info);
 		return;
 	}
@@ -964,79 +586,30 @@ unlock_dialog_response (GtkDialog *dialog,
 static void
 unlock_dialog_new (NMDevice *device, GsmDeviceInfo *info)
 {
-	const char *header = NULL;
-	const char *title = NULL;
-	const char *show_pass_label = NULL;
-	char *desc = NULL;
-	const char *label1 = NULL, *label2 = NULL, *label3 = NULL;
-	const char *device_desc;
-	gboolean match23 = FALSE;
-	guint32 label1_min = 0, label2_min = 0, label3_min = 0;
-	guint32 label1_max = 0, label2_max = 0, label3_max = 0;
-	guint32 unlock_code = 0;
-
 	g_return_if_fail (info->unlock_required != NULL);
+	g_return_if_fail (!strcmp (info->unlock_required, "sim-pin") || !strcmp (info->unlock_required, "sim-puk"));
 
 	if (info->dialog)
 		return;
 
-	/* Figure out the dialog text based on the required unlock code */
-	device_desc = utils_get_device_description (device);
-	if (!strcmp (info->unlock_required, "sim-pin")) {
-		title = _("SIM PIN unlock required");
-		header = _("SIM PIN Unlock Required");
-		/* FIXME: some warning about # of times you can enter incorrect PIN */
-		desc = g_strdup_printf (_("The mobile broadband device '%s' requires a SIM PIN code before it can be used."), device_desc);
-		/* Translators: PIN code entry label */
-		label1 = _("PIN code:");
-		label1_min = 4;
-		label1_max = 8;
-		/* Translators: Show/obscure PIN checkbox label */
-		show_pass_label = _("Show PIN code");
-		unlock_code = UNLOCK_CODE_PIN;
-	} else if (!strcmp (info->unlock_required, "sim-puk")) {
-		title = _("SIM PUK unlock required");
-		header = _("SIM PUK Unlock Required");
-		/* FIXME: some warning about # of times you can enter incorrect PUK */
-		desc = g_strdup_printf (_("The mobile broadband device '%s' requires a SIM PUK code before it can be used."), device_desc);
-		/* Translators: PUK code entry label */
-		label1 = _("PUK code:");
-		label1_min = label1_max = 8;
-		/* Translators: New PIN entry label */
-		label2 = _("New PIN code:");
-		/* Translators: New PIN verification entry label */
-		label3 = _("Re-enter new PIN code:");
-		label2_min = label3_min = 4;
-		label2_max = label3_max = 8;
-		match23 = TRUE;
-		/* Translators: Show/obscure PIN/PUK checkbox label */
-		show_pass_label = _("Show PIN/PUK codes");
-		unlock_code = UNLOCK_CODE_PUK;
-	} else {
-		g_warning ("Unhandled unlock request for '%s'", info->unlock_required);
-		return;
-	}
+	info->dialog = applet_mobile_pin_dialog_new (info->unlock_required,
+	                                             nma_utils_get_device_description (device));
 
-	/* Construct and run the dialog */
-	info->dialog = applet_mobile_pin_dialog_new (title,
-	                                             header,
-	                                             desc,
-	                                             show_pass_label,
-	                                             (unlock_code == UNLOCK_CODE_PIN) ? TRUE : FALSE);
-	g_free (desc);
-	g_return_if_fail (info->dialog != NULL);
-
-	g_object_set_data (G_OBJECT (info->dialog), "unlock-code", GUINT_TO_POINTER (unlock_code));
-	applet_mobile_pin_dialog_match_23 (info->dialog, match23);
-
-	applet_mobile_pin_dialog_set_entry1 (info->dialog, label1, label1_min, label1_max);
-	if (label2)
-		applet_mobile_pin_dialog_set_entry2 (info->dialog, label2, label2_min, label2_max);
-	if (label3)
-		applet_mobile_pin_dialog_set_entry3 (info->dialog, label3, label3_min, label3_max);
+	if (!strcmp (info->unlock_required, "sim-pin"))
+		g_object_set_data (G_OBJECT (info->dialog), "unlock-code", GUINT_TO_POINTER (UNLOCK_CODE_PIN));
+	else if (!strcmp (info->unlock_required, "sim-puk"))
+		g_object_set_data (G_OBJECT (info->dialog), "unlock-code", GUINT_TO_POINTER (UNLOCK_CODE_PUK));
+	else
+		g_assert_not_reached ();
 
 	g_signal_connect (info->dialog, "response", G_CALLBACK (unlock_dialog_response), info);
-	applet_mobile_pin_dialog_present (info->dialog, FALSE);
+
+	/* Need to resize the dialog after hiding widgets */
+	gtk_window_resize (GTK_WINDOW (info->dialog), 400, 100);
+
+	/* Show the dialog */
+	gtk_widget_realize (info->dialog);
+	gtk_window_present (GTK_WINDOW (info->dialog));
 }
 
 /********************************************************************/
@@ -1058,8 +631,8 @@ gsm_device_info_free (gpointer data)
 	if (info->keyring_id)
 		gnome_keyring_cancel_request (info->keyring_id);
 
-	if (info->providers)
-		g_hash_table_destroy (info->providers);
+	if (info->mobile_providers_database)
+		g_object_unref (info->mobile_providers_database);
 
 	if (info->poll_id)
 		g_source_remove (info->poll_id);
@@ -1091,98 +664,6 @@ signal_reply (DBusGProxy *proxy, DBusGProxyCall *call, gpointer user_data)
 	}
 
 	g_clear_error (&error);
-}
-
-static char *
-find_provider_for_mcc_mnc (GHashTable *table, const char *mccmnc)
-{
-	GHashTableIter iter;
-	gpointer value;
-	GSList *piter, *siter;
-	const char *name2 = NULL, *name3 = NULL;
-	gboolean done = FALSE;
-
-	if (!mccmnc)
-		return NULL;
-
-	g_hash_table_iter_init (&iter, table);
-	/* Search through each country */
-	while (g_hash_table_iter_next (&iter, NULL, &value) && !done) {
-		GSList *providers = value;
-
-		/* Search through each country's providers */
-		for (piter = providers; piter && !done; piter = g_slist_next (piter)) {
-			NmnMobileProvider *provider = piter->data;
-
-			/* Search through MCC/MNC list */
-			for (siter = provider->gsm_mcc_mnc; siter; siter = g_slist_next (siter)) {
-				NmnGsmMccMnc *mcc = siter->data;
-
-				/* Match both 2-digit and 3-digit MNC; prefer a
-				 * 3-digit match if found, otherwise a 2-digit one.
-				 */
-				if (strncmp (mcc->mcc, mccmnc, 3))
-					continue;  /* MCC was wrong */
-
-				if (   !name3
-				    && (strlen (mccmnc) == 6)
-				    && !strncmp (mccmnc + 3, mcc->mnc, 3))
-					name3 = provider->name;
-
-				if (   !name2
-				    && !strncmp (mccmnc + 3, mcc->mnc, 2))
-					name2 = provider->name;
-
-				if (name2 && name3) {
-					done = TRUE;
-					break;
-				}
-			}
-		}
-	}
-
-	if (name3)
-		return g_strdup (name3);
-	return g_strdup (name2);
-}
-
-static char *
-parse_op_name (GsmDeviceInfo *info, const char *orig, const char *op_code)
-{
-	guint i, orig_len;
-
-	/* Some devices return the MCC/MNC if they haven't fully initialized
-	 * or gotten all the info from the network yet.  Handle that.
-	 */
-
-	orig_len = orig ? strlen (orig) : 0;
-	if (orig_len == 0) {
-		/* If the operator name isn't valid, maybe we can look up the MCC/MNC
-		 * from the operator code instead.
-		 */
-		if (op_code && strlen (op_code)) {
-			orig = op_code;
-			orig_len = strlen (orig);
-		} else
-			return NULL;
-	} else if (orig_len < 5 || orig_len > 6)
-		return g_strdup (orig);  /* not an MCC/MNC */
-
-	for (i = 0; i < orig_len; i++) {
-		if (!isdigit (orig[i]))
-			return strdup (orig);
-	}
-
-	/* At this point we have a 5 or 6 character all-digit string; that's
-	 * probably an MCC/MNC.  Look that up.
-	 */
-
-	if (!info->providers)
-		info->providers = nmn_mobile_providers_parse (NULL);
-	if (!info->providers)
-		return strdup (orig);
-
-	return find_provider_for_mcc_mnc (info->providers, orig);
 }
 
 static void
@@ -1236,7 +717,9 @@ reg_info_reply (DBusGProxy *proxy, DBusGProxyCall *call, gpointer user_data)
 
 			value = g_value_array_get_nth (array, 2);
 			if (G_VALUE_HOLDS_STRING (value))
-				new_op_name = parse_op_name (info, g_value_get_string (value), new_op_code);
+				new_op_name = mobile_helper_parse_3gpp_operator_name (&(info->mobile_providers_database),
+				                                                      g_value_get_string (value),
+				                                                      new_op_code);
 		}
 
 		g_value_array_free (array);
@@ -1411,7 +894,7 @@ simid_reply (DBusGProxy *proxy, DBusGProxyCall *call, gpointer user_data)
 	check_start_polling (info);
 }
 
-#define MM_DBUS_INTERFACE_MODEM_GSM_CARD "org.freedesktop.ModemManager.Modem.Gsm.Card"
+#define MM_OLD_DBUS_INTERFACE_MODEM_GSM_CARD "org.freedesktop.ModemManager.Modem.Gsm.Card"
 
 static void
 unlock_reply (DBusGProxy *proxy, DBusGProxyCall *call, gpointer user_data)
@@ -1444,7 +927,7 @@ unlock_reply (DBusGProxy *proxy, DBusGProxyCall *call, gpointer user_data)
 		/* Get SIM card identifier */
 		dbus_g_proxy_begin_call (info->props_proxy, "Get",
 		                         simid_reply, info, NULL,
-		                         G_TYPE_STRING, MM_DBUS_INTERFACE_MODEM_GSM_CARD,
+		                         G_TYPE_STRING, MM_OLD_DBUS_INTERFACE_MODEM_GSM_CARD,
 		                         G_TYPE_STRING, "SimIdentifier",
 		                         G_TYPE_INVALID);
 	}
@@ -1555,7 +1038,9 @@ reg_info_changed_cb (DBusGProxy *proxy,
 	g_free (info->op_code);
 	info->op_code = strlen (op_code) ? g_strdup (op_code) : NULL;
 	g_free (info->op_name);
-	info->op_name = parse_op_name (info, op_name, info->op_code);
+	info->op_name = mobile_helper_parse_3gpp_operator_name (&(info->mobile_providers_database),
+	                                                        op_name,
+	                                                        info->op_code);
 	info->skip_reg_poll = TRUE;
 }
 
@@ -1573,8 +1058,8 @@ signal_quality_changed_cb (DBusGProxy *proxy,
 	applet_schedule_update_icon (info->applet);
 }
 
-#define MM_DBUS_INTERFACE_MODEM "org.freedesktop.ModemManager.Modem"
-#define MM_DBUS_INTERFACE_MODEM_GSM_NETWORK "org.freedesktop.ModemManager.Modem.Gsm.Network"
+#define MM_OLD_DBUS_INTERFACE_MODEM "org.freedesktop.ModemManager.Modem"
+#define MM_OLD_DBUS_INTERFACE_MODEM_GSM_NETWORK "org.freedesktop.ModemManager.Modem.Gsm.Network"
 
 static void
 modem_properties_changed (DBusGProxy *proxy,
@@ -1585,7 +1070,7 @@ modem_properties_changed (DBusGProxy *proxy,
 	GsmDeviceInfo *info = user_data;
 	GValue *value;
 
-	if (!strcmp (interface, MM_DBUS_INTERFACE_MODEM)) {
+	if (!strcmp (interface, MM_OLD_DBUS_INTERFACE_MODEM)) {
 		value = g_hash_table_lookup (props, "UnlockRequired");
 		if (value && G_VALUE_HOLDS_STRING (value)) {
 			g_free (info->unlock_required);
@@ -1608,7 +1093,7 @@ modem_properties_changed (DBusGProxy *proxy,
 			}
 			check_start_polling (info);
 		}
-	} else if (!strcmp (interface, MM_DBUS_INTERFACE_MODEM_GSM_NETWORK)) {
+	} else if (!strcmp (interface, MM_OLD_DBUS_INTERFACE_MODEM_GSM_NETWORK)) {
 		value = g_hash_table_lookup (props, "AccessTechnology");
 		if (value && G_VALUE_HOLDS_UINT (value)) {
 			info->act = g_value_get_uint (value);
@@ -1665,7 +1150,7 @@ gsm_device_added (NMDevice *device, NMApplet *applet)
 	info->net_proxy = dbus_g_proxy_new_for_name (info->bus,
 	                                             "org.freedesktop.ModemManager",
 	                                             udi,
-	                                             MM_DBUS_INTERFACE_MODEM_GSM_NETWORK);
+	                                             MM_OLD_DBUS_INTERFACE_MODEM_GSM_NETWORK);
 	if (!info->net_proxy) {
 		g_message ("%s: failed to create GSM Network proxy.", __func__);
 		gsm_device_info_free (info);
@@ -1703,19 +1188,19 @@ gsm_device_added (NMDevice *device, NMApplet *applet)
 	/* Ask whether the device needs to be unlocked */
 	dbus_g_proxy_begin_call (info->props_proxy, "GetAll",
 	                         unlock_reply, info, NULL,
-	                         G_TYPE_STRING, MM_DBUS_INTERFACE_MODEM,
+	                         G_TYPE_STRING, MM_OLD_DBUS_INTERFACE_MODEM,
 	                         G_TYPE_INVALID);
 
 	/* Ask whether the device is enabled */
 	dbus_g_proxy_begin_call (info->props_proxy, "Get",
 	                         enabled_reply, info, NULL,
-	                         G_TYPE_STRING, MM_DBUS_INTERFACE_MODEM,
+	                         G_TYPE_STRING, MM_OLD_DBUS_INTERFACE_MODEM,
 	                         G_TYPE_STRING, "Enabled",
 	                         G_TYPE_INVALID);
 
 	dbus_g_proxy_begin_call (info->props_proxy, "Get",
 	                         access_tech_reply, info, NULL,
-	                         G_TYPE_STRING, MM_DBUS_INTERFACE_MODEM_GSM_NETWORK,
+	                         G_TYPE_STRING, MM_OLD_DBUS_INTERFACE_MODEM_GSM_NETWORK,
 	                         G_TYPE_STRING, "AccessTechnology",
 	                         G_TYPE_INVALID);
 }
@@ -1734,9 +1219,8 @@ applet_device_gsm_get_class (NMApplet *applet)
 	dclass->device_state_changed = gsm_device_state_changed;
 	dclass->get_icon = gsm_get_icon;
 	dclass->get_secrets = gsm_get_secrets;
-	dclass->secrets_request_size = sizeof (NMGsmSecretsInfo);
+	dclass->secrets_request_size = sizeof (MobileHelperSecretsInfo);
 	dclass->device_added = gsm_device_added;
 
 	return dclass;
 }
-

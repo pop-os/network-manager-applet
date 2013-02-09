@@ -69,6 +69,8 @@ typedef struct {
 #define NET_TYPE_2G          2
 #define NET_TYPE_PREFER_3G   3
 #define NET_TYPE_PREFER_2G   4
+#define NET_TYPE_PREFER_4G   5
+#define NET_TYPE_4G          6
 
 static void
 mobile_private_init (CEPageMobile *self)
@@ -129,6 +131,12 @@ populate_gsm_ui (CEPageMobile *self, NMConnection *connection)
 		break;
 	case NM_SETTING_GSM_NETWORK_TYPE_PREFER_GPRS_EDGE:
 		type_idx = NET_TYPE_PREFER_2G;
+		break;
+	case NM_SETTING_GSM_NETWORK_TYPE_PREFER_4G:
+		type_idx = NET_TYPE_PREFER_4G;
+		break;
+	case NM_SETTING_GSM_NETWORK_TYPE_4G:
+		type_idx = NET_TYPE_4G;
 		break;
 	case NM_SETTING_GSM_NETWORK_TYPE_ANY:
 	default:
@@ -364,6 +372,7 @@ CEPage *
 ce_page_mobile_new (NMConnection *connection,
                     GtkWindow *parent_window,
                     NMClient *client,
+                    NMRemoteSettings *settings,
                     const char **out_secrets_setting_name,
                     GError **error)
 {
@@ -374,6 +383,7 @@ ce_page_mobile_new (NMConnection *connection,
 	                                    connection,
 	                                    parent_window,
 	                                    client,
+	                                    settings,
 	                                    UIDIR "/ce-page-mobile.ui",
 	                                    "MobilePage",
 	                                    _("Mobile Broadband")));
@@ -437,6 +447,12 @@ gsm_ui_to_setting (CEPageMobile *self)
 	case NET_TYPE_PREFER_2G:
 		net_type = NM_SETTING_GSM_NETWORK_TYPE_PREFER_GPRS_EDGE;
 		break;
+	case NET_TYPE_PREFER_4G:
+		net_type = NM_SETTING_GSM_NETWORK_TYPE_PREFER_4G;
+		break;
+	case NET_TYPE_4G:
+		net_type = NM_SETTING_GSM_NETWORK_TYPE_4G;
+		break;
 	case NET_TYPE_ANY:
 	default:
 		net_type = NM_SETTING_GSM_NETWORK_TYPE_ANY;
@@ -446,15 +462,15 @@ gsm_ui_to_setting (CEPageMobile *self)
 	roaming_allowed = gtk_toggle_button_get_active (priv->roaming_allowed);
 
 	g_object_set (priv->setting,
-				  NM_SETTING_GSM_NUMBER,       nm_entry_get_text (priv->number),
-				  NM_SETTING_GSM_USERNAME,     nm_entry_get_text (priv->username),
-				  NM_SETTING_GSM_PASSWORD,     nm_entry_get_text (priv->password),
-				  NM_SETTING_GSM_APN,          nm_entry_get_text (priv->apn),
-				  NM_SETTING_GSM_NETWORK_ID,   nm_entry_get_text (priv->network_id),
-				  NM_SETTING_GSM_NETWORK_TYPE, net_type,
-				  NM_SETTING_GSM_PIN,          nm_entry_get_text (priv->pin),
-				  NM_SETTING_GSM_HOME_ONLY,    !roaming_allowed,
-				  NULL);
+	              NM_SETTING_GSM_NUMBER,       nm_entry_get_text (priv->number),
+	              NM_SETTING_GSM_USERNAME,     nm_entry_get_text (priv->username),
+	              NM_SETTING_GSM_PASSWORD,     nm_entry_get_text (priv->password),
+	              NM_SETTING_GSM_APN,          nm_entry_get_text (priv->apn),
+	              NM_SETTING_GSM_NETWORK_ID,   nm_entry_get_text (priv->network_id),
+	              NM_SETTING_GSM_NETWORK_TYPE, net_type,
+	              NM_SETTING_GSM_PIN,          nm_entry_get_text (priv->pin),
+	              NM_SETTING_GSM_HOME_ONLY,    !roaming_allowed,
+	              NULL);
 }
 
 static void
@@ -539,8 +555,8 @@ add_default_serial_setting (NMConnection *connection)
 }
 
 typedef struct {
+    NMRemoteSettings *settings;
     PageNewConnectionResultFunc result_func;
-    PageGetConnectionsFunc get_connections_func;
     gpointer user_data;
 } WizardInfo;
 
@@ -589,7 +605,7 @@ new_connection_mobile_wizard_done (NMAMobileWizard *wizard,
 			detail = g_strdup_printf ("%s %s %%d", method->provider_name, method->plan_name);
 		else
 			detail = g_strdup_printf ("%s connection %%d", method->provider_name);
-		connection = ce_page_new_connection (detail, ctype, FALSE, info->get_connections_func, info->user_data);
+		connection = ce_page_new_connection (detail, ctype, FALSE, info->settings, info->user_data);
 		g_free (detail);
 
 		nm_connection_add_setting (connection, type_setting);
@@ -601,6 +617,8 @@ new_connection_mobile_wizard_done (NMAMobileWizard *wizard,
 
 	if (wizard)
 		nma_mobile_wizard_destroy (wizard);
+
+	g_object_unref (info->settings);
 	g_free (info);
 }
 
@@ -612,8 +630,9 @@ cancel_dialog (GtkDialog *dialog)
 
 void
 mobile_connection_new (GtkWindow *parent,
+                       const char *detail,
+                       NMRemoteSettings *settings,
                        PageNewConnectionResultFunc result_func,
-                       PageGetConnectionsFunc get_connections_func,
                        gpointer user_data)
 {
 	NMAMobileWizard *wizard;
@@ -625,7 +644,7 @@ mobile_connection_new (GtkWindow *parent,
 
 	info = g_malloc0 (sizeof (WizardInfo));
 	info->result_func = result_func;
-	info->get_connections_func = get_connections_func;
+	info->settings = g_object_ref (settings);
 	info->user_data = user_data;
 
 	wizard = nma_mobile_wizard_new (parent, NULL, NM_DEVICE_MODEM_CAPABILITY_NONE, FALSE,

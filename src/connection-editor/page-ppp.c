@@ -266,6 +266,7 @@ CEPage *
 ce_page_ppp_new (NMConnection *connection,
                  GtkWindow *parent_window,
                  NMClient *client,
+                 NMRemoteSettings *settings,
                  const char **out_secrets_setting_name,
                  GError **error)
 {
@@ -277,6 +278,7 @@ ce_page_ppp_new (NMConnection *connection,
 	                                 connection,
 	                                 parent_window,
 	                                 client,
+	                                 settings,
 	                                 UIDIR "/ce-page-ppp.ui",
 	                                 "PppPage",
 	                                 _("PPP Settings")));

@@ -6,13 +6,8 @@
 
 G_BEGIN_DECLS
 
-/* VOID:INT,POINTER (nma-marshal.list:1) */
-extern void _nma_marshal_VOID__INT_POINTER (GClosure     *closure,
-                                            GValue       *return_value,
-                                            guint         n_param_values,
-                                            const GValue *param_values,
-                                            gpointer      invocation_hint,
-                                            gpointer      marshal_data);
+/* VOID:ENUM (nma-marshal.list:1) */
+#define _nma_marshal_VOID__ENUM	g_cclosure_marshal_VOID__ENUM
 
 /* VOID:POINTER,POINTER,STRING,POINTER,UINT,POINTER,POINTER (nma-marshal.list:2) */
 extern void _nma_marshal_VOID__POINTER_POINTER_STRING_POINTER_UINT_POINTER_POINTER (GClosure     *closure,

@@ -17,7 +17,7 @@
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  *
- * Copyright (C) 2004 - 2011 Red Hat, Inc.
+ * Copyright (C) 2004 - 2012 Red Hat, Inc.
  */
 
 #ifdef HAVE_CONFIG_H
@@ -41,7 +41,6 @@
 #include <nm-setting-cdma.h>
 #include "nm-connection-list.h"
 #include "nm-connection-editor.h"
-#include "page-wired.h"
 
 static GMainLoop *loop = NULL;
 
@@ -60,7 +59,7 @@ static GMainLoop *loop = NULL;
 #define NM_CE_SERVICE(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), NM_TYPE_CE_SERVICE, NMCEService))
 #define NM_CE_SERVICE_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), NM_TYPE_CE_SERVICE, NMCEServiceClass))
 #define NM_IS_CE_SERVICE(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), NM_TYPE_CE_SERVICE))
-#define NM_IS_CE_SERVICE_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((obj), NM_TYPE_CE_SERVICE))
+#define NM_IS_CE_SERVICE_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), NM_TYPE_CE_SERVICE))
 #define NM_CE_SERVICE_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), NM_TYPE_CE_SERVICE, NMCEServiceClass))
 
 typedef struct {
@@ -137,6 +136,17 @@ nm_ce_service_class_init (NMCEServiceClass *service_class)
 /*************************************************/
 
 static gboolean
+idle_create_connection (gpointer user_data)
+{
+	NMConnectionList *list = user_data;
+	GType ctype = GPOINTER_TO_UINT (g_object_get_data (G_OBJECT (list), "nm-connection-editor-ctype"));
+	char *detail = g_object_get_data (G_OBJECT (list), "nm-connection-editor-detail");
+
+	nm_connection_list_create (list, ctype, detail);
+	return FALSE;
+}
+
+static gboolean
 handle_arguments (NMConnectionList *list,
                   const char *type,
                   gboolean create,
@@ -146,11 +156,23 @@ handle_arguments (NMConnectionList *list,
 {
 	gboolean show_list = TRUE;
 	GType ctype;
+	char *type_tmp = NULL;
+	const char *p, *detail = NULL;
+
+	if (type) {
+		p = strchr (type, ':');
+		if (p) {
+			type = type_tmp = g_strndup (type, p - type);
+			detail = p + 1;
+		}
+	} else
+		type = NM_SETTING_WIRED_SETTING_NAME;
 
 	/* Grab type to create or show */
-	ctype = nm_connection_lookup_setting_type (type ? type : NM_SETTING_WIRED_SETTING_NAME);
+	ctype = nm_connection_lookup_setting_type (type);
 	if (ctype == 0) {
 		g_warning ("Unknown connection type '%s'", type);
+		g_free (type_tmp);
 		return TRUE;
 	}
 
@@ -160,9 +182,18 @@ handle_arguments (NMConnectionList *list,
 	} else if (create) {
 		if (!type) {
 			g_warning ("'create' requested but no connection type given.");
+			g_free (type_tmp);
 			return TRUE;
 		}
-		nm_connection_list_create (list, ctype);
+
+		/* If type is "vpn" and the user cancels the "vpn type" dialog, we need
+		 * to quit. But we haven't even started yet. So postpone this to an idle.
+		 */
+		g_idle_add (idle_create_connection, list);
+		g_object_set_data (G_OBJECT (list), "nm-connection-editor-ctype",
+		                   GUINT_TO_POINTER (ctype));
+		g_object_set_data_full (G_OBJECT (list), "nm-connection-editor-detail",
+		                        g_strdup (detail), g_free);
 
 		show_list = FALSE;
 	} else if (edit_uuid) {
@@ -175,6 +206,7 @@ handle_arguments (NMConnectionList *list,
 	if (show_list == FALSE && quit_after == TRUE)
 		g_signal_connect_swapped (list, "editing-done", G_CALLBACK (g_main_loop_quit), loop);
 
+	g_free (type_tmp);
 	return show_list;
 }
 

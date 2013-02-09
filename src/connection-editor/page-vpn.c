@@ -29,11 +29,13 @@
 
 #include <nm-setting-connection.h>
 #include <nm-setting-vpn.h>
+#include <nm-utils.h>
 
 #define NM_VPN_API_SUBJECT_TO_CHANGE
 #include <nm-vpn-plugin-ui-interface.h>
 
 #include "page-vpn.h"
+#include "new-connection.h"
 #include "nm-connection-editor.h"
 #include "vpn-helpers.h"
 
@@ -93,6 +95,7 @@ CEPage *
 ce_page_vpn_new (NMConnection *connection,
                  GtkWindow *parent_window,
                  NMClient *client,
+                 NMRemoteSettings *settings,
                  const char **out_secrets_setting_name,
                  GError **error)
 {
@@ -104,6 +107,7 @@ ce_page_vpn_new (NMConnection *connection,
 	                                 connection,
 	                                 parent_window,
 	                                 client,
+	                                 settings,
 	                                 NULL,
 	                                 NULL,
 	                                 _("VPN")));
@@ -133,6 +137,14 @@ ce_page_vpn_new (NMConnection *connection,
 	*out_secrets_setting_name = NM_SETTING_VPN_SETTING_NAME;
 
 	return CE_PAGE (self);
+}
+
+gboolean
+ce_page_vpn_can_export (CEPageVpn *page)
+{
+	CEPageVpnPrivate *priv = CE_PAGE_VPN_GET_PRIVATE (page);
+
+	return 	(nm_vpn_plugin_ui_interface_get_capabilities (priv->plugin) & NM_VPN_PLUGIN_UI_CAPABILITY_EXPORT) != 0;
 }
 
 static gboolean
@@ -181,31 +193,138 @@ ce_page_vpn_class_init (CEPageVpnClass *vpn_class)
 	parent_class->validate = validate;
 }
 
+typedef struct {
+	NMRemoteSettings *settings;
+	PageNewConnectionResultFunc result_func;
+	gpointer user_data;
+} NewVpnInfo;
+
+static void
+import_cb (NMConnection *connection, gpointer user_data)
+{
+	NewVpnInfo *info = (NewVpnInfo *) user_data;
+	NMSettingConnection *s_con;
+	NMSettingVPN *s_vpn;
+	const char *service_type;
+	char *s;
+	GError *error = NULL;
+
+	/* Basic sanity checks of the connection */
+	s_con = nm_connection_get_setting_connection (connection);
+	if (!s_con) {
+		s_con = NM_SETTING_CONNECTION (nm_setting_connection_new ());
+		nm_connection_add_setting (connection, NM_SETTING (s_con));
+	}
+
+	s = (char *) nm_setting_connection_get_id (s_con);
+	if (!s) {
+		GSList *connections;
+
+		connections = nm_remote_settings_list_connections (info->settings);
+		s = ce_page_get_next_available_name (connections, _("VPN connection %d"));
+		g_object_set (s_con, NM_SETTING_CONNECTION_ID, s, NULL);
+		g_free (s);
+
+		g_slist_free (connections);
+	}
+
+	s = (char *) nm_setting_connection_get_connection_type (s_con);
+	if (!s || strcmp (s, NM_SETTING_VPN_SETTING_NAME))
+		g_object_set (s_con, NM_SETTING_CONNECTION_TYPE, NM_SETTING_VPN_SETTING_NAME, NULL);
+
+	s = (char *) nm_setting_connection_get_uuid (s_con);
+	if (!s) {
+		s = nm_utils_uuid_generate ();
+		g_object_set (s_con, NM_SETTING_CONNECTION_UUID, s, NULL);
+		g_free (s);
+	}
+
+	s_vpn = nm_connection_get_setting_vpn (connection);
+	service_type = s_vpn ? nm_setting_vpn_get_service_type (s_vpn) : NULL;
+
+	if (!service_type || !strlen (service_type)) {
+		g_object_unref (connection);
+		connection = NULL;
+
+		error = g_error_new_literal (NMA_ERROR, NMA_ERROR_GENERIC,
+		                             _("The VPN plugin failed to import the VPN connection correctly\n\nError: no VPN service type."));
+	}
+
+	info->result_func (connection, FALSE, error, info->user_data);
+	g_clear_error (&error);
+	g_object_unref (info->settings);
+	g_slice_free (NewVpnInfo, info);
+}
+
+void
+vpn_connection_import (GtkWindow *parent,
+                       const char *detail,
+                       NMRemoteSettings *settings,
+                       PageNewConnectionResultFunc result_func,
+                       gpointer user_data)
+{
+	NewVpnInfo *info;
+
+	info = g_slice_new (NewVpnInfo);
+	info->result_func = result_func;
+	info->settings = g_object_ref (settings);
+	info->user_data = user_data;
+	vpn_import (import_cb, info);
+}
+
+#define NEW_VPN_CONNECTION_PRIMARY_LABEL _("Choose a VPN Connection Type")
+#define NEW_VPN_CONNECTION_SECONDARY_LABEL _("Select the type of VPN you wish to use for the new connection.  If the type of VPN connection you wish to create does not appear in the list, you may not have the correct VPN plugin installed.")
+
+static gboolean
+vpn_type_filter_func (GType type, gpointer user_data)
+{
+	return type == NM_TYPE_SETTING_VPN;
+}
+
+static void
+vpn_type_result_func (NMConnection *connection, gpointer user_data)
+{
+	NewVpnInfo *info = user_data;
+
+	info->result_func (connection, connection == NULL, NULL, info->user_data);
+	g_slice_free (NewVpnInfo, info);
+}
 
 void
 vpn_connection_new (GtkWindow *parent,
+                    const char *detail,
+                    NMRemoteSettings *settings,
                     PageNewConnectionResultFunc result_func,
-                    PageGetConnectionsFunc get_connections_func,
                     gpointer user_data)
 {
-	char *service = NULL;
 	NMConnection *connection;
 	NMSetting *s_vpn;
 
-	service = vpn_ask_connection_type (parent);
-	if (!service) {
-		(*result_func) (NULL, TRUE, NULL, user_data);
+	if (!detail) {
+		NewVpnInfo *info;
+
+		/* This will happen if nm-c-e is launched from the command line
+		 * with "--create --type vpn". Dump the user back into the
+		 * new connection dialog to let them pick a subtype now.
+		 */
+		info = g_slice_new (NewVpnInfo);
+		info->result_func = result_func;
+		info->user_data = user_data;
+		new_connection_dialog_full (parent, settings,
+		                            NEW_VPN_CONNECTION_PRIMARY_LABEL,
+		                            NEW_VPN_CONNECTION_SECONDARY_LABEL,
+		                            vpn_type_filter_func,
+		                            vpn_type_result_func, info);
 		return;
 	}
 
 	connection = ce_page_new_connection (_("VPN connection %d"),
 	                                     NM_SETTING_VPN_SETTING_NAME,
 	                                     FALSE,
-	                                     get_connections_func,
+	                                     settings,
 	                                     user_data);
 	s_vpn = nm_setting_vpn_new ();
-	g_object_set (s_vpn, NM_SETTING_VPN_SERVICE_TYPE, service, NULL);
-	g_free (service);
+	g_object_set (s_vpn, NM_SETTING_VPN_SERVICE_TYPE, detail, NULL);
 	nm_connection_add_setting (connection, s_vpn);
 
 	(*result_func) (connection, FALSE, NULL, user_data);

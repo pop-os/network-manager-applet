@@ -1,5 +1,5 @@
 /* -*- Mode: C; tab-width: 4; indent-tabs-mode: t; c-basic-offset: 4 -*- */
-/* NetworkManager Wireless Applet -- Display wireless access points and allow user control
+/* NetworkManager Applet -- allow user control over networking
  *
  * Dan Williams <dcbw@redhat.com>
  *
@@ -30,6 +30,8 @@
 
 struct _EAPMethodLEAP {
 	EAPMethod parent;
+
+	gboolean new_connection;
 };
 
 static void
@@ -83,6 +85,7 @@ add_to_size_group (EAPMethod *parent, GtkSizeGroup *group)
 static void
 fill_connection (EAPMethod *parent, NMConnection *connection)
 {
+	EAPMethodLEAP *method = (EAPMethodLEAP *) parent;
 	NMSetting8021x *s_8021x;
 	GtkWidget *widget;
 
@@ -98,6 +101,14 @@ fill_connection (EAPMethod *parent, NMConnection *connection)
 	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_leap_password_entry"));
 	g_assert (widget);
 	g_object_set (s_8021x, NM_SETTING_802_1X_PASSWORD, gtk_entry_get_text (GTK_ENTRY (widget)), NULL);
+
+	/* Default to agent-owned secrets for new connections */
+	if (method->new_connection) {
+		g_object_set (s_8021x,
+		              NM_SETTING_802_1X_PASSWORD_FLAGS, NM_SETTING_SECRET_FLAG_AGENT_OWNED,
+		              NM_SETTING_802_1X_SYSTEM_CA_CERTS, TRUE,
+		              NULL);
+	}
 }
 
 static void
@@ -115,6 +126,7 @@ eap_method_leap_new (WirelessSecurity *ws_parent,
                      NMConnection *connection,
                      gboolean secrets_only)
 {
+	EAPMethodLEAP *method;
 	EAPMethod *parent;
 	GtkWidget *widget;
 
@@ -130,6 +142,9 @@ eap_method_leap_new (WirelessSecurity *ws_parent,
 	                          FALSE);
 	if (!parent)
 		return NULL;
+
+	method = (EAPMethodLEAP *) parent;
+	method->new_connection = secrets_only ? FALSE : TRUE;
 
 	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_leap_username_entry"));
 	g_assert (widget);
@@ -163,6 +178,6 @@ eap_method_leap_new (WirelessSecurity *ws_parent,
 	                  (GCallback) show_toggled_cb,
 	                  parent);
 
-	return (EAPMethodLEAP *) parent;
+	return method;
 }
 

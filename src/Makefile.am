@@ -35,12 +35,12 @@ nm_applet_SOURCES = \
 	applet-agent.h \
 	applet-vpn-request.c \
 	applet-vpn-request.h \
-	wired-dialog.h \
-	wired-dialog.c \
+	ethernet-dialog.h \
+	ethernet-dialog.c \
 	applet-dialogs.h \
 	applet-dialogs.c \
-	applet-device-wired.h \
-	applet-device-wired.c \
+	applet-device-ethernet.h \
+	applet-device-ethernet.c \
 	applet-device-wifi.h \
 	applet-device-wifi.c \
 	ap-menu-item.h \
@@ -72,6 +72,13 @@ nm_applet_LDADD = \
 	${top_builddir}/src/wireless-security/libwireless-security.la \
 	${top_builddir}/src/libnm-gtk/libnm-gtk.la
 
+if WITH_MODEM_MANAGER_1
+nm_applet_SOURCES += \
+	applet-device-broadband.h \
+	applet-device-broadband.c
+nm_applet_CPPFLAGS += $(MM_GLIB_CFLAGS)
+nm_applet_LDADD += $(MM_GLIB_LIBS)
+endif
 
 if BUILD_MIGRATION_TOOL
 SUBDIRS += gconf-helpers
@@ -94,7 +101,7 @@ nm_applet_migration_tool_LDADD = \
 
 
 uidir = $(datadir)/nm-applet
-ui_DATA = gsm-unlock.ui info.ui wired-8021x.ui keyring.png
+ui_DATA = gsm-unlock.ui info.ui 8021x.ui keyring.png
 
 CLEANFILES = *.bak $(BUILT_SOURCES)
 

@@ -1,5 +1,5 @@
 /* -*- Mode: C; tab-width: 4; indent-tabs-mode: t; c-basic-offset: 4 -*- */
-/* NetworkManager Wireless Applet -- Display wireless access points and allow user control
+/* NetworkManager Applet -- allow user control over networking
  *
  * Dan Williams <dcbw@redhat.com>
  *
@@ -35,10 +35,10 @@
 
 #include "applet.h"
 #include "applet-device-wimax.h"
-#include "utils.h"
 #include "applet-dialogs.h"
 #include "nma-marshal.h"
 #include "mb-menu-item.h"
+#include "nm-ui-utils.h"
 
 #define ACTIVE_NSP_TAG "active-nsp"
 
@@ -221,13 +221,9 @@ wimax_add_menu_item (NMDevice *device,
 	nsps = nm_device_wimax_get_nsps (wimax);
 
 	if (n_devices > 1) {
-		char *desc;
+		const char *desc;
 
-		desc = (char *) utils_get_device_description (device);
-		if (!desc)
-			desc = (char *) nm_device_get_iface (device);
-		g_assert (desc);
-
+		desc = nma_utils_get_device_description (device);
 		text = g_strdup_printf (_("WiMAX Mobile Broadband (%s)"), desc);
 	} else {
 		text = g_strdup (_("WiMAX Mobile Broadband"));

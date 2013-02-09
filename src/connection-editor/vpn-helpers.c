@@ -163,30 +163,6 @@ vpn_get_plugins (GError **error)
 	return plugins;
 }
 
-
-typedef struct {
-	char *filename;
-	NMConnection *connection;
-	GError *error;
-} VpnImportInfo;
-
-static void
-try_import (gpointer key, gpointer value, gpointer user_data)
-{
-	VpnImportInfo *info = user_data;
-	NMVpnPluginUiInterface *plugin = NM_VPN_PLUGIN_UI_INTERFACE (value);
-
-	if (info->connection)
-		return;
-
-	if (info->error) {
-		g_error_free (info->error);
-		info->error = NULL;
-	}
-
-	info->connection = nm_vpn_plugin_ui_interface_import (plugin, info->filename, &(info->error));
-}
-
 typedef struct {
 	VpnImportSuccessCallback callback;
 	gpointer user_data;
@@ -197,8 +173,11 @@ import_vpn_from_file_cb (GtkWidget *dialog, gint response, gpointer user_data)
 {
 	char *filename = NULL;
 	ActionInfo *info = (ActionInfo *) user_data;
-	VpnImportInfo import_info;
-	NMConnection *connection;
+	GHashTableIter iter;
+	gpointer key;
+	NMVpnPluginUiInterface *plugin;
+	NMConnection *connection = NULL;
+	GError *error = NULL;
 
 	if (response != GTK_RESPONSE_ACCEPT)
 		goto out;
@@ -209,12 +188,12 @@ import_vpn_from_file_cb (GtkWidget *dialog, gint response, gpointer user_data)
 		goto out;
 	}
 
-	import_info.filename = filename;
-	import_info.connection = NULL;
-	import_info.error = NULL;
-	g_hash_table_foreach (plugins, try_import, (gpointer) &import_info);
+	g_hash_table_iter_init (&iter, plugins);
+	while (!connection && g_hash_table_iter_next (&iter, &key, (gpointer *)&plugin)) {
+		g_clear_error (&error);
+		connection = nm_vpn_plugin_ui_interface_import (plugin, filename, &error);
+	}
 
-	connection = import_info.connection;
 	if (connection)
 		info->callback (connection, info->user_data);
 	else {
@@ -228,7 +207,7 @@ import_vpn_from_file_cb (GtkWidget *dialog, gint response, gpointer user_data)
 		                                     _("Cannot import VPN connection"));
 		gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (err_dialog),
 		                                 _("The file '%s' could not be read or does not contain recognized VPN connection information\n\nError: %s."),
-		                                 bname, import_info.error ? import_info.error->message : "unknown error");
+		                                 bname, error ? error->message : "unknown error");
 		g_free (bname);
 		g_signal_connect (err_dialog, "delete-event", G_CALLBACK (gtk_widget_destroy), NULL);
 		g_signal_connect (err_dialog, "response", G_CALLBACK (gtk_widget_destroy), NULL);
@@ -236,8 +215,7 @@ import_vpn_from_file_cb (GtkWidget *dialog, gint response, gpointer user_data)
 		gtk_window_present (GTK_WINDOW (err_dialog));
 	}
 
-	if (import_info.error)
-		g_error_free (import_info.error);
+	g_clear_error (&error);
 	g_free (filename);
 
 out:
@@ -266,8 +244,8 @@ vpn_import (VpnImportSuccessCallback callback, gpointer user_data)
 	                                      GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
 	                                      GTK_STOCK_OPEN, GTK_RESPONSE_ACCEPT,
 	                                      NULL);
-        home_folder = g_get_home_dir ();
-        gtk_file_chooser_set_current_folder (GTK_FILE_CHOOSER (dialog), home_folder);
+	home_folder = g_get_home_dir ();
+	gtk_file_chooser_set_current_folder (GTK_FILE_CHOOSER (dialog), home_folder);
 
 	info = g_malloc0 (sizeof (ActionInfo));
 	info->callback = callback;
@@ -412,144 +390,6 @@ vpn_export (NMConnection *connection)
 	g_signal_connect (G_OBJECT (dialog), "response", G_CALLBACK (export_vpn_to_file_cb), g_object_ref (connection));
 	gtk_widget_show_all (dialog);
 	gtk_window_present (GTK_WINDOW (dialog));
-}
-
-static void
-add_plugins_to_list (gpointer key, gpointer data, gpointer user_data)
-{
-	GSList **list = (GSList **) user_data;
-
-	*list = g_slist_append (*list, NM_VPN_PLUGIN_UI_INTERFACE (data));
-}
-
-static gint
-sort_plugins (gconstpointer a, gconstpointer b)
-{
-	NMVpnPluginUiInterface *aa = NM_VPN_PLUGIN_UI_INTERFACE (a);
-	NMVpnPluginUiInterface *bb = NM_VPN_PLUGIN_UI_INTERFACE (b);
-	const char *aa_desc = NULL, *bb_desc = NULL;
-
-	g_object_get (aa, NM_VPN_PLUGIN_UI_INTERFACE_NAME, &aa_desc, NULL);
-	g_object_get (bb, NM_VPN_PLUGIN_UI_INTERFACE_NAME, &bb_desc, NULL);
-
-	if (!aa_desc)
-		return -1;
-	if (!bb_desc)
-		return 1;
-
-	return strcmp (aa_desc, bb_desc);
-}
-
-#define COL_PLUGIN_DESC 0
-#define COL_PLUGIN_OBJ  1
-
-static void
-combo_changed_cb (GtkComboBox *combo, gpointer user_data)
-{
-	GtkLabel *label = GTK_LABEL (user_data);
-	GtkTreeModel *model;
-	GtkTreeIter iter;
-	NMVpnPluginUiInterface *plugin = NULL;
-	const char *desc = NULL;
-	char *tmp;
-
-	if (!gtk_combo_box_get_active_iter (combo, &iter))
-		goto error;
-
-	model = gtk_combo_box_get_model (combo);
-	if (!model)
-		goto error;
-
-	gtk_tree_model_get (model, &iter, COL_PLUGIN_OBJ, &plugin, -1);
-	if (!plugin)
-		goto error;
-
-	g_object_get (G_OBJECT (plugin), NM_VPN_PLUGIN_UI_INTERFACE_DESC, &desc, NULL);
-	if (!desc)
-		goto error;
-
-	tmp = g_strdup_printf ("<i>%s</i>", desc);
-	gtk_label_set_markup (label, tmp);
-	g_free (tmp);
-	return;
-
-error:
-	gtk_label_set_text (label, "");
-}
-
-char *
-vpn_ask_connection_type (GtkWindow *parent)
-{
-	GtkBuilder *builder;
-	GtkWidget *dialog, *combo, *widget;
-	GtkTreeModel *model;
-	GSList *plugin_list = NULL, *iter;
-	gint response;
-	GtkTreeIter tree_iter;
-	char *service_type = NULL;
-	GError *error = NULL;
-
-	if (!plugins || !g_hash_table_size (plugins)) {
-		g_warning ("%s: no VPN plugins could be found!", __func__);
-		return NULL;
-	}
-
-	builder = gtk_builder_new();
-
-	if (!gtk_builder_add_from_file (builder, UIDIR "/ce-vpn-wizard.ui", &error)) {
-		g_warning ("Couldn't load builder file: %s", error->message);
-		g_error_free (error);
-		return NULL;
-	}
-
-	dialog = GTK_WIDGET (gtk_builder_get_object (builder, "vpn_type_dialog"));
-	if (!dialog) {
-		g_warning ("%s: couldn't load VPN wizard dialog!", __func__);
-		g_object_unref (builder);
-		return NULL;
-	}
-
-	model = GTK_TREE_MODEL (gtk_list_store_new (2, G_TYPE_STRING, G_TYPE_OBJECT));
-	g_hash_table_foreach (plugins, add_plugins_to_list, &plugin_list);
-
-	plugin_list = g_slist_sort (plugin_list, sort_plugins);
-	for (iter = plugin_list; iter; iter = g_slist_next (iter)) {
-		NMVpnPluginUiInterface *plugin = NM_VPN_PLUGIN_UI_INTERFACE (iter->data);
-		const char *desc;
-
-		gtk_list_store_append (GTK_LIST_STORE (model), &tree_iter);
-		g_object_get (plugin, NM_VPN_PLUGIN_UI_INTERFACE_NAME, &desc, NULL);
-		gtk_list_store_set (GTK_LIST_STORE (model), &tree_iter,
-		                    COL_PLUGIN_DESC, desc,
-		                    COL_PLUGIN_OBJ, plugin, -1);
-	}
-
-	combo = GTK_WIDGET (gtk_builder_get_object (builder, "vpn_type_combo"));
-	widget = GTK_WIDGET (gtk_builder_get_object (builder, "vpn_desc_label"));
-	g_signal_connect (G_OBJECT (combo), "changed", G_CALLBACK (combo_changed_cb), widget);
-	gtk_combo_box_set_model (GTK_COMBO_BOX (combo), model);
-	gtk_combo_box_set_active (GTK_COMBO_BOX (combo), 0);
-
-	gtk_window_set_transient_for (GTK_WINDOW (dialog), parent);
-	gtk_widget_show_all (dialog);
-	response = gtk_dialog_run (GTK_DIALOG (dialog));
-	if (response != GTK_RESPONSE_OK)
-		goto out;
-
-	if (gtk_combo_box_get_active_iter (GTK_COMBO_BOX (combo), &tree_iter)) {
-		NMVpnPluginUiInterface *plugin = NULL;
-
-		gtk_tree_model_get (model, &tree_iter, COL_PLUGIN_OBJ, &plugin, -1);
-		if (plugin)
-			g_object_get (G_OBJECT (plugin), NM_VPN_PLUGIN_UI_INTERFACE_SERVICE, &service_type, NULL);
-	}
-
-out:
-	gtk_widget_destroy (dialog);
-	g_object_unref (builder);
-	if (service_type)
-		return g_strdup (service_type);
-	return NULL;
 }
 
 gboolean

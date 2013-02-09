@@ -124,6 +124,7 @@ CEPage *
 ce_page_dsl_new (NMConnection *connection,
                  GtkWindow *parent_window,
                  NMClient *client,
+                 NMRemoteSettings *settings,
                  const char **out_secrets_setting_name,
                  GError **error)
 {
@@ -134,6 +135,7 @@ ce_page_dsl_new (NMConnection *connection,
 	                                 connection,
 	                                 parent_window,
 	                                 client,
+	                                 settings,
 	                                 UIDIR "/ce-page-dsl.ui",
 	                                 "DslPage",
 	                                 _("DSL")));
@@ -179,10 +181,10 @@ ui_to_setting (CEPageDsl *self)
 		service = NULL;
 
 	g_object_set (priv->setting,
-				  NM_SETTING_PPPOE_USERNAME, username,
-				  NM_SETTING_PPPOE_PASSWORD, password,
-				  NM_SETTING_PPPOE_SERVICE, service,
-				  NULL);
+	              NM_SETTING_PPPOE_USERNAME, username,
+	              NM_SETTING_PPPOE_PASSWORD, password,
+	              NM_SETTING_PPPOE_SERVICE, service,
+	              NULL);
 }
 
 static gboolean
@@ -222,8 +224,9 @@ ce_page_dsl_class_init (CEPageDslClass *dsl_class)
 
 void
 dsl_connection_new (GtkWindow *parent,
+                    const char *detail,
+                    NMRemoteSettings *settings,
                     PageNewConnectionResultFunc result_func,
-                    PageGetConnectionsFunc get_connections_func,
                     gpointer user_data)
 {
 	NMConnection *connection;
@@ -232,7 +235,7 @@ dsl_connection_new (GtkWindow *parent,
 	connection = ce_page_new_connection (_("DSL connection %d"),
 	                                     NM_SETTING_PPPOE_SETTING_NAME,
 	                                     FALSE,
-	                                     get_connections_func,
+	                                     settings,
 	                                     user_data);
 	nm_connection_add_setting (connection, nm_setting_pppoe_new ());
 	nm_connection_add_setting (connection, nm_setting_wired_new ());

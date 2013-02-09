@@ -1,5 +1,5 @@
 /* -*- Mode: C; tab-width: 4; indent-tabs-mode: t; c-basic-offset: 4 -*- */
-/* NetworkManager Wireless Applet -- Display wireless access points and allow user control
+/* NetworkManager Applet -- allow user control over networking
  *
  * Dan Williams <dcbw@redhat.com>
  *
@@ -39,9 +39,8 @@
 
 #include "applet.h"
 #include "applet-device-bt.h"
-#include "wired-dialog.h"
-#include "utils.h"
 #include "applet-dialogs.h"
+#include "nm-ui-utils.h"
 
 typedef struct {
 	NMApplet *applet;
@@ -145,12 +144,8 @@ bt_add_menu_item (NMDevice *device,
 	g_slist_free (all);
 
 	text = nm_device_bt_get_name (NM_DEVICE_BT (device));
-	if (!text) {
-		text = utils_get_device_description (device);
-		if (!text)
-			text = nm_device_get_iface (device);
-		g_assert (text);
-	}
+	if (!text)
+		text = nma_utils_get_device_description (device);
 
 	item = applet_menu_item_create_device_item_helper (device, applet, text);
 
