@@ -1,5 +1,5 @@
 /* -*- Mode: C; tab-width: 4; indent-tabs-mode: t; c-basic-offset: 4 -*- */
-/* NetworkManager Wireless Applet -- Display wireless access points and allow user control
+/* NetworkManager Applet -- allow user control over networking
  *
  * Dan Williams <dcbw@redhat.com>
  *
@@ -25,6 +25,8 @@
 
 #include <gtk/gtk.h>
 #include "applet.h"
+#include "nm-mobile-wizard.h"
+#include "nm-mobile-providers.h"
 
 enum {
 	MB_STATE_UNKNOWN = 0,
@@ -38,8 +40,7 @@ enum {
 enum {
 	MB_TECH_UNKNOWN = 0,
 	MB_TECH_1XRTT,
-	MB_TECH_EVDO_REV0,
-	MB_TECH_EVDO_REVA,
+	MB_TECH_EVDO,
 	MB_TECH_GSM,
 	MB_TECH_GPRS,
 	MB_TECH_EDGE,
@@ -47,6 +48,8 @@ enum {
 	MB_TECH_HSDPA,
 	MB_TECH_HSUPA,
 	MB_TECH_HSPA,
+	MB_TECH_HSPA_PLUS,
+	MB_TECH_LTE,
 	MB_TECH_WIMAX,
 };
 
@@ -60,5 +63,52 @@ GdkPixbuf *mobile_helper_get_quality_icon (guint32 quality, NMApplet *applet);
 
 GdkPixbuf *mobile_helper_get_tech_icon (guint32 tech, NMApplet *applet);
 
-#endif  /* APPLET_MOBILE_HELPERS_H */
+/********************************************************************/
 
+gboolean   mobile_helper_wizard (NMDeviceModemCapabilities capabilities,
+                                 AppletNewAutoConnectionCallback callback,
+                                 gpointer callback_data);
+
+/********************************************************************/
+
+void mobile_helper_save_pin_in_keyring   (const char *devid,
+                                          const char *simid,
+                                          const char *pin);
+void mobile_helper_delete_pin_in_keyring (const char *devid);
+
+/********************************************************************/
+
+typedef struct {
+	SecretsRequest req;
+	GtkWidget *dialog;
+	GtkEntry *secret_entry;
+	char *secret_name;
+	NMDeviceModemCapabilities capability;
+} MobileHelperSecretsInfo;
+
+gboolean mobile_helper_get_secrets (NMDeviceModemCapabilities capabilities,
+                                    SecretsRequest *req,
+                                    GError **error);
+
+/********************************************************************/
+
+GdkPixbuf *mobile_helper_get_icon (NMDevice *device,
+                                   NMDeviceState state,
+                                   NMConnection *connection,
+                                   char **tip,
+                                   NMApplet *applet,
+                                   guint32 mb_state,
+                                   guint32 mb_tech,
+                                   guint32 quality,
+                                   gboolean quality_valid);
+
+/********************************************************************/
+
+char *mobile_helper_parse_3gpp_operator_name (NMAMobileProvidersDatabase **mpd,
+                                              const char *orig,
+                                              const char *op_code);
+
+char *mobile_helper_parse_3gpp2_operator_name (NMAMobileProvidersDatabase **mpd,
+                                               guint32 sid);
+
+#endif  /* APPLET_MOBILE_HELPERS_H */

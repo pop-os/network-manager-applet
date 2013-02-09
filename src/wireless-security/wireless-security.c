@@ -1,5 +1,5 @@
 /* -*- Mode: C; tab-width: 4; indent-tabs-mode: t; c-basic-offset: 4 -*- */
-/* NetworkManager Wireless Applet -- Display wireless access points and allow user control
+/* NetworkManager Applet -- allow user control over networking
  *
  * Dan Williams <dcbw@redhat.com>
  *
@@ -544,6 +544,8 @@ ws_802_1x_nag_user (WirelessSecurity *sec,
 	gtk_tree_model_get (model, &iter, AUTH_METHOD_COLUMN, &eap, -1);
 	g_return_val_if_fail (eap != NULL, NULL);
 
-	return eap_method_nag_user (eap);
+	widget = eap_method_nag_user (eap);
+	eap_method_unref (eap);
+	return widget;
 }
 

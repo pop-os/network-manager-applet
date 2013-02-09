@@ -171,7 +171,7 @@ ip6_private_init (CEPageIP6 *self, NMConnection *connection)
 						METHOD_COL_ENABLED, TRUE,
 	                    -1);
 
-	/* DHCP only used on wifi and wired for now */
+	/* DHCP only used on Wi-Fi and ethernet for now */
 	if (   priv->connection_type == NM_TYPE_SETTING_WIRED
 	    || priv->connection_type == NM_TYPE_SETTING_WIRELESS) {
 		gtk_list_store_append (priv->method_store, &iter);
@@ -293,9 +293,9 @@ method_changed (GtkComboBox *combo, gpointer user_data)
 
 	gtk_widget_set_sensitive (priv->dns_servers_label, dns_enabled);
 	if (method_auto)
-		gtk_label_set_text_with_mnemonic (GTK_LABEL (priv->dns_servers_label), _("Additional _DNS servers:"));
+		gtk_label_set_text_with_mnemonic (GTK_LABEL (priv->dns_servers_label), _("Additional DNS ser_vers:"));
 	else
-		gtk_label_set_text_with_mnemonic (GTK_LABEL (priv->dns_servers_label), _("_DNS servers:"));
+		gtk_label_set_text_with_mnemonic (GTK_LABEL (priv->dns_servers_label), _("DNS ser_vers:"));
 	gtk_widget_set_sensitive (GTK_WIDGET (priv->dns_servers), dns_enabled);
 	if (!dns_enabled)
 		gtk_entry_set_text (priv->dns_servers, "");
@@ -703,9 +703,26 @@ key_pressed_cb (GtkWidget *widget,
 	#define GDK_KEY_Tab GDK_Tab
 #endif
 
-	/* Tab should behave the same way as Enter (finish editing) */
-	if (event->type == GDK_KEY_PRESS && event->key.keyval == GDK_KEY_Tab)
-		gtk_cell_editable_editing_done (GTK_CELL_EDITABLE (widget));
+	GdkKeymapKey *keys = NULL;
+	gint n_keys;
+
+	/*
+	 * Tab should behave the same way as Enter (cycling on cells).
+	 *
+	 * Previously, we had finished cell editing, which appeared to work:
+	 *   gtk_cell_editable_editing_done (GTK_CELL_EDITABLE (widget));
+	 * But unfortunately, it showed up crash occurred with XIM input (GTK_IM_MODULE=xim).
+	 * https://bugzilla.redhat.com/show_bug.cgi?id=747368
+	 */
+	if (event->type == GDK_KEY_PRESS && event->key.keyval == GDK_KEY_Tab) {
+		/* Get hardware keycode for GDK_KEY_Return */
+		if (gdk_keymap_get_entries_for_keyval (gdk_keymap_get_default (), GDK_KEY_Return, &keys, &n_keys)) {
+			/* Change 'Tab' to 'Enter' key */
+			event->key.keyval = GDK_KEY_Return;
+			event->key.hardware_keycode = keys[0].keycode;
+		}
+		g_free (keys);
+	}
 
 	return FALSE;
 }
@@ -940,6 +957,7 @@ CEPage *
 ce_page_ip6_new (NMConnection *connection,
                  GtkWindow *parent_window,
                  NMClient *client,
+                 NMRemoteSettings *settings,
                  const char **out_secrets_setting_name,
                  GError **error)
 {
@@ -951,6 +969,7 @@ ce_page_ip6_new (NMConnection *connection,
 	                                 connection,
 	                                 parent_window,
 	                                 client,
+	                                 settings,
 	                                 UIDIR "/ce-page-ip6.ui",
 	                                 "IP6Page",
 	                                 _("IPv6 Settings")));
@@ -1025,9 +1044,9 @@ ui_to_setting (CEPageIP6 *self)
 
 	g_object_freeze_notify (G_OBJECT (priv->setting));
 	g_object_set (priv->setting,
-				  NM_SETTING_IP6_CONFIG_METHOD, method,
-				  NM_SETTING_IP6_CONFIG_IGNORE_AUTO_DNS, ignore_auto_dns,
-				  NULL);
+	              NM_SETTING_IP6_CONFIG_METHOD, method,
+	              NM_SETTING_IP6_CONFIG_IGNORE_AUTO_DNS, ignore_auto_dns,
+	              NULL);
 
 	/* IP addresses */
 	nm_setting_ip6_config_clear_addresses (priv->setting);

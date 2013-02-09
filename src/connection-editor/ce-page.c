@@ -125,20 +125,81 @@ ce_page_validate (CEPage *self, NMConnection *connection, GError **error)
 }
 
 char **
-ce_page_get_mac_list (CEPage *self)
+ce_page_get_mac_list (CEPage *self, GType device_type, const char *mac_property)
 {
+	const GPtrArray *devices;
+	GPtrArray *macs;
+	int i;
+
 	g_return_val_if_fail (CE_IS_PAGE (self), NULL);
 
-	if (CE_PAGE_GET_CLASS (self)->get_mac_list)
-		return CE_PAGE_GET_CLASS (self)->get_mac_list (self);
+	if (!self->client)
+		return NULL;
 
-	return NULL;
+	macs = g_ptr_array_new ();
+	devices = nm_client_get_devices (self->client);
+	for (i = 0; devices && (i < devices->len); i++) {
+		NMDevice *dev = g_ptr_array_index (devices, i);
+		const char *iface;
+		char *mac, *item;
+
+		if (!G_TYPE_CHECK_INSTANCE_TYPE (dev, device_type))
+			continue;
+
+		g_object_get (G_OBJECT (dev), mac_property, &mac, NULL);
+		iface = nm_device_get_iface (NM_DEVICE (dev));
+		item = g_strdup_printf ("%s (%s)", mac, iface);
+		g_free (mac);
+		g_ptr_array_add (macs, item);
+	}
+
+	g_ptr_array_add (macs, NULL);
+	return (char **)g_ptr_array_free (macs, FALSE);
 }
 
 void
-ce_page_mac_to_entry (const GByteArray *mac, GtkEntry *entry)
+ce_page_setup_mac_combo (CEPage *self, GtkComboBox *combo,
+                         const char *current_mac, char **mac_list)
 {
-	struct ether_addr addr;
+	char **iter, *active_mac = NULL;
+	int current_mac_len;
+	GtkWidget *entry;
+
+	if (current_mac)
+		current_mac_len = strlen (current_mac);
+	else
+		current_mac_len = -1;
+
+	for (iter = mac_list; iter && *iter; iter++) {
+#if GTK_CHECK_VERSION (2,24,0)
+		gtk_combo_box_text_append_text (GTK_COMBO_BOX_TEXT (combo), *iter);
+#else
+		gtk_combo_box_append_text (combo, *iter);
+#endif
+		if (   current_mac
+		    && g_ascii_strncasecmp (*iter, current_mac, current_mac_len) == 0
+		    && ((*iter)[current_mac_len] == '\0' || (*iter)[current_mac_len] == ' '))
+			active_mac = *iter;
+	}
+
+	if (current_mac) {
+		if (!active_mac) {
+#if GTK_CHECK_VERSION (2,24,0)
+			gtk_combo_box_text_prepend_text (GTK_COMBO_BOX_TEXT (combo), current_mac);
+#else
+			gtk_combo_box_prepend_text (combo, current_mac_str);
+#endif
+		}
+
+		entry = gtk_bin_get_child (GTK_BIN (combo));
+		if (entry)
+			gtk_entry_set_text (GTK_ENTRY (entry), active_mac ? active_mac : current_mac);
+	}
+}
+
+void
+ce_page_mac_to_entry (const GByteArray *mac, int type, GtkEntry *entry)
+{
 	char *str_addr;
 
 	g_return_if_fail (entry != NULL);
@@ -147,52 +208,19 @@ ce_page_mac_to_entry (const GByteArray *mac, GtkEntry *entry)
 	if (!mac || !mac->len)
 		return;
 
-	memcpy (addr.ether_addr_octet, mac->data, ETH_ALEN);
-	/* we like leading zeros and all-caps, instead
-	 * of what glibc's ether_ntop() gives us
-	 */
-	str_addr = g_strdup_printf ("%02X:%02X:%02X:%02X:%02X:%02X",
-	                            addr.ether_addr_octet[0], addr.ether_addr_octet[1],
-	                            addr.ether_addr_octet[2], addr.ether_addr_octet[3],
-	                            addr.ether_addr_octet[4], addr.ether_addr_octet[5]);
+	if (mac->len != nm_utils_hwaddr_len (type))
+		return;
+
+	str_addr = nm_utils_hwaddr_ntoa (mac->data, type);
 	gtk_entry_set_text (entry, str_addr);
 	g_free (str_addr);
 }
 
-static gboolean
-is_mac_valid (const struct ether_addr *addr)
-{
-	guint8 invalid1[ETH_ALEN] = {0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF};
-	guint8 invalid2[ETH_ALEN] = {0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
-	guint8 invalid3[ETH_ALEN] = {0x44, 0x44, 0x44, 0x44, 0x44, 0x44};
-	guint8 invalid4[ETH_ALEN] = {0x00, 0x30, 0xb4, 0x00, 0x00, 0x00}; /* prism54 dummy MAC */
-
-	g_return_val_if_fail (addr != NULL, FALSE);
-
-	/* Compare the AP address the card has with invalid ethernet MAC addresses. */
-	if (!memcmp (addr->ether_addr_octet, &invalid1, ETH_ALEN))
-		return FALSE;
-
-	if (!memcmp (addr->ether_addr_octet, &invalid2, ETH_ALEN))
-		return FALSE;
-
-	if (!memcmp (addr->ether_addr_octet, &invalid3, ETH_ALEN))
-		return FALSE;
-
-	if (!memcmp (addr->ether_addr_octet, &invalid4, ETH_ALEN))
-		return FALSE;
-
-	if (addr->ether_addr_octet[0] & 1) /* Multicast addresses */
-		return FALSE;
-
-	return TRUE;
-}
-
 GByteArray *
-ce_page_entry_to_mac (GtkEntry *entry, gboolean *invalid)
+ce_page_entry_to_mac (GtkEntry *entry, int type, gboolean *invalid)
 {
-	struct ether_addr *ether;
-	const char *temp;
+	const char *temp, *sp;
+	char *buf = NULL;
 	GByteArray *mac;
 
 	g_return_val_if_fail (entry != NULL, NULL);
@@ -205,15 +233,25 @@ ce_page_entry_to_mac (GtkEntry *entry, gboolean *invalid)
 	if (!temp || !strlen (temp))
 		return NULL;
 
-	ether = ether_aton (temp);
-	if (!ether || !is_mac_valid (ether)) {
+	sp = strchr (temp, ' ');
+	if (sp)
+		temp = buf = g_strndup (temp, sp - temp);
+
+	mac = nm_utils_hwaddr_atoba (temp, type);
+	g_free (buf);
+	if (!mac) {
 		if (invalid)
 			*invalid = TRUE;
 		return NULL;
 	}
 
-	mac = g_byte_array_sized_new (ETH_ALEN);
-	g_byte_array_append (mac, (const guint8 *) ether->ether_addr_octet, ETH_ALEN);
+	if (type == ARPHRD_ETHER && !utils_ether_addr_valid ((struct ether_addr *)mac->data)) {
+		g_byte_array_free (mac, TRUE);
+		if (invalid)
+			*invalid = TRUE;
+		return NULL;
+	}
+
 	return mac;
 }
 
@@ -495,7 +533,7 @@ NMConnection *
 ce_page_new_connection (const char *format,
                         const char *ctype,
                         gboolean autoconnect,
-                        PageGetConnectionsFunc get_connections_func,
+                        NMRemoteSettings *settings,
                         gpointer user_data)
 {
 	NMConnection *connection;
@@ -510,7 +548,7 @@ ce_page_new_connection (const char *format,
 
 	uuid = nm_utils_uuid_generate ();
 
-	connections = (*get_connections_func) (user_data);
+	connections = nm_remote_settings_list_connections (settings);
 	id = ce_page_get_next_available_name (connections, format);
 	g_slist_free (connections);
 
@@ -532,6 +570,7 @@ ce_page_new (GType page_type,
              NMConnection *connection,
              GtkWindow *parent_window,
              NMClient *client,
+             NMRemoteSettings *settings,
              const char *ui_file,
              const char *widget_name,
              const char *title)
@@ -549,6 +588,7 @@ ce_page_new (GType page_type,
 	                              NULL));
 	self->title = g_strdup (title);
 	self->client = client;
+	self->settings = settings;
 
 	if (ui_file) {
 		if (!gtk_builder_add_from_file (self->builder, ui_file, &error)) {

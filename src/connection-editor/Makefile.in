@@ -74,21 +74,30 @@ am_nm_connection_editor_OBJECTS =  \
 	nm_connection_editor-nm-connection-list.$(OBJEXT) \
 	nm_connection_editor-main.$(OBJEXT) \
 	nm_connection_editor-ce-page.$(OBJEXT) \
-	nm_connection_editor-page-wired.$(OBJEXT) \
-	nm_connection_editor-page-wired-security.$(OBJEXT) \
-	nm_connection_editor-page-wireless.$(OBJEXT) \
-	nm_connection_editor-page-wireless-security.$(OBJEXT) \
+	nm_connection_editor-page-general.$(OBJEXT) \
+	nm_connection_editor-page-ethernet.$(OBJEXT) \
+	nm_connection_editor-page-8021x-security.$(OBJEXT) \
+	nm_connection_editor-page-wifi.$(OBJEXT) \
+	nm_connection_editor-page-wifi-security.$(OBJEXT) \
+	nm_connection_editor-page-wimax.$(OBJEXT) \
+	nm_connection_editor-page-infiniband.$(OBJEXT) \
 	nm_connection_editor-page-ip4.$(OBJEXT) \
 	nm_connection_editor-page-ip6.$(OBJEXT) \
 	nm_connection_editor-page-dsl.$(OBJEXT) \
 	nm_connection_editor-page-mobile.$(OBJEXT) \
 	nm_connection_editor-page-ppp.$(OBJEXT) \
 	nm_connection_editor-page-vpn.$(OBJEXT) \
+	nm_connection_editor-page-master.$(OBJEXT) \
+	nm_connection_editor-page-bond.$(OBJEXT) \
+	nm_connection_editor-page-bridge.$(OBJEXT) \
+	nm_connection_editor-page-bridge-port.$(OBJEXT) \
+	nm_connection_editor-page-vlan.$(OBJEXT) \
 	nm_connection_editor-vpn-helpers.$(OBJEXT) \
 	nm_connection_editor-ip4-routes-dialog.$(OBJEXT) \
 	nm_connection_editor-ip6-routes-dialog.$(OBJEXT) \
 	nm_connection_editor-ppp-auth-methods-dialog.$(OBJEXT) \
-	nm_connection_editor-ce-polkit-button.$(OBJEXT)
+	nm_connection_editor-ce-polkit-button.$(OBJEXT) \
+	nm_connection_editor-new-connection.$(OBJEXT)
 nm_connection_editor_OBJECTS = $(am_nm_connection_editor_OBJECTS)
 am__DEPENDENCIES_1 =
 nm_connection_editor_DEPENDENCIES =  \
@@ -218,6 +227,8 @@ GREP = @GREP@
 GSETTINGS_DISABLE_SCHEMAS_COMPILE = @GSETTINGS_DISABLE_SCHEMAS_COMPILE@
 GTK_CFLAGS = @GTK_CFLAGS@
 GTK_LIBS = @GTK_LIBS@
+GUDEV_CFLAGS = @GUDEV_CFLAGS@
+GUDEV_LIBS = @GUDEV_LIBS@
 INSTALL = @INSTALL@
 INSTALL_DATA = @INSTALL_DATA@
 INSTALL_PROGRAM = @INSTALL_PROGRAM@
@@ -233,6 +244,14 @@ INTLTOOL_V_MERGE = @INTLTOOL_V_MERGE@
 INTLTOOL_V_MERGE_OPTIONS = @INTLTOOL_V_MERGE_OPTIONS@
 INTLTOOL__v_MERGE_ = @INTLTOOL__v_MERGE_@
 INTLTOOL__v_MERGE_0 = @INTLTOOL__v_MERGE_0@
+INTROSPECTION_CFLAGS = @INTROSPECTION_CFLAGS@
+INTROSPECTION_COMPILER = @INTROSPECTION_COMPILER@
+INTROSPECTION_GENERATE = @INTROSPECTION_GENERATE@
+INTROSPECTION_GIRDIR = @INTROSPECTION_GIRDIR@
+INTROSPECTION_LIBS = @INTROSPECTION_LIBS@
+INTROSPECTION_MAKEFILE = @INTROSPECTION_MAKEFILE@
+INTROSPECTION_SCANNER = @INTROSPECTION_SCANNER@
+INTROSPECTION_TYPELIBDIR = @INTROSPECTION_TYPELIBDIR@
 ISO_CODES_CFLAGS = @ISO_CODES_CFLAGS@
 ISO_CODES_LIBS = @ISO_CODES_LIBS@
 LD = @LD@
@@ -250,6 +269,8 @@ MAKEINFO = @MAKEINFO@
 MANIFEST_TOOL = @MANIFEST_TOOL@
 MKDIR_P = @MKDIR_P@
 MKINSTALLDIRS = @MKINSTALLDIRS@
+MM_GLIB_CFLAGS = @MM_GLIB_CFLAGS@
+MM_GLIB_LIBS = @MM_GLIB_LIBS@
 MSGFMT = @MSGFMT@
 MSGFMT_OPTS = @MSGFMT_OPTS@
 MSGMERGE = @MSGMERGE@
@@ -367,14 +388,20 @@ nm_connection_editor_SOURCES = \
 	main.c \
 	ce-page.h \
 	ce-page.c \
-	page-wired.h \
-	page-wired.c \
-	page-wired-security.h \
-	page-wired-security.c \
-	page-wireless.h \
-	page-wireless.c \
-	page-wireless-security.h \
-	page-wireless-security.c \
+	page-general.h \
+	page-general.c \
+	page-ethernet.h \
+	page-ethernet.c \
+	page-8021x-security.h \
+	page-8021x-security.c \
+	page-wifi.h \
+	page-wifi.c \
+	page-wifi-security.h \
+	page-wifi-security.c \
+	page-wimax.h \
+	page-wimax.c \
+	page-infiniband.h \
+	page-infiniband.c \
 	page-ip4.h \
 	page-ip4.c \
 	page-ip6.h \
@@ -387,6 +414,16 @@ nm_connection_editor_SOURCES = \
 	page-ppp.c \
 	page-vpn.h \
 	page-vpn.c \
+	page-master.h \
+	page-master.c \
+	page-bond.h \
+	page-bond.c \
+	page-bridge.h \
+	page-bridge.c \
+	page-bridge-port.h \
+	page-bridge-port.c \
+	page-vlan.h \
+	page-vlan.c \
 	vpn-helpers.h \
 	vpn-helpers.c \
 	ip4-routes-dialog.h \
@@ -396,7 +433,9 @@ nm_connection_editor_SOURCES = \
 	ppp-auth-methods-dialog.c \
 	ppp-auth-methods-dialog.h \
 	ce-polkit-button.c \
-	ce-polkit-button.h
+	ce-polkit-button.h \
+	new-connection.c \
+	new-connection.h
 
 nm_connection_editor_LDADD = \
 	${top_builddir}/src/wireless-security/libwireless-security.la \
@@ -410,9 +449,16 @@ nm_connection_editor_LDADD = \
 uidir = $(datadir)/nm-applet
 ui_DATA = \
 	nm-connection-editor.ui \
-	ce-page-wired.ui \
-	ce-page-wireless.ui \
-	ce-page-wireless-security.ui \
+	ce-new-connection.ui \
+	ce-page-general.ui \
+	ce-page-ethernet.ui \
+	ce-page-wifi.ui \
+	ce-page-wifi-security.ui \
+	ce-page-wimax.ui \
+	ce-page-infiniband.ui \
+	ce-page-bond.ui \
+	ce-page-bridge.ui \
+	ce-page-bridge-port.ui \
 	ce-page-ip4.ui \
 	ce-ip4-routes.ui \
 	ce-page-ip6.ui \
@@ -421,7 +467,7 @@ ui_DATA = \
 	ce-page-mobile.ui \
 	ce-page-ppp.ui \
 	ce-ppp-auth-methods.ui \
-	ce-vpn-wizard.ui
+	ce-page-vlan.ui
 
 BUILT_SOURCES = nm-connection-editor-service-glue.h
 CLEANFILES = *.bak $(BUILT_SOURCES)
@@ -522,18 +568,27 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/nm_connection_editor-ip4-routes-dialog.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/nm_connection_editor-ip6-routes-dialog.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/nm_connection_editor-main.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/nm_connection_editor-new-connection.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/nm_connection_editor-nm-connection-editor.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/nm_connection_editor-nm-connection-list.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/nm_connection_editor-page-8021x-security.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/nm_connection_editor-page-bond.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/nm_connection_editor-page-bridge-port.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/nm_connection_editor-page-bridge.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/nm_connection_editor-page-dsl.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/nm_connection_editor-page-ethernet.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/nm_connection_editor-page-general.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/nm_connection_editor-page-infiniband.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/nm_connection_editor-page-ip4.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/nm_connection_editor-page-ip6.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/nm_connection_editor-page-master.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/nm_connection_editor-page-mobile.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/nm_connection_editor-page-ppp.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/nm_connection_editor-page-vlan.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/nm_connection_editor-page-vpn.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/nm_connection_editor-page-wired-security.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/nm_connection_editor-page-wired.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/nm_connection_editor-page-wireless-security.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/nm_connection_editor-page-wireless.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/nm_connection_editor-page-wifi-security.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/nm_connection_editor-page-wifi.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/nm_connection_editor-page-wimax.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/nm_connection_editor-ppp-auth-methods-dialog.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/nm_connection_editor-vpn-helpers.Po@am__quote@
 
@@ -617,61 +672,103 @@ nm_connection_editor-ce-page.obj: ce-page.c
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(nm_connection_editor_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o nm_connection_editor-ce-page.obj `if test -f 'ce-page.c'; then $(CYGPATH_W) 'ce-page.c'; else $(CYGPATH_W) '$(srcdir)/ce-page.c'; fi`
 
-nm_connection_editor-page-wired.o: page-wired.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(nm_connection_editor_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT nm_connection_editor-page-wired.o -MD -MP -MF $(DEPDIR)/nm_connection_editor-page-wired.Tpo -c -o nm_connection_editor-page-wired.o `test -f 'page-wired.c' || echo '$(srcdir)/'`page-wired.c
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/nm_connection_editor-page-wired.Tpo $(DEPDIR)/nm_connection_editor-page-wired.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='page-wired.c' object='nm_connection_editor-page-wired.o' libtool=no @AMDEPBACKSLASH@
+nm_connection_editor-page-general.o: page-general.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(nm_connection_editor_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT nm_connection_editor-page-general.o -MD -MP -MF $(DEPDIR)/nm_connection_editor-page-general.Tpo -c -o nm_connection_editor-page-general.o `test -f 'page-general.c' || echo '$(srcdir)/'`page-general.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/nm_connection_editor-page-general.Tpo $(DEPDIR)/nm_connection_editor-page-general.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='page-general.c' object='nm_connection_editor-page-general.o' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(nm_connection_editor_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o nm_connection_editor-page-wired.o `test -f 'page-wired.c' || echo '$(srcdir)/'`page-wired.c
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(nm_connection_editor_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o nm_connection_editor-page-general.o `test -f 'page-general.c' || echo '$(srcdir)/'`page-general.c
 
-nm_connection_editor-page-wired.obj: page-wired.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(nm_connection_editor_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT nm_connection_editor-page-wired.obj -MD -MP -MF $(DEPDIR)/nm_connection_editor-page-wired.Tpo -c -o nm_connection_editor-page-wired.obj `if test -f 'page-wired.c'; then $(CYGPATH_W) 'page-wired.c'; else $(CYGPATH_W) '$(srcdir)/page-wired.c'; fi`
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/nm_connection_editor-page-wired.Tpo $(DEPDIR)/nm_connection_editor-page-wired.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='page-wired.c' object='nm_connection_editor-page-wired.obj' libtool=no @AMDEPBACKSLASH@
+nm_connection_editor-page-general.obj: page-general.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(nm_connection_editor_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT nm_connection_editor-page-general.obj -MD -MP -MF $(DEPDIR)/nm_connection_editor-page-general.Tpo -c -o nm_connection_editor-page-general.obj `if test -f 'page-general.c'; then $(CYGPATH_W) 'page-general.c'; else $(CYGPATH_W) '$(srcdir)/page-general.c'; fi`
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/nm_connection_editor-page-general.Tpo $(DEPDIR)/nm_connection_editor-page-general.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='page-general.c' object='nm_connection_editor-page-general.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(nm_connection_editor_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o nm_connection_editor-page-wired.obj `if test -f 'page-wired.c'; then $(CYGPATH_W) 'page-wired.c'; else $(CYGPATH_W) '$(srcdir)/page-wired.c'; fi`
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(nm_connection_editor_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o nm_connection_editor-page-general.obj `if test -f 'page-general.c'; then $(CYGPATH_W) 'page-general.c'; else $(CYGPATH_W) '$(srcdir)/page-general.c'; fi`
 
-nm_connection_editor-page-wired-security.o: page-wired-security.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(nm_connection_editor_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT nm_connection_editor-page-wired-security.o -MD -MP -MF $(DEPDIR)/nm_connection_editor-page-wired-security.Tpo -c -o nm_connection_editor-page-wired-security.o `test -f 'page-wired-security.c' || echo '$(srcdir)/'`page-wired-security.c
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/nm_connection_editor-page-wired-security.Tpo $(DEPDIR)/nm_connection_editor-page-wired-security.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='page-wired-security.c' object='nm_connection_editor-page-wired-security.o' libtool=no @AMDEPBACKSLASH@
+nm_connection_editor-page-ethernet.o: page-ethernet.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(nm_connection_editor_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT nm_connection_editor-page-ethernet.o -MD -MP -MF $(DEPDIR)/nm_connection_editor-page-ethernet.Tpo -c -o nm_connection_editor-page-ethernet.o `test -f 'page-ethernet.c' || echo '$(srcdir)/'`page-ethernet.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/nm_connection_editor-page-ethernet.Tpo $(DEPDIR)/nm_connection_editor-page-ethernet.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='page-ethernet.c' object='nm_connection_editor-page-ethernet.o' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(nm_connection_editor_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o nm_connection_editor-page-wired-security.o `test -f 'page-wired-security.c' || echo '$(srcdir)/'`page-wired-security.c
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(nm_connection_editor_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o nm_connection_editor-page-ethernet.o `test -f 'page-ethernet.c' || echo '$(srcdir)/'`page-ethernet.c
 
-nm_connection_editor-page-wired-security.obj: page-wired-security.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(nm_connection_editor_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT nm_connection_editor-page-wired-security.obj -MD -MP -MF $(DEPDIR)/nm_connection_editor-page-wired-security.Tpo -c -o nm_connection_editor-page-wired-security.obj `if test -f 'page-wired-security.c'; then $(CYGPATH_W) 'page-wired-security.c'; else $(CYGPATH_W) '$(srcdir)/page-wired-security.c'; fi`
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/nm_connection_editor-page-wired-security.Tpo $(DEPDIR)/nm_connection_editor-page-wired-security.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='page-wired-security.c' object='nm_connection_editor-page-wired-security.obj' libtool=no @AMDEPBACKSLASH@
+nm_connection_editor-page-ethernet.obj: page-ethernet.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(nm_connection_editor_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT nm_connection_editor-page-ethernet.obj -MD -MP -MF $(DEPDIR)/nm_connection_editor-page-ethernet.Tpo -c -o nm_connection_editor-page-ethernet.obj `if test -f 'page-ethernet.c'; then $(CYGPATH_W) 'page-ethernet.c'; else $(CYGPATH_W) '$(srcdir)/page-ethernet.c'; fi`
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/nm_connection_editor-page-ethernet.Tpo $(DEPDIR)/nm_connection_editor-page-ethernet.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='page-ethernet.c' object='nm_connection_editor-page-ethernet.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(nm_connection_editor_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o nm_connection_editor-page-wired-security.obj `if test -f 'page-wired-security.c'; then $(CYGPATH_W) 'page-wired-security.c'; else $(CYGPATH_W) '$(srcdir)/page-wired-security.c'; fi`
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(nm_connection_editor_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o nm_connection_editor-page-ethernet.obj `if test -f 'page-ethernet.c'; then $(CYGPATH_W) 'page-ethernet.c'; else $(CYGPATH_W) '$(srcdir)/page-ethernet.c'; fi`
 
-nm_connection_editor-page-wireless.o: page-wireless.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(nm_connection_editor_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT nm_connection_editor-page-wireless.o -MD -MP -MF $(DEPDIR)/nm_connection_editor-page-wireless.Tpo -c -o nm_connection_editor-page-wireless.o `test -f 'page-wireless.c' || echo '$(srcdir)/'`page-wireless.c
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/nm_connection_editor-page-wireless.Tpo $(DEPDIR)/nm_connection_editor-page-wireless.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='page-wireless.c' object='nm_connection_editor-page-wireless.o' libtool=no @AMDEPBACKSLASH@
+nm_connection_editor-page-8021x-security.o: page-8021x-security.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(nm_connection_editor_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT nm_connection_editor-page-8021x-security.o -MD -MP -MF $(DEPDIR)/nm_connection_editor-page-8021x-security.Tpo -c -o nm_connection_editor-page-8021x-security.o `test -f 'page-8021x-security.c' || echo '$(srcdir)/'`page-8021x-security.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/nm_connection_editor-page-8021x-security.Tpo $(DEPDIR)/nm_connection_editor-page-8021x-security.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='page-8021x-security.c' object='nm_connection_editor-page-8021x-security.o' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(nm_connection_editor_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o nm_connection_editor-page-wireless.o `test -f 'page-wireless.c' || echo '$(srcdir)/'`page-wireless.c
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(nm_connection_editor_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o nm_connection_editor-page-8021x-security.o `test -f 'page-8021x-security.c' || echo '$(srcdir)/'`page-8021x-security.c
 
-nm_connection_editor-page-wireless.obj: page-wireless.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(nm_connection_editor_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT nm_connection_editor-page-wireless.obj -MD -MP -MF $(DEPDIR)/nm_connection_editor-page-wireless.Tpo -c -o nm_connection_editor-page-wireless.obj `if test -f 'page-wireless.c'; then $(CYGPATH_W) 'page-wireless.c'; else $(CYGPATH_W) '$(srcdir)/page-wireless.c'; fi`
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/nm_connection_editor-page-wireless.Tpo $(DEPDIR)/nm_connection_editor-page-wireless.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='page-wireless.c' object='nm_connection_editor-page-wireless.obj' libtool=no @AMDEPBACKSLASH@
+nm_connection_editor-page-8021x-security.obj: page-8021x-security.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(nm_connection_editor_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT nm_connection_editor-page-8021x-security.obj -MD -MP -MF $(DEPDIR)/nm_connection_editor-page-8021x-security.Tpo -c -o nm_connection_editor-page-8021x-security.obj `if test -f 'page-8021x-security.c'; then $(CYGPATH_W) 'page-8021x-security.c'; else $(CYGPATH_W) '$(srcdir)/page-8021x-security.c'; fi`
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/nm_connection_editor-page-8021x-security.Tpo $(DEPDIR)/nm_connection_editor-page-8021x-security.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='page-8021x-security.c' object='nm_connection_editor-page-8021x-security.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(nm_connection_editor_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o nm_connection_editor-page-wireless.obj `if test -f 'page-wireless.c'; then $(CYGPATH_W) 'page-wireless.c'; else $(CYGPATH_W) '$(srcdir)/page-wireless.c'; fi`
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(nm_connection_editor_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o nm_connection_editor-page-8021x-security.obj `if test -f 'page-8021x-security.c'; then $(CYGPATH_W) 'page-8021x-security.c'; else $(CYGPATH_W) '$(srcdir)/page-8021x-security.c'; fi`
 
-nm_connection_editor-page-wireless-security.o: page-wireless-security.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(nm_connection_editor_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT nm_connection_editor-page-wireless-security.o -MD -MP -MF $(DEPDIR)/nm_connection_editor-page-wireless-security.Tpo -c -o nm_connection_editor-page-wireless-security.o `test -f 'page-wireless-security.c' || echo '$(srcdir)/'`page-wireless-security.c
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/nm_connection_editor-page-wireless-security.Tpo $(DEPDIR)/nm_connection_editor-page-wireless-security.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='page-wireless-security.c' object='nm_connection_editor-page-wireless-security.o' libtool=no @AMDEPBACKSLASH@
+nm_connection_editor-page-wifi.o: page-wifi.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(nm_connection_editor_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT nm_connection_editor-page-wifi.o -MD -MP -MF $(DEPDIR)/nm_connection_editor-page-wifi.Tpo -c -o nm_connection_editor-page-wifi.o `test -f 'page-wifi.c' || echo '$(srcdir)/'`page-wifi.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/nm_connection_editor-page-wifi.Tpo $(DEPDIR)/nm_connection_editor-page-wifi.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='page-wifi.c' object='nm_connection_editor-page-wifi.o' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(nm_connection_editor_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o nm_connection_editor-page-wireless-security.o `test -f 'page-wireless-security.c' || echo '$(srcdir)/'`page-wireless-security.c
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(nm_connection_editor_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o nm_connection_editor-page-wifi.o `test -f 'page-wifi.c' || echo '$(srcdir)/'`page-wifi.c
 
-nm_connection_editor-page-wireless-security.obj: page-wireless-security.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(nm_connection_editor_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT nm_connection_editor-page-wireless-security.obj -MD -MP -MF $(DEPDIR)/nm_connection_editor-page-wireless-security.Tpo -c -o nm_connection_editor-page-wireless-security.obj `if test -f 'page-wireless-security.c'; then $(CYGPATH_W) 'page-wireless-security.c'; else $(CYGPATH_W) '$(srcdir)/page-wireless-security.c'; fi`
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/nm_connection_editor-page-wireless-security.Tpo $(DEPDIR)/nm_connection_editor-page-wireless-security.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='page-wireless-security.c' object='nm_connection_editor-page-wireless-security.obj' libtool=no @AMDEPBACKSLASH@
+nm_connection_editor-page-wifi.obj: page-wifi.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(nm_connection_editor_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT nm_connection_editor-page-wifi.obj -MD -MP -MF $(DEPDIR)/nm_connection_editor-page-wifi.Tpo -c -o nm_connection_editor-page-wifi.obj `if test -f 'page-wifi.c'; then $(CYGPATH_W) 'page-wifi.c'; else $(CYGPATH_W) '$(srcdir)/page-wifi.c'; fi`
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/nm_connection_editor-page-wifi.Tpo $(DEPDIR)/nm_connection_editor-page-wifi.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='page-wifi.c' object='nm_connection_editor-page-wifi.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(nm_connection_editor_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o nm_connection_editor-page-wireless-security.obj `if test -f 'page-wireless-security.c'; then $(CYGPATH_W) 'page-wireless-security.c'; else $(CYGPATH_W) '$(srcdir)/page-wireless-security.c'; fi`
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(nm_connection_editor_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o nm_connection_editor-page-wifi.obj `if test -f 'page-wifi.c'; then $(CYGPATH_W) 'page-wifi.c'; else $(CYGPATH_W) '$(srcdir)/page-wifi.c'; fi`
+
+nm_connection_editor-page-wifi-security.o: page-wifi-security.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(nm_connection_editor_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT nm_connection_editor-page-wifi-security.o -MD -MP -MF $(DEPDIR)/nm_connection_editor-page-wifi-security.Tpo -c -o nm_connection_editor-page-wifi-security.o `test -f 'page-wifi-security.c' || echo '$(srcdir)/'`page-wifi-security.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/nm_connection_editor-page-wifi-security.Tpo $(DEPDIR)/nm_connection_editor-page-wifi-security.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='page-wifi-security.c' object='nm_connection_editor-page-wifi-security.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(nm_connection_editor_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o nm_connection_editor-page-wifi-security.o `test -f 'page-wifi-security.c' || echo '$(srcdir)/'`page-wifi-security.c
+
+nm_connection_editor-page-wifi-security.obj: page-wifi-security.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(nm_connection_editor_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT nm_connection_editor-page-wifi-security.obj -MD -MP -MF $(DEPDIR)/nm_connection_editor-page-wifi-security.Tpo -c -o nm_connection_editor-page-wifi-security.obj `if test -f 'page-wifi-security.c'; then $(CYGPATH_W) 'page-wifi-security.c'; else $(CYGPATH_W) '$(srcdir)/page-wifi-security.c'; fi`
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/nm_connection_editor-page-wifi-security.Tpo $(DEPDIR)/nm_connection_editor-page-wifi-security.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='page-wifi-security.c' object='nm_connection_editor-page-wifi-security.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(nm_connection_editor_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o nm_connection_editor-page-wifi-security.obj `if test -f 'page-wifi-security.c'; then $(CYGPATH_W) 'page-wifi-security.c'; else $(CYGPATH_W) '$(srcdir)/page-wifi-security.c'; fi`
+
+nm_connection_editor-page-wimax.o: page-wimax.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(nm_connection_editor_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT nm_connection_editor-page-wimax.o -MD -MP -MF $(DEPDIR)/nm_connection_editor-page-wimax.Tpo -c -o nm_connection_editor-page-wimax.o `test -f 'page-wimax.c' || echo '$(srcdir)/'`page-wimax.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/nm_connection_editor-page-wimax.Tpo $(DEPDIR)/nm_connection_editor-page-wimax.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='page-wimax.c' object='nm_connection_editor-page-wimax.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(nm_connection_editor_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o nm_connection_editor-page-wimax.o `test -f 'page-wimax.c' || echo '$(srcdir)/'`page-wimax.c
+
+nm_connection_editor-page-wimax.obj: page-wimax.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(nm_connection_editor_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT nm_connection_editor-page-wimax.obj -MD -MP -MF $(DEPDIR)/nm_connection_editor-page-wimax.Tpo -c -o nm_connection_editor-page-wimax.obj `if test -f 'page-wimax.c'; then $(CYGPATH_W) 'page-wimax.c'; else $(CYGPATH_W) '$(srcdir)/page-wimax.c'; fi`
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/nm_connection_editor-page-wimax.Tpo $(DEPDIR)/nm_connection_editor-page-wimax.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='page-wimax.c' object='nm_connection_editor-page-wimax.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(nm_connection_editor_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o nm_connection_editor-page-wimax.obj `if test -f 'page-wimax.c'; then $(CYGPATH_W) 'page-wimax.c'; else $(CYGPATH_W) '$(srcdir)/page-wimax.c'; fi`
+
+nm_connection_editor-page-infiniband.o: page-infiniband.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(nm_connection_editor_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT nm_connection_editor-page-infiniband.o -MD -MP -MF $(DEPDIR)/nm_connection_editor-page-infiniband.Tpo -c -o nm_connection_editor-page-infiniband.o `test -f 'page-infiniband.c' || echo '$(srcdir)/'`page-infiniband.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/nm_connection_editor-page-infiniband.Tpo $(DEPDIR)/nm_connection_editor-page-infiniband.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='page-infiniband.c' object='nm_connection_editor-page-infiniband.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(nm_connection_editor_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o nm_connection_editor-page-infiniband.o `test -f 'page-infiniband.c' || echo '$(srcdir)/'`page-infiniband.c
+
+nm_connection_editor-page-infiniband.obj: page-infiniband.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(nm_connection_editor_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT nm_connection_editor-page-infiniband.obj -MD -MP -MF $(DEPDIR)/nm_connection_editor-page-infiniband.Tpo -c -o nm_connection_editor-page-infiniband.obj `if test -f 'page-infiniband.c'; then $(CYGPATH_W) 'page-infiniband.c'; else $(CYGPATH_W) '$(srcdir)/page-infiniband.c'; fi`
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/nm_connection_editor-page-infiniband.Tpo $(DEPDIR)/nm_connection_editor-page-infiniband.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='page-infiniband.c' object='nm_connection_editor-page-infiniband.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(nm_connection_editor_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o nm_connection_editor-page-infiniband.obj `if test -f 'page-infiniband.c'; then $(CYGPATH_W) 'page-infiniband.c'; else $(CYGPATH_W) '$(srcdir)/page-infiniband.c'; fi`
 
 nm_connection_editor-page-ip4.o: page-ip4.c
 @am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(nm_connection_editor_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT nm_connection_editor-page-ip4.o -MD -MP -MF $(DEPDIR)/nm_connection_editor-page-ip4.Tpo -c -o nm_connection_editor-page-ip4.o `test -f 'page-ip4.c' || echo '$(srcdir)/'`page-ip4.c
@@ -757,6 +854,76 @@ nm_connection_editor-page-vpn.obj: page-vpn.c
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(nm_connection_editor_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o nm_connection_editor-page-vpn.obj `if test -f 'page-vpn.c'; then $(CYGPATH_W) 'page-vpn.c'; else $(CYGPATH_W) '$(srcdir)/page-vpn.c'; fi`
 
+nm_connection_editor-page-master.o: page-master.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(nm_connection_editor_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT nm_connection_editor-page-master.o -MD -MP -MF $(DEPDIR)/nm_connection_editor-page-master.Tpo -c -o nm_connection_editor-page-master.o `test -f 'page-master.c' || echo '$(srcdir)/'`page-master.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/nm_connection_editor-page-master.Tpo $(DEPDIR)/nm_connection_editor-page-master.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='page-master.c' object='nm_connection_editor-page-master.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(nm_connection_editor_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o nm_connection_editor-page-master.o `test -f 'page-master.c' || echo '$(srcdir)/'`page-master.c
+
+nm_connection_editor-page-master.obj: page-master.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(nm_connection_editor_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT nm_connection_editor-page-master.obj -MD -MP -MF $(DEPDIR)/nm_connection_editor-page-master.Tpo -c -o nm_connection_editor-page-master.obj `if test -f 'page-master.c'; then $(CYGPATH_W) 'page-master.c'; else $(CYGPATH_W) '$(srcdir)/page-master.c'; fi`
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/nm_connection_editor-page-master.Tpo $(DEPDIR)/nm_connection_editor-page-master.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='page-master.c' object='nm_connection_editor-page-master.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(nm_connection_editor_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o nm_connection_editor-page-master.obj `if test -f 'page-master.c'; then $(CYGPATH_W) 'page-master.c'; else $(CYGPATH_W) '$(srcdir)/page-master.c'; fi`
+
+nm_connection_editor-page-bond.o: page-bond.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(nm_connection_editor_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT nm_connection_editor-page-bond.o -MD -MP -MF $(DEPDIR)/nm_connection_editor-page-bond.Tpo -c -o nm_connection_editor-page-bond.o `test -f 'page-bond.c' || echo '$(srcdir)/'`page-bond.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/nm_connection_editor-page-bond.Tpo $(DEPDIR)/nm_connection_editor-page-bond.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='page-bond.c' object='nm_connection_editor-page-bond.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(nm_connection_editor_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o nm_connection_editor-page-bond.o `test -f 'page-bond.c' || echo '$(srcdir)/'`page-bond.c
+
+nm_connection_editor-page-bond.obj: page-bond.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(nm_connection_editor_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT nm_connection_editor-page-bond.obj -MD -MP -MF $(DEPDIR)/nm_connection_editor-page-bond.Tpo -c -o nm_connection_editor-page-bond.obj `if test -f 'page-bond.c'; then $(CYGPATH_W) 'page-bond.c'; else $(CYGPATH_W) '$(srcdir)/page-bond.c'; fi`
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/nm_connection_editor-page-bond.Tpo $(DEPDIR)/nm_connection_editor-page-bond.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='page-bond.c' object='nm_connection_editor-page-bond.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(nm_connection_editor_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o nm_connection_editor-page-bond.obj `if test -f 'page-bond.c'; then $(CYGPATH_W) 'page-bond.c'; else $(CYGPATH_W) '$(srcdir)/page-bond.c'; fi`
+
+nm_connection_editor-page-bridge.o: page-bridge.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(nm_connection_editor_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT nm_connection_editor-page-bridge.o -MD -MP -MF $(DEPDIR)/nm_connection_editor-page-bridge.Tpo -c -o nm_connection_editor-page-bridge.o `test -f 'page-bridge.c' || echo '$(srcdir)/'`page-bridge.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/nm_connection_editor-page-bridge.Tpo $(DEPDIR)/nm_connection_editor-page-bridge.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='page-bridge.c' object='nm_connection_editor-page-bridge.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(nm_connection_editor_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o nm_connection_editor-page-bridge.o `test -f 'page-bridge.c' || echo '$(srcdir)/'`page-bridge.c
+
+nm_connection_editor-page-bridge.obj: page-bridge.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(nm_connection_editor_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT nm_connection_editor-page-bridge.obj -MD -MP -MF $(DEPDIR)/nm_connection_editor-page-bridge.Tpo -c -o nm_connection_editor-page-bridge.obj `if test -f 'page-bridge.c'; then $(CYGPATH_W) 'page-bridge.c'; else $(CYGPATH_W) '$(srcdir)/page-bridge.c'; fi`
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/nm_connection_editor-page-bridge.Tpo $(DEPDIR)/nm_connection_editor-page-bridge.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='page-bridge.c' object='nm_connection_editor-page-bridge.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(nm_connection_editor_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o nm_connection_editor-page-bridge.obj `if test -f 'page-bridge.c'; then $(CYGPATH_W) 'page-bridge.c'; else $(CYGPATH_W) '$(srcdir)/page-bridge.c'; fi`
+
+nm_connection_editor-page-bridge-port.o: page-bridge-port.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(nm_connection_editor_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT nm_connection_editor-page-bridge-port.o -MD -MP -MF $(DEPDIR)/nm_connection_editor-page-bridge-port.Tpo -c -o nm_connection_editor-page-bridge-port.o `test -f 'page-bridge-port.c' || echo '$(srcdir)/'`page-bridge-port.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/nm_connection_editor-page-bridge-port.Tpo $(DEPDIR)/nm_connection_editor-page-bridge-port.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='page-bridge-port.c' object='nm_connection_editor-page-bridge-port.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(nm_connection_editor_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o nm_connection_editor-page-bridge-port.o `test -f 'page-bridge-port.c' || echo '$(srcdir)/'`page-bridge-port.c
+
+nm_connection_editor-page-bridge-port.obj: page-bridge-port.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(nm_connection_editor_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT nm_connection_editor-page-bridge-port.obj -MD -MP -MF $(DEPDIR)/nm_connection_editor-page-bridge-port.Tpo -c -o nm_connection_editor-page-bridge-port.obj `if test -f 'page-bridge-port.c'; then $(CYGPATH_W) 'page-bridge-port.c'; else $(CYGPATH_W) '$(srcdir)/page-bridge-port.c'; fi`
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/nm_connection_editor-page-bridge-port.Tpo $(DEPDIR)/nm_connection_editor-page-bridge-port.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='page-bridge-port.c' object='nm_connection_editor-page-bridge-port.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(nm_connection_editor_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o nm_connection_editor-page-bridge-port.obj `if test -f 'page-bridge-port.c'; then $(CYGPATH_W) 'page-bridge-port.c'; else $(CYGPATH_W) '$(srcdir)/page-bridge-port.c'; fi`
+
+nm_connection_editor-page-vlan.o: page-vlan.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(nm_connection_editor_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT nm_connection_editor-page-vlan.o -MD -MP -MF $(DEPDIR)/nm_connection_editor-page-vlan.Tpo -c -o nm_connection_editor-page-vlan.o `test -f 'page-vlan.c' || echo '$(srcdir)/'`page-vlan.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/nm_connection_editor-page-vlan.Tpo $(DEPDIR)/nm_connection_editor-page-vlan.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='page-vlan.c' object='nm_connection_editor-page-vlan.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(nm_connection_editor_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o nm_connection_editor-page-vlan.o `test -f 'page-vlan.c' || echo '$(srcdir)/'`page-vlan.c
+
+nm_connection_editor-page-vlan.obj: page-vlan.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(nm_connection_editor_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT nm_connection_editor-page-vlan.obj -MD -MP -MF $(DEPDIR)/nm_connection_editor-page-vlan.Tpo -c -o nm_connection_editor-page-vlan.obj `if test -f 'page-vlan.c'; then $(CYGPATH_W) 'page-vlan.c'; else $(CYGPATH_W) '$(srcdir)/page-vlan.c'; fi`
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/nm_connection_editor-page-vlan.Tpo $(DEPDIR)/nm_connection_editor-page-vlan.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='page-vlan.c' object='nm_connection_editor-page-vlan.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(nm_connection_editor_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o nm_connection_editor-page-vlan.obj `if test -f 'page-vlan.c'; then $(CYGPATH_W) 'page-vlan.c'; else $(CYGPATH_W) '$(srcdir)/page-vlan.c'; fi`
+
 nm_connection_editor-vpn-helpers.o: vpn-helpers.c
 @am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(nm_connection_editor_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT nm_connection_editor-vpn-helpers.o -MD -MP -MF $(DEPDIR)/nm_connection_editor-vpn-helpers.Tpo -c -o nm_connection_editor-vpn-helpers.o `test -f 'vpn-helpers.c' || echo '$(srcdir)/'`vpn-helpers.c
 @am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/nm_connection_editor-vpn-helpers.Tpo $(DEPDIR)/nm_connection_editor-vpn-helpers.Po
@@ -826,6 +993,20 @@ nm_connection_editor-ce-polkit-button.obj: ce-polkit-button.c
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='ce-polkit-button.c' object='nm_connection_editor-ce-polkit-button.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(nm_connection_editor_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o nm_connection_editor-ce-polkit-button.obj `if test -f 'ce-polkit-button.c'; then $(CYGPATH_W) 'ce-polkit-button.c'; else $(CYGPATH_W) '$(srcdir)/ce-polkit-button.c'; fi`
+
+nm_connection_editor-new-connection.o: new-connection.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(nm_connection_editor_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT nm_connection_editor-new-connection.o -MD -MP -MF $(DEPDIR)/nm_connection_editor-new-connection.Tpo -c -o nm_connection_editor-new-connection.o `test -f 'new-connection.c' || echo '$(srcdir)/'`new-connection.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/nm_connection_editor-new-connection.Tpo $(DEPDIR)/nm_connection_editor-new-connection.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='new-connection.c' object='nm_connection_editor-new-connection.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(nm_connection_editor_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o nm_connection_editor-new-connection.o `test -f 'new-connection.c' || echo '$(srcdir)/'`new-connection.c
+
+nm_connection_editor-new-connection.obj: new-connection.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(nm_connection_editor_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT nm_connection_editor-new-connection.obj -MD -MP -MF $(DEPDIR)/nm_connection_editor-new-connection.Tpo -c -o nm_connection_editor-new-connection.obj `if test -f 'new-connection.c'; then $(CYGPATH_W) 'new-connection.c'; else $(CYGPATH_W) '$(srcdir)/new-connection.c'; fi`
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/nm_connection_editor-new-connection.Tpo $(DEPDIR)/nm_connection_editor-new-connection.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='new-connection.c' object='nm_connection_editor-new-connection.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(nm_connection_editor_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o nm_connection_editor-new-connection.obj `if test -f 'new-connection.c'; then $(CYGPATH_W) 'new-connection.c'; else $(CYGPATH_W) '$(srcdir)/new-connection.c'; fi`
 
 mostlyclean-libtool:
 	-rm -f *.lo

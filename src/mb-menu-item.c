@@ -52,8 +52,7 @@ get_tech_name (guint32 tech)
 	switch (tech) {
 	case MB_TECH_1XRTT:
 		return _("CDMA");
-	case MB_TECH_EVDO_REV0:
-	case MB_TECH_EVDO_REVA:
+	case MB_TECH_EVDO:
 		return _("EVDO");
 	case MB_TECH_GSM:
 		return _("GSM");
@@ -69,8 +68,12 @@ get_tech_name (guint32 tech)
 		return _("HSUPA");
 	case MB_TECH_HSPA:
 		return _("HSPA");
+	case MB_TECH_HSPA_PLUS:
+		return _("HSPA+");
 	case MB_TECH_WIMAX:
 		return _("WiMAX");
+	case MB_TECH_LTE:
+		return _("LTE");
 	default:
 		break;
 	}

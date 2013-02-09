@@ -1,5 +1,5 @@
 /* -*- Mode: C; tab-width: 4; indent-tabs-mode: t; c-basic-offset: 4 -*- */
-/* NetworkManager Wireless Applet -- Display wireless access points and allow user control
+/* NetworkManager Applet -- allow user control over networking
  *
  * Dan Williams <dcbw@redhat.com>
  *
@@ -37,7 +37,7 @@
 
 #include "nm-wifi-dialog.h"
 #include "wireless-security.h"
-#include "utils.h"
+#include "nm-ui-utils.h"
 
 G_DEFINE_TYPE (NMAWifiDialog, nma_wifi_dialog, GTK_TYPE_DIALOG)
 
@@ -107,25 +107,6 @@ nma_wifi_dialog_get_nag_ignored (NMAWifiDialog *self)
 	g_return_val_if_fail (self != NULL, FALSE);
 
 	return NMA_WIFI_DIALOG_GET_PRIVATE (self)->nag_ignored;
-}
-
-static void
-model_free (GtkTreeModel *model, guint col)
-{
-	GtkTreeIter	iter;
-
-	if (!model)
-		return;
-
-	if (gtk_tree_model_get_iter_first (model, &iter)) {
-		do {
-			char *str;
-
-			gtk_tree_model_get (model, &iter, col, &str, -1);
-			g_free (str);
-		} while (gtk_tree_model_iter_next (model, &iter));
-	}
-	g_object_unref (model);
 }
 
 static void
@@ -364,7 +345,7 @@ connection_combo_changed (GtkWidget *combo,
 	                    C_NEW_COLUMN, &is_new, -1);
 
 	if (!security_combo_init (self, priv->secrets_only)) {
-		g_warning ("Couldn't change wireless security combo box.");
+		g_warning ("Couldn't change Wi-Fi security combo box.");
 		return;
 	}
 	security_combo_changed (priv->sec_combo, self);
@@ -425,7 +406,8 @@ connection_combo_init (NMAWifiDialog *self, NMConnection *connection)
 	g_return_val_if_fail (priv->connection == NULL, FALSE);
 
 	/* Clear any old model */
-	model_free (priv->connection_model, C_NAME_COLUMN);
+	if (priv->connection_model)
+		g_object_unref (priv->connection_model);
 
 	/* New model */
 	store = gtk_list_store_new (4, G_TYPE_STRING, G_TYPE_OBJECT, G_TYPE_BOOLEAN, G_TYPE_BOOLEAN);
@@ -583,7 +565,7 @@ device_combo_changed (GtkWidget *combo,
 	}
 
 	if (!security_combo_init (self, priv->secrets_only)) {
-		g_warning ("Couldn't change wireless security combo box.");
+		g_warning ("Couldn't change Wi-Fi security combo box.");
 		return;
 	}
 
@@ -594,13 +576,9 @@ static void
 add_device_to_model (GtkListStore *model, NMDevice *device)
 {
 	GtkTreeIter iter;
-	char *desc;
+	const char *desc;
 
-	desc = (char *) utils_get_device_description (device);
-	if (!desc)
-		desc = (char *) nm_device_get_iface (device);
-	g_assert (desc);
-
+	desc = nma_utils_get_device_description (device);
 	gtk_list_store_append (model, &iter);
 	gtk_list_store_set (model, &iter, D_NAME_COLUMN, desc, D_DEV_COLUMN, device, -1);
 }
@@ -1087,7 +1065,7 @@ internal_init (NMAWifiDialog *self,
 
 	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "hbox1"));
 	if (!widget) {
-		g_warning ("Couldn't find wireless_dialog widget.");
+		g_warning ("Couldn't find Wi-Fi_dialog widget.");
 		return FALSE;
 	}
 	gtk_widget_unparent (widget);
@@ -1113,7 +1091,7 @@ internal_init (NMAWifiDialog *self,
 	gtk_dialog_set_response_sensitive (GTK_DIALOG (self), GTK_RESPONSE_OK, FALSE);
 
 	if (!device_combo_init (self, specific_device)) {
-		g_warning ("No wireless devices available.");
+		g_warning ("No Wi-Fi devices available.");
 		return FALSE;
 	}
 
@@ -1123,7 +1101,7 @@ internal_init (NMAWifiDialog *self,
 	}
 
 	if (!security_combo_init (self, priv->secrets_only)) {
-		g_warning ("Couldn't set up wireless security combo box.");
+		g_warning ("Couldn't set up Wi-Fi security combo box.");
 		return FALSE;
 	}
 
@@ -1155,24 +1133,24 @@ internal_init (NMAWifiDialog *self,
 		if (ssid)
 			esc_ssid = nm_utils_ssid_to_utf8 (ssid);
 
-		tmp = g_strdup_printf (_("Passwords or encryption keys are required to access the wireless network '%s'."),
+		tmp = g_strdup_printf (_("Passwords or encryption keys are required to access the Wi-Fi network '%s'."),
 		                       esc_ssid ? esc_ssid : "<unknown>");
-		gtk_window_set_title (GTK_WINDOW (self), _("Wireless Network Authentication Required"));
+		gtk_window_set_title (GTK_WINDOW (self), _("Wi-Fi Network Authentication Required"));
 		label = g_strdup_printf ("<span size=\"larger\" weight=\"bold\">%s</span>\n\n%s",
-		                         _("Authentication required by wireless network"),
+		                         _("Authentication required by Wi-Fi network"),
 		                         tmp);
 		g_free (esc_ssid);
 		g_free (tmp);
 	} else if (priv->adhoc_create) {
-		gtk_window_set_title (GTK_WINDOW (self), _("Create New Wireless Network"));
+		gtk_window_set_title (GTK_WINDOW (self), _("Create New Wi-Fi Network"));
 		label = g_strdup_printf ("<span size=\"larger\" weight=\"bold\">%s</span>\n\n%s",
-		                         _("New wireless network"),
-		                         _("Enter a name for the wireless network you wish to create."));
+		                         _("New Wi-Fi network"),
+		                         _("Enter a name for the Wi-Fi network you wish to create."));
 	} else {
-		gtk_window_set_title (GTK_WINDOW (self), _("Connect to Hidden Wireless Network"));
+		gtk_window_set_title (GTK_WINDOW (self), _("Connect to Hidden Wi-Fi Network"));
 		label = g_strdup_printf ("<span size=\"larger\" weight=\"bold\">%s</span>\n\n%s",
-		                         _("Hidden wireless network"),
-		                         _("Enter the name and security details of the hidden wireless network you wish to connect to."));
+		                         _("Hidden Wi-Fi network"),
+		                         _("Enter the name and security details of the hidden Wi-Fi network you wish to connect to."));
 	}
 
 	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "caption_label"));
@@ -1187,9 +1165,17 @@ internal_init (NMAWifiDialog *self,
 	return TRUE;
 }
 
+/**
+ * nma_wifi_dialog_get_connection:
+ * @self: an #NMAWifiDialog
+ * @device: (out):
+ * @ap: (out):
+ *
+ * Returns: (transfer full):
+ */
 NMConnection *
 nma_wifi_dialog_get_connection (NMAWifiDialog *self,
-                                NMDevice **out_device,
+                                NMDevice **device,
                                 NMAccessPoint **ap)
 {
 	NMAWifiDialogPrivate *priv;
@@ -1252,11 +1238,11 @@ nma_wifi_dialog_get_connection (NMAWifiDialog *self,
 	}
 
 	/* Fill device */
-	if (out_device) {
+	if (device) {
 		combo = GTK_WIDGET (gtk_builder_get_object (priv->builder, "device_combo"));
 		gtk_combo_box_get_active_iter (GTK_COMBO_BOX (combo), &iter);
-		gtk_tree_model_get (priv->device_model, &iter, D_DEV_COLUMN, out_device, -1);
-		g_object_unref (*out_device);
+		gtk_tree_model_get (priv->device_model, &iter, D_DEV_COLUMN, device, -1);
+		g_object_unref (*device);
 	}
 
 	if (ap)
@@ -1301,7 +1287,7 @@ nma_wifi_dialog_new (NMClient *client,
 		priv->group = gtk_size_group_new (GTK_SIZE_GROUP_HORIZONTAL);
 
 		if (!internal_init (self, connection, device, secrets_only, FALSE)) {
-			g_warning ("Couldn't create wireless security dialog.");
+			g_warning ("Couldn't create Wi-Fi security dialog.");
 			gtk_widget_destroy (GTK_WIDGET (self));
 			self = NULL;
 		}
@@ -1332,7 +1318,7 @@ internal_new_other (NMClient *client, NMRemoteSettings *settings, gboolean creat
 	priv->adhoc_create = create;
 
 	if (!internal_init (self, NULL, NULL, FALSE, create)) {
-		g_warning ("Couldn't create wireless security dialog.");
+		g_warning ("Couldn't create Wi-Fi security dialog.");
 		gtk_widget_destroy (GTK_WIDGET (self));
 		return NULL;
 	}
@@ -1352,11 +1338,17 @@ nma_wifi_dialog_new_for_create (NMClient *client, NMRemoteSettings *settings)
 	return internal_new_other (client, settings, TRUE);
 }
 
+/**
+ * nma_wifi_dialog_nag_user:
+ * @self:
+ *
+ * Returns: (transfer full):
+ */
 GtkWidget *
 nma_wifi_dialog_nag_user (NMAWifiDialog *self)
 {
 	NMAWifiDialogPrivate *priv;
-	GtkWidget *combo;
+	GtkWidget *combo, *nag;
 	GtkTreeModel *model;
 	GtkTreeIter iter;
 	WirelessSecurity *sec = NULL;
@@ -1376,8 +1368,11 @@ nma_wifi_dialog_nag_user (NMAWifiDialog *self)
 	}
 
 	gtk_tree_model_get (model, &iter, S_SEC_COLUMN, &sec, -1);
-	if (sec)
-		return wireless_security_nag_user (sec);
+	if (sec) {
+		nag = wireless_security_nag_user (sec);
+		wireless_security_unref (sec);
+		return nag;
+	}
 
 	return NULL;
 }
@@ -1415,8 +1410,8 @@ dispose (GObject *object)
 	g_object_unref (priv->settings);
 	g_object_unref (priv->builder);
 
-	model_free (priv->device_model, D_NAME_COLUMN);
-	model_free (priv->connection_model, C_NAME_COLUMN);
+	g_object_unref (priv->device_model);
+	g_object_unref (priv->connection_model);
 
 	if (priv->group)
 		g_object_unref (priv->group);

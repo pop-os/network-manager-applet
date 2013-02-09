@@ -17,7 +17,7 @@
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  *
- * (C) Copyright 2008 - 2011 Red Hat, Inc.
+ * (C) Copyright 2008 - 2012 Red Hat, Inc.
  */
 
 #ifndef __CE_PAGE_H__
@@ -31,7 +31,11 @@
 #include <dbus/dbus-glib.h>
 #include <nm-connection.h>
 #include <nm-client.h>
+#include <nm-remote-settings.h>
 #include "utils.h"
+
+/* for ARPHRD_ETHER / ARPHRD_INFINIBAND for MAC utilies */
+#include <net/if_arp.h>
 
 typedef void (*PageNewConnectionResultFunc) (NMConnection *connection,
                                              gboolean canceled,
@@ -41,15 +45,16 @@ typedef void (*PageNewConnectionResultFunc) (NMConnection *connection,
 typedef GSList * (*PageGetConnectionsFunc) (gpointer user_data);
 
 typedef void (*PageNewConnectionFunc) (GtkWindow *parent,
+                                       const char *detail,
+                                       NMRemoteSettings *settings,
                                        PageNewConnectionResultFunc result_func,
-                                       PageGetConnectionsFunc get_connections_func,
                                        gpointer user_data);
 
 #define CE_TYPE_PAGE            (ce_page_get_type ())
 #define CE_PAGE(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), CE_TYPE_PAGE, CEPage))
 #define CE_PAGE_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), CE_TYPE_PAGE, CEPageClass))
 #define CE_IS_PAGE(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), CE_TYPE_PAGE))
-#define CE_IS_PAGE_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((obj), CE_TYPE_PAGE))
+#define CE_IS_PAGE_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), CE_TYPE_PAGE))
 #define CE_PAGE_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), CE_TYPE_PAGE, CEPageClass))
 
 #define CE_PAGE_CONNECTION    "connection"
@@ -70,6 +75,7 @@ typedef struct {
 	NMConnection *connection;
 	GtkWindow *parent_window;
 	NMClient *client;
+	NMRemoteSettings *settings;
 
 	gboolean disposed;
 } CEPage;
@@ -79,7 +85,6 @@ typedef struct {
 
 	/* Virtual functions */
 	gboolean    (*validate)     (CEPage *self, NMConnection *connection, GError **error);
-	char **     (*get_mac_list) (CEPage *self);
 	/* Let the page warn the user if some property needs review */
 	GtkWidget * (*nag_user)     (CEPage *self);
 
@@ -92,6 +97,7 @@ typedef struct {
 typedef CEPage* (*CEPageNewFunc)(NMConnection *connection,
                                  GtkWindow *parent,
                                  NMClient *client,
+                                 NMRemoteSettings *settings,
                                  const char **out_secrets_setting_name,
                                  GError **error);
 
@@ -104,13 +110,15 @@ const char * ce_page_get_title (CEPage *self);
 
 gboolean ce_page_validate (CEPage *self, NMConnection *connection, GError **error);
 
-char **ce_page_get_mac_list (CEPage *self);
+char **ce_page_get_mac_list (CEPage *self, GType device_type, const char *mac_property);
+void ce_page_setup_mac_combo (CEPage *self, GtkComboBox *combo,
+                              const char *current_mac, char **mac_list);
 
 void ce_page_changed (CEPage *self);
 
-void ce_page_mac_to_entry (const GByteArray *mac, GtkEntry *entry);
+void ce_page_mac_to_entry (const GByteArray *mac, int type, GtkEntry *entry);
 
-GByteArray *ce_page_entry_to_mac (GtkEntry *entry, gboolean *invalid);
+GByteArray *ce_page_entry_to_mac (GtkEntry *entry, int type, gboolean *invalid);
 
 gint ce_spin_output_with_default (GtkSpinButton *spin, gpointer user_data);
 
@@ -131,13 +139,14 @@ GtkWidget *ce_page_nag_user (CEPage *self);
 NMConnection *ce_page_new_connection (const char *format,
                                       const char *ctype,
                                       gboolean autoconnect,
-                                      PageGetConnectionsFunc get_connections_func,
+                                      NMRemoteSettings *settings,
                                       gpointer user_data);
 
 CEPage *ce_page_new (GType page_type,
                      NMConnection *connection,
                      GtkWindow *parent_window,
                      NMClient *client,
+                     NMRemoteSettings *settings,
                      const char *ui_file,
                      const char *widget_name,
                      const char *title);

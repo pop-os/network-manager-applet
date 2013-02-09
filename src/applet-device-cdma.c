@@ -1,5 +1,5 @@
 /* -*- Mode: C; tab-width: 4; indent-tabs-mode: t; c-basic-offset: 4 -*- */
-/* NetworkManager Wireless Applet -- Display wireless access points and allow user control
+/* NetworkManager Applet -- allow user control over networking
  *
  * Dan Williams <dcbw@redhat.com>
  *
@@ -39,11 +39,11 @@
 #include "applet.h"
 #include "applet-device-cdma.h"
 #include "utils.h"
-#include "nm-mobile-wizard.h"
 #include "applet-dialogs.h"
 #include "nma-marshal.h"
-#include "nmn-mobile-providers.h"
+#include "nm-mobile-providers.h"
 #include "mb-menu-item.h"
+#include "nm-ui-utils.h"
 
 typedef struct {
 	NMApplet *applet;
@@ -60,7 +60,7 @@ typedef struct {
 	guint32 sid;
 	gboolean modem_enabled;
 
-	GHashTable *providers;
+	NMAMobileProvidersDatabase *mobile_providers_database;
 	char *provider_name;
 
 	guint32 poll_id;
@@ -88,110 +88,15 @@ cdma_menu_item_info_destroy (gpointer data)
 	g_slice_free (CdmaMenuItemInfo, data);
 }
 
-typedef struct {
-	AppletNewAutoConnectionCallback callback;
-	gpointer callback_data;
-} AutoCdmaWizardInfo;
-
-static void
-mobile_wizard_done (NMAMobileWizard *wizard,
-                    gboolean canceled,
-                    NMAMobileWizardAccessMethod *method,
-                    gpointer user_data)
-{
-	AutoCdmaWizardInfo *info = user_data;
-	NMConnection *connection = NULL;
-
-	if (!canceled && method) {
-		NMSetting *setting;
-		char *uuid, *id;
-
-		if (method->devtype != NM_DEVICE_MODEM_CAPABILITY_CDMA_EVDO) {
-			g_warning ("Unexpected device type (not CDMA).");
-			canceled = TRUE;
-			goto done;
-		}
-
-		connection = nm_connection_new ();
-
-		setting = nm_setting_cdma_new ();
-		g_object_set (setting,
-		              NM_SETTING_CDMA_NUMBER, "#777",
-		              NM_SETTING_CDMA_USERNAME, method->username,
-		              NM_SETTING_CDMA_PASSWORD, method->password,
-		              NULL);
-		nm_connection_add_setting (connection, setting);
-
-		/* Serial setting */
-		setting = nm_setting_serial_new ();
-		g_object_set (setting,
-		              NM_SETTING_SERIAL_BAUD, 115200,
-		              NM_SETTING_SERIAL_BITS, 8,
-		              NM_SETTING_SERIAL_PARITY, 'n',
-		              NM_SETTING_SERIAL_STOPBITS, 1,
-		              NULL);
-		nm_connection_add_setting (connection, setting);
-
-		nm_connection_add_setting (connection, nm_setting_ppp_new ());
-
-		setting = nm_setting_connection_new ();
-		id = utils_create_mobile_connection_id (method->provider_name, method->plan_name);
-		uuid = nm_utils_uuid_generate ();
-		g_object_set (setting,
-		              NM_SETTING_CONNECTION_ID, id,
-		              NM_SETTING_CONNECTION_TYPE, NM_SETTING_CDMA_SETTING_NAME,
-		              NM_SETTING_CONNECTION_AUTOCONNECT, FALSE,
-		              NM_SETTING_CONNECTION_UUID, uuid,
-		              NULL);
-		g_free (uuid);
-		g_free (id);
-		nm_connection_add_setting (connection, setting);
-	}
-
-done:
-	(*(info->callback)) (connection, TRUE, canceled, info->callback_data);
-
-	if (wizard)
-		nma_mobile_wizard_destroy (wizard);
-	g_free (info);
-}
-
-static gboolean
-do_mobile_wizard (AppletNewAutoConnectionCallback callback,
-                  gpointer callback_data)
-{
-	NMAMobileWizard *wizard;
-	AutoCdmaWizardInfo *info;
-	NMAMobileWizardAccessMethod *method;
-
-	info = g_malloc0 (sizeof (AutoCdmaWizardInfo));
-	info->callback = callback;
-	info->callback_data = callback_data;
-
-	wizard = nma_mobile_wizard_new (NULL, NULL, NM_DEVICE_MODEM_CAPABILITY_CDMA_EVDO, FALSE,
-									mobile_wizard_done, info);
-	if (wizard) {
-		nma_mobile_wizard_present (wizard);
-		return TRUE;
-	}
-
-	/* Fall back to something */
-	method = g_malloc0 (sizeof (NMAMobileWizardAccessMethod));
-	method->devtype = NM_DEVICE_MODEM_CAPABILITY_CDMA_EVDO;
-	method->provider_name = _("CDMA");
-	mobile_wizard_done (NULL, FALSE, method, info);
-	g_free (method);
-
-	return TRUE;
-}
-
 static gboolean
 cdma_new_auto_connection (NMDevice *device,
                           gpointer dclass_data,
                           AppletNewAutoConnectionCallback callback,
                           gpointer callback_data)
 {
-	return do_mobile_wizard (callback, callback_data);
+	return mobile_helper_wizard (NM_DEVICE_MODEM_CAPABILITY_CDMA_EVDO,
+	                             callback,
+	                             callback_data);
 }
 
 static void
@@ -246,7 +151,13 @@ applet_cdma_connect_network (NMApplet *applet, NMDevice *device)
 	info->applet = applet;
 	info->device = g_object_ref (device);
 
-	do_mobile_wizard (dbus_connect_3g_cb, info);
+	if (!mobile_helper_wizard (NM_DEVICE_MODEM_CAPABILITY_CDMA_EVDO,
+	                           dbus_connect_3g_cb,
+	                           info)) {
+		g_warning ("Couldn't run mobile wizard for CDMA device");
+		g_object_unref (info->device);
+		g_free (info);
+	}
 }
 
 static void
@@ -307,7 +218,7 @@ static guint32
 cdma_act_to_mb_act (CdmaDeviceInfo *info)
 {
 	if (info->evdo_state)
-		return MB_TECH_EVDO_REVA; /* Always rA until we get CDMA AcT from MM */
+		return MB_TECH_EVDO;
 	else if (info->cdma1x_state)
 		return MB_TECH_1XRTT;
 	return MB_TECH_UNKNOWN;
@@ -332,13 +243,9 @@ cdma_add_menu_item (NMDevice *device,
 	g_slist_free (all);
 
 	if (n_devices > 1) {
-		char *desc;
+		const char *desc;
 
-		desc = (char *) utils_get_device_description (device);
-		if (!desc)
-			desc = (char *) nm_device_get_iface (device);
-		g_assert (desc);
-
+		desc = nma_utils_get_device_description (device);
 		text = g_strdup_printf (_("Mobile Broadband (%s)"), desc);
 	} else {
 		text = g_strdup (_("Mobile Broadband"));
@@ -458,160 +365,26 @@ cdma_get_icon (NMDevice *device,
                char **tip,
                NMApplet *applet)
 {
-	NMSettingConnection *s_con;
-	GdkPixbuf *pixbuf = NULL;
-	const char *id;
 	CdmaDeviceInfo *info;
-	gboolean mb_state;
 
 	info = g_object_get_data (G_OBJECT (device), "devinfo");
 	g_assert (info);
 
-	id = nm_device_get_iface (NM_DEVICE (device));
-	if (connection) {
-		s_con = nm_connection_get_setting_connection (connection);
-		id = nm_setting_connection_get_id (s_con);
-	}
-
-	switch (state) {
-	case NM_DEVICE_STATE_PREPARE:
-		*tip = g_strdup_printf (_("Preparing mobile broadband connection '%s'..."), id);
-		break;
-	case NM_DEVICE_STATE_CONFIG:
-		*tip = g_strdup_printf (_("Configuring mobile broadband connection '%s'..."), id);
-		break;
-	case NM_DEVICE_STATE_NEED_AUTH:
-		*tip = g_strdup_printf (_("User authentication required for mobile broadband connection '%s'..."), id);
-		break;
-	case NM_DEVICE_STATE_IP_CONFIG:
-		*tip = g_strdup_printf (_("Requesting a network address for '%s'..."), id);
-		break;
-	case NM_DEVICE_STATE_ACTIVATED:
-		mb_state = cdma_state_to_mb_state (info);
-		pixbuf = mobile_helper_get_status_pixbuf (info->quality,
-		                                          info->quality_valid,
-		                                          mb_state,
-		                                          cdma_act_to_mb_act (info),
-		                                          applet);
-
-		if ((mb_state != MB_STATE_UNKNOWN) && info->quality_valid) {
-			gboolean roaming = (mb_state == MB_STATE_ROAMING);
-
-			*tip = g_strdup_printf (_("Mobile broadband connection '%s' active: (%d%%%s%s)"),
-			                        id, info->quality,
-			                        roaming ? ", " : "",
-			                        roaming ? _("roaming") : "");
-		} else
-			*tip = g_strdup_printf (_("Mobile broadband connection '%s' active"), id);
-		break;
-	default:
-		break;
-	}
-
-	return pixbuf;
-}
-
-typedef struct {
-	SecretsRequest req;
-	GtkWidget *dialog;
-	GtkEntry *secret_entry;
-	char *secret_name;
-} NMCdmaSecretsInfo;
-
-static void
-free_cdma_secrets_info (SecretsRequest *req)
-{
-	NMCdmaSecretsInfo *info = (NMCdmaSecretsInfo *) req;
-
-	if (info->dialog) {
-		gtk_widget_hide (info->dialog);
-		gtk_widget_destroy (info->dialog);
-	}
-	g_free (info->secret_name);
-}
-
-static void
-get_cdma_secrets_cb (GtkDialog *dialog,
-                     gint response,
-                     gpointer user_data)
-{
-	SecretsRequest *req = user_data;
-	NMCdmaSecretsInfo *info = (NMCdmaSecretsInfo *) req;
-	NMSettingCdma *setting;
-	GError *error = NULL;
-
-	if (response == GTK_RESPONSE_OK) {
-		setting = nm_connection_get_setting_cdma (req->connection);
-		if (setting) {
-			g_object_set (G_OBJECT (setting),
-				          info->secret_name, gtk_entry_get_text (info->secret_entry),
-				          NULL);
-		} else {
-			error = g_error_new (NM_SECRET_AGENT_ERROR,
-				                 NM_SECRET_AGENT_ERROR_INTERNAL_ERROR,
-				                 "%s.%d (%s): no GSM setting",
-				                 __FILE__, __LINE__, __func__);
-		}
-	} else {
-		error = g_error_new (NM_SECRET_AGENT_ERROR,
-		                     NM_SECRET_AGENT_ERROR_USER_CANCELED,
-		                     "%s.%d (%s): canceled",
-		                     __FILE__, __LINE__, __func__);
-	}
-
-	applet_secrets_request_complete_setting (req, NM_SETTING_CDMA_SETTING_NAME, error);
-	applet_secrets_request_free (req);
-	g_clear_error (&error);
+	return mobile_helper_get_icon (device,
+	                               state,
+	                               connection,
+	                               tip,
+	                               applet,
+	                               cdma_state_to_mb_state (info),
+	                               cdma_act_to_mb_act (info),
+	                               info->quality,
+	                               info->quality_valid);
 }
 
 static gboolean
 cdma_get_secrets (SecretsRequest *req, GError **error)
 {
-	NMCdmaSecretsInfo *info = (NMCdmaSecretsInfo *) req;
-	GtkWidget *widget;
-	GtkEntry *secret_entry = NULL;
-
-	applet_secrets_request_set_free_func (req, free_cdma_secrets_info);
-
-	if (!req->hints || !g_strv_length (req->hints)) {
-		g_set_error (error,
-		             NM_SECRET_AGENT_ERROR,
-		             NM_SECRET_AGENT_ERROR_INTERNAL_ERROR,
-		             "%s.%d (%s): missing secrets hints.",
-		             __FILE__, __LINE__, __func__);
-		return FALSE;
-	}
-	info->secret_name = g_strdup (req->hints[0]);
-
-	if (!strcmp (info->secret_name, NM_SETTING_CDMA_PASSWORD))
-		widget = applet_mobile_password_dialog_new (req->connection, &secret_entry);
-	else {
-		g_set_error (error,
-		             NM_SECRET_AGENT_ERROR,
-		             NM_SECRET_AGENT_ERROR_INTERNAL_ERROR,
-		             "%s.%d (%s): unknown secrets hint '%s'.",
-		             __FILE__, __LINE__, __func__, info->secret_name);
-		return FALSE;
-	}
-	info->dialog = widget;
-	info->secret_entry = secret_entry;
-
-	if (!widget || !secret_entry) {
-		g_set_error (error,
-		             NM_SECRET_AGENT_ERROR,
-		             NM_SECRET_AGENT_ERROR_INTERNAL_ERROR,
-		             "%s.%d (%s): error asking for CDMA secrets.",
-		             __FILE__, __LINE__, __func__);
-		return FALSE;
-	}
-
-	g_signal_connect (widget, "response", G_CALLBACK (get_cdma_secrets_cb), info);
-
-	gtk_window_set_position (GTK_WINDOW (widget), GTK_WIN_POS_CENTER_ALWAYS);
-	gtk_widget_realize (GTK_WIDGET (widget));
-	gtk_window_present (GTK_WINDOW (widget));
-
-	return TRUE;
+	return mobile_helper_get_secrets (NM_DEVICE_MODEM_CAPABILITY_CDMA_EVDO, req, error);
 }
 
 static void
@@ -627,8 +400,8 @@ cdma_device_info_free (gpointer data)
 		dbus_g_connection_unref (info->bus);
 	if (info->poll_id)
 		g_source_remove (info->poll_id);
-	if (info->providers)
-		g_hash_table_destroy (info->providers);
+	if (info->mobile_providers_database)
+		g_object_unref (info->mobile_providers_database);
 	g_free (info->provider_name);
 	memset (info, 0, sizeof (CdmaDeviceInfo));
 	g_free (info);
@@ -710,39 +483,6 @@ signal_reply (DBusGProxy *proxy, DBusGProxyCall *call, gpointer user_data)
 
 #define SERVING_SYSTEM_TYPE (dbus_g_type_get_struct ("GValueArray", G_TYPE_UINT, G_TYPE_STRING, G_TYPE_UINT, G_TYPE_INVALID))
 
-static char *
-find_provider_for_sid (GHashTable *table, guint32 sid)
-{
-	GHashTableIter iter;
-	gpointer value;
-	GSList *piter, *siter;
-	char *name = NULL;
-
-	if (sid == 0)
-		return NULL;
-
-	g_hash_table_iter_init (&iter, table);
-	/* Search through each country */
-	while (g_hash_table_iter_next (&iter, NULL, &value) && !name) {
-		GSList *providers = value;
-
-		/* Search through each country's providers */
-		for (piter = providers; piter && !name; piter = g_slist_next (piter)) {
-			NmnMobileProvider *provider = piter->data;
-
-			/* Search through CDMA SID list */
-			for (siter = provider->cdma_sid; siter; siter = g_slist_next (siter)) {
-				if (GPOINTER_TO_UINT (siter->data) == sid) {
-					name = g_strdup (provider->name);
-					break;
-				}
-			}
-		}
-	}
-
-	return name;
-}
-
 static void
 serving_system_reply (DBusGProxy *proxy, DBusGProxyCall *call, gpointer user_data)
 {
@@ -764,17 +504,10 @@ serving_system_reply (DBusGProxy *proxy, DBusGProxyCall *call, gpointer user_dat
 		g_value_array_free (array);
 	}
 
-	if (new_sid && (new_sid != info->sid)) {
+	if (new_sid != info->sid) {
 		info->sid = new_sid;
-		if (info->providers) {
-			g_free (info->provider_name);
-			info->provider_name = NULL;
-			info->provider_name = find_provider_for_sid (info->providers, new_sid);
-		}
-	} else if (!new_sid) {
-		info->sid = 0;
 		g_free (info->provider_name);
-		info->provider_name = NULL;
+		info->provider_name = mobile_helper_parse_3gpp2_operator_name (&(info->mobile_providers_database), info->sid);
 	}
 
 	g_clear_error (&error);
@@ -890,7 +623,7 @@ signal_quality_changed_cb (DBusGProxy *proxy,
 	applet_schedule_update_icon (info->applet);
 }
 
-#define MM_DBUS_INTERFACE_MODEM "org.freedesktop.ModemManager.Modem"
+#define MM_OLD_DBUS_INTERFACE_MODEM "org.freedesktop.ModemManager.Modem"
 #define DBUS_TYPE_G_MAP_OF_VARIANT (dbus_g_type_get_map ("GHashTable", G_TYPE_STRING, G_TYPE_VALUE))
 
 static void
@@ -902,7 +635,7 @@ modem_properties_changed (DBusGProxy *proxy,
 	CdmaDeviceInfo *info = user_data;
 	GValue *value;
 
-	if (!strcmp (interface, MM_DBUS_INTERFACE_MODEM)) {
+	if (!strcmp (interface, MM_OLD_DBUS_INTERFACE_MODEM)) {
 		value = g_hash_table_lookup (props, "Enabled");
 		if (value && G_VALUE_HOLDS_BOOLEAN (value)) {
 			info->modem_enabled = g_value_get_boolean (value);
@@ -945,8 +678,6 @@ cdma_device_added (NMDevice *device, NMApplet *applet)
 	info->device = device;
 	info->bus = bus;
 	info->quality_valid = FALSE;
-
-	info->providers = nmn_mobile_providers_parse (NULL);
 
 	info->props_proxy = dbus_g_proxy_new_for_name (bus,
 	                                               "org.freedesktop.ModemManager",
@@ -999,7 +730,7 @@ cdma_device_added (NMDevice *device, NMApplet *applet)
 	/* Ask whether the device is enabled */
 	dbus_g_proxy_begin_call (info->props_proxy, "Get",
 	                         enabled_reply, info, NULL,
-	                         G_TYPE_STRING, MM_DBUS_INTERFACE_MODEM,
+	                         G_TYPE_STRING, MM_OLD_DBUS_INTERFACE_MODEM,
 	                         G_TYPE_STRING, "Enabled",
 	                         G_TYPE_INVALID);
 }
@@ -1018,9 +749,8 @@ applet_device_cdma_get_class (NMApplet *applet)
 	dclass->device_state_changed = cdma_device_state_changed;
 	dclass->get_icon = cdma_get_icon;
 	dclass->get_secrets = cdma_get_secrets;
-	dclass->secrets_request_size = sizeof (NMCdmaSecretsInfo);
+	dclass->secrets_request_size = sizeof (MobileHelperSecretsInfo);
 	dclass->device_added = cdma_device_added;
 
 	return dclass;
 }
-

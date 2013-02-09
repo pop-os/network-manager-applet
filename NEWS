@@ -1,24 +1,26 @@
-========================================================
-network-manager-applet-0.9.6.4
-Overview of changes since network-manager-applet-0.9.6.2
-========================================================
-
-This is a new stable release of network-manager-applet.  Notable changes include:
-
-* Translation fixes
-* Better cooperation with GNOME Shell
-* Fix connection editing from external tools when the editor is already open
-* Backport new libnm-gtk API to work with recent GNOME Control Center versions
-
-
 =======================================================
-network-manager-applet-0.9.6.2
+network-manager-applet-0.9.8
 Overview of changes since network-manager-applet-0.9.6
 =======================================================
 
 This is a new stable release of network-manager-applet.  Notable changes include:
 
-* Fix GNOME Bluetooth plugin DUN modem detection and setup
+* Rework connection editor main UI to better support different connection types
+* Add connection editor support for WiMAX, Infiniband, Bond, and VLAN connections
+* Suggest "seen BSSIDs" for WiFi BSSID entry
+* Add connection editor support for autoconnect VPN connections
+* Add a "General" page to the connection editor and move general options to it
+* Fix GNOME Bluetooth plugin for recent versions of GNOME Bluetooth and the
+    GNOME Control Center
+* Add LTE and HSPA+ icons to the applet
+* Fix connection editor command-line passing to already-running instance
+* Suppress nm-applet notifications when GNOME Shell is running
+* Ensure 802.1x passwords default to "agent owned" and not system-wide
+* Default to using system CA certificates for new connections
+* Add support for ModemManager 0.7/0.8
+* Fix a crash when editing IP addresses with the XIM input framework
+* Fix handling of connection Zone when firewalld is active
+* Fix saving a connection when ignoring a missing CA certificate
 
 
 =======================================================
