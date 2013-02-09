@@ -1,4 +1,4 @@
-network-manager-applet (0.9.7.997-1) UNRELEASED; urgency=low
+network-manager-applet (0.9.7.997-1) experimental; urgency=low
 
   * New upstream release (0.9.8 beta2).
     - VPN connections can now be configured as "secondary" connections which
@@ -14,7 +14,7 @@ network-manager-applet (0.9.7.997-1) UNRELEASED; urgency=low
   * Use a strict dependency between network-manager-gnome and libnm-gtk0 to
     avoid crashes due to missing schema files. (Closes: #699590)
 
- -- Michael Biebl <biebl@debian.org>  Sat, 09 Feb 2013 20:21:59 +0100
+ -- Michael Biebl <biebl@debian.org>  Sat, 09 Feb 2013 21:08:40 +0100
 
 network-manager-applet (0.9.6.4-4) experimental; urgency=low
 
