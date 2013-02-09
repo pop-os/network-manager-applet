@@ -3,6 +3,7 @@ network-manager-applet (0.9.7.995-1) UNRELEASED; urgency=low
   * New upstream release (0.9.8 beta1).
   * Remove 05-8021x-passwords-user.patch, merged upstream.
   * Update 11-user-connections.patch for new code base.
+  * Update 12-force-online.patch for the icon name changes.
 
  -- Michael Biebl <biebl@debian.org>  Sat, 09 Feb 2013 20:21:59 +0100
 
