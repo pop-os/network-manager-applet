@@ -16,13 +16,15 @@ Build-Depends:
  libglib2.0-dev (>= 2.26),
  libgconf2-dev,
  libnotify-dev (>= 0.7),
- libnm-util-dev (>= 0.9.6),
- libnm-glib-dev (>= 0.9.6),
- libnm-glib-vpn-dev (>= 0.9.6),
- network-manager-dev (>= 0.9.6),
+ libnm-util-dev (>= 0.9.7.997),
+ libnm-glib-dev (>= 0.9.7.997),
+ libnm-glib-vpn-dev (>= 0.9.7.997),
+ network-manager-dev (>= 0.9.7.997),
+ libgudev-1.0-dev (>= 147),
  docbook-to-man,
  libgnome-bluetooth-dev (>= 3.0.0),
- iso-codes
+ iso-codes,
+ gobject-introspection
 Standards-Version: 3.9.3
 Vcs-Git: git://git.debian.org/git/pkg-utopia/network-manager-applet.git
 Vcs-Browser: http://git.debian.org/?p=pkg-utopia/network-manager-applet.git;a=summary
@@ -35,7 +37,7 @@ Pre-Depends: ${misc:Pre-Depends}
 Depends:
  ${shlibs:Depends},
  ${misc:Depends},
- network-manager (>= 0.9.6),
+ network-manager (>= 0.9.7.997),
  policykit-1-gnome,
  gnome-icon-theme,
  dbus-x11
