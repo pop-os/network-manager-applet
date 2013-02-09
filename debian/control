@@ -31,7 +31,7 @@ Vcs-Browser: http://git.debian.org/?p=pkg-utopia/network-manager-applet.git;a=su
 Homepage: http://www.gnome.org/projects/NetworkManager/
 
 Package: network-manager-gnome
-Architecture: any
+Architecture: linux-any
 Section: gnome
 Pre-Depends: ${misc:Pre-Depends}
 Depends:
@@ -69,7 +69,7 @@ Description: network management framework (GNOME frontend)
  and it can optionally store them in the gnome-keyring.
 
 Package: libnm-gtk0
-Architecture: any
+Architecture: linux-any
 Section: libs
 Depends:
  ${shlibs:Depends},
@@ -89,7 +89,7 @@ Description: library for wireless and mobile dialogs - common files
  This package contains data files used by libnm-gtk.
 
 Package: libnm-gtk-dev
-Architecture: any
+Architecture: linux-any
 Section: libdevel
 Depends:
  ${shlibs:Depends},

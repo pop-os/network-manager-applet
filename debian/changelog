@@ -10,6 +10,7 @@ network-manager-applet (0.9.7.997-1) UNRELEASED; urgency=low
   * Update symbols file for libnm-gtk0.
   * Bump minimum required version of network-manager to (>= 0.9.7.997).
   * Add Build-Depends on libgudev-1.0-dev and gobject-introspection.
+  * Mark binary packages as linux-any.
 
  -- Michael Biebl <biebl@debian.org>  Sat, 09 Feb 2013 20:21:59 +0100
 
