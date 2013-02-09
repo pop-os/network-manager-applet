@@ -37,6 +37,7 @@ Pre-Depends: ${misc:Pre-Depends}
 Depends:
  ${shlibs:Depends},
  ${misc:Depends},
+ libnm-gtk0 (= ${binary:Version}),
  network-manager (>= 0.9.7.997),
  policykit-1-gnome,
  gnome-icon-theme,
