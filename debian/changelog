@@ -1,6 +1,6 @@
-network-manager-applet (0.9.7.995-1) UNRELEASED; urgency=low
+network-manager-applet (0.9.7.997-1) UNRELEASED; urgency=low
 
-  * New upstream release (0.9.8 beta1).
+  * New upstream release (0.9.8 beta2).
     - VPN connections can now be configured as "secondary" connections which
       are autostarted as soon as the underlying connection is active.
       (Closes: #589533)
