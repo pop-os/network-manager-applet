@@ -4,6 +4,7 @@ network-manager-applet (0.9.7.995-1) UNRELEASED; urgency=low
   * Remove 05-8021x-passwords-user.patch, merged upstream.
   * Update 11-user-connections.patch for new code base.
   * Update 12-force-online.patch for the icon name changes.
+  * Update symbols file for libnm-gtk0.
 
  -- Michael Biebl <biebl@debian.org>  Sat, 09 Feb 2013 20:21:59 +0100
 
