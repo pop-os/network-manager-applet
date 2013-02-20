@@ -1,6 +1,6 @@
 AC_PREREQ([2.63])
 AC_INIT([nm-applet],
-        [0.9.7.997],
+        [0.9.8.0],
         [https://bugzilla.gnome.org/enter_bug.cgi?product=NetworkManager],
         [network-manager-applet])
 
@@ -98,10 +98,10 @@ PKG_CHECK_MODULES(GOBJECT, gobject-2.0)
 PKG_CHECK_MODULES(NMA,
 		[dbus-glib-1 >= 0.74
 		 gio-2.0 >= 2.26
-		 NetworkManager >= 0.9.6
-		 libnm-glib >= 0.9.6
-		 libnm-util >= 0.9.6
-		 libnm-glib-vpn >= 0.9.6
+		 NetworkManager >= 0.9.8
+		 libnm-glib >= 0.9.8
+		 libnm-util >= 0.9.8
+		 libnm-glib-vpn >= 0.9.8
 		 gmodule-export-2.0])
 
 # With recent glib, defining GLIB_VERSION_MIN_REQUIRED avoids
@@ -268,5 +268,8 @@ icons/32/Makefile
 icons/48/Makefile
 icons/scalable/Makefile
 po/Makefile.in
+man/Makefile
+man/nm-applet.1
+man/nm-connection-editor.1
 ])
 AC_OUTPUT
