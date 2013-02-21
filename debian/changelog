@@ -1,4 +1,4 @@
-network-manager-applet (0.9.8.0-1) UNRELEASED; urgency=low
+network-manager-applet (0.9.8.0-1) experimental; urgency=low
 
   * New upstream release.
   * Refresh 11-user-connections.patch.
@@ -7,7 +7,7 @@ network-manager-applet (0.9.8.0-1) UNRELEASED; urgency=low
   * Enable gobject introspection support for libnm-gtk. The typelib files are
     shipped in a separate binary package named gir1.2-nmgtk-1.0.
 
- -- Michael Biebl <biebl@debian.org>  Wed, 20 Feb 2013 23:53:32 +0100
+ -- Michael Biebl <biebl@debian.org>  Thu, 21 Feb 2013 03:57:27 +0100
 
 network-manager-applet (0.9.7.997-1) experimental; urgency=low
 
