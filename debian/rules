@@ -15,14 +15,6 @@ override_dh_auto_configure:
 		--enable-migration \
 		--with-gtkver=3 \
 
-override_dh_auto_clean:
-	dh_auto_clean
-	rm -f debian/*.1
-
-override_dh_auto_build:
-	dh_auto_build
-	docbook-to-man debian/nm-applet.sgml > debian/nm-applet.1
-
 override_dh_install:
 	dh_install --list-missing
 	find debian/network-manager-gnome/ -name \*.la -o -name \*.a | xargs rm -f

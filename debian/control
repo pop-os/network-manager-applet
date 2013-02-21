@@ -21,7 +21,6 @@ Build-Depends:
  libnm-glib-vpn-dev (>= 0.9.8),
  network-manager-dev (>= 0.9.8),
  libgudev-1.0-dev (>= 147),
- docbook-to-man,
  libgnome-bluetooth-dev (>= 3.0.0),
  iso-codes,
  gobject-introspection
