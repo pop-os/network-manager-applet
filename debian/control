@@ -23,6 +23,7 @@ Build-Depends:
  libgudev-1.0-dev (>= 147),
  libgnome-bluetooth-dev (>= 3.0.0),
  iso-codes,
+ libgirepository1.0-dev,
  gobject-introspection
 Standards-Version: 3.9.3
 Vcs-Git: git://git.debian.org/git/pkg-utopia/network-manager-applet.git
@@ -95,6 +96,7 @@ Depends:
  ${shlibs:Depends},
  ${misc:Depends},
  libnm-gtk0 (= ${binary:Version}),
+ gir1.2-nmgtk-1.0 (= ${binary:Version}),
  network-manager-dev (>= 0.9),
  libnm-util-dev (>= 0.9),
  libnm-glib-dev (>= 0.9),
@@ -104,3 +106,18 @@ Description: library for wireless and mobile dialogs - development files
  The libnm-gtk library provides Gtk+ dialogs for NetworkManager.
  .
  This package contains the development files.
+
+Package: gir1.2-nmgtk-1.0
+Section: introspection
+Architecture: linux-any
+Depends:
+ ${gir:Depends},
+ ${shlibs:Depends},
+ ${misc:Depends}
+Description: GObject introspection data for libnm-gtk
+ The libnm-gtk library provides Gtk+ dialogs for NetworkManager.
+ .
+ This package contains introspection data for libnm-gtk.
+ .
+ It can be used by packages using the GIRepository format to generate
+ dynamic bindings.

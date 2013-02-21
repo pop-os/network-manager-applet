@@ -4,6 +4,8 @@ network-manager-applet (0.9.8.0-1) UNRELEASED; urgency=low
   * Refresh 11-user-connections.patch.
   * Bump minimum required version of network-manager to (>= 0.9.8).
   * Install man pages provided by upstream instead of our own.
+  * Enable gobject introspection support for libnm-gtk. The typelib files are
+    shipped in a separate binary package named gir1.2-nmgtk-1.0.
 
  -- Michael Biebl <biebl@debian.org>  Wed, 20 Feb 2013 23:53:32 +0100
 
