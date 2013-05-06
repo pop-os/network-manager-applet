@@ -2,6 +2,7 @@ network-manager-applet (0.9.8.0-2) UNRELEASED; urgency=low
 
   * Use gir dh addon instead of calling dh_girepository manually.
   * Upload to unstable.
+  * Bump Standards-Version to 3.9.4. No further changes.
 
  -- Michael Biebl <biebl@debian.org>  Tue, 26 Mar 2013 00:16:46 +0100
 
