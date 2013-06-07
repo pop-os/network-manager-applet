@@ -243,12 +243,8 @@ get_device_class (NMDevice *device, NMApplet *applet)
 		NMDeviceModemCapabilities caps;
 
 #if WITH_MODEM_MANAGER_1
-		if (g_str_has_prefix (nm_device_get_udi (device), "/org/freedesktop/ModemManager1/Modem/")) {
-			if (applet->mm1_running)
-				return applet->broadband_class;
-			g_message ("%s: ModemManager was not found", __func__);
-			return NULL;
-		}
+		if (g_str_has_prefix (nm_device_get_udi (device), "/org/freedesktop/ModemManager1/Modem/"))
+			return applet->broadband_class;
 #endif
 
 		caps = nm_device_modem_get_current_capabilities (NM_DEVICE_MODEM (device));
@@ -3060,7 +3056,8 @@ applet_agent_registered_cb (AppletAgent *agent,
 	NMApplet *applet = NM_APPLET (user_data);
 
 	/* If the shell is running and the agent just got registered, unregister it */
-	if (   (nm_shell_watcher_version_at_least (applet->shell_watcher, 3, 4))
+	if (   applet->shell_watcher
+	    && (nm_shell_watcher_version_at_least (applet->shell_watcher, 3, 4))
 	    && nm_secret_agent_get_registered (NM_SECRET_AGENT (agent))) {
 		g_message ("Stopping registered applet secret agent because GNOME Shell is running");
 		nm_secret_agent_unregister (NM_SECRET_AGENT (agent));
@@ -3139,7 +3136,7 @@ nma_icon_check_and_load (const char *name, GdkPixbuf **icon, NMApplet *applet)
 	/* Try to load the icon; if the load fails, log the problem, and set
 	 * the icon to the fallback icon if requested.
 	 */
-	*icon = gtk_icon_theme_load_icon (applet->icon_theme, name, applet->icon_size, 0, &error);
+	*icon = gtk_icon_theme_load_icon (applet->icon_theme, name, applet->icon_size, GTK_ICON_LOOKUP_FORCE_SIZE, &error);
 	if (!*icon) {
 		g_warning ("Icon %s missing: (%d) %s",
 		           name,
@@ -3243,13 +3240,13 @@ status_icon_size_changed_cb (GtkStatusIcon *icon,
                              NMApplet *applet)
 {
 	if (getenv ("NMA_SIZE_DEBUG")) {
-		g_message ("%s(): status icon size now %d", __func__, size);
+		g_message ("%s(): status icon size %d requested", __func__, size);
 	}
 
 	/* icon_size may be 0 if for example the panel hasn't given us any space
 	 * yet.  We'll get resized later, but for now just load the 16x16 icons.
 	 */
-	applet->icon_size = MAX (16, size);
+	applet->icon_size = size ? size : 16;
 
 	nma_icons_reload (applet);
 
@@ -3534,12 +3531,14 @@ constructor (GType type,
 	applet_embedded_cb (G_OBJECT (applet->status_icon), NULL, NULL);
 
 #if GLIB_CHECK_VERSION(2,26,0)
-	/* Watch GNOME Shell so we can unregister our applet agent if it appears */
-	applet->shell_watcher = nm_shell_watcher_new ();
-	g_signal_connect (applet->shell_watcher,
-	                  "notify::shell-version",
-	                  G_CALLBACK (shell_version_changed_cb),
-	                  applet);
+	if (!shell_debug) {
+		/* Watch GNOME Shell so we can unregister our applet agent if it appears */
+		applet->shell_watcher = nm_shell_watcher_new ();
+		g_signal_connect (applet->shell_watcher,
+			              "notify::shell-version",
+			              G_CALLBACK (shell_version_changed_cb),
+			              applet);
+	}
 #endif
 
 	return G_OBJECT (applet);
