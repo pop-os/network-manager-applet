@@ -7,9 +7,9 @@ Bug-Debian: http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=471191
 
 Index: network-manager-applet/src/applet.c
 ===================================================================
---- network-manager-applet.orig/src/applet.c	2013-02-09 20:46:04.969729232 +0100
-+++ network-manager-applet/src/applet.c	2013-02-09 20:46:04.961729134 +0100
-@@ -2745,6 +2745,10 @@
+--- network-manager-applet.orig/src/applet.c	2013-06-08 02:00:38.610676114 +0200
++++ network-manager-applet/src/applet.c	2013-06-08 02:00:38.606676054 +0200
+@@ -2741,6 +2741,10 @@
  		break;
  	default:
  		pixbuf = applet_get_device_icon_for_state (applet, &dev_tip);

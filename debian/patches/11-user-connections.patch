@@ -1,7 +1,7 @@
 Index: network-manager-applet/src/applet-device-wifi.c
 ===================================================================
---- network-manager-applet.orig/src/applet-device-wifi.c	2013-02-20 23:54:00.073967139 +0100
-+++ network-manager-applet/src/applet-device-wifi.c	2013-02-20 23:53:59.749963902 +0100
+--- network-manager-applet.orig/src/applet-device-wifi.c	2013-06-08 02:00:29.802542795 +0200
++++ network-manager-applet/src/applet-device-wifi.c	2013-06-08 02:00:29.778542432 +0200
 @@ -404,6 +404,7 @@
  	NMSettingWirelessSecurity *s_wsec = NULL;
  	NMSetting8021x *s_8021x = NULL;
@@ -50,8 +50,8 @@ Index: network-manager-applet/src/applet-device-wifi.c
  	 */
 Index: network-manager-applet/src/connection-editor/ce-page.h
 ===================================================================
---- network-manager-applet.orig/src/connection-editor/ce-page.h	2013-02-20 23:54:00.073967139 +0100
-+++ network-manager-applet/src/connection-editor/ce-page.h	2013-02-20 23:53:59.765964062 +0100
+--- network-manager-applet.orig/src/connection-editor/ce-page.h	2013-06-08 02:00:29.802542795 +0200
++++ network-manager-applet/src/connection-editor/ce-page.h	2013-06-08 02:00:29.778542432 +0200
 @@ -48,6 +48,7 @@
                                         const char *detail,
                                         NMRemoteSettings *settings,
@@ -62,8 +62,8 @@ Index: network-manager-applet/src/connection-editor/ce-page.h
  #define CE_TYPE_PAGE            (ce_page_get_type ())
 Index: network-manager-applet/src/connection-editor/new-connection.c
 ===================================================================
---- network-manager-applet.orig/src/connection-editor/new-connection.c	2013-02-20 23:54:00.073967139 +0100
-+++ network-manager-applet/src/connection-editor/new-connection.c	2013-02-20 23:53:59.781964221 +0100
+--- network-manager-applet.orig/src/connection-editor/new-connection.c	2013-06-08 02:00:29.802542795 +0200
++++ network-manager-applet/src/connection-editor/new-connection.c	2013-06-08 02:00:29.778542432 +0200
 @@ -394,6 +394,7 @@
                          gpointer user_data)
  {
@@ -82,8 +82,8 @@ Index: network-manager-applet/src/connection-editor/new-connection.c
  
 Index: network-manager-applet/src/connection-editor/page-bond.c
 ===================================================================
---- network-manager-applet.orig/src/connection-editor/page-bond.c	2013-02-20 23:54:00.073967139 +0100
-+++ network-manager-applet/src/connection-editor/page-bond.c	2013-02-20 23:53:59.789964302 +0100
+--- network-manager-applet.orig/src/connection-editor/page-bond.c	2013-06-08 02:00:29.802542795 +0200
++++ network-manager-applet/src/connection-editor/page-bond.c	2013-06-08 02:00:29.778542432 +0200
 @@ -548,6 +548,7 @@
                       const char *detail,
                       NMRemoteSettings *settings,
@@ -94,8 +94,8 @@ Index: network-manager-applet/src/connection-editor/page-bond.c
  	NMConnection *connection;
 Index: network-manager-applet/src/connection-editor/page-bond.h
 ===================================================================
---- network-manager-applet.orig/src/connection-editor/page-bond.h	2013-02-20 23:54:00.073967139 +0100
-+++ network-manager-applet/src/connection-editor/page-bond.h	2013-02-20 23:53:59.797964381 +0100
+--- network-manager-applet.orig/src/connection-editor/page-bond.h	2013-06-08 02:00:29.802542795 +0200
++++ network-manager-applet/src/connection-editor/page-bond.h	2013-06-08 02:00:29.778542432 +0200
 @@ -56,6 +56,7 @@
                            const char *detail,
                            NMRemoteSettings *settings,
@@ -106,9 +106,9 @@ Index: network-manager-applet/src/connection-editor/page-bond.h
  #endif  /* __PAGE_BOND_H__ */
 Index: network-manager-applet/src/connection-editor/page-bridge.c
 ===================================================================
---- network-manager-applet.orig/src/connection-editor/page-bridge.c	2013-02-20 23:54:00.073967139 +0100
-+++ network-manager-applet/src/connection-editor/page-bridge.c	2013-02-20 23:53:59.805964462 +0100
-@@ -296,6 +296,7 @@
+--- network-manager-applet.orig/src/connection-editor/page-bridge.c	2013-06-08 02:00:29.802542795 +0200
++++ network-manager-applet/src/connection-editor/page-bridge.c	2013-06-08 02:00:29.782542493 +0200
+@@ -297,6 +297,7 @@
                       const char *detail,
                       NMRemoteSettings *settings,
                       PageNewConnectionResultFunc result_func,
@@ -118,8 +118,8 @@ Index: network-manager-applet/src/connection-editor/page-bridge.c
  	NMConnection *connection;
 Index: network-manager-applet/src/connection-editor/page-bridge.h
 ===================================================================
---- network-manager-applet.orig/src/connection-editor/page-bridge.h	2013-02-20 23:54:00.073967139 +0100
-+++ network-manager-applet/src/connection-editor/page-bridge.h	2013-02-20 23:53:59.805964462 +0100
+--- network-manager-applet.orig/src/connection-editor/page-bridge.h	2013-06-08 02:00:29.802542795 +0200
++++ network-manager-applet/src/connection-editor/page-bridge.h	2013-06-08 02:00:29.782542493 +0200
 @@ -56,6 +56,7 @@
                              const char *detail,
                              NMRemoteSettings *settings,
@@ -130,8 +130,8 @@ Index: network-manager-applet/src/connection-editor/page-bridge.h
  #endif  /* __PAGE_BRIDGE_H__ */
 Index: network-manager-applet/src/connection-editor/page-dsl.c
 ===================================================================
---- network-manager-applet.orig/src/connection-editor/page-dsl.c	2013-02-20 23:54:00.073967139 +0100
-+++ network-manager-applet/src/connection-editor/page-dsl.c	2013-02-20 23:53:59.825964662 +0100
+--- network-manager-applet.orig/src/connection-editor/page-dsl.c	2013-06-08 02:00:29.802542795 +0200
++++ network-manager-applet/src/connection-editor/page-dsl.c	2013-06-08 02:00:29.782542493 +0200
 @@ -227,6 +227,7 @@
                      const char *detail,
                      NMRemoteSettings *settings,
@@ -142,8 +142,8 @@ Index: network-manager-applet/src/connection-editor/page-dsl.c
  	NMConnection *connection;
 Index: network-manager-applet/src/connection-editor/page-dsl.h
 ===================================================================
---- network-manager-applet.orig/src/connection-editor/page-dsl.h	2013-02-20 23:54:00.073967139 +0100
-+++ network-manager-applet/src/connection-editor/page-dsl.h	2013-02-20 23:53:59.825964662 +0100
+--- network-manager-applet.orig/src/connection-editor/page-dsl.h	2013-06-08 02:00:29.802542795 +0200
++++ network-manager-applet/src/connection-editor/page-dsl.h	2013-06-08 02:00:29.782542493 +0200
 @@ -58,6 +58,7 @@
                           const char *detail,
                           NMRemoteSettings *settings,
@@ -154,8 +154,8 @@ Index: network-manager-applet/src/connection-editor/page-dsl.h
  #endif  /* __PAGE_DSL_H__ */
 Index: network-manager-applet/src/connection-editor/page-ethernet.c
 ===================================================================
---- network-manager-applet.orig/src/connection-editor/page-ethernet.c	2013-02-20 23:54:00.073967139 +0100
-+++ network-manager-applet/src/connection-editor/page-ethernet.c	2013-02-20 23:53:59.833964741 +0100
+--- network-manager-applet.orig/src/connection-editor/page-ethernet.c	2013-06-08 02:00:29.802542795 +0200
++++ network-manager-applet/src/connection-editor/page-ethernet.c	2013-06-08 02:00:29.782542493 +0200
 @@ -389,6 +389,7 @@
                           const char *detail,
                           NMRemoteSettings *settings,
@@ -166,8 +166,8 @@ Index: network-manager-applet/src/connection-editor/page-ethernet.c
  	NMConnection *connection;
 Index: network-manager-applet/src/connection-editor/page-ethernet.h
 ===================================================================
---- network-manager-applet.orig/src/connection-editor/page-ethernet.h	2013-02-20 23:54:00.073967139 +0100
-+++ network-manager-applet/src/connection-editor/page-ethernet.h	2013-02-20 23:53:59.841964821 +0100
+--- network-manager-applet.orig/src/connection-editor/page-ethernet.h	2013-06-08 02:00:29.802542795 +0200
++++ network-manager-applet/src/connection-editor/page-ethernet.h	2013-06-08 02:00:29.782542493 +0200
 @@ -58,6 +58,7 @@
                                const char *detail,
                                NMRemoteSettings *settings,
@@ -178,8 +178,8 @@ Index: network-manager-applet/src/connection-editor/page-ethernet.h
  #endif  /* __PAGE_ETHERNET_H__ */
 Index: network-manager-applet/src/connection-editor/page-infiniband.c
 ===================================================================
---- network-manager-applet.orig/src/connection-editor/page-infiniband.c	2013-02-20 23:54:00.073967139 +0100
-+++ network-manager-applet/src/connection-editor/page-infiniband.c	2013-02-20 23:53:59.865965061 +0100
+--- network-manager-applet.orig/src/connection-editor/page-infiniband.c	2013-06-08 02:00:29.802542795 +0200
++++ network-manager-applet/src/connection-editor/page-infiniband.c	2013-06-08 02:00:29.786542552 +0200
 @@ -256,6 +256,7 @@
                             const char *detail,
                             NMRemoteSettings *settings,
@@ -190,8 +190,8 @@ Index: network-manager-applet/src/connection-editor/page-infiniband.c
  	NMConnection *connection;
 Index: network-manager-applet/src/connection-editor/page-infiniband.h
 ===================================================================
---- network-manager-applet.orig/src/connection-editor/page-infiniband.h	2013-02-20 23:54:00.073967139 +0100
-+++ network-manager-applet/src/connection-editor/page-infiniband.h	2013-02-20 23:53:59.873965141 +0100
+--- network-manager-applet.orig/src/connection-editor/page-infiniband.h	2013-06-08 02:00:29.802542795 +0200
++++ network-manager-applet/src/connection-editor/page-infiniband.h	2013-06-08 02:00:29.786542552 +0200
 @@ -56,6 +56,7 @@
                                  const char *detail,
                                  NMRemoteSettings *settings,
@@ -202,8 +202,8 @@ Index: network-manager-applet/src/connection-editor/page-infiniband.h
  #endif  /* __PAGE_INFINIBAND_H__ */
 Index: network-manager-applet/src/connection-editor/page-mobile.c
 ===================================================================
---- network-manager-applet.orig/src/connection-editor/page-mobile.c	2013-02-20 23:54:00.073967139 +0100
-+++ network-manager-applet/src/connection-editor/page-mobile.c	2013-02-20 23:53:59.881965221 +0100
+--- network-manager-applet.orig/src/connection-editor/page-mobile.c	2013-06-08 02:00:29.802542795 +0200
++++ network-manager-applet/src/connection-editor/page-mobile.c	2013-06-08 02:00:29.786542552 +0200
 @@ -570,6 +570,7 @@
  	NMConnection *connection = NULL;
  
@@ -252,8 +252,8 @@ Index: network-manager-applet/src/connection-editor/page-mobile.c
  	NMAMobileWizard *wizard;
 Index: network-manager-applet/src/connection-editor/page-mobile.h
 ===================================================================
---- network-manager-applet.orig/src/connection-editor/page-mobile.h	2013-02-20 23:54:00.073967139 +0100
-+++ network-manager-applet/src/connection-editor/page-mobile.h	2013-02-20 23:53:59.889965301 +0100
+--- network-manager-applet.orig/src/connection-editor/page-mobile.h	2013-06-08 02:00:29.802542795 +0200
++++ network-manager-applet/src/connection-editor/page-mobile.h	2013-06-08 02:00:29.786542552 +0200
 @@ -58,6 +58,7 @@
                              const char *detail,
                              NMRemoteSettings *settings,
@@ -264,8 +264,8 @@ Index: network-manager-applet/src/connection-editor/page-mobile.h
  #endif  /* __PAGE_MOBILE_H__ */
 Index: network-manager-applet/src/connection-editor/page-vlan.c
 ===================================================================
---- network-manager-applet.orig/src/connection-editor/page-vlan.c	2013-02-20 23:54:00.073967139 +0100
-+++ network-manager-applet/src/connection-editor/page-vlan.c	2013-02-20 23:53:59.917965581 +0100
+--- network-manager-applet.orig/src/connection-editor/page-vlan.c	2013-06-08 02:00:29.802542795 +0200
++++ network-manager-applet/src/connection-editor/page-vlan.c	2013-06-08 02:00:29.786542552 +0200
 @@ -671,6 +671,7 @@
                       const char *detail,
                       NMRemoteSettings *settings,
@@ -276,8 +276,8 @@ Index: network-manager-applet/src/connection-editor/page-vlan.c
  	NMConnection *connection;
 Index: network-manager-applet/src/connection-editor/page-vlan.h
 ===================================================================
---- network-manager-applet.orig/src/connection-editor/page-vlan.h	2013-02-20 23:54:00.073967139 +0100
-+++ network-manager-applet/src/connection-editor/page-vlan.h	2013-02-20 23:53:59.925965660 +0100
+--- network-manager-applet.orig/src/connection-editor/page-vlan.h	2013-06-08 02:00:29.802542795 +0200
++++ network-manager-applet/src/connection-editor/page-vlan.h	2013-06-08 02:00:29.790542613 +0200
 @@ -56,6 +56,7 @@
                            const char *detail,
                            NMRemoteSettings *settings,
@@ -288,8 +288,8 @@ Index: network-manager-applet/src/connection-editor/page-vlan.h
  #endif  /* __PAGE_VLAN_H__ */
 Index: network-manager-applet/src/connection-editor/page-vpn.c
 ===================================================================
---- network-manager-applet.orig/src/connection-editor/page-vpn.c	2013-02-20 23:54:00.073967139 +0100
-+++ network-manager-applet/src/connection-editor/page-vpn.c	2013-02-20 23:53:59.933965741 +0100
+--- network-manager-applet.orig/src/connection-editor/page-vpn.c	2013-06-08 02:00:29.802542795 +0200
++++ network-manager-applet/src/connection-editor/page-vpn.c	2013-06-08 02:00:29.790542613 +0200
 @@ -295,9 +295,11 @@
                      const char *detail,
                      NMRemoteSettings *settings,
@@ -319,8 +319,8 @@ Index: network-manager-applet/src/connection-editor/page-vpn.c
  	nm_connection_add_setting (connection, s_vpn);
 Index: network-manager-applet/src/connection-editor/page-vpn.h
 ===================================================================
---- network-manager-applet.orig/src/connection-editor/page-vpn.h	2013-02-20 23:54:00.073967139 +0100
-+++ network-manager-applet/src/connection-editor/page-vpn.h	2013-02-20 23:53:59.941965820 +0100
+--- network-manager-applet.orig/src/connection-editor/page-vpn.h	2013-06-08 02:00:29.802542795 +0200
++++ network-manager-applet/src/connection-editor/page-vpn.h	2013-06-08 02:00:29.790542613 +0200
 @@ -60,6 +60,7 @@
                           const char *detail,
                           NMRemoteSettings *settings,
@@ -331,8 +331,8 @@ Index: network-manager-applet/src/connection-editor/page-vpn.h
  void vpn_connection_import (GtkWindow *parent,
 Index: network-manager-applet/src/connection-editor/page-wifi.c
 ===================================================================
---- network-manager-applet.orig/src/connection-editor/page-wifi.c	2013-02-20 23:54:00.073967139 +0100
-+++ network-manager-applet/src/connection-editor/page-wifi.c	2013-02-20 23:53:59.949965901 +0100
+--- network-manager-applet.orig/src/connection-editor/page-wifi.c	2013-06-08 02:00:29.802542795 +0200
++++ network-manager-applet/src/connection-editor/page-wifi.c	2013-06-08 02:00:29.790542613 +0200
 @@ -33,6 +33,8 @@
  #include <nm-device-wifi.h>
  #include <nm-utils.h>
@@ -342,7 +342,7 @@ Index: network-manager-applet/src/connection-editor/page-wifi.c
  #include "page-wifi.h"
  
  G_DEFINE_TYPE (CEPageWifi, ce_page_wifi, CE_TYPE_PAGE)
-@@ -642,6 +644,7 @@
+@@ -655,6 +657,7 @@
                       const char *detail,
                       NMRemoteSettings *settings,
                       PageNewConnectionResultFunc result_func,
@@ -350,7 +350,7 @@ Index: network-manager-applet/src/connection-editor/page-wifi.c
                       gpointer user_data)
  {
  	NMConnection *connection;
-@@ -652,6 +655,17 @@
+@@ -665,6 +668,17 @@
  	                                     TRUE,
  	                                     settings,
  	                                     user_data);
@@ -370,8 +370,8 @@ Index: network-manager-applet/src/connection-editor/page-wifi.c
  	nm_connection_add_setting (connection, s_wifi);
 Index: network-manager-applet/src/connection-editor/page-wifi.h
 ===================================================================
---- network-manager-applet.orig/src/connection-editor/page-wifi.h	2013-02-20 23:54:00.073967139 +0100
-+++ network-manager-applet/src/connection-editor/page-wifi.h	2013-02-20 23:53:59.957965980 +0100
+--- network-manager-applet.orig/src/connection-editor/page-wifi.h	2013-06-08 02:00:29.802542795 +0200
++++ network-manager-applet/src/connection-editor/page-wifi.h	2013-06-08 02:00:29.790542613 +0200
 @@ -62,6 +62,7 @@
                            const char *detail,
                            NMRemoteSettings *settings,
@@ -382,8 +382,8 @@ Index: network-manager-applet/src/connection-editor/page-wifi.h
  #endif  /* __PAGE_WIFI_H__ */
 Index: network-manager-applet/src/connection-editor/page-wimax.c
 ===================================================================
---- network-manager-applet.orig/src/connection-editor/page-wimax.c	2013-02-20 23:54:00.073967139 +0100
-+++ network-manager-applet/src/connection-editor/page-wimax.c	2013-02-20 23:53:59.965966061 +0100
+--- network-manager-applet.orig/src/connection-editor/page-wimax.c	2013-06-08 02:00:29.802542795 +0200
++++ network-manager-applet/src/connection-editor/page-wimax.c	2013-06-08 02:00:29.790542613 +0200
 @@ -225,6 +225,7 @@
                        const char *detail,
                        NMRemoteSettings *settings,
@@ -394,8 +394,8 @@ Index: network-manager-applet/src/connection-editor/page-wimax.c
  	NMConnection *connection;
 Index: network-manager-applet/src/connection-editor/page-wimax.h
 ===================================================================
---- network-manager-applet.orig/src/connection-editor/page-wimax.h	2013-02-20 23:54:00.073967139 +0100
-+++ network-manager-applet/src/connection-editor/page-wimax.h	2013-02-20 23:53:59.973966140 +0100
+--- network-manager-applet.orig/src/connection-editor/page-wimax.h	2013-06-08 02:00:29.802542795 +0200
++++ network-manager-applet/src/connection-editor/page-wimax.h	2013-06-08 02:00:29.790542613 +0200
 @@ -56,6 +56,7 @@
                             const char *detail,
                             NMRemoteSettings *settings,
@@ -406,8 +406,8 @@ Index: network-manager-applet/src/connection-editor/page-wimax.h
  #endif  /* __PAGE_WIMAX_H__ */
 Index: network-manager-applet/src/gnome-bluetooth/nma-bt-device.c
 ===================================================================
---- network-manager-applet.orig/src/gnome-bluetooth/nma-bt-device.c	2013-02-20 23:54:00.073967139 +0100
-+++ network-manager-applet/src/gnome-bluetooth/nma-bt-device.c	2013-02-20 23:53:59.981966220 +0100
+--- network-manager-applet.orig/src/gnome-bluetooth/nma-bt-device.c	2013-06-08 02:00:29.802542795 +0200
++++ network-manager-applet/src/gnome-bluetooth/nma-bt-device.c	2013-06-08 02:00:29.794542674 +0200
 @@ -354,6 +354,7 @@
  	              NM_SETTING_CDMA_NUMBER, "#777",
  	              NM_SETTING_CDMA_USERNAME, method->username,
@@ -450,8 +450,8 @@ Index: network-manager-applet/src/gnome-bluetooth/nma-bt-device.c
  	/* The Bluetooth settings */
 Index: network-manager-applet/src/libnm-gtk/nm-wifi-dialog.c
 ===================================================================
---- network-manager-applet.orig/src/libnm-gtk/nm-wifi-dialog.c	2013-02-20 23:54:00.073967139 +0100
-+++ network-manager-applet/src/libnm-gtk/nm-wifi-dialog.c	2013-02-20 23:53:59.981966220 +0100
+--- network-manager-applet.orig/src/libnm-gtk/nm-wifi-dialog.c	2013-06-08 02:00:29.802542795 +0200
++++ network-manager-applet/src/libnm-gtk/nm-wifi-dialog.c	2013-06-08 02:00:29.794542674 +0200
 @@ -38,6 +38,7 @@
  #include "nm-wifi-dialog.h"
  #include "wireless-security.h"
@@ -460,7 +460,7 @@ Index: network-manager-applet/src/libnm-gtk/nm-wifi-dialog.c
  
  G_DEFINE_TYPE (NMAWifiDialog, nma_wifi_dialog, GTK_TYPE_DIALOG)
  
-@@ -1203,6 +1204,9 @@
+@@ -1221,6 +1222,9 @@
  			      NM_SETTING_CONNECTION_UUID, uuid,
  			      NULL);
  		g_free (uuid);
@@ -472,9 +472,9 @@ Index: network-manager-applet/src/libnm-gtk/nm-wifi-dialog.c
  		s_wireless = (NMSettingWireless *) nm_setting_wireless_new ();
 Index: network-manager-applet/src/mobile-helpers.c
 ===================================================================
---- network-manager-applet.orig/src/mobile-helpers.c	2013-02-20 23:54:00.073967139 +0100
-+++ network-manager-applet/src/mobile-helpers.c	2013-02-20 23:53:59.989966300 +0100
-@@ -170,6 +170,7 @@
+--- network-manager-applet.orig/src/mobile-helpers.c	2013-06-08 02:00:29.802542795 +0200
++++ network-manager-applet/src/mobile-helpers.c	2013-06-08 02:00:29.794542674 +0200
+@@ -172,6 +172,7 @@
  			              NM_SETTING_CDMA_NUMBER, "#777",
  			              NM_SETTING_CDMA_USERNAME, method->username,
  			              NM_SETTING_CDMA_PASSWORD, method->password,
@@ -482,7 +482,7 @@ Index: network-manager-applet/src/mobile-helpers.c
  			              NULL);
  			nm_connection_add_setting (connection, setting);
  		} else if (method->devtype == NM_DEVICE_MODEM_CAPABILITY_GSM_UMTS) {
-@@ -180,6 +181,7 @@
+@@ -182,6 +183,7 @@
  			              NM_SETTING_GSM_USERNAME, method->username,
  			              NM_SETTING_GSM_PASSWORD, method->password,
  			              NM_SETTING_GSM_APN, method->gsm_apn,
@@ -490,7 +490,7 @@ Index: network-manager-applet/src/mobile-helpers.c
  			              NULL);
  			nm_connection_add_setting (connection, setting);
  		} else
-@@ -208,6 +210,7 @@
+@@ -210,6 +212,7 @@
  		              NULL);
  		g_free (uuid);
  		g_free (id);
@@ -500,8 +500,8 @@ Index: network-manager-applet/src/mobile-helpers.c
  
 Index: network-manager-applet/src/utils/utils.c
 ===================================================================
---- network-manager-applet.orig/src/utils/utils.c	2013-02-20 23:54:00.073967139 +0100
-+++ network-manager-applet/src/utils/utils.c	2013-02-20 23:54:00.017966580 +0100
+--- network-manager-applet.orig/src/utils/utils.c	2013-06-08 02:00:29.802542795 +0200
++++ network-manager-applet/src/utils/utils.c	2013-06-08 02:00:29.794542674 +0200
 @@ -209,3 +209,10 @@
  	}
  }
@@ -515,8 +515,8 @@ Index: network-manager-applet/src/utils/utils.c
 +}
 Index: network-manager-applet/src/utils/utils.h
 ===================================================================
---- network-manager-applet.orig/src/utils/utils.h	2013-02-20 23:54:00.073967139 +0100
-+++ network-manager-applet/src/utils/utils.h	2013-02-20 23:54:00.025966660 +0100
+--- network-manager-applet.orig/src/utils/utils.h	2013-06-08 02:00:29.802542795 +0200
++++ network-manager-applet/src/utils/utils.h	2013-06-08 02:00:29.798542734 +0200
 @@ -27,6 +27,7 @@
  #include <gtk/gtk.h>
  #include <nm-connection.h>
@@ -536,8 +536,8 @@ Index: network-manager-applet/src/utils/utils.h
  typedef enum  {
 Index: network-manager-applet/src/wireless-security/ws-wep-key.c
 ===================================================================
---- network-manager-applet.orig/src/wireless-security/ws-wep-key.c	2013-02-20 23:54:00.073967139 +0100
-+++ network-manager-applet/src/wireless-security/ws-wep-key.c	2013-02-20 23:54:00.057966979 +0100
+--- network-manager-applet.orig/src/wireless-security/ws-wep-key.c	2013-06-08 02:00:29.802542795 +0200
++++ network-manager-applet/src/wireless-security/ws-wep-key.c	2013-06-08 02:00:29.798542734 +0200
 @@ -142,6 +142,7 @@
  fill_connection (WirelessSecurity *parent, NMConnection *connection)
  {
@@ -568,8 +568,8 @@ Index: network-manager-applet/src/wireless-security/ws-wep-key.c
  			nm_setting_wireless_security_set_wep_key (s_wsec, i, sec->keys[i]);
 Index: network-manager-applet/src/wireless-security/ws-wpa-psk.c
 ===================================================================
---- network-manager-applet.orig/src/wireless-security/ws-wpa-psk.c	2013-02-20 23:54:00.073967139 +0100
-+++ network-manager-applet/src/wireless-security/ws-wpa-psk.c	2013-02-20 23:54:00.061967019 +0100
+--- network-manager-applet.orig/src/wireless-security/ws-wpa-psk.c	2013-06-08 02:00:29.802542795 +0200
++++ network-manager-applet/src/wireless-security/ws-wpa-psk.c	2013-06-08 02:00:29.798542734 +0200
 @@ -92,11 +92,13 @@
  {
  	GtkWidget *widget;
