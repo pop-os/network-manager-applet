@@ -2,6 +2,8 @@ network-manager-applet (0.9.8.2-1) UNRELEASED; urgency=low
 
   * New upstream release.
   * Refresh patches.
+  * Conversion from libgnome-keyring to libsecret. Add Build-Depends on
+    libsecret-1-dev and keep libgnome-keyring-dev for the migration tool.
 
  -- Michael Biebl <biebl@debian.org>  Sat, 08 Jun 2013 02:00:06 +0200
 
