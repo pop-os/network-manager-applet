@@ -1,4 +1,4 @@
-network-manager-applet (0.9.8.2-1) UNRELEASED; urgency=low
+network-manager-applet (0.9.8.2-1) unstable; urgency=low
 
   * New upstream release.
   * Refresh patches.
@@ -6,7 +6,7 @@ network-manager-applet (0.9.8.2-1) UNRELEASED; urgency=low
     libsecret-1-dev and keep libgnome-keyring-dev for the migration tool.
   * Use DEB_LDFLAGS_MAINT_APPEND to properly append our custom build flags.
 
- -- Michael Biebl <biebl@debian.org>  Sat, 08 Jun 2013 02:00:06 +0200
+ -- Michael Biebl <biebl@debian.org>  Sat, 08 Jun 2013 02:05:04 +0200
 
 network-manager-applet (0.9.8.0-2) unstable; urgency=low
 
