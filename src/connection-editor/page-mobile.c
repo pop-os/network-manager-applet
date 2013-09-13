@@ -570,6 +570,7 @@ new_connection_mobile_wizard_done (NMAMobileWizard *wizard,
 	NMConnection *connection = NULL;
 
 	if (!canceled && method) {
+		NMSettingConnection *s_con;
 		NMSetting *type_setting;
 		const char *ctype = NULL;
 		char *detail = NULL;
@@ -583,6 +584,7 @@ new_connection_mobile_wizard_done (NMAMobileWizard *wizard,
 			              NM_SETTING_GSM_NUMBER, "*99#",
 			              NM_SETTING_GSM_USERNAME, method->username,
 			              NM_SETTING_GSM_PASSWORD, method->password,
+			              NM_SETTING_GSM_PASSWORD_FLAGS, NM_SETTING_SECRET_FLAG_AGENT_OWNED,
 			              NM_SETTING_GSM_APN, method->gsm_apn,
 			              NULL);
 			break;
@@ -594,6 +596,7 @@ new_connection_mobile_wizard_done (NMAMobileWizard *wizard,
 			              NM_SETTING_CDMA_NUMBER, "#777",
 			              NM_SETTING_GSM_USERNAME, method->username,
 			              NM_SETTING_GSM_PASSWORD, method->password,
+			              NM_SETTING_GSM_PASSWORD_FLAGS, NM_SETTING_SECRET_FLAG_AGENT_OWNED,
 			              NULL);
 			break;
 		default:
@@ -607,6 +610,13 @@ new_connection_mobile_wizard_done (NMAMobileWizard *wizard,
 			detail = g_strdup_printf ("%s connection %%d", method->provider_name);
 		connection = ce_page_new_connection (detail, ctype, FALSE, info->settings, info->user_data);
 		g_free (detail);
+
+		s_con = nm_connection_get_setting_connection (connection);
+		if (!s_con) {
+			s_con = (NMSettingConnection *) nm_setting_connection_new ();
+			nm_connection_add_setting (connection, NM_SETTING (s_con));
+		}
+		nm_setting_connection_add_permission (s_con, "user", g_get_user_name (), NULL);
 
 		nm_connection_add_setting (connection, type_setting);
 		add_default_serial_setting (connection);
@@ -633,6 +643,7 @@ mobile_connection_new (GtkWindow *parent,
                        const char *detail,
                        NMRemoteSettings *settings,
                        PageNewConnectionResultFunc result_func,
+                       NMClient *client,
                        gpointer user_data)
 {
 	NMAMobileWizard *wizard;

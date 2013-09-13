@@ -58,6 +58,7 @@ void dsl_connection_new (GtkWindow *parent,
                          const char *detail,
                          NMRemoteSettings *settings,
                          PageNewConnectionResultFunc callback,
+                         NMClient *client,
                          gpointer user_data);
 
 #endif  /* __PAGE_DSL_H__ */

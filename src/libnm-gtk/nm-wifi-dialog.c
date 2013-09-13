@@ -38,6 +38,7 @@
 #include "nm-wifi-dialog.h"
 #include "wireless-security.h"
 #include "nm-ui-utils.h"
+#include "utils.h"
 
 G_DEFINE_TYPE (NMAWifiDialog, nma_wifi_dialog, GTK_TYPE_DIALOG)
 
@@ -1221,6 +1222,9 @@ nma_wifi_dialog_get_connection (NMAWifiDialog *self,
 			      NM_SETTING_CONNECTION_UUID, uuid,
 			      NULL);
 		g_free (uuid);
+		if (utils_default_to_private_connection (priv->client)) {
+			nm_setting_connection_add_permission (s_con, "user", g_get_user_name (), NULL);
+		}
 		nm_connection_add_setting (connection, (NMSetting *) s_con);
 
 		s_wireless = (NMSettingWireless *) nm_setting_wireless_new ();

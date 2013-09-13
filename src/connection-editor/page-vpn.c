@@ -295,9 +295,11 @@ vpn_connection_new (GtkWindow *parent,
                     const char *detail,
                     NMRemoteSettings *settings,
                     PageNewConnectionResultFunc result_func,
+                    NMClient *client,
                     gpointer user_data)
 {
 	NMConnection *connection;
+	NMSettingConnection *s_con;
 	NMSetting *s_vpn;
 
 	if (!detail) {
@@ -323,6 +325,14 @@ vpn_connection_new (GtkWindow *parent,
 	                                     FALSE,
 	                                     settings,
 	                                     user_data);
+
+	s_con = nm_connection_get_setting_connection (connection);
+	if (!s_con) {
+		s_con = (NMSettingConnection *) nm_setting_connection_new ();
+		nm_connection_add_setting (connection, NM_SETTING (s_con));
+	}
+	nm_setting_connection_add_permission (s_con, "user", g_get_user_name (), NULL);
+
 	s_vpn = nm_setting_vpn_new ();
 	g_object_set (s_vpn, NM_SETTING_VPN_SERVICE_TYPE, detail, NULL);
 	nm_connection_add_setting (connection, s_vpn);
