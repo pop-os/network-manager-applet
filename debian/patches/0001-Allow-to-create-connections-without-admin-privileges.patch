@@ -457,7 +457,7 @@ index 6938284..91d937c 100644
  
  #endif  /* __PAGE_WIMAX_H__ */
 diff --git a/src/gnome-bluetooth/nma-bt-device.c b/src/gnome-bluetooth/nma-bt-device.c
-index 512c5cc..172e16f 100644
+index 3a7728c..7c7bad5 100644
 --- a/src/gnome-bluetooth/nma-bt-device.c
 +++ b/src/gnome-bluetooth/nma-bt-device.c
 @@ -354,6 +354,7 @@ dun_new_cdma (NMAMobileWizardAccessMethod *method)
