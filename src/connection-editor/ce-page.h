@@ -48,7 +48,6 @@ typedef void (*PageNewConnectionFunc) (GtkWindow *parent,
                                        const char *detail,
                                        NMRemoteSettings *settings,
                                        PageNewConnectionResultFunc result_func,
-                                       NMClient *client,
                                        gpointer user_data);
 
 #define CE_TYPE_PAGE            (ce_page_get_type ())

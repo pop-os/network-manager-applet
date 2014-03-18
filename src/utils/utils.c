@@ -209,10 +209,3 @@ utils_show_error_dialog (const char *title,
 	}
 }
 
-gboolean
-utils_default_to_private_connection (NMClient *client)
-{
-	NMClientPermissionResult perms;
-	perms = nm_client_get_permission_result (client, NM_CLIENT_PERMISSION_SETTINGS_MODIFY_SYSTEM);
-	return (perms != NM_CLIENT_PERMISSION_RESULT_YES);
-}

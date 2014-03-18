@@ -27,7 +27,6 @@
 #include <gtk/gtk.h>
 #include <nm-connection.h>
 #include <nm-device.h>
-#include <nm-client.h>
 #include <net/ethernet.h>
 #include <nm-access-point.h>
 
@@ -53,8 +52,6 @@ void utils_show_error_dialog (const char *title,
                               const char *text2,
                               gboolean modal,
                               GtkWindow *parent);
-
-gboolean utils_default_to_private_connection (NMClient *client);
 
 #define NMA_ERROR (g_quark_from_static_string ("nma-error-quark"))
 

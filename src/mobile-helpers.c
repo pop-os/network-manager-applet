@@ -172,7 +172,6 @@ mobile_wizard_done (NMAMobileWizard *wizard,
 			              NM_SETTING_CDMA_NUMBER, "#777",
 			              NM_SETTING_CDMA_USERNAME, method->username,
 			              NM_SETTING_CDMA_PASSWORD, method->password,
-			              NM_SETTING_CDMA_PASSWORD_FLAGS, NM_SETTING_SECRET_FLAG_AGENT_OWNED,
 			              NULL);
 			nm_connection_add_setting (connection, setting);
 		} else if (method->devtype == NM_DEVICE_MODEM_CAPABILITY_GSM_UMTS) {
@@ -183,7 +182,6 @@ mobile_wizard_done (NMAMobileWizard *wizard,
 			              NM_SETTING_GSM_USERNAME, method->username,
 			              NM_SETTING_GSM_PASSWORD, method->password,
 			              NM_SETTING_GSM_APN, method->gsm_apn,
-			              NM_SETTING_GSM_PASSWORD_FLAGS, NM_SETTING_SECRET_FLAG_AGENT_OWNED,
 			              NULL);
 			nm_connection_add_setting (connection, setting);
 		} else
@@ -212,7 +210,6 @@ mobile_wizard_done (NMAMobileWizard *wizard,
 		              NULL);
 		g_free (uuid);
 		g_free (id);
-		nm_setting_connection_add_permission ((NMSettingConnection *) setting, "user", g_get_user_name (), NULL);
 		nm_connection_add_setting (connection, setting);
 	}
 

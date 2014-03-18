@@ -354,7 +354,6 @@ dun_new_cdma (NMAMobileWizardAccessMethod *method)
 	              NM_SETTING_CDMA_NUMBER, "#777",
 	              NM_SETTING_CDMA_USERNAME, method->username,
 	              NM_SETTING_CDMA_PASSWORD, method->password,
-	              NM_SETTING_CDMA_PASSWORD_FLAGS, NM_SETTING_SECRET_FLAG_AGENT_OWNED,
 	              NULL);
 	nm_connection_add_setting (connection, setting);
 
@@ -381,7 +380,6 @@ dun_new_cdma (NMAMobileWizardAccessMethod *method)
 	              NULL);
 	g_free (uuid);
 	g_free (id);
-	nm_setting_connection_add_permission ((NMSettingConnection *) setting, "user", g_get_user_name (), NULL);
 	nm_connection_add_setting (connection, setting);
 
 	return connection;
@@ -401,7 +399,6 @@ dun_new_gsm (NMAMobileWizardAccessMethod *method)
 	              NM_SETTING_GSM_NUMBER, "*99#",
 	              NM_SETTING_GSM_USERNAME, method->username,
 	              NM_SETTING_GSM_PASSWORD, method->password,
-	              NM_SETTING_GSM_PASSWORD_FLAGS, NM_SETTING_SECRET_FLAG_AGENT_OWNED,
 	              NM_SETTING_GSM_APN, method->gsm_apn,
 	              NULL);
 	nm_connection_add_setting (connection, setting);
@@ -429,7 +426,6 @@ dun_new_gsm (NMAMobileWizardAccessMethod *method)
 	              NULL);
 	g_free (uuid);
 	g_free (id);
-	nm_setting_connection_add_permission ((NMSettingConnection *) setting, "user", g_get_user_name (), NULL);
 	nm_connection_add_setting (connection, setting);
 
 	return connection;
@@ -1015,7 +1011,6 @@ add_pan_connection (NmaBtDevice *self)
 	              NULL);
 	g_free (id);
 	g_free (uuid);
-	nm_setting_connection_add_permission ((NMSettingConnection *) setting, "user", g_get_user_name (), NULL);
 	nm_connection_add_setting (connection, setting);
 
 	/* The Bluetooth settings */

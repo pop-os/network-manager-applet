@@ -2741,10 +2741,6 @@ applet_update_icon (gpointer user_data)
 		break;
 	default:
 		pixbuf = applet_get_device_icon_for_state (applet, &dev_tip);
-		if (!pixbuf && state == NM_STATE_CONNECTED) {
-			pixbuf = nma_icon_check_and_load ("nm-device-wired", &applet->ethernet_icon, applet);
-			g_object_ref (pixbuf);
-		}
 		break;
 	}
 

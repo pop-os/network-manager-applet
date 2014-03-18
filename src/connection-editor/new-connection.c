@@ -394,7 +394,6 @@ new_connection_of_type (GtkWindow *parent_window,
                         gpointer user_data)
 {
 	NewConnectionData *ncd;
-	NMConnectionList *list = user_data;
 
 	ncd = g_slice_new (NewConnectionData);
 	ncd->parent_window = parent_window;
@@ -406,7 +405,6 @@ new_connection_of_type (GtkWindow *parent_window,
 	          detail,
 	          settings,
 	          new_connection_result,
-	          list->nm_client,
 	          ncd);
 }
 

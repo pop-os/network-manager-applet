@@ -92,13 +92,11 @@ fill_connection (WirelessSecurity *parent, NMConnection *connection)
 {
 	GtkWidget *widget;
 	const char *key;
-	NMSettingConnection *s_con;
 	NMSettingWireless *s_wireless;
 	NMSettingWirelessSecurity *s_wireless_sec;
 	const char *mode;
 	gboolean is_adhoc = FALSE;
 
-	s_con = nm_connection_get_setting_connection (connection);
 	s_wireless = nm_connection_get_setting_wireless (connection);
 	g_assert (s_wireless);
 
@@ -115,9 +113,6 @@ fill_connection (WirelessSecurity *parent, NMConnection *connection)
 	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "wpa_psk_entry"));
 	key = gtk_entry_get_text (GTK_ENTRY (widget));
 	g_object_set (s_wireless_sec, NM_SETTING_WIRELESS_SECURITY_PSK, key, NULL);
-	/* If the connection is user-owned, mark the secrets as agent-owned */
-	if (s_con && nm_setting_connection_get_num_permissions (s_con))
-		g_object_set (s_wireless_sec, NM_SETTING_WIRELESS_SECURITY_PSK_FLAGS, NM_SETTING_SECRET_FLAG_AGENT_OWNED, NULL);
 
 	wireless_security_clear_ciphers (connection);
 	if (is_adhoc) {

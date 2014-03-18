@@ -142,7 +142,6 @@ static void
 fill_connection (WirelessSecurity *parent, NMConnection *connection)
 {
 	WirelessSecurityWEPKey *sec = (WirelessSecurityWEPKey *) parent;
-	NMSettingConnection *s_con;
 	NMSettingWireless *s_wireless;
 	NMSettingWirelessSecurity *s_wsec;
 	GtkWidget *widget;
@@ -156,8 +155,6 @@ fill_connection (WirelessSecurity *parent, NMConnection *connection)
 	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "wep_key_entry"));
 	key = gtk_entry_get_text (GTK_ENTRY (widget));
 	strcpy (sec->keys[sec->cur_index], key);
-
-	s_con = nm_connection_get_setting_connection (connection);
 
 	s_wireless = nm_connection_get_setting_wireless (connection);
 	g_assert (s_wireless);
@@ -174,10 +171,6 @@ fill_connection (WirelessSecurity *parent, NMConnection *connection)
 	              NM_SETTING_WIRELESS_SECURITY_AUTH_ALG, (auth_alg == 1) ? "shared" : "open",
 	              NM_SETTING_WIRELESS_SECURITY_WEP_KEY_TYPE, sec->type,
 	              NULL);
-
-	/* If the connection is user-owned, mark the secrets as agent-owned */
-	if (s_con && nm_setting_connection_get_num_permissions (s_con))
-		g_object_set (s_wsec, NM_SETTING_WIRELESS_SECURITY_WEP_KEY_FLAGS, NM_SETTING_SECRET_FLAG_AGENT_OWNED, NULL);
 
 	for (i = 0; i < 4; i++) {
 		if (strlen (sec->keys[i]))

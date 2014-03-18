@@ -33,8 +33,6 @@
 #include <nm-device-wifi.h>
 #include <nm-utils.h>
 
-#include "utils.h"
-
 #include "page-wifi.h"
 
 G_DEFINE_TYPE (CEPageWifi, ce_page_wifi, CE_TYPE_PAGE)
@@ -657,7 +655,6 @@ wifi_connection_new (GtkWindow *parent,
                      const char *detail,
                      NMRemoteSettings *settings,
                      PageNewConnectionResultFunc result_func,
-                     NMClient *client,
                      gpointer user_data)
 {
 	NMConnection *connection;
@@ -668,17 +665,6 @@ wifi_connection_new (GtkWindow *parent,
 	                                     TRUE,
 	                                     settings,
 	                                     user_data);
-
-	if (utils_default_to_private_connection (client)) {
-		NMSettingConnection *s_con;
-		s_con = nm_connection_get_setting_connection (connection);
-		if (!s_con) {
-			s_con = (NMSettingConnection *) nm_setting_connection_new ();
-			nm_connection_add_setting (connection, NM_SETTING (s_con));
-		}
-		nm_setting_connection_add_permission (s_con, "user", g_get_user_name (), NULL);
-	}
-
 	s_wifi = nm_setting_wireless_new ();
 	g_object_set (s_wifi, NM_SETTING_WIRELESS_MODE, "infrastructure", NULL);
 	nm_connection_add_setting (connection, s_wifi);

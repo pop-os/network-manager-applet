@@ -404,7 +404,6 @@ _do_new_auto_connection (NMApplet *applet,
 	NMSettingWirelessSecurity *s_wsec = NULL;
 	NMSetting8021x *s_8021x = NULL;
 	const GByteArray *ssid;
-	NM80211ApFlags flags;
 	NM80211ApSecurityFlags wpa_flags, rsn_flags;
 	GtkWidget *dialog;
 	MoreInfo *more_info;
@@ -431,7 +430,6 @@ _do_new_auto_connection (NMApplet *applet,
 	/* If the AP is WPA[2]-Enterprise then we need to set up a minimal 802.1x
 	 * setting and ask the user for more information.
 	 */
-	flags = nm_access_point_get_flags (ap);
 	rsn_flags = nm_access_point_get_rsn_flags (ap);
 	wpa_flags = nm_access_point_get_wpa_flags (ap);
 	if (   (rsn_flags & NM_802_11_AP_SEC_KEY_MGMT_802_1X)
@@ -461,29 +459,6 @@ _do_new_auto_connection (NMApplet *applet,
 		nm_setting_802_1x_add_eap_method (s_8021x, "ttls");
 		g_object_set (s_8021x, NM_SETTING_802_1X_PHASE2_AUTH, "mschapv2", NULL);
 		nm_connection_add_setting (connection, NM_SETTING (s_8021x));
-	}
-
-	if (utils_default_to_private_connection (applet->nm_client)) {
-		if (!s_con) {
-			s_con = (NMSettingConnection *) nm_setting_connection_new ();
-			nm_connection_add_setting (connection, NM_SETTING (s_con));
-		}
-		nm_setting_connection_add_permission (s_con, "user", g_get_user_name (), NULL);
-
-		if ((rsn_flags & NM_802_11_AP_SEC_KEY_MGMT_PSK) ||
-		    (wpa_flags & NM_802_11_AP_SEC_KEY_MGMT_PSK)) {
-			if (!s_wsec) {
-				s_wsec = (NMSettingWirelessSecurity *) nm_setting_wireless_security_new ();
-				nm_connection_add_setting (connection, NM_SETTING (s_wsec));
-			}
-			g_object_set (s_wsec, NM_SETTING_WIRELESS_SECURITY_PSK_FLAGS, NM_SETTING_SECRET_FLAG_AGENT_OWNED, NULL);
-		} else if (flags & NM_802_11_AP_FLAGS_PRIVACY) {
-			if (!s_wsec) {
-				s_wsec = (NMSettingWirelessSecurity *) nm_setting_wireless_security_new ();
-				nm_connection_add_setting (connection, NM_SETTING (s_wsec));
-			}
-			g_object_set (s_wsec, NM_SETTING_WIRELESS_SECURITY_WEP_KEY_FLAGS, NM_SETTING_SECRET_FLAG_AGENT_OWNED, NULL);
-		}
 	}
 
 	/* If it's an 802.1x connection, we need more information, so pop up the

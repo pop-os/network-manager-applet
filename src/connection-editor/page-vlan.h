@@ -56,7 +56,6 @@ void vlan_connection_new (GtkWindow *parent,
                           const char *detail,
                           NMRemoteSettings *settings,
                           PageNewConnectionResultFunc result_func,
-                          NMClient *client,
                           gpointer user_data);
 
 #endif  /* __PAGE_VLAN_H__ */
