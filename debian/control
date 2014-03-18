@@ -26,7 +26,7 @@ Build-Depends:
  iso-codes,
  libgirepository1.0-dev,
  gobject-introspection
-Standards-Version: 3.9.4
+Standards-Version: 3.9.5
 Vcs-Git: git://git.debian.org/git/pkg-utopia/network-manager-applet.git
 Vcs-Browser: http://git.debian.org/?p=pkg-utopia/network-manager-applet.git;a=summary
 Homepage: http://www.gnome.org/projects/NetworkManager/
