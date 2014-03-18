@@ -1,6 +1,7 @@
 network-manager-applet (0.9.8.8-1) UNRELEASED; urgency=medium
 
   * New upstream release.
+  * Bump Standards-Version to 3.9.5.
 
  -- Michael Biebl <biebl@debian.org>  Tue, 18 Mar 2014 11:11:30 +0100
 
