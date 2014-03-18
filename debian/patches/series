@@ -1,3 +1,2 @@
-# Debian patches for network-manager-applet
-11-user-connections.patch
-12-force-online.patch
+0001-Allow-to-create-connections-without-admin-privileges.patch
+0002-Force-online-state-with-unmanaged-devices.patch
