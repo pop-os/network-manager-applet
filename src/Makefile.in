@@ -494,7 +494,8 @@ nm_applet_CPPFLAGS = $(GTK_CFLAGS) $(NMA_CFLAGS) $(LIBSECRET_CFLAGS) \
 	-DLIBEXECDIR=\""$(libexecdir)"\" \
 	-DAUTOSTARTDIR=\""$(sysconfdir)/xdg/autostart"\" \
 	-DVPN_NAME_FILES_DIR=\""$(sysconfdir)/NetworkManager/VPN"\" \
-	-DNMALOCALEDIR=\"$(datadir)/locale\" $(DBUS_CFLAGS) \
+	-DNMALOCALEDIR=\"$(datadir)/locale\" \
+	-DG_LOG_DOMAIN=\""nm-applet"\" $(DBUS_CFLAGS) \
 	$(DISABLE_DEPRECATED) -I${top_builddir}/src/marshallers \
 	-I${top_srcdir}/src/utils \
 	-I${top_srcdir}/src/wireless-security \
