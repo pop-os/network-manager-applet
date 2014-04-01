@@ -1,3 +1,4 @@
 0001-Allow-to-create-connections-without-admin-privileges.patch
 0002-Force-online-state-with-unmanaged-devices.patch
 0003-Don-t-hard-code-gnome-bluetooth-plugin-directory.patch
+0004-Use-the-paths-specified-in-the-VPN-.name-files.patch
