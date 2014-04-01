@@ -5,6 +5,7 @@ network-manager-applet (0.9.8.8-3) UNRELEASED; urgency=medium
     gnome-bluetooth-1.0.pc.
   * Convert to multi-arch. Mark libnm-gtk0 as M-A: same, libnm-gtk-common as
     M-A: foreign.
+  * Rely on dh v9 to set flags from dpkg-buildflags.
 
  -- Michael Biebl <biebl@debian.org>  Tue, 01 Apr 2014 15:19:42 +0200
 
