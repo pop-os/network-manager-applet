@@ -1,4 +1,4 @@
-network-manager-applet (0.9.8.8-4) UNRELEASED; urgency=medium
+network-manager-applet (0.9.8.8-4) unstable; urgency=medium
 
   * Drop dbus reload from postinst. The dbus package uses a file trigger
     nowadays to automatically reload its configuration.
@@ -7,7 +7,7 @@ network-manager-applet (0.9.8.8-4) UNRELEASED; urgency=medium
     same, use the paths as specified by the VPN plugins and only
     reconstruct the path if it is not absolute or we fail to load the plugin.
 
- -- Michael Biebl <biebl@debian.org>  Tue, 01 Apr 2014 21:40:50 +0200
+ -- Michael Biebl <biebl@debian.org>  Tue, 01 Apr 2014 21:41:36 +0200
 
 network-manager-applet (0.9.8.8-3) unstable; urgency=medium
 
