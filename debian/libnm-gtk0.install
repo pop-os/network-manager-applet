@@ -1,1 +1,1 @@
-usr/lib/libnm-gtk.so.*
+usr/lib/*/libnm-gtk.so.*

@@ -68,7 +68,9 @@ Description: network management framework (GNOME frontend)
 
 Package: libnm-gtk0
 Architecture: linux-any
+Multi-Arch: same
 Section: libs
+Pre-Depends: ${misc:Pre-Depends}
 Depends: ${shlibs:Depends},
          ${misc:Depends},
          libnm-gtk-common (= ${source:Version})
@@ -77,6 +79,7 @@ Description: library for wireless and mobile dialogs
 
 Package: libnm-gtk-common
 Architecture: all
+Multi-Arch: foreign
 Section: libs
 Depends: ${misc:Depends}
 Description: library for wireless and mobile dialogs - common files
