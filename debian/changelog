@@ -1,3 +1,9 @@
+network-manager-applet (0.9.8.8-3) UNRELEASED; urgency=medium
+
+  * Bump debhelper compatibility level to 9.
+
+ -- Michael Biebl <biebl@debian.org>  Tue, 01 Apr 2014 15:19:42 +0200
+
 network-manager-applet (0.9.8.8-2) unstable; urgency=medium
 
   * Enable ModemManager1 interface support. (Closes: #711968)
