@@ -1,0 +1,27 @@
+From: Michael Biebl <biebl@debian.org>
+Date: Fri, 4 Apr 2014 17:02:04 +0200
+Subject: Use valid path when loading the org.gnome.nm-applet.eap schema
+
+Since glib 2.39, GSettings verifies the path validity [0].
+A valid path begins and ends with '/' and does not contain two
+consecutive '/'. We were missing the trailing '/', leading to an assert
+when trying to load the org.gnome.nm-applet.eap schema.
+
+[0] https://git.gnome.org/browse/glib/commit/?id=6568843624e9f46a3c51cd8c1a6670896a48f1fb
+---
+ src/wireless-security/eap-method.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/wireless-security/eap-method.c b/src/wireless-security/eap-method.c
+index a3fd832..2e20624 100644
+--- a/src/wireless-security/eap-method.c
++++ b/src/wireless-security/eap-method.c
+@@ -118,7 +118,7 @@ _get_ca_ignore_settings (const char *uuid)
+ 	GSettings *settings;
+ 	char *path = NULL;
+ 
+-	path = g_strdup_printf ("/org/gnome/nm-applet/eap/%s", uuid);
++	path = g_strdup_printf ("/org/gnome/nm-applet/eap/%s/", uuid);
+ 	settings = g_settings_new_with_path ("org.gnome.nm-applet.eap", path);
+ 	g_free (path);
+ 

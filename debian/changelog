@@ -1,3 +1,11 @@
+network-manager-applet (0.9.8.8-5) UNRELEASED; urgency=medium
+
+  * Use valid paths when loading the org.gnome.nm-applet.eap schema.
+    We were missing a trailing '/'. Newer glib versions validate the path more
+    strictly, leading to an assert.
+
+ -- Michael Biebl <biebl@debian.org>  Fri, 04 Apr 2014 17:46:53 +0200
+
 network-manager-applet (0.9.8.8-4) unstable; urgency=medium
 
   * Drop dbus reload from postinst. The dbus package uses a file trigger
