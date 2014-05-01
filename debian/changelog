@@ -2,6 +2,9 @@ network-manager-applet (0.9.8.10-1) UNRELEASED; urgency=medium
 
   * New upstream release.
   * Update patches.
+  * Tighten Build-Depends on libgnome-bluetooth-dev to (<< 3.11.0).
+    The bluetooth widget no longer builds with newer gnome-bluetooth since the
+    plugin API was removed.
 
  -- Michael Biebl <biebl@debian.org>  Thu, 01 May 2014 13:57:15 +0200
 
