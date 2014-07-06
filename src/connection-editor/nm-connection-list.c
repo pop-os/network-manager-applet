@@ -571,7 +571,7 @@ tree_model_visible_func (GtkTreeModel *model,
 	}
 
 	/* A connection node is visible unless it is a slave to a known
-	 * bond or bridge.
+	 * bond or team or bridge.
 	 */
 	s_con = nm_connection_get_setting_connection (connection);
 	g_object_unref (connection);
@@ -582,6 +582,7 @@ tree_model_visible_func (GtkTreeModel *model,
 		return TRUE;
 	slave_type = nm_setting_connection_get_slave_type (s_con);
 	if (   g_strcmp0 (slave_type, NM_SETTING_BOND_SETTING_NAME) != 0
+	    && g_strcmp0 (slave_type, NM_SETTING_TEAM_SETTING_NAME) != 0
 	    && g_strcmp0 (slave_type, NM_SETTING_BRIDGE_SETTING_NAME) != 0)
 		return TRUE;
 
@@ -684,7 +685,6 @@ add_connection_buttons (NMConnectionList *self)
 	/* Edit */
 	button = ce_polkit_button_new (_("_Edit"),
 	                               _("Edit the selected connection"),
-	                               _("_Edit..."),
 	                               _("Authenticate to edit the selected connection"),
 	                               GTK_STOCK_EDIT,
 	                               self->nm_client,
@@ -701,7 +701,6 @@ add_connection_buttons (NMConnectionList *self)
 	/* Delete */
 	button = ce_polkit_button_new (_("_Delete"),
 	                               _("Delete the selected connection"),
-	                               _("_Delete..."),
 	                               _("Authenticate to delete the selected connection"),
 	                               GTK_STOCK_DELETE,
 	                               self->nm_client,
@@ -850,7 +849,6 @@ NMConnectionList *
 nm_connection_list_new (void)
 {
 	NMConnectionList *list;
-	DBusGConnection *bus;
 	GError *error = NULL;
 	const char *objects[] = { "NMConnectionList", NULL };
 
@@ -876,15 +874,7 @@ nm_connection_list_new (void)
 	if (!list->nm_client)
 		goto error;
 
-	bus = dbus_g_bus_get (DBUS_BUS_SYSTEM, &error);
-	if (error) {
-		g_warning ("Could not connect to the system bus: %s", error->message);
-		g_error_free (error);
-		goto error;
-	}
-
-	list->settings = nm_remote_settings_new (bus);
-	dbus_g_connection_unref (bus);
+	list->settings = nm_remote_settings_new (NULL);
 	g_signal_connect (list->settings,
 	                  NM_REMOTE_SETTINGS_NEW_CONNECTION,
 	                  G_CALLBACK (connection_added),

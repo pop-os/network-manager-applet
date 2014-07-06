@@ -26,9 +26,9 @@
 
 #include <nm-setting-connection.h>
 #include <nm-setting-bond.h>
+#include <nm-utils.h>
 
 #include "page-bond.h"
-#include "page-ethernet.h"
 #include "page-infiniband.h"
 #include "nm-connection-editor.h"
 #include "new-connection.h"
@@ -40,12 +40,13 @@ G_DEFINE_TYPE (CEPageBond, ce_page_bond, CE_TYPE_PAGE_MASTER)
 typedef struct {
 	NMSettingBond *setting;
 
-	GType slave_type;
-	PageNewConnectionFunc new_slave_func;
+	int slave_arptype;
 
 	GtkWindow *toplevel;
 
 	GtkComboBox *mode;
+	GtkEntry *primary;
+	GtkWidget *primary_label;
 	GtkComboBox *monitoring;
 	GtkSpinButton *frequency;
 	GtkSpinButton *updelay;
@@ -56,13 +57,6 @@ typedef struct {
 	GtkWidget *downdelay_box;
 	GtkEntry *arp_targets;
 	GtkWidget *arp_targets_label;
-
-	GtkTable *table;
-	int table_row_spacing;
-	int updelay_row;
-	int downdelay_row;
-	int arp_targets_row;
-
 } CEPageBondPrivate;
 
 #define MODE_BALANCE_RR    0
@@ -85,6 +79,8 @@ bond_private_init (CEPageBond *self)
 	builder = CE_PAGE (self)->builder;
 
 	priv->mode = GTK_COMBO_BOX (gtk_builder_get_object (builder, "bond_mode"));
+	priv->primary = GTK_ENTRY (gtk_builder_get_object (builder, "bond_primary"));
+	priv->primary_label = GTK_WIDGET (gtk_builder_get_object (builder, "bond_primary_label"));
 	priv->monitoring = GTK_COMBO_BOX (gtk_builder_get_object (builder, "bond_monitoring"));
 	priv->frequency = GTK_SPIN_BUTTON (gtk_builder_get_object (builder, "bond_frequency"));
 	priv->updelay = GTK_SPIN_BUTTON (gtk_builder_get_object (builder, "bond_updelay"));
@@ -98,18 +94,6 @@ bond_private_init (CEPageBond *self)
 
 	priv->toplevel = GTK_WINDOW (gtk_widget_get_ancestor (GTK_WIDGET (priv->mode),
 	                                                      GTK_TYPE_WINDOW));
-
-	priv->table = GTK_TABLE (gtk_builder_get_object (builder, "BondPage"));
-	priv->table_row_spacing = gtk_table_get_default_row_spacing (priv->table);
-	gtk_container_child_get (GTK_CONTAINER (priv->table), priv->updelay_label,
-	                         "top-attach", &priv->updelay_row,
-	                         NULL);
-	gtk_container_child_get (GTK_CONTAINER (priv->table), priv->downdelay_label,
-	                         "top-attach", &priv->downdelay_row,
-	                         NULL);
-	gtk_container_child_get (GTK_CONTAINER (priv->table), priv->arp_targets_label,
-	                         "top-attach", &priv->arp_targets_row,
-	                         NULL);
 }
 
 static void
@@ -124,10 +108,8 @@ connection_removed (CEPageMaster *master, NMConnection *connection)
 	CEPageBond *self = CE_PAGE_BOND (master);
 	CEPageBondPrivate *priv = CE_PAGE_BOND_GET_PRIVATE (self);
 
-	if (!ce_page_master_has_slaves (master)) {
-		priv->slave_type = G_TYPE_INVALID;
-		priv->new_slave_func = NULL;
-	}
+	if (!ce_page_master_has_slaves (master))
+		priv->slave_arptype = ARPHRD_VOID;
 }
 
 static void
@@ -136,15 +118,12 @@ connection_added (CEPageMaster *master, NMConnection *connection)
 	CEPageBond *self = CE_PAGE_BOND (master);
 	CEPageBondPrivate *priv = CE_PAGE_BOND_GET_PRIVATE (self);
 
-	/* A bit kludgy... */
 	if (nm_connection_is_type (connection, NM_SETTING_INFINIBAND_SETTING_NAME)) {
-		priv->slave_type = NM_TYPE_SETTING_INFINIBAND;
-		priv->new_slave_func = infiniband_connection_new;
+		priv->slave_arptype = ARPHRD_INFINIBAND;
 		gtk_combo_box_set_active (priv->mode, MODE_ACTIVE_BACKUP);
 		gtk_widget_set_sensitive (GTK_WIDGET (priv->mode), FALSE);
 	} else {
-		priv->slave_type = NM_TYPE_SETTING_WIRED;
-		priv->new_slave_func = ethernet_connection_new;
+		priv->slave_arptype = ARPHRD_ETHER;
 		gtk_widget_set_sensitive (GTK_WIDGET (priv->mode), TRUE);
 	}
 }
@@ -154,14 +133,23 @@ bonding_mode_changed (GtkComboBox *combo, gpointer user_data)
 {
 	CEPageBond *self = user_data;
 	CEPageBondPrivate *priv = CE_PAGE_BOND_GET_PRIVATE (self);
+	int mode;
 
-	/* balance-tlb and balance-alb work only with MII monitoring */
-	if (   gtk_combo_box_get_active (combo) == MODE_BALANCE_TLB
-	    || gtk_combo_box_get_active (combo) == MODE_BALANCE_ALB) {
+	mode = gtk_combo_box_get_active (combo);
+
+	if (mode == MODE_BALANCE_TLB || mode == MODE_BALANCE_ALB) {
 		gtk_combo_box_set_active (priv->monitoring, MONITORING_MII);
 		gtk_widget_set_sensitive (GTK_WIDGET (priv->monitoring), FALSE);
 	} else {
 		gtk_widget_set_sensitive (GTK_WIDGET (priv->monitoring), TRUE);
+	}
+
+	if (mode == MODE_ACTIVE_BACKUP) {
+		gtk_widget_show (GTK_WIDGET (priv->primary));
+		gtk_widget_show (GTK_WIDGET (priv->primary_label));
+	} else {
+		gtk_widget_hide (GTK_WIDGET (priv->primary));
+		gtk_widget_hide (GTK_WIDGET (priv->primary_label));
 	}
 }
 
@@ -180,10 +168,6 @@ monitoring_mode_changed (GtkComboBox *combo, gpointer user_data)
 		gtk_widget_show (priv->downdelay_box);
 		gtk_widget_hide (GTK_WIDGET (priv->arp_targets));
 		gtk_widget_hide (priv->arp_targets_label);
-
-		gtk_table_set_row_spacing (priv->table, priv->updelay_row, priv->table_row_spacing);
-		gtk_table_set_row_spacing (priv->table, priv->downdelay_row, priv->table_row_spacing);
-		gtk_table_set_row_spacing (priv->table, priv->arp_targets_row, 0);
 	} else {
 		gtk_widget_hide (GTK_WIDGET (priv->updelay));
 		gtk_widget_hide (priv->updelay_label);
@@ -193,10 +177,6 @@ monitoring_mode_changed (GtkComboBox *combo, gpointer user_data)
 		gtk_widget_hide (priv->downdelay_box);
 		gtk_widget_show (GTK_WIDGET (priv->arp_targets));
 		gtk_widget_show (priv->arp_targets_label);
-
-		gtk_table_set_row_spacing (priv->table, priv->updelay_row, 0);
-		gtk_table_set_row_spacing (priv->table, priv->downdelay_row, 0);
-		gtk_table_set_row_spacing (priv->table, priv->arp_targets_row, priv->table_row_spacing);
 	}
 }
 
@@ -293,7 +273,7 @@ populate_ui (CEPageBond *self)
 {
 	CEPageBondPrivate *priv = CE_PAGE_BOND_GET_PRIVATE (self);
 	NMSettingBond *setting = priv->setting;
-	const char *mode, *frequency, *updelay, *downdelay, *raw_targets;
+	const char *mode, *primary, *frequency, *updelay, *downdelay, *raw_targets;
 	char *targets;
 	int mode_idx = MODE_BALANCE_RR;
 
@@ -320,6 +300,10 @@ populate_ui (CEPageBond *self)
 	                  G_CALLBACK (bonding_mode_changed),
 	                  self);
 	bonding_mode_changed (priv->mode, self);
+
+	/* Primary */
+	primary = nm_setting_bond_get_option_by_name (setting, NM_SETTING_BOND_OPTION_PRIMARY);
+	gtk_entry_set_text (priv->primary, primary ? primary : "");
 
 	/* Monitoring mode/frequency */
 	frequency = nm_setting_bond_get_option_by_name (setting, NM_SETTING_BOND_OPTION_ARP_INTERVAL);
@@ -369,13 +353,22 @@ populate_ui (CEPageBond *self)
 }
 
 static gboolean
-connection_type_filter (GType type, gpointer user_data)
+connection_type_filter (GType type, gpointer self)
 {
-	if (type == NM_TYPE_SETTING_WIRED ||
-	    type == NM_TYPE_SETTING_INFINIBAND)
-		return TRUE;
-	else
+	CEPageBondPrivate *priv = CE_PAGE_BOND_GET_PRIVATE (self);
+
+	if (!nm_utils_check_virtual_device_compatibility (NM_TYPE_SETTING_BOND, type))
 		return FALSE;
+
+	/* Can only have connections of a single arptype. Note that we don't
+	 * need to check the reverse case here since we don't need to call
+	 * new_connection_dialog() in the InfiniBand case.
+	 */
+	if (   priv->slave_arptype == ARPHRD_ETHER
+	    && type == NM_TYPE_SETTING_INFINIBAND)
+		return FALSE;
+
+	return TRUE;
 }
 
 static void
@@ -384,11 +377,11 @@ add_slave (CEPageMaster *master, NewConnectionResultFunc result_func)
 	CEPageBond *self = CE_PAGE_BOND (master);
 	CEPageBondPrivate *priv = CE_PAGE_BOND_GET_PRIVATE (self);
 
-	if (priv->new_slave_func) {
+	if (priv->slave_arptype == ARPHRD_INFINIBAND) {
 		new_connection_of_type (priv->toplevel,
 		                        NULL,
 		                        CE_PAGE (self)->settings,
-		                        priv->new_slave_func,
+		                        infiniband_connection_new,
 		                        result_func,
 		                        master);
 	} else {
@@ -411,6 +404,7 @@ finish_setup (CEPageBond *self, gpointer unused, GError *error, gpointer user_da
 	populate_ui (self);
 
 	g_signal_connect (priv->mode, "changed", G_CALLBACK (stuff_changed), self);
+	g_signal_connect (priv->primary, "changed", G_CALLBACK (stuff_changed), self);
 	g_signal_connect (priv->monitoring, "changed", G_CALLBACK (stuff_changed), self);
 	g_signal_connect (priv->frequency, "value-changed", G_CALLBACK (stuff_changed), self);
 	g_signal_connect (priv->updelay, "value-changed", G_CALLBACK (stuff_changed), self);
@@ -465,6 +459,7 @@ ui_to_setting (CEPageBond *self)
 	const char *frequency;
 	const char *updelay;
 	const char *downdelay;
+	const char *primary = NULL;
 	char *targets;
 
 	/* Mode */
@@ -474,6 +469,7 @@ ui_to_setting (CEPageBond *self)
 		break;
 	case MODE_ACTIVE_BACKUP:
 		mode = "active-backup";
+		primary = gtk_entry_get_text (priv->primary);
 		break;
 	case MODE_BALANCE_XOR:
 		mode = "balance-xor";
@@ -495,14 +491,19 @@ ui_to_setting (CEPageBond *self)
 		break;
 	}
 
+	/* Set bond mode and primary */
+	nm_setting_bond_add_option (priv->setting, NM_SETTING_BOND_OPTION_MODE, mode);
+
+	if (primary && *primary)
+		nm_setting_bond_add_option (priv->setting, NM_SETTING_BOND_OPTION_PRIMARY, primary);
+	else
+		nm_setting_bond_remove_option (priv->setting, NM_SETTING_BOND_OPTION_PRIMARY);
+
 	/* Monitoring mode/frequency */
 	frequency = gtk_entry_get_text (GTK_ENTRY (priv->frequency));
 	updelay = gtk_entry_get_text (GTK_ENTRY (priv->updelay));
 	downdelay = gtk_entry_get_text (GTK_ENTRY (priv->downdelay));
 	targets = uglify_targets (gtk_entry_get_text (priv->arp_targets));
-
-	/* Set bond mode */
-	nm_setting_bond_add_option (priv->setting, NM_SETTING_BOND_OPTION_MODE, mode);
 
 	switch (gtk_combo_box_get_active (priv->monitoring)) {
 	case MONITORING_MII:
@@ -546,6 +547,11 @@ validate (CEPage *page, NMConnection *connection, GError **error)
 static void
 ce_page_bond_init (CEPageBond *self)
 {
+	CEPageBondPrivate *priv = CE_PAGE_BOND_GET_PRIVATE (self);
+	CEPageMaster *master = CE_PAGE_MASTER (self);
+
+	priv->slave_arptype = ARPHRD_VOID;
+	master->aggregating = TRUE;
 }
 
 static void
@@ -574,7 +580,7 @@ bond_connection_new (GtkWindow *parent,
                      gpointer user_data)
 {
 	NMConnection *connection;
-	int bond_num, max_bond_num, num;
+	int bond_num = 0, num;
 	GSList *connections, *iter;
 	NMConnection *conn2;
 	NMSettingBond *s_bond;
@@ -589,7 +595,6 @@ bond_connection_new (GtkWindow *parent,
 	nm_connection_add_setting (connection, nm_setting_bond_new ());
 
 	/* Find an available interface name */
-	bond_num = max_bond_num = 0;
 	connections = nm_remote_settings_list_connections (settings);
 	for (iter = connections; iter; iter = iter->next) {
 		conn2 = iter->data;
@@ -604,10 +609,8 @@ bond_connection_new (GtkWindow *parent,
 			continue;
 
 		num = atoi (iface + 4);
-		if (num > max_bond_num)
-			max_bond_num = num;
-		if (num == bond_num)
-			bond_num = max_bond_num + 1;
+		if (bond_num <= num)
+			bond_num = num + 1;
 	}
 	g_slist_free (connections);
 

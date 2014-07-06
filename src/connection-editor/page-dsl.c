@@ -57,9 +57,9 @@ dsl_private_init (CEPageDsl *self)
 
 	builder = CE_PAGE (self)->builder;
 
-	priv->username = GTK_ENTRY (GTK_WIDGET (gtk_builder_get_object (builder, "dsl_username")));
-	priv->password = GTK_ENTRY (GTK_WIDGET (gtk_builder_get_object (builder, "dsl_password")));
-	priv->service = GTK_ENTRY (GTK_WIDGET (gtk_builder_get_object (builder, "dsl_service")));
+	priv->username = GTK_ENTRY (gtk_builder_get_object (builder, "dsl_username"));
+	priv->password = GTK_ENTRY (gtk_builder_get_object (builder, "dsl_password"));
+	priv->service = GTK_ENTRY (gtk_builder_get_object (builder, "dsl_service"));
 }
 
 static void
@@ -68,7 +68,6 @@ populate_ui (CEPageDsl *self, NMConnection *connection)
 	CEPageDslPrivate *priv = CE_PAGE_DSL_GET_PRIVATE (self);
 	NMSettingPPPOE *setting = priv->setting;
 	const char *str;
-	GHashTable *secrets = NULL;
 
 	str = nm_setting_pppoe_get_username (setting);
 	if (str)
@@ -78,9 +77,6 @@ populate_ui (CEPageDsl *self, NMConnection *connection)
 	str = nm_setting_pppoe_get_password (setting);
 	if (str)
 		gtk_entry_set_text (priv->password, str);
-
-	if (secrets)
-		g_hash_table_destroy (secrets);
 
 	str = nm_setting_pppoe_get_service (setting);
 	if (str)

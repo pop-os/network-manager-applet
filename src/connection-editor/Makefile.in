@@ -117,9 +117,12 @@ am_nm_connection_editor_OBJECTS =  \
 	nm_connection_editor-page-vpn.$(OBJEXT) \
 	nm_connection_editor-page-master.$(OBJEXT) \
 	nm_connection_editor-page-bond.$(OBJEXT) \
+	nm_connection_editor-page-team.$(OBJEXT) \
+	nm_connection_editor-page-team-port.$(OBJEXT) \
 	nm_connection_editor-page-bridge.$(OBJEXT) \
 	nm_connection_editor-page-bridge-port.$(OBJEXT) \
 	nm_connection_editor-page-vlan.$(OBJEXT) \
+	nm_connection_editor-page-dcb.$(OBJEXT) \
 	nm_connection_editor-vpn-helpers.$(OBJEXT) \
 	nm_connection_editor-ip4-routes-dialog.$(OBJEXT) \
 	nm_connection_editor-ip6-routes-dialog.$(OBJEXT) \
@@ -245,9 +248,6 @@ CPP = @CPP@
 CPPFLAGS = @CPPFLAGS@
 CYGPATH_W = @CYGPATH_W@
 DATADIRNAME = @DATADIRNAME@
-DBUS_126_CFLAGS = @DBUS_126_CFLAGS@
-DBUS_126_LIBS = @DBUS_126_LIBS@
-DBUS_SYS_DIR = @DBUS_SYS_DIR@
 DEFS = @DEFS@
 DEPDIR = @DEPDIR@
 DISABLE_DEPRECATED = @DISABLE_DEPRECATED@
@@ -419,6 +419,7 @@ top_srcdir = @top_srcdir@
 nm_connection_editor_CPPFLAGS = \
 	$(GTK_CFLAGS) \
 	$(NMA_CFLAGS) \
+	-DNM_VERSION_MAX_ALLOWED=NM_VERSION_0_9_10 \
 	-DICONDIR=\""$(datadir)/icons"\" \
 	-DUIDIR=\""$(uidir)"\" \
 	-DBINDIR=\""$(bindir)"\" \
@@ -471,12 +472,18 @@ nm_connection_editor_SOURCES = \
 	page-master.c \
 	page-bond.h \
 	page-bond.c \
+	page-team.h \
+	page-team.c \
+	page-team-port.h \
+	page-team-port.c \
 	page-bridge.h \
 	page-bridge.c \
 	page-bridge-port.h \
 	page-bridge-port.c \
 	page-vlan.h \
 	page-vlan.c \
+	page-dcb.c \
+	page-dcb.h \
 	vpn-helpers.h \
 	vpn-helpers.c \
 	ip4-routes-dialog.h \
@@ -510,6 +517,8 @@ ui_DATA = \
 	ce-page-wimax.ui \
 	ce-page-infiniband.ui \
 	ce-page-bond.ui \
+	ce-page-team.ui \
+	ce-page-team-port.ui \
 	ce-page-bridge.ui \
 	ce-page-bridge-port.ui \
 	ce-page-ip4.ui \
@@ -520,7 +529,8 @@ ui_DATA = \
 	ce-page-mobile.ui \
 	ce-page-ppp.ui \
 	ce-ppp-auth-methods.ui \
-	ce-page-vlan.ui
+	ce-page-vlan.ui \
+	ce-page-dcb.ui
 
 BUILT_SOURCES = nm-connection-editor-service-glue.h
 CLEANFILES = *.bak $(BUILT_SOURCES)
@@ -632,6 +642,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/nm_connection_editor-page-bond.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/nm_connection_editor-page-bridge-port.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/nm_connection_editor-page-bridge.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/nm_connection_editor-page-dcb.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/nm_connection_editor-page-dsl.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/nm_connection_editor-page-ethernet.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/nm_connection_editor-page-general.Po@am__quote@
@@ -641,6 +652,8 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/nm_connection_editor-page-master.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/nm_connection_editor-page-mobile.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/nm_connection_editor-page-ppp.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/nm_connection_editor-page-team-port.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/nm_connection_editor-page-team.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/nm_connection_editor-page-vlan.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/nm_connection_editor-page-vpn.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/nm_connection_editor-page-wifi-security.Po@am__quote@
@@ -939,6 +952,34 @@ nm_connection_editor-page-bond.obj: page-bond.c
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(nm_connection_editor_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o nm_connection_editor-page-bond.obj `if test -f 'page-bond.c'; then $(CYGPATH_W) 'page-bond.c'; else $(CYGPATH_W) '$(srcdir)/page-bond.c'; fi`
 
+nm_connection_editor-page-team.o: page-team.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(nm_connection_editor_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT nm_connection_editor-page-team.o -MD -MP -MF $(DEPDIR)/nm_connection_editor-page-team.Tpo -c -o nm_connection_editor-page-team.o `test -f 'page-team.c' || echo '$(srcdir)/'`page-team.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/nm_connection_editor-page-team.Tpo $(DEPDIR)/nm_connection_editor-page-team.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='page-team.c' object='nm_connection_editor-page-team.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(nm_connection_editor_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o nm_connection_editor-page-team.o `test -f 'page-team.c' || echo '$(srcdir)/'`page-team.c
+
+nm_connection_editor-page-team.obj: page-team.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(nm_connection_editor_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT nm_connection_editor-page-team.obj -MD -MP -MF $(DEPDIR)/nm_connection_editor-page-team.Tpo -c -o nm_connection_editor-page-team.obj `if test -f 'page-team.c'; then $(CYGPATH_W) 'page-team.c'; else $(CYGPATH_W) '$(srcdir)/page-team.c'; fi`
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/nm_connection_editor-page-team.Tpo $(DEPDIR)/nm_connection_editor-page-team.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='page-team.c' object='nm_connection_editor-page-team.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(nm_connection_editor_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o nm_connection_editor-page-team.obj `if test -f 'page-team.c'; then $(CYGPATH_W) 'page-team.c'; else $(CYGPATH_W) '$(srcdir)/page-team.c'; fi`
+
+nm_connection_editor-page-team-port.o: page-team-port.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(nm_connection_editor_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT nm_connection_editor-page-team-port.o -MD -MP -MF $(DEPDIR)/nm_connection_editor-page-team-port.Tpo -c -o nm_connection_editor-page-team-port.o `test -f 'page-team-port.c' || echo '$(srcdir)/'`page-team-port.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/nm_connection_editor-page-team-port.Tpo $(DEPDIR)/nm_connection_editor-page-team-port.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='page-team-port.c' object='nm_connection_editor-page-team-port.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(nm_connection_editor_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o nm_connection_editor-page-team-port.o `test -f 'page-team-port.c' || echo '$(srcdir)/'`page-team-port.c
+
+nm_connection_editor-page-team-port.obj: page-team-port.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(nm_connection_editor_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT nm_connection_editor-page-team-port.obj -MD -MP -MF $(DEPDIR)/nm_connection_editor-page-team-port.Tpo -c -o nm_connection_editor-page-team-port.obj `if test -f 'page-team-port.c'; then $(CYGPATH_W) 'page-team-port.c'; else $(CYGPATH_W) '$(srcdir)/page-team-port.c'; fi`
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/nm_connection_editor-page-team-port.Tpo $(DEPDIR)/nm_connection_editor-page-team-port.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='page-team-port.c' object='nm_connection_editor-page-team-port.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(nm_connection_editor_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o nm_connection_editor-page-team-port.obj `if test -f 'page-team-port.c'; then $(CYGPATH_W) 'page-team-port.c'; else $(CYGPATH_W) '$(srcdir)/page-team-port.c'; fi`
+
 nm_connection_editor-page-bridge.o: page-bridge.c
 @am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(nm_connection_editor_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT nm_connection_editor-page-bridge.o -MD -MP -MF $(DEPDIR)/nm_connection_editor-page-bridge.Tpo -c -o nm_connection_editor-page-bridge.o `test -f 'page-bridge.c' || echo '$(srcdir)/'`page-bridge.c
 @am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/nm_connection_editor-page-bridge.Tpo $(DEPDIR)/nm_connection_editor-page-bridge.Po
@@ -980,6 +1021,20 @@ nm_connection_editor-page-vlan.obj: page-vlan.c
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='page-vlan.c' object='nm_connection_editor-page-vlan.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(nm_connection_editor_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o nm_connection_editor-page-vlan.obj `if test -f 'page-vlan.c'; then $(CYGPATH_W) 'page-vlan.c'; else $(CYGPATH_W) '$(srcdir)/page-vlan.c'; fi`
+
+nm_connection_editor-page-dcb.o: page-dcb.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(nm_connection_editor_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT nm_connection_editor-page-dcb.o -MD -MP -MF $(DEPDIR)/nm_connection_editor-page-dcb.Tpo -c -o nm_connection_editor-page-dcb.o `test -f 'page-dcb.c' || echo '$(srcdir)/'`page-dcb.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/nm_connection_editor-page-dcb.Tpo $(DEPDIR)/nm_connection_editor-page-dcb.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='page-dcb.c' object='nm_connection_editor-page-dcb.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(nm_connection_editor_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o nm_connection_editor-page-dcb.o `test -f 'page-dcb.c' || echo '$(srcdir)/'`page-dcb.c
+
+nm_connection_editor-page-dcb.obj: page-dcb.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(nm_connection_editor_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT nm_connection_editor-page-dcb.obj -MD -MP -MF $(DEPDIR)/nm_connection_editor-page-dcb.Tpo -c -o nm_connection_editor-page-dcb.obj `if test -f 'page-dcb.c'; then $(CYGPATH_W) 'page-dcb.c'; else $(CYGPATH_W) '$(srcdir)/page-dcb.c'; fi`
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/nm_connection_editor-page-dcb.Tpo $(DEPDIR)/nm_connection_editor-page-dcb.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='page-dcb.c' object='nm_connection_editor-page-dcb.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(nm_connection_editor_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o nm_connection_editor-page-dcb.obj `if test -f 'page-dcb.c'; then $(CYGPATH_W) 'page-dcb.c'; else $(CYGPATH_W) '$(srcdir)/page-dcb.c'; fi`
 
 nm_connection_editor-vpn-helpers.o: vpn-helpers.c
 @am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(nm_connection_editor_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT nm_connection_editor-vpn-helpers.o -MD -MP -MF $(DEPDIR)/nm_connection_editor-vpn-helpers.Tpo -c -o nm_connection_editor-vpn-helpers.o `test -f 'vpn-helpers.c' || echo '$(srcdir)/'`vpn-helpers.c

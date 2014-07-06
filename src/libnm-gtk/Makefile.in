@@ -136,7 +136,8 @@ libnm_gtk_la_DEPENDENCIES = $(am__DEPENDENCIES_1) \
 am_libnm_gtk_la_OBJECTS = libnm_gtk_la-nm-wifi-dialog.lo \
 	libnm_gtk_la-nm-wireless-dialog.lo \
 	libnm_gtk_la-nm-mobile-wizard.lo libnm_gtk_la-nm-ui-utils.lo \
-	libnm_gtk_la-nm-mobile-providers.lo
+	libnm_gtk_la-nm-mobile-providers.lo \
+	libnm_gtk_la-nm-vpn-password-dialog.lo
 libnm_gtk_la_OBJECTS = $(am_libnm_gtk_la_OBJECTS)
 AM_V_lt = $(am__v_lt_@AM_V@)
 am__v_lt_ = $(am__v_lt_@AM_DEFAULT_V@)
@@ -268,9 +269,6 @@ CPP = @CPP@
 CPPFLAGS = @CPPFLAGS@
 CYGPATH_W = @CYGPATH_W@
 DATADIRNAME = @DATADIRNAME@
-DBUS_126_CFLAGS = @DBUS_126_CFLAGS@
-DBUS_126_LIBS = @DBUS_126_LIBS@
-DBUS_SYS_DIR = @DBUS_SYS_DIR@
 DEFS = @DEFS@
 DEPDIR = @DEPDIR@
 DISABLE_DEPRECATED = @DISABLE_DEPRECATED@
@@ -448,7 +446,8 @@ libnmgtk_HEADERS = \
 	nm-wireless-dialog.h \
 	nm-mobile-wizard.h \
 	nm-ui-utils.h \
-	nm-mobile-providers.h
+	nm-mobile-providers.h \
+	nm-vpn-password-dialog.h
 
 lib_LTLIBRARIES = libnm-gtk.la
 libnm_gtk_la_SOURCES = \
@@ -456,7 +455,8 @@ libnm_gtk_la_SOURCES = \
 	nm-wireless-dialog.c \
 	nm-mobile-wizard.c \
 	nm-ui-utils.c \
-	nm-mobile-providers.c
+	nm-mobile-providers.c \
+	nm-vpn-password-dialog.c
 
 libnm_gtk_la_CFLAGS = \
 	$(GTK_CFLAGS) \
@@ -591,6 +591,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libnm_gtk_la-nm-mobile-providers.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libnm_gtk_la-nm-mobile-wizard.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libnm_gtk_la-nm-ui-utils.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libnm_gtk_la-nm-vpn-password-dialog.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libnm_gtk_la-nm-wifi-dialog.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libnm_gtk_la-nm-wireless-dialog.Plo@am__quote@
 
@@ -652,6 +653,13 @@ libnm_gtk_la-nm-mobile-providers.lo: nm-mobile-providers.c
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='nm-mobile-providers.c' object='libnm_gtk_la-nm-mobile-providers.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libnm_gtk_la_CFLAGS) $(CFLAGS) -c -o libnm_gtk_la-nm-mobile-providers.lo `test -f 'nm-mobile-providers.c' || echo '$(srcdir)/'`nm-mobile-providers.c
+
+libnm_gtk_la-nm-vpn-password-dialog.lo: nm-vpn-password-dialog.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libnm_gtk_la_CFLAGS) $(CFLAGS) -MT libnm_gtk_la-nm-vpn-password-dialog.lo -MD -MP -MF $(DEPDIR)/libnm_gtk_la-nm-vpn-password-dialog.Tpo -c -o libnm_gtk_la-nm-vpn-password-dialog.lo `test -f 'nm-vpn-password-dialog.c' || echo '$(srcdir)/'`nm-vpn-password-dialog.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libnm_gtk_la-nm-vpn-password-dialog.Tpo $(DEPDIR)/libnm_gtk_la-nm-vpn-password-dialog.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='nm-vpn-password-dialog.c' object='libnm_gtk_la-nm-vpn-password-dialog.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libnm_gtk_la_CFLAGS) $(CFLAGS) -c -o libnm_gtk_la-nm-vpn-password-dialog.lo `test -f 'nm-vpn-password-dialog.c' || echo '$(srcdir)/'`nm-vpn-password-dialog.c
 
 mostlyclean-libtool:
 	-rm -f *.lo

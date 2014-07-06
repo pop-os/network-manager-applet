@@ -6,10 +6,10 @@
 # 
 msgid ""
 msgstr ""
-"Project-Id-Version: 3.10\n"
+"Project-Id-Version: 3.8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-23 00:32+0100\n"
-"PO-Revision-Date: 2013-09-23 00:35+0000\n"
+"POT-Creation-Date: 2013-03-08 00:20+0000\n"
+"PO-Revision-Date: 2013-03-08 00:00+0000\n"
 "Last-Translator: Duarte Loreto <happyguy_pt@hotmail.com>\n"
 "Language-Team: Portuguese <gnome_pt@yahoogroups.com>\n"
 "Language: pt\n"
@@ -101,10 +101,20 @@ msgstr ""
 "applet."
 
 #: ../org.gnome.nm-applet.gschema.xml.in.h:13
+msgid "Show the applet in notification area"
+msgstr "Apresentar a applet na área de notificação"
+
+#: ../org.gnome.nm-applet.gschema.xml.in.h:14
+msgid "Set to FALSE to disable displaying the applet in the notification area."
+msgstr ""
+"Definir como FALSO para desativar a apresentação da applet na área de "
+"notificação."
+
+#: ../org.gnome.nm-applet.gschema.xml.in.h:15
 msgid "Ignore CA certificate"
 msgstr "Ignorar o certificado da AC"
 
-#: ../org.gnome.nm-applet.gschema.xml.in.h:14
+#: ../org.gnome.nm-applet.gschema.xml.in.h:16
 msgid ""
 "Set this to true to disable warnings about CA certificates in EAP "
 "authentication."
@@ -112,7 +122,7 @@ msgstr ""
 "Defina como verdadeiro para desativar avisos sobre os certificados das ACs "
 "(Autoridades de Certificação) na autenticação EAP."
 
-#: ../org.gnome.nm-applet.gschema.xml.in.h:15
+#: ../org.gnome.nm-applet.gschema.xml.in.h:17
 msgid ""
 "Set this to true to disable warnings about CA certificates in phase 2 of EAP "
 "authentication."
@@ -361,7 +371,7 @@ msgstr "_Desligar VPN"
 msgid "NetworkManager is not running..."
 msgstr "O Gestor de Rede não está em execução..."
 
-#: ../src/applet.c:1883 ../src/applet.c:2735
+#: ../src/applet.c:1883 ../src/applet.c:2738
 msgid "Networking disabled"
 msgstr "Rede inativada"
 
@@ -418,52 +428,52 @@ msgstr "Desligado"
 msgid "The network connection has been disconnected."
 msgstr "A ligação de rede foi terminada."
 
-#: ../src/applet.c:2598
+#: ../src/applet.c:2600
 #, c-format
 msgid "Preparing network connection '%s'..."
 msgstr "A preparar ligação de rede '%s'..."
 
-#: ../src/applet.c:2601
+#: ../src/applet.c:2603
 #, c-format
 msgid "User authentication required for network connection '%s'..."
 msgstr "Autenticação de utilizador necessária para ligação de rede '%s'..."
 
-#: ../src/applet.c:2604 ../src/applet-device-bt.c:235
+#: ../src/applet.c:2606 ../src/applet-device-bt.c:235
 #: ../src/applet-device-wimax.c:469 ../src/mobile-helpers.c:594
 #, c-format
 msgid "Requesting a network address for '%s'..."
 msgstr "A pedir um endereço de rede para '%s'..."
 
-#: ../src/applet.c:2607
+#: ../src/applet.c:2609
 #, c-format
 msgid "Network connection '%s' active"
 msgstr "Ligação de rede '%s' ativa"
 
-#: ../src/applet.c:2690
+#: ../src/applet.c:2692
 #, c-format
 msgid "Starting VPN connection '%s'..."
 msgstr "A iniciar ligação VPN '%s'..."
 
-#: ../src/applet.c:2693
+#: ../src/applet.c:2695
 #, c-format
 msgid "User authentication required for VPN connection '%s'..."
 msgstr "Autenticação de utilizador necessária para ligação VPN '%s'..."
 
-#: ../src/applet.c:2696
+#: ../src/applet.c:2698
 #, c-format
 msgid "Requesting a VPN address for '%s'..."
 msgstr "A pedir um endereço de rede VPN para '%s'..."
 
-#: ../src/applet.c:2699
+#: ../src/applet.c:2701
 #, c-format
 msgid "VPN connection '%s' active"
 msgstr "Ligação VPN '%s' ativa"
 
-#: ../src/applet.c:2740
+#: ../src/applet.c:2743
 msgid "No network connection"
 msgstr "Sem ligação à rede"
 
-#: ../src/applet.c:3442
+#: ../src/applet.c:3459
 msgid "NetworkManager Applet"
 msgstr "Applet do Gestor de Rede"
 
@@ -1277,7 +1287,7 @@ msgstr "Tempo de _envelhecimento:"
 msgid "automatic"
 msgstr "automático"
 
-#: ../src/connection-editor/ce-page.c:362
+#: ../src/connection-editor/ce-page.c:356
 msgid "Failed to update connection secrets due to an unknown error."
 msgstr "Incapaz de atualizar segredos da ligação devido a um desconhecido."
 
@@ -1312,6 +1322,18 @@ msgid "_Password:"
 msgstr "_Senha:"
 
 #: ../src/connection-editor/ce-page-ethernet.ui.h:1
+#: ../src/connection-editor/ce-page-infiniband.ui.h:1
+#: ../src/connection-editor/ce-page-vlan.ui.h:1
+#: ../src/connection-editor/ce-page-ethernet.ui.h:2
+#: ../src/connection-editor/ce-page-infiniband.ui.h:2
+#: ../src/connection-editor/ce-page-vlan.ui.h:2
+msgid "Only on activation"
+msgstr "Apenas ao ativar"
+
+#: ../src/connection-editor/ce-page-ethernet.ui.h:3
+#: ../src/connection-editor/ce-page-infiniband.ui.h:3
+#: ../src/connection-editor/ce-page-vlan.ui.h:3
+#: ../src/connection-editor/ce-page-ethernet.ui.h:4
 #: ../src/connection-editor/ce-page-ip4.ui.h:1
 #: ../src/connection-editor/ce-page-ip6.ui.h:1
 #: ../src/connection-editor/ce-page-wifi.ui.h:1
@@ -1320,67 +1342,67 @@ msgstr "_Senha:"
 msgid "Automatic"
 msgstr "Automático"
 
-#: ../src/connection-editor/ce-page-ethernet.ui.h:2
+#: ../src/connection-editor/ce-page-ethernet.ui.h:5
 msgid "Twisted Pair (TP)"
 msgstr "Par Cruzado (TP)"
 
-#: ../src/connection-editor/ce-page-ethernet.ui.h:3
+#: ../src/connection-editor/ce-page-ethernet.ui.h:6
 msgid "Attachment Unit Interface (AUI)"
 msgstr "Interface de Unidade de Acoplamento (AUI)"
 
-#: ../src/connection-editor/ce-page-ethernet.ui.h:4
+#: ../src/connection-editor/ce-page-ethernet.ui.h:7
 msgid "BNC"
 msgstr "BNC"
 
-#: ../src/connection-editor/ce-page-ethernet.ui.h:5
+#: ../src/connection-editor/ce-page-ethernet.ui.h:8
 msgid "Media Independent Interface (MII)"
 msgstr "Interface Independente do Meio (MII)"
 
-#: ../src/connection-editor/ce-page-ethernet.ui.h:6
+#: ../src/connection-editor/ce-page-ethernet.ui.h:9
 msgid "10 Mb/s"
 msgstr "10 Mb/s"
 
-#: ../src/connection-editor/ce-page-ethernet.ui.h:7
+#: ../src/connection-editor/ce-page-ethernet.ui.h:10
 msgid "100 Mb/s"
 msgstr "100 Mb/s"
 
-#: ../src/connection-editor/ce-page-ethernet.ui.h:8
+#: ../src/connection-editor/ce-page-ethernet.ui.h:11
 msgid "1 Gb/s"
 msgstr "1 Gb/s"
 
-#: ../src/connection-editor/ce-page-ethernet.ui.h:9
+#: ../src/connection-editor/ce-page-ethernet.ui.h:12
 msgid "10 Gb/s"
 msgstr "10 Gb/s"
 
-#: ../src/connection-editor/ce-page-ethernet.ui.h:10
+#: ../src/connection-editor/ce-page-ethernet.ui.h:13
 msgid "_Port:"
 msgstr "_Porta:"
 
-#: ../src/connection-editor/ce-page-ethernet.ui.h:11
+#: ../src/connection-editor/ce-page-ethernet.ui.h:14
 msgid "_Speed:"
 msgstr "_Velocidade:"
 
-#: ../src/connection-editor/ce-page-ethernet.ui.h:12
+#: ../src/connection-editor/ce-page-ethernet.ui.h:15
 msgid "Full duple_x"
 msgstr "Full duple_x"
 
-#: ../src/connection-editor/ce-page-ethernet.ui.h:13
+#: ../src/connection-editor/ce-page-ethernet.ui.h:16
 msgid "Aut_onegotiate"
 msgstr "Aut_o-negociar"
 
-#: ../src/connection-editor/ce-page-ethernet.ui.h:14
-#: ../src/connection-editor/ce-page-infiniband.ui.h:2
+#: ../src/connection-editor/ce-page-ethernet.ui.h:17
+#: ../src/connection-editor/ce-page-infiniband.ui.h:5
 #: ../src/connection-editor/ce-page-wifi.ui.h:8
 #: ../src/connection-editor/ce-page-wimax.ui.h:1
 msgid "_Device MAC address:"
 msgstr "Endereço MAC do _dispositivo:"
 
-#: ../src/connection-editor/ce-page-ethernet.ui.h:15
+#: ../src/connection-editor/ce-page-ethernet.ui.h:18
 #: ../src/connection-editor/ce-page-wifi.ui.h:10
 msgid "C_loned MAC address:"
 msgstr "Endereço MAC c_lonado:"
 
-#: ../src/connection-editor/ce-page-ethernet.ui.h:16
+#: ../src/connection-editor/ce-page-ethernet.ui.h:19
 #: ../src/connection-editor/ce-page-wifi.ui.h:9
 msgid ""
 "The MAC address entered here will be used as hardware address for the "
@@ -1391,19 +1413,25 @@ msgstr ""
 "dispositivo de rede onde esta ligação está ativa.  Esta funcionalidade é "
 "conhecida como clonagem MAC ou \"spoofing\".  Exemplo: 00:11:22:33:44:55"
 
-#: ../src/connection-editor/ce-page-ethernet.ui.h:17
-#: ../src/connection-editor/ce-page-infiniband.ui.h:4
-#: ../src/connection-editor/ce-page-vlan.ui.h:4
+#: ../src/connection-editor/ce-page-ethernet.ui.h:20
+#: ../src/connection-editor/ce-page-infiniband.ui.h:7
+#: ../src/connection-editor/ce-page-vlan.ui.h:7
 #: ../src/connection-editor/ce-page-wifi.ui.h:7
 msgid "_MTU:"
 msgstr "_MTU:"
 
-#: ../src/connection-editor/ce-page-ethernet.ui.h:18
-#: ../src/connection-editor/ce-page-infiniband.ui.h:3
-#: ../src/connection-editor/ce-page-vlan.ui.h:5
+#: ../src/connection-editor/ce-page-ethernet.ui.h:21
+#: ../src/connection-editor/ce-page-infiniband.ui.h:6
+#: ../src/connection-editor/ce-page-vlan.ui.h:8
 #: ../src/connection-editor/ce-page-wifi.ui.h:6
 msgid "bytes"
 msgstr "bytes"
+
+#: ../src/connection-editor/ce-page-ethernet.ui.h:22
+#: ../src/connection-editor/ce-page-infiniband.ui.h:8
+#: ../src/connection-editor/ce-page-vlan.ui.h:10
+msgid "Carrier de_tect:"
+msgstr "De_tecção de transportador:"
 
 #: ../src/connection-editor/ce-page-general.ui.h:1
 msgid "Automatically connect to _VPN when using this connection"
@@ -1421,17 +1449,17 @@ msgstr "Ligar _automaticamente a esta rede quando ela estiver disponível"
 msgid "Firewall _zone:"
 msgstr "_Zona de firewall:"
 
-#: ../src/connection-editor/ce-page-infiniband.ui.h:1
+#: ../src/connection-editor/ce-page-infiniband.ui.h:4
 msgid "_Transport mode:"
 msgstr "Modo de _transporte:"
 
 #. IP-over-InfiniBand "datagram mode"
-#: ../src/connection-editor/ce-page-infiniband.ui.h:6
+#: ../src/connection-editor/ce-page-infiniband.ui.h:10
 msgid "Datagram"
 msgstr "Datagrama"
 
 #. IP-over-InfiniBand "connected mode"
-#: ../src/connection-editor/ce-page-infiniband.ui.h:8
+#: ../src/connection-editor/ce-page-infiniband.ui.h:12
 msgid "Connected"
 msgstr "Ligado"
 
@@ -1662,29 +1690,29 @@ msgstr "Eco"
 msgid "Send PPP _echo packets"
 msgstr "Enviar pacotes de _eco PPP"
 
-#: ../src/connection-editor/ce-page-vlan.ui.h:1
+#: ../src/connection-editor/ce-page-vlan.ui.h:4
 msgid "_Parent interface:"
 msgstr "Interface _pai:"
 
-#: ../src/connection-editor/ce-page-vlan.ui.h:2
+#: ../src/connection-editor/ce-page-vlan.ui.h:5
 msgid "VLAN interface _name:"
 msgstr "_Nome do interface VLAN:"
 
-#: ../src/connection-editor/ce-page-vlan.ui.h:3
+#: ../src/connection-editor/ce-page-vlan.ui.h:6
 msgid "_Cloned MAC address:"
 msgstr "Endereço MAC _clonado:"
 
-#: ../src/connection-editor/ce-page-vlan.ui.h:6
+#: ../src/connection-editor/ce-page-vlan.ui.h:9
 msgid "VLAN _id:"
 msgstr "_Id VLAN:"
 
 #. In context, this means "concatenate the device name and the VLAN ID number together"
-#: ../src/connection-editor/ce-page-vlan.ui.h:8
+#: ../src/connection-editor/ce-page-vlan.ui.h:12
 msgid "Device name + number"
 msgstr "Nome + número do dispositivo"
 
 #. LEAVE "vlan" UNTRANSLATED. In context, this means "concatenate the string 'vlan' and the VLAN ID number together".
-#: ../src/connection-editor/ce-page-vlan.ui.h:10
+#: ../src/connection-editor/ce-page-vlan.ui.h:14
 msgid "\"vlan\" + number"
 msgstr "\"vlan\" + número"
 
@@ -1827,13 +1855,13 @@ msgid "Prefix"
 msgstr "Prefixo"
 
 #: ../src/connection-editor/new-connection.c:101
-#: ../src/connection-editor/page-ethernet.c:251
+#: ../src/connection-editor/page-ethernet.c:272
 #: ../src/libnm-gtk/nm-ui-utils.c:323
 msgid "Ethernet"
 msgstr "Ethernet"
 
 #: ../src/connection-editor/new-connection.c:107
-#: ../src/connection-editor/page-wifi.c:483 ../src/libnm-gtk/nm-ui-utils.c:325
+#: ../src/connection-editor/page-wifi.c:471 ../src/libnm-gtk/nm-ui-utils.c:325
 msgid "Wi-Fi"
 msgstr "Wi-Fi"
 
@@ -1849,25 +1877,25 @@ msgid "DSL"
 msgstr "DSL"
 
 #: ../src/connection-editor/new-connection.c:131
-#: ../src/connection-editor/page-infiniband.c:168
+#: ../src/connection-editor/page-infiniband.c:189
 #: ../src/libnm-gtk/nm-ui-utils.c:335
 msgid "InfiniBand"
 msgstr "InfiniBand"
 
 #: ../src/connection-editor/new-connection.c:137
-#: ../src/connection-editor/page-bond.c:439 ../src/libnm-gtk/nm-ui-utils.c:337
+#: ../src/connection-editor/page-bond.c:419 ../src/libnm-gtk/nm-ui-utils.c:337
 #: ../src/libnm-gtk/nm-ui-utils.c:559
 msgid "Bond"
 msgstr "Combinar"
 
 #: ../src/connection-editor/new-connection.c:143
-#: ../src/connection-editor/page-bridge.c:212
+#: ../src/connection-editor/page-bridge.c:211
 #: ../src/libnm-gtk/nm-ui-utils.c:339 ../src/libnm-gtk/nm-ui-utils.c:561
 msgid "Bridge"
 msgstr "Ponte"
 
 #: ../src/connection-editor/new-connection.c:149
-#: ../src/connection-editor/page-vlan.c:484 ../src/libnm-gtk/nm-ui-utils.c:341
+#: ../src/connection-editor/page-vlan.c:504 ../src/libnm-gtk/nm-ui-utils.c:341
 #: ../src/libnm-gtk/nm-ui-utils.c:563
 msgid "VLAN"
 msgstr "VLAN"
@@ -1929,50 +1957,50 @@ msgstr ""
 "O editor de ligação foi incapaz de encontrar alguns recursos necessários (o "
 "ficheiro .ui não foi encontrado)."
 
-#: ../src/connection-editor/nm-connection-editor.c:413
+#: ../src/connection-editor/nm-connection-editor.c:408
 msgid "_Save"
 msgstr "_Gravar"
 
-#: ../src/connection-editor/nm-connection-editor.c:414
+#: ../src/connection-editor/nm-connection-editor.c:409
 msgid "Save any changes made to this connection."
 msgstr "Guardar quaisquer alterações feitas a esta ligação."
 
-#: ../src/connection-editor/nm-connection-editor.c:415
+#: ../src/connection-editor/nm-connection-editor.c:410
 msgid "_Save..."
 msgstr "_Gravar..."
 
-#: ../src/connection-editor/nm-connection-editor.c:416
+#: ../src/connection-editor/nm-connection-editor.c:411
 msgid "Authenticate to save this connection for all users of this machine."
 msgstr ""
 "Autentique-se para gravar esta ligação para todos os utilizadores deste "
 "computador."
 
-#: ../src/connection-editor/nm-connection-editor.c:432
+#: ../src/connection-editor/nm-connection-editor.c:427
 msgid "Could not create connection"
 msgstr "Incapaz de criar a ligação"
 
-#: ../src/connection-editor/nm-connection-editor.c:432
+#: ../src/connection-editor/nm-connection-editor.c:427
 msgid "Could not edit connection"
 msgstr "Incapaz de editar ligação"
 
-#: ../src/connection-editor/nm-connection-editor.c:434
+#: ../src/connection-editor/nm-connection-editor.c:429
 msgid "Unknown error creating connection editor dialog."
 msgstr "Erro desconhecido ao criar o diálogo de edição de ligação."
 
-#: ../src/connection-editor/nm-connection-editor.c:541
+#: ../src/connection-editor/nm-connection-editor.c:536
 msgid "Error saving connection"
 msgstr "Erro ao gravar a ligação"
 
-#: ../src/connection-editor/nm-connection-editor.c:542
+#: ../src/connection-editor/nm-connection-editor.c:537
 #, c-format
 msgid "The property '%s' / '%s' is invalid: %d"
 msgstr "A propriedade '%s' / '%s' é inválida: %d"
 
-#: ../src/connection-editor/nm-connection-editor.c:641
+#: ../src/connection-editor/nm-connection-editor.c:631
 msgid "Error initializing editor"
 msgstr "Erro ao inicializar editor"
 
-#: ../src/connection-editor/nm-connection-editor.c:962
+#: ../src/connection-editor/nm-connection-editor.c:952
 msgid "Connection add failed"
 msgstr "Adição de ligação falhou"
 
@@ -2061,24 +2089,20 @@ msgstr "_Apagar..."
 msgid "Authenticate to delete the selected connection"
 msgstr "Autentique-se para apagar a ligação selecionada"
 
-#: ../src/connection-editor/nm-connection-list.c:943
-msgid "No VPN plugins are installed."
-msgstr "Não existem plugins de VPN instalados."
+#: ../src/connection-editor/nm-connection-list.c:942
+msgid "Error creating connection"
+msgstr "Erro ao criar ligação"
 
-#: ../src/connection-editor/nm-connection-list.c:945
+#: ../src/connection-editor/nm-connection-list.c:943
 #, c-format
 msgid "Don't know how to create '%s' connections"
 msgstr "Desconhece-se com criar ligações \"%s\""
 
-#: ../src/connection-editor/nm-connection-list.c:947
-msgid "Error creating connection"
-msgstr "Erro ao criar ligação"
-
-#: ../src/connection-editor/nm-connection-list.c:1003
+#: ../src/connection-editor/nm-connection-list.c:998
 msgid "Error editing connection"
 msgstr "Erro ao editar ligação"
 
-#: ../src/connection-editor/nm-connection-list.c:1004
+#: ../src/connection-editor/nm-connection-list.c:999
 #, c-format
 msgid "Did not find a connection with UUID '%s'"
 msgstr "Não foi encontrada ligação com UUID \"%s\""
@@ -2095,20 +2119,20 @@ msgstr "Incapaz de ler o interface de utilizador de Segurança 802.1x."
 msgid "Use 802.1_X security for this connection"
 msgstr "Utilizar segurança 802.1_X para esta ligação"
 
-#: ../src/connection-editor/page-bond.c:442
+#: ../src/connection-editor/page-bond.c:422
 msgid "Could not load bond user interface."
 msgstr "Incapaz de ler o interface de utilizador de combinar."
 
-#: ../src/connection-editor/page-bond.c:584
+#: ../src/connection-editor/page-bond.c:561
 #, c-format
 msgid "Bond connection %d"
 msgstr "Combinar ligação %d"
 
-#: ../src/connection-editor/page-bridge.c:215
+#: ../src/connection-editor/page-bridge.c:214
 msgid "Could not load bridge user interface."
 msgstr "Incapaz de ler o interface de utilizador de ponte."
 
-#: ../src/connection-editor/page-bridge.c:310
+#: ../src/connection-editor/page-bridge.c:309
 #, c-format
 msgid "Bridge connection %d"
 msgstr "Ponte na ligação %d"
@@ -2133,8 +2157,8 @@ msgstr "Incapaz de ler o interface de utilizador de DSL."
 msgid "DSL connection %d"
 msgstr "Ligação DSL %d"
 
-#: ../src/connection-editor/page-ethernet.c:90
-#: ../src/connection-editor/page-infiniband.c:74
+#: ../src/connection-editor/page-ethernet.c:95
+#: ../src/connection-editor/page-infiniband.c:79
 #: ../src/connection-editor/page-wifi.c:113
 #: ../src/connection-editor/page-wimax.c:70
 msgid ""
@@ -2144,11 +2168,11 @@ msgstr ""
 "Esta opção bloqueia esta ligação ao dispositivo de rede especificado pelo "
 "endereço MAC permanente inserido aqui.  Exemplo: 00:11:22:33:44:55"
 
-#: ../src/connection-editor/page-ethernet.c:253
+#: ../src/connection-editor/page-ethernet.c:274
 msgid "Could not load ethernet user interface."
 msgstr "Incapaz de ler o interface de utilizador de ethernet."
 
-#: ../src/connection-editor/page-ethernet.c:396
+#: ../src/connection-editor/page-ethernet.c:435
 #, c-format
 msgid "Ethernet connection %d"
 msgstr "Ligação ethernet %d"
@@ -2177,11 +2201,11 @@ msgstr "FirewallD não está em execução."
 msgid "Could not load General user interface."
 msgstr "Incapaz de ler o interface de utilizador Geral."
 
-#: ../src/connection-editor/page-infiniband.c:171
+#: ../src/connection-editor/page-infiniband.c:192
 msgid "Could not load InfiniBand user interface."
 msgstr "Incapaz de ler o interface de utilizador de InfiniBand."
 
-#: ../src/connection-editor/page-infiniband.c:263
+#: ../src/connection-editor/page-infiniband.c:302
 #, c-format
 msgid "InfiniBand connection %d"
 msgstr "Ligação InfiniBand %d"
@@ -2372,11 +2396,11 @@ msgstr "Definições PPP"
 msgid "Could not load PPP user interface."
 msgstr "Incapaz de carregar interface de utilizador de PPP."
 
-#: ../src/connection-editor/page-vlan.c:486
+#: ../src/connection-editor/page-vlan.c:506
 msgid "Could not load vlan user interface."
 msgstr "Incapaz de ler o interface de utilizador de vlan."
 
-#: ../src/connection-editor/page-vlan.c:682
+#: ../src/connection-editor/page-vlan.c:719
 #, c-format
 msgid "VLAN connection %d"
 msgstr "Ligação VLAN %d"
@@ -2440,11 +2464,11 @@ msgstr "predefinição"
 msgid "%u (%u MHz)"
 msgstr "%u (%u MHz)"
 
-#: ../src/connection-editor/page-wifi.c:485
+#: ../src/connection-editor/page-wifi.c:473
 msgid "Could not load Wi-Fi user interface."
 msgstr "Incapaz de ler o interface de utilizador de Wi-Fi."
 
-#: ../src/connection-editor/page-wifi.c:663
+#: ../src/connection-editor/page-wifi.c:650
 #, c-format
 msgid "Wi-Fi connection %d"
 msgstr "Ligação Wi-Fi %d"
@@ -2598,7 +2622,7 @@ msgid "Failed to create DUN connection: %s"
 msgstr "Falhou a criação da ligação DUN: %s"
 
 #: ../src/gnome-bluetooth/nma-bt-device.c:445
-#: ../src/gnome-bluetooth/nma-bt-device.c:985
+#: ../src/gnome-bluetooth/nma-bt-device.c:959
 msgid "Your phone is now ready to use!"
 msgstr "O seu telefone encontra-se agora pronto a utilizar!"
 
@@ -2627,15 +2651,15 @@ msgstr "desligado inesperadamente do telefone."
 msgid "timed out detecting phone details."
 msgstr "tempo expirado ao detetar os detalhes do telefone."
 
-#: ../src/gnome-bluetooth/nma-bt-device.c:816
+#: ../src/gnome-bluetooth/nma-bt-device.c:791
 msgid "Detecting phone configuration..."
 msgstr "A detetar configuração do telefone..."
 
-#: ../src/gnome-bluetooth/nma-bt-device.c:869
-msgid "ModemManager is not running"
-msgstr "ModemManager não está em execução"
+#: ../src/gnome-bluetooth/nma-bt-device.c:823
+msgid "error getting bus connection"
+msgstr "erro ao obter a ligação ao bus"
 
-#: ../src/gnome-bluetooth/nma-bt-device.c:946
+#: ../src/gnome-bluetooth/nma-bt-device.c:920
 msgid ""
 "The default Bluetooth adapter must be enabled before setting up a Dial-Up-"
 "Networking connection."
@@ -2643,12 +2667,12 @@ msgstr ""
 "O adaptador de Bluetooth por omissão deve estar ativo antes de configurar "
 "uma ligação de rede Dial-Up."
 
-#: ../src/gnome-bluetooth/nma-bt-device.c:983
+#: ../src/gnome-bluetooth/nma-bt-device.c:957
 #, c-format
 msgid "Failed to create PAN connection: %s"
 msgstr "Falhou a criação da ligação PAN: %s"
 
-#: ../src/gnome-bluetooth/nma-bt-device.c:1004
+#: ../src/gnome-bluetooth/nma-bt-device.c:978
 #, c-format
 msgid "%s Network"
 msgstr "Rede %s"
@@ -2877,11 +2901,11 @@ msgstr "%s %s"
 msgid "New..."
 msgstr "Nova..."
 
-#: ../src/libnm-gtk/nm-wifi-dialog.c:1055
+#: ../src/libnm-gtk/nm-wifi-dialog.c:1052
 msgid "C_reate"
 msgstr "C_riar"
 
-#: ../src/libnm-gtk/nm-wifi-dialog.c:1154
+#: ../src/libnm-gtk/nm-wifi-dialog.c:1136
 #, c-format
 msgid ""
 "Passwords or encryption keys are required to access the Wi-Fi network '%s'."
@@ -2889,35 +2913,35 @@ msgstr ""
 "Senhas ou chaves de encriptação são necessárias para aceder à rede Wi-Fi "
 "'%s'."
 
-#: ../src/libnm-gtk/nm-wifi-dialog.c:1156
+#: ../src/libnm-gtk/nm-wifi-dialog.c:1138
 msgid "Wi-Fi Network Authentication Required"
 msgstr "Autenticação de Rede Wi-Fi Necessária"
 
-#: ../src/libnm-gtk/nm-wifi-dialog.c:1158
+#: ../src/libnm-gtk/nm-wifi-dialog.c:1140
 msgid "Authentication required by Wi-Fi network"
 msgstr "Autenticação pedida pela rede Wi-Fi"
 
-#: ../src/libnm-gtk/nm-wifi-dialog.c:1163
+#: ../src/libnm-gtk/nm-wifi-dialog.c:1145
 msgid "Create New Wi-Fi Network"
 msgstr "Criar uma Nova Rede Wi-Fi"
 
-#: ../src/libnm-gtk/nm-wifi-dialog.c:1165
+#: ../src/libnm-gtk/nm-wifi-dialog.c:1147
 msgid "New Wi-Fi network"
 msgstr "Nova rede Wi-Fi"
 
-#: ../src/libnm-gtk/nm-wifi-dialog.c:1166
+#: ../src/libnm-gtk/nm-wifi-dialog.c:1148
 msgid "Enter a name for the Wi-Fi network you wish to create."
 msgstr "Introduza um nome para a rede Wi-Fi que deseja criar."
 
-#: ../src/libnm-gtk/nm-wifi-dialog.c:1168
+#: ../src/libnm-gtk/nm-wifi-dialog.c:1150
 msgid "Connect to Hidden Wi-Fi Network"
 msgstr "Ligar-se a Rede Wi-Fi Oculta"
 
-#: ../src/libnm-gtk/nm-wifi-dialog.c:1170
+#: ../src/libnm-gtk/nm-wifi-dialog.c:1152
 msgid "Hidden Wi-Fi network"
 msgstr "Rede Wi-Fi oculta"
 
-#: ../src/libnm-gtk/nm-wifi-dialog.c:1171
+#: ../src/libnm-gtk/nm-wifi-dialog.c:1153
 msgid ""
 "Enter the name and security details of the hidden Wi-Fi network you wish to "
 "connect to."
@@ -3077,8 +3101,8 @@ msgid "Choose CA Certificate"
 msgstr "Escolha o Certificado CA"
 
 #: ../src/wireless-security/eap-method.c:645
-msgid "DER, PEM, or PKCS#12 private keys (*.der, *.pem, *.p12)"
-msgstr "Chaves privadas DER, PEM, ou PKCS#12 (*.der, *.pem, *.p12)"
+msgid "DER, PEM, or PKCS#12 private keys (*.der, *.pem, *.p12, *.key)"
+msgstr "Chaves privadas DER, PEM, ou PKCS#12 (*.der, *.pem, *.p12, *.key)"
 
 #: ../src/wireless-security/eap-method.c:648
 msgid "DER or PEM certificates (*.der, *.pem, *.crt, *.cer)"
@@ -3208,18 +3232,6 @@ msgstr "Chave _Privada:"
 msgid "_Private key password:"
 msgstr "Senha da chave _privada:"
 
-#: ../src/wireless-security/nag-user-dialog.ui.h:1
-msgid "Don't _warn me again"
-msgstr "Não me a_visar novamente"
-
-#: ../src/wireless-security/nag-user-dialog.ui.h:2
-msgid "No"
-msgstr "Não"
-
-#: ../src/wireless-security/nag-user-dialog.ui.h:3
-msgid "Yes"
-msgstr "Sim"
-
 #: ../src/wireless-security/wireless-security.c:394
 msgid "TLS"
 msgstr "TLS"
@@ -3277,24 +3289,6 @@ msgstr "Apresen_tar a chave"
 #: ../src/wireless-security/ws-wep-key.ui.h:10
 msgid "WEP inde_x:"
 msgstr "Índice _WEP:"
-
-#~ msgid "Show the applet in notification area"
-#~ msgstr "Apresentar a applet na área de notificação"
-
-#~ msgid ""
-#~ "Set to FALSE to disable displaying the applet in the notification area."
-#~ msgstr ""
-#~ "Definir como FALSO para desativar a apresentação da applet na área de "
-#~ "notificação."
-
-#~ msgid "Only on activation"
-#~ msgstr "Apenas ao ativar"
-
-#~ msgid "Carrier de_tect:"
-#~ msgstr "De_tecção de transportador:"
-
-#~ msgid "error getting bus connection"
-#~ msgstr "erro ao obter a ligação ao bus"
 
 #~ msgid "Wireless Networks (%s)"
 #~ msgstr "Redes Sem Fios (%s)"
@@ -4051,6 +4045,9 @@ msgstr "Índice _WEP:"
 
 #~ msgid "Finishing connection to the wired network..."
 #~ msgstr "A terminar a ligação à rede sem fios..."
+
+#~ msgid "NetworkManager is not running"
+#~ msgstr "Gestor de Rede não está em execução"
 
 #~ msgid "Connected to an Ad-Hoc wireless network"
 #~ msgstr "Ligado a uma rede sem fios Ad-Hoc"

@@ -38,6 +38,7 @@
 #include "nm-wifi-dialog.h"
 #include "wireless-security.h"
 #include "nm-ui-utils.h"
+#include "eap-method.h"
 
 G_DEFINE_TYPE (NMAWifiDialog, nma_wifi_dialog, GTK_TYPE_DIALOG)
 
@@ -60,14 +61,13 @@ typedef struct {
 	NMConnection *connection;
 	NMDevice *device;
 	NMAccessPoint *ap;
-	gboolean adhoc_create;
+	guint operation;
 
 	GtkTreeModel *device_model;
 	GtkTreeModel *connection_model;
 	GtkSizeGroup *group;
 	GtkWidget *sec_combo;
 
-	gboolean nag_ignored;
 	gboolean network_name_focus;
 
 	gboolean secrets_only;
@@ -78,6 +78,12 @@ typedef struct {
 
 	gboolean disposed;
 } NMAWifiDialogPrivate;
+
+enum {
+	OP_NONE = 0,
+	OP_CREATE_ADHOC,
+	OP_CONNECT_HIDDEN,
+};
 
 #define D_NAME_COLUMN		0
 #define D_DEV_COLUMN		1
@@ -96,17 +102,12 @@ static void ssid_entry_changed (GtkWidget *entry, gpointer user_data);
 void
 nma_wifi_dialog_set_nag_ignored (NMAWifiDialog *self, gboolean ignored)
 {
-	g_return_if_fail (self != NULL);
-
-	NMA_WIFI_DIALOG_GET_PRIVATE (self)->nag_ignored = ignored;
 }
 
 gboolean
 nma_wifi_dialog_get_nag_ignored (NMAWifiDialog *self)
 {
-	g_return_val_if_fail (self != NULL, FALSE);
-
-	return NMA_WIFI_DIALOG_GET_PRIVATE (self)->nag_ignored;
+	return TRUE;
 }
 
 static void
@@ -344,6 +345,9 @@ connection_combo_changed (GtkWidget *combo,
 	                    C_CON_COLUMN, &priv->connection,
 	                    C_NEW_COLUMN, &is_new, -1);
 
+	if (priv->connection)
+		eap_method_ca_cert_ignore_load (priv->connection);
+
 	if (!security_combo_init (self, priv->secrets_only)) {
 		g_warning ("Couldn't change Wi-Fi security combo box.");
 		return;
@@ -461,7 +465,7 @@ connection_combo_init (NMAWifiDialog *self, NMConnection *connection)
 				continue;
 
 			/* If creating a new Ad-Hoc network, only show shared network connections */
-			if (priv->adhoc_create) {
+			if (priv->operation == OP_CREATE_ADHOC) {
 				NMSettingIP4Config *s_ip4;
 				const char *method = NULL;
 
@@ -535,8 +539,8 @@ connection_combo_init (NMAWifiDialog *self, NMConnection *connection)
 		gtk_widget_hide (GTK_WIDGET (gtk_builder_get_object (priv->builder, "connection_label")));
 		gtk_widget_hide (widget);
 	}
-	gtk_tree_model_get_iter_first (priv->connection_model, &tree_iter);
-	gtk_tree_model_get (priv->connection_model, &tree_iter, C_CON_COLUMN, &priv->connection, -1);
+	if (gtk_tree_model_get_iter_first (priv->connection_model, &tree_iter))
+		gtk_tree_model_get (priv->connection_model, &tree_iter, C_CON_COLUMN, &priv->connection, -1);
 
 	return TRUE;
 }
@@ -644,8 +648,8 @@ device_combo_init (NMAWifiDialog *self, NMDevice *device)
 			gtk_widget_hide (GTK_WIDGET (gtk_builder_get_object (priv->builder, "device_label")));
 			gtk_widget_hide (widget);
 		}
-		gtk_tree_model_get_iter_first (priv->device_model, &iter);
-		gtk_tree_model_get (priv->device_model, &iter, D_DEV_COLUMN, &priv->device, -1);
+		if (gtk_tree_model_get_iter_first (priv->device_model, &iter))
+			gtk_tree_model_get (priv->device_model, &iter, D_DEV_COLUMN, &priv->device, -1);
 	}
 
 	return num_added > 0 ? TRUE : FALSE;
@@ -832,7 +836,7 @@ security_combo_init (NMAWifiDialog *self, gboolean secrets_only)
 	g_return_val_if_fail (priv->device != NULL, FALSE);
 	g_return_val_if_fail (priv->sec_combo != NULL, FALSE);
 
-	is_adhoc = priv->adhoc_create;
+	is_adhoc = (priv->operation == OP_CREATE_ADHOC);
 
 	/* The security options displayed are filtered based on device
 	 * capabilities, and if provided, additionally by access point capabilities.
@@ -848,7 +852,6 @@ security_combo_init (NMAWifiDialog *self, gboolean secrets_only)
 
 	if (priv->connection) {
 		const char *mode;
-		const char *security;
 
 		s_wireless = nm_connection_get_setting_wireless (priv->connection);
 
@@ -858,9 +861,6 @@ security_combo_init (NMAWifiDialog *self, gboolean secrets_only)
 
 		wsec = nm_connection_get_setting_wireless_security (priv->connection);
 
-		security = nm_setting_wireless_get_security (s_wireless);
-		if (!security || strcmp (security, NM_SETTING_WIRELESS_SECURITY_SETTING_NAME))
-			wsec = NULL;
 		if (wsec) {
 			default_type = get_default_type_for_security (wsec, !!priv->ap, ap_flags, dev_caps);
 			if (default_type == NMU_SEC_STATIC_WEP)
@@ -873,7 +873,7 @@ security_combo_init (NMAWifiDialog *self, gboolean secrets_only)
 		wep_type = NM_WEP_KEY_TYPE_PASSPHRASE;
 	}
 
-	sec_model = gtk_list_store_new (2, G_TYPE_STRING, wireless_security_get_g_type ());
+	sec_model = gtk_list_store_new (2, G_TYPE_STRING, wireless_security_get_type ());
 
 	if (nm_utils_security_valid (NMU_SEC_NONE, dev_caps, !!priv->ap, is_adhoc, ap_flags, ap_wpa, ap_rsn)) {
 		gtk_list_store_append (sec_model, &iter);
@@ -892,7 +892,7 @@ security_combo_init (NMAWifiDialog *self, gboolean secrets_only)
 	    && ((!ap_wpa && !ap_rsn) || !(dev_caps & (NM_WIFI_DEVICE_CAP_WPA | NM_WIFI_DEVICE_CAP_RSN)))) {
 		WirelessSecurityWEPKey *ws_wep;
 
-		ws_wep = ws_wep_key_new (priv->connection, NM_WEP_KEY_TYPE_KEY, priv->adhoc_create, secrets_only);
+		ws_wep = ws_wep_key_new (priv->connection, NM_WEP_KEY_TYPE_KEY, is_adhoc, secrets_only);
 		if (ws_wep) {
 			add_security_item (self, WIRELESS_SECURITY (ws_wep), sec_model,
 			                   &iter, _("WEP 40/128-bit Key (Hex or ASCII)"));
@@ -901,7 +901,7 @@ security_combo_init (NMAWifiDialog *self, gboolean secrets_only)
 			item++;
 		}
 
-		ws_wep = ws_wep_key_new (priv->connection, NM_WEP_KEY_TYPE_PASSPHRASE, priv->adhoc_create, secrets_only);
+		ws_wep = ws_wep_key_new (priv->connection, NM_WEP_KEY_TYPE_PASSPHRASE, is_adhoc, secrets_only);
 		if (ws_wep) {
 			add_security_item (self, WIRELESS_SECURITY (ws_wep), sec_model,
 			                   &iter, _("WEP 128-bit Passphrase"));
@@ -1016,16 +1016,12 @@ static gboolean
 internal_init (NMAWifiDialog *self,
                NMConnection *specific_connection,
                NMDevice *specific_device,
-               gboolean secrets_only,
-               gboolean create)
+               gboolean secrets_only)
 {
 	NMAWifiDialogPrivate *priv = NMA_WIFI_DIALOG_GET_PRIVATE (self);
 	GtkWidget *widget;
 	char *label, *icon_name = "network-wireless";
 	gboolean security_combo_focus = FALSE;
-	gboolean hide_security_combo = secrets_only;
-	NMSettingWirelessSecurity *s_wsec;
-	const char *key_mgmt = NULL;
 
 	gtk_window_set_position (GTK_WINDOW (self), GTK_WIN_POS_CENTER_ALWAYS);
 	gtk_container_set_border_width (GTK_CONTAINER (self), 6);
@@ -1049,7 +1045,7 @@ internal_init (NMAWifiDialog *self,
 	                           FALSE, TRUE, 0, GTK_PACK_END);
 
 	/* Connect/Create button */
-	if (create) {
+	if (priv->operation == OP_CREATE_ADHOC) {
 		GtkWidget *image;
 
 		widget = gtk_button_new_with_mnemonic (_("C_reate"));
@@ -1075,10 +1071,7 @@ internal_init (NMAWifiDialog *self,
 
 	gtk_container_add (GTK_CONTAINER (gtk_dialog_get_content_area (GTK_DIALOG (self))), widget);
 
-	/* If given a valid connection, hide the SSID bits, connection combo, and
-	 * possibly authentication combo because all of those are described already
-	 * by the connection and don't need to change.
-	 */
+	/* If given a valid connection, hide the SSID bits and connection combo */
 	if (specific_connection) {
 		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "network_name_label"));
 		gtk_widget_hide (widget);
@@ -1088,17 +1081,6 @@ internal_init (NMAWifiDialog *self,
 
 		security_combo_focus = TRUE;
 		priv->network_name_focus = FALSE;
-
-		/* We need to show the security combo for WEP/Dynamic-WEP cases because
-		 * that can't be autodetected.  Open/WPA-PSK/WPA-Enterprise can
-		 * be autodetected and so we shouldn't show the user stuff they
-		 * don't need to change.
-		 */
-		s_wsec = nm_connection_get_setting_wireless_security (specific_connection);
-		if (s_wsec)
-			key_mgmt = nm_setting_wireless_security_get_key_mgmt (s_wsec);
-		if (g_strcmp0 (key_mgmt, "none") != 0 && g_strcmp0 (key_mgmt, "ieee8021x") != 0)
-			hide_security_combo = TRUE;
 	} else {
 		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "network_name_entry"));
 		g_signal_connect (G_OBJECT (widget), "changed", (GCallback) ssid_entry_changed, self);
@@ -1126,11 +1108,10 @@ internal_init (NMAWifiDialog *self,
 	g_signal_connect (G_OBJECT (priv->sec_combo), "changed",
 	                  G_CALLBACK (security_combo_changed_manually), self);
 
-	if (hide_security_combo) {
+	if (secrets_only) {
 		gtk_widget_hide (priv->sec_combo);
 		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "security_combo_label"));
 		gtk_widget_hide (widget);
-		security_combo_focus = FALSE;
 	}
 
 	if (security_combo_focus)
@@ -1159,17 +1140,18 @@ internal_init (NMAWifiDialog *self,
 		                         tmp);
 		g_free (esc_ssid);
 		g_free (tmp);
-	} else if (priv->adhoc_create) {
+	} else if (priv->operation == OP_CREATE_ADHOC) {
 		gtk_window_set_title (GTK_WINDOW (self), _("Create New Wi-Fi Network"));
 		label = g_strdup_printf ("<span size=\"larger\" weight=\"bold\">%s</span>\n\n%s",
 		                         _("New Wi-Fi network"),
 		                         _("Enter a name for the Wi-Fi network you wish to create."));
-	} else {
+	} else if (priv->operation == OP_CONNECT_HIDDEN) {
 		gtk_window_set_title (GTK_WINDOW (self), _("Connect to Hidden Wi-Fi Network"));
 		label = g_strdup_printf ("<span size=\"larger\" weight=\"bold\">%s</span>\n\n%s",
 		                         _("Hidden Wi-Fi network"),
 		                         _("Enter the name and security details of the hidden Wi-Fi network you wish to connect to."));
-	}
+	} else
+		g_assert_not_reached ();
 
 	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "caption_label"));
 	gtk_label_set_markup (GTK_LABEL (widget), label);
@@ -1226,7 +1208,7 @@ nma_wifi_dialog_get_connection (NMAWifiDialog *self,
 		s_wireless = (NMSettingWireless *) nm_setting_wireless_new ();
 		g_object_set (s_wireless, NM_SETTING_WIRELESS_SSID, validate_dialog_ssid (self), NULL);
 
-		if (priv->adhoc_create) {
+		if (priv->operation == OP_CREATE_ADHOC) {
 			NMSettingIP4Config *s_ip4;
 
 			g_object_set (s_wireless, NM_SETTING_WIRELESS_MODE, "adhoc", NULL);
@@ -1234,7 +1216,11 @@ nma_wifi_dialog_get_connection (NMAWifiDialog *self,
 			s_ip4 = (NMSettingIP4Config *) nm_setting_ip4_config_new ();
 			g_object_set (s_ip4, NM_SETTING_IP4_CONFIG_METHOD, NM_SETTING_IP4_CONFIG_METHOD_SHARED, NULL);
 			nm_connection_add_setting (connection, (NMSetting *) s_ip4);
-		}
+		} else if (priv->operation == OP_CONNECT_HIDDEN) {
+			/* Mark as a hidden SSID network */
+			g_object_set (s_wireless, NM_SETTING_WIRELESS_HIDDEN, TRUE, NULL);
+		} else
+			g_assert_not_reached ();
 
 		nm_connection_add_setting (connection, (NMSetting *) s_wireless);
 	} else
@@ -1247,13 +1233,10 @@ nma_wifi_dialog_get_connection (NMAWifiDialog *self,
 	if (sec) {
 		wireless_security_fill_connection (sec, connection);
 		wireless_security_unref (sec);
-	} else {
-		/* Unencrypted */
-		s_wireless = nm_connection_get_setting_wireless (connection);
-		g_assert (s_wireless);
-
-		g_object_set (s_wireless, NM_SETTING_WIRELESS_SEC, NULL, NULL);
 	}
+
+	/* Save new CA cert ignore values to GSettings */
+	eap_method_ca_cert_ignore_save (connection);
 
 	/* Fill device */
 	if (device) {
@@ -1304,7 +1287,10 @@ nma_wifi_dialog_new (NMClient *client,
 		priv->sec_combo = GTK_WIDGET (gtk_builder_get_object (priv->builder, "security_combo"));
 		priv->group = gtk_size_group_new (GTK_SIZE_GROUP_HORIZONTAL);
 
-		if (!internal_init (self, connection, device, secrets_only, FALSE)) {
+		/* Handle CA cert ignore stuff */
+		eap_method_ca_cert_ignore_load (connection);
+
+		if (!internal_init (self, connection, device, secrets_only)) {
 			g_warning ("Couldn't create Wi-Fi security dialog.");
 			gtk_widget_destroy (GTK_WIDGET (self));
 			self = NULL;
@@ -1315,7 +1301,9 @@ nma_wifi_dialog_new (NMClient *client,
 }
 
 static GtkWidget *
-internal_new_other (NMClient *client, NMRemoteSettings *settings, gboolean create)
+internal_new_operation (NMClient *client,
+                        NMRemoteSettings *settings,
+                        guint operation)
 {
 	NMAWifiDialog *self;
 	NMAWifiDialogPrivate *priv;
@@ -1333,9 +1321,9 @@ internal_new_other (NMClient *client, NMRemoteSettings *settings, gboolean creat
 	priv->settings = g_object_ref (settings);
 	priv->sec_combo = GTK_WIDGET (gtk_builder_get_object (priv->builder, "security_combo"));
 	priv->group = gtk_size_group_new (GTK_SIZE_GROUP_HORIZONTAL);
-	priv->adhoc_create = create;
+	priv->operation = operation;
 
-	if (!internal_init (self, NULL, NULL, FALSE, create)) {
+	if (!internal_init (self, NULL, NULL, FALSE)) {
 		g_warning ("Couldn't create Wi-Fi security dialog.");
 		gtk_widget_destroy (GTK_WIDGET (self));
 		return NULL;
@@ -1345,15 +1333,21 @@ internal_new_other (NMClient *client, NMRemoteSettings *settings, gboolean creat
 }
 
 GtkWidget *
+nma_wifi_dialog_new_for_hidden (NMClient *client, NMRemoteSettings *settings)
+{
+	return internal_new_operation (client, settings, OP_CONNECT_HIDDEN);
+}
+
+GtkWidget *
 nma_wifi_dialog_new_for_other (NMClient *client, NMRemoteSettings *settings)
 {
-	return internal_new_other (client, settings, FALSE);
+	return internal_new_operation (client, settings, OP_CONNECT_HIDDEN);
 }
 
 GtkWidget *
 nma_wifi_dialog_new_for_create (NMClient *client, NMRemoteSettings *settings)
 {
-	return internal_new_other (client, settings, TRUE);
+	return internal_new_operation (client, settings, OP_CREATE_ADHOC);
 }
 
 /**
@@ -1365,33 +1359,6 @@ nma_wifi_dialog_new_for_create (NMClient *client, NMRemoteSettings *settings)
 GtkWidget *
 nma_wifi_dialog_nag_user (NMAWifiDialog *self)
 {
-	NMAWifiDialogPrivate *priv;
-	GtkWidget *combo, *nag;
-	GtkTreeModel *model;
-	GtkTreeIter iter;
-	WirelessSecurity *sec = NULL;
-
-	g_return_val_if_fail (self != NULL, NULL);
-
-	priv = NMA_WIFI_DIALOG_GET_PRIVATE (self);
-
-	combo = GTK_WIDGET (gtk_builder_get_object (priv->builder, "security_combo"));
-	g_return_val_if_fail (combo != NULL, NULL);
-
-	/* Ask the security method if it wants to nag the user. */
-	model = gtk_combo_box_get_model (GTK_COMBO_BOX (combo));
-	if (!gtk_combo_box_get_active_iter (GTK_COMBO_BOX (combo), &iter)) {
-		g_warning ("%s: no active security combo box item.", __func__);
-		return NULL;
-	}
-
-	gtk_tree_model_get (model, &iter, S_SEC_COLUMN, &sec, -1);
-	if (sec) {
-		nag = wireless_security_nag_user (sec);
-		wireless_security_unref (sec);
-		return nag;
-	}
-
 	return NULL;
 }
 

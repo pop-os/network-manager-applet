@@ -7,6 +7,7 @@ nm_applet_CPPFLAGS = \
 	$(NMA_CFLAGS) \
 	$(LIBSECRET_CFLAGS) \
 	$(NOTIFY_CFLAGS) \
+	-DNM_VERSION_MAX_ALLOWED=NM_VERSION_0_9_10 \
 	-DICONDIR=\""$(datadir)/icons"\"						\
 	-DUIDIR=\""$(uidir)"\"							\
 	-DBINDIR=\""$(bindir)"\"								\
@@ -58,6 +59,16 @@ nm_applet_SOURCES = \
 	applet-device-bt.c \
 	applet-device-wimax.h \
 	applet-device-wimax.c \
+	applet-device-vlan.h \
+	applet-device-vlan.c \
+	applet-device-bond.h \
+	applet-device-bond.c \
+	applet-device-team.h \
+	applet-device-team.c \
+	applet-device-bridge.h \
+	applet-device-bridge.c \
+	applet-device-infiniband.h \
+	applet-device-infiniband.c \
 	fallback-icon.h \
 	shell-watcher.h \
 	shell-watcher.c

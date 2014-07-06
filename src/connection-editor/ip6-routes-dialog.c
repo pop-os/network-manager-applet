@@ -36,6 +36,7 @@
 #include <nm-utils.h>
 
 #include "ip6-routes-dialog.h"
+#include "utils.h"
 
 #define COL_ADDRESS 0
 #define COL_PREFIX  1
@@ -198,7 +199,7 @@ route_delete_clicked (GtkButton *button, gpointer user_data)
 	GtkTreeIter iter;
 	int num_rows;
 
-	treeview = GTK_TREE_VIEW (GTK_WIDGET (gtk_builder_get_object (builder, "ip6_routes")));
+	treeview = GTK_TREE_VIEW (gtk_builder_get_object (builder, "ip6_routes"));
 
 	selection = gtk_tree_view_get_selection (treeview);
 	if (gtk_tree_selection_count_selected_rows (selection) != 1)
@@ -307,38 +308,24 @@ cell_edited (GtkCellRendererText *cell,
 }
 
 static void
-ip_address_filter_cb (GtkEntry *   entry,
-                      const gchar *text,
-                      gint         length,
-                      gint *       position,
-                      gpointer     user_data)
+ip_address_filter_cb (GtkEditable *editable,
+                      gchar *text,
+                      gint length,
+                      gint *position,
+                      gpointer user_data)
 {
 	GtkWidget *ok_button = user_data;
-	GtkEditable *editable = GTK_EDITABLE (entry);
-	int i, count = 0;
-	gchar *result;
+	gboolean changed;
 
-	result = g_malloc0 (length + 1);
+	changed = utils_filter_editable_on_insert_text (editable,
+	                                                text, length, position, user_data,
+	                                                utils_char_is_ascii_ip6_address,
+	                                                ip_address_filter_cb);
 
-	for (i = 0; i < length; i++) {
-		if (g_ascii_isxdigit(text[i]) || (text[i] == ':'))
-			result[count++] = text[i];
-	}
-
-	if (count > 0) {
-		g_signal_handlers_block_by_func (G_OBJECT (editable),
-		                                 G_CALLBACK (ip_address_filter_cb),
-		                                 user_data);
-		gtk_editable_insert_text (editable, result, count, position);
+	if (changed) {
 		g_free (last_edited);
 		last_edited = gtk_editable_get_chars (editable, 0, -1);
-		g_signal_handlers_unblock_by_func (G_OBJECT (editable),
-		                                   G_CALLBACK (ip_address_filter_cb),
-		                                   user_data);
 	}
-
-	g_signal_stop_emission_by_name (G_OBJECT (editable), "insert-text");
-	g_free (result);
 
 	/* Desensitize the OK button during input to simplify input validation.
 	 * All routes will be validated on focus-out, which will then re-enable
@@ -372,11 +359,7 @@ cell_changed_cb (GtkEditable *editable,
 {
 	char *cell_text;
 	guint column;
-#if GTK_CHECK_VERSION(3,0,0)
 	GdkRGBA rgba;
-#else
-	GdkColor color;
-#endif
 	gboolean value_valid = FALSE;
 	const char *colorname = NULL;
 
@@ -412,13 +395,8 @@ cell_changed_cb (GtkEditable *editable,
 	/* Change cell's background color while editing */
 	colorname = value_valid ? "lightgreen" : "red";
 
-#if GTK_CHECK_VERSION(3,0,0)
 	gdk_rgba_parse (&rgba, colorname);
 	gtk_widget_override_background_color (GTK_WIDGET (editable), GTK_STATE_NORMAL, &rgba);
-#else
-	gdk_color_parse (colorname, &color);
-	gtk_widget_modify_base (GTK_WIDGET (editable), GTK_STATE_NORMAL, &color);
-#endif
 
 	g_free (cell_text);
 	return FALSE;
@@ -429,10 +407,6 @@ key_pressed_cb (GtkWidget *widget,
                 GdkEvent *event,
                 gpointer user_data)
 {
-#if !GDK_KEY_Tab
-	#define GDK_KEY_Tab GDK_Tab
-#endif
-
 	GdkKeymapKey *keys = NULL;
 	gint n_keys;
 
@@ -496,36 +470,24 @@ ip6_cell_editing_started (GtkCellRenderer *cell,
 }
 
 static void
-uint_filter_cb (GtkEntry *   entry,
-                const gchar *text,
-                gint         length,
-                gint *       position,
-                gpointer     user_data)
+uint_filter_cb (GtkEditable *editable,
+                gchar *text,
+                gint length,
+                gint *position,
+                gpointer user_data)
 {
 	GtkWidget *ok_button = user_data;
-	GtkEditable *editable = GTK_EDITABLE (entry);
-	int i, count = 0;
-	gchar *result = g_new (gchar, length);
+	gboolean changed;
 
-	for (i = 0; i < length; i++) {
-		if ((text[i] >= '0' && text[i] <= '9'))
-			result[count++] = text[i];
-	}
+	changed = utils_filter_editable_on_insert_text (editable,
+	                                                text, length, position, user_data,
+	                                                utils_char_is_ascii_digit,
+	                                                uint_filter_cb);
 
-	if (count > 0) {
-		g_signal_handlers_block_by_func (G_OBJECT (editable),
-		                                 G_CALLBACK (uint_filter_cb),
-		                                 user_data);
-		gtk_editable_insert_text (editable, result, count, position);
+	if (changed) {
 		g_free (last_edited);
 		last_edited = gtk_editable_get_chars (editable, 0, -1);
-		g_signal_handlers_unblock_by_func (G_OBJECT (editable),
-		                                   G_CALLBACK (uint_filter_cb),
-		                                   user_data);
 	}
-
-	g_signal_stop_emission_by_name (G_OBJECT (editable), "insert-text");
-	g_free (result);
 
 	/* Desensitize the OK button during input to simplify input validation.
 	 * All routes will be validated on focus-out, which will then re-enable

@@ -37,11 +37,7 @@ typedef struct {
 
 	gboolean is_vpn;
 
-#if GTK_CHECK_VERSION(2,24,0)
 	GtkComboBoxText *firewall_zone;
-#else
-	GtkComboBox *firewall_zone;
-#endif
 	char **zones;
 	gboolean got_zones;
 
@@ -75,9 +71,11 @@ zones_reply (DBusGProxy *proxy, DBusGProxyCall *call, gpointer user_data)
 	CEPageGeneralPrivate *priv = CE_PAGE_GENERAL_GET_PRIVATE (self);
 	GError *error = NULL;
 
-	dbus_g_proxy_end_call (proxy, call, &error,
-	                       G_TYPE_STRV, &priv->zones,
-	                       G_TYPE_INVALID);
+	if (!dbus_g_proxy_end_call (proxy, call, &error,
+	                            G_TYPE_STRV, &priv->zones,
+	                            G_TYPE_INVALID)) {
+		g_warning ("Failed to get zones from FirewallD: (%d) %s", error->code, error->message);
+	}
 
 	priv->got_zones = TRUE;
 
@@ -128,11 +126,7 @@ general_private_init (CEPageGeneral *self)
 	builder = CE_PAGE (self)->builder;
 
 	/*-- Firewall zone --*/
-#if GTK_CHECK_VERSION(2,24,0)
 	priv->firewall_zone = GTK_COMBO_BOX_TEXT (gtk_combo_box_text_new ());
-#else
-	priv->firewall_zone = GTK_COMBO_BOX (gtk_combo_box_new_text ());
-#endif
 
 	align = GTK_WIDGET (gtk_builder_get_object (builder, "firewall_zone_alignment"));
 	gtk_container_add (GTK_CONTAINER (align), GTK_WIDGET (priv->firewall_zone));
@@ -142,7 +136,7 @@ general_private_init (CEPageGeneral *self)
 	get_zones_from_firewall (self);
 
 	/* Set mnemonic widget for device Firewall zone label */
-	label = GTK_LABEL (GTK_WIDGET (gtk_builder_get_object (builder, "firewall_zone_label")));
+	label = GTK_LABEL (gtk_builder_get_object (builder, "firewall_zone_label"));
 	gtk_label_set_mnemonic_widget (label, GTK_WIDGET (priv->firewall_zone));
 
 	/*-- Dependent VPN connection --*/
@@ -198,29 +192,17 @@ populate_firewall_zones_ui (CEPageGeneral *self)
 	s_zone = nm_setting_connection_get_zone (setting);
 
 	/* Always add "fake" 'Default' zone for default firewall settings */
-#if GTK_CHECK_VERSION (2,24,0)
 	gtk_combo_box_text_append_text (priv->firewall_zone, FIREWALL_ZONE_DEFAULT);
-#else
-	gtk_combo_box_append_text (priv->firewall_zone, FIREWALL_ZONE_DEFAULT);
-#endif
 
 	for (zone_ptr = priv->zones, idx = 0; zone_ptr && *zone_ptr; zone_ptr++, idx++) {
-#if GTK_CHECK_VERSION (2,24,0)
 		gtk_combo_box_text_append_text (priv->firewall_zone, *zone_ptr);
-#else
-		gtk_combo_box_append_text (priv->firewall_zone, *zone_ptr);
-#endif
 		if (g_strcmp0 (s_zone, *zone_ptr) == 0)
 			combo_idx = idx + 1;
 	}
 
 	if (s_zone && combo_idx == 0) {
 		/* Unknown zone in connection setting - add it to combobox */
-#if GTK_CHECK_VERSION (2,24,0)
 		gtk_combo_box_text_append_text (priv->firewall_zone, s_zone);
-#else
-		gtk_combo_box_append_text (priv->firewall_zone, s_zone);
-#endif
 		combo_idx = idx + 1;
 	}
 	gtk_combo_box_set_active (GTK_COMBO_BOX (priv->firewall_zone), combo_idx);
@@ -380,11 +362,7 @@ ui_to_setting (CEPageGeneral *self)
 	 * are received from FirewallD asynchronously; got_zones indicates we are ready.
 	 */
 	if (priv->got_zones) {
-#if GTK_CHECK_VERSION (2,24,0)
 		zone = gtk_combo_box_text_get_active_text (priv->firewall_zone);
-#else
-		zone = gtk_combo_box_get_active_text (priv->firewall_zone);
-#endif
 
 		if (g_strcmp0 (zone, FIREWALL_ZONE_DEFAULT) == 0)
 			zone = NULL;

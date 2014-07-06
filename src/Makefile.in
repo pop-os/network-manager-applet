@@ -117,6 +117,10 @@ am__nm_applet_SOURCES_DIST = main.c applet.c applet.h applet-agent.c \
 	applet-device-gsm.c applet-device-cdma.h applet-device-cdma.c \
 	mobile-helpers.c mobile-helpers.h applet-device-bt.h \
 	applet-device-bt.c applet-device-wimax.h applet-device-wimax.c \
+	applet-device-vlan.h applet-device-vlan.c applet-device-bond.h \
+	applet-device-bond.c applet-device-team.h applet-device-team.c \
+	applet-device-bridge.h applet-device-bridge.c \
+	applet-device-infiniband.h applet-device-infiniband.c \
 	fallback-icon.h shell-watcher.h shell-watcher.c \
 	applet-device-broadband.h applet-device-broadband.c
 @WITH_MODEM_MANAGER_1_TRUE@am__objects_1 = nm_applet-applet-device-broadband.$(OBJEXT)
@@ -134,6 +138,11 @@ am_nm_applet_OBJECTS = nm_applet-main.$(OBJEXT) \
 	nm_applet-mobile-helpers.$(OBJEXT) \
 	nm_applet-applet-device-bt.$(OBJEXT) \
 	nm_applet-applet-device-wimax.$(OBJEXT) \
+	nm_applet-applet-device-vlan.$(OBJEXT) \
+	nm_applet-applet-device-bond.$(OBJEXT) \
+	nm_applet-applet-device-team.$(OBJEXT) \
+	nm_applet-applet-device-bridge.$(OBJEXT) \
+	nm_applet-applet-device-infiniband.$(OBJEXT) \
 	nm_applet-shell-watcher.$(OBJEXT) $(am__objects_1)
 nm_applet_OBJECTS = $(am_nm_applet_OBJECTS)
 am__DEPENDENCIES_1 =
@@ -314,9 +323,6 @@ CPP = @CPP@
 CPPFLAGS = @CPPFLAGS@
 CYGPATH_W = @CYGPATH_W@
 DATADIRNAME = @DATADIRNAME@
-DBUS_126_CFLAGS = @DBUS_126_CFLAGS@
-DBUS_126_LIBS = @DBUS_126_LIBS@
-DBUS_SYS_DIR = @DBUS_SYS_DIR@
 DEFS = @DEFS@
 DEPDIR = @DEPDIR@
 DISABLE_DEPRECATED = @DISABLE_DEPRECATED@
@@ -488,9 +494,9 @@ top_srcdir = @top_srcdir@
 SUBDIRS = marshallers utils wireless-security libnm-gtk \
 	connection-editor gnome-bluetooth $(am__append_4)
 nm_applet_CPPFLAGS = $(GTK_CFLAGS) $(NMA_CFLAGS) $(LIBSECRET_CFLAGS) \
-	$(NOTIFY_CFLAGS) -DICONDIR=\""$(datadir)/icons"\" \
-	-DUIDIR=\""$(uidir)"\" -DBINDIR=\""$(bindir)"\" \
-	-DSYSCONFDIR=\""$(sysconfdir)"\" \
+	$(NOTIFY_CFLAGS) -DNM_VERSION_MAX_ALLOWED=NM_VERSION_0_9_10 \
+	-DICONDIR=\""$(datadir)/icons"\" -DUIDIR=\""$(uidir)"\" \
+	-DBINDIR=\""$(bindir)"\" -DSYSCONFDIR=\""$(sysconfdir)"\" \
 	-DLIBEXECDIR=\""$(libexecdir)"\" \
 	-DAUTOSTARTDIR=\""$(sysconfdir)/xdg/autostart"\" \
 	-DVPN_NAME_FILES_DIR=\""$(sysconfdir)/NetworkManager/VPN"\" \
@@ -511,6 +517,10 @@ nm_applet_SOURCES = main.c applet.c applet.h applet-agent.c \
 	applet-device-gsm.c applet-device-cdma.h applet-device-cdma.c \
 	mobile-helpers.c mobile-helpers.h applet-device-bt.h \
 	applet-device-bt.c applet-device-wimax.h applet-device-wimax.c \
+	applet-device-vlan.h applet-device-vlan.c applet-device-bond.h \
+	applet-device-bond.c applet-device-team.h applet-device-team.c \
+	applet-device-bridge.h applet-device-bridge.c \
+	applet-device-infiniband.h applet-device-infiniband.c \
 	fallback-icon.h shell-watcher.h shell-watcher.c \
 	$(am__append_1)
 nm_applet_LDADD = -lm $(GTK_LIBS) $(NMA_LIBS) $(LIBSECRET_LIBS) \
@@ -689,11 +699,16 @@ distclean-compile:
 
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/nm_applet-ap-menu-item.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/nm_applet-applet-agent.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/nm_applet-applet-device-bond.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/nm_applet-applet-device-bridge.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/nm_applet-applet-device-broadband.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/nm_applet-applet-device-bt.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/nm_applet-applet-device-cdma.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/nm_applet-applet-device-ethernet.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/nm_applet-applet-device-gsm.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/nm_applet-applet-device-infiniband.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/nm_applet-applet-device-team.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/nm_applet-applet-device-vlan.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/nm_applet-applet-device-wifi.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/nm_applet-applet-device-wimax.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/nm_applet-applet-dialogs.Po@am__quote@
@@ -939,6 +954,76 @@ nm_applet-applet-device-wimax.obj: applet-device-wimax.c
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='applet-device-wimax.c' object='nm_applet-applet-device-wimax.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(nm_applet_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o nm_applet-applet-device-wimax.obj `if test -f 'applet-device-wimax.c'; then $(CYGPATH_W) 'applet-device-wimax.c'; else $(CYGPATH_W) '$(srcdir)/applet-device-wimax.c'; fi`
+
+nm_applet-applet-device-vlan.o: applet-device-vlan.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(nm_applet_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT nm_applet-applet-device-vlan.o -MD -MP -MF $(DEPDIR)/nm_applet-applet-device-vlan.Tpo -c -o nm_applet-applet-device-vlan.o `test -f 'applet-device-vlan.c' || echo '$(srcdir)/'`applet-device-vlan.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/nm_applet-applet-device-vlan.Tpo $(DEPDIR)/nm_applet-applet-device-vlan.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='applet-device-vlan.c' object='nm_applet-applet-device-vlan.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(nm_applet_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o nm_applet-applet-device-vlan.o `test -f 'applet-device-vlan.c' || echo '$(srcdir)/'`applet-device-vlan.c
+
+nm_applet-applet-device-vlan.obj: applet-device-vlan.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(nm_applet_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT nm_applet-applet-device-vlan.obj -MD -MP -MF $(DEPDIR)/nm_applet-applet-device-vlan.Tpo -c -o nm_applet-applet-device-vlan.obj `if test -f 'applet-device-vlan.c'; then $(CYGPATH_W) 'applet-device-vlan.c'; else $(CYGPATH_W) '$(srcdir)/applet-device-vlan.c'; fi`
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/nm_applet-applet-device-vlan.Tpo $(DEPDIR)/nm_applet-applet-device-vlan.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='applet-device-vlan.c' object='nm_applet-applet-device-vlan.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(nm_applet_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o nm_applet-applet-device-vlan.obj `if test -f 'applet-device-vlan.c'; then $(CYGPATH_W) 'applet-device-vlan.c'; else $(CYGPATH_W) '$(srcdir)/applet-device-vlan.c'; fi`
+
+nm_applet-applet-device-bond.o: applet-device-bond.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(nm_applet_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT nm_applet-applet-device-bond.o -MD -MP -MF $(DEPDIR)/nm_applet-applet-device-bond.Tpo -c -o nm_applet-applet-device-bond.o `test -f 'applet-device-bond.c' || echo '$(srcdir)/'`applet-device-bond.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/nm_applet-applet-device-bond.Tpo $(DEPDIR)/nm_applet-applet-device-bond.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='applet-device-bond.c' object='nm_applet-applet-device-bond.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(nm_applet_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o nm_applet-applet-device-bond.o `test -f 'applet-device-bond.c' || echo '$(srcdir)/'`applet-device-bond.c
+
+nm_applet-applet-device-bond.obj: applet-device-bond.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(nm_applet_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT nm_applet-applet-device-bond.obj -MD -MP -MF $(DEPDIR)/nm_applet-applet-device-bond.Tpo -c -o nm_applet-applet-device-bond.obj `if test -f 'applet-device-bond.c'; then $(CYGPATH_W) 'applet-device-bond.c'; else $(CYGPATH_W) '$(srcdir)/applet-device-bond.c'; fi`
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/nm_applet-applet-device-bond.Tpo $(DEPDIR)/nm_applet-applet-device-bond.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='applet-device-bond.c' object='nm_applet-applet-device-bond.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(nm_applet_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o nm_applet-applet-device-bond.obj `if test -f 'applet-device-bond.c'; then $(CYGPATH_W) 'applet-device-bond.c'; else $(CYGPATH_W) '$(srcdir)/applet-device-bond.c'; fi`
+
+nm_applet-applet-device-team.o: applet-device-team.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(nm_applet_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT nm_applet-applet-device-team.o -MD -MP -MF $(DEPDIR)/nm_applet-applet-device-team.Tpo -c -o nm_applet-applet-device-team.o `test -f 'applet-device-team.c' || echo '$(srcdir)/'`applet-device-team.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/nm_applet-applet-device-team.Tpo $(DEPDIR)/nm_applet-applet-device-team.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='applet-device-team.c' object='nm_applet-applet-device-team.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(nm_applet_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o nm_applet-applet-device-team.o `test -f 'applet-device-team.c' || echo '$(srcdir)/'`applet-device-team.c
+
+nm_applet-applet-device-team.obj: applet-device-team.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(nm_applet_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT nm_applet-applet-device-team.obj -MD -MP -MF $(DEPDIR)/nm_applet-applet-device-team.Tpo -c -o nm_applet-applet-device-team.obj `if test -f 'applet-device-team.c'; then $(CYGPATH_W) 'applet-device-team.c'; else $(CYGPATH_W) '$(srcdir)/applet-device-team.c'; fi`
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/nm_applet-applet-device-team.Tpo $(DEPDIR)/nm_applet-applet-device-team.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='applet-device-team.c' object='nm_applet-applet-device-team.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(nm_applet_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o nm_applet-applet-device-team.obj `if test -f 'applet-device-team.c'; then $(CYGPATH_W) 'applet-device-team.c'; else $(CYGPATH_W) '$(srcdir)/applet-device-team.c'; fi`
+
+nm_applet-applet-device-bridge.o: applet-device-bridge.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(nm_applet_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT nm_applet-applet-device-bridge.o -MD -MP -MF $(DEPDIR)/nm_applet-applet-device-bridge.Tpo -c -o nm_applet-applet-device-bridge.o `test -f 'applet-device-bridge.c' || echo '$(srcdir)/'`applet-device-bridge.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/nm_applet-applet-device-bridge.Tpo $(DEPDIR)/nm_applet-applet-device-bridge.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='applet-device-bridge.c' object='nm_applet-applet-device-bridge.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(nm_applet_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o nm_applet-applet-device-bridge.o `test -f 'applet-device-bridge.c' || echo '$(srcdir)/'`applet-device-bridge.c
+
+nm_applet-applet-device-bridge.obj: applet-device-bridge.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(nm_applet_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT nm_applet-applet-device-bridge.obj -MD -MP -MF $(DEPDIR)/nm_applet-applet-device-bridge.Tpo -c -o nm_applet-applet-device-bridge.obj `if test -f 'applet-device-bridge.c'; then $(CYGPATH_W) 'applet-device-bridge.c'; else $(CYGPATH_W) '$(srcdir)/applet-device-bridge.c'; fi`
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/nm_applet-applet-device-bridge.Tpo $(DEPDIR)/nm_applet-applet-device-bridge.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='applet-device-bridge.c' object='nm_applet-applet-device-bridge.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(nm_applet_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o nm_applet-applet-device-bridge.obj `if test -f 'applet-device-bridge.c'; then $(CYGPATH_W) 'applet-device-bridge.c'; else $(CYGPATH_W) '$(srcdir)/applet-device-bridge.c'; fi`
+
+nm_applet-applet-device-infiniband.o: applet-device-infiniband.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(nm_applet_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT nm_applet-applet-device-infiniband.o -MD -MP -MF $(DEPDIR)/nm_applet-applet-device-infiniband.Tpo -c -o nm_applet-applet-device-infiniband.o `test -f 'applet-device-infiniband.c' || echo '$(srcdir)/'`applet-device-infiniband.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/nm_applet-applet-device-infiniband.Tpo $(DEPDIR)/nm_applet-applet-device-infiniband.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='applet-device-infiniband.c' object='nm_applet-applet-device-infiniband.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(nm_applet_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o nm_applet-applet-device-infiniband.o `test -f 'applet-device-infiniband.c' || echo '$(srcdir)/'`applet-device-infiniband.c
+
+nm_applet-applet-device-infiniband.obj: applet-device-infiniband.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(nm_applet_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT nm_applet-applet-device-infiniband.obj -MD -MP -MF $(DEPDIR)/nm_applet-applet-device-infiniband.Tpo -c -o nm_applet-applet-device-infiniband.obj `if test -f 'applet-device-infiniband.c'; then $(CYGPATH_W) 'applet-device-infiniband.c'; else $(CYGPATH_W) '$(srcdir)/applet-device-infiniband.c'; fi`
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/nm_applet-applet-device-infiniband.Tpo $(DEPDIR)/nm_applet-applet-device-infiniband.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='applet-device-infiniband.c' object='nm_applet-applet-device-infiniband.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(nm_applet_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o nm_applet-applet-device-infiniband.obj `if test -f 'applet-device-infiniband.c'; then $(CYGPATH_W) 'applet-device-infiniband.c'; else $(CYGPATH_W) '$(srcdir)/applet-device-infiniband.c'; fi`
 
 nm_applet-shell-watcher.o: shell-watcher.c
 @am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(nm_applet_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT nm_applet-shell-watcher.o -MD -MP -MF $(DEPDIR)/nm_applet-shell-watcher.Tpo -c -o nm_applet-shell-watcher.o `test -f 'shell-watcher.c' || echo '$(srcdir)/'`shell-watcher.c

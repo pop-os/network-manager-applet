@@ -85,8 +85,6 @@ typedef struct {
 
 	/* Virtual functions */
 	gboolean    (*validate)     (CEPage *self, NMConnection *connection, GError **error);
-	/* Let the page warn the user if some property needs review */
-	GtkWidget * (*nag_user)     (CEPage *self);
 
 	/* Signals */
 	void        (*changed)     (CEPage *self);
@@ -120,7 +118,9 @@ void ce_page_mac_to_entry (const GByteArray *mac, int type, GtkEntry *entry);
 
 GByteArray *ce_page_entry_to_mac (GtkEntry *entry, int type, gboolean *invalid);
 
-gint ce_spin_output_with_default (GtkSpinButton *spin, gpointer user_data);
+gboolean ce_spin_output_with_automatic (GtkSpinButton *spin, gpointer user_data);
+
+gboolean ce_spin_output_with_default (GtkSpinButton *spin, gpointer user_data);
 
 int ce_get_property_default (NMSetting *setting, const char *property_name);
 
@@ -132,8 +132,6 @@ void ce_page_complete_init (CEPage *self,
 gboolean ce_page_get_initialized (CEPage *self);
 
 char *ce_page_get_next_available_name (GSList *connections, const char *format);
-
-GtkWidget *ce_page_nag_user (CEPage *self);
 
 /* Only for subclasses */
 NMConnection *ce_page_new_connection (const char *format,

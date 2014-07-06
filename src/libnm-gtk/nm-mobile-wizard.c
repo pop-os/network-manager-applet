@@ -23,7 +23,6 @@
 #include "config.h"
 
 #include <stdlib.h>
-#include <ctype.h>
 
 #include <glib.h>
 #include <glib/gi18n-lib.h>
@@ -39,6 +38,7 @@
 #include "nm-mobile-wizard.h"
 #include "nm-mobile-providers.h"
 #include "nm-ui-utils.h"
+#include "utils.h"
 
 #define DEVICE_TAG "device"
 #define TYPE_TAG "setting-type"
@@ -199,11 +199,7 @@ confirm_setup (NMAMobileWizard *self)
 {
 	GtkWidget *vbox, *label, *alignment, *pbox;
 
-#if GTK_CHECK_VERSION(3,1,6)
-        vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 6);
-#else
-	vbox = gtk_vbox_new (FALSE, 6);
-#endif
+	vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 6);
 	gtk_container_set_border_width (GTK_CONTAINER (vbox), 12);
 	label = gtk_label_new (_("Your mobile broadband connection is configured with the following settings:"));
 	gtk_widget_set_size_request (label, 500, -1);
@@ -240,11 +236,7 @@ confirm_setup (NMAMobileWizard *self)
 
 	alignment = gtk_alignment_new (0, 0.5, 0, 0);
 	gtk_alignment_set_padding (GTK_ALIGNMENT (alignment), 0, 0, 25, 0);
-#if GTK_CHECK_VERSION(3,1,6)
-        pbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
-#else
-	pbox = gtk_vbox_new (FALSE, 0);
-#endif
+	pbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
 	gtk_container_add (GTK_CONTAINER (alignment), pbox);
 	gtk_box_pack_start (GTK_BOX (vbox), alignment, FALSE, FALSE, 0);
 
@@ -264,6 +256,7 @@ confirm_setup (NMAMobileWizard *self)
 		gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
 		gtk_misc_set_padding (GTK_MISC (label), 0, 6);
 		gtk_label_set_line_wrap (GTK_LABEL (label), TRUE);
+		gtk_label_set_max_width_chars (GTK_LABEL (label), 60);
 		gtk_container_add (GTK_CONTAINER (alignment), label);
 		gtk_box_pack_start (GTK_BOX (vbox), alignment, FALSE, FALSE, 6);
 	}
@@ -445,36 +438,16 @@ plan_row_separator_func (GtkTreeModel *model, GtkTreeIter *iter, gpointer data)
 }
 
 static void
-apn_filter_cb (GtkEntry *   entry,
-               const gchar *text,
-               gint         length,
-               gint *       position,
-               gpointer     user_data)
+apn_filter_cb (GtkEditable *editable,
+               gchar *text,
+               gint length,
+               gint *position,
+               gpointer user_data)
 {
-	GtkEditable *editable = GTK_EDITABLE (entry);
-	int i, count = 0;
-	gchar *result = g_new0 (gchar, length);
-
-	for (i = 0; i < length; i++) {
-		if (   isalnum (text[i])
-		    || (text[i] == '.')
-		    || (text[i] == '_')
-		    || (text[i] == '-'))
-			result[count++] = text[i];
-	}
-
-	if (count > 0) {
-		g_signal_handlers_block_by_func (G_OBJECT (editable),
-		                                 G_CALLBACK (apn_filter_cb),
-		                                 user_data);
-		gtk_editable_insert_text (editable, result, count, position);
-		g_signal_handlers_unblock_by_func (G_OBJECT (editable),
-		                                   G_CALLBACK (apn_filter_cb),
-		                                   user_data);
-	}
-
-	g_signal_stop_emission_by_name (G_OBJECT (editable), "insert-text");
-	g_free (result);
+	utils_filter_editable_on_insert_text (editable,
+	                                      text, length, position, user_data,
+	                                      utils_char_is_ascii_apn,
+	                                      apn_filter_cb);
 }
 
 static void
@@ -483,11 +456,7 @@ plan_setup (NMAMobileWizard *self)
 	GtkWidget *vbox, *label, *alignment, *hbox, *image;
 	GtkCellRenderer *renderer;
 
-#if GTK_CHECK_VERSION(3,1,6)
-        vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 6);
-#else
-	vbox = gtk_vbox_new (FALSE, 6);
-#endif
+	vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 6);
 	gtk_container_set_border_width (GTK_CONTAINER (vbox), 12);
 
 	label = gtk_label_new_with_mnemonic (_("_Select your plan:"));
@@ -529,11 +498,7 @@ plan_setup (NMAMobileWizard *self)
 	gtk_container_add (GTK_CONTAINER (alignment), self->plan_unlisted_entry);
 	gtk_box_pack_start (GTK_BOX (vbox), alignment, FALSE, FALSE, 0);
 
-#if GTK_CHECK_VERSION(3,1,6)
-        hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
-#else
-	hbox = gtk_hbox_new (FALSE, 6);
-#endif
+	hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
 	image = gtk_image_new_from_stock (GTK_STOCK_DIALOG_WARNING, GTK_ICON_SIZE_DIALOG);
 	gtk_misc_set_alignment (GTK_MISC (image), 0.5, 0.0);
 	gtk_box_pack_start (GTK_BOX (hbox), image, FALSE, FALSE, 0);
@@ -541,6 +506,7 @@ plan_setup (NMAMobileWizard *self)
 	label = gtk_label_new (_("Warning: Selecting an incorrect plan may result in billing issues for your broadband account or may prevent connectivity.\n\nIf you are unsure of your plan please ask your provider for your plan's APN."));
 	gtk_widget_set_size_request (label, 500, -1);
 	gtk_label_set_line_wrap (GTK_LABEL (label), TRUE);
+	gtk_label_set_max_width_chars (GTK_LABEL (label), 60);
 	gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, TRUE, 0);
 	gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, FALSE, 0);
 
@@ -739,16 +705,12 @@ get_provider_unlisted_type (NMAMobileWizard *self)
 static void
 providers_setup (NMAMobileWizard *self)
 {
-	GtkWidget *vbox, *scroll, *alignment, *unlisted_table, *label;
+	GtkWidget *vbox, *scroll, *alignment, *unlisted_grid, *label;
 	GtkCellRenderer *renderer;
 	GtkTreeViewColumn *column;
 	GtkTreeSelection *selection;
 
-#if GTK_CHECK_VERSION(3,1,6)
-        vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 6);
-#else
-	vbox = gtk_vbox_new (FALSE, 6);
-#endif
+	vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 6);
 	gtk_container_set_border_width (GTK_CONTAINER (vbox), 12);
 
 	self->providers_view_radio = gtk_radio_button_new_with_mnemonic (NULL, _("Select your provider from a _list:"));
@@ -797,44 +759,35 @@ providers_setup (NMAMobileWizard *self)
 	gtk_alignment_set_padding (GTK_ALIGNMENT (alignment), 0, 0, 15, 0);
 	gtk_box_pack_start (GTK_BOX (vbox), alignment, FALSE, FALSE, 0);
 
-	unlisted_table = gtk_table_new (2, 2, FALSE);
-	gtk_container_add (GTK_CONTAINER (alignment), unlisted_table);
+	unlisted_grid = gtk_grid_new ();
+	gtk_grid_set_row_spacing (GTK_GRID (unlisted_grid), 12);
+	gtk_grid_set_column_spacing (GTK_GRID (unlisted_grid), 12);
+	gtk_container_add (GTK_CONTAINER (alignment), unlisted_grid);
 
 	label = gtk_label_new (_("Provider:"));
 	gtk_misc_set_alignment (GTK_MISC (label), 1, 0.5);
-	gtk_table_attach (GTK_TABLE (unlisted_table), label, 0, 1, 0, 1, 0, 0, 6, 6);
+	gtk_grid_attach (GTK_GRID (unlisted_grid), label, 0, 0, 1, 1);
 
 	self->provider_unlisted_entry = gtk_entry_new ();
 	gtk_entry_set_width_chars (GTK_ENTRY (self->provider_unlisted_entry), 40);
 	g_signal_connect_swapped (self->provider_unlisted_entry, "changed", G_CALLBACK (providers_update_complete), self);
 
 	alignment = gtk_alignment_new (0, 0.5, 0.66, 0);
+	gtk_widget_set_hexpand (alignment, TRUE);
 	gtk_container_add (GTK_CONTAINER (alignment), self->provider_unlisted_entry);
-	gtk_table_attach (GTK_TABLE (unlisted_table), alignment,
-	                  1, 2, 0, 1, GTK_EXPAND | GTK_FILL, 0, 6, 6);
+	gtk_grid_attach (GTK_GRID (unlisted_grid), alignment,
+	                 1, 0, 1, 1);
 
-#if GTK_CHECK_VERSION(2,23,0)
 	self->provider_unlisted_type_combo = gtk_combo_box_text_new ();
-#else
-	self->provider_unlisted_type_combo = gtk_combo_box_new_text ();
-#endif
 	gtk_label_set_mnemonic_widget (GTK_LABEL (label), self->provider_unlisted_type_combo);
-#if GTK_CHECK_VERSION(2,23,0)
 	gtk_combo_box_text_append_text (GTK_COMBO_BOX_TEXT (self->provider_unlisted_type_combo),
-#else
-	gtk_combo_box_append_text (GTK_COMBO_BOX (self->provider_unlisted_type_combo),
-#endif
 	                           _("My provider uses GSM technology (GPRS, EDGE, UMTS, HSPA)"));
-#if GTK_CHECK_VERSION(2,23,0)
 	gtk_combo_box_text_append_text (GTK_COMBO_BOX_TEXT (self->provider_unlisted_type_combo),
-#else
-	gtk_combo_box_append_text (GTK_COMBO_BOX (self->provider_unlisted_type_combo),
-#endif
 	                           _("My provider uses CDMA technology (1xRTT, EVDO)"));
 	gtk_combo_box_set_active (GTK_COMBO_BOX (self->provider_unlisted_type_combo), 0);
 
-	gtk_table_attach (GTK_TABLE (unlisted_table), self->provider_unlisted_type_combo,
-	                  1, 2, 1, 2, 0, 0, 6, 6);
+	gtk_grid_attach (GTK_GRID (unlisted_grid), self->provider_unlisted_type_combo,
+	                 1, 1, 1, 1);
 
 	/* Only show the CDMA/GSM combo if we don't know the device type */
 	if (self->family != NMA_MOBILE_FAMILY_UNKNOWN)
@@ -1042,6 +995,16 @@ country_update_complete (NMAMobileWizard *self)
 		nma_country_info_unref (country_info);
 }
 
+static void
+country_update_continue (NMAMobileWizard *self)
+{
+	gtk_assistant_set_page_complete (GTK_ASSISTANT (self->assistant),
+	                                 self->country_page,
+	                                 TRUE);
+
+	gtk_assistant_next_page (GTK_ASSISTANT (self->assistant));
+}
+
 static gint
 country_sort_func (GtkTreeModel *model,
                    GtkTreeIter *a,
@@ -1091,11 +1054,7 @@ country_setup (NMAMobileWizard *self)
 	GtkTreeSelection *selection;
 	GtkTreeIter unlisted_iter;
 
-#if GTK_CHECK_VERSION(3,1,6)
-        vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 6);
-#else
-	vbox = gtk_vbox_new (FALSE, 6);
-#endif
+	vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 6);
 	gtk_container_set_border_width (GTK_CONTAINER (vbox), 12);
 	label = gtk_label_new (_("Country or Region List:"));
 	gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
@@ -1176,6 +1135,9 @@ country_setup (NMAMobileWizard *self)
 	gtk_widget_show_all (vbox);
 
 	self->country_page = vbox;
+
+	/* If the user presses the ENTER key after selecting the country, continue to the next page */
+	g_signal_connect_swapped (self->country_view, "row-activated", G_CALLBACK (country_update_continue), self);
 
 	/* Initial completeness state */
 	country_update_complete (self);
@@ -1313,7 +1275,7 @@ intro_add_initial_devices (NMAMobileWizard *self)
 	gboolean selected_first = FALSE;
 	int i;
 
-	devices = nm_client_get_devices (self->client);
+	devices = self->client ? nm_client_get_devices (self->client) : NULL;
 	for (i = 0; devices && (i < devices->len); i++) {
 		if (__intro_device_added (self, g_ptr_array_index (devices, i), !selected_first)) {
 			if (selected_first == FALSE)
@@ -1392,16 +1354,13 @@ intro_setup (NMAMobileWizard *self)
 	GtkCellRenderer *renderer;
 	char *s;
 
-#if GTK_CHECK_VERSION(3,1,6)
-        vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 6);
-#else
-	vbox = gtk_vbox_new (FALSE, 6);
-#endif
+	vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 6);
 	gtk_container_set_border_width (GTK_CONTAINER (vbox), 12);
 
 	label = gtk_label_new (_("This assistant helps you easily set up a mobile broadband connection to a cellular (3G) network."));
 	gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
 	gtk_label_set_line_wrap (GTK_LABEL (label), TRUE);
+	gtk_label_set_max_width_chars (GTK_LABEL (label), 60);
 	gtk_box_pack_start (GTK_BOX (vbox), label, FALSE, TRUE, 6);
 
 	label = gtk_label_new (_("You will need the following information:"));
@@ -1411,11 +1370,7 @@ intro_setup (NMAMobileWizard *self)
 
 	alignment = gtk_alignment_new (0, 0, 1, 0);
 	gtk_alignment_set_padding (GTK_ALIGNMENT (alignment), 0, 25, 25, 0);
-#if GTK_CHECK_VERSION(3,1,6)
-        info_vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 6);
-#else
-	info_vbox = gtk_vbox_new (FALSE, 6);
-#endif
+	info_vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 6);
 	gtk_container_add (GTK_CONTAINER (alignment), info_vbox);
 	gtk_box_pack_start (GTK_BOX (vbox), alignment, FALSE, FALSE, 6);
 
@@ -1442,12 +1397,14 @@ intro_setup (NMAMobileWizard *self)
 		GtkTreeIter iter;
 
 		self->client = nm_client_new ();
-		g_signal_connect (self->client, "device-added",
-		                  G_CALLBACK (intro_device_added_cb), self);
-		g_signal_connect (self->client, "device-removed",
-		                  G_CALLBACK (intro_device_removed_cb), self);
-		g_signal_connect (self->client, "notify::manager-running",
-		                  G_CALLBACK (intro_manager_running_cb), self);
+		if (self->client) {
+			g_signal_connect (self->client, "device-added",
+			                  G_CALLBACK (intro_device_added_cb), self);
+			g_signal_connect (self->client, "device-removed",
+			                  G_CALLBACK (intro_device_removed_cb), self);
+			g_signal_connect (self->client, "notify::manager-running",
+			                  G_CALLBACK (intro_manager_running_cb), self);
+		}
 
 		self->dev_store = gtk_tree_store_new (3, G_TYPE_STRING, NM_TYPE_DEVICE, G_TYPE_BOOLEAN);
 		self->dev_combo = gtk_combo_box_new_with_model (GTK_TREE_MODEL (self->dev_store));

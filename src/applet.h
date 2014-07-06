@@ -31,7 +31,6 @@
 #include <gtk/gtk.h>
 #include <gdk/gdkx.h>
 
-#include <dbus/dbus.h>
 #include <dbus/dbus-glib.h>
 #include <net/ethernet.h>
 
@@ -69,6 +68,7 @@ typedef struct
 #define PREF_DISABLE_VPN_NOTIFICATIONS            "disable-vpn-notifications"
 #define PREF_DISABLE_WIFI_CREATE                  "disable-wifi-create"
 #define PREF_SUPPRESS_WIFI_NETWORKS_AVAILABLE     "suppress-wireless-networks-available"
+#define PREF_SHOW_APPLET                          "show-applet"
 
 #define ICON_LAYER_LINK 0
 #define ICON_LAYER_VPN 1
@@ -85,12 +85,9 @@ typedef struct
 	GObject parent_instance;
 
 	GMainLoop *loop;
-	DBusGConnection *bus;
 	DBusGConnection *session_bus;
 
-#if GLIB_CHECK_VERSION(2,26,0)
 	NMShellWatcher *shell_watcher;
-#endif
 	guint agent_start_id;
 
 	NMClient *nm_client;
@@ -103,6 +100,8 @@ typedef struct
 	MMManager *mm1;
 	gboolean   mm1_running;
 #endif
+
+	gboolean visible;
 
 	/* Permissions */
 	NMClientPermissionResult permissions[NM_CLIENT_PERMISSION_LAST + 1];
@@ -117,6 +116,11 @@ typedef struct
 #endif
 	NMADeviceClass *bt_class;
 	NMADeviceClass *wimax_class;
+	NMADeviceClass *vlan_class;
+	NMADeviceClass *bond_class;
+	NMADeviceClass *team_class;
+	NMADeviceClass *bridge_class;
+	NMADeviceClass *infiniband_class;
 
 	/* Data model elements */
 	guint			update_icon_id;
@@ -230,7 +234,8 @@ struct NMADeviceClass {
 	                                        gpointer callback_data);
 
 	void           (*add_menu_item)        (NMDevice *device,
-	                                        guint32 num_devices,
+	                                        gboolean multiple_devices,
+	                                        GSList *connections,
 	                                        NMConnection *active,
 	                                        GtkWidget *menu,
 	                                        NMApplet *applet);
@@ -241,6 +246,9 @@ struct NMADeviceClass {
 	                                        NMDeviceState new_state,
 	                                        NMDeviceState old_state,
 	                                        NMDeviceStateReason reason,
+	                                        NMApplet *applet);
+	void           (*notify_connected)     (NMDevice *device,
+	                                        const char *msg,
 	                                        NMApplet *applet);
 
 	/* Device class is expected to return a *referenced* pixbuf, which will
@@ -331,5 +339,24 @@ gboolean applet_wifi_connect_to_8021x_network (NMApplet *applet,
                                                NMAccessPoint *ap);
 gboolean applet_wifi_create_wifi_network (NMApplet *applet);
 gboolean applet_wifi_can_create_wifi_network (NMApplet *applet);
+
+typedef enum {
+	NMA_ADD_ACTIVE = 1,
+	NMA_ADD_INACTIVE = 2,
+} NMAAddActiveInactiveEnum;
+
+void applet_add_connection_items (NMDevice *device,
+                                  GSList *connections,
+                                  gboolean sensitive,
+                                  NMConnection *active,
+                                  NMAAddActiveInactiveEnum flag,
+                                  GtkWidget *menu,
+                                  NMApplet *applet);
+
+void applet_add_default_connection_item (NMDevice *device,
+                                         const char *label,
+                                         gboolean sensitive,
+                                         GtkWidget *menu,
+                                         NMApplet *applet);
 
 #endif

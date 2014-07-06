@@ -1,53 +1,34 @@
 AC_PREREQ([2.63])
 AC_INIT([nm-applet],
-        [0.9.8.10],
+        [0.9.10.0],
         [https://bugzilla.gnome.org/enter_bug.cgi?product=NetworkManager],
         [network-manager-applet])
 
 AC_CONFIG_HEADERS([config.h])
 AC_CONFIG_MACRO_DIR([m4])
 
-AM_INIT_AUTOMAKE([1.10 subdir-objects no-dist-gzip dist-bzip2 -Wno-portability])
+AM_INIT_AUTOMAKE([1.11 subdir-objects no-dist-gzip dist-bzip2 -Wno-portability])
 AM_MAINTAINER_MODE([enable])
-
-# Support silent build rules, requires at least automake-1.11. Disable
-# by either passing --disable-silent-rules to configure or passing V=1
-# to make
-m4_ifdef([AM_SILENT_RULES], [AM_SILENT_RULES([no])])
+AM_SILENT_RULES([yes])
 
 dnl
 dnl Require programs
 dnl
 AC_PROG_CC
 AM_PROG_CC_C_O
-AC_PROG_INSTALL
 PKG_PROG_PKG_CONFIG
 
 dnl Define _GNU_SOURCE for various things like strcasestr()
-AC_GNU_SOURCE
+AC_USE_SYSTEM_EXTENSIONS
 
 dnl Initialize libtool
 LT_PREREQ([2.2.6])
 LT_INIT
 
 dnl
-dnl Required headers
-dnl
-AC_CHECK_HEADERS(fcntl.h paths.h sys/ioctl.h sys/time.h syslog.h unistd.h)
-
-dnl
 dnl Checks for typedefs, structures, and compiler characteristics.
 dnl
-AC_TYPE_MODE_T
 AC_TYPE_PID_T
-AC_HEADER_TIME
-
-dnl
-dnl Checks for library functions.
-dnl
-AC_PROG_GCC_TRADITIONAL
-AC_FUNC_MEMCMP
-AC_CHECK_FUNCS(select socket uname)
 
 dnl
 dnl translation support
@@ -88,30 +69,18 @@ else
     AC_DEFINE_UNQUOTED([ISO_CODES_PREFIX],["$prefix"],[ISO codes prefix])
 fi
 
-dnl
-dnl Make sha1.c happy on big endian systems
-dnl
-AC_C_BIGENDIAN
-
 PKG_CHECK_MODULES(GOBJECT, gobject-2.0)
 
 PKG_CHECK_MODULES(NMA,
 		[dbus-glib-1 >= 0.74
-		 gio-2.0 >= 2.26
-		 NetworkManager >= 0.9.8
-		 libnm-glib >= 0.9.8
-		 libnm-util >= 0.9.8
-		 libnm-glib-vpn >= 0.9.8
+		 gio-2.0 >= 2.32
+		 NetworkManager >= 0.9.9.95
+		 libnm-glib >= 0.9.9.95
+		 libnm-util >= 0.9.9.95
+		 libnm-glib-vpn >= 0.9.9.95
 		 gmodule-export-2.0])
 
-# With recent glib, defining GLIB_VERSION_MIN_REQUIRED avoids
-# deprecation warnings for recently-deprecated functions (eg,
-# GValueArray stuff). We say GLIB_VERSION_2_26 because there
-# aren't macros for any older versions.
-NMA_CFLAGS="$NMA_CFLAGS -DGLIB_VERSION_MIN_REQUIRED=GLIB_VERSION_2_26"
-# Likewise for Gtk; we don't want to port to GtkGrid, etc, until
-# we can drop gtk2 support
-NMA_CFLAGS="$NMA_CFLAGS -DGDK_VERSION_MIN_REQUIRED=GDK_VERSION_3_0"
+NMA_CFLAGS="$NMA_CFLAGS -DGLIB_VERSION_MIN_REQUIRED=GLIB_VERSION_2_32"
 
 AC_MSG_CHECKING([whether to build nm-applet-migration-tool])
 AC_ARG_ENABLE([migration],
@@ -154,36 +123,10 @@ PKG_CHECK_MODULES(NOTIFY, [libnotify >= 0.4.3])
 AC_SUBST(NOTIFY_CFLAGS)
 AC_SUBST(NOTIFY_LIBS)
 
-gtk2_req=2.20
-gtk3_req=3.0
-AC_ARG_WITH([gtkver], AS_HELP_STRING([--with-gtkver], [The major version of GTK+ to build with]),
-            with_gtkver="$withval",with_gtkver=0)
-case "${with_gtkver}" in
-       0) PKG_CHECK_MODULES(GTK, gtk+-3.0 > $gtk3_req, ,
-                            [PKG_CHECK_MODULES(GTK, gtk+-2.0 > $gtk2_req)])
-	  ;;
-       2) PKG_CHECK_MODULES(GTK, gtk+-2.0 >= $gtk2_req)
-          ;;
-       3) PKG_CHECK_MODULES(GTK, gtk+-3.0 >= $gtk3_req)
-          ;;
-       *) AC_MSG_ERROR(unknown GTK+ version $with_gtkver!)
-          ;;
-esac
+PKG_CHECK_MODULES(GTK, gtk+-3.0 >= 3.4)
 AC_SUBST(GTK_CFLAGS)
 AC_SUBST(GTK_LIBS)
-
-# Check for dbus-1.2.6 or later for deny-by-default rules
-PKG_CHECK_MODULES(DBUS_126, [dbus-1 >= 1.2.6], [have_dbus_126=yes],[have_dbus_126=no])
-AM_CONDITIONAL(HAVE_DBUS_126, test x"$have_dbus_126" = "xyes")
-
-AC_ARG_WITH(dbus-sys, AS_HELP_STRING([--with-dbus-sys=DIR], [where D-BUS system.d directory is]))
-
-if ! test -z "$with_dbus_sys" ; then
-    DBUS_SYS_DIR="$with_dbus_sys"
-else
-    DBUS_SYS_DIR="${sysconfdir}/dbus-1/system.d"
-fi
-AC_SUBST(DBUS_SYS_DIR)
+GTK_CFLAGS="$GTK_CFLAGS -DGDK_VERSION_MIN_REQUIRED=GDK_VERSION_3_4"
 
 dnl Check for gnome-bluetooth
 AC_ARG_WITH([bluetooth],
@@ -197,8 +140,7 @@ case "${with_bluetooth}" in
 		PKG_CHECK_MODULES(GNOME_BLUETOOTH,
 				  gnome-bluetooth-1.0 >= 2.27.6
 				  gnome-bluetooth-1.0 < 3.11.0
-				  libnm-util >= 0.9.4
-				  libnm-glib >= 0.9.4,
+				  libnm-util libnm-glib,
 				  have_gbt=yes, have_gbt=no)
 		;;
 esac

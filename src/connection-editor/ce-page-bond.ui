@@ -1,34 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- Generated with glade 3.15.4 on Wed Sep 25 12:38:16 2013 -->
 <interface>
-  <requires lib="gtk+" version="2.16"/>
+  <!-- interface-requires gtk+ 3.0 -->
+  <object class="GtkAdjustment" id="bond_downdelay_adjustment">
+    <property name="upper">10000</property>
+    <property name="step_increment">100</property>
+    <property name="page_increment">100</property>
+  </object>
   <object class="GtkAdjustment" id="bond_frequency_adjustment">
     <property name="lower">1</property>
     <property name="upper">10000</property>
     <property name="value">100</property>
     <property name="step_increment">1</property>
     <property name="page_increment">10</property>
-  </object>
-  <object class="GtkAdjustment" id="bond_updelay_adjustment">
-    <property name="lower">0</property>
-    <property name="upper">10000</property>
-    <property name="value">0</property>
-    <property name="step_increment">100</property>
-    <property name="page_increment">100</property>
-  </object>
-  <object class="GtkAdjustment" id="bond_downdelay_adjustment">
-    <property name="lower">0</property>
-    <property name="upper">10000</property>
-    <property name="value">0</property>
-    <property name="step_increment">100</property>
-    <property name="page_increment">100</property>
-  </object>
-  <object class="GtkListStore" id="master_connections_model">
-    <columns>
-      <!-- column-name connection -->
-      <column type="NMConnection"/>
-      <!-- column-name name -->
-      <column type="gchararray"/>
-    </columns>
   </object>
   <object class="GtkListStore" id="bond_mode_model">
     <columns>
@@ -73,14 +57,25 @@
       </row>
     </data>
   </object>
-  <object class="GtkTable" id="BondPage">
+  <object class="GtkAdjustment" id="bond_updelay_adjustment">
+    <property name="upper">10000</property>
+    <property name="step_increment">100</property>
+    <property name="page_increment">100</property>
+  </object>
+  <object class="GtkListStore" id="master_connections_model">
+    <columns>
+      <!-- column-name connection -->
+      <column type="NMConnection"/>
+      <!-- column-name name -->
+      <column type="gchararray"/>
+    </columns>
+  </object>
+  <object class="GtkGrid" id="BondPage">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
     <property name="border_width">12</property>
-    <property name="n_rows">9</property>
-    <property name="n_columns">2</property>
-    <property name="column_spacing">12</property>
     <property name="row_spacing">6</property>
+    <property name="column_spacing">12</property>
     <child>
       <object class="GtkLabel" id="master_connections_label">
         <property name="visible">True</property>
@@ -90,11 +85,10 @@
         <property name="use_underline">True</property>
       </object>
       <packing>
-        <property name="right_attach">2</property>
+        <property name="left_attach">0</property>
         <property name="top_attach">1</property>
-        <property name="bottom_attach">2</property>
-        <property name="x_options">GTK_FILL</property>
-        <property name="y_options"></property>
+        <property name="width">2</property>
+        <property name="height">1</property>
       </packing>
     </child>
     <child>
@@ -107,10 +101,10 @@
         <property name="mnemonic_widget">bond_mode</property>
       </object>
       <packing>
+        <property name="left_attach">0</property>
         <property name="top_attach">3</property>
-        <property name="bottom_attach">4</property>
-        <property name="x_options">GTK_FILL</property>
-        <property name="y_options"></property>
+        <property name="width">1</property>
+        <property name="height">1</property>
       </packing>
     </child>
     <child>
@@ -127,10 +121,9 @@
       </object>
       <packing>
         <property name="left_attach">1</property>
-        <property name="right_attach">2</property>
         <property name="top_attach">3</property>
-        <property name="bottom_attach">4</property>
-        <property name="y_options"></property>
+        <property name="width">1</property>
+        <property name="height">1</property>
       </packing>
     </child>
     <child>
@@ -181,11 +174,9 @@
             <child>
               <object class="GtkButton" id="master_connection_add">
                 <property name="label">gtk-add</property>
-                <property name="use_action_appearance">False</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
-                <property name="use_action_appearance">False</property>
                 <property name="use_stock">True</property>
               </object>
               <packing>
@@ -197,11 +188,9 @@
             <child>
               <object class="GtkButton" id="master_connection_edit">
                 <property name="label" translatable="yes">_Edit</property>
-                <property name="use_action_appearance">False</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
-                <property name="use_action_appearance">False</property>
                 <property name="use_underline">True</property>
               </object>
               <packing>
@@ -213,11 +202,9 @@
             <child>
               <object class="GtkButton" id="master_connection_delete">
                 <property name="label" translatable="yes">_Delete</property>
-                <property name="use_action_appearance">False</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
-                <property name="use_action_appearance">False</property>
                 <property name="use_underline">True</property>
               </object>
               <packing>
@@ -235,9 +222,10 @@
         </child>
       </object>
       <packing>
-        <property name="right_attach">2</property>
+        <property name="left_attach">0</property>
         <property name="top_attach">2</property>
-        <property name="bottom_attach">3</property>
+        <property name="width">2</property>
+        <property name="height">1</property>
       </packing>
     </child>
     <child>
@@ -250,9 +238,10 @@
         <property name="mnemonic_widget">bond_frequency</property>
       </object>
       <packing>
-        <property name="top_attach">5</property>
-        <property name="bottom_attach">6</property>
-        <property name="y_options">GTK_FILL</property>
+        <property name="left_attach">0</property>
+        <property name="top_attach">6</property>
+        <property name="width">1</property>
+        <property name="height">1</property>
       </packing>
     </child>
     <child>
@@ -290,10 +279,9 @@
       </object>
       <packing>
         <property name="left_attach">1</property>
-        <property name="right_attach">2</property>
-        <property name="top_attach">5</property>
-        <property name="bottom_attach">6</property>
-        <property name="y_options">GTK_FILL</property>
+        <property name="top_attach">6</property>
+        <property name="width">1</property>
+        <property name="height">1</property>
       </packing>
     </child>
     <child>
@@ -306,7 +294,10 @@
         <property name="mnemonic_widget">master_interface</property>
       </object>
       <packing>
-        <property name="y_options">GTK_FILL</property>
+        <property name="left_attach">0</property>
+        <property name="top_attach">0</property>
+        <property name="width">1</property>
+        <property name="height">1</property>
       </packing>
     </child>
     <child>
@@ -317,8 +308,9 @@
       </object>
       <packing>
         <property name="left_attach">1</property>
-        <property name="right_attach">2</property>
-        <property name="y_options">GTK_FILL</property>
+        <property name="top_attach">0</property>
+        <property name="width">1</property>
+        <property name="height">1</property>
       </packing>
     </child>
     <child>
@@ -331,9 +323,10 @@
         <property name="mnemonic_widget">bond_monitoring</property>
       </object>
       <packing>
-        <property name="top_attach">4</property>
-        <property name="bottom_attach">5</property>
-        <property name="y_options">GTK_FILL</property>
+        <property name="left_attach">0</property>
+        <property name="top_attach">5</property>
+        <property name="width">1</property>
+        <property name="height">1</property>
       </packing>
     </child>
     <child>
@@ -350,10 +343,9 @@
       </object>
       <packing>
         <property name="left_attach">1</property>
-        <property name="right_attach">2</property>
-        <property name="top_attach">4</property>
-        <property name="bottom_attach">5</property>
-        <property name="y_options">GTK_FILL</property>
+        <property name="top_attach">5</property>
+        <property name="width">1</property>
+        <property name="height">1</property>
       </packing>
     </child>
     <child>
@@ -366,9 +358,10 @@
         <property name="mnemonic_widget">bond_arp_targets</property>
       </object>
       <packing>
-        <property name="top_attach">8</property>
-        <property name="bottom_attach">9</property>
-        <property name="y_options">GTK_FILL</property>
+        <property name="left_attach">0</property>
+        <property name="top_attach">9</property>
+        <property name="width">1</property>
+        <property name="height">1</property>
       </packing>
     </child>
     <child>
@@ -380,10 +373,9 @@
       </object>
       <packing>
         <property name="left_attach">1</property>
-        <property name="right_attach">2</property>
-        <property name="top_attach">8</property>
-        <property name="bottom_attach">9</property>
-        <property name="y_options">GTK_FILL</property>
+        <property name="top_attach">9</property>
+        <property name="width">1</property>
+        <property name="height">1</property>
       </packing>
     </child>
     <child>
@@ -396,9 +388,10 @@
         <property name="mnemonic_widget">bond_updelay</property>
       </object>
       <packing>
-        <property name="top_attach">6</property>
-        <property name="bottom_attach">7</property>
-        <property name="y_options">GTK_FILL</property>
+        <property name="left_attach">0</property>
+        <property name="top_attach">7</property>
+        <property name="width">1</property>
+        <property name="height">1</property>
       </packing>
     </child>
     <child>
@@ -411,9 +404,10 @@
         <property name="mnemonic_widget">bond_downdelay</property>
       </object>
       <packing>
-        <property name="top_attach">7</property>
-        <property name="bottom_attach">8</property>
-        <property name="y_options">GTK_FILL</property>
+        <property name="left_attach">0</property>
+        <property name="top_attach">8</property>
+        <property name="width">1</property>
+        <property name="height">1</property>
       </packing>
     </child>
     <child>
@@ -426,7 +420,6 @@
             <property name="visible">True</property>
             <property name="can_focus">True</property>
             <property name="invisible_char">●</property>
-            <property name="invisible_char_set">True</property>
             <property name="adjustment">bond_updelay_adjustment</property>
             <property name="snap_to_ticks">True</property>
             <property name="numeric">True</property>
@@ -453,10 +446,9 @@
       </object>
       <packing>
         <property name="left_attach">1</property>
-        <property name="right_attach">2</property>
-        <property name="top_attach">6</property>
-        <property name="bottom_attach">7</property>
-        <property name="y_options">GTK_FILL</property>
+        <property name="top_attach">7</property>
+        <property name="width">1</property>
+        <property name="height">1</property>
       </packing>
     </child>
     <child>
@@ -469,7 +461,6 @@
             <property name="visible">True</property>
             <property name="can_focus">True</property>
             <property name="invisible_char">●</property>
-            <property name="invisible_char_set">True</property>
             <property name="adjustment">bond_downdelay_adjustment</property>
             <property name="snap_to_ticks">True</property>
             <property name="numeric">True</property>
@@ -496,10 +487,39 @@
       </object>
       <packing>
         <property name="left_attach">1</property>
-        <property name="right_attach">2</property>
-        <property name="top_attach">7</property>
-        <property name="bottom_attach">8</property>
-        <property name="y_options">GTK_FILL</property>
+        <property name="top_attach">8</property>
+        <property name="width">1</property>
+        <property name="height">1</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkLabel" id="bond_primary_label">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="xalign">0</property>
+        <property name="label" translatable="yes">_Primary:</property>
+        <property name="use_underline">True</property>
+        <property name="mnemonic_widget">bond_primary</property>
+      </object>
+      <packing>
+        <property name="left_attach">0</property>
+        <property name="top_attach">4</property>
+        <property name="width">1</property>
+        <property name="height">1</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkEntry" id="bond_primary">
+        <property name="visible">True</property>
+        <property name="can_focus">True</property>
+        <property name="tooltip_text" translatable="yes">The interface name of the primary device. If set, this device will always be the active slave when it is available.</property>
+        <property name="invisible_char">●</property>
+      </object>
+      <packing>
+        <property name="left_attach">1</property>
+        <property name="top_attach">4</property>
+        <property name="width">1</property>
+        <property name="height">1</property>
       </packing>
     </child>
   </object>

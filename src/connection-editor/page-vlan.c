@@ -72,13 +72,8 @@ vlan_private_init (CEPageVlan *self)
 
 	builder = CE_PAGE (self)->builder;
 
-#if GTK_CHECK_VERSION(2,24,0)
 	priv->parent = GTK_COMBO_BOX (gtk_combo_box_text_new_with_entry ());
 	gtk_combo_box_set_entry_text_column (priv->parent, 0);
-#else
-	priv->parent = GTK_COMBO_BOX (gtk_combo_box_entry_new_text ());
-	gtk_combo_box_entry_set_text_column (GTK_COMBO_BOX_ENTRY (priv->parent), 0);
-#endif
 	priv->parent_entry = GTK_ENTRY (gtk_bin_get_child (GTK_BIN (priv->parent)));
 
 	align = GTK_WIDGET (gtk_builder_get_object (builder, "vlan_parent_alignment"));
@@ -86,13 +81,13 @@ vlan_private_init (CEPageVlan *self)
 	gtk_widget_show_all (GTK_WIDGET (priv->parent));
 
 	/* Set mnemonic widget for parent label */
-	label = GTK_LABEL (GTK_WIDGET (gtk_builder_get_object (builder, "vlan_parent_label")));
+	label = GTK_LABEL (gtk_builder_get_object (builder, "vlan_parent_label"));
 	gtk_label_set_mnemonic_widget (label, GTK_WIDGET (priv->parent));
 
-	priv->id_entry = GTK_SPIN_BUTTON (GTK_WIDGET (gtk_builder_get_object (builder, "vlan_id_entry")));
-	priv->name_entry = GTK_ENTRY (GTK_WIDGET (gtk_builder_get_object (builder, "vlan_name_entry")));
-	priv->cloned_mac = GTK_ENTRY (GTK_WIDGET (gtk_builder_get_object (builder, "vlan_cloned_mac_entry")));
-	priv->mtu = GTK_SPIN_BUTTON (GTK_WIDGET (gtk_builder_get_object (builder, "vlan_mtu")));
+	priv->id_entry = GTK_SPIN_BUTTON (gtk_builder_get_object (builder, "vlan_id_entry"));
+	priv->name_entry = GTK_ENTRY (gtk_builder_get_object (builder, "vlan_name_entry"));
+	priv->cloned_mac = GTK_ENTRY (gtk_builder_get_object (builder, "vlan_cloned_mac_entry"));
+	priv->mtu = GTK_SPIN_BUTTON (gtk_builder_get_object (builder, "vlan_mtu"));
 }
 
 static void
@@ -254,8 +249,8 @@ get_vlan_devices (CEPageVlan *self)
 	for (i = 0; devices_array && (i < devices_array->len); i++) {
 		device = devices_array->pdata[i];
 
-		/* FIXME: this supported-device-types logic belongs in NM somewhere. */
-		if (!NM_IS_DEVICE_ETHERNET (device))
+		if (!nm_utils_check_virtual_device_compatibility (NM_TYPE_SETTING_VLAN,
+		                                                  nm_device_get_setting_type (device)))
 			continue;
 
 		devices = g_slist_prepend (devices, device);
@@ -277,7 +272,7 @@ build_vlan_parent_list (CEPageVlan *self, GSList *devices)
 
 	parents = g_ptr_array_new ();
 
-	/* Devices with no L2 configuration can spawn VLANs directly. At the
+	/* Devices with no interesting L2 configuration can spawn VLANs directly. At the
 	 * moment, this means just Ethernet.
 	 */
 	for (d_iter = devices; d_iter; d_iter = d_iter->next) {
@@ -302,8 +297,13 @@ build_vlan_parent_list (CEPageVlan *self, GSList *devices)
 	for (c_iter = connections; c_iter; c_iter = c_iter->next) {
 		NMConnection *candidate = c_iter->data;
 		NMSettingConnection *s_con = nm_connection_get_setting_connection (candidate);
+		GType connection_gtype;
 
 		if (nm_setting_connection_get_master (s_con))
+			continue;
+
+		connection_gtype = nm_connection_lookup_setting_type (nm_setting_connection_get_connection_type (s_con));
+		if (!nm_utils_check_virtual_device_compatibility (NM_TYPE_SETTING_VLAN, connection_gtype))
 			continue;
 
 		for (d_iter = devices; d_iter; d_iter = d_iter->next) {
@@ -317,7 +317,10 @@ build_vlan_parent_list (CEPageVlan *self, GSList *devices)
 				iface = nm_device_get_iface (device);
 				id = nm_setting_connection_get_id (s_con);
 
-				parent->label = g_strdup_printf ("%s (%s)", iface, id);
+				/* Translators: the first %s is a device name (eg, "em1"), the
+				 * second is a connection name (eg, "Auto Ethernet").
+				 */
+				parent->label = g_strdup_printf (_("%s (via \"%s\")"), iface, id);
 				g_ptr_array_add (parents, parent);
 				/* no break here; the connection may apply to multiple devices */
 			}
@@ -445,7 +448,7 @@ populate_ui (CEPageVlan *self)
 		mtu_def = mtu_val = 1500;
 	}
 	g_signal_connect (priv->mtu, "output",
-	                  G_CALLBACK (ce_spin_output_with_default),
+	                  G_CALLBACK (ce_spin_output_with_automatic),
 	                  GINT_TO_POINTER (mtu_def));
 
 	gtk_spin_button_set_value (priv->mtu, (gdouble) mtu_val);

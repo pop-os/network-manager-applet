@@ -221,7 +221,6 @@ finish_setup (CEPageWifiSecurity *self, gpointer unused, GError *error, gpointer
 	GtkListStore *sec_model;
 	GtkTreeIter iter;
 	const char *mode;
-	const char *security;
 	guint32 dev_caps = 0;
 	NMUtilsSecurityType default_type = NMU_SEC_NONE;
 	int active = -1;
@@ -235,7 +234,7 @@ finish_setup (CEPageWifiSecurity *self, gpointer unused, GError *error, gpointer
 	s_wireless = nm_connection_get_setting_wireless (connection);
 	g_assert (s_wireless);
 
-	combo = GTK_COMBO_BOX (GTK_WIDGET (gtk_builder_get_object (parent->builder, "wifi_security_combo")));
+	combo = GTK_COMBO_BOX (gtk_builder_get_object (parent->builder, "wifi_security_combo"));
 
 	dev_caps =   NM_WIFI_DEVICE_CAP_CIPHER_WEP40
 	           | NM_WIFI_DEVICE_CAP_CIPHER_WEP104
@@ -251,13 +250,10 @@ finish_setup (CEPageWifiSecurity *self, gpointer unused, GError *error, gpointer
 
 	s_wireless_sec = nm_connection_get_setting_wireless_security (connection);
 
-	security = nm_setting_wireless_get_security (s_wireless);
-	if (!security || strcmp (security, NM_SETTING_WIRELESS_SECURITY_SETTING_NAME))
-		s_wireless_sec = NULL;
 	if (s_wireless_sec)
 		default_type = get_default_type_for_security (s_wireless_sec);
 
-	sec_model = gtk_list_store_new (3, G_TYPE_STRING, wireless_security_get_g_type (), G_TYPE_BOOLEAN);
+	sec_model = gtk_list_store_new (3, G_TYPE_STRING, wireless_security_get_type (), G_TYPE_BOOLEAN);
 
 	if (nm_utils_security_valid (NMU_SEC_NONE, dev_caps, FALSE, is_adhoc, 0, 0, 0)) {
 		gtk_list_store_append (sec_model, &iter);
@@ -389,7 +385,6 @@ ce_page_wifi_security_new (NMConnection *connection,
 	NMSettingWireless *s_wireless;
 	NMSettingWirelessSecurity *s_wsec = NULL;
 	NMUtilsSecurityType default_type = NMU_SEC_NONE;
-	const char *security;
 
 	s_wireless = nm_connection_get_setting_wireless (connection);
 	if (!s_wireless) {
@@ -414,9 +409,6 @@ ce_page_wifi_security_new (NMConnection *connection,
 
 	s_wsec = nm_connection_get_setting_wireless_security (connection);
 
-	security = nm_setting_wireless_get_security (s_wireless);
-	if (!security || strcmp (security, NM_SETTING_WIRELESS_SECURITY_SETTING_NAME))
-		s_wsec = NULL;
 	if (s_wsec)
 		default_type = get_default_type_for_security (s_wsec);
 
@@ -510,27 +502,12 @@ validate (CEPage *page, NMConnection *connection, GError **error)
 		wireless_security_unref (sec);
 	} else {
 		/* No security, unencrypted */
-		g_object_set (s_wireless, NM_SETTING_WIRELESS_SEC, NULL, NULL);
 		nm_connection_remove_setting (connection, NM_TYPE_SETTING_WIRELESS_SECURITY);
 		nm_connection_remove_setting (connection, NM_TYPE_SETTING_802_1X);
 		valid = TRUE;
 	}
 
 	return valid;
-}
-
-static GtkWidget *
-nag_user (CEPage *page)
-{
-	WirelessSecurity *sec;
-	GtkWidget *nag = NULL;
-
-	sec = wireless_security_combo_get_active (CE_PAGE_WIFI_SECURITY (page));
-	if (sec) {
-		nag = wireless_security_nag_user (sec);
-		wireless_security_unref (sec);
-	}
-	return nag;
 }
 
 static void
@@ -543,5 +520,4 @@ ce_page_wifi_security_class_init (CEPageWifiSecurityClass *wireless_security_cla
 	object_class->dispose = dispose;
 
 	parent_class->validate = validate;
-	parent_class->nag_user = nag_user;
 }

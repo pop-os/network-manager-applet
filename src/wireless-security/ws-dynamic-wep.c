@@ -75,11 +75,6 @@ fill_connection (WirelessSecurity *parent, NMConnection *connection)
 	g_assert (s_wireless_sec);
 
 	g_object_set (s_wireless_sec, NM_SETTING_WIRELESS_SECURITY_KEY_MGMT, "ieee8021x", NULL);
-
-	nm_setting_wireless_security_add_pairwise (s_wireless_sec, "wep40");
-	nm_setting_wireless_security_add_pairwise (s_wireless_sec, "wep104");
-	nm_setting_wireless_security_add_group (s_wireless_sec, "wep40");
-	nm_setting_wireless_security_add_group (s_wireless_sec, "wep104");
 }
 
 static void
@@ -92,12 +87,6 @@ auth_combo_changed_cb (GtkWidget *combo, gpointer user_data)
 	                              parent,
 	                              "dynamic_wep_method_vbox",
 	                              sec->size_group);
-}
-
-static GtkWidget *
-nag_user (WirelessSecurity *parent)
-{
-	return ws_802_1x_nag_user (parent, "dynamic_wep_auth_combo");
 }
 
 static void
@@ -126,7 +115,6 @@ ws_dynamic_wep_new (NMConnection *connection,
 	if (!parent)
 		return NULL;
 
-	parent->nag_user = nag_user;
 	parent->adhoc_compatible = FALSE;
 
 	widget = ws_802_1x_auth_combo_init (parent,

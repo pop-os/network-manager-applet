@@ -3,6 +3,7 @@ bin_PROGRAMS = nm-connection-editor
 nm_connection_editor_CPPFLAGS = \
 	$(GTK_CFLAGS) \
 	$(NMA_CFLAGS) \
+	-DNM_VERSION_MAX_ALLOWED=NM_VERSION_0_9_10 \
 	-DICONDIR=\""$(datadir)/icons"\" \
 	-DUIDIR=\""$(uidir)"\" \
 	-DBINDIR=\""$(bindir)"\" \
@@ -55,12 +56,18 @@ nm_connection_editor_SOURCES = \
 	page-master.c \
 	page-bond.h \
 	page-bond.c \
+	page-team.h \
+	page-team.c \
+	page-team-port.h \
+	page-team-port.c \
 	page-bridge.h \
 	page-bridge.c \
 	page-bridge-port.h \
 	page-bridge-port.c \
 	page-vlan.h \
 	page-vlan.c \
+	page-dcb.c \
+	page-dcb.h \
 	vpn-helpers.h \
 	vpn-helpers.c \
 	ip4-routes-dialog.h \
@@ -97,6 +104,8 @@ ui_DATA = \
 	ce-page-wimax.ui \
 	ce-page-infiniband.ui \
 	ce-page-bond.ui \
+	ce-page-team.ui \
+	ce-page-team-port.ui \
 	ce-page-bridge.ui \
 	ce-page-bridge-port.ui \
 	ce-page-ip4.ui \
@@ -107,7 +116,8 @@ ui_DATA = \
 	ce-page-mobile.ui \
 	ce-page-ppp.ui \
 	ce-ppp-auth-methods.ui \
-	ce-page-vlan.ui
+	ce-page-vlan.ui \
+	ce-page-dcb.ui
 
 BUILT_SOURCES = nm-connection-editor-service-glue.h
 

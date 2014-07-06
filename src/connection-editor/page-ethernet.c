@@ -42,11 +42,7 @@ G_DEFINE_TYPE (CEPageEthernet, ce_page_ethernet, CE_TYPE_PAGE)
 typedef struct {
 	NMSettingWired *setting;
 
-#if GTK_CHECK_VERSION(2,24,0)
 	GtkComboBoxText *device_mac;  /* Permanent MAC of the device */
-#else
-	GtkComboBoxEntry *device_mac;
-#endif
 	GtkEntry *cloned_mac;         /* Cloned MAC - used for MAC spoofing */
 	GtkComboBox *port;
 	GtkComboBox *speed;
@@ -79,13 +75,8 @@ ethernet_private_init (CEPageEthernet *self)
 
 	builder = CE_PAGE (self)->builder;
 
-#if GTK_CHECK_VERSION(2,24,0)
 	priv->device_mac = GTK_COMBO_BOX_TEXT (gtk_combo_box_text_new_with_entry ());
 	gtk_combo_box_set_entry_text_column (GTK_COMBO_BOX (priv->device_mac), 0);
-#else
-	priv->device_mac = GTK_COMBO_BOX_ENTRY (gtk_combo_box_entry_new_text ());
-	gtk_combo_box_entry_set_text_column (GTK_COMBO_BOX_ENTRY (priv->device_mac), 0);
-#endif
 	gtk_widget_set_tooltip_text (GTK_WIDGET (priv->device_mac),
 	                             _("This option locks this connection to the network device specified by its permanent MAC address entered here.  Example: 00:11:22:33:44:55"));
 
@@ -94,15 +85,15 @@ ethernet_private_init (CEPageEthernet *self)
 	gtk_widget_show_all (GTK_WIDGET (priv->device_mac));
 
 	/* Set mnemonic widget for device MAC label */
-	label = GTK_LABEL (GTK_WIDGET (gtk_builder_get_object (builder, "ethernet_device_mac_label")));
+	label = GTK_LABEL (gtk_builder_get_object (builder, "ethernet_device_mac_label"));
 	gtk_label_set_mnemonic_widget (label, GTK_WIDGET (priv->device_mac));
 
-	priv->cloned_mac = GTK_ENTRY (GTK_WIDGET (gtk_builder_get_object (builder, "ethernet_cloned_mac")));
-	priv->port = GTK_COMBO_BOX (GTK_WIDGET (gtk_builder_get_object (builder, "ethernet_port")));
-	priv->speed = GTK_COMBO_BOX (GTK_WIDGET (gtk_builder_get_object (builder, "ethernet_speed")));
-	priv->duplex = GTK_TOGGLE_BUTTON (GTK_WIDGET (gtk_builder_get_object (builder, "ethernet_duplex")));
-	priv->autonegotiate = GTK_TOGGLE_BUTTON (GTK_WIDGET (gtk_builder_get_object (builder, "ethernet_autonegotiate")));
-	priv->mtu = GTK_SPIN_BUTTON (GTK_WIDGET (gtk_builder_get_object (builder, "ethernet_mtu")));
+	priv->cloned_mac = GTK_ENTRY (gtk_builder_get_object (builder, "ethernet_cloned_mac"));
+	priv->port = GTK_COMBO_BOX (gtk_builder_get_object (builder, "ethernet_port"));
+	priv->speed = GTK_COMBO_BOX (gtk_builder_get_object (builder, "ethernet_speed"));
+	priv->duplex = GTK_TOGGLE_BUTTON (gtk_builder_get_object (builder, "ethernet_duplex"));
+	priv->autonegotiate = GTK_TOGGLE_BUTTON (gtk_builder_get_object (builder, "ethernet_autonegotiate"));
+	priv->mtu = GTK_SPIN_BUTTON (gtk_builder_get_object (builder, "ethernet_mtu"));
 }
 
 static void
@@ -189,7 +180,7 @@ populate_ui (CEPageEthernet *self)
 	/* MTU */
 	mtu_def = ce_get_property_default (NM_SETTING (setting), NM_SETTING_WIRED_MTU);
 	g_signal_connect (priv->mtu, "output",
-	                  G_CALLBACK (ce_spin_output_with_default),
+	                  G_CALLBACK (ce_spin_output_with_automatic),
 	                  GINT_TO_POINTER (mtu_def));
 
 	gtk_spin_button_set_value (priv->mtu, (gdouble) nm_setting_wired_get_mtu (setting));
