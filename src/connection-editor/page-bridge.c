@@ -26,6 +26,7 @@
 
 #include <nm-setting-connection.h>
 #include <nm-setting-bridge.h>
+#include <nm-utils.h>
 
 #include "page-bridge.h"
 #include "nm-connection-editor.h"
@@ -161,12 +162,7 @@ create_connection (CEPageMaster *master, NMConnection *connection)
 static gboolean
 connection_type_filter (GType type, gpointer user_data)
 {
-	if (type == NM_TYPE_SETTING_WIRED ||
-	    type == NM_TYPE_SETTING_WIRELESS ||
-		type == NM_TYPE_SETTING_VLAN)
-		return TRUE;
-	else
-		return FALSE;
+	return nm_utils_check_virtual_device_compatibility (NM_TYPE_SETTING_BRIDGE, type);
 }
 
 static void
@@ -300,7 +296,7 @@ bridge_connection_new (GtkWindow *parent,
                      gpointer user_data)
 {
 	NMConnection *connection;
-	int bridge_num, max_bridge_num, num;
+	int bridge_num = 0, num;
 	GSList *connections, *iter;
 	NMConnection *conn2;
 	NMSettingBridge *s_bridge;
@@ -315,7 +311,6 @@ bridge_connection_new (GtkWindow *parent,
 	nm_connection_add_setting (connection, nm_setting_bridge_new ());
 
 	/* Find an available interface name */
-	bridge_num = max_bridge_num = 0;
 	connections = nm_remote_settings_list_connections (settings);
 	for (iter = connections; iter; iter = iter->next) {
 		conn2 = iter->data;
@@ -326,14 +321,12 @@ bridge_connection_new (GtkWindow *parent,
 		if (!s_bridge)
 			continue;
 		iface = nm_setting_bridge_get_interface_name (s_bridge);
-		if (!iface || strncmp (iface, "bridge", 4) != 0 || !g_ascii_isdigit (iface[4]))
+		if (!iface || strncmp (iface, "bridge", 6) != 0 || !g_ascii_isdigit (iface[6]))
 			continue;
 
-		num = atoi (iface + 4);
-		if (num > max_bridge_num)
-			max_bridge_num = num;
-		if (num == bridge_num)
-			bridge_num = max_bridge_num + 1;
+		num = atoi (iface + 6);
+		if (bridge_num <= num)
+			bridge_num = num + 1;
 	}
 	g_slist_free (connections);
 

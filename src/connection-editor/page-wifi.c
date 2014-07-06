@@ -43,16 +43,8 @@ typedef struct {
 	NMSettingWireless *setting;
 
 	GtkEntry *ssid;
-#if GTK_CHECK_VERSION (2,24,0)
 	GtkComboBoxText *bssid;
-#else
-	GtkComboBoxEntry *bssid;
-#endif
-#if GTK_CHECK_VERSION (2,24,0)
 	GtkComboBoxText *device_mac;  /* Permanent MAC of the device */
-#else
-	GtkComboBoxEntry *device_mac;
-#endif
 	GtkEntry *cloned_mac;         /* Cloned MAC - used for MAC spoofing */
 	GtkComboBox *mode;
 	GtkComboBox *band;
@@ -80,20 +72,15 @@ wifi_private_init (CEPageWifi *self)
 
 	priv->group = gtk_size_group_new (GTK_SIZE_GROUP_HORIZONTAL);
 
-	priv->ssid     = GTK_ENTRY (GTK_WIDGET (gtk_builder_get_object (builder, "wifi_ssid")));
-	priv->cloned_mac = GTK_ENTRY (GTK_WIDGET (gtk_builder_get_object (builder, "wifi_cloned_mac")));
-	priv->mode     = GTK_COMBO_BOX (GTK_WIDGET (gtk_builder_get_object (builder, "wifi_mode")));
-	priv->band     = GTK_COMBO_BOX (GTK_WIDGET (gtk_builder_get_object (builder, "wifi_band")));
-	priv->channel  = GTK_SPIN_BUTTON (GTK_WIDGET (gtk_builder_get_object (builder, "wifi_channel")));
+	priv->ssid     = GTK_ENTRY (gtk_builder_get_object (builder, "wifi_ssid"));
+	priv->cloned_mac = GTK_ENTRY (gtk_builder_get_object (builder, "wifi_cloned_mac"));
+	priv->mode     = GTK_COMBO_BOX (gtk_builder_get_object (builder, "wifi_mode"));
+	priv->band     = GTK_COMBO_BOX (gtk_builder_get_object (builder, "wifi_band"));
+	priv->channel  = GTK_SPIN_BUTTON (gtk_builder_get_object (builder, "wifi_channel"));
 
 	/* BSSID */
-#if GTK_CHECK_VERSION(2,24,0)
 	priv->bssid = GTK_COMBO_BOX_TEXT (gtk_combo_box_text_new_with_entry ());
 	gtk_combo_box_set_entry_text_column (GTK_COMBO_BOX (priv->bssid), 0);
-#else
-	priv->bssid = GTK_COMBO_BOX_ENTRY (gtk_combo_box_entry_new_text ());
-	gtk_combo_box_entry_set_text_column (GTK_COMBO_BOX_ENTRY (priv->bssid), 0);
-#endif
 	gtk_widget_set_tooltip_text (GTK_WIDGET (priv->bssid),
 	                             _("This option locks this connection to the Wi-Fi access point (AP) specified by the BSSID entered here.  Example: 00:11:22:33:44:55"));
 
@@ -102,13 +89,8 @@ wifi_private_init (CEPageWifi *self)
 	gtk_widget_show_all (GTK_WIDGET (priv->bssid));
 
 	/* Device MAC */
-#if GTK_CHECK_VERSION(2,24,0)
 	priv->device_mac = GTK_COMBO_BOX_TEXT (gtk_combo_box_text_new_with_entry ());
 	gtk_combo_box_set_entry_text_column (GTK_COMBO_BOX (priv->device_mac), 0);
-#else
-	priv->device_mac = GTK_COMBO_BOX_ENTRY (gtk_combo_box_entry_new_text ());
-	gtk_combo_box_entry_set_text_column (GTK_COMBO_BOX_ENTRY (priv->device_mac), 0);
-#endif
 	gtk_widget_set_tooltip_text (GTK_WIDGET (priv->device_mac),
 	                             _("This option locks this connection to the network device specified by its permanent MAC address entered here.  Example: 00:11:22:33:44:55"));
 
@@ -117,18 +99,18 @@ wifi_private_init (CEPageWifi *self)
 	gtk_widget_show_all (GTK_WIDGET (priv->device_mac));
 
 	/* Set mnemonic widget for device MAC label */
-	label = GTK_LABEL (GTK_WIDGET (gtk_builder_get_object (builder, "wifi_device_mac_label")));
+	label = GTK_LABEL (gtk_builder_get_object (builder, "wifi_device_mac_label"));
 	gtk_label_set_mnemonic_widget (label, GTK_WIDGET (priv->device_mac));
 
-	priv->rate     = GTK_SPIN_BUTTON (GTK_WIDGET (gtk_builder_get_object (builder, "wifi_rate")));
+	priv->rate     = GTK_SPIN_BUTTON (gtk_builder_get_object (builder, "wifi_rate"));
 	widget = GTK_WIDGET (gtk_builder_get_object (builder, "rate_units"));
 	gtk_size_group_add_widget (priv->group, widget);
 
-	priv->tx_power = GTK_SPIN_BUTTON (GTK_WIDGET (gtk_builder_get_object (builder, "wifi_tx_power")));
+	priv->tx_power = GTK_SPIN_BUTTON (gtk_builder_get_object (builder, "wifi_tx_power"));
 	widget = GTK_WIDGET (gtk_builder_get_object (builder, "tx_power_units"));
 	gtk_size_group_add_widget (priv->group, widget);
 
-	priv->mtu      = GTK_SPIN_BUTTON (GTK_WIDGET (gtk_builder_get_object (builder, "wifi_mtu")));
+	priv->mtu      = GTK_SPIN_BUTTON (gtk_builder_get_object (builder, "wifi_mtu"));
 	widget = GTK_WIDGET (gtk_builder_get_object (builder, "mtu_units"));
 	gtk_size_group_add_widget (priv->group, widget);
 }
@@ -333,19 +315,19 @@ populate_ui (CEPageWifi *self)
 
 	rate_def = ce_get_property_default (NM_SETTING (setting), NM_SETTING_WIRELESS_RATE);
 	g_signal_connect (priv->rate, "output",
-	                  G_CALLBACK (ce_spin_output_with_default),
+	                  G_CALLBACK (ce_spin_output_with_automatic),
 	                  GINT_TO_POINTER (rate_def));
 	g_signal_connect_swapped (priv->rate, "value-changed", G_CALLBACK (ce_page_changed), self);
 
 	tx_power_def = ce_get_property_default (NM_SETTING (setting), NM_SETTING_WIRELESS_TX_POWER);
 	g_signal_connect (priv->tx_power, "output",
-	                  G_CALLBACK (ce_spin_output_with_default),
+	                  G_CALLBACK (ce_spin_output_with_automatic),
 	                  GINT_TO_POINTER (tx_power_def));
 	g_signal_connect_swapped (priv->tx_power, "value-changed", G_CALLBACK (ce_page_changed), self);
 
 	mtu_def = ce_get_property_default (NM_SETTING (setting), NM_SETTING_WIRELESS_MTU);
 	g_signal_connect (priv->mtu, "output",
-	                  G_CALLBACK (ce_spin_output_with_default),
+	                  G_CALLBACK (ce_spin_output_with_automatic),
 	                  GINT_TO_POINTER (mtu_def));
 	g_signal_connect_swapped (priv->mtu, "value-changed", G_CALLBACK (ce_page_changed), self);
 
@@ -589,7 +571,6 @@ validate (CEPage *page, NMConnection *connection, GError **error)
 {
 	CEPageWifi *self = CE_PAGE_WIFI (page);
 	CEPageWifiPrivate *priv = CE_PAGE_WIFI_GET_PRIVATE (self);
-	char *security;
 	gboolean success;
 	gboolean invalid = FALSE;
 	GByteArray *ignore;
@@ -621,13 +602,7 @@ validate (CEPage *page, NMConnection *connection, GError **error)
 
 	ui_to_setting (self);
 
-	/* A hack to not check the wifi security here */
-	security = g_strdup (nm_setting_wireless_get_security (priv->setting));
-	g_object_set (priv->setting, NM_SETTING_WIRELESS_SEC, NULL, NULL);
-
 	success = nm_setting_verify (NM_SETTING (priv->setting), NULL, error);
-	g_object_set (priv->setting, NM_SETTING_WIRELESS_SEC, security, NULL);
-	g_free (security);
 
 	return success;
 }

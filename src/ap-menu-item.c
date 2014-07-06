@@ -39,11 +39,7 @@ G_DEFINE_TYPE (NMNetworkMenuItem, nm_network_menu_item, GTK_TYPE_IMAGE_MENU_ITEM
 static void
 nm_network_menu_item_init (NMNetworkMenuItem * item)
 {
-#if GTK_CHECK_VERSION(3,1,6)
-        item->hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
-#else
-	item->hbox = gtk_hbox_new (FALSE, 6);
-#endif
+	item->hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
 	item->ssid = gtk_label_new (NULL);
 	gtk_misc_set_alignment (GTK_MISC (item->ssid), 0.0, 0.5);
 
@@ -155,7 +151,7 @@ nm_network_menu_item_best_strength (NMNetworkMenuItem * item,
 	g_return_if_fail (item != NULL);
 	g_return_if_fail (NM_IS_NETWORK_MENU_ITEM (item));
 
-	strength = CLAMP (strength, 0, 100);
+	strength = MIN (strength, 100);
 
 	/* Just do nothing if the new strength is less */
 	if (strength < item->int_strength)

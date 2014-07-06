@@ -48,6 +48,7 @@
 #include <nm-setting-wimax.h>
 #include <nm-setting-infiniband.h>
 #include <nm-setting-bond.h>
+#include <nm-setting-team.h>
 #include <nm-setting-bridge.h>
 #include <nm-utils.h>
 
@@ -71,11 +72,15 @@
 #include "page-wimax.h"
 #include "page-infiniband.h"
 #include "page-bond.h"
+#include "page-team.h"
+#include "page-team-port.h"
 #include "page-bridge.h"
 #include "page-bridge-port.h"
 #include "page-vlan.h"
+#include "page-dcb.h"
 #include "ce-polkit-button.h"
 #include "vpn-helpers.h"
+#include "eap-method.h"
 
 G_DEFINE_TYPE (NMConnectionEditor, nm_connection_editor, G_TYPE_OBJECT)
 
@@ -412,7 +417,6 @@ nm_connection_editor_new (GtkWindow *parent_window,
 
 	editor->ok_button = ce_polkit_button_new (_("_Save"),
 	                                          _("Save any changes made to this connection."),
-	                                          _("_Save..."),
 	                                          _("Authenticate to save this connection for all users of this machine."),
 	                                          GTK_STOCK_APPLY,
 	                                          client,
@@ -487,79 +491,6 @@ nm_connection_editor_get_connection (NMConnectionEditor *editor)
 	g_return_val_if_fail (NM_IS_CONNECTION_EDITOR (editor), NULL);
 
 	return editor->orig_connection;
-}
-
-static void
-update_secret_flags (NMSetting *setting,
-                     const char *key,
-                     const GValue *value,
-                     GParamFlags flags,
-                     gpointer user_data)
-{
-	gboolean everyone = !!GPOINTER_TO_UINT (user_data);
-	NMSettingSecretFlags secret_flags = NM_SETTING_SECRET_FLAG_NONE;
-
-	if (!(flags & NM_SETTING_PARAM_SECRET))
-		return;
-
-	/* VPN connections never get changed */
-	if (NM_IS_SETTING_VPN (setting))
-		return;
-
-	/* 802.1x passwords don't get changed either */
-	if (NM_IS_SETTING_802_1X (setting)) {
-		if (   g_strcmp0 (key, NM_SETTING_802_1X_PASSWORD) == 0
-		    || g_strcmp0 (key, NM_SETTING_802_1X_PRIVATE_KEY_PASSWORD) == 0
-		    || g_strcmp0 (key, NM_SETTING_802_1X_PHASE2_PRIVATE_KEY_PASSWORD) == 0)
-			return;
-	}
-
-	nm_setting_get_secret_flags (setting, key, &secret_flags, NULL);
-	if (everyone)
-		secret_flags &= ~NM_SETTING_SECRET_FLAG_AGENT_OWNED;
-	else
-		secret_flags |= NM_SETTING_SECRET_FLAG_AGENT_OWNED;
-
-	nm_setting_set_secret_flags (setting, key, secret_flags, NULL);
-}
-
-gboolean
-nm_connection_editor_update_connection (NMConnectionEditor *editor)
-{
-	NMSettingConnection *s_con;
-	GHashTable *settings;
-	gboolean everyone = FALSE;
-	GError *error = NULL;
-
-	g_return_val_if_fail (NM_IS_CONNECTION_EDITOR (editor), FALSE);
-
-	if (!nm_connection_verify (editor->connection, &error)) {
-		/* In theory, this cannot happen: the "Save..." button should only
-		 * be sensitive if the connection is valid.
-		 */
-		nm_connection_editor_error (GTK_WINDOW (editor->window),
-		                            _("Error saving connection"),
-		                            _("The property '%s' / '%s' is invalid: %d"),
-		                            g_type_name (nm_connection_lookup_setting_type_by_quark (error->domain)),
-		                            error->message, error->code);
-		g_error_free (error);
-		return FALSE;
-	}
-
-	/* Update secret flags at the end after all other settings have updated,
-	 * otherwise the secret flags we set here might be overwritten during
-	 * setting validation.
-	 */
-	s_con = nm_connection_get_setting_connection (editor->connection);
-	everyone = !nm_setting_connection_get_num_permissions (s_con);
-	nm_connection_for_each_setting_value (editor->connection, update_secret_flags, GUINT_TO_POINTER (everyone));
-
-	/* Copy the modified connection to the original connection */
-	settings = nm_connection_to_hash (editor->connection, NM_SETTING_HASH_FLAG_ALL);
-	nm_connection_replace_settings (editor->orig_connection, settings, NULL);
-	g_hash_table_destroy (settings);
-
-	return TRUE;
 }
 
 static void
@@ -812,6 +743,9 @@ nm_connection_editor_set_connection (NMConnectionEditor *editor,
 	editor->orig_connection = g_object_ref (orig_connection);
 	nm_connection_editor_update_title (editor);
 
+	/* Handle CA cert ignore stuff */
+	eap_method_ca_cert_ignore_load (editor->connection);
+
 	s_con = nm_connection_get_setting_connection (editor->connection);
 	g_assert (s_con);
 
@@ -822,6 +756,8 @@ nm_connection_editor_set_connection (NMConnectionEditor *editor,
 		if (!add_page (editor, ce_page_ethernet_new, editor->connection, error))
 			goto out;
 		if (!add_page (editor, ce_page_8021x_security_new, editor->connection, error))
+			goto out;
+		if (!add_page (editor, ce_page_dcb_new, editor->connection, error))
 			goto out;
 	} else if (!strcmp (connection_type, NM_SETTING_WIRELESS_SETTING_NAME)) {
 		if (!add_page (editor, ce_page_wifi_new, editor->connection, error))
@@ -856,6 +792,9 @@ nm_connection_editor_set_connection (NMConnectionEditor *editor,
 	} else if (!strcmp (connection_type, NM_SETTING_BOND_SETTING_NAME)) {
 		if (!add_page (editor, ce_page_bond_new, editor->connection, error))
 			goto out;
+	} else if (!strcmp (connection_type, NM_SETTING_TEAM_SETTING_NAME)) {
+		if (!add_page (editor, ce_page_team_new, editor->connection, error))
+			goto out;
 	} else if (!strcmp (connection_type, NM_SETTING_BRIDGE_SETTING_NAME)) {
 		if (!add_page (editor, ce_page_bridge_new, editor->connection, error))
 			goto out;
@@ -869,7 +808,11 @@ nm_connection_editor_set_connection (NMConnectionEditor *editor,
 	slave_type = nm_setting_connection_get_slave_type (s_con);
 	if (!g_strcmp0 (slave_type, NM_SETTING_BOND_SETTING_NAME))
 		add_ip4 = add_ip6 = FALSE;
-	else if (!g_strcmp0 (slave_type, NM_SETTING_BRIDGE_SETTING_NAME)) {
+	else if (!g_strcmp0 (slave_type, NM_SETTING_TEAM_SETTING_NAME)) {
+		add_ip4 = add_ip6 = FALSE;
+		if (!add_page (editor, ce_page_team_port_new, editor->connection, error))
+			goto out;
+	} else if (!g_strcmp0 (slave_type, NM_SETTING_BRIDGE_SETTING_NAME)) {
 		add_ip4 = add_ip6 = FALSE;
 		if (!add_page (editor, ce_page_bridge_port_new, editor->connection, error))
 			goto out;
@@ -994,10 +937,23 @@ ok_button_clicked_save_connection (NMConnectionEditor *self)
 {
 	GError *error = NULL;
 
-	if (!nm_connection_editor_update_connection (self))
+	/* Copy the modified connection to the original connection */
+	if (!nm_connection_replace_settings_from_connection (self->orig_connection,
+	                                                     self->connection,
+	                                                     &error)) {
+		nm_connection_editor_error (GTK_WINDOW (self->window),
+		                            _("Error saving connection"),
+		                            _("The property '%s' / '%s' is invalid: %d"),
+		                            g_type_name (nm_connection_lookup_setting_type_by_quark (error->domain)),
+		                            error->message, error->code);
+		g_error_free (error);
 		return;
+	}
 
 	nm_connection_editor_set_busy (self, TRUE);
+
+	/* Save new CA cert ignore values to GSettings */
+	eap_method_ca_cert_ignore_save (self->connection);
 
 	if (self->is_new_connection) {
 		nm_remote_settings_add_connection (self->settings,
@@ -1005,46 +961,15 @@ ok_button_clicked_save_connection (NMConnectionEditor *self)
 		                                   added_connection_cb,
 		                                   self);
 	} else {
-		GHashTable *new_settings;
-
-		/* Connections need the certificates filled because the applet
-		 * private values that we use to store the path to
-		 * certificates and private keys don't go through D-Bus; they
-		 * are private of course!
-		 */
-		new_settings = nm_connection_to_hash (self->orig_connection, NM_SETTING_HASH_FLAG_ALL);
-		if (!nm_connection_replace_settings (self->orig_connection, new_settings, &error)) {
-			update_complete (self, error);
-			g_error_free (error);
-			return;
-		}
-
 		nm_remote_connection_commit_changes (NM_REMOTE_CONNECTION (self->orig_connection),
 		                                     updated_connection_cb, self);
 	}
 }
 
 static void
-nag_dialog_response_cb (GtkDialog *dialog,
-                        gint response,
-                        gpointer user_data)
-{
-	NMConnectionEditor *self = NM_CONNECTION_EDITOR (user_data);
-
-	gtk_widget_hide (GTK_WIDGET (dialog));
-	if (response == GTK_RESPONSE_NO) {
-		/* user opted not to correct the warning */
-		ok_button_clicked_save_connection (self);
-	}
-	g_signal_handler_disconnect (dialog, self->nag_id);
-	self->nag_id = 0;
-}
-
-static void
 ok_button_clicked_cb (GtkWidget *widget, gpointer user_data)
 {
 	NMConnectionEditor *self = NM_CONNECTION_EDITOR (user_data);
-	GSList *iter;
 
 	/* If the dialog is busy waiting for authorization or something,
 	 * don't destroy it until authorization returns.
@@ -1052,21 +977,8 @@ ok_button_clicked_cb (GtkWidget *widget, gpointer user_data)
 	if (self->busy)
 		return;
 
-	/* Make sure the user is warned about insecure security options like no
-	 * CA certificate.
-	 */
-	g_warn_if_fail (self->nag_id == 0);
-	for (iter = self->pages; iter; iter = g_slist_next (iter)) {
-		CEPage *page = iter->data;
-		GtkWidget *nag_dialog;
-
-		nag_dialog = ce_page_nag_user (page);
-		if (nag_dialog) {
-			gtk_window_set_transient_for (GTK_WINDOW (nag_dialog), GTK_WINDOW (self->window));
-			self->nag_id = g_signal_connect (nag_dialog, "response", G_CALLBACK (nag_dialog_response_cb), self);
-			return;
-		}
-	}
+	/* Validate one last time to ensure all pages update the connection */
+	connection_editor_validate (self);
 
 	ok_button_clicked_save_connection (self);
 }
@@ -1152,22 +1064,20 @@ nm_connection_editor_set_busy (NMConnectionEditor *editor, gboolean busy)
 	}
 }
 
-void
-nm_connection_editor_error (GtkWindow *parent, const char *heading, const char *format, ...)
+static void
+nm_connection_editor_dialog (GtkWindow *parent, GtkMessageType type, const char *heading,
+                             const char *format, va_list args)
 {
 	GtkWidget *dialog;
-	va_list args;
 	char *message;
 
 	dialog = gtk_message_dialog_new (parent,
 	                                 GTK_DIALOG_DESTROY_WITH_PARENT,
-	                                 GTK_MESSAGE_ERROR,
+	                                 type,
 	                                 GTK_BUTTONS_CLOSE,
 	                                 "%s", heading);
 
-	va_start (args, format);
 	message = g_strdup_vprintf (format, args);
-	va_end (args);
 
 	gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog), "%s", message);
 	g_free (message);
@@ -1176,5 +1086,25 @@ nm_connection_editor_error (GtkWindow *parent, const char *heading, const char *
 	gtk_window_present (GTK_WINDOW (dialog));
 	gtk_dialog_run (GTK_DIALOG (dialog));
 	gtk_widget_destroy (dialog);
+}
+
+void
+nm_connection_editor_error (GtkWindow *parent, const char *heading, const char *format, ...)
+{
+	va_list args;
+
+	va_start (args, format);
+	nm_connection_editor_dialog (parent, GTK_MESSAGE_ERROR, heading, format, args);
+	va_end (args);
+}
+
+void
+nm_connection_editor_warning (GtkWindow *parent, const char *heading, const char *format, ...)
+{
+	va_list args;
+
+	va_start (args, format);
+	nm_connection_editor_dialog (parent, GTK_MESSAGE_WARNING, heading, format, args);
+	va_end (args);
 }
 

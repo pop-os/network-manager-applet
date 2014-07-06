@@ -268,8 +268,9 @@ mobile_helper_wizard (NMDeviceModemCapabilities capabilities,
 		method->provider_name = _("GSM");
 	else if (wizard_capability == NM_DEVICE_MODEM_CAPABILITY_CDMA_EVDO)
 		method->provider_name = _("CDMA");
-	else
-		g_assert_not_reached ();
+
+	g_assert (   wizard_capability == NM_DEVICE_MODEM_CAPABILITY_GSM_UMTS
+	          || wizard_capability == NM_DEVICE_MODEM_CAPABILITY_CDMA_EVDO);
 
 	mobile_wizard_done (NULL, FALSE, method, info);
 	g_free (method);
@@ -449,7 +450,7 @@ ask_for_pin (GtkEntry **out_secret_entry)
 	gtk_window_set_modal (GTK_WINDOW (dialog), TRUE);
 	gtk_window_set_title (GTK_WINDOW (dialog), _("PIN code required"));
 
-	ok_button = gtk_dialog_add_button (dialog, GTK_STOCK_CANCEL, GTK_RESPONSE_REJECT);
+	gtk_dialog_add_button (dialog, GTK_STOCK_CANCEL, GTK_RESPONSE_REJECT);
 	ok_button = gtk_dialog_add_button (dialog, GTK_STOCK_OK, GTK_RESPONSE_OK);
 	gtk_window_set_default (GTK_WINDOW (dialog), ok_button);
 
@@ -461,11 +462,7 @@ ask_for_pin (GtkEntry **out_secret_entry)
 	w = gtk_alignment_new (0.5, 0.5, 0, 1.0);
 	gtk_box_pack_start (vbox, w, TRUE, TRUE, 0);
 
-#if GTK_CHECK_VERSION(3,1,6)
 	box = GTK_BOX (gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 6));
-#else
-	box = GTK_BOX (gtk_hbox_new (FALSE, 6));
-#endif
 	gtk_container_set_border_width (GTK_CONTAINER (box), 6);
 	gtk_container_add (GTK_CONTAINER (w), GTK_WIDGET (box));
 

@@ -53,11 +53,7 @@
 
 #include "gconf-helpers.h"
 #include "gconf-upgrade.h"
-
-#if !GLIB_CHECK_VERSION(2,31,0)
-#define g_value_set_schar g_value_set_char
-#define g_value_get_schar g_value_get_char
-#endif
+#include "nm-gvaluearray-compat.h"
 
 #define S390_OPT_KEY_PREFIX "s390-opt-"
 
@@ -1482,6 +1478,30 @@ out:
 	return success;
 }
 
+static gboolean
+validate_gvalue_array (GValueArray *elements, guint n_expected, ...)
+{
+	va_list args;
+	GValue *tmp;
+	int i;
+	gboolean valid = FALSE;
+
+	if (n_expected != elements->n_values)
+		return FALSE;
+
+	va_start (args, n_expected);
+	for (i = 0; i < n_expected; i++) {
+		tmp = g_value_array_get_nth (elements, i);
+		if (G_VALUE_TYPE (tmp) != va_arg (args, GType))
+			goto done;
+	}
+	valid = TRUE;
+
+done:
+	va_end (args);
+	return valid;
+}
+
 gboolean
 nm_gconf_set_ip6addr_array_helper (GConfClient *client,
 								   const char *path,
@@ -1521,14 +1541,13 @@ nm_gconf_set_ip6addr_array_helper (GConfClient *client,
 			goto out;
 		}
 
-		if (   (G_VALUE_TYPE (g_value_array_get_nth (elements, 0)) != DBUS_TYPE_G_UCHAR_ARRAY)
-		    || (G_VALUE_TYPE (g_value_array_get_nth (elements, 1)) != G_TYPE_UINT)) {
+		if (!validate_gvalue_array (elements, 2, DBUS_TYPE_G_UCHAR_ARRAY, G_TYPE_UINT)) {
 			g_warning ("%s: invalid IPv6 address!", __func__);
 			goto out;
 		}
 
-		if (   (elements->n_values == 3)
-		    && (G_VALUE_TYPE (g_value_array_get_nth (elements, 2)) != DBUS_TYPE_G_UCHAR_ARRAY)) {
+		if (   elements->n_values == 3
+		    && !validate_gvalue_array (elements, 3, DBUS_TYPE_G_UCHAR_ARRAY, G_TYPE_UINT, DBUS_TYPE_G_UCHAR_ARRAY)) {
 			g_warning ("%s: invalid IPv6 gateway!", __func__);
 			goto out;
 		}
@@ -1609,12 +1628,11 @@ nm_gconf_set_ip6route_array_helper (GConfClient *client,
 		guint prefix, metric;
 		char dest[INET6_ADDRSTRLEN], next_hop[INET6_ADDRSTRLEN];
 
-		if (   (elements->n_values != 4)
-		    || (G_VALUE_TYPE (g_value_array_get_nth (elements, 0)) != DBUS_TYPE_G_UCHAR_ARRAY)
-		    || (G_VALUE_TYPE (g_value_array_get_nth (elements, 1)) != G_TYPE_UINT)
-		    || (G_VALUE_TYPE (g_value_array_get_nth (elements, 2)) != DBUS_TYPE_G_UCHAR_ARRAY)
-		    || (G_VALUE_TYPE (g_value_array_get_nth (elements, 3)) != G_TYPE_UINT))
- {
+		if (!validate_gvalue_array (elements, 4,
+		                            DBUS_TYPE_G_UCHAR_ARRAY,
+		                            G_TYPE_UINT,
+		                            DBUS_TYPE_G_UCHAR_ARRAY,
+		                            G_TYPE_UINT)) {
 			g_warning ("%s: invalid IPv6 route!", __func__);
 			goto out;
 		}

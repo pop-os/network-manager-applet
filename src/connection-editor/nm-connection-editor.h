@@ -61,7 +61,6 @@ typedef struct {
 	GtkWidget *ok_button;
 	GtkWidget *cancel_button;
 	GtkWidget *export_button;
-	guint nag_id;
 
 	gboolean busy;
 	gboolean init_run;
@@ -86,7 +85,6 @@ NMConnectionEditor *nm_connection_editor_get_master (NMConnection *slave);
 void                nm_connection_editor_present (NMConnectionEditor *editor);
 void                nm_connection_editor_run (NMConnectionEditor *editor);
 NMConnection *      nm_connection_editor_get_connection (NMConnectionEditor *editor);
-gboolean            nm_connection_editor_update_connection (NMConnectionEditor *editor);
 GtkWindow *         nm_connection_editor_get_window (NMConnectionEditor *editor);
 gboolean            nm_connection_editor_get_busy (NMConnectionEditor *editor);
 void                nm_connection_editor_set_busy (NMConnectionEditor *editor, gboolean busy);
@@ -95,5 +93,9 @@ void                nm_connection_editor_error (GtkWindow *parent,
                                                 const char *heading,
                                                 const char *format,
                                                 ...);
+void                nm_connection_editor_warning (GtkWindow *parent,
+                                                  const char *heading,
+                                                  const char *format,
+                                                  ...);
 
 #endif

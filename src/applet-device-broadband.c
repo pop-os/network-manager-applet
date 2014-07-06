@@ -164,7 +164,7 @@ dialog_sim_send_puk_ready (MMSim *sim,
 			msg = _("Wrong PUK code; please contact your provider.");
 		else {
 			g_dbus_error_strip_remote_error (error);
-			msg = error ? error->message : NULL;
+			msg = error->message;
 		}
 
 		applet_mobile_pin_dialog_stop_spinner (info->dialog, msg);
@@ -206,7 +206,7 @@ dialog_sim_send_pin_ready (MMSim *sim,
 				msg = _("Wrong PIN code; please contact your provider.");
 			else {
 				g_dbus_error_strip_remote_error (error);
-				msg = error ? error->message : NULL;
+				msg = error->message;
 			}
 
 			applet_mobile_pin_dialog_stop_spinner (info->dialog, msg);
@@ -258,8 +258,7 @@ unlock_dialog_response (GtkDialog *dialog,
 
 	code1 = applet_mobile_pin_dialog_get_entry1 (info->dialog);
 	if (!code1 || !strlen (code1)) {
-		g_warn_if_fail (code1 != NULL);
-		g_warn_if_fail (strlen (code1));
+		g_warn_if_reached ();
 		unlock_dialog_destroy (info);
 		return;
 	}
@@ -277,7 +276,7 @@ unlock_dialog_response (GtkDialog *dialog,
 	if (lock == MM_MODEM_LOCK_SIM_PUK) {
 		code2 = applet_mobile_pin_dialog_get_entry2 (info->dialog);
 		if (!code2) {
-			g_warn_if_fail (code2 != NULL);
+			g_warn_if_reached ();
 			unlock_dialog_destroy (info);
 			return;
 		}
@@ -626,6 +625,11 @@ get_icon (NMDevice *device,
 {
 	BroadbandDeviceInfo *info;
 
+	if (!applet->mm1) {
+		g_warning ("ModemManager is not available for modem at %s", nm_device_get_udi (device));
+		return NULL;
+	}
+
 	info = g_object_get_data (G_OBJECT (device), "devinfo");
 	g_assert (info);
 
@@ -692,7 +696,8 @@ add_connection_item (NMDevice *device,
 
 static void
 add_menu_item (NMDevice *device,
-               guint32 n_devices,
+               gboolean multiple_devices,
+               GSList *connections,
                NMConnection *active,
                GtkWidget *menu,
                NMApplet *applet)
@@ -700,15 +705,11 @@ add_menu_item (NMDevice *device,
 	BroadbandDeviceInfo *info;
 	char *text;
 	GtkWidget *item;
-	GSList *connections, *all, *iter;
+	GSList *iter;
 
 	info = g_object_get_data (G_OBJECT (device), "devinfo");
 
-	all = applet_get_all_connections (applet);
-	connections = nm_device_filter_connections (device, all);
-	g_slist_free (all);
-
-	if (n_devices > 1) {
+	if (multiple_devices) {
 		const char *desc;
 
 		desc = nma_utils_get_device_description (device);
@@ -783,42 +784,20 @@ add_menu_item (NMDevice *device,
 			add_connection_item (device, NULL, item, menu, applet);
 		}
 	}
-
-	g_slist_free (connections);
 }
 
 /********************************************************************/
 
 static void
-device_state_changed (NMDevice *device,
-                      NMDeviceState new_state,
-                      NMDeviceState old_state,
-                      NMDeviceStateReason reason,
-                      NMApplet *applet)
+notify_connected (NMDevice *device,
+                  const char *msg,
+                  NMApplet *applet)
 {
-	NMConnection *connection;
-	NMSettingConnection *s_con = NULL;
-	char *str = NULL;
-
-	if (new_state != NM_DEVICE_STATE_ACTIVATED)
-		return;
-
-	connection = applet_find_active_connection_for_device (device, applet, NULL);
-	if (connection) {
-		const char *id;
-
-		s_con = nm_connection_get_setting_connection (connection);
-		id = s_con ? nm_setting_connection_get_id (s_con) : NULL;
-		if (id)
-			str = g_strdup_printf (_("You are now connected to '%s'."), id);
-	}
-
 	applet_do_notify_with_pref (applet,
 	                            _("Connection Established"),
-	                            str ? str : _("You are now connected to the Mobile Broadband network."),
+	                            msg ? msg : _("You are now connected to the Mobile Broadband network."),
 	                            "nm-device-wwan",
 	                            PREF_DISABLE_CONNECTED_NOTIFICATIONS);
-	g_free (str);
 }
 
 /********************************************************************/
@@ -978,8 +957,10 @@ broadband_device_info_free (BroadbandDeviceInfo *info)
 
 	if (info->mm_sim)
 		g_object_unref (info->mm_sim);
-	if (info->mm_modem)
+	if (info->mm_modem) {
+		g_signal_handlers_disconnect_matched (info->mm_modem, G_SIGNAL_MATCH_DATA, 0, 0, NULL, NULL, info);
 		g_object_unref (info->mm_modem);
+	}
 	if (info->mm_object)
 		g_object_unref (info->mm_object);
 
@@ -1072,7 +1053,7 @@ applet_device_broadband_get_class (NMApplet *applet)
 	dclass->new_auto_connection = new_auto_connection;
 	dclass->add_menu_item = add_menu_item;
 	dclass->device_added = device_added;
-	dclass->device_state_changed = device_state_changed;
+	dclass->notify_connected = notify_connected;
 	dclass->get_icon = get_icon;
 	dclass->get_secrets = get_secrets;
 	dclass->secrets_request_size = sizeof (MobileHelperSecretsInfo);

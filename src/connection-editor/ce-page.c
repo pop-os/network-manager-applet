@@ -35,11 +35,6 @@
 #include "ce-page.h"
 #include "nma-marshal.h"
 
-#if !GLIB_CHECK_VERSION(2,31,0)
-#define g_value_set_schar g_value_set_char
-#define g_value_get_schar g_value_get_char
-#endif
-
 G_DEFINE_ABSTRACT_TYPE (CEPage, ce_page, G_TYPE_OBJECT)
 
 enum {
@@ -60,16 +55,17 @@ enum {
 
 static guint signals[LAST_SIGNAL] = { 0 };
 
-gint
-ce_spin_output_with_default (GtkSpinButton *spin, gpointer user_data)
+static gboolean
+spin_output_with_default_string (GtkSpinButton *spin,
+                                 int defvalue,
+                                 const char *defstring)
 {
-	int defvalue = GPOINTER_TO_INT (user_data);
 	int val;
 	gchar *buf = NULL;
 
 	val = gtk_spin_button_get_value_as_int (spin);
 	if (val == defvalue)
-		buf = g_strdup (_("automatic"));
+		buf = g_strdup (defstring);
 	else
 		buf = g_strdup_printf ("%d", val);
 
@@ -80,11 +76,29 @@ ce_spin_output_with_default (GtkSpinButton *spin, gpointer user_data)
 	return TRUE;
 }
 
+gboolean
+ce_spin_output_with_automatic (GtkSpinButton *spin, gpointer user_data)
+{
+	return spin_output_with_default_string (spin,
+	                                        GPOINTER_TO_INT (user_data),
+	                                        _("automatic"));
+}
+
+gboolean
+ce_spin_output_with_default (GtkSpinButton *spin, gpointer user_data)
+{
+	return spin_output_with_default_string (spin,
+	                                        GPOINTER_TO_INT (user_data),
+	                                        _("default"));
+}
+
 int
 ce_get_property_default (NMSetting *setting, const char *property_name)
 {
 	GParamSpec *spec;
 	GValue value = { 0, };
+
+	g_return_val_if_fail (NM_IS_SETTING (setting), -1);
 
 	spec = g_object_class_find_property (G_OBJECT_GET_CLASS (setting), property_name);
 	g_return_val_if_fail (spec != NULL, -1);
@@ -172,11 +186,7 @@ ce_page_setup_mac_combo (CEPage *self, GtkComboBox *combo,
 		current_mac_len = -1;
 
 	for (iter = mac_list, i = 0; iter && *iter; iter++, i++) {
-#if GTK_CHECK_VERSION (2,24,0)
 		gtk_combo_box_text_append_text (GTK_COMBO_BOX_TEXT (combo), *iter);
-#else
-		gtk_combo_box_append_text (combo, *iter);
-#endif
 		if (   current_mac
 		    && g_ascii_strncasecmp (*iter, current_mac, current_mac_len) == 0
 		    && ((*iter)[current_mac_len] == '\0' || (*iter)[current_mac_len] == ' ')) {
@@ -188,14 +198,9 @@ ce_page_setup_mac_combo (CEPage *self, GtkComboBox *combo,
 	if (current_mac) {
 		/* set active item */
 		gtk_combo_box_set_active (combo, active_idx);
-
-		if (!active_mac) {
-#if GTK_CHECK_VERSION (2,24,0)
+		
+		if (!active_mac)
 			gtk_combo_box_text_prepend_text (GTK_COMBO_BOX_TEXT (combo), current_mac);
-#else
-			gtk_combo_box_prepend_text (combo, current_mac_str);
-#endif
-		}
 
 		entry = gtk_bin_get_child (GTK_BIN (combo));
 		if (entry)
@@ -296,14 +301,6 @@ ce_page_get_next_available_name (GSList *connections, const char *format)
 
 	g_slist_free (names);
 	return cname;
-}
-
-GtkWidget *
-ce_page_nag_user (CEPage *self)
-{
-	if (CE_PAGE_GET_CLASS (self)->nag_user)
-		return CE_PAGE_GET_CLASS (self)->nag_user (self);
-	return NULL;
 }
 
 static void

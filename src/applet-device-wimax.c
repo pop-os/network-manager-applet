@@ -204,7 +204,8 @@ sort_nsps (gconstpointer a, gconstpointer b)
 
 static void
 wimax_add_menu_item (NMDevice *device,
-                     guint32 n_devices,
+                     gboolean multiple_devices,
+                     GSList *connections,
                      NMConnection *active,
                      GtkWidget *menu,
                      NMApplet *applet)
@@ -212,7 +213,7 @@ wimax_add_menu_item (NMDevice *device,
 	NMDeviceWimax *wimax = NM_DEVICE_WIMAX (device);
 	char *text;
 	GtkWidget *item;
-	GSList *connections, *all, *iter, *sorted = NULL;
+	GSList *iter, *sorted = NULL;
 	const GPtrArray *nsps;
 	NMWimaxNsp *active_nsp = NULL;
 	gboolean wimax_enabled, wimax_hw_enabled;
@@ -220,7 +221,7 @@ wimax_add_menu_item (NMDevice *device,
 
 	nsps = nm_device_wimax_get_nsps (wimax);
 
-	if (n_devices > 1) {
+	if (multiple_devices) {
 		const char *desc;
 
 		desc = nma_utils_get_device_description (device);
@@ -274,10 +275,6 @@ wimax_add_menu_item (NMDevice *device,
 	if (g_slist_length (sorted)) {
 		applet_menu_item_add_complex_separator_helper (menu, applet, _("Available"), -1);
 
-		all = applet_get_all_connections (applet);
-		connections = nm_device_filter_connections (device, all);
-		g_slist_free (all);
-
 		/* And add menu items for each NSP */
 		for (iter = sorted; iter; iter = g_slist_next (iter)) {
 			NMWimaxNsp *nsp = NM_WIMAX_NSP (iter->data);
@@ -290,8 +287,6 @@ wimax_add_menu_item (NMDevice *device,
 				gtk_widget_show (item);
 			}
 		}
-
-		g_slist_free (connections);
 	}
 
 	g_slist_free (sorted);
@@ -398,34 +393,15 @@ wimax_device_added (NMDevice *device, NMApplet *applet)
 }
 
 static void
-wimax_device_state_changed (NMDevice *device,
-                            NMDeviceState new_state,
-                            NMDeviceState old_state,
-                            NMDeviceStateReason reason,
-                            NMApplet *applet)
+wimax_notify_connected (NMDevice *device,
+                        const char *msg,
+                        NMApplet *applet)
 {
-	if (new_state == NM_DEVICE_STATE_ACTIVATED) {
-		NMConnection *connection;
-		NMSettingConnection *s_con = NULL;
-		char *str = NULL;
-
-		connection = applet_find_active_connection_for_device (device, applet, NULL);
-		if (connection) {
-			const char *id;
-
-			s_con = nm_connection_get_setting_connection (connection);
-			id = s_con ? nm_setting_connection_get_id (s_con) : NULL;
-			if (id)
-				str = g_strdup_printf (_("You are now connected to '%s'."), id);
-		}
-
-		applet_do_notify_with_pref (applet,
-		                            _("Connection Established"),
-		                            str ? str : _("You are now connected to the WiMAX network."),
-		                            "nm-device-wwan",
-		                            PREF_DISABLE_CONNECTED_NOTIFICATIONS);
-		g_free (str);
-	}
+	applet_do_notify_with_pref (applet,
+	                            _("Connection Established"),
+	                            msg ? msg : _("You are now connected to the WiMAX network."),
+	                            "nm-device-wwan",
+	                            PREF_DISABLE_CONNECTED_NOTIFICATIONS);
 }
 
 static GdkPixbuf *
@@ -484,7 +460,7 @@ wimax_get_icon (NMDevice *device,
 		break;
 	}
 
-	return pixbuf;
+	return pixbuf ? g_object_ref (pixbuf) : NULL;
 }
 
 static gboolean
@@ -510,7 +486,7 @@ applet_device_wimax_get_class (NMApplet *applet)
 	dclass->new_auto_connection = wimax_new_auto_connection;
 	dclass->add_menu_item = wimax_add_menu_item;
 	dclass->device_added = wimax_device_added;
-	dclass->device_state_changed = wimax_device_state_changed;
+	dclass->notify_connected = wimax_notify_connected;
 	dclass->get_icon = wimax_get_icon;
 	dclass->get_secrets = wimax_get_secrets;
 

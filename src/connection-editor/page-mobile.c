@@ -23,7 +23,6 @@
 #include "config.h"
 
 #include <string.h>
-#include <ctype.h>
 
 #include <gtk/gtk.h>
 #include <glib/gi18n.h>
@@ -80,17 +79,17 @@ mobile_private_init (CEPageMobile *self)
 
 	builder = CE_PAGE (self)->builder;
 
-	priv->number = GTK_ENTRY (GTK_WIDGET (gtk_builder_get_object (builder, "mobile_number")));
-	priv->username = GTK_ENTRY (GTK_WIDGET (gtk_builder_get_object (builder, "mobile_username")));
-	priv->password = GTK_ENTRY (GTK_WIDGET (gtk_builder_get_object (builder, "mobile_password")));
+	priv->number = GTK_ENTRY (gtk_builder_get_object (builder, "mobile_number"));
+	priv->username = GTK_ENTRY (gtk_builder_get_object (builder, "mobile_username"));
+	priv->password = GTK_ENTRY (gtk_builder_get_object (builder, "mobile_password"));
 
-	priv->apn = GTK_ENTRY (GTK_WIDGET (gtk_builder_get_object (builder, "mobile_apn")));
-	priv->apn_button = GTK_BUTTON (GTK_WIDGET (gtk_builder_get_object (builder, "mobile_apn_button")));
-	priv->network_id = GTK_ENTRY (GTK_WIDGET (gtk_builder_get_object (builder, "mobile_network_id")));
-	priv->network_type = GTK_COMBO_BOX (GTK_WIDGET (gtk_builder_get_object (builder, "mobile_network_type")));
-	priv->roaming_allowed = GTK_TOGGLE_BUTTON (GTK_WIDGET (gtk_builder_get_object (builder, "mobile_roaming_allowed")));
+	priv->apn = GTK_ENTRY (gtk_builder_get_object (builder, "mobile_apn"));
+	priv->apn_button = GTK_BUTTON (gtk_builder_get_object (builder, "mobile_apn_button"));
+	priv->network_id = GTK_ENTRY (gtk_builder_get_object (builder, "mobile_network_id"));
+	priv->network_type = GTK_COMBO_BOX (gtk_builder_get_object (builder, "mobile_network_type"));
+	priv->roaming_allowed = GTK_TOGGLE_BUTTON (gtk_builder_get_object (builder, "mobile_roaming_allowed"));
 
-	priv->pin = GTK_ENTRY (GTK_WIDGET (gtk_builder_get_object (builder, "mobile_pin")));
+	priv->pin = GTK_ENTRY (gtk_builder_get_object (builder, "mobile_pin"));
 
 	priv->window_group = gtk_window_group_new ();
 }
@@ -119,6 +118,7 @@ populate_gsm_ui (CEPageMobile *self, NMConnection *connection)
 	if (s)
 		gtk_entry_set_text (priv->network_id, s);
 
+G_GNUC_BEGIN_IGNORE_DEPRECATIONS
 	switch (nm_setting_gsm_get_network_type (setting)) {
 	case NM_SETTING_GSM_NETWORK_TYPE_UMTS_HSPA:
 		type_idx = NET_TYPE_3G;
@@ -144,6 +144,7 @@ populate_gsm_ui (CEPageMobile *self, NMConnection *connection)
 		break;
 	}
 	gtk_combo_box_set_active (priv->network_type, type_idx);
+G_GNUC_END_IGNORE_DEPRECATIONS
 
 	gtk_toggle_button_set_active (priv->roaming_allowed,
 	                              !nm_setting_gsm_get_home_only (setting));
@@ -265,68 +266,29 @@ apn_button_clicked (GtkButton *button, gpointer user_data)
 }
 
 static void
-network_id_filter_cb (GtkEntry *   entry,
-                      const gchar *text,
-                      gint         length,
-                      gint *       position,
-                      gpointer     user_data)
+network_id_filter_cb (GtkEditable *editable,
+                      gchar *text,
+                      gint length,
+                      gint *position,
+                      gpointer user_data)
 {
-	GtkEditable *editable = GTK_EDITABLE (entry);
-	int i, count = 0;
-	gchar *result;
-
-	result = g_malloc0 (length + 1);
-
-	for (i = 0; i < length; i++) {
-		if (isdigit (text[i]))
-			result[count++] = text[i];
-	}
-
-	if (count > 0) {
-		g_signal_handlers_block_by_func (G_OBJECT (editable),
-		                                 G_CALLBACK (network_id_filter_cb),
-		                                 user_data);
-		gtk_editable_insert_text (editable, result, count, position);
-		g_signal_handlers_unblock_by_func (G_OBJECT (editable),
-		                                   G_CALLBACK (network_id_filter_cb),
-		                                   user_data);
-	}
-
-	g_signal_stop_emission_by_name (G_OBJECT (editable), "insert-text");
-	g_free (result);
+	utils_filter_editable_on_insert_text (editable,
+	                                      text, length, position, user_data,
+	                                      utils_char_is_ascii_digit,
+	                                      network_id_filter_cb);
 }
 
 static void
-apn_filter_cb (GtkEntry *   entry,
-               const gchar *text,
-               gint         length,
-               gint *       position,
-               gpointer     user_data)
+apn_filter_cb (GtkEditable *editable,
+               gchar *text,
+               gint length,
+               gint *position,
+               gpointer user_data)
 {
-	GtkEditable *editable = GTK_EDITABLE (entry);
-	int i, count = 0;
-	gchar *result = g_new0 (gchar, length);
-
-	for (i = 0; i < length; i++) {
-		if (   isalnum (text[i])
-		    || (text[i] == '.')
-		    || (text[i] == '_')
-		    || (text[i] == '-'))
-			result[count++] = text[i];
-	}
-
-	if (count > 0) {
-		g_signal_handlers_block_by_func (G_OBJECT (editable),
-		                                 G_CALLBACK (apn_filter_cb),
-		                                 user_data);
-		gtk_editable_insert_text (editable, result, count, position);
-		g_signal_handlers_unblock_by_func (G_OBJECT (editable),
-		                                   G_CALLBACK (apn_filter_cb),
-		                                   user_data);
-	}
-
-	g_signal_stop_emission_by_name (G_OBJECT (editable), "insert-text");
-	g_free (result);
+	utils_filter_editable_on_insert_text (editable,
+	                                      text, length, position, user_data,
+	                                      utils_char_is_ascii_apn,
+	                                      apn_filter_cb);
 }
 
 static void
@@ -671,11 +633,7 @@ mobile_connection_new (GtkWindow *parent,
 	gtk_alignment_set_padding (GTK_ALIGNMENT (alignment), 12, 12, 12, 12);
 	gtk_box_pack_start (GTK_BOX (content), alignment, TRUE, FALSE, 6);
 
-#if GTK_CHECK_VERSION (3,1,6)
 	hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
-#else
-	hbox = gtk_hbox_new (FALSE, 6);
-#endif
 	gtk_container_add (GTK_CONTAINER (alignment), hbox);
 
 	image = gtk_image_new_from_icon_name ("nm-device-wwan", GTK_ICON_SIZE_DIALOG);
@@ -683,11 +641,7 @@ mobile_connection_new (GtkWindow *parent,
 	gtk_misc_set_padding (GTK_MISC (image), 0, 6);
 	gtk_box_pack_start (GTK_BOX (hbox), image, FALSE, FALSE, 6);
 
-#if GTK_CHECK_VERSION (3,1,6)
 	vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 6);
-#else
-	vbox = gtk_vbox_new (FALSE, 6);
-#endif
 	gtk_box_pack_start (GTK_BOX (hbox), vbox, TRUE, FALSE, 0);
 
 	label = gtk_label_new (_("Select the technology your mobile broadband provider uses.  If you are unsure, ask your provider."));

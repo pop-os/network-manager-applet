@@ -27,41 +27,40 @@
 #include "eap-method.h"
 #include "wireless-security.h"
 #include "helpers.h"
+#include "utils.h"
 
 struct _EAPMethodLEAP {
 	EAPMethod parent;
 
-	gboolean new_connection;
+	WirelessSecurity *ws_parent;
+
+	gboolean editing_connection;
+
+	GtkEntry *username_entry;
+	GtkEntry *password_entry;
+	GtkToggleButton *show_password;
 };
 
 static void
-show_toggled_cb (GtkCheckButton *button, EAPMethod *method)
+show_toggled_cb (GtkToggleButton *button, EAPMethodLEAP *method)
 {
-	GtkWidget *widget;
 	gboolean visible;
 
-	widget = GTK_WIDGET (gtk_builder_get_object (method->builder, "eap_leap_password_entry"));
-	g_assert (widget);
-
-	visible = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (button));
-	gtk_entry_set_visibility (GTK_ENTRY (widget), visible);
+	visible = gtk_toggle_button_get_active (button);
+	gtk_entry_set_visibility (method->password_entry, visible);
 }
 
 static gboolean
 validate (EAPMethod *parent)
 {
-	GtkWidget *widget;
+	EAPMethodLEAP *method = (EAPMethodLEAP *)parent;
 	const char *text;
 
-	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_leap_username_entry"));
-	g_assert (widget);
-	text = gtk_entry_get_text (GTK_ENTRY (widget));
+	text = gtk_entry_get_text (method->username_entry);
 	if (!text || !strlen (text))
 		return FALSE;
 
-	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_leap_password_entry"));
-	g_assert (widget);
-	text = gtk_entry_get_text (GTK_ENTRY (widget));
+	text = gtk_entry_get_text (method->password_entry);
 	if (!text || !strlen (text))
 		return FALSE;
 
@@ -83,30 +82,25 @@ add_to_size_group (EAPMethod *parent, GtkSizeGroup *group)
 }
 
 static void
-fill_connection (EAPMethod *parent, NMConnection *connection)
+fill_connection (EAPMethod *parent, NMConnection *connection, NMSettingSecretFlags flags)
 {
 	EAPMethodLEAP *method = (EAPMethodLEAP *) parent;
 	NMSetting8021x *s_8021x;
-	GtkWidget *widget;
 
 	s_8021x = nm_connection_get_setting_802_1x (connection);
 	g_assert (s_8021x);
 
 	nm_setting_802_1x_add_eap_method (s_8021x, "leap");
 
-	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_leap_username_entry"));
-	g_assert (widget);
-	g_object_set (s_8021x, NM_SETTING_802_1X_IDENTITY, gtk_entry_get_text (GTK_ENTRY (widget)), NULL);
+	g_object_set (s_8021x, NM_SETTING_802_1X_IDENTITY, gtk_entry_get_text (method->username_entry), NULL);
+	g_object_set (s_8021x, NM_SETTING_802_1X_PASSWORD, gtk_entry_get_text (method->password_entry), NULL);
 
-	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_leap_password_entry"));
-	g_assert (widget);
-	g_object_set (s_8021x, NM_SETTING_802_1X_PASSWORD, gtk_entry_get_text (GTK_ENTRY (widget)), NULL);
+	/* Update secret flags and popup when editing the connection */
+	if (method->editing_connection) {
+		GtkWidget *passwd_entry = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_leap_password_entry"));
+		g_assert (passwd_entry);
 
-	/* Default to agent-owned secrets for new connections */
-	if (method->new_connection) {
-		g_object_set (s_8021x,
-		              NM_SETTING_802_1X_PASSWORD_FLAGS, NM_SETTING_SECRET_FLAG_AGENT_OWNED,
-		              NULL);
+		utils_update_password_storage (NM_SETTING (s_8021x), flags, passwd_entry, parent->password_flags_name);
 	}
 }
 
@@ -118,6 +112,59 @@ update_secrets (EAPMethod *parent, NMConnection *connection)
 	                          "eap_leap_password_entry",
 	                          NM_TYPE_SETTING_802_1X,
 	                          (HelperSecretFunc) nm_setting_802_1x_get_password);
+}
+
+/* Set the UI fields for user, password and show_password to the
+ * values as provided by method->ws_parent. */
+static void
+set_userpass_ui (EAPMethodLEAP *method)
+{
+	if (method->ws_parent->username)
+		gtk_entry_set_text (method->username_entry, method->ws_parent->username);
+	else
+		gtk_entry_set_text (method->username_entry, "");
+
+	if (method->ws_parent->password && !method->ws_parent->always_ask)
+		gtk_entry_set_text (method->password_entry, method->ws_parent->password);
+	else
+		gtk_entry_set_text (method->password_entry, "");
+
+	gtk_toggle_button_set_active (method->show_password, method->ws_parent->show_password);
+}
+
+static void
+widgets_realized (GtkWidget *widget, EAPMethodLEAP *method)
+{
+	set_userpass_ui (method);
+}
+
+static void
+widgets_unrealized (GtkWidget *widget, EAPMethodLEAP *method)
+{
+	wireless_security_set_userpass (method->ws_parent,
+	                                gtk_entry_get_text (method->username_entry),
+	                                gtk_entry_get_text (method->password_entry),
+	                                (gboolean) -1,
+	                                gtk_toggle_button_get_active (method->show_password));
+}
+
+static void
+destroy (EAPMethod *parent)
+{
+	EAPMethodLEAP *method = (EAPMethodLEAP *) parent;
+	GtkWidget *widget;
+
+	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_leap_notebook"));
+	g_assert (widget);
+
+	g_signal_handlers_disconnect_by_func (G_OBJECT (widget),
+	                                      (GCallback) widgets_realized,
+	                                      method);
+	g_signal_handlers_disconnect_by_func (G_OBJECT (widget),
+	                                      (GCallback) widgets_unrealized,
+	                                      method);
+
+	wireless_security_unref (method->ws_parent);
 }
 
 EAPMethodLEAP *
@@ -134,7 +181,7 @@ eap_method_leap_new (WirelessSecurity *ws_parent,
 	                          add_to_size_group,
 	                          fill_connection,
 	                          update_secrets,
-	                          NULL,
+	                          destroy,
 	                          UIDIR "/eap-method-leap.ui",
 	                          "eap_leap_notebook",
 	                          "eap_leap_username_entry",
@@ -142,40 +189,54 @@ eap_method_leap_new (WirelessSecurity *ws_parent,
 	if (!parent)
 		return NULL;
 
+	parent->password_flags_name = NM_SETTING_802_1X_PASSWORD;
 	method = (EAPMethodLEAP *) parent;
-	method->new_connection = secrets_only ? FALSE : TRUE;
+	method->editing_connection = secrets_only ? FALSE : TRUE;
+	method->ws_parent = wireless_security_ref (ws_parent);
+
+	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_leap_notebook"));
+	g_assert (widget);
+	g_signal_connect (G_OBJECT (widget), "realize",
+	                  (GCallback) widgets_realized,
+	                  method);
+	g_signal_connect (G_OBJECT (widget), "unrealize",
+	                  (GCallback) widgets_unrealized,
+	                  method);
 
 	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_leap_username_entry"));
 	g_assert (widget);
+	method->username_entry = GTK_ENTRY (widget);
 	g_signal_connect (G_OBJECT (widget), "changed",
 	                  (GCallback) wireless_security_changed_cb,
 	                  ws_parent);
-	if (connection) {
-		NMSetting8021x *s_8021x;
-
-		s_8021x = nm_connection_get_setting_802_1x (connection);
-		if (s_8021x && nm_setting_802_1x_get_identity (s_8021x))
-			gtk_entry_set_text (GTK_ENTRY (widget), nm_setting_802_1x_get_identity (s_8021x));
-	}
 
 	if (secrets_only)
 		gtk_widget_set_sensitive (widget, FALSE);
 
 	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_leap_password_entry"));
 	g_assert (widget);
+	method->password_entry = GTK_ENTRY (widget);
 	g_signal_connect (G_OBJECT (widget), "changed",
 	                  (GCallback) wireless_security_changed_cb,
 	                  ws_parent);
 
-	/* Fill secrets, if any */
-	if (connection)
-		update_secrets (parent, connection);
+	/* Create password-storage popup menu for password entry under entry's secondary icon */
+	utils_setup_password_storage (connection, NM_SETTING_802_1X_SETTING_NAME, widget, parent->password_flags_name);
 
 	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "show_checkbutton_eapleap"));
 	g_assert (widget);
+	method->show_password = GTK_TOGGLE_BUTTON (widget);
 	g_signal_connect (G_OBJECT (widget), "toggled",
 	                  (GCallback) show_toggled_cb,
 	                  parent);
+
+	/* Initialize the UI fields with the security settings from method->ws_parent.
+	 * This will be done again when the widget gets realized. It must be done here as well,
+	 * because the outer dialog will ask to 'validate' the connection before the security tab
+	 * is shown/realized (to enable the 'Apply' button).
+	 * As 'validate' accesses the contents of the UI fields, they must be initialized now, even
+	 * if the widgets are not yet visible. */
+	set_userpass_ui (method);
 
 	return method;
 }

@@ -144,7 +144,7 @@ ip4_private_init (CEPageIP4 *self, NMConnection *connection)
 		str_auto_only = _("Automatic (DHCP) addresses only");
 	}
 
-	priv->method = GTK_COMBO_BOX (GTK_WIDGET (gtk_builder_get_object (builder, "ip4_method")));
+	priv->method = GTK_COMBO_BOX (gtk_builder_get_object (builder, "ip4_method"));
 
 	priv->method_store = gtk_list_store_new (2, G_TYPE_STRING, G_TYPE_UINT);
 
@@ -201,18 +201,18 @@ ip4_private_init (CEPageIP4 *self, NMConnection *connection)
 	gtk_combo_box_set_model (priv->method, GTK_TREE_MODEL (priv->method_store));
 
 	priv->addr_label = GTK_WIDGET (gtk_builder_get_object (builder, "ip4_addr_label"));
-	priv->addr_add = GTK_BUTTON (GTK_WIDGET (gtk_builder_get_object (builder, "ip4_addr_add_button")));
-	priv->addr_delete = GTK_BUTTON (GTK_WIDGET (gtk_builder_get_object (builder, "ip4_addr_delete_button")));
-	priv->addr_list = GTK_TREE_VIEW (GTK_WIDGET (gtk_builder_get_object (builder, "ip4_addresses")));
+	priv->addr_add = GTK_BUTTON (gtk_builder_get_object (builder, "ip4_addr_add_button"));
+	priv->addr_delete = GTK_BUTTON (gtk_builder_get_object (builder, "ip4_addr_delete_button"));
+	priv->addr_list = GTK_TREE_VIEW (gtk_builder_get_object (builder, "ip4_addresses"));
 
 	priv->dns_servers_label = GTK_WIDGET (gtk_builder_get_object (builder, "ip4_dns_servers_label"));
-	priv->dns_servers = GTK_ENTRY (GTK_WIDGET (gtk_builder_get_object (builder, "ip4_dns_servers_entry")));
+	priv->dns_servers = GTK_ENTRY (gtk_builder_get_object (builder, "ip4_dns_servers_entry"));
 
 	priv->dns_searches_label = GTK_WIDGET (gtk_builder_get_object (builder, "ip4_dns_searches_label"));
-	priv->dns_searches = GTK_ENTRY (GTK_WIDGET (gtk_builder_get_object (builder, "ip4_dns_searches_entry")));
+	priv->dns_searches = GTK_ENTRY (gtk_builder_get_object (builder, "ip4_dns_searches_entry"));
 
 	priv->dhcp_client_id_label = GTK_WIDGET (gtk_builder_get_object (builder, "ip4_dhcp_client_id_label"));
-	priv->dhcp_client_id = GTK_ENTRY (GTK_WIDGET (gtk_builder_get_object (builder, "ip4_dhcp_client_id_entry")));
+	priv->dhcp_client_id = GTK_ENTRY (gtk_builder_get_object (builder, "ip4_dhcp_client_id_entry"));
 
 	/* Hide DHCP stuff if it'll never be used for a particular method */
 	if (   priv->connection_type == NM_TYPE_SETTING_VPN
@@ -223,7 +223,7 @@ ip4_private_init (CEPageIP4 *self, NMConnection *connection)
 		gtk_widget_hide (GTK_WIDGET (priv->dhcp_client_id));
 	}
 
-	priv->ip4_required = GTK_CHECK_BUTTON (GTK_WIDGET (gtk_builder_get_object (builder, "ip4_required_checkbutton")));
+	priv->ip4_required = GTK_CHECK_BUTTON (gtk_builder_get_object (builder, "ip4_required_checkbutton"));
 	/* Hide IP4-require button if it'll never be used for a particular method */
 	if (   priv->connection_type == NM_TYPE_SETTING_VPN
 	    || priv->connection_type == NM_TYPE_SETTING_GSM
@@ -231,7 +231,7 @@ ip4_private_init (CEPageIP4 *self, NMConnection *connection)
 	    || priv->connection_type == NM_TYPE_SETTING_PPPOE)
 		gtk_widget_hide (GTK_WIDGET (priv->ip4_required));
 
-	priv->routes_button = GTK_BUTTON (GTK_WIDGET (gtk_builder_get_object (builder, "ip4_routes_button")));
+	priv->routes_button = GTK_BUTTON (gtk_builder_get_object (builder, "ip4_routes_button"));
 }
 
 static void
@@ -614,39 +614,48 @@ cell_edited (GtkCellRendererText *cell,
 }
 
 static void
-ip_address_filter_cb (GtkEntry *   entry,
-                      const gchar *text,
-                      gint         length,
-                      gint *       position,
-                      gpointer     user_data)
+ip_address_filter_cb (GtkEditable *editable,
+                      gchar *text,
+                      gint length,
+                      gint *position,
+                      gpointer user_data)
 {
 	CEPageIP4 *self = CE_PAGE_IP4 (user_data);
 	CEPageIP4Private *priv = CE_PAGE_IP4_GET_PRIVATE (self);
-	GtkEditable *editable = GTK_EDITABLE (entry);
-	int i, count = 0;
-	gchar *result;
+	gboolean changed;
 
-	result = g_malloc0 (length + 1);
+	changed = utils_filter_editable_on_insert_text (editable,
+	                                                text, length, position, user_data,
+	                                                utils_char_is_ascii_ip4_address,
+	                                                ip_address_filter_cb);
 
-	for (i = 0; i < length; i++) {
-		if ((text[i] >= '0' && text[i] <= '9') || (text[i] == '.'))
-			result[count++] = text[i];
-	}
-
-	if (count > 0) {
-		g_signal_handlers_block_by_func (G_OBJECT (editable),
-		                                 G_CALLBACK (ip_address_filter_cb),
-		                                 user_data);
-		gtk_editable_insert_text (editable, result, count, position);
+	if (changed) {
 		g_free (priv->last_edited);
 		priv->last_edited = gtk_editable_get_chars (editable, 0, -1);
-		g_signal_handlers_unblock_by_func (G_OBJECT (editable),
-		                                   G_CALLBACK (ip_address_filter_cb),
-		                                   user_data);
 	}
+}
 
-	g_signal_stop_emission_by_name (G_OBJECT (editable), "insert-text");
-	g_free (result);
+static gboolean
+_char_is_ascii_dns_servers (char character)
+{
+	return utils_char_is_ascii_ip4_address (character) ||
+	       character == ' ' ||
+	       character == ',' ||
+	       character == ':' ||
+	       character == ';';
+}
+
+static void
+dns_servers_filter_cb (GtkEditable *editable,
+                       gchar *text,
+                       gint length,
+                       gint *position,
+                       gpointer user_data)
+{
+	utils_filter_editable_on_insert_text (editable,
+	                                      text, length, position, user_data,
+	                                      _char_is_ascii_dns_servers,
+	                                      dns_servers_filter_cb);
 }
 
 static void
@@ -695,11 +704,7 @@ cell_changed_cb (GtkEditable *editable,
 {
 	char *cell_text;
 	guint column;
-#if GTK_CHECK_VERSION(3,0,0)
 	GdkRGBA rgba;
-#else
-	GdkColor color;
-#endif
 	gboolean value_valid = FALSE;
 	const char *colorname = NULL;
 
@@ -721,13 +726,8 @@ cell_changed_cb (GtkEditable *editable,
 	/* Change cell's background color while editing */
 	colorname = value_valid ? "lightgreen" : "red";
 
-#if GTK_CHECK_VERSION(3,0,0)
 	gdk_rgba_parse (&rgba, colorname);
 	gtk_widget_override_background_color (GTK_WIDGET (editable), GTK_STATE_NORMAL, &rgba);
-#else
-	gdk_color_parse (colorname, &color);
-	gtk_widget_modify_base (GTK_WIDGET (editable), GTK_STATE_NORMAL, &color);
-#endif
 
 	g_free (cell_text);
 	return FALSE;
@@ -738,10 +738,6 @@ key_pressed_cb (GtkWidget *widget,
                 GdkEvent *event,
                 gpointer user_data)
 {
-#if !GDK_KEY_Tab
-	#define GDK_KEY_Tab GDK_Tab
-#endif
-
 	GdkKeymapKey *keys = NULL;
 	gint n_keys;
 
@@ -977,6 +973,7 @@ finish_setup (CEPageIP4 *self, gpointer unused, GError *error, gpointer user_dat
 	g_signal_connect (selection, "changed", G_CALLBACK (list_selection_changed), priv->addr_delete);
 
 	g_signal_connect_swapped (priv->dns_servers, "changed", G_CALLBACK (ce_page_changed), self);
+	g_signal_connect (priv->dns_servers, "insert-text", G_CALLBACK (dns_servers_filter_cb), self);
 	g_signal_connect_swapped (priv->dns_searches, "changed", G_CALLBACK (ce_page_changed), self);
 
 	method_changed (priv->method, self);
@@ -1181,9 +1178,7 @@ ui_to_setting (CEPageIP4 *self)
 			if (strlen (stripped))
 				search_domains = g_slist_prepend (search_domains, g_strdup (stripped));
 		}
-
-		if (items)
-			g_strfreev (items);
+		g_strfreev (items);
 	}
 
 	search_domains = g_slist_reverse (search_domains);

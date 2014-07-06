@@ -52,8 +52,6 @@
 
 static void wifi_dialog_response_cb (GtkDialog *dialog, gint response, gpointer user_data);
 
-static void nag_dialog_response_cb (GtkDialog *nag_dialog, gint response, gpointer user_data);
-
 static NMAccessPoint *update_active_ap (NMDevice *device, NMDeviceState state, NMApplet *applet);
 
 static void _do_new_auto_connection (NMApplet *applet,
@@ -78,7 +76,7 @@ applet_wifi_connect_to_hidden_network (NMApplet *applet)
 {
 	GtkWidget *dialog;
 
-	dialog = nma_wifi_dialog_new_for_other (applet->nm_client, applet->settings);
+	dialog = nma_wifi_dialog_new_for_hidden (applet->nm_client, applet->settings);
 	if (dialog) {
 		g_signal_connect (dialog, "response",
 		                  G_CALLBACK (wifi_dialog_response_cb),
@@ -321,7 +319,7 @@ clamp_ap_to_bssid (NMAccessPoint *ap, NMSettingWireless *s_wifi)
 	 * neighbor's WiFi.
 	 */
 
-	str_bssid = nm_access_point_get_hw_address (ap);
+	str_bssid = nm_access_point_get_bssid (ap);
 	if (str_bssid) {
 		eth_addr = ether_aton (str_bssid);
 		if (eth_addr) {
@@ -355,22 +353,6 @@ more_info_wifi_dialog_response_cb (GtkDialog *foo,
 	if (response != GTK_RESPONSE_OK) {
 		info->callback (NULL, FALSE, TRUE, info->callback_data);
 		goto done;
-	}
-
-	if (!nma_wifi_dialog_get_nag_ignored (dialog)) {
-		GtkWidget *nag_dialog;
-
-		/* Nag the user about certificates or whatever.  Only destroy the dialog
-		 * if no nagging was done.
-		 */
-		nag_dialog = nma_wifi_dialog_nag_user (dialog);
-		if (nag_dialog) {
-			gtk_window_set_transient_for (GTK_WINDOW (nag_dialog), GTK_WINDOW (dialog));
-			g_signal_connect (nag_dialog, "response",
-			                  G_CALLBACK (nag_dialog_response_cb),
-			                  dialog);
-			return;
-		}
 	}
 
 	/* nma_wifi_dialog_get_connection() returns a connection with the
@@ -448,7 +430,6 @@ _do_new_auto_connection (NMApplet *applet,
 		}
 		g_object_set (s_wifi,
 		              NM_SETTING_WIRELESS_SSID, ssid,
-		              NM_SETTING_WIRELESS_SEC, NM_SETTING_WIRELESS_SECURITY_SETTING_NAME,
 		              NULL);
 
 		s_wsec = (NMSettingWirelessSecurity *) nm_setting_wireless_security_new ();
@@ -759,7 +740,8 @@ sort_toplevel (gconstpointer tmpa, gconstpointer tmpb)
 
 static void
 wifi_add_menu_item (NMDevice *device,
-                    guint32 n_devices,
+                    gboolean multiple_devices,
+                    GSList *connections,
                     NMConnection *active,
                     GtkWidget *menu,
                     NMApplet *applet)
@@ -769,7 +751,7 @@ wifi_add_menu_item (NMDevice *device,
 	const GPtrArray *aps;
 	int i;
 	NMAccessPoint *active_ap = NULL;
-	GSList *connections = NULL, *all, *iter;
+	GSList *iter;
 	gboolean wifi_enabled = TRUE;
 	gboolean wifi_hw_enabled = TRUE;
 	GSList *menu_items = NULL;  /* All menu items we'll be adding */
@@ -779,7 +761,7 @@ wifi_add_menu_item (NMDevice *device,
 	wdev = NM_DEVICE_WIFI (device);
 	aps = nm_device_wifi_get_access_points (wdev);
 
-	if (n_devices > 1) {
+	if (multiple_devices) {
 		const char *desc;
 
 		desc = nma_utils_get_device_description (device);
@@ -796,10 +778,6 @@ wifi_add_menu_item (NMDevice *device,
 	gtk_widget_set_sensitive (widget, FALSE);
 	gtk_menu_shell_append (GTK_MENU_SHELL (menu), widget);
 	gtk_widget_show (widget);
-
-	all = applet_get_all_connections (applet);
-	connections = nm_device_filter_connections (device, all);
-	g_slist_free (all);
 
 	/* Add the active AP if we're connected to something and the device is available */
 	if (!nma_menu_device_check_unusable (device)) {
@@ -903,7 +881,6 @@ wifi_add_menu_item (NMDevice *device,
 
 out:
 	g_slist_free (menu_items);
-	g_slist_free (connections);
 }
 
 static void
@@ -1244,24 +1221,29 @@ wifi_device_state_changed (NMDevice *device,
                            NMDeviceStateReason reason,
                            NMApplet *applet)
 {
-	NMAccessPoint *new = NULL;
-	char *msg;
-	char *esc_ssid = NULL;
-
-	new = update_active_ap (device, new_state, applet);
+	update_active_ap (device, new_state, applet);
 
 	if (new_state == NM_DEVICE_STATE_DISCONNECTED)
 		queue_avail_access_point_notification (device);
+}
 
-	if (new_state != NM_DEVICE_STATE_ACTIVATED)
-		return;
+static void
+wifi_notify_connected (NMDevice *device,
+                       const char *msg,
+                       NMApplet *applet)
+{
+	NMAccessPoint *ap;
+	char *esc_ssid;
+	char *ssid_msg;
 
-	esc_ssid = get_ssid_utf8 (new);
-	msg = g_strdup_printf (_("You are now connected to the Wi-Fi network '%s'."), esc_ssid);
+	ap = g_object_get_data (G_OBJECT (device), ACTIVE_AP_TAG);
+
+	esc_ssid = get_ssid_utf8 (ap);
+	ssid_msg = g_strdup_printf (_("You are now connected to the Wi-Fi network '%s'."), esc_ssid);
 	applet_do_notify_with_pref (applet, _("Connection Established"),
-	                            msg, "nm-device-wireless",
+	                            ssid_msg, "nm-device-wireless",
 	                            PREF_DISABLE_CONNECTED_NOTIFICATIONS);
-	g_free (msg);
+	g_free (ssid_msg);
 	g_free (esc_ssid);
 }
 
@@ -1301,10 +1283,10 @@ wifi_get_icon (NMDevice *device,
 		break;
 	case NM_DEVICE_STATE_ACTIVATED:
 		if (ap) {
-			guint32 strength;
+			guint8 strength;
 
 			strength = nm_access_point_get_strength (ap);
-			strength = CLAMP (strength, 0, 100);
+			strength = MIN (strength, 100);
 
 			if (strength > 80)
 				pixbuf = nma_icon_check_and_load ("nm-signal-100", &applet->wifi_100_icon, applet);
@@ -1331,36 +1313,6 @@ wifi_get_icon (NMDevice *device,
 	}
 
 	return pixbuf ? g_object_ref (pixbuf) : NULL;
-}
-
-static gboolean
-wifi_dialog_close (gpointer user_data)
-{
-	GtkWidget *dialog = GTK_WIDGET (user_data);
-
-	gtk_dialog_response (GTK_DIALOG (dialog), GTK_RESPONSE_OK);
-	return FALSE;
-}
-
-static void
-wifi_dialog_destroyed (gpointer data, GObject *dialog_ptr)
-{
-	/* remove the idle function; for not to call wifi_dialog_close() on invalid pointer */
-	g_idle_remove_by_data (dialog_ptr);
-}
-
-static void
-nag_dialog_response_cb (GtkDialog *nag_dialog,
-                        gint response,
-                        gpointer user_data)
-{
-	NMAWifiDialog *wifi_dialog = NMA_WIFI_DIALOG (user_data);
-
-	if (response == GTK_RESPONSE_NO) {  /* user opted not to correct the warning */
-		nma_wifi_dialog_set_nag_ignored (wifi_dialog, TRUE);
-		g_idle_add (wifi_dialog_close, wifi_dialog);
-		g_object_weak_ref (G_OBJECT (wifi_dialog), wifi_dialog_destroyed, NULL);
-	}
 }
 
 
@@ -1415,22 +1367,6 @@ wifi_dialog_response_cb (GtkDialog *foo,
 
 	if (response != GTK_RESPONSE_OK)
 		goto done;
-
-	if (!nma_wifi_dialog_get_nag_ignored (dialog)) {
-		GtkWidget *nag_dialog;
-
-		/* Nag the user about certificates or whatever.  Only destroy the dialog
-		 * if no nagging was done.
-		 */
-		nag_dialog = nma_wifi_dialog_nag_user (dialog);
-		if (nag_dialog) {
-			gtk_window_set_transient_for (GTK_WINDOW (nag_dialog), GTK_WINDOW (dialog));
-			g_signal_connect (nag_dialog, "response",
-			                  G_CALLBACK (nag_dialog_response_cb),
-			                  dialog);
-			return;
-		}
-	}
 
 	/* nma_wifi_dialog_get_connection() returns a connection with the
 	 * refcount incremented, so the caller must remember to unref it.
@@ -1526,7 +1462,6 @@ typedef struct {
 	SecretsRequest req;
 
 	GtkWidget *dialog;
-	GtkWidget *nag_dialog;
 } NMWifiInfo;
 
 static void
@@ -1553,25 +1488,6 @@ get_secrets_dialog_response_cb (GtkDialog *foo,
 	GHashTable *settings = NULL;
 	const char *key_mgmt, *auth_alg;
 	GError *error = NULL;
-
-	/* Handle the nag dialog specially; don't want to clear the NMActiveConnection
-	 * destroy handler yet if the main dialog isn't going away.
-	 */
-	if ((response == GTK_RESPONSE_OK) && !nma_wifi_dialog_get_nag_ignored (dialog)) {
-		GtkWidget *widget;
-
-		/* Nag the user about certificates or whatever.  Only destroy the dialog
-		 * if no nagging was done.
-		 */
-		widget = nma_wifi_dialog_nag_user (dialog);
-		if (widget) {
-			gtk_window_set_transient_for (GTK_WINDOW (widget), GTK_WINDOW (dialog));
-			g_signal_connect (widget, "response",
-			                  G_CALLBACK (nag_dialog_response_cb),
-			                  dialog);
-			return;
-		}
-	}
 
 	if (response != GTK_RESPONSE_OK) {
 		g_set_error (&error,
@@ -1697,6 +1613,7 @@ applet_device_wifi_get_class (NMApplet *applet)
 	dclass->add_menu_item = wifi_add_menu_item;
 	dclass->device_added = wifi_device_added;
 	dclass->device_state_changed = wifi_device_state_changed;
+	dclass->notify_connected = wifi_notify_connected;
 	dclass->get_icon = wifi_get_icon;
 	dclass->get_secrets = wifi_get_secrets;
 	dclass->secrets_request_size = sizeof (NMWifiInfo);

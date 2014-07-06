@@ -20,16 +20,20 @@
  * (C) Copyright 2007 - 2010 Red Hat, Inc.
  */
 
-#include <ctype.h>
 #include <string.h>
+#include <glib.h>
 
 #include <nm-setting-wireless.h>
 #include <nm-setting-wireless-security.h>
 
 #include "wireless-security.h"
+#include "utils.h"
 
 struct _WirelessSecurityWEPKey {
 	WirelessSecurity parent;
+
+	gboolean editing_connection;
+	const char *password_flags_name;
 
 	NMWepKeyType type;
 	char keys[4][65];
@@ -104,12 +108,12 @@ validate (WirelessSecurity *parent, const GByteArray *ssid)
 	if (sec->type == NM_WEP_KEY_TYPE_KEY) {
 		if ((strlen (key) == 10) || (strlen (key) == 26)) {
 			for (i = 0; i < strlen (key); i++) {
-				if (!isxdigit (key[i]))
+				if (!g_ascii_isxdigit (key[i]))
 					return FALSE;
 			}
 		} else if ((strlen (key) == 5) || (strlen (key) == 13)) {
 			for (i = 0; i < strlen (key); i++) {
-				if (!isascii (key[i]))
+				if (!utils_char_is_ascii_print (key[i]))
 					return FALSE;
 			}
 		} else {
@@ -142,9 +146,9 @@ static void
 fill_connection (WirelessSecurity *parent, NMConnection *connection)
 {
 	WirelessSecurityWEPKey *sec = (WirelessSecurityWEPKey *) parent;
-	NMSettingWireless *s_wireless;
 	NMSettingWirelessSecurity *s_wsec;
-	GtkWidget *widget;
+	NMSettingSecretFlags secret_flags;
+	GtkWidget *widget, *passwd_entry;
 	gint auth_alg;
 	const char *key;
 	int i;
@@ -153,13 +157,18 @@ fill_connection (WirelessSecurity *parent, NMConnection *connection)
 	auth_alg = gtk_combo_box_get_active (GTK_COMBO_BOX (widget));
 
 	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "wep_key_entry"));
+	passwd_entry = widget;
 	key = gtk_entry_get_text (GTK_ENTRY (widget));
 	strcpy (sec->keys[sec->cur_index], key);
 
-	s_wireless = nm_connection_get_setting_wireless (connection);
-	g_assert (s_wireless);
-
-	g_object_set (s_wireless, NM_SETTING_WIRELESS_SEC, NM_SETTING_WIRELESS_SECURITY_SETTING_NAME, NULL);
+	/* Get WEP_KEY_FLAGS from the old security setting, if any. Else
+	 * initialize the flags to NM_SETTING_SECRET_FLAG_AGENT_OWNED.
+	 */
+	s_wsec = nm_connection_get_setting_wireless_security (connection);
+	if (s_wsec)
+		secret_flags = nm_setting_wireless_security_get_wep_key_flags (s_wsec);
+	else
+		secret_flags = NM_SETTING_SECRET_FLAG_AGENT_OWNED;
 
 	/* Blow away the old security setting by adding a clear one */
 	s_wsec = (NMSettingWirelessSecurity *) nm_setting_wireless_security_new ();
@@ -176,44 +185,27 @@ fill_connection (WirelessSecurity *parent, NMConnection *connection)
 		if (strlen (sec->keys[i]))
 			nm_setting_wireless_security_set_wep_key (s_wsec, i, sec->keys[i]);
 	}
+
+	/* Update secret flags and popup when editing the connection */
+	if (sec->editing_connection)
+		utils_update_password_storage (NM_SETTING (s_wsec), secret_flags, passwd_entry, sec->password_flags_name);
 }
 
 static void
-wep_entry_filter_cb (GtkEntry *   entry,
-                     const gchar *text,
-                     gint         length,
-                     gint *       position,
-                     gpointer     data)
+wep_entry_filter_cb (GtkEditable *editable,
+                     gchar *text,
+                     gint length,
+                     gint *position,
+                     gpointer data)
 {
 	WirelessSecurityWEPKey *sec = (WirelessSecurityWEPKey *) data;
-	GtkEditable *editable = GTK_EDITABLE (entry);
-	int i, count = 0;
-	gchar *result;
-
-	result = g_malloc0 (length + 1);
 
 	if (sec->type == NM_WEP_KEY_TYPE_KEY) {
-		for (i = 0; i < length; i++) {
-			if (isxdigit(text[i]) || isascii(text[i]))
-				result[count++] = text[i];
-		}
-	} else if (sec->type == NM_WEP_KEY_TYPE_PASSPHRASE) {
-		for (i = 0; i < length; i++)
-			result[count++] = text[i];
+		utils_filter_editable_on_insert_text (editable,
+		                                      text, length, position, data,
+		                                      utils_char_is_ascii_print,
+		                                      wep_entry_filter_cb);
 	}
-
-	if (count > 0) {
-		g_signal_handlers_block_by_func (G_OBJECT (editable),
-			                             G_CALLBACK (wep_entry_filter_cb),
-			                             data);
-		gtk_editable_insert_text (editable, result, count, position);
-		g_signal_handlers_unblock_by_func (G_OBJECT (editable),
-			                               G_CALLBACK (wep_entry_filter_cb),
-			                               data);
-	}
-
-	g_signal_stop_emission_by_name (G_OBJECT (editable), "insert-text");
-	g_free (result);
 }
 
 static void
@@ -262,13 +254,18 @@ ws_wep_key_new (NMConnection *connection,
 	                                 "wep_key_entry");
 	if (!parent)
 		return NULL;
-	
+
 	sec = (WirelessSecurityWEPKey *) parent;
+	sec->editing_connection = secrets_only ? FALSE : TRUE;
+	sec->password_flags_name = NM_SETTING_WIRELESS_SECURITY_WEP_KEY0;
 	sec->type = type;
 
 	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "wep_key_entry"));
 	g_assert (widget);
 	gtk_entry_set_width_chars (GTK_ENTRY (widget), 28);
+
+	/* Create password-storage popup menu for password entry under entry's secondary icon */
+	utils_setup_password_storage (connection, NM_SETTING_WIRELESS_SECURITY_SETTING_NAME, widget, sec->password_flags_name);
 
 	if (connection) {
 		NMSettingWireless *s_wireless;
