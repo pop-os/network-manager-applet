@@ -1,4 +1,4 @@
-network-manager-applet (0.9.10.0-1) UNRELEASED; urgency=medium
+network-manager-applet (0.9.10.0-1) unstable; urgency=medium
 
   * New upstream release.
   * Update Build-Depends as per configure.ac.
@@ -8,7 +8,7 @@ network-manager-applet (0.9.10.0-1) UNRELEASED; urgency=medium
     in older versions of network-manager-gnome, so add a versioned Breaks.
   * Exclude libtool .la files and static libraries from list-missing.
 
- -- Michael Biebl <biebl@debian.org>  Sun, 06 Jul 2014 03:04:39 +0200
+ -- Michael Biebl <biebl@debian.org>  Thu, 10 Jul 2014 07:32:44 +0200
 
 network-manager-applet (0.9.8.10-1) unstable; urgency=medium
 
