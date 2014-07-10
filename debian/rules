@@ -13,7 +13,6 @@ override_dh_auto_configure:
 		--disable-more-warnings \
 		--enable-migration \
 		--enable-introspection \
-		--with-gtkver=3 \
 		--with-modem-manager-1
 
 override_dh_install:
