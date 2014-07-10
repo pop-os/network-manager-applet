@@ -6,6 +6,7 @@ network-manager-applet (0.9.10.0-1) UNRELEASED; urgency=medium
   * Refresh patches.
   * Update symbols file. A few deprecated symbols were dropped which were used
     in older versions of network-manager-gnome, so add a versioned Breaks.
+  * Exclude libtool .la files and static libraries from list-missing.
 
  -- Michael Biebl <biebl@debian.org>  Sun, 06 Jul 2014 03:04:39 +0200
 
