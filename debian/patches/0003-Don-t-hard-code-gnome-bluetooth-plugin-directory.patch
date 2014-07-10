@@ -8,12 +8,12 @@ Subject: Don't hard-code gnome-bluetooth plugin directory
  2 files changed, 3 insertions(+), 1 deletion(-)
 
 diff --git a/configure.ac b/configure.ac
-index 3863b1d..66527ce 100644
+index 0ef7f88..8f47790 100644
 --- a/configure.ac
 +++ b/configure.ac
-@@ -200,6 +200,8 @@ case "${with_bluetooth}" in
- 				  libnm-util >= 0.9.4
- 				  libnm-glib >= 0.9.4,
+@@ -142,6 +142,8 @@ case "${with_bluetooth}" in
+ 				  gnome-bluetooth-1.0 < 3.11.0
+ 				  libnm-util libnm-glib,
  				  have_gbt=yes, have_gbt=no)
 +		GNOME_BLUETOOTH_PLUGIN_DIR="`$PKG_CONFIG --variable=libdir gnome-bluetooth-1.0`/gnome-bluetooth/plugins"
 +		AC_SUBST(GNOME_BLUETOOTH_PLUGIN_DIR)

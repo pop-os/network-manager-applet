@@ -3,6 +3,7 @@ network-manager-applet (0.9.10.0-1) UNRELEASED; urgency=medium
   * New upstream release.
   * Update Build-Depends as per configure.ac.
   * Drop obsolete --with-gtkver configure switch.
+  * Refresh patches.
 
  -- Michael Biebl <biebl@debian.org>  Sun, 06 Jul 2014 03:04:39 +0200
 
