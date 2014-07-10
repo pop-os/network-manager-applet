@@ -74,6 +74,7 @@ Pre-Depends: ${misc:Pre-Depends}
 Depends: ${shlibs:Depends},
          ${misc:Depends},
          libnm-gtk-common (= ${source:Version})
+Breaks: network-manager-gnome (<< 0.9.10.0)
 Description: library for wireless and mobile dialogs
  This library provides Gtk+ dialogs for NetworkManager.
 
