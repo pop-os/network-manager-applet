@@ -13,7 +13,8 @@ override_dh_auto_configure:
 		--disable-more-warnings \
 		--enable-migration \
 		--enable-introspection \
-		--with-modem-manager-1
+		--with-modem-manager-1 \
+		--without-bluetooth
 
 override_dh_install:
 	dh_install -X.la -X.a --list-missing

@@ -21,8 +21,6 @@ Build-Depends: debhelper (>= 9),
                network-manager-dev (>= 0.9.10),
                libmm-glib-dev,
                libgudev-1.0-dev (>= 147),
-               libgnome-bluetooth-dev (>= 3.0.0),
-               libgnome-bluetooth-dev (<< 3.11.0),
                iso-codes,
                libgirepository1.0-dev,
                gobject-introspection
@@ -45,13 +43,11 @@ Depends: ${shlibs:Depends},
 Recommends: notification-daemon,
             gnome-keyring,
             mobile-broadband-provider-info,
-            gnome-bluetooth,
             iso-codes
 Suggests: network-manager-openconnect-gnome,
           network-manager-openvpn-gnome,
           network-manager-vpnc-gnome,
           network-manager-pptp-gnome
-Breaks: gnome-bluetooth (<< 3.0)
 Description: network management framework (GNOME frontend)
  NetworkManager is a system network service that manages your network devices
  and connections, attempting to keep active network connectivity when

@@ -1,3 +1,12 @@
+network-manager-applet (0.9.10.0-2) UNRELEASED; urgency=medium
+
+  * Disable bluetooth support. The gnome-bluetooth plugin no longer builds
+    with gnome-bluetooth 3.12. But this plugin is really only useful for DUN
+    which with bluez 5 isn't supported (yet).
+    PAN support should still be functional.
+
+ -- Michael Biebl <biebl@debian.org>  Wed, 16 Jul 2014 01:27:44 +0200
+
 network-manager-applet (0.9.10.0-1) unstable; urgency=medium
 
   * New upstream release.
