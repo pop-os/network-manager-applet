@@ -22,7 +22,7 @@
 
 #include <glib/gi18n.h>
 
-#include "new-connection.h"
+#include "connection-helpers.h"
 #include "nm-connection-list.h"
 #include "nm-connection-editor.h"
 #include "page-ethernet.h"
@@ -75,21 +75,41 @@ sort_types (gconstpointer a, gconstpointer b)
 	else if (typeb->virtual && !typea->virtual)
 		return -1;
 
-	if (typea->setting_type == NM_TYPE_SETTING_VPN &&
-	    typeb->setting_type != NM_TYPE_SETTING_VPN)
+	if (typea->setting_types[0] == NM_TYPE_SETTING_VPN &&
+	    typeb->setting_types[0] != NM_TYPE_SETTING_VPN)
 		return 1;
-	else if (typeb->setting_type == NM_TYPE_SETTING_VPN &&
-	         typea->setting_type != NM_TYPE_SETTING_VPN)
+	else if (typeb->setting_types[0] == NM_TYPE_SETTING_VPN &&
+	         typea->setting_types[0] != NM_TYPE_SETTING_VPN)
 		return -1;
 
 	return g_utf8_collate (typea->name, typeb->name);
 }
 
+#define add_type_data_full(a, n, new_func, type0, type1, type2, v) \
+{ \
+	ConnectionTypeData data; \
+ \
+	memset (&data, 0, sizeof (data)); \
+	data.name = n; \
+	data.new_connection_func = new_func; \
+	data.setting_types[0] = type0; \
+	data.setting_types[1] = type1; \
+	data.setting_types[2] = type2; \
+	data.setting_types[3] = G_TYPE_INVALID; \
+	data.virtual = v; \
+	g_array_append_val (a, data); \
+}
+
+#define add_type_data_real(a, n, new_func, type0) \
+	add_type_data_full(a, n, new_func, type0, G_TYPE_INVALID, G_TYPE_INVALID, FALSE)
+
+#define add_type_data_virtual(a, n, new_func, type0) \
+	add_type_data_full(a, n, new_func, type0, G_TYPE_INVALID, G_TYPE_INVALID, TRUE)
+
 ConnectionTypeData *
 get_connection_type_list (void)
 {
 	GArray *array;
-	ConnectionTypeData data;
 	static ConnectionTypeData *list;
 	GHashTable *vpn_plugins_hash;
 	gboolean have_vpn_plugins;
@@ -99,65 +119,22 @@ get_connection_type_list (void)
 
 	array = g_array_new (TRUE, FALSE, sizeof (ConnectionTypeData));
 
-	data.name = _("Ethernet");
-	data.new_connection_func = ethernet_connection_new;
-	data.setting_type = NM_TYPE_SETTING_WIRED;
-	data.virtual = FALSE;
-	g_array_append_val (array, data);
-
-	data.name = _("Wi-Fi");
-	data.new_connection_func = wifi_connection_new;
-	data.setting_type = NM_TYPE_SETTING_WIRELESS;
-	data.virtual = FALSE;
-	g_array_append_val (array, data);
-
-	data.name = _("Mobile Broadband");
-	data.new_connection_func = mobile_connection_new;
-	data.setting_type = NM_TYPE_SETTING_GSM;
-	data.virtual = FALSE;
-	g_array_append_val (array, data);
-
-	data.name = _("WiMAX");
-	data.new_connection_func = wimax_connection_new;
-	data.setting_type = NM_TYPE_SETTING_WIMAX;
-	data.virtual = FALSE;
-	g_array_append_val (array, data);
-
-	data.name = _("DSL");
-	data.new_connection_func = dsl_connection_new;
-	data.setting_type = NM_TYPE_SETTING_PPPOE;
-	data.virtual = FALSE;
-	g_array_append_val (array, data);
-
-	data.name = _("InfiniBand");
-	data.new_connection_func = infiniband_connection_new;
-	data.setting_type = NM_TYPE_SETTING_INFINIBAND;
-	data.virtual = FALSE;
-	g_array_append_val (array, data);
-
-	data.name = _("Bond");
-	data.new_connection_func = bond_connection_new;
-	data.setting_type = NM_TYPE_SETTING_BOND;
-	data.virtual = TRUE;
-	g_array_append_val (array, data);
-
-	data.name = _("Team");
-	data.new_connection_func = team_connection_new;
-	data.setting_type = NM_TYPE_SETTING_TEAM;
-	data.virtual = TRUE;
-	g_array_append_val (array, data);
-
-	data.name = _("Bridge");
-	data.new_connection_func = bridge_connection_new;
-	data.setting_type = NM_TYPE_SETTING_BRIDGE;
-	data.virtual = TRUE;
-	g_array_append_val (array, data);
-
-	data.name = _("VLAN");
-	data.new_connection_func = vlan_connection_new;
-	data.setting_type = NM_TYPE_SETTING_VLAN;
-	data.virtual = TRUE;
-	g_array_append_val (array, data);
+	add_type_data_real (array, _("Ethernet"), ethernet_connection_new, NM_TYPE_SETTING_WIRED);
+	add_type_data_real (array, _("Wi-Fi"), wifi_connection_new, NM_TYPE_SETTING_WIRELESS);
+	add_type_data_full (array,
+	                    _("Mobile Broadband"),
+	                    mobile_connection_new,
+	                    NM_TYPE_SETTING_GSM,
+	                    NM_TYPE_SETTING_CDMA,
+	                    NM_TYPE_SETTING_BLUETOOTH,
+	                    FALSE);
+	add_type_data_real (array, _("WiMAX"), wimax_connection_new, NM_TYPE_SETTING_WIMAX);
+	add_type_data_real (array, _("DSL"), dsl_connection_new, NM_TYPE_SETTING_PPPOE);
+	add_type_data_real (array, _("InfiniBand"), infiniband_connection_new, NM_TYPE_SETTING_INFINIBAND);
+	add_type_data_virtual (array, _("Bond"), bond_connection_new, NM_TYPE_SETTING_BOND);
+	add_type_data_virtual (array, _("Team"), team_connection_new, NM_TYPE_SETTING_TEAM);
+	add_type_data_virtual (array, _("Bridge"), bridge_connection_new, NM_TYPE_SETTING_BRIDGE);
+	add_type_data_virtual (array, _("VLAN"), vlan_connection_new, NM_TYPE_SETTING_VLAN);
 
 	/* Add "VPN" only if there are plugins */
 	vpn_plugins_hash = vpn_get_plugins (NULL);
@@ -166,11 +143,7 @@ get_connection_type_list (void)
 		GHashTableIter iter;
 		gpointer name, plugin;
 
-		data.name = _("VPN");
-		data.new_connection_func = vpn_connection_new;
-		data.setting_type = NM_TYPE_SETTING_VPN;
-		data.virtual = TRUE;
-		g_array_append_val (array, data);
+		add_type_data_virtual (array, _("VPN"), vpn_connection_new, NM_TYPE_SETTING_VPN);
 
 		vpn_plugins = NULL;
 		g_hash_table_iter_init (&iter, vpn_plugins_hash);
@@ -266,13 +239,17 @@ set_up_connection_type_combo (GtkComboBox *combo,
 	}
 
 	for (i = 0; list[i].name; i++) {
-		if (type_filter_func && !type_filter_func (list[i].setting_type, user_data))
-			continue;
+		if (type_filter_func) {
+			if (   !type_filter_func (list[i].setting_types[0], user_data)
+			    && !type_filter_func (list[i].setting_types[1], user_data)
+			    && !type_filter_func (list[i].setting_types[2], user_data))
+				continue;
+		}
 
-		if (list[i].setting_type == NM_TYPE_SETTING_VPN) {
+		if (list[i].setting_types[0] == NM_TYPE_SETTING_VPN) {
 			vpn_index = i;
 			continue;
-		} else if (list[i].setting_type == NM_TYPE_SETTING_WIRED)
+		} else if (list[i].setting_types[0] == NM_TYPE_SETTING_WIRED)
 			active = added;
 
 		if (list[i].virtual && !added_virtual_header && show_headers) {
@@ -589,4 +566,36 @@ delete_connection (GtkWindow *parent_window,
 		nm_connection_editor_set_busy (editor, TRUE);
 
 	nm_remote_connection_delete (connection, delete_cb, info);
+}
+
+gboolean
+connection_supports_ip4 (NMConnection *connection)
+{
+	NMSettingConnection *s_con;
+
+	g_return_val_if_fail (NM_IS_CONNECTION (connection), FALSE);
+
+	s_con = nm_connection_get_setting_connection (connection);
+	return (nm_setting_connection_get_slave_type (s_con) == NULL);
+}
+
+gboolean
+connection_supports_ip6 (NMConnection *connection)
+{
+	NMSettingConnection *s_con;
+	const char *connection_type;
+
+	g_return_val_if_fail (NM_IS_CONNECTION (connection), FALSE);
+
+	s_con = nm_connection_get_setting_connection (connection);
+	if (nm_setting_connection_get_slave_type (s_con) != NULL)
+		return FALSE;
+
+	connection_type = nm_setting_connection_get_connection_type (s_con);
+	if (!strcmp (connection_type, NM_SETTING_VPN_SETTING_NAME))
+		return vpn_supports_ipv6 (connection);
+	else if (!strcmp (connection_type, NM_SETTING_PPPOE_SETTING_NAME))
+		return FALSE;
+	else
+		return TRUE;
 }

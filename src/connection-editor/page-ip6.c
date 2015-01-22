@@ -45,6 +45,7 @@
 
 #include "page-ip6.h"
 #include "ip6-routes-dialog.h"
+#include "nm-glib-compat.h"
 
 G_DEFINE_TYPE (CEPageIP6, ce_page_ip6, CE_TYPE_PAGE)
 
@@ -139,10 +140,6 @@ ip6_private_init (CEPageIP6 *self, NMConnection *connection)
 	if (priv->connection_type == NM_TYPE_SETTING_VPN) {
 		str_auto = _("Automatic (VPN)");
 		str_auto_only = _("Automatic (VPN) addresses only");
-	} else if (   priv->connection_type == NM_TYPE_SETTING_GSM
-	           || priv->connection_type == NM_TYPE_SETTING_CDMA) {
-		str_auto = _("Automatic (PPP)");
-		str_auto_only = _("Automatic (PPP) addresses only");
 	} else if (priv->connection_type == NM_TYPE_SETTING_PPPOE) {
 		str_auto = _("Automatic (PPPoE)");
 		str_auto_only = _("Automatic (PPPoE) addresses only");
@@ -722,7 +719,7 @@ cell_changed_cb (GtkEditable *editable,
 	colorname = value_valid ? "lightgreen" : "red";
 
 	gdk_rgba_parse (&rgba, colorname);
-	gtk_widget_override_background_color (GTK_WIDGET (editable), GTK_STATE_NORMAL, &rgba);
+	gtk_widget_override_background_color (GTK_WIDGET (editable), GTK_STATE_FLAG_NORMAL, &rgba);
 
 	g_free (cell_text);
 	return FALSE;
@@ -1236,14 +1233,13 @@ dispose (GObject *object)
 	CEPageIP6Private *priv = CE_PAGE_IP6_GET_PRIVATE (self);
 	int i;
 
-	if (priv->window_group)
-		g_object_unref (priv->window_group);
+	g_clear_object (&priv->window_group);
 
 	/* Mark CEPageIP6 object as invalid; store this indication to cells to be usable in callbacks */
 	for (i = 0; i <= COL_LAST; i++)
 		g_object_set_data (G_OBJECT (priv->addr_cells[i]), "ce-page-not-valid", GUINT_TO_POINTER (1));
 
-	g_free (priv->connection_id);
+	g_clear_pointer (&priv->connection_id, g_free);
 
 	G_OBJECT_CLASS (ce_page_ip6_parent_class)->dispose (object);
 }

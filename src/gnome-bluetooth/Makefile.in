@@ -78,7 +78,8 @@ PRE_UNINSTALL = :
 POST_UNINSTALL = :
 build_triplet = @build@
 host_triplet = @host@
-@HAVE_GBT_TRUE@@WITH_MODEM_MANAGER_1_TRUE@am__append_1 = $(MM_GLIB_LIBS)
+@HAVE_GBT_TRUE@@WITH_MODEM_MANAGER_1_TRUE@am__append_1 = $(MM_GLIB_CFLAGS)
+@HAVE_GBT_TRUE@@WITH_MODEM_MANAGER_1_TRUE@am__append_2 = $(MM_GLIB_LIBS)
 subdir = src/gnome-bluetooth
 DIST_COMMON = $(srcdir)/Makefile.in $(srcdir)/Makefile.am \
 	$(top_srcdir)/depcomp
@@ -389,7 +390,7 @@ target_alias = @target_alias@
 top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
-INCLUDES = \
+AM_CPPFLAGS = \
 	-DDATADIR=\"$(datadir)\" \
 	-DICONDIR=\"$(icondir)\" \
 	-DLOCALEDIR="\"$(datadir)/locale\""	\
@@ -409,12 +410,12 @@ BT_WIDGET_SOURCES = \
 @HAVE_GBT_TRUE@plugindir = $(libdir)/gnome-bluetooth/plugins
 @HAVE_GBT_TRUE@plugin_LTLIBRARIES = libnma.la
 @HAVE_GBT_TRUE@libnma_la_SOURCES = $(BT_WIDGET_SOURCES)
-@HAVE_GBT_TRUE@@WITH_MODEM_MANAGER_1_TRUE@libnma_la_CPPFLAGS = $(MM_GLIB_CFLAGS)
+@HAVE_GBT_TRUE@libnma_la_CPPFLAGS = $(AM_CPPFLAGS) $(am__append_1)
 @HAVE_GBT_TRUE@libnma_la_LDFLAGS = -module -avoid-version
 @HAVE_GBT_TRUE@libnma_la_LIBADD = $(top_builddir)/src/marshallers/libmarshallers.la \
 @HAVE_GBT_TRUE@	$(top_builddir)/src/utils/libutils.la \
 @HAVE_GBT_TRUE@	$(top_builddir)/src/libnm-gtk/libnm-gtk.la \
-@HAVE_GBT_TRUE@	$(GNOME_BLUETOOTH_LIBS) $(am__append_1)
+@HAVE_GBT_TRUE@	$(GNOME_BLUETOOTH_LIBS) $(am__append_2)
 EXTRA_DIST = $(BT_WIDGET_SOURCES)
 all: all-am
 

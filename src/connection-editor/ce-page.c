@@ -325,6 +325,7 @@ ce_page_complete_init (CEPage *self,
 	/* Ignore missing settings errors */
 	if (   error
 	    && !dbus_g_error_has_name (error, "org.freedesktop.NetworkManager.Settings.InvalidSetting")
+	    && !dbus_g_error_has_name (error, "org.freedesktop.NetworkManager.Settings.Connection.SettingNotFound")
 	    && !dbus_g_error_has_name (error, "org.freedesktop.NetworkManager.AgentManager.NoSecrets")) {
 		emit_initialized (self, error);
 		return;
@@ -374,22 +375,10 @@ dispose (GObject *object)
 {
 	CEPage *self = CE_PAGE (object);
 
-	if (self->disposed)
-		return;
-
-	self->disposed = TRUE;
-
-	if (self->page)
-		g_object_unref (self->page);
-
-	if (self->builder)
-		g_object_unref (self->builder);
-
-	if (self->proxy)
-		g_object_unref (self->proxy);
-
-	if (self->connection)
-		g_object_unref (self->connection);
+	g_clear_object (&self->page);
+	g_clear_object (&self->builder);
+	g_clear_object (&self->proxy);
+	g_clear_object (&self->connection);
 
 	G_OBJECT_CLASS (ce_page_parent_class)->dispose (object);
 }

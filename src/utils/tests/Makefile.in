@@ -351,9 +351,9 @@ target_alias = @target_alias@
 top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
-INCLUDES = -I$(top_srcdir)/src/utils
 test_utils_SOURCES = test-utils.c
 test_utils_CPPFLAGS = \
+	-I $(top_srcdir)/src/utils \
 	$(GTK_CFLAGS) \
 	$(NMA_CFLAGS)
 

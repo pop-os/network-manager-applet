@@ -48,6 +48,8 @@ nm_connection_editor_SOURCES = \
 	page-dsl.c \
 	page-mobile.h \
 	page-mobile.c \
+	page-bluetooth.h \
+	page-bluetooth.c \
 	page-ppp.h \
 	page-ppp.c \
 	page-vpn.h \
@@ -78,8 +80,8 @@ nm_connection_editor_SOURCES = \
 	ppp-auth-methods-dialog.h \
 	ce-polkit-button.c \
 	ce-polkit-button.h \
-	new-connection.c \
-	new-connection.h
+	connection-helpers.c \
+	connection-helpers.h
 
 nm-connection-editor-service-glue.h: $(top_srcdir)/src/connection-editor/nm-connection-editor-service.xml
 	$(AM_V_GEN) dbus-binding-tool --prefix=nm_connection_editor_service --mode=glib-server --output=$@ $<
@@ -114,6 +116,7 @@ ui_DATA = \
 	ce-ip6-routes.ui \
 	ce-page-dsl.ui \
 	ce-page-mobile.ui \
+	ce-page-bluetooth.ui \
 	ce-page-ppp.ui \
 	ce-ppp-auth-methods.ui \
 	ce-page-vlan.ui \

@@ -87,7 +87,6 @@
 #include "nm-wifi-dialog.h"
 #include "applet-vpn-request.h"
 #include "utils.h"
-#include "shell-watcher.h"
 #include "nm-ui-utils.h"
 
 #if WITH_MODEM_MANAGER_1
@@ -699,8 +698,7 @@ applet_menu_item_activate_helper (NMDevice *device,
 void
 applet_menu_item_add_complex_separator_helper (GtkWidget *menu,
                                                NMApplet *applet,
-                                               const gchar* label,
-                                               int pos)
+                                               const gchar* label)
 {
 	GtkWidget *menu_item = gtk_image_menu_item_new ();
 	GtkWidget *box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
@@ -720,11 +718,7 @@ applet_menu_item_add_complex_separator_helper (GtkWidget *menu,
 	              "child", box,
 	              "sensitive", FALSE,
 	              NULL);
-	if (pos < 0)
-		gtk_menu_shell_append (GTK_MENU_SHELL (menu), menu_item);
-	else
-		gtk_menu_shell_insert (GTK_MENU_SHELL (menu), menu_item, pos);
-	return;
+	gtk_menu_shell_append (GTK_MENU_SHELL (menu), menu_item);
 }
 
 GtkWidget *
@@ -1396,7 +1390,7 @@ nm_g_ptr_array_contains (const GPtrArray *haystack, gpointer needle)
 	return FALSE;
 }
 
-NMConnection *
+static NMConnection *
 applet_find_active_connection_for_device (NMDevice *device,
                                           NMApplet *applet,
                                           NMActiveConnection **out_active)
@@ -1420,6 +1414,10 @@ applet_find_active_connection_for_device (NMDevice *device,
 		active = NM_ACTIVE_CONNECTION (g_ptr_array_index (active_connections, i));
 		devices = nm_active_connection_get_devices (active);
 		connection_path = nm_active_connection_get_connection (active);
+
+		/* Skip VPN connections */
+		if (nm_active_connection_get_vpn (active))
+			continue;
 
 		if (!devices || !connection_path)
 			continue;
@@ -2380,14 +2378,11 @@ applet_add_default_connection_item (NMDevice *device,
 /*****************************************************************************/
 
 static void
-foo_set_icon (NMApplet *applet, GdkPixbuf *pixbuf, guint32 layer)
+foo_set_icon (NMApplet *applet, guint32 layer, GdkPixbuf *pixbuf, char *icon_name)
 {
 	int i;
 
-	if (layer > ICON_LAYER_MAX) {
-		g_warning ("Tried to icon to invalid layer %d", layer);
-		return;
-	}
+	g_return_if_fail (layer == ICON_LAYER_LINK || layer == ICON_LAYER_VPN);
 
 	/* Ignore setting of the same icon as is already displayed */
 	if (applet->icon_layers[layer] == pixbuf)
@@ -2402,8 +2397,7 @@ foo_set_icon (NMApplet *applet, GdkPixbuf *pixbuf, guint32 layer)
 		applet->icon_layers[layer] = g_object_ref (pixbuf);
 
 	if (!applet->icon_layers[0]) {
-		nma_icon_check_and_load ("nm-no-connection", &applet->no_connection_icon, applet);
-		pixbuf = g_object_ref (applet->no_connection_icon);
+		pixbuf = g_object_ref (nma_icon_check_and_load ("nm-no-connection", applet));
 	} else {
 		pixbuf = gdk_pixbuf_copy (applet->icon_layers[0]);
 
@@ -2423,7 +2417,6 @@ foo_set_icon (NMApplet *applet, GdkPixbuf *pixbuf, guint32 layer)
 	gtk_status_icon_set_from_pixbuf (applet->status_icon, pixbuf);
 	g_object_unref (pixbuf);
 }
-
 
 NMRemoteConnection *
 applet_get_exported_connection_for_device (NMDevice *device, NMApplet *applet)
@@ -2746,10 +2739,12 @@ mm1_client_setup (NMApplet *applet)
 
 #endif /* WITH_MODEM_MANAGER_1 */
 
-static GdkPixbuf *
-applet_common_get_device_icon (NMDeviceState state, NMApplet *applet)
+static void
+applet_common_get_device_icon (NMDeviceState state,
+                               GdkPixbuf **out_pixbuf,
+                               char **out_icon_name,
+                               NMApplet *applet)
 {
-	GdkPixbuf *pixbuf = NULL;
 	int stage = -1;
 
 	switch (state) {
@@ -2768,25 +2763,19 @@ applet_common_get_device_icon (NMDeviceState state, NMApplet *applet)
 	}
 
 	if (stage >= 0) {
-		int i, j;
+		char *name = g_strdup_printf ("nm-stage%02d-connecting%02d", stage + 1, applet->animation_step + 1);
 
-		for (i = 0; i < NUM_CONNECTING_STAGES; i++) {
-			for (j = 0; j < NUM_CONNECTING_FRAMES; j++) {
-				char *name;
+		if (out_pixbuf)
+			*out_pixbuf = g_object_ref (nma_icon_check_and_load (name, applet));
+		if (out_icon_name)
+			*out_icon_name = name;
+		else
+			g_free (name);
 
-				name = g_strdup_printf ("nm-stage%02d-connecting%02d", i+1, j+1);
-				nma_icon_check_and_load (name, &applet->network_connecting_icons[i][j], applet);
-				g_free (name);
-			}
-		}
-
-		pixbuf = applet->network_connecting_icons[stage][applet->animation_step];
 		applet->animation_step++;
 		if (applet->animation_step >= NUM_CONNECTING_FRAMES)
 			applet->animation_step = 0;
 	}
-
-	return pixbuf;
 }
 
 static char *
@@ -2825,14 +2814,19 @@ get_tip_for_device_state (NMDevice *device,
 	return tip;
 }
 
-static GdkPixbuf *
-applet_get_device_icon_for_state (NMApplet *applet, char **tip)
+static void
+applet_get_device_icon_for_state (NMApplet *applet,
+                                  GdkPixbuf **out_pixbuf,
+                                  char **out_icon_name,
+                                  char **out_tip)
 {
 	NMActiveConnection *active;
 	NMDevice *device = NULL;
-	GdkPixbuf *pixbuf = NULL;
 	NMDeviceState state = NM_DEVICE_STATE_UNKNOWN;
 	NMADeviceClass *dclass;
+
+	g_assert (out_pixbuf && out_icon_name && out_tip);
+	g_assert (!*out_pixbuf && !*out_icon_name && !*out_tip);
 
 	// FIXME: handle multiple device states here
 
@@ -2852,22 +2846,24 @@ applet_get_device_icon_for_state (NMApplet *applet, char **tip)
 	dclass = get_device_class (device, applet);
 	if (dclass) {
 		NMConnection *connection;
+		const char *icon_name = NULL;
 
 		connection = applet_find_active_connection_for_device (device, applet, NULL);
-		/* device class returns a referenced pixbuf */
-		pixbuf = dclass->get_icon (device, state, connection, tip, applet);
-		if (!*tip)
-			*tip = get_tip_for_device_state (device, state, connection);
+
+		dclass->get_icon (device, state, connection, out_pixbuf, &icon_name, out_tip, applet);
+
+		if (!*out_pixbuf && icon_name)
+			*out_pixbuf = g_object_ref (nma_icon_check_and_load (icon_name, applet));
+		*out_icon_name = g_strdup (icon_name);
+		if (!*out_tip)
+			*out_tip = get_tip_for_device_state (device, state, connection);
+		if (icon_name || *out_pixbuf)
+			return;
+		/* Fall through for common icons */
 	}
 
 out:
-	if (!pixbuf) {
-		pixbuf = applet_common_get_device_icon (state, applet);
-		/* reference the pixbuf to match the device class' get_icon() function behavior */
-		if (pixbuf)
-			g_object_ref (pixbuf);
-	}
-	return pixbuf;
+	applet_common_get_device_icon (state, out_pixbuf, out_icon_name, applet);
 }
 
 static char *
@@ -2923,8 +2919,8 @@ applet_update_icon (gpointer user_data)
 	NMApplet *applet = NM_APPLET (user_data);
 	GdkPixbuf *pixbuf = NULL;
 	NMState state;
-	char *dev_tip = NULL, *vpn_tip = NULL;
-	NMVPNConnectionState vpn_state = NM_VPN_SERVICE_STATE_UNKNOWN;
+	char *dev_tip = NULL, *vpn_tip = NULL, *icon_name = NULL;
+	NMVPNConnectionState vpn_state = NM_VPN_CONNECTION_STATE_UNKNOWN;
 	gboolean nm_running;
 	NMActiveConnection *active_vpn = NULL;
 
@@ -2943,47 +2939,46 @@ applet_update_icon (gpointer user_data)
 	switch (state) {
 	case NM_STATE_UNKNOWN:
 	case NM_STATE_ASLEEP:
-		pixbuf = nma_icon_check_and_load ("nm-no-connection", &applet->no_connection_icon, applet);
-		g_object_ref (pixbuf);
+		icon_name = g_strdup ("nm-no-connection");
+		pixbuf = g_object_ref (nma_icon_check_and_load (icon_name, applet));
 		dev_tip = g_strdup (_("Networking disabled"));
 		break;
 	case NM_STATE_DISCONNECTED:
-		pixbuf = nma_icon_check_and_load ("nm-no-connection", &applet->no_connection_icon, applet);
-		g_object_ref (pixbuf);
+		icon_name = g_strdup ("nm-no-connection");
+		pixbuf = g_object_ref (nma_icon_check_and_load (icon_name, applet));
 		dev_tip = g_strdup (_("No network connection"));
 		break;
 	default:
-		pixbuf = applet_get_device_icon_for_state (applet, &dev_tip);
+		applet_get_device_icon_for_state (applet, &pixbuf, &icon_name, &dev_tip);
 		break;
 	}
 
-	foo_set_icon (applet, pixbuf, ICON_LAYER_LINK);
+	foo_set_icon (applet, ICON_LAYER_LINK, pixbuf, icon_name);
 	if (pixbuf)
 		g_object_unref (pixbuf);
+	if (icon_name)
+		g_free (icon_name);
 
 	/* VPN state next */
 	pixbuf = NULL;
+	icon_name = NULL;
 	active_vpn = applet_get_first_active_vpn_connection (applet, &vpn_state);
 	if (active_vpn) {
-		int i;
+		char *name;
 
 		switch (vpn_state) {
 		case NM_VPN_CONNECTION_STATE_ACTIVATED:
-			pixbuf = nma_icon_check_and_load ("nm-vpn-active-lock", &applet->vpn_lock_icon, applet);
+			icon_name = g_strdup_printf ("nm-vpn-active-lock");
+			pixbuf = nma_icon_check_and_load (icon_name, applet);
 			break;
 		case NM_VPN_CONNECTION_STATE_PREPARE:
 		case NM_VPN_CONNECTION_STATE_NEED_AUTH:
 		case NM_VPN_CONNECTION_STATE_CONNECT:
 		case NM_VPN_CONNECTION_STATE_IP_CONFIG_GET:
-			for (i = 0; i < NUM_VPN_CONNECTING_FRAMES; i++) {
-				char *name;
+			name = g_strdup_printf ("nm-vpn-connecting%02d", applet->animation_step + 1);
+			pixbuf = nma_icon_check_and_load (name, applet);
+			g_free (name);
 
-				name = g_strdup_printf ("nm-vpn-connecting%02d", i+1);
-				nma_icon_check_and_load (name, &applet->vpn_connecting_icons[i], applet);
-				g_free (name);
-			}
-
-			pixbuf = applet->vpn_connecting_icons[applet->animation_step];
 			applet->animation_step++;
 			if (applet->animation_step >= NUM_VPN_CONNECTING_FRAMES)
 				applet->animation_step = 0;
@@ -2993,29 +2988,24 @@ applet_update_icon (gpointer user_data)
 		}
 
 		vpn_tip = get_tip_for_vpn (active_vpn, vpn_state, applet);
-	}
-	foo_set_icon (applet, pixbuf, ICON_LAYER_VPN);
+		if (vpn_tip && dev_tip) {
+			char *tmp;
 
+			tmp = g_strdup_printf ("%s\n%s", dev_tip, vpn_tip);
+			g_free (vpn_tip);
+			vpn_tip = tmp;
+		}
+	}
+	foo_set_icon (applet, ICON_LAYER_VPN, pixbuf, icon_name);
+	if (icon_name)
+		g_free (icon_name);
+
+	/* update tooltip */
 	g_free (applet->tip);
-	applet->tip = NULL;
-
-	if (dev_tip || vpn_tip) {
-		GString *tip;
-
-		tip = g_string_new (dev_tip);
-
-		if (vpn_tip)
-			g_string_append_printf (tip, "%s%s", tip->len ? "\n" : "", vpn_tip);
-
-		if (tip->len)
-			applet->tip = tip->str;
-
-		g_free (vpn_tip);
-		g_free (dev_tip);
-		g_string_free (tip, FALSE);
-	}
-
+	applet->tip = g_strdup (vpn_tip ? vpn_tip : dev_tip);
 	gtk_status_icon_set_tooltip_text (applet->status_icon, applet->tip);
+	g_free (vpn_tip);
+	g_free (dev_tip);
 
 	return FALSE;
 }
@@ -3277,73 +3267,41 @@ nma_clear_icon (GdkPixbuf **icon, NMApplet *applet)
 
 static void nma_icons_free (NMApplet *applet)
 {
-	int i, j;
-
-	for (i = 0; i <= ICON_LAYER_MAX; i++)
-		nma_clear_icon (&applet->icon_layers[i], applet);
-
-	nma_clear_icon (&applet->no_connection_icon, applet);
-	nma_clear_icon (&applet->ethernet_icon, applet);
-	nma_clear_icon (&applet->adhoc_icon, applet);
-	nma_clear_icon (&applet->wwan_icon, applet);
-	nma_clear_icon (&applet->wwan_tower_icon, applet);
-	nma_clear_icon (&applet->vpn_lock_icon, applet);
-	nma_clear_icon (&applet->wifi_00_icon, applet);
-	nma_clear_icon (&applet->wifi_25_icon, applet);
-	nma_clear_icon (&applet->wifi_50_icon, applet);
-	nma_clear_icon (&applet->wifi_75_icon, applet);
-	nma_clear_icon (&applet->wifi_100_icon, applet);
-	nma_clear_icon (&applet->secure_lock_icon, applet);
-
-	nma_clear_icon (&applet->mb_tech_1x_icon, applet);
-	nma_clear_icon (&applet->mb_tech_evdo_icon, applet);
-	nma_clear_icon (&applet->mb_tech_gprs_icon, applet);
-	nma_clear_icon (&applet->mb_tech_edge_icon, applet);
-	nma_clear_icon (&applet->mb_tech_umts_icon, applet);
-	nma_clear_icon (&applet->mb_tech_hspa_icon, applet);
-	nma_clear_icon (&applet->mb_tech_lte_icon, applet);
-	nma_clear_icon (&applet->mb_roaming_icon, applet);
-	nma_clear_icon (&applet->mb_tech_3g_icon, applet);
-
-	for (i = 0; i < NUM_CONNECTING_STAGES; i++) {
-		for (j = 0; j < NUM_CONNECTING_FRAMES; j++)
-			nma_clear_icon (&applet->network_connecting_icons[i][j], applet);
-	}
-
-	for (i = 0; i < NUM_VPN_CONNECTING_FRAMES; i++)
-		nma_clear_icon (&applet->vpn_connecting_icons[i], applet);
+	int i;
 
 	for (i = 0; i <= ICON_LAYER_MAX; i++)
 		nma_clear_icon (&applet->icon_layers[i], applet);
 }
 
 GdkPixbuf *
-nma_icon_check_and_load (const char *name, GdkPixbuf **icon, NMApplet *applet)
+nma_icon_check_and_load (const char *name, NMApplet *applet)
 {
 	GError *error = NULL;
+	GdkPixbuf *icon = g_hash_table_lookup (applet->icon_cache, name);
 
-	g_return_val_if_fail (name != NULL, NULL);
-	g_return_val_if_fail (icon != NULL, NULL);
-	g_return_val_if_fail (applet != NULL, NULL);
+	g_assert (name != NULL);
+	g_assert (applet != NULL);
 
 	/* icon already loaded successfully */
-	if (*icon && (*icon != applet->fallback_icon))
-		return *icon;
+	if (icon)
+		return icon;
 
 	/* Try to load the icon; if the load fails, log the problem, and set
 	 * the icon to the fallback icon if requested.
 	 */
-	*icon = gtk_icon_theme_load_icon (applet->icon_theme, name, applet->icon_size, GTK_ICON_LOOKUP_FORCE_SIZE, &error);
-	if (!*icon) {
+	if (!(icon = gtk_icon_theme_load_icon (applet->icon_theme, name, applet->icon_size, GTK_ICON_LOOKUP_FORCE_SIZE, &error))) {
 		g_warning ("Icon %s missing: (%d) %s",
 		           name,
 		           error ? error->code : -1,
 			       (error && error->message) ? error->message : "(unknown)");
 		g_clear_error (&error);
 
-		*icon = applet->fallback_icon;
+		icon = applet->fallback_icon;
 	}
-	return *icon;
+
+	g_hash_table_insert (applet->icon_cache, g_strdup (name), icon);
+
+	return icon;
 }
 
 #include "fallback-icon.h"
@@ -3356,6 +3314,7 @@ nma_icons_reload (NMApplet *applet)
 
 	g_return_val_if_fail (applet->icon_size > 0, FALSE);
 
+	g_hash_table_remove_all (applet->icon_cache);
 	nma_icons_free (applet);
 
 	loader = gdk_pixbuf_loader_new_with_type ("png", &error);
@@ -3533,46 +3492,14 @@ applet_embedded_cb (GObject *object, GParamSpec *pspec, gpointer user_data)
 static void
 register_agent (NMApplet *applet)
 {
+	g_return_if_fail (!applet->agent);
+
 	applet->agent = applet_agent_new ();
 	g_assert (applet->agent);
 	g_signal_connect (applet->agent, APPLET_AGENT_GET_SECRETS,
 	                  G_CALLBACK (applet_agent_get_secrets_cb), applet);
 	g_signal_connect (applet->agent, APPLET_AGENT_CANCEL_SECRETS,
 	                  G_CALLBACK (applet_agent_cancel_secrets_cb), applet);
-	nm_secret_agent_register (NM_SECRET_AGENT (applet->agent));
-}
-
-static void
-shell_version_changed_cb (NMShellWatcher *watcher, GParamSpec *pspec, gpointer user_data)
-{
-	NMApplet *applet = user_data;
-
-	if (nm_shell_watcher_version_at_least (watcher, 3, 0)) {
-		g_debug ("gnome-shell is running");
-
-		if (applet->agent) {
-			g_debug ("destroying secret agent");
-
-			g_signal_handlers_disconnect_by_func (applet->agent,
-			                                      G_CALLBACK (applet_agent_get_secrets_cb),
-			                                      applet);
-			g_signal_handlers_disconnect_by_func (applet->agent,
-			                                      G_CALLBACK (applet_agent_cancel_secrets_cb),
-			                                      applet);
-			nm_secret_agent_unregister (NM_SECRET_AGENT (applet->agent));
-			g_clear_object (&applet->agent);
-		}
-
-		/* We don't need the watcher any more */
-		g_signal_handlers_disconnect_by_func (applet->shell_watcher,
-		                                      G_CALLBACK (shell_version_changed_cb),
-		                                      applet);
-		g_clear_object (&applet->shell_watcher);
-	} else {
-		/* No shell */
-		g_debug ("gnome-shell is not running, registering secret agent");
-		register_agent (applet);
-	}
 }
 
 static gboolean
@@ -3640,12 +3567,17 @@ initable_init (GInitable *initable, GCancellable *cancellable, GError **error)
 	g_signal_connect (applet->gsettings, "changed::show-applet",
 	                  G_CALLBACK (applet_gsettings_show_changed), applet);
 
+
 	/* Load pixmaps and create applet widgets */
 	if (!setup_widgets (applet)) {
 		g_set_error_literal (error, NMA_ERROR, NMA_ERROR_GENERIC,
 		                     "Could not initialize widgets");
 		return FALSE;
 	}
+	applet->icon_cache = g_hash_table_new_full (g_str_hash,
+	                                            g_str_equal,
+	                                            g_free,
+	                                            g_object_unref);
 	nma_icons_init (applet);
 
 	if (!notify_is_initted ())
@@ -3727,15 +3659,7 @@ initable_init (GInitable *initable, GCancellable *cancellable, GError **error)
 	                  G_CALLBACK (applet_embedded_cb), NULL);
 	applet_embedded_cb (G_OBJECT (applet->status_icon), NULL, NULL);
 
-	/* Watch GNOME Shell so we can unregister our applet agent if it appears */
-	if (!shell_debug) {
-		applet->shell_watcher = nm_shell_watcher_new ();
-		g_signal_connect (applet->shell_watcher,
-			              "notify::shell-version",
-			              G_CALLBACK (shell_version_changed_cb),
-			              applet);
-	} else
-		register_agent (applet);
+	register_agent (applet);
 
 	return TRUE;
 }
@@ -3764,6 +3688,7 @@ static void finalize (GObject *object)
 
 	if (applet->menu)
 		g_object_unref (applet->menu);
+	g_clear_pointer (&applet->icon_cache, g_hash_table_destroy);
 	nma_icons_free (applet);
 
 	g_free (applet->tip);
@@ -3805,9 +3730,6 @@ static void finalize (GObject *object)
 	if (applet->session_bus)
 		dbus_g_connection_unref (applet->session_bus);
 
-	if (applet->shell_watcher)
-		g_object_unref (applet->shell_watcher);
-
 	G_OBJECT_CLASS (nma_parent_class)->finalize (object);
 }
 
@@ -3820,38 +3742,11 @@ static void nma_init (NMApplet *applet)
 	applet->icon_size = 16;
 }
 
-enum {
-	PROP_0,
-	PROP_LOOP,
-	LAST_PROP
-};
-
-static void
-set_property (GObject *object, guint prop_id,
-              const GValue *value, GParamSpec *pspec)
-{
-	NMApplet *applet = NM_APPLET (object);
-
-	switch (prop_id) {
-	case PROP_LOOP:
-		applet->loop = g_value_get_pointer (value);
-		break;
-	default:
-		G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-		break;
-	}
-}
-
 static void nma_class_init (NMAppletClass *klass)
 {
 	GObjectClass *oclass = G_OBJECT_CLASS (klass);
-	GParamSpec *pspec;
 
-	oclass->set_property = set_property;
 	oclass->finalize = finalize;
-
-	pspec = g_param_spec_pointer ("loop", "Loop", "Applet mainloop", G_PARAM_CONSTRUCT | G_PARAM_WRITABLE);
-	g_object_class_install_property (oclass, PROP_LOOP, pspec);
 
 	dbus_g_object_type_install_info (NM_TYPE_APPLET, &dbus_glib_nma_object_info);
 }
@@ -3863,19 +3758,16 @@ nma_initable_interface_init (GInitableIface *iface, gpointer iface_data)
 }
 
 NMApplet *
-nm_applet_new (GMainLoop *loop)
+nm_applet_new (void)
 {
 	NMApplet *applet;
 	GError *error = NULL;
 
-	applet = g_initable_new (NM_TYPE_APPLET, NULL, &error,
-	                         "loop", loop,
-	                         NULL);
+	applet = g_initable_new (NM_TYPE_APPLET, NULL, &error, NULL);
 	if (!applet) {
 		g_warning ("%s", error->message);
 		g_error_free (error);
 	}
-
 	return applet;
 }
 

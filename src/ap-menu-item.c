@@ -160,32 +160,41 @@ nm_network_menu_item_best_strength (NMNetworkMenuItem * item,
 	item->int_strength = strength;
 
 	if (strength > 80)
-		icon = nma_icon_check_and_load ("nm-signal-100", &applet->wifi_100_icon, applet);
+		icon = nma_icon_check_and_load ("nm-signal-100", applet);
 	else if (strength > 55)
-		icon = nma_icon_check_and_load ("nm-signal-75", &applet->wifi_75_icon, applet);
+		icon = nma_icon_check_and_load ("nm-signal-75", applet);
 	else if (strength > 30)
-		icon = nma_icon_check_and_load ("nm-signal-50", &applet->wifi_50_icon, applet);
+		icon = nma_icon_check_and_load ("nm-signal-50", applet);
 	else if (strength > 5)
-		icon = nma_icon_check_and_load ("nm-signal-25", &applet->wifi_25_icon, applet);
+		icon = nma_icon_check_and_load ("nm-signal-25", applet);
 	else
-		icon = nma_icon_check_and_load ("nm-signal-00", &applet->wifi_00_icon, applet);
+		icon = nma_icon_check_and_load ("nm-signal-00", applet);
 
 	pixbuf = gdk_pixbuf_copy (icon);
 
 	/* If the AP is "secure", composite the lock icon on top of the signal bars */
 	if (item->is_encrypted) {
-		top = nma_icon_check_and_load ("nm-secure-lock", &applet->secure_lock_icon, applet);
+		top = nma_icon_check_and_load ("nm-secure-lock", applet);
 		gdk_pixbuf_composite (top, pixbuf, 0, 0, gdk_pixbuf_get_width (top),
 							  gdk_pixbuf_get_height (top),
 							  0, 0, 1.0, 1.0,
 							  GDK_INTERP_NEAREST, 255);
 	}
 
+	/* Scale to menu size if larger so the menu doesn't look awful */
+	if (gdk_pixbuf_get_height (pixbuf) > 24 || gdk_pixbuf_get_width (pixbuf) > 24) {
+		GdkPixbuf *scaled;
+
+		scaled = gdk_pixbuf_scale_simple (pixbuf, 24, 24, GDK_INTERP_BILINEAR);
+		g_object_unref (pixbuf);
+		pixbuf = scaled;
+	}
+
 	gtk_image_set_from_pixbuf (GTK_IMAGE (item->strength), pixbuf);
 	g_object_unref (pixbuf);
 }
 
-const const char *
+const char *
 nm_network_menu_item_get_hash (NMNetworkMenuItem * item)
 {
 	g_return_val_if_fail (item != NULL, NULL);
@@ -214,8 +223,16 @@ nm_network_menu_item_set_detail (NMNetworkMenuItem *item,
 		item->is_encrypted = TRUE;
 
 	if (nm_access_point_get_mode (ap) == NM_802_11_MODE_ADHOC) {
+		GdkPixbuf *scaled = NULL;
+
 		item->is_adhoc = is_adhoc = TRUE;
-		gtk_image_set_from_pixbuf (GTK_IMAGE (item->detail), adhoc_icon);
+
+		if (gdk_pixbuf_get_height (adhoc_icon) > 24 || gdk_pixbuf_get_width (adhoc_icon) > 24)
+			scaled = gdk_pixbuf_scale_simple (adhoc_icon, 24, 24, GDK_INTERP_BILINEAR);
+
+		gtk_image_set_from_pixbuf (GTK_IMAGE (item->detail), scaled ? scaled : adhoc_icon);
+
+		g_clear_object (&scaled);
 	} else
 		gtk_image_set_from_stock (GTK_IMAGE (item->detail), NULL, GTK_ICON_SIZE_MENU);
 

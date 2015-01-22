@@ -87,7 +87,7 @@ bt_add_menu_item (NMDevice *device,
 	if (!nma_menu_device_check_unusable (device)) {
 		/* Add menu items for existing bluetooth connections for this device */
 		if (g_slist_length (connections)) {
-			applet_menu_item_add_complex_separator_helper (menu, applet, _("Available"), -1);
+			applet_menu_item_add_complex_separator_helper (menu, applet, _("Available"));
 			applet_add_connection_items (device, connections, TRUE, active, NMA_ADD_INACTIVE, menu, applet);
 		}
 	}
@@ -105,15 +105,16 @@ bt_notify_connected (NMDevice *device,
 	                            PREF_DISABLE_CONNECTED_NOTIFICATIONS);
 }
 
-static GdkPixbuf *
+static void
 bt_get_icon (NMDevice *device,
              NMDeviceState state,
              NMConnection *connection,
+             GdkPixbuf **out_pixbuf,
+             const char **out_icon_name,
              char **tip,
              NMApplet *applet)
 {
 	NMSettingConnection *s_con;
-	GdkPixbuf *pixbuf = NULL;
 	const char *id;
 
 	id = nm_device_get_iface (NM_DEVICE (device));
@@ -136,14 +137,12 @@ bt_get_icon (NMDevice *device,
 		*tip = g_strdup_printf (_("Requesting a network address for '%s'..."), id);
 		break;
 	case NM_DEVICE_STATE_ACTIVATED:
-		pixbuf = nma_icon_check_and_load ("nm-device-wwan", &applet->wwan_icon, applet);
+		*out_icon_name = "nm-device-wwan";
 		*tip = g_strdup_printf (_("Mobile broadband connection '%s' active"), id);
 		break;
 	default:
 		break;
 	}
-
-	return pixbuf ? g_object_ref (pixbuf) : NULL;
 }
 
 typedef struct {

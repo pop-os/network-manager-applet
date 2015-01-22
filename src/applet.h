@@ -44,7 +44,6 @@
 #include <nm-active-connection.h>
 #include <nm-remote-settings.h>
 #include "applet-agent.h"
-#include "shell-watcher.h"
 
 #if WITH_MODEM_MANAGER_1
 #include <libmm-glib.h>
@@ -87,9 +86,6 @@ typedef struct
 	GMainLoop *loop;
 	DBusGConnection *session_bus;
 
-	NMShellWatcher *shell_watcher;
-	guint agent_start_id;
-
 	NMClient *nm_client;
 	NMRemoteSettings *settings;
 	AppletAgent *agent;
@@ -126,35 +122,10 @@ typedef struct
 	guint			update_icon_id;
 
 	GtkIconTheme *	icon_theme;
-	GdkPixbuf *		no_connection_icon;
-	GdkPixbuf *		ethernet_icon;
-	GdkPixbuf *		adhoc_icon;
-	GdkPixbuf *		wwan_icon;
-	GdkPixbuf *		wifi_00_icon;
-	GdkPixbuf *		wifi_25_icon;
-	GdkPixbuf *		wifi_50_icon;
-	GdkPixbuf *		wifi_75_icon;
-	GdkPixbuf *		wifi_100_icon;
-	GdkPixbuf *		secure_lock_icon;
-#define NUM_CONNECTING_STAGES 3
+	GHashTable *	icon_cache;
 #define NUM_CONNECTING_FRAMES 11
-	GdkPixbuf *		network_connecting_icons[NUM_CONNECTING_STAGES][NUM_CONNECTING_FRAMES];
 #define NUM_VPN_CONNECTING_FRAMES 14
-	GdkPixbuf *		vpn_connecting_icons[NUM_VPN_CONNECTING_FRAMES];
-	GdkPixbuf *		vpn_lock_icon;
 	GdkPixbuf *		fallback_icon;
-
-	/* Mobiel Broadband icons */
-	GdkPixbuf *		wwan_tower_icon;
-	GdkPixbuf *		mb_tech_1x_icon;
-	GdkPixbuf *		mb_tech_evdo_icon;
-	GdkPixbuf *		mb_tech_gprs_icon;
-	GdkPixbuf *		mb_tech_edge_icon;
-	GdkPixbuf *		mb_tech_umts_icon;
-	GdkPixbuf *		mb_tech_hspa_icon;
-	GdkPixbuf *		mb_tech_lte_icon;
-	GdkPixbuf *		mb_roaming_icon;
-	GdkPixbuf *		mb_tech_3g_icon;
 
 	/* Active status icon pixbufs */
 	GdkPixbuf *		icon_layers[ICON_LAYER_MAX + 1];
@@ -251,13 +222,15 @@ struct NMADeviceClass {
 	                                        const char *msg,
 	                                        NMApplet *applet);
 
-	/* Device class is expected to return a *referenced* pixbuf, which will
+	/* Device class is expected to pass a *referenced* pixbuf, which will
 	 * be unrefed by the icon code.  This allows the device class to create
 	 * a composited pixbuf if necessary and pass the reference to the caller.
 	 */
-	GdkPixbuf *    (*get_icon)             (NMDevice *device,
+	void           (*get_icon)             (NMDevice *device,
 	                                        NMDeviceState state,
 	                                        NMConnection *connection,
+	                                        GdkPixbuf **out_pixbuf,
+	                                        const char **out_icon_name,
 	                                        char **tip,
 	                                        NMApplet *applet);
 
@@ -268,7 +241,7 @@ struct NMADeviceClass {
 
 GType nma_get_type (void);
 
-NMApplet *nm_applet_new (GMainLoop *loop);
+NMApplet *nm_applet_new (void);
 
 void applet_schedule_update_icon (NMApplet *applet);
 
@@ -293,8 +266,7 @@ void applet_menu_item_disconnect_helper (NMDevice *device,
 
 void applet_menu_item_add_complex_separator_helper (GtkWidget *menu,
                                                     NMApplet *applet,
-                                                    const gchar* label,
-                                                    int pos);
+                                                    const gchar* label);
 
 GtkWidget*
 applet_menu_item_create_device_item_helper (NMDevice *device,
@@ -321,16 +293,11 @@ void applet_do_notify_with_pref (NMApplet *applet,
                                  const char *icon,
                                  const char *pref);
 
-NMConnection * applet_find_active_connection_for_device (NMDevice *device,
-                                                         NMApplet *applet,
-                                                         NMActiveConnection **out_active);
-
 GtkWidget * applet_new_menu_item_helper (NMConnection *connection,
                                          NMConnection *active,
                                          gboolean add_active);
 
 GdkPixbuf * nma_icon_check_and_load (const char *name,
-                                     GdkPixbuf **icon,
                                      NMApplet *applet);
 
 gboolean applet_wifi_connect_to_hidden_network (NMApplet *applet);

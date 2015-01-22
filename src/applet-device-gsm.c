@@ -49,7 +49,7 @@
 #include "nma-marshal.h"
 #include "nm-mobile-providers.h"
 #include "nm-ui-utils.h"
-#include "nm-gvaluearray-compat.h"
+#include "nm-glib-compat.h"
 
 typedef enum {
     MM_MODEM_GSM_ACCESS_TECH_UNKNOWN     = 0,
@@ -354,7 +354,7 @@ gsm_add_menu_item (NMDevice *device,
 	/* Add the default / inactive connection items */
 	if (!nma_menu_device_check_unusable (device)) {
 		if ((!active && g_slist_length (connections)) || (active && g_slist_length (connections) > 1))
-			applet_menu_item_add_complex_separator_helper (menu, applet, _("Available"), -1);
+			applet_menu_item_add_complex_separator_helper (menu, applet, _("Available"));
 
 		if (g_slist_length (connections)) {
 			for (iter = connections; iter; iter = g_slist_next (iter)) {
@@ -399,10 +399,12 @@ gsm_notify_connected (NMDevice *device,
 	                            PREF_DISABLE_CONNECTED_NOTIFICATIONS);
 }
 
-static GdkPixbuf *
+static void
 gsm_get_icon (NMDevice *device,
               NMDeviceState state,
               NMConnection *connection,
+              GdkPixbuf **out_pixbuf,
+              const char **out_icon_name,
               char **tip,
               NMApplet *applet)
 {
@@ -411,15 +413,17 @@ gsm_get_icon (NMDevice *device,
 	info = g_object_get_data (G_OBJECT (device), "devinfo");
 	g_assert (info);
 
-	return mobile_helper_get_icon (device,
-	                               state,
-	                               connection,
-	                               tip,
-	                               applet,
-	                               gsm_state_to_mb_state (info),
-	                               gsm_act_to_mb_act (info),
-	                               info->quality,
-	                               info->quality_valid);
+	mobile_helper_get_icon (device,
+	                        state,
+	                        connection,
+	                        out_pixbuf,
+	                        out_icon_name,
+	                        tip,
+	                        applet,
+	                        gsm_state_to_mb_state (info),
+	                        gsm_act_to_mb_act (info),
+	                        info->quality,
+	                        info->quality_valid);
 }
 
 static gboolean

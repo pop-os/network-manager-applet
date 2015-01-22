@@ -45,6 +45,8 @@
 
 #include "page-ip4.h"
 #include "ip4-routes-dialog.h"
+#include "connection-helpers.h"
+#include "nm-glib-compat.h"
 
 G_DEFINE_TYPE (CEPageIP4, ce_page_ip4, CE_TYPE_PAGE)
 
@@ -134,8 +136,8 @@ ip4_private_init (CEPageIP4 *self, NMConnection *connection)
 		str_auto_only = _("Automatic (VPN) addresses only");
 	} else if (   priv->connection_type == NM_TYPE_SETTING_GSM
 	           || priv->connection_type == NM_TYPE_SETTING_CDMA) {
-		str_auto = _("Automatic (PPP)");
-		str_auto_only = _("Automatic (PPP) addresses only");
+		str_auto = _("Automatic");
+		str_auto_only = _("Automatic, addresses only");
 	} else if (priv->connection_type == NM_TYPE_SETTING_PPPOE) {
 		str_auto = _("Automatic (PPPoE)");
 		str_auto_only = _("Automatic (PPPoE) addresses only");
@@ -189,9 +191,8 @@ ip4_private_init (CEPageIP4 *self, NMConnection *connection)
 		                    -1);
 	}
 
-	/* At the moment, Disabled is only supported for Ethernet & Wi-Fi */
-	if (   priv->connection_type == NM_TYPE_SETTING_WIRED
-	    || priv->connection_type == NM_TYPE_SETTING_WIRELESS) {
+	/* Disabled is only supported for types that also support IPv6 */
+	if (connection_supports_ip6 (connection)) {
 		gtk_list_store_append (priv->method_store, &iter);
 		gtk_list_store_set (priv->method_store, &iter,
 		                    METHOD_COL_NAME, _("Disabled"),
@@ -727,7 +728,7 @@ cell_changed_cb (GtkEditable *editable,
 	colorname = value_valid ? "lightgreen" : "red";
 
 	gdk_rgba_parse (&rgba, colorname);
-	gtk_widget_override_background_color (GTK_WIDGET (editable), GTK_STATE_NORMAL, &rgba);
+	gtk_widget_override_background_color (GTK_WIDGET (editable), GTK_STATE_FLAG_NORMAL, &rgba);
 
 	g_free (cell_text);
 	return FALSE;
@@ -1245,14 +1246,13 @@ dispose (GObject *object)
 	CEPageIP4Private *priv = CE_PAGE_IP4_GET_PRIVATE (self);
 	int i;
 
-	if (priv->window_group)
-		g_object_unref (priv->window_group);
+	g_clear_object (&priv->window_group);
 
 	/* Mark CEPageIP4 object as invalid; store this indication to cells to be usable in callbacks */
 	for (i = 0; i <= COL_LAST; i++)
 		g_object_set_data (G_OBJECT (priv->addr_cells[i]), "ce-page-not-valid", GUINT_TO_POINTER (1));
 
-	g_free (priv->connection_id);
+	g_clear_pointer (&priv->connection_id, g_free);
 
 	G_OBJECT_CLASS (ce_page_ip4_parent_class)->dispose (object);
 }
