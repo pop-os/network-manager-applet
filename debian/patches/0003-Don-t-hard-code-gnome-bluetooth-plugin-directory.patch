@@ -8,7 +8,7 @@ Subject: Don't hard-code gnome-bluetooth plugin directory
  2 files changed, 3 insertions(+), 1 deletion(-)
 
 diff --git a/configure.ac b/configure.ac
-index 0ef7f88..8f47790 100644
+index 8ac081c..90f8187 100644
 --- a/configure.ac
 +++ b/configure.ac
 @@ -142,6 +142,8 @@ case "${with_bluetooth}" in
@@ -21,7 +21,7 @@ index 0ef7f88..8f47790 100644
  esac
  
 diff --git a/src/gnome-bluetooth/Makefile.am b/src/gnome-bluetooth/Makefile.am
-index dbf5373..1a4e5b2 100644
+index 940aeba..2649d2e 100644
 --- a/src/gnome-bluetooth/Makefile.am
 +++ b/src/gnome-bluetooth/Makefile.am
 @@ -16,7 +16,7 @@ BT_WIDGET_SOURCES = \
