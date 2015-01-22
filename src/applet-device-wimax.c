@@ -273,7 +273,7 @@ wimax_add_menu_item (NMDevice *device,
 	}
 
 	if (g_slist_length (sorted)) {
-		applet_menu_item_add_complex_separator_helper (menu, applet, _("Available"), -1);
+		applet_menu_item_add_complex_separator_helper (menu, applet, _("Available"));
 
 		/* And add menu items for each NSP */
 		for (iter = sorted; iter; iter = g_slist_next (iter)) {
@@ -404,15 +404,16 @@ wimax_notify_connected (NMDevice *device,
 	                            PREF_DISABLE_CONNECTED_NOTIFICATIONS);
 }
 
-static GdkPixbuf *
+static void
 wimax_get_icon (NMDevice *device,
                 NMDeviceState state,
                 NMConnection *connection,
+                GdkPixbuf **out_pixbuf,
+                const char **out_icon_name,
                 char **tip,
                 NMApplet *applet)
 {
 	NMSettingConnection *s_con;
-	GdkPixbuf *pixbuf = NULL;
 	const char *id;
 	NMWimaxNsp *nsp;
 	guint32 quality = 0;
@@ -446,7 +447,7 @@ wimax_get_icon (NMDevice *device,
 		break;
 	case NM_DEVICE_STATE_ACTIVATED:
 		roaming = (nsp_type == NM_WIMAX_NSP_NETWORK_TYPE_ROAMING_PARTNER);
-		pixbuf = mobile_helper_get_status_pixbuf (quality,
+		*out_pixbuf = mobile_helper_get_status_pixbuf (quality,
 		                                          TRUE,
 		                                          nsp_type_to_mb_state (nsp_type),
 		                                          MB_TECH_WIMAX,
@@ -459,8 +460,6 @@ wimax_get_icon (NMDevice *device,
 	default:
 		break;
 	}
-
-	return pixbuf ? g_object_ref (pixbuf) : NULL;
 }
 
 static gboolean

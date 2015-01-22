@@ -616,10 +616,12 @@ broadband_act_to_mb_act (BroadbandDeviceInfo *info)
 	return MB_TECH_UNKNOWN;
 }
 
-static GdkPixbuf *
+static void
 get_icon (NMDevice *device,
           NMDeviceState state,
           NMConnection *connection,
+          GdkPixbuf **out_pixbuf,
+          const char **out_icon_name,
           char **tip,
           NMApplet *applet)
 {
@@ -627,21 +629,23 @@ get_icon (NMDevice *device,
 
 	if (!applet->mm1) {
 		g_warning ("ModemManager is not available for modem at %s", nm_device_get_udi (device));
-		return NULL;
+		return;
 	}
 
 	info = g_object_get_data (G_OBJECT (device), "devinfo");
 	g_assert (info);
 
-	return mobile_helper_get_icon (device,
-	                               state,
-	                               connection,
-	                               tip,
-	                               applet,
-	                               broadband_state_to_mb_state (info),
-	                               broadband_act_to_mb_act (info),
-	                               mm_modem_get_signal_quality (info->mm_modem, NULL),
-	                               (mm_modem_get_state (info->mm_modem) >= MM_MODEM_STATE_ENABLED));
+	mobile_helper_get_icon (device,
+	                        state,
+	                        connection,
+	                        out_pixbuf,
+	                        out_icon_name,
+	                        tip,
+	                        applet,
+	                        broadband_state_to_mb_state (info),
+	                        broadband_act_to_mb_act (info),
+	                        mm_modem_get_signal_quality (info->mm_modem, NULL),
+	                        (mm_modem_get_state (info->mm_modem) >= MM_MODEM_STATE_ENABLED));
 }
 
 /********************************************************************/
@@ -767,7 +771,7 @@ add_menu_item (NMDevice *device,
 	/* Add the default / inactive connection items */
 	if (!nma_menu_device_check_unusable (device)) {
 		if ((!active && g_slist_length (connections)) || (active && g_slist_length (connections) > 1))
-			applet_menu_item_add_complex_separator_helper (menu, applet, _("Available"), -1);
+			applet_menu_item_add_complex_separator_helper (menu, applet, _("Available"));
 
 		if (g_slist_length (connections)) {
 			for (iter = connections; iter; iter = g_slist_next (iter)) {

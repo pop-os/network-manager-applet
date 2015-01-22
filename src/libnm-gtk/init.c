@@ -1,8 +1,6 @@
 /* -*- Mode: C; tab-width: 4; indent-tabs-mode: t; c-basic-offset: 4 -*- */
-/* NetworkManager Applet -- allow user control over networking
- *
- * Dan Williams <dcbw@redhat.com>
- *
+
+/*
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
@@ -17,17 +15,24 @@
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  *
- * (C) Copyright 2004 - 2011 Red Hat, Inc.
+ * Copyright 2014 Red Hat, Inc.
  */
 
-#ifndef APPLET_VPN_REQUEST_H
-#define APPLET_VPN_REQUEST_H
+#include "config.h"
 
-#include "applet.h"
+#include <libintl.h>
+#include <glib/gi18n-lib.h>
 
-size_t applet_vpn_request_get_secrets_size (void);
+static void __attribute__((constructor))
+_libnm_gtk_init (void)
+{
+	static gboolean initialized = FALSE;
 
-gboolean applet_vpn_request_get_secrets (SecretsRequest *req, GError **error);
+	if (initialized)
+		return;
+	initialized = TRUE;
 
-#endif  /* APPLET_VPN_REQUEST_H */
+	bindtextdomain (GETTEXT_PACKAGE, NMALOCALEDIR);
+	bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
+}
 

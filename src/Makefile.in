@@ -121,8 +121,8 @@ am__nm_applet_SOURCES_DIST = main.c applet.c applet.h applet-agent.c \
 	applet-device-bond.c applet-device-team.h applet-device-team.c \
 	applet-device-bridge.h applet-device-bridge.c \
 	applet-device-infiniband.h applet-device-infiniband.c \
-	fallback-icon.h shell-watcher.h shell-watcher.c \
-	applet-device-broadband.h applet-device-broadband.c
+	fallback-icon.h applet-device-broadband.h \
+	applet-device-broadband.c
 @WITH_MODEM_MANAGER_1_TRUE@am__objects_1 = nm_applet-applet-device-broadband.$(OBJEXT)
 am_nm_applet_OBJECTS = nm_applet-main.$(OBJEXT) \
 	nm_applet-applet.$(OBJEXT) nm_applet-applet-agent.$(OBJEXT) \
@@ -142,8 +142,7 @@ am_nm_applet_OBJECTS = nm_applet-main.$(OBJEXT) \
 	nm_applet-applet-device-bond.$(OBJEXT) \
 	nm_applet-applet-device-team.$(OBJEXT) \
 	nm_applet-applet-device-bridge.$(OBJEXT) \
-	nm_applet-applet-device-infiniband.$(OBJEXT) \
-	nm_applet-shell-watcher.$(OBJEXT) $(am__objects_1)
+	nm_applet-applet-device-infiniband.$(OBJEXT) $(am__objects_1)
 nm_applet_OBJECTS = $(am_nm_applet_OBJECTS)
 am__DEPENDENCIES_1 =
 @WITH_MODEM_MANAGER_1_TRUE@am__DEPENDENCIES_2 = $(am__DEPENDENCIES_1)
@@ -521,8 +520,7 @@ nm_applet_SOURCES = main.c applet.c applet.h applet-agent.c \
 	applet-device-bond.c applet-device-team.h applet-device-team.c \
 	applet-device-bridge.h applet-device-bridge.c \
 	applet-device-infiniband.h applet-device-infiniband.c \
-	fallback-icon.h shell-watcher.h shell-watcher.c \
-	$(am__append_1)
+	fallback-icon.h $(am__append_1)
 nm_applet_LDADD = -lm $(GTK_LIBS) $(NMA_LIBS) $(LIBSECRET_LIBS) \
 	$(NOTIFY_LIBS) \
 	${top_builddir}/src/marshallers/libmarshallers.la \
@@ -718,7 +716,6 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/nm_applet-main.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/nm_applet-mb-menu-item.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/nm_applet-mobile-helpers.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/nm_applet-shell-watcher.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/nm_applet_migration_tool-migration-tool.Po@am__quote@
 
 .c.o:
@@ -1024,20 +1021,6 @@ nm_applet-applet-device-infiniband.obj: applet-device-infiniband.c
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='applet-device-infiniband.c' object='nm_applet-applet-device-infiniband.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(nm_applet_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o nm_applet-applet-device-infiniband.obj `if test -f 'applet-device-infiniband.c'; then $(CYGPATH_W) 'applet-device-infiniband.c'; else $(CYGPATH_W) '$(srcdir)/applet-device-infiniband.c'; fi`
-
-nm_applet-shell-watcher.o: shell-watcher.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(nm_applet_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT nm_applet-shell-watcher.o -MD -MP -MF $(DEPDIR)/nm_applet-shell-watcher.Tpo -c -o nm_applet-shell-watcher.o `test -f 'shell-watcher.c' || echo '$(srcdir)/'`shell-watcher.c
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/nm_applet-shell-watcher.Tpo $(DEPDIR)/nm_applet-shell-watcher.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='shell-watcher.c' object='nm_applet-shell-watcher.o' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(nm_applet_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o nm_applet-shell-watcher.o `test -f 'shell-watcher.c' || echo '$(srcdir)/'`shell-watcher.c
-
-nm_applet-shell-watcher.obj: shell-watcher.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(nm_applet_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT nm_applet-shell-watcher.obj -MD -MP -MF $(DEPDIR)/nm_applet-shell-watcher.Tpo -c -o nm_applet-shell-watcher.obj `if test -f 'shell-watcher.c'; then $(CYGPATH_W) 'shell-watcher.c'; else $(CYGPATH_W) '$(srcdir)/shell-watcher.c'; fi`
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/nm_applet-shell-watcher.Tpo $(DEPDIR)/nm_applet-shell-watcher.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='shell-watcher.c' object='nm_applet-shell-watcher.obj' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(nm_applet_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o nm_applet-shell-watcher.obj `if test -f 'shell-watcher.c'; then $(CYGPATH_W) 'shell-watcher.c'; else $(CYGPATH_W) '$(srcdir)/shell-watcher.c'; fi`
 
 nm_applet-applet-device-broadband.o: applet-device-broadband.c
 @am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(nm_applet_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT nm_applet-applet-device-broadband.o -MD -MP -MF $(DEPDIR)/nm_applet-applet-device-broadband.Tpo -c -o nm_applet-applet-device-broadband.o `test -f 'applet-device-broadband.c' || echo '$(srcdir)/'`applet-device-broadband.c

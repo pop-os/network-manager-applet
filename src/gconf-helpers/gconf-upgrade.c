@@ -30,7 +30,11 @@
 #include <errno.h>
 #include <arpa/inet.h>
 
+/* libgnome-keyring is deprecated. */
+#include "utils.h"
+NM_PRAGMA_WARNING_DISABLE("-Wdeprecated-declarations")
 #include <gnome-keyring.h>
+
 #include <nm-setting-connection.h>
 #include <nm-setting-wireless.h>
 #include <nm-setting-wireless-security.h>
@@ -252,12 +256,6 @@ nm_gconf_read_0_6_wep_settings (GConfClient *client,
 
 	return s_wireless_sec;
 }
-
-static const struct flagnames wpa_versions[] = {
-	{ "wpa", IW_AUTH_WPA_VERSION_WPA },
-	{ "rsn", IW_AUTH_WPA_VERSION_WPA2 },
-	{ NULL, 0 }
-};
 
 static NMSettingWirelessSecurity *
 nm_gconf_read_0_6_wpa_settings (GConfClient *client,

@@ -15,13 +15,35 @@
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  *
- * Copyright 2013 Red Hat, Inc.
+ * Copyright 2013-2014 Red Hat, Inc.
  */
 
-#ifndef NM_GVALUEARRAY_COMPAT_H
-#define NM_GVALUEARRAY_COMPAT_H
+#ifndef NM_GLIB_COMPAT_H
+#define NM_GLIB_COMPAT_H
 
 #include <glib.h>
+
+
+/*************************************************************/
+
+#ifdef __clang__
+
+#undef G_GNUC_BEGIN_IGNORE_DEPRECATIONS
+#undef G_GNUC_END_IGNORE_DEPRECATIONS
+
+#define G_GNUC_BEGIN_IGNORE_DEPRECATIONS \
+    _Pragma("clang diagnostic push") \
+    _Pragma("clang diagnostic ignored \"-Wdeprecated-declarations\"")
+
+#define G_GNUC_END_IGNORE_DEPRECATIONS \
+    _Pragma("clang diagnostic pop")
+
+#endif
+
+
+/*************************************************************
+ * undeprecate GValueArray
+ *************************************************************/
 
 #define g_value_array_get_type() \
   G_GNUC_EXTENSION ({ \
@@ -100,4 +122,35 @@
     G_GNUC_END_IGNORE_DEPRECATIONS \
   })
 
-#endif  /* NM_GVALUEARRAY_COMPAT_H */
+
+/*************************************************************
+ * Define g_clear_pointer() if it doesn't exist (glib < 2.34)
+ *************************************************************/
+
+#if !GLIB_CHECK_VERSION(2,34,0)
+
+#define g_clear_pointer(pp, destroy)	  \
+	G_STMT_START { \
+		G_STATIC_ASSERT (sizeof *(pp) == sizeof (gpointer)); \
+		/* Only one access, please */ \
+		gpointer *_pp = (gpointer *) (pp); \
+		gpointer _p; \
+		/* This assignment is needed to avoid a gcc warning */ \
+		GDestroyNotify _destroy = (GDestroyNotify) (destroy); \
+	  \
+		(void) (0 ? (gpointer) *(pp) : 0); \
+		do \
+			_p = g_atomic_pointer_get (_pp); \
+		while G_UNLIKELY (!g_atomic_pointer_compare_and_exchange (_pp, _p, NULL)); \
+	  \
+		if (_p) \
+			_destroy (_p); \
+	} G_STMT_END
+
+#endif
+
+
+/*************************************************************/
+
+
+#endif  /* NM_GLIB_COMPAT_H */

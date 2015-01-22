@@ -113,6 +113,7 @@ am_nm_connection_editor_OBJECTS =  \
 	nm_connection_editor-page-ip6.$(OBJEXT) \
 	nm_connection_editor-page-dsl.$(OBJEXT) \
 	nm_connection_editor-page-mobile.$(OBJEXT) \
+	nm_connection_editor-page-bluetooth.$(OBJEXT) \
 	nm_connection_editor-page-ppp.$(OBJEXT) \
 	nm_connection_editor-page-vpn.$(OBJEXT) \
 	nm_connection_editor-page-master.$(OBJEXT) \
@@ -128,7 +129,7 @@ am_nm_connection_editor_OBJECTS =  \
 	nm_connection_editor-ip6-routes-dialog.$(OBJEXT) \
 	nm_connection_editor-ppp-auth-methods-dialog.$(OBJEXT) \
 	nm_connection_editor-ce-polkit-button.$(OBJEXT) \
-	nm_connection_editor-new-connection.$(OBJEXT)
+	nm_connection_editor-connection-helpers.$(OBJEXT)
 nm_connection_editor_OBJECTS = $(am_nm_connection_editor_OBJECTS)
 am__DEPENDENCIES_1 =
 nm_connection_editor_DEPENDENCIES =  \
@@ -464,6 +465,8 @@ nm_connection_editor_SOURCES = \
 	page-dsl.c \
 	page-mobile.h \
 	page-mobile.c \
+	page-bluetooth.h \
+	page-bluetooth.c \
 	page-ppp.h \
 	page-ppp.c \
 	page-vpn.h \
@@ -494,8 +497,8 @@ nm_connection_editor_SOURCES = \
 	ppp-auth-methods-dialog.h \
 	ce-polkit-button.c \
 	ce-polkit-button.h \
-	new-connection.c \
-	new-connection.h
+	connection-helpers.c \
+	connection-helpers.h
 
 nm_connection_editor_LDADD = \
 	${top_builddir}/src/wireless-security/libwireless-security.la \
@@ -527,6 +530,7 @@ ui_DATA = \
 	ce-ip6-routes.ui \
 	ce-page-dsl.ui \
 	ce-page-mobile.ui \
+	ce-page-bluetooth.ui \
 	ce-page-ppp.ui \
 	ce-ppp-auth-methods.ui \
 	ce-page-vlan.ui \
@@ -632,13 +636,14 @@ distclean-compile:
 
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/nm_connection_editor-ce-page.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/nm_connection_editor-ce-polkit-button.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/nm_connection_editor-connection-helpers.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/nm_connection_editor-ip4-routes-dialog.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/nm_connection_editor-ip6-routes-dialog.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/nm_connection_editor-main.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/nm_connection_editor-new-connection.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/nm_connection_editor-nm-connection-editor.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/nm_connection_editor-nm-connection-list.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/nm_connection_editor-page-8021x-security.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/nm_connection_editor-page-bluetooth.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/nm_connection_editor-page-bond.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/nm_connection_editor-page-bridge-port.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/nm_connection_editor-page-bridge.Po@am__quote@
@@ -896,6 +901,20 @@ nm_connection_editor-page-mobile.obj: page-mobile.c
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(nm_connection_editor_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o nm_connection_editor-page-mobile.obj `if test -f 'page-mobile.c'; then $(CYGPATH_W) 'page-mobile.c'; else $(CYGPATH_W) '$(srcdir)/page-mobile.c'; fi`
 
+nm_connection_editor-page-bluetooth.o: page-bluetooth.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(nm_connection_editor_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT nm_connection_editor-page-bluetooth.o -MD -MP -MF $(DEPDIR)/nm_connection_editor-page-bluetooth.Tpo -c -o nm_connection_editor-page-bluetooth.o `test -f 'page-bluetooth.c' || echo '$(srcdir)/'`page-bluetooth.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/nm_connection_editor-page-bluetooth.Tpo $(DEPDIR)/nm_connection_editor-page-bluetooth.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='page-bluetooth.c' object='nm_connection_editor-page-bluetooth.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(nm_connection_editor_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o nm_connection_editor-page-bluetooth.o `test -f 'page-bluetooth.c' || echo '$(srcdir)/'`page-bluetooth.c
+
+nm_connection_editor-page-bluetooth.obj: page-bluetooth.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(nm_connection_editor_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT nm_connection_editor-page-bluetooth.obj -MD -MP -MF $(DEPDIR)/nm_connection_editor-page-bluetooth.Tpo -c -o nm_connection_editor-page-bluetooth.obj `if test -f 'page-bluetooth.c'; then $(CYGPATH_W) 'page-bluetooth.c'; else $(CYGPATH_W) '$(srcdir)/page-bluetooth.c'; fi`
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/nm_connection_editor-page-bluetooth.Tpo $(DEPDIR)/nm_connection_editor-page-bluetooth.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='page-bluetooth.c' object='nm_connection_editor-page-bluetooth.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(nm_connection_editor_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o nm_connection_editor-page-bluetooth.obj `if test -f 'page-bluetooth.c'; then $(CYGPATH_W) 'page-bluetooth.c'; else $(CYGPATH_W) '$(srcdir)/page-bluetooth.c'; fi`
+
 nm_connection_editor-page-ppp.o: page-ppp.c
 @am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(nm_connection_editor_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT nm_connection_editor-page-ppp.o -MD -MP -MF $(DEPDIR)/nm_connection_editor-page-ppp.Tpo -c -o nm_connection_editor-page-ppp.o `test -f 'page-ppp.c' || echo '$(srcdir)/'`page-ppp.c
 @am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/nm_connection_editor-page-ppp.Tpo $(DEPDIR)/nm_connection_editor-page-ppp.Po
@@ -1106,19 +1125,19 @@ nm_connection_editor-ce-polkit-button.obj: ce-polkit-button.c
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(nm_connection_editor_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o nm_connection_editor-ce-polkit-button.obj `if test -f 'ce-polkit-button.c'; then $(CYGPATH_W) 'ce-polkit-button.c'; else $(CYGPATH_W) '$(srcdir)/ce-polkit-button.c'; fi`
 
-nm_connection_editor-new-connection.o: new-connection.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(nm_connection_editor_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT nm_connection_editor-new-connection.o -MD -MP -MF $(DEPDIR)/nm_connection_editor-new-connection.Tpo -c -o nm_connection_editor-new-connection.o `test -f 'new-connection.c' || echo '$(srcdir)/'`new-connection.c
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/nm_connection_editor-new-connection.Tpo $(DEPDIR)/nm_connection_editor-new-connection.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='new-connection.c' object='nm_connection_editor-new-connection.o' libtool=no @AMDEPBACKSLASH@
+nm_connection_editor-connection-helpers.o: connection-helpers.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(nm_connection_editor_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT nm_connection_editor-connection-helpers.o -MD -MP -MF $(DEPDIR)/nm_connection_editor-connection-helpers.Tpo -c -o nm_connection_editor-connection-helpers.o `test -f 'connection-helpers.c' || echo '$(srcdir)/'`connection-helpers.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/nm_connection_editor-connection-helpers.Tpo $(DEPDIR)/nm_connection_editor-connection-helpers.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='connection-helpers.c' object='nm_connection_editor-connection-helpers.o' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(nm_connection_editor_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o nm_connection_editor-new-connection.o `test -f 'new-connection.c' || echo '$(srcdir)/'`new-connection.c
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(nm_connection_editor_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o nm_connection_editor-connection-helpers.o `test -f 'connection-helpers.c' || echo '$(srcdir)/'`connection-helpers.c
 
-nm_connection_editor-new-connection.obj: new-connection.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(nm_connection_editor_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT nm_connection_editor-new-connection.obj -MD -MP -MF $(DEPDIR)/nm_connection_editor-new-connection.Tpo -c -o nm_connection_editor-new-connection.obj `if test -f 'new-connection.c'; then $(CYGPATH_W) 'new-connection.c'; else $(CYGPATH_W) '$(srcdir)/new-connection.c'; fi`
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/nm_connection_editor-new-connection.Tpo $(DEPDIR)/nm_connection_editor-new-connection.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='new-connection.c' object='nm_connection_editor-new-connection.obj' libtool=no @AMDEPBACKSLASH@
+nm_connection_editor-connection-helpers.obj: connection-helpers.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(nm_connection_editor_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT nm_connection_editor-connection-helpers.obj -MD -MP -MF $(DEPDIR)/nm_connection_editor-connection-helpers.Tpo -c -o nm_connection_editor-connection-helpers.obj `if test -f 'connection-helpers.c'; then $(CYGPATH_W) 'connection-helpers.c'; else $(CYGPATH_W) '$(srcdir)/connection-helpers.c'; fi`
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/nm_connection_editor-connection-helpers.Tpo $(DEPDIR)/nm_connection_editor-connection-helpers.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='connection-helpers.c' object='nm_connection_editor-connection-helpers.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(nm_connection_editor_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o nm_connection_editor-new-connection.obj `if test -f 'new-connection.c'; then $(CYGPATH_W) 'new-connection.c'; else $(CYGPATH_W) '$(srcdir)/new-connection.c'; fi`
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(nm_connection_editor_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o nm_connection_editor-connection-helpers.obj `if test -f 'connection-helpers.c'; then $(CYGPATH_W) 'connection-helpers.c'; else $(CYGPATH_W) '$(srcdir)/connection-helpers.c'; fi`
 
 mostlyclean-libtool:
 	-rm -f *.lo

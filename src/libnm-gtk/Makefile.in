@@ -137,7 +137,7 @@ am_libnm_gtk_la_OBJECTS = libnm_gtk_la-nm-wifi-dialog.lo \
 	libnm_gtk_la-nm-wireless-dialog.lo \
 	libnm_gtk_la-nm-mobile-wizard.lo libnm_gtk_la-nm-ui-utils.lo \
 	libnm_gtk_la-nm-mobile-providers.lo \
-	libnm_gtk_la-nm-vpn-password-dialog.lo
+	libnm_gtk_la-nm-vpn-password-dialog.lo libnm_gtk_la-init.lo
 libnm_gtk_la_OBJECTS = $(am_libnm_gtk_la_OBJECTS)
 AM_V_lt = $(am__v_lt_@AM_V@)
 am__v_lt_ = $(am__v_lt_@AM_DEFAULT_V@)
@@ -456,7 +456,8 @@ libnm_gtk_la_SOURCES = \
 	nm-mobile-wizard.c \
 	nm-ui-utils.c \
 	nm-mobile-providers.c \
-	nm-vpn-password-dialog.c
+	nm-vpn-password-dialog.c \
+	init.c
 
 libnm_gtk_la_CFLAGS = \
 	$(GTK_CFLAGS) \
@@ -588,6 +589,7 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libnm_gtk_la-init.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libnm_gtk_la-nm-mobile-providers.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libnm_gtk_la-nm-mobile-wizard.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libnm_gtk_la-nm-ui-utils.Plo@am__quote@
@@ -660,6 +662,13 @@ libnm_gtk_la-nm-vpn-password-dialog.lo: nm-vpn-password-dialog.c
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='nm-vpn-password-dialog.c' object='libnm_gtk_la-nm-vpn-password-dialog.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libnm_gtk_la_CFLAGS) $(CFLAGS) -c -o libnm_gtk_la-nm-vpn-password-dialog.lo `test -f 'nm-vpn-password-dialog.c' || echo '$(srcdir)/'`nm-vpn-password-dialog.c
+
+libnm_gtk_la-init.lo: init.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libnm_gtk_la_CFLAGS) $(CFLAGS) -MT libnm_gtk_la-init.lo -MD -MP -MF $(DEPDIR)/libnm_gtk_la-init.Tpo -c -o libnm_gtk_la-init.lo `test -f 'init.c' || echo '$(srcdir)/'`init.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libnm_gtk_la-init.Tpo $(DEPDIR)/libnm_gtk_la-init.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='init.c' object='libnm_gtk_la-init.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libnm_gtk_la_CFLAGS) $(CFLAGS) -c -o libnm_gtk_la-init.lo `test -f 'init.c' || echo '$(srcdir)/'`init.c
 
 mostlyclean-libtool:
 	-rm -f *.lo

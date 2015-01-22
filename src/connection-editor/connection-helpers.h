@@ -26,7 +26,7 @@
 
 typedef struct {
 	const char *name;
-	GType setting_type;
+	GType setting_types[4];
 	PageNewConnectionFunc new_connection_func;
 	gboolean virtual;
 } ConnectionTypeData;
@@ -66,6 +66,9 @@ void delete_connection (GtkWindow *parent_window,
                         NMRemoteConnection *connection,
                         DeleteConnectionResultFunc result_func,
                         gpointer user_data);
+
+gboolean connection_supports_ip4 (NMConnection *connection);
+gboolean connection_supports_ip6 (NMConnection *connection);
 
 #endif  /* __CONNECTION_HELPERS_H__ */
 

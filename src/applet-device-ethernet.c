@@ -128,7 +128,7 @@ ethernet_add_menu_item (NMDevice *device,
 
 	if (!nma_menu_device_check_unusable (device)) {
 		if ((!active && g_slist_length (connections)) || (active && g_slist_length (connections) > 1))
-			applet_menu_item_add_complex_separator_helper (menu, applet, _("Available"), -1);
+			applet_menu_item_add_complex_separator_helper (menu, applet, _("Available"));
 
 		if (g_slist_length (connections))
 			applet_add_connection_items (device, connections, carrier, active, NMA_ADD_INACTIVE, menu, applet);
@@ -149,15 +149,16 @@ ethernet_notify_connected (NMDevice *device,
 	                            PREF_DISABLE_CONNECTED_NOTIFICATIONS);
 }
 
-static GdkPixbuf *
+static void
 ethernet_get_icon (NMDevice *device,
                    NMDeviceState state,
                    NMConnection *connection,
+                   GdkPixbuf **out_pixbuf,
+                   const char **out_icon_name,
                    char **tip,
                    NMApplet *applet)
 {
 	NMSettingConnection *s_con;
-	GdkPixbuf *pixbuf = NULL;
 	const char *id;
 
 	id = nm_device_get_iface (NM_DEVICE (device));
@@ -180,14 +181,12 @@ ethernet_get_icon (NMDevice *device,
 		*tip = g_strdup_printf (_("Requesting an ethernet network address for '%s'..."), id);
 		break;
 	case NM_DEVICE_STATE_ACTIVATED:
-		pixbuf = nma_icon_check_and_load ("nm-device-wired", &applet->ethernet_icon, applet);
+		*out_icon_name = g_strdup_printf ("nm-device-wired");
 		*tip = g_strdup_printf (_("Ethernet network connection '%s' active"), id);
 		break;
 	default:
 		break;
 	}
-
-	return pixbuf ? g_object_ref (pixbuf) : NULL;
 }
 
 /* PPPoE */
