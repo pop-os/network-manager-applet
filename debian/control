@@ -27,7 +27,7 @@ Build-Depends: debhelper (>= 9),
 Standards-Version: 3.9.6
 Vcs-Git: git://anonscm.debian.org/pkg-utopia/network-manager-applet.git
 Vcs-Browser: https://anonscm.debian.org/cgit/pkg-utopia/network-manager-applet.git
-Homepage: http://www.gnome.org/projects/NetworkManager/
+Homepage: https://www.gnome.org/projects/NetworkManager/
 
 Package: network-manager-gnome
 Architecture: linux-any

@@ -5,6 +5,7 @@ network-manager-applet (1.0.0-1) UNRELEASED; urgency=medium
   * Bump dependency on network-manager and related dev packages to (>= 1.0.0).
   * Bump Standards-Version to 3.9.6. No further changes.
   * Update Vcs-Browser URL to use cgit and https.
+  * Update Homepage URL to use https.
 
  -- Michael Biebl <biebl@debian.org>  Thu, 22 Jan 2015 15:48:33 +0100
 
