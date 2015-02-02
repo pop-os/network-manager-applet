@@ -1,4 +1,4 @@
-network-manager-applet (1.0.0-1) UNRELEASED; urgency=medium
+network-manager-applet (1.0.0-1) experimental; urgency=medium
 
   * New upstream release.
   * Rebase patches.
@@ -7,7 +7,7 @@ network-manager-applet (1.0.0-1) UNRELEASED; urgency=medium
   * Update Vcs-Browser URL to use cgit and https.
   * Update Homepage URL to use https.
 
- -- Michael Biebl <biebl@debian.org>  Thu, 22 Jan 2015 15:48:33 +0100
+ -- Michael Biebl <biebl@debian.org>  Mon, 02 Feb 2015 13:40:08 +0100
 
 network-manager-applet (0.9.10.0-2) unstable; urgency=medium
 
