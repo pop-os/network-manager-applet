@@ -1,3 +1,11 @@
+network-manager-applet (1.0.0-2) UNRELEASED; urgency=medium
+
+  * Install typelib files into multiarch paths now that gobject-introspection
+    supports that.
+  * Mark dev and gir packages as Multi-Arch: same.
+
+ -- Michael Biebl <biebl@debian.org>  Mon, 09 Feb 2015 00:49:20 +0100
+
 network-manager-applet (1.0.0-1) experimental; urgency=medium
 
   * New upstream release.
