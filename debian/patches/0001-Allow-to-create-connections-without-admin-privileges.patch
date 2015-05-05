@@ -115,10 +115,10 @@ index 639beb3..325c0fe 100644
  
  #define CE_TYPE_PAGE            (ce_page_get_type ())
 diff --git a/src/connection-editor/connection-helpers.c b/src/connection-editor/connection-helpers.c
-index 23942e8..bc0e403 100644
+index 69da25c..b638530 100644
 --- a/src/connection-editor/connection-helpers.c
 +++ b/src/connection-editor/connection-helpers.c
-@@ -378,6 +378,7 @@ new_connection_of_type (GtkWindow *parent_window,
+@@ -380,6 +380,7 @@ new_connection_of_type (GtkWindow *parent_window,
                          gpointer user_data)
  {
  	NewConnectionData *ncd;
@@ -126,7 +126,7 @@ index 23942e8..bc0e403 100644
  
  	ncd = g_slice_new (NewConnectionData);
  	ncd->parent_window = parent_window;
-@@ -389,6 +390,7 @@ new_connection_of_type (GtkWindow *parent_window,
+@@ -391,6 +392,7 @@ new_connection_of_type (GtkWindow *parent_window,
  	          detail,
  	          settings,
  	          new_connection_result,
@@ -159,10 +159,10 @@ index dcc8e1f..3844869 100644
  
  #endif  /* __PAGE_BOND_H__ */
 diff --git a/src/connection-editor/page-bridge.c b/src/connection-editor/page-bridge.c
-index 2221e07..466249d 100644
+index 1ffcb1f..34ff9af 100644
 --- a/src/connection-editor/page-bridge.c
 +++ b/src/connection-editor/page-bridge.c
-@@ -293,6 +293,7 @@ bridge_connection_new (GtkWindow *parent,
+@@ -294,6 +294,7 @@ bridge_connection_new (GtkWindow *parent,
                       const char *detail,
                       NMRemoteSettings *settings,
                       PageNewConnectionResultFunc result_func,
@@ -231,10 +231,10 @@ index 4dd4a5c..55ade9b 100644
  
  #endif  /* __PAGE_ETHERNET_H__ */
 diff --git a/src/connection-editor/page-infiniband.c b/src/connection-editor/page-infiniband.c
-index 937da39..bbccec6 100644
+index f85e453..0026f46 100644
 --- a/src/connection-editor/page-infiniband.c
 +++ b/src/connection-editor/page-infiniband.c
-@@ -247,6 +247,7 @@ infiniband_connection_new (GtkWindow *parent,
+@@ -251,6 +251,7 @@ infiniband_connection_new (GtkWindow *parent,
                             const char *detail,
                             NMRemoteSettings *settings,
                             PageNewConnectionResultFunc result_func,
@@ -255,10 +255,10 @@ index e895a98..97bff3b 100644
  
  #endif  /* __PAGE_INFINIBAND_H__ */
 diff --git a/src/connection-editor/page-mobile.c b/src/connection-editor/page-mobile.c
-index b43879b..5f2d600 100644
+index 7da1367..af0c7a2 100644
 --- a/src/connection-editor/page-mobile.c
 +++ b/src/connection-editor/page-mobile.c
-@@ -527,6 +527,7 @@ new_connection_mobile_wizard_done (NMAMobileWizard *wizard,
+@@ -468,6 +468,7 @@ new_connection_mobile_wizard_done (NMAMobileWizard *wizard,
  	NMConnection *connection = NULL;
  
  	if (!canceled && method) {
@@ -266,7 +266,7 @@ index b43879b..5f2d600 100644
  		NMSetting *type_setting;
  		const char *ctype = NULL;
  		char *detail = NULL;
-@@ -540,6 +541,7 @@ new_connection_mobile_wizard_done (NMAMobileWizard *wizard,
+@@ -481,6 +482,7 @@ new_connection_mobile_wizard_done (NMAMobileWizard *wizard,
  			              NM_SETTING_GSM_NUMBER, "*99#",
  			              NM_SETTING_GSM_USERNAME, method->username,
  			              NM_SETTING_GSM_PASSWORD, method->password,
@@ -274,7 +274,7 @@ index b43879b..5f2d600 100644
  			              NM_SETTING_GSM_APN, method->gsm_apn,
  			              NULL);
  			break;
-@@ -551,6 +553,7 @@ new_connection_mobile_wizard_done (NMAMobileWizard *wizard,
+@@ -492,6 +494,7 @@ new_connection_mobile_wizard_done (NMAMobileWizard *wizard,
  			              NM_SETTING_CDMA_NUMBER, "#777",
  			              NM_SETTING_GSM_USERNAME, method->username,
  			              NM_SETTING_GSM_PASSWORD, method->password,
@@ -282,7 +282,7 @@ index b43879b..5f2d600 100644
  			              NULL);
  			break;
  		default:
-@@ -565,6 +568,13 @@ new_connection_mobile_wizard_done (NMAMobileWizard *wizard,
+@@ -506,6 +509,13 @@ new_connection_mobile_wizard_done (NMAMobileWizard *wizard,
  		connection = ce_page_new_connection (detail, ctype, FALSE, info->settings, info->user_data);
  		g_free (detail);
  
@@ -296,7 +296,7 @@ index b43879b..5f2d600 100644
  		nm_connection_add_setting (connection, type_setting);
  		add_default_serial_setting (connection);
  		nm_connection_add_setting (connection, nm_setting_ppp_new ());
-@@ -590,6 +600,7 @@ mobile_connection_new (GtkWindow *parent,
+@@ -531,6 +541,7 @@ mobile_connection_new (GtkWindow *parent,
                         const char *detail,
                         NMRemoteSettings *settings,
                         PageNewConnectionResultFunc result_func,
@@ -549,10 +549,10 @@ index ace323b..0916557 100644
  
  		s_wireless = (NMSettingWireless *) nm_setting_wireless_new ();
 diff --git a/src/mobile-helpers.c b/src/mobile-helpers.c
-index 9cfb5fe..b124b2f 100644
+index 4da1d97..d92956e 100644
 --- a/src/mobile-helpers.c
 +++ b/src/mobile-helpers.c
-@@ -172,6 +172,7 @@ mobile_wizard_done (NMAMobileWizard *wizard,
+@@ -179,6 +179,7 @@ mobile_wizard_done (NMAMobileWizard *wizard,
  			              NM_SETTING_CDMA_NUMBER, "#777",
  			              NM_SETTING_CDMA_USERNAME, method->username,
  			              NM_SETTING_CDMA_PASSWORD, method->password,
@@ -560,7 +560,7 @@ index 9cfb5fe..b124b2f 100644
  			              NULL);
  			nm_connection_add_setting (connection, setting);
  		} else if (method->devtype == NM_DEVICE_MODEM_CAPABILITY_GSM_UMTS) {
-@@ -182,6 +183,7 @@ mobile_wizard_done (NMAMobileWizard *wizard,
+@@ -189,6 +190,7 @@ mobile_wizard_done (NMAMobileWizard *wizard,
  			              NM_SETTING_GSM_USERNAME, method->username,
  			              NM_SETTING_GSM_PASSWORD, method->password,
  			              NM_SETTING_GSM_APN, method->gsm_apn,
@@ -568,7 +568,7 @@ index 9cfb5fe..b124b2f 100644
  			              NULL);
  			nm_connection_add_setting (connection, setting);
  		} else
-@@ -210,6 +212,7 @@ mobile_wizard_done (NMAMobileWizard *wizard,
+@@ -217,6 +219,7 @@ mobile_wizard_done (NMAMobileWizard *wizard,
  		              NULL);
  		g_free (uuid);
  		g_free (id);
