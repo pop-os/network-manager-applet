@@ -1,9 +1,9 @@
-network-manager-applet (1.0.2-1) UNRELEASED; urgency=medium
+network-manager-applet (1.0.2-1) unstable; urgency=medium
 
   * New upstream release.
   * Rebase patches.
 
- -- Michael Biebl <biebl@debian.org>  Tue, 05 May 2015 17:56:58 +0200
+ -- Michael Biebl <biebl@debian.org>  Tue, 05 May 2015 23:16:53 +0200
 
 network-manager-applet (1.0.0-3) unstable; urgency=medium
 
