@@ -8,7 +8,7 @@ Subject: Don't hard-code gnome-bluetooth plugin directory
  2 files changed, 3 insertions(+), 1 deletion(-)
 
 diff --git a/configure.ac b/configure.ac
-index aeed0d1..0312360 100644
+index 04ea361..6842c23 100644
 --- a/configure.ac
 +++ b/configure.ac
 @@ -142,6 +142,8 @@ case "${with_bluetooth}" in
