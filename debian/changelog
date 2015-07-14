@@ -3,6 +3,7 @@ network-manager-applet (1.0.4-1) UNRELEASED; urgency=medium
   * New upstream release.
   * Make no-patch-numbers the default for gbp pq to avoid unnecessary noise.
   * Refresh patches.
+  * Update symbols file for libnm-gtk0.
 
  -- Michael Biebl <biebl@debian.org>  Wed, 06 May 2015 16:52:51 +0200
 
