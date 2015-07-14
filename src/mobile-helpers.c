@@ -194,14 +194,13 @@ mobile_wizard_done (NMAMobileWizard *wizard,
 		} else
 			g_assert_not_reached ();
 
-		/* Serial setting */
-		setting = nm_setting_serial_new ();
-		g_object_set (setting,
-		              NM_SETTING_SERIAL_BAUD, 115200,
-		              NM_SETTING_SERIAL_BITS, 8,
-		              NM_SETTING_SERIAL_PARITY, 'n',
-		              NM_SETTING_SERIAL_STOPBITS, 1,
-		              NULL);
+		/* Default to IPv4 & IPv6 'automatic' addressing */
+		setting = nm_setting_ip4_config_new ();
+		g_object_set (setting, "method", NM_SETTING_IP4_CONFIG_METHOD_AUTO, NULL);
+		nm_connection_add_setting (connection, setting);
+
+		setting = nm_setting_ip6_config_new ();
+		g_object_set (setting, "method", NM_SETTING_IP6_CONFIG_METHOD_AUTO, NULL);
 		nm_connection_add_setting (connection, setting);
 
 		nm_connection_add_setting (connection, nm_setting_ppp_new ());
@@ -215,6 +214,9 @@ mobile_wizard_done (NMAMobileWizard *wizard,
 		              NM_SETTING_CONNECTION_AUTOCONNECT, FALSE,
 		              NM_SETTING_CONNECTION_UUID, uuid,
 		              NULL);
+		/* Make the new connection available only for the current user */
+		nm_setting_connection_add_permission ((NMSettingConnection *) setting,
+		                                      "user", g_get_user_name (), NULL);
 		g_free (uuid);
 		g_free (id);
 		nm_connection_add_setting (connection, setting);
