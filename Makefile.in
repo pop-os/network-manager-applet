@@ -103,7 +103,7 @@ am__CONFIG_DISTCLEAN_FILES = config.status config.cache config.log \
  configure.lineno config.status.lineno
 mkinstalldirs = $(install_sh) -d
 CONFIG_HEADER = config.h
-CONFIG_CLEAN_FILES =
+CONFIG_CLEAN_FILES = org.gnome.nm-applet.gschema.xml
 CONFIG_CLEAN_VPATH_FILES =
 AM_V_P = $(am__v_P_@AM_V@)
 am__v_P_ = $(am__v_P_@AM_DEFAULT_V@)
@@ -159,11 +159,11 @@ am__uninstall_files_from_dir = { \
     || { echo " ( cd '$$dir' && rm -f" $$files ")"; \
          $(am__cd) "$$dir" && rm -f $$files; }; \
   }
-am__installdirs = "$(DESTDIR)$(applicationsdir)" \
-	"$(DESTDIR)$(autostartdir)" "$(DESTDIR)$(convertdir)" \
-	"$(DESTDIR)$(desktopdir)" "$(DESTDIR)$(gsettingsschemadir)"
-DATA = $(applications_DATA) $(autostart_DATA) $(convert_DATA) \
-	$(desktop_DATA) $(gsettingsschema_DATA)
+am__installdirs = "$(DESTDIR)$(appdatadir)" \
+	"$(DESTDIR)$(applicationsdir)" "$(DESTDIR)$(autostartdir)" \
+	"$(DESTDIR)$(convertdir)" "$(DESTDIR)$(desktopdir)"
+DATA = $(appdata_DATA) $(applications_DATA) $(autostart_DATA) \
+	$(convert_DATA) $(desktop_DATA)
 RECURSIVE_CLEAN_TARGETS = mostlyclean-recursive clean-recursive	\
   distclean-recursive maintainer-clean-recursive
 am__recursive_targets = \
@@ -194,9 +194,10 @@ ETAGS = etags
 CTAGS = ctags
 CSCOPE = cscope
 DIST_SUBDIRS = $(SUBDIRS)
-am__DIST_COMMON = $(srcdir)/Makefile.in $(srcdir)/config.h.in AUTHORS \
-	COPYING ChangeLog INSTALL NEWS README compile config.guess \
-	config.sub depcomp install-sh ltmain.sh missing
+am__DIST_COMMON = $(srcdir)/Makefile.in $(srcdir)/config.h.in \
+	$(srcdir)/org.gnome.nm-applet.gschema.xml.in AUTHORS COPYING \
+	ChangeLog INSTALL NEWS README compile config.guess config.sub \
+	depcomp install-sh ltmain.sh missing
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
 distdir = $(PACKAGE)-$(VERSION)
 top_distdir = $(distdir)
@@ -428,8 +429,8 @@ top_srcdir = @top_srcdir@
 ACLOCAL_AMFLAGS = -I m4 ${ACLOCAL_FLAGS}
 SUBDIRS = src icons po man
 EXTRA_DIST = CONTRIBUTING intltool-extract.in intltool-merge.in \
-	intltool-update.in Makefile.glib autogen.sh $(schema_in_files) \
-	$(convert_DATA) $(autostart_in_files) $(desktop_in_files)
+	intltool-update.in Makefile.glib autogen.sh $(convert_DATA) \
+	$(appdata_in_files) $(autostart_in_files) $(desktop_in_files)
 autostartdir = $(sysconfdir)/xdg/autostart
 autostart_in_files = nm-applet.desktop.in
 autostart_DATA = $(autostart_in_files:.desktop.in=.desktop)
@@ -438,15 +439,18 @@ applications_DATA = $(autostart_DATA)
 desktopdir = $(datadir)/applications
 desktop_in_files = nm-connection-editor.desktop.in
 desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
-schema_in_files = org.gnome.nm-applet.gschema.xml.in
-gsettingsschema_DATA = $(schema_in_files:.xml.in=.xml)
+gsettings_SCHEMAS = org.gnome.nm-applet.gschema.xml
+appdatadir = $(datadir)/appdata
+appdata_DATA = $(appdata_in_files:.xml.in=.xml)
+appdata_in_files = org.gnome.nm-connection-editor.appdata.xml.in
 convertdir = $(datadir)/GConf/gsettings
 convert_DATA = nm-applet.convert
 DISTCHECK_CONFIGURE_FLAGS = --enable-more-warnings=yes
 CLEANFILES = \
 	$(autostart_DATA) \
 	$(desktop_DATA) \
-	$(gsettingsschema_DATA)
+	$(appdata_DATA) 	\
+	$(BUILT_SOURCES)
 
 DISTCLEANFILES = intltool-extract intltool-merge intltool-update
 all: config.h
@@ -501,6 +505,8 @@ $(srcdir)/config.h.in: @MAINTAINER_MODE_TRUE@ $(am__configure_deps)
 
 distclean-hdr:
 	-rm -f config.h stamp-h1
+org.gnome.nm-applet.gschema.xml: $(top_builddir)/config.status $(srcdir)/org.gnome.nm-applet.gschema.xml.in
+	cd $(top_builddir) && $(SHELL) ./config.status $@
 
 mostlyclean-libtool:
 	-rm -f *.lo
@@ -510,6 +516,27 @@ clean-libtool:
 
 distclean-libtool:
 	-rm -f libtool config.lt
+install-appdataDATA: $(appdata_DATA)
+	@$(NORMAL_INSTALL)
+	@list='$(appdata_DATA)'; test -n "$(appdatadir)" || list=; \
+	if test -n "$$list"; then \
+	  echo " $(MKDIR_P) '$(DESTDIR)$(appdatadir)'"; \
+	  $(MKDIR_P) "$(DESTDIR)$(appdatadir)" || exit 1; \
+	fi; \
+	for p in $$list; do \
+	  if test -f "$$p"; then d=; else d="$(srcdir)/"; fi; \
+	  echo "$$d$$p"; \
+	done | $(am__base_list) | \
+	while read files; do \
+	  echo " $(INSTALL_DATA) $$files '$(DESTDIR)$(appdatadir)'"; \
+	  $(INSTALL_DATA) $$files "$(DESTDIR)$(appdatadir)" || exit $$?; \
+	done
+
+uninstall-appdataDATA:
+	@$(NORMAL_UNINSTALL)
+	@list='$(appdata_DATA)'; test -n "$(appdatadir)" || list=; \
+	files=`for p in $$list; do echo $$p; done | sed -e 's|^.*/||'`; \
+	dir='$(DESTDIR)$(appdatadir)'; $(am__uninstall_files_from_dir)
 install-applicationsDATA: $(applications_DATA)
 	@$(NORMAL_INSTALL)
 	@list='$(applications_DATA)'; test -n "$(applicationsdir)" || list=; \
@@ -594,27 +621,6 @@ uninstall-desktopDATA:
 	@list='$(desktop_DATA)'; test -n "$(desktopdir)" || list=; \
 	files=`for p in $$list; do echo $$p; done | sed -e 's|^.*/||'`; \
 	dir='$(DESTDIR)$(desktopdir)'; $(am__uninstall_files_from_dir)
-install-gsettingsschemaDATA: $(gsettingsschema_DATA)
-	@$(NORMAL_INSTALL)
-	@list='$(gsettingsschema_DATA)'; test -n "$(gsettingsschemadir)" || list=; \
-	if test -n "$$list"; then \
-	  echo " $(MKDIR_P) '$(DESTDIR)$(gsettingsschemadir)'"; \
-	  $(MKDIR_P) "$(DESTDIR)$(gsettingsschemadir)" || exit 1; \
-	fi; \
-	for p in $$list; do \
-	  if test -f "$$p"; then d=; else d="$(srcdir)/"; fi; \
-	  echo "$$d$$p"; \
-	done | $(am__base_list) | \
-	while read files; do \
-	  echo " $(INSTALL_DATA) $$files '$(DESTDIR)$(gsettingsschemadir)'"; \
-	  $(INSTALL_DATA) $$files "$(DESTDIR)$(gsettingsschemadir)" || exit $$?; \
-	done
-
-uninstall-gsettingsschemaDATA:
-	@$(NORMAL_UNINSTALL)
-	@list='$(gsettingsschema_DATA)'; test -n "$(gsettingsschemadir)" || list=; \
-	files=`for p in $$list; do echo $$p; done | sed -e 's|^.*/||'`; \
-	dir='$(DESTDIR)$(gsettingsschemadir)'; $(am__uninstall_files_from_dir)
 
 # This directory's subdirectories are mostly independent; you can cd
 # into them and run 'make' without going through this Makefile.
@@ -914,7 +920,7 @@ check: check-recursive
 all-am: Makefile $(DATA) config.h
 installdirs: installdirs-recursive
 installdirs-am:
-	for dir in "$(DESTDIR)$(applicationsdir)" "$(DESTDIR)$(autostartdir)" "$(DESTDIR)$(convertdir)" "$(DESTDIR)$(desktopdir)" "$(DESTDIR)$(gsettingsschemadir)"; do \
+	for dir in "$(DESTDIR)$(appdatadir)" "$(DESTDIR)$(applicationsdir)" "$(DESTDIR)$(autostartdir)" "$(DESTDIR)$(convertdir)" "$(DESTDIR)$(desktopdir)"; do \
 	  test -z "$$dir" || $(MKDIR_P) "$$dir"; \
 	done
 install: install-recursive
@@ -971,9 +977,8 @@ info: info-recursive
 
 info-am:
 
-install-data-am: install-applicationsDATA install-autostartDATA \
-	install-convertDATA install-desktopDATA \
-	install-gsettingsschemaDATA
+install-data-am: install-appdataDATA install-applicationsDATA \
+	install-autostartDATA install-convertDATA install-desktopDATA
 
 install-dvi: install-dvi-recursive
 
@@ -1019,9 +1024,9 @@ ps: ps-recursive
 
 ps-am:
 
-uninstall-am: uninstall-applicationsDATA uninstall-autostartDATA \
-	uninstall-convertDATA uninstall-desktopDATA \
-	uninstall-gsettingsschemaDATA
+uninstall-am: uninstall-appdataDATA uninstall-applicationsDATA \
+	uninstall-autostartDATA uninstall-convertDATA \
+	uninstall-desktopDATA
 
 .MAKE: $(am__recursive_targets) all install-am install-strip
 
@@ -1032,25 +1037,26 @@ uninstall-am: uninstall-applicationsDATA uninstall-autostartDATA \
 	dist-xz dist-zip distcheck distclean distclean-generic \
 	distclean-hdr distclean-libtool distclean-tags distcleancheck \
 	distdir distuninstallcheck dvi dvi-am html html-am info \
-	info-am install install-am install-applicationsDATA \
-	install-autostartDATA install-convertDATA install-data \
-	install-data-am install-desktopDATA install-dvi install-dvi-am \
-	install-exec install-exec-am install-gsettingsschemaDATA \
-	install-html install-html-am install-info install-info-am \
-	install-man install-pdf install-pdf-am install-ps \
-	install-ps-am install-strip installcheck installcheck-am \
-	installdirs installdirs-am maintainer-clean \
+	info-am install install-am install-appdataDATA \
+	install-applicationsDATA install-autostartDATA \
+	install-convertDATA install-data install-data-am \
+	install-desktopDATA install-dvi install-dvi-am install-exec \
+	install-exec-am install-html install-html-am install-info \
+	install-info-am install-man install-pdf install-pdf-am \
+	install-ps install-ps-am install-strip installcheck \
+	installcheck-am installdirs installdirs-am maintainer-clean \
 	maintainer-clean-generic mostlyclean mostlyclean-generic \
 	mostlyclean-libtool pdf pdf-am ps ps-am tags tags-am uninstall \
-	uninstall-am uninstall-applicationsDATA \
+	uninstall-am uninstall-appdataDATA uninstall-applicationsDATA \
 	uninstall-autostartDATA uninstall-convertDATA \
-	uninstall-desktopDATA uninstall-gsettingsschemaDATA
+	uninstall-desktopDATA
 
 .PRECIOUS: Makefile
 
 include $(GLIB_MAKEFILE)
 @INTLTOOL_DESKTOP_RULE@
-@INTLTOOL_XML_NOMERGE_RULE@
+@GSETTINGS_RULES@
+@INTLTOOL_XML_RULE@
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.

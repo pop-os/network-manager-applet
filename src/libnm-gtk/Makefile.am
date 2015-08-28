@@ -50,9 +50,10 @@ libnm_gtk_la_LIBADD = \
 	$(top_builddir)/src/marshallers/libmarshallers.la \
 	$(top_builddir)/src/wireless-security/libwireless-security.la
 
-libnm_gtk_la_LDFLAGS = -Wl,-no-undefined \
-	-export-symbols-regex '^nma_.*'
+EXTRA_libnm_gtk_la_DEPENDENCIES = $(srcdir)/libnm-gtk.ver
 
+libnm_gtk_la_LDFLAGS = -Wl,-no-undefined \
+	-Wl,--version-script=$(srcdir)/libnm-gtk.ver
 
 pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA = libnm-gtk.pc
@@ -81,7 +82,10 @@ gir_DATA = $(INTROSPECTION_GIRS)
 typelibdir = $(libdir)/girepository-1.0
 typelib_DATA = $(INTROSPECTION_GIRS:.gir=.typelib)
 
+check-local:
+	$(top_srcdir)/src/libnm-gtk/check-exports.sh $(builddir)/.libs/libnm-gtk.so $(srcdir)/libnm-gtk.ver
+
 CLEANFILES = $(gir_DATA) $(typelib_DATA)
 endif
 
-EXTRA_DIST = libnm-gtk.pc.in $(ui_DATA)
+EXTRA_DIST = libnm-gtk.pc.in libnm-gtk.ver check-exports.sh $(ui_DATA)
