@@ -135,10 +135,10 @@ index 69da25c..b638530 100644
  }
  
 diff --git a/src/connection-editor/page-bond.c b/src/connection-editor/page-bond.c
-index 02a3aee..9ac5aa4 100644
+index 799ea94..966625c 100644
 --- a/src/connection-editor/page-bond.c
 +++ b/src/connection-editor/page-bond.c
-@@ -611,6 +611,7 @@ bond_connection_new (GtkWindow *parent,
+@@ -610,6 +610,7 @@ bond_connection_new (GtkWindow *parent,
                       const char *detail,
                       NMRemoteSettings *settings,
                       PageNewConnectionResultFunc result_func,
@@ -317,10 +317,10 @@ index ab2903c..bc5b479 100644
  
  #endif  /* __PAGE_MOBILE_H__ */
 diff --git a/src/connection-editor/page-team.c b/src/connection-editor/page-team.c
-index 26e3432..16b17d6 100644
+index 9efa43d..786c0fa 100644
 --- a/src/connection-editor/page-team.c
 +++ b/src/connection-editor/page-team.c
-@@ -329,6 +329,7 @@ team_connection_new (GtkWindow *parent,
+@@ -367,6 +367,7 @@ team_connection_new (GtkWindow *parent,
                       const char *detail,
                       NMRemoteSettings *settings,
                       PageNewConnectionResultFunc result_func,
