@@ -1,6 +1,6 @@
 AC_PREREQ([2.63])
 AC_INIT([nm-applet],
-        [1.0.4],
+        [1.0.6],
         [https://bugzilla.gnome.org/enter_bug.cgi?product=NetworkManager],
         [network-manager-applet])
 
@@ -25,6 +25,10 @@ dnl Initialize libtool
 LT_PREREQ([2.2.6])
 LT_INIT
 
+m4_define([nma_git_sha], [m4_esyscmd([ ( [ -d ./.git/ ] && [ "$(readlink -f ./.git/)" = "$(readlink -f "$(git rev-parse --git-dir 2>/dev/null)" 2>/dev/null)" ] && git rev-parse --verify -q HEAD 2>/dev/null ) || true ])])
+NMA_GIT_SHA=nma_git_sha
+AC_DEFINE_UNQUOTED(NMA_GIT_SHA,"$NMA_GIT_SHA",[git commit id of the original source code version])
+
 dnl
 dnl Checks for typedefs, structures, and compiler characteristics.
 dnl
@@ -33,7 +37,7 @@ AC_TYPE_PID_T
 dnl
 dnl translation support
 dnl
-IT_PROG_INTLTOOL([0.40.0])
+IT_PROG_INTLTOOL([0.50.1])
 
 GETTEXT_PACKAGE=nm-applet
 AC_SUBST(GETTEXT_PACKAGE)
@@ -182,6 +186,7 @@ dnl Check for gobject introspection
 GOBJECT_INTROSPECTION_CHECK([0.9.6])
 
 GLIB_CONFIG_NMA
+GLIB_SETTINGS
 
 dnl
 dnl Compiler flags
@@ -216,5 +221,6 @@ po/Makefile.in
 man/Makefile
 man/nm-applet.1
 man/nm-connection-editor.1
+org.gnome.nm-applet.gschema.xml
 ])
 AC_OUTPUT
