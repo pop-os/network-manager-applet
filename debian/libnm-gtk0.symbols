@@ -1,4 +1,5 @@
 libnm-gtk.so.0 libnm-gtk0 #MINVER#
+ libnm_gtk_1_0_6@libnm_gtk_1_0_6 1.0.6
  nma_country_info_get_country_code@Base 0.9.7.995
  nma_country_info_get_country_name@Base 0.9.7.995
  nma_country_info_get_providers@Base 0.9.7.995
@@ -42,15 +43,15 @@ libnm-gtk.so.0 libnm-gtk0 #MINVER#
  nma_utils_get_device_product@Base 0.9.7.995
  nma_utils_get_device_type_name@Base 0.9.7.995
  nma_utils_get_device_vendor@Base 0.9.7.995
- nma_utils_menu_to_secret_flags@Base 1.0.4
- nma_utils_setup_password_storage@Base 1.0.4
- nma_utils_update_password_storage@Base 1.0.4
+ nma_utils_menu_to_secret_flags@libnm_gtk_1_0_6 1.0.6
+ nma_utils_setup_password_storage@libnm_gtk_1_0_6 1.0.6
+ nma_utils_update_password_storage@libnm_gtk_1_0_6 1.0.6
  nma_vpn_password_dialog_focus_password@Base 0.9.10.0
  nma_vpn_password_dialog_focus_password_secondary@Base 0.9.10.0
- nma_vpn_password_dialog_focus_password_ternary@Base 1.0.4
+ nma_vpn_password_dialog_focus_password_ternary@libnm_gtk_1_0_6 1.0.6
  nma_vpn_password_dialog_get_password@Base 0.9.10.0
  nma_vpn_password_dialog_get_password_secondary@Base 0.9.10.0
- nma_vpn_password_dialog_get_password_ternary@Base 1.0.4
+ nma_vpn_password_dialog_get_password_ternary@libnm_gtk_1_0_6 1.0.6
  nma_vpn_password_dialog_get_type@Base 0.9.10.0
  nma_vpn_password_dialog_new@Base 0.9.10.0
  nma_vpn_password_dialog_run_and_block@Base 0.9.10.0
@@ -58,11 +59,11 @@ libnm-gtk.so.0 libnm-gtk0 #MINVER#
  nma_vpn_password_dialog_set_password_label@Base 0.9.10.0
  nma_vpn_password_dialog_set_password_secondary@Base 0.9.10.0
  nma_vpn_password_dialog_set_password_secondary_label@Base 0.9.10.0
- nma_vpn_password_dialog_set_password_ternary@Base 1.0.4
- nma_vpn_password_dialog_set_password_ternary_label@Base 1.0.4
+ nma_vpn_password_dialog_set_password_ternary@libnm_gtk_1_0_6 1.0.6
+ nma_vpn_password_dialog_set_password_ternary_label@libnm_gtk_1_0_6 1.0.6
  nma_vpn_password_dialog_set_show_password@Base 0.9.10.0
  nma_vpn_password_dialog_set_show_password_secondary@Base 0.9.10.0
- nma_vpn_password_dialog_set_show_password_ternary@Base 1.0.4
+ nma_vpn_password_dialog_set_show_password_ternary@libnm_gtk_1_0_6 1.0.6
  nma_wifi_dialog_get_connection@Base 0.9.6.4
  nma_wifi_dialog_get_nag_ignored@Base 0.9.6.4
  nma_wifi_dialog_get_type@Base 0.9.6.4
