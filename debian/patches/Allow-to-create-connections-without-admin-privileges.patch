@@ -37,8 +37,8 @@ Closes: #696256
  src/connection-editor/page-team.h          |  1 +
  src/connection-editor/page-vlan.c          |  1 +
  src/connection-editor/page-vlan.h          |  1 +
- src/connection-editor/page-vpn.c           | 10 ++++++++++
- src/connection-editor/page-vpn.h           |  1 +
+ src/connection-editor/page-vpn.c           | 11 +++++++++++
+ src/connection-editor/page-vpn.h           |  2 ++
  src/connection-editor/page-wifi.c          | 14 ++++++++++++++
  src/connection-editor/page-wifi.h          |  1 +
  src/connection-editor/page-wimax.c         |  1 +
@@ -50,7 +50,7 @@ Closes: #696256
  src/utils/utils.h                          |  3 +++
  src/wireless-security/ws-wep-key.c         |  7 +++++++
  src/wireless-security/ws-wpa-psk.c         |  5 +++++
- 32 files changed, 116 insertions(+)
+ 32 files changed, 118 insertions(+)
 
 diff --git a/src/applet-device-wifi.c b/src/applet-device-wifi.c
 index 0ae44ad..dc7fbc8 100644
@@ -365,10 +365,18 @@ index 0e66a06..c7969aa 100644
  
  #endif  /* __PAGE_VLAN_H__ */
 diff --git a/src/connection-editor/page-vpn.c b/src/connection-editor/page-vpn.c
-index 004a260..1d79715 100644
+index 004a260..5c0c8b5 100644
 --- a/src/connection-editor/page-vpn.c
 +++ b/src/connection-editor/page-vpn.c
-@@ -287,9 +287,11 @@ vpn_connection_new (GtkWindow *parent,
+@@ -253,6 +253,7 @@ vpn_connection_import (GtkWindow *parent,
+                        const char *detail,
+                        NMRemoteSettings *settings,
+                        PageNewConnectionResultFunc result_func,
++                       NMClient *client,
+                        gpointer user_data)
+ {
+ 	NewVpnInfo *info;
+@@ -287,9 +288,11 @@ vpn_connection_new (GtkWindow *parent,
                      const char *detail,
                      NMRemoteSettings *settings,
                      PageNewConnectionResultFunc result_func,
@@ -380,7 +388,7 @@ index 004a260..1d79715 100644
  	NMSetting *s_vpn;
  
  	if (!detail) {
-@@ -315,6 +317,14 @@ vpn_connection_new (GtkWindow *parent,
+@@ -315,6 +318,14 @@ vpn_connection_new (GtkWindow *parent,
  	                                     FALSE,
  	                                     settings,
  	                                     user_data);
@@ -396,10 +404,10 @@ index 004a260..1d79715 100644
  	g_object_set (s_vpn, NM_SETTING_VPN_SERVICE_TYPE, detail, NULL);
  	nm_connection_add_setting (connection, s_vpn);
 diff --git a/src/connection-editor/page-vpn.h b/src/connection-editor/page-vpn.h
-index 2339732..74ae225 100644
+index 2339732..2164930 100644
 --- a/src/connection-editor/page-vpn.h
 +++ b/src/connection-editor/page-vpn.h
-@@ -60,6 +60,7 @@ void vpn_connection_new (GtkWindow *parent,
+@@ -60,12 +60,14 @@ void vpn_connection_new (GtkWindow *parent,
                           const char *detail,
                           NMRemoteSettings *settings,
                           PageNewConnectionResultFunc result_func,
@@ -407,6 +415,13 @@ index 2339732..74ae225 100644
                           gpointer user_data);
  
  void vpn_connection_import (GtkWindow *parent,
+                             const char *detail,
+                             NMRemoteSettings *settings,
+                             PageNewConnectionResultFunc result_func,
++                            NMClient *client,
+                             gpointer user_data);
+ 
+ #endif  /* __PAGE_VPN_H__ */
 diff --git a/src/connection-editor/page-wifi.c b/src/connection-editor/page-wifi.c
 index 8a25c64..9c56e4b 100644
 --- a/src/connection-editor/page-wifi.c
