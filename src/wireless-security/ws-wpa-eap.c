@@ -45,9 +45,9 @@ destroy (WirelessSecurity *parent)
 }
 
 static gboolean
-validate (WirelessSecurity *parent, const GByteArray *ssid)
+validate (WirelessSecurity *parent, GError **error)
 {
-	return ws_802_1x_validate (parent, "wpa_eap_auth_combo");
+	return ws_802_1x_validate (parent, "wpa_eap_auth_combo", error);
 }
 
 static void
@@ -117,6 +117,7 @@ ws_wpa_eap_new (NMConnection *connection,
 		return NULL;
 
 	parent->adhoc_compatible = FALSE;
+	parent->hotspot_compatible = FALSE;
 
 	widget = ws_802_1x_auth_combo_init (parent,
 	                                    "wpa_eap_auth_combo",

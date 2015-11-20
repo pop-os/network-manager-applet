@@ -57,6 +57,7 @@ typedef struct {
 	GtkEntry *name_entry;
 	GtkEntry *cloned_mac;
 	GtkSpinButton *mtu;
+	GtkToggleButton *flag_reorder_hdr, *flag_gvrp, *flag_loose_binding;
 
 	char *last_parent;
 	int last_id;
@@ -88,6 +89,9 @@ vlan_private_init (CEPageVlan *self)
 	priv->name_entry = GTK_ENTRY (gtk_builder_get_object (builder, "vlan_name_entry"));
 	priv->cloned_mac = GTK_ENTRY (gtk_builder_get_object (builder, "vlan_cloned_mac_entry"));
 	priv->mtu = GTK_SPIN_BUTTON (gtk_builder_get_object (builder, "vlan_mtu"));
+	priv->flag_reorder_hdr = GTK_TOGGLE_BUTTON (gtk_builder_get_object (builder, "reorder_hdr_flag"));
+	priv->flag_gvrp = GTK_TOGGLE_BUTTON (gtk_builder_get_object (builder, "gvrp_flag"));
+	priv->flag_loose_binding = GTK_TOGGLE_BUTTON (gtk_builder_get_object (builder, "loose_binding_flag"));
 }
 
 static void
@@ -349,6 +353,7 @@ populate_ui (CEPageVlan *self)
 	NMDevice *device, *parent_device = NULL;
 	const char *parent, *iface, *current_parent;
 	int i, mtu_def, mtu_val;
+	guint32 flags;
 
 	devices = get_vlan_devices (self);
 
@@ -454,6 +459,15 @@ populate_ui (CEPageVlan *self)
 	gtk_spin_button_set_value (priv->mtu, (gdouble) mtu_val);
 	g_signal_connect (priv->mtu, "value-changed", G_CALLBACK (stuff_changed), self);
 
+	/* Flags */
+	flags = nm_setting_vlan_get_flags (priv->setting);
+	if (flags & NM_VLAN_FLAG_REORDER_HEADERS)
+		gtk_toggle_button_set_active (priv->flag_reorder_hdr, TRUE);
+	if (flags & NM_VLAN_FLAG_GVRP)
+		gtk_toggle_button_set_active (priv->flag_gvrp, TRUE);
+	if (flags & NM_VLAN_FLAG_LOOSE_BINDING)
+		gtk_toggle_button_set_active (priv->flag_loose_binding, TRUE);
+
 	g_slist_free (devices);
 }
 
@@ -467,7 +481,8 @@ finish_setup (CEPageVlan *self, gpointer unused, GError *error, gpointer user_da
 }
 
 CEPage *
-ce_page_vlan_new (NMConnection *connection,
+ce_page_vlan_new (NMConnectionEditor *editor,
+                  NMConnection *connection,
                   GtkWindow *parent_window,
                   NMClient *client,
                   NMRemoteSettings *settings,
@@ -478,6 +493,7 @@ ce_page_vlan_new (NMConnection *connection,
 	CEPageVlanPrivate *priv;
 
 	self = CE_PAGE_VLAN (ce_page_new (CE_TYPE_PAGE_VLAN,
+	                                  editor,
 	                                  connection,
 	                                  parent_window,
 	                                  client,
@@ -521,6 +537,7 @@ ui_to_setting (CEPageVlan *self)
 	GType hwtype;
 	gboolean mtu_set;
 	int mtu;
+	guint32 flags = 0;
 
 	parent_id = gtk_combo_box_get_active (GTK_COMBO_BOX (priv->parent));
 	if (parent_id == -1) {
@@ -567,10 +584,19 @@ ui_to_setting (CEPageVlan *self)
 	iface = gtk_entry_get_text (priv->name_entry);
 	vid = gtk_spin_button_get_value_as_int (priv->id_entry);
 
+	/* Flags */
+	if (gtk_toggle_button_get_active (priv->flag_reorder_hdr))
+		flags |= NM_VLAN_FLAG_REORDER_HEADERS;
+	if (gtk_toggle_button_get_active (priv->flag_gvrp))
+		flags |= NM_VLAN_FLAG_GVRP;
+	if (gtk_toggle_button_get_active (priv->flag_loose_binding))
+		flags |= NM_VLAN_FLAG_LOOSE_BINDING;
+
 	g_object_set (priv->setting,
 	              NM_SETTING_VLAN_PARENT, parent_uuid ? parent_uuid : parent_iface,
 	              NM_SETTING_VLAN_INTERFACE_NAME, iface,
 	              NM_SETTING_VLAN_ID, vid,
+	              NM_SETTING_VLAN_FLAGS, flags,
 	              NULL);
 
 	if (hwtype != G_TYPE_NONE) {
@@ -601,7 +627,7 @@ ui_to_setting (CEPageVlan *self)
 }
 
 static gboolean
-validate (CEPage *page, NMConnection *connection, GError **error)
+ce_page_validate_v (CEPage *page, NMConnection *connection, GError **error)
 {
 	CEPageVlan *self = CE_PAGE_VLAN (page);
 	CEPageVlanPrivate *priv = CE_PAGE_VLAN_GET_PRIVATE (self);
@@ -611,17 +637,16 @@ validate (CEPage *page, NMConnection *connection, GError **error)
 
 	parent_id = gtk_combo_box_get_active (GTK_COMBO_BOX (priv->parent));
 	if (parent_id == -1) {
-		gboolean valid;
-
 		parent = gtk_entry_get_text (priv->parent_entry);
 		parent_iface = g_strndup (parent, strcspn (parent, " "));
-		valid = nm_utils_iface_valid_name (parent_iface);
-		g_free (parent_iface);
-		if (!valid)
+		if (!ce_page_interface_name_valid (parent_iface, _("vlan parent"), error)) {
+			g_free (parent_iface);
 			return FALSE;
+		}
+		g_free (parent_iface);
 	}
 
-	if (!ce_page_mac_entry_valid (priv->cloned_mac, ARPHRD_ETHER))
+	if (!ce_page_mac_entry_valid (priv->cloned_mac, ARPHRD_ETHER, _("cloned MAC"), error))
 		return FALSE;
 
 	ui_to_setting (self);
@@ -664,7 +689,7 @@ ce_page_vlan_class_init (CEPageVlanClass *vlan_class)
 
 	/* virtual methods */
 	object_class->finalize = finalize;
-	parent_class->validate = validate;
+	parent_class->ce_page_validate_v = ce_page_validate_v;
 }
 
 

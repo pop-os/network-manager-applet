@@ -115,7 +115,8 @@ finish_setup (CEPageDsl *self, gpointer unused, GError *error, gpointer user_dat
 }
 
 CEPage *
-ce_page_dsl_new (NMConnection *connection,
+ce_page_dsl_new (NMConnectionEditor *editor,
+                 NMConnection *connection,
                  GtkWindow *parent_window,
                  NMClient *client,
                  NMRemoteSettings *settings,
@@ -126,6 +127,7 @@ ce_page_dsl_new (NMConnection *connection,
 	CEPageDslPrivate *priv;
 
 	self = CE_PAGE_DSL (ce_page_new (CE_TYPE_PAGE_DSL,
+	                                 editor,
 	                                 connection,
 	                                 parent_window,
 	                                 client,
@@ -182,7 +184,7 @@ ui_to_setting (CEPageDsl *self)
 }
 
 static gboolean
-validate (CEPage *page, NMConnection *connection, GError **error)
+ce_page_validate_v (CEPage *page, NMConnection *connection, GError **error)
 {
 	CEPageDsl *self = CE_PAGE_DSL (page);
 	CEPageDslPrivate *priv = CE_PAGE_DSL_GET_PRIVATE (self);
@@ -212,7 +214,7 @@ ce_page_dsl_class_init (CEPageDslClass *dsl_class)
 	g_type_class_add_private (object_class, sizeof (CEPageDslPrivate));
 
 	/* virtual methods */
-	parent_class->validate = validate;
+	parent_class->ce_page_validate_v = ce_page_validate_v;
 }
 
 

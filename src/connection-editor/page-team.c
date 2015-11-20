@@ -250,17 +250,19 @@ finish_setup (CEPageTeam *self, gpointer unused, GError *error, gpointer user_da
 }
 
 CEPage *
-ce_page_team_new (NMConnection *connection,
-				  GtkWindow *parent_window,
-				  NMClient *client,
+ce_page_team_new (NMConnectionEditor *editor,
+                  NMConnection *connection,
+                  GtkWindow *parent_window,
+                  NMClient *client,
                   NMRemoteSettings *settings,
-				  const char **out_secrets_setting_name,
-				  GError **error)
+                  const char **out_secrets_setting_name,
+                  GError **error)
 {
 	CEPageTeam *self;
 	CEPageTeamPrivate *priv;
 
 	self = CE_PAGE_TEAM (ce_page_new (CE_TYPE_PAGE_TEAM,
+	                                  editor,
 	                                  connection,
 	                                  parent_window,
 	                                  client,
@@ -322,12 +324,12 @@ ui_to_setting (CEPageTeam *self)
 }
 
 static gboolean
-validate (CEPage *page, NMConnection *connection, GError **error)
+ce_page_validate_v (CEPage *page, NMConnection *connection, GError **error)
 {
 	CEPageTeam *self = CE_PAGE_TEAM (page);
 	CEPageTeamPrivate *priv = CE_PAGE_TEAM_GET_PRIVATE (self);
 
-	if (!CE_PAGE_CLASS (ce_page_team_parent_class)->validate (page, connection, error))
+	if (!CE_PAGE_CLASS (ce_page_team_parent_class)->ce_page_validate_v (page, connection, error))
 		return FALSE;
 
 	ui_to_setting (self);
@@ -354,7 +356,7 @@ ce_page_team_class_init (CEPageTeamClass *team_class)
 	g_type_class_add_private (object_class, sizeof (CEPageTeamPrivate));
 
 	/* virtual methods */
-	parent_class->validate = validate;
+	parent_class->ce_page_validate_v = ce_page_validate_v;
 	master_class->create_connection = create_connection;
 	master_class->connection_added = connection_added;
 	master_class->connection_removed = connection_removed;

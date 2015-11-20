@@ -91,7 +91,8 @@ finish_setup (CEPageVpn *self, gpointer unused, GError *error, gpointer user_dat
 }
 
 CEPage *
-ce_page_vpn_new (NMConnection *connection,
+ce_page_vpn_new (NMConnectionEditor *editor,
+                 NMConnection *connection,
                  GtkWindow *parent_window,
                  NMClient *client,
                  NMRemoteSettings *settings,
@@ -103,6 +104,7 @@ ce_page_vpn_new (NMConnection *connection,
 	const char *service_type;
 
 	self = CE_PAGE_VPN (ce_page_new (CE_TYPE_PAGE_VPN,
+	                                 editor,
 	                                 connection,
 	                                 parent_window,
 	                                 client,
@@ -147,7 +149,7 @@ ce_page_vpn_can_export (CEPageVpn *page)
 }
 
 static gboolean
-validate (CEPage *page, NMConnection *connection, GError **error)
+ce_page_validate_v (CEPage *page, NMConnection *connection, GError **error)
 {
 	CEPageVpn *self = CE_PAGE_VPN (page);
 	CEPageVpnPrivate *priv = CE_PAGE_VPN_GET_PRIVATE (self);
@@ -182,7 +184,7 @@ ce_page_vpn_class_init (CEPageVpnClass *vpn_class)
 	/* virtual methods */
 	object_class->dispose = dispose;
 
-	parent_class->validate = validate;
+	parent_class->ce_page_validate_v = ce_page_validate_v;
 }
 
 typedef struct {
