@@ -1,3 +1,9 @@
+network-manager-applet (1.0.8-1) UNRELEASED; urgency=medium
+
+  * New upstream release.
+
+ -- Michael Biebl <biebl@debian.org>  Fri, 20 Nov 2015 18:24:07 +0100
+
 network-manager-applet (1.0.6-2) unstable; urgency=medium
 
   * Fix crash in nm-connection-editor when importing existing VPN config.
