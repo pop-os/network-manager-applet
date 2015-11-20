@@ -11,7 +11,7 @@ override_dh_auto_configure:
 	dh_auto_configure -- \
 		--libexecdir=/usr/lib/NetworkManager \
 		--disable-more-warnings \
-		--enable-migration \
+		--disable-migration \
 		--enable-introspection \
 		--with-modem-manager-1 \
 		--without-bluetooth

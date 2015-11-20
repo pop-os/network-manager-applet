@@ -2,6 +2,7 @@ network-manager-applet (1.0.8-1) UNRELEASED; urgency=medium
 
   * New upstream release.
   * Refresh patches.
+  * Disable migration tool for NM <= 0.8 settings.
 
  -- Michael Biebl <biebl@debian.org>  Fri, 20 Nov 2015 18:24:07 +0100
 
