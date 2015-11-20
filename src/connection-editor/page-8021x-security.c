@@ -98,7 +98,8 @@ finish_setup (CEPage8021xSecurity *self, gpointer unused, GError *error, gpointe
 }
 
 CEPage *
-ce_page_8021x_security_new (NMConnection *connection,
+ce_page_8021x_security_new (NMConnectionEditor *editor,
+                            NMConnection *connection,
                             GtkWindow *parent_window,
                             NMClient *client,
                             NMRemoteSettings *settings,
@@ -110,6 +111,7 @@ ce_page_8021x_security_new (NMConnection *connection,
 	CEPage *parent;
 
 	self = CE_PAGE_8021X_SECURITY (ce_page_new (CE_TYPE_PAGE_8021X_SECURITY,
+	                                            editor,
 	                                            connection,
 	                                            parent_window,
 	                                            client,
@@ -143,7 +145,7 @@ ce_page_8021x_security_new (NMConnection *connection,
 }
 
 static gboolean
-validate (CEPage *page, NMConnection *connection, GError **error)
+ce_page_validate_v (CEPage *page, NMConnection *connection, GError **error)
 {
 	CEPage8021xSecurityPrivate *priv = CE_PAGE_8021X_SECURITY_GET_PRIVATE (page);
 	gboolean valid = TRUE;
@@ -152,8 +154,7 @@ validate (CEPage *page, NMConnection *connection, GError **error)
 		NMConnection *tmp_connection;
 		NMSetting *s_8021x;
 
-		/* FIXME: get failed property and error out of wireless security objects */
-		valid = wireless_security_validate (priv->security, NULL);
+		valid = wireless_security_validate (priv->security, error);
 		if (valid) {
 			NMSetting *s_con;
 
@@ -173,8 +174,7 @@ validate (CEPage *page, NMConnection *connection, GError **error)
 			nm_connection_add_setting (connection, NM_SETTING (g_object_ref (s_8021x)));
 
 			g_object_unref (tmp_connection);
-		} else
-			g_set_error (error, NMA_ERROR, NMA_ERROR_GENERIC, "Invalid 802.1x security");
+		}
 	} else {
 		nm_connection_remove_setting (connection, NM_TYPE_SETTING_802_1X);
 		valid = TRUE;
@@ -212,5 +212,5 @@ ce_page_8021x_security_class_init (CEPage8021xSecurityClass *security_class)
 	/* virtual methods */
 	object_class->dispose = dispose;
 
-	parent_class->validate = validate;
+	parent_class->ce_page_validate_v = ce_page_validate_v;
 }

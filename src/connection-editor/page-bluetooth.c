@@ -89,7 +89,8 @@ finish_setup (CEPageBluetooth *self, gpointer unused, GError *error, gpointer us
 }
 
 CEPage *
-ce_page_bluetooth_new (NMConnection *connection,
+ce_page_bluetooth_new (NMConnectionEditor *editor,
+                       NMConnection *connection,
                        GtkWindow *parent_window,
                        NMClient *client,
                        NMRemoteSettings *settings,
@@ -100,6 +101,7 @@ ce_page_bluetooth_new (NMConnection *connection,
 	CEPageBluetoothPrivate *priv;
 
 	self = CE_PAGE_BLUETOOTH (ce_page_new (CE_TYPE_PAGE_BLUETOOTH,
+	                          editor,
 	                          connection,
 	                          parent_window,
 	                          client,
@@ -143,12 +145,12 @@ ui_to_setting (CEPageBluetooth *self)
 }
 
 static gboolean
-validate (CEPage *page, NMConnection *connection, GError **error)
+ce_page_validate_v (CEPage *page, NMConnection *connection, GError **error)
 {
 	CEPageBluetooth *self = CE_PAGE_BLUETOOTH (page);
 	CEPageBluetoothPrivate *priv = CE_PAGE_BLUETOOTH_GET_PRIVATE (self);
 
-	if (!ce_page_mac_entry_valid (priv->bdaddr, ARPHRD_ETHER))
+	if (!ce_page_mac_entry_valid (priv->bdaddr, ARPHRD_ETHER, _("bdaddr"), error))
 		return FALSE;
 
 	ui_to_setting (self);
@@ -169,7 +171,7 @@ ce_page_bluetooth_class_init (CEPageBluetoothClass *bluetooth_class)
 	g_type_class_add_private (object_class, sizeof (CEPageBluetoothPrivate));
 
 	/* virtual methods */
-	parent_class->validate = validate;
+	parent_class->ce_page_validate_v = ce_page_validate_v;
 }
 
 typedef struct {

@@ -70,9 +70,9 @@ _nma_marshal_VOID__POINTER_POINTER_STRING_POINTER_UINT_POINTER_POINTER (GClosure
                                                                                           gpointer     arg_6,
                                                                                           gpointer     arg_7,
                                                                                           gpointer     data2);
-  register GMarshalFunc_VOID__POINTER_POINTER_STRING_POINTER_UINT_POINTER_POINTER callback;
-  register GCClosure *cc = (GCClosure*) closure;
-  register gpointer data1, data2;
+  GMarshalFunc_VOID__POINTER_POINTER_STRING_POINTER_UINT_POINTER_POINTER callback;
+  GCClosure *cc = (GCClosure*) closure;
+  gpointer data1, data2;
 
   g_return_if_fail (n_param_values == 8);
 
@@ -112,9 +112,9 @@ _nma_marshal_VOID__STRING_BOXED (GClosure     *closure,
                                                    gpointer     arg_1,
                                                    gpointer     arg_2,
                                                    gpointer     data2);
-  register GMarshalFunc_VOID__STRING_BOXED callback;
-  register GCClosure *cc = (GCClosure*) closure;
-  register gpointer data1, data2;
+  GMarshalFunc_VOID__STRING_BOXED callback;
+  GCClosure *cc = (GCClosure*) closure;
+  gpointer data1, data2;
 
   g_return_if_fail (n_param_values == 3);
 
@@ -150,9 +150,9 @@ _nma_marshal_VOID__UINT_STRING_STRING (GClosure     *closure,
                                                          gpointer     arg_2,
                                                          gpointer     arg_3,
                                                          gpointer     data2);
-  register GMarshalFunc_VOID__UINT_STRING_STRING callback;
-  register GCClosure *cc = (GCClosure*) closure;
-  register gpointer data1, data2;
+  GMarshalFunc_VOID__UINT_STRING_STRING callback;
+  GCClosure *cc = (GCClosure*) closure;
+  gpointer data1, data2;
 
   g_return_if_fail (n_param_values == 4);
 
@@ -188,9 +188,9 @@ _nma_marshal_VOID__UINT_UINT (GClosure     *closure,
                                                 guint        arg_1,
                                                 guint        arg_2,
                                                 gpointer     data2);
-  register GMarshalFunc_VOID__UINT_UINT callback;
-  register GCClosure *cc = (GCClosure*) closure;
-  register gpointer data1, data2;
+  GMarshalFunc_VOID__UINT_UINT callback;
+  GCClosure *cc = (GCClosure*) closure;
+  gpointer data1, data2;
 
   g_return_if_fail (n_param_values == 3);
 

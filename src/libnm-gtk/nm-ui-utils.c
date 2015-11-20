@@ -611,16 +611,16 @@ typedef enum {
 } MenuItem;
 
 static const char *icon_name_table[ITEM_STORAGE_MAX + 1] = {
-	[ITEM_STORAGE_USER]    = "document-save",
-	[ITEM_STORAGE_SYSTEM]  = "document-save-as",
-	[ITEM_STORAGE_ASK]     = "dialog-question",
-	[ITEM_STORAGE_UNUSED]  = "edit-clear",
+	[ITEM_STORAGE_USER]    = "user-info-symbolic",
+	[ITEM_STORAGE_SYSTEM]  = "system-users-symbolic",
+	[ITEM_STORAGE_ASK]     = "dialog-question-symbolic",
+	[ITEM_STORAGE_UNUSED]  = "edit-clear-all-symbolic",
 };
 static const char *icon_desc_table[ITEM_STORAGE_MAX + 1] = {
-	[ITEM_STORAGE_USER]    = N_("Store the password only for this _user"),
-	[ITEM_STORAGE_SYSTEM]  = N_("Store the password for _all users"),
-	[ITEM_STORAGE_ASK]     = N_("As_k for this password every time"),
-	[ITEM_STORAGE_UNUSED]  = N_("The password is _not required"),
+	[ITEM_STORAGE_USER]    = N_("Store the password only for this user"),
+	[ITEM_STORAGE_SYSTEM]  = N_("Store the password for all users"),
+	[ITEM_STORAGE_ASK]     = N_("Ask for this password every time"),
+	[ITEM_STORAGE_UNUSED]  = N_("The password is not required"),
 };
 
 static void
@@ -717,26 +717,28 @@ menu_item_to_secret_flags (MenuItem item)
 	case ITEM_STORAGE_SYSTEM:
 	default:
 		break;
-		
 	}
 	return flags;
 }
 
 typedef struct {
 	NMSetting *setting;
-	const char *password_flags_name;
+	char *password_flags_name;
 	MenuItem item_number;
 	GtkWidget *passwd_entry;
 } PopupMenuItemInfo;
 
 static void
-popup_menu_item_info_destroy (gpointer data)
+popup_menu_item_info_destroy (gpointer data, GClosure *closure)
 {
 	PopupMenuItemInfo *info = (PopupMenuItemInfo *) data;
 
 	if (info->setting)
 		g_object_unref (info->setting);
-	g_slice_free (PopupMenuItemInfo, data);
+	g_clear_pointer (&info->password_flags_name, g_free);
+	if (info->passwd_entry)
+		g_object_remove_weak_pointer (G_OBJECT (info->passwd_entry), (gpointer *) &info->passwd_entry);
+	g_slice_free (PopupMenuItemInfo, info);
 }
 
 static void
@@ -755,8 +757,37 @@ activate_menu_item_cb (GtkMenuItem *menuitem, gpointer user_data)
 			                             flags, NULL);
 
 		/* Change icon */
-		change_password_storage_icon (info->passwd_entry, info->item_number);
+		if (info->passwd_entry) {
+			change_password_storage_icon (info->passwd_entry, info->item_number);
+
+			/* Emit "changed" signal on the entry */
+			g_signal_emit_by_name (G_OBJECT (info->passwd_entry), "changed");
+		}
 	}
+}
+
+static void
+popup_menu_item_info_register (GtkWidget *item,
+                               NMSetting *setting,
+                               const char *password_flags_name,
+                               MenuItem item_number,
+                               GtkWidget *passwd_entry)
+{
+	PopupMenuItemInfo *info;
+
+	info = g_slice_new0 (PopupMenuItemInfo);
+	info->setting = setting ? g_object_ref (setting) : NULL;
+	info->password_flags_name = g_strdup (password_flags_name);
+	info->item_number = item_number;
+	info->passwd_entry = passwd_entry;
+
+	if (info->passwd_entry)
+		g_object_add_weak_pointer (G_OBJECT (info->passwd_entry), (gpointer *) &info->passwd_entry);
+
+	g_signal_connect_data (item, "activate",
+	                       G_CALLBACK (activate_menu_item_cb),
+	                       info,
+	                       (GClosureNotify) popup_menu_item_info_destroy, 0);
 }
 
 static void
@@ -801,7 +832,6 @@ nma_utils_setup_password_storage (GtkWidget *passwd_entry,
 	GtkWidget *item[4];
 	GSList *group;
 	MenuItem idx;
-	PopupMenuItemInfo *info;
 	NMSettingSecretFlags secret_flags;
 
 	/* Whether entry should be sensitive if "always-ask" is active " */
@@ -811,12 +841,12 @@ nma_utils_setup_password_storage (GtkWidget *passwd_entry,
 	g_object_set_data (G_OBJECT (popup_menu), PASSWORD_STORAGE_MENU_TAG, GUINT_TO_POINTER (TRUE));
 	g_object_set_data (G_OBJECT (popup_menu), MENU_WITH_NOT_REQUIRED_TAG, GUINT_TO_POINTER (with_not_required));
 	group = NULL;
-	item[0] = gtk_radio_menu_item_new_with_mnemonic (group, icon_desc_table[0]);
+	item[0] = gtk_radio_menu_item_new_with_label (group, icon_desc_table[0]);
 	group = gtk_radio_menu_item_get_group (GTK_RADIO_MENU_ITEM (item[0]));
-	item[1] = gtk_radio_menu_item_new_with_mnemonic (group, icon_desc_table[1]);
-	item[2] = gtk_radio_menu_item_new_with_mnemonic (group, icon_desc_table[2]);
+	item[1] = gtk_radio_menu_item_new_with_label (group, icon_desc_table[1]);
+	item[2] = gtk_radio_menu_item_new_with_label (group, icon_desc_table[2]);
 	if (with_not_required)
-		item[3] = gtk_radio_menu_item_new_with_mnemonic (group, icon_desc_table[3]);
+		item[3] = gtk_radio_menu_item_new_with_label (group, icon_desc_table[3]);
 
 	gtk_menu_shell_append (GTK_MENU_SHELL (popup_menu), item[0]);
 	gtk_menu_shell_append (GTK_MENU_SHELL (popup_menu), item[1]);
@@ -824,51 +854,11 @@ nma_utils_setup_password_storage (GtkWidget *passwd_entry,
 	if (with_not_required)
 		gtk_menu_shell_append (GTK_MENU_SHELL (popup_menu), item[3]);
 
-	if (setting)
-		g_object_ref (setting);
-
-	info = g_slice_new0 (PopupMenuItemInfo);
-	info->setting = setting;
-	info->password_flags_name = password_flags_name;
-	info->item_number = ITEM_STORAGE_USER;
-	info->passwd_entry = passwd_entry;
-	g_signal_connect_data (item[0], "activate",
-	                       G_CALLBACK (activate_menu_item_cb),
-	                       info,
-	                       (GClosureNotify) popup_menu_item_info_destroy, 0);
-
-	info = g_slice_new0 (PopupMenuItemInfo);
-	info->setting = setting;
-	info->password_flags_name = password_flags_name;
-	info->item_number = ITEM_STORAGE_SYSTEM;
-	info->passwd_entry = passwd_entry;
-	g_signal_connect_data (item[1], "activate",
-	                       G_CALLBACK (activate_menu_item_cb),
-	                       info,
-	                       (GClosureNotify) popup_menu_item_info_destroy, 0);
-
-	info = g_slice_new0 (PopupMenuItemInfo);
-	info->setting = setting;
-	info->password_flags_name = password_flags_name;
-	info->item_number = ITEM_STORAGE_ASK;
-	info->passwd_entry = passwd_entry;
-	g_signal_connect_data (item[2], "activate",
-	                       G_CALLBACK (activate_menu_item_cb),
-	                       info,
-	                       (GClosureNotify) popup_menu_item_info_destroy, 0);
-
-
-	if (with_not_required) {
-		info = g_slice_new0 (PopupMenuItemInfo);
-		info->setting = setting;
-		info->password_flags_name = password_flags_name;
-		info->item_number = ITEM_STORAGE_UNUSED;
-		info->passwd_entry = passwd_entry;
-		g_signal_connect_data (item[3], "activate",
-		                       G_CALLBACK (activate_menu_item_cb),
-		                       info,
-		                       (GClosureNotify) popup_menu_item_info_destroy, 0);
-	}
+	popup_menu_item_info_register (item[0], setting, password_flags_name, ITEM_STORAGE_USER, passwd_entry);
+	popup_menu_item_info_register (item[1], setting, password_flags_name, ITEM_STORAGE_SYSTEM, passwd_entry);
+	popup_menu_item_info_register (item[2], setting, password_flags_name, ITEM_STORAGE_ASK, passwd_entry);
+	if (with_not_required)
+		popup_menu_item_info_register (item[3], setting, password_flags_name, ITEM_STORAGE_UNUSED, passwd_entry);
 
 	g_signal_connect (passwd_entry, "icon-release", G_CALLBACK (icon_release_cb), popup_menu);
 	gtk_menu_attach_to_widget (GTK_MENU (popup_menu), passwd_entry, NULL);

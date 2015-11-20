@@ -134,17 +134,19 @@ finish_setup (CEPageTeamPort *self, gpointer unused, GError *error, gpointer use
 }
 
 CEPage *
-ce_page_team_port_new (NMConnection *connection,
-                         GtkWindow *parent_window,
-                         NMClient *client,
-                         NMRemoteSettings *settings,
-                         const char **out_secrets_setting_name,
-                         GError **error)
+ce_page_team_port_new (NMConnectionEditor *editor,
+                       NMConnection *connection,
+                       GtkWindow *parent_window,
+                       NMClient *client,
+                       NMRemoteSettings *settings,
+                       const char **out_secrets_setting_name,
+                       GError **error)
 {
 	CEPageTeamPort *self;
 	CEPageTeamPortPrivate *priv;
 
 	self = CE_PAGE_TEAM_PORT (ce_page_new (CE_TYPE_PAGE_TEAM_PORT,
+	                                       editor,
 	                                       connection,
 	                                       parent_window,
 	                                       client,
@@ -196,7 +198,7 @@ ui_to_setting (CEPageTeamPort *self)
 }
 
 static gboolean
-validate (CEPage *page, NMConnection *connection, GError **error)
+ce_page_validate_v (CEPage *page, NMConnection *connection, GError **error)
 {
 	CEPageTeamPort *self = CE_PAGE_TEAM_PORT (page);
 	CEPageTeamPortPrivate *priv = CE_PAGE_TEAM_PORT_GET_PRIVATE (self);
@@ -219,5 +221,5 @@ ce_page_team_port_class_init (CEPageTeamPortClass *team_port_class)
 	g_type_class_add_private (object_class, sizeof (CEPageTeamPortPrivate));
 
 	/* virtual methods */
-	parent_class->validate = validate;
+	parent_class->ce_page_validate_v = ce_page_validate_v;
 }

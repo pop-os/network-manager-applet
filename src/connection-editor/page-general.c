@@ -302,7 +302,8 @@ finish_setup (CEPageGeneral *self, gpointer unused, GError *error, gpointer user
 }
 
 CEPage *
-ce_page_general_new (NMConnection *connection,
+ce_page_general_new (NMConnectionEditor *editor,
+                     NMConnection *connection,
                      GtkWindow *parent_window,
                      NMClient *client,
                      NMRemoteSettings *settings,
@@ -313,6 +314,7 @@ ce_page_general_new (NMConnection *connection,
 	CEPageGeneralPrivate *priv;
 
 	self = CE_PAGE_GENERAL (ce_page_new (CE_TYPE_PAGE_GENERAL,
+	                                     editor,
 	                                     connection,
 	                                     parent_window,
 	                                     client,
@@ -348,7 +350,6 @@ static void
 ui_to_setting (CEPageGeneral *self)
 {
 	CEPageGeneralPrivate *priv = CE_PAGE_GENERAL_GET_PRIVATE (self);
-	char *zone;
 	char *uuid = NULL;
 	GtkTreeIter iter;
 	gboolean autoconnect = FALSE, everyone = FALSE;
@@ -357,12 +358,12 @@ ui_to_setting (CEPageGeneral *self)
 	 * are received from FirewallD asynchronously; got_zones indicates we are ready.
 	 */
 	if (priv->got_zones) {
+		char *zone;
+
 		zone = gtk_combo_box_text_get_active_text (priv->firewall_zone);
-
-		if (g_strcmp0 (zone, FIREWALL_ZONE_DEFAULT) == 0)
-			zone = NULL;
-		g_object_set (priv->setting, NM_SETTING_CONNECTION_ZONE, zone, NULL);
-
+		g_object_set (priv->setting, NM_SETTING_CONNECTION_ZONE,
+		              (g_strcmp0 (zone, FIREWALL_ZONE_DEFAULT) != 0) ? zone : NULL,
+		              NULL);
 		g_free (zone);
 	}
 
@@ -389,7 +390,7 @@ ui_to_setting (CEPageGeneral *self)
 }
 
 static gboolean
-validate (CEPage *page, NMConnection *connection, GError **error)
+ce_page_validate_v (CEPage *page, NMConnection *connection, GError **error)
 {
 	CEPageGeneral *self = CE_PAGE_GENERAL (page);
 	CEPageGeneralPrivate *priv = CE_PAGE_GENERAL_GET_PRIVATE (self);
@@ -414,6 +415,6 @@ ce_page_general_class_init (CEPageGeneralClass *connection_class)
 	/* virtual methods */
 	object_class->dispose = dispose;
 
-	parent_class->validate = validate;
+	parent_class->ce_page_validate_v = ce_page_validate_v;
 }
 
