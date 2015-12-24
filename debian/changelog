@@ -1,3 +1,9 @@
+network-manager-applet (1.0.10-1) UNRELEASED; urgency=medium
+
+  * New upstream release.
+
+ -- Michael Biebl <biebl@debian.org>  Thu, 24 Dec 2015 01:07:48 +0100
+
 network-manager-applet (1.0.8-1) unstable; urgency=medium
 
   * New upstream release.
