@@ -12,7 +12,7 @@ Closes: #471191
  1 file changed, 4 insertions(+)
 
 diff --git a/src/applet.c b/src/applet.c
-index 39ea8e4..0a1043b 100644
+index 7a79622..69e9870 100644
 --- a/src/applet.c
 +++ b/src/applet.c
 @@ -2952,6 +2952,10 @@ applet_update_icon (gpointer user_data)

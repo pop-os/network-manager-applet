@@ -103,7 +103,7 @@ index 0ae44ad..dc7fbc8 100644
  	 * Dialog Of Doom.
  	 */
 diff --git a/src/connection-editor/ce-page.h b/src/connection-editor/ce-page.h
-index 69955f5..263c685 100644
+index cda5978..8a3cae2 100644
 --- a/src/connection-editor/ce-page.h
 +++ b/src/connection-editor/ce-page.h
 @@ -49,6 +49,7 @@ typedef void (*PageNewConnectionFunc) (GtkWindow *parent,
@@ -207,7 +207,7 @@ index f3b0b30..74e3734 100644
  
  #endif  /* __PAGE_DSL_H__ */
 diff --git a/src/connection-editor/page-ethernet.c b/src/connection-editor/page-ethernet.c
-index 92404c8..fc090ea 100644
+index d10e2ae..db50e19 100644
 --- a/src/connection-editor/page-ethernet.c
 +++ b/src/connection-editor/page-ethernet.c
 @@ -379,6 +379,7 @@ ethernet_connection_new (GtkWindow *parent,
@@ -231,7 +231,7 @@ index edc331d..1cf6ad1 100644
  
  #endif  /* __PAGE_ETHERNET_H__ */
 diff --git a/src/connection-editor/page-infiniband.c b/src/connection-editor/page-infiniband.c
-index 8e1eae6..c5355b1 100644
+index a3c8a32..5688556 100644
 --- a/src/connection-editor/page-infiniband.c
 +++ b/src/connection-editor/page-infiniband.c
 @@ -255,6 +255,7 @@ infiniband_connection_new (GtkWindow *parent,
@@ -423,7 +423,7 @@ index 7d74930..bc14dee 100644
  
  #endif  /* __PAGE_VPN_H__ */
 diff --git a/src/connection-editor/page-wifi.c b/src/connection-editor/page-wifi.c
-index 9249453..116e888 100644
+index ac7cad2..36da755 100644
 --- a/src/connection-editor/page-wifi.c
 +++ b/src/connection-editor/page-wifi.c
 @@ -34,6 +34,8 @@
@@ -474,7 +474,7 @@ index eee167c..7a502a5 100644
  
  #endif  /* __PAGE_WIFI_H__ */
 diff --git a/src/connection-editor/page-wimax.c b/src/connection-editor/page-wimax.c
-index e7a470e..39d5484 100644
+index ff88013..2be1c65 100644
 --- a/src/connection-editor/page-wimax.c
 +++ b/src/connection-editor/page-wimax.c
 @@ -220,6 +220,7 @@ wimax_connection_new (GtkWindow *parent,
