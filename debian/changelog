@@ -2,6 +2,7 @@ network-manager-applet (1.0.10-1) UNRELEASED; urgency=medium
 
   * New upstream release.
   * Rebase patches.
+  * Use dh_autoreconf --as-needed to avoid unnecessary shlibs dependencies.
 
  -- Michael Biebl <biebl@debian.org>  Thu, 24 Dec 2015 01:07:48 +0100
 
