@@ -1,10 +1,10 @@
-network-manager-applet (1.0.10-1) UNRELEASED; urgency=medium
+network-manager-applet (1.0.10-1) unstable; urgency=medium
 
   * New upstream release.
   * Rebase patches.
   * Use dh_autoreconf --as-needed to avoid unnecessary shlibs dependencies.
 
- -- Michael Biebl <biebl@debian.org>  Thu, 24 Dec 2015 01:07:48 +0100
+ -- Michael Biebl <biebl@debian.org>  Thu, 24 Dec 2015 01:18:49 +0100
 
 network-manager-applet (1.0.8-1) unstable; urgency=medium
 
