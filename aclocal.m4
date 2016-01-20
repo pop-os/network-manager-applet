@@ -456,39 +456,6 @@ sed 's/^/| /' conftest.foo >&AS_MESSAGE_LOG_FD
 fi])
 
 
-# gnome-common.m4
-#
-# serial 3
-# 
-
-AU_DEFUN([GNOME_DEBUG_CHECK],
-[
-	AX_CHECK_ENABLE_DEBUG([no],[GNOME_ENABLE_DEBUG])
-],
-[[$0: This macro is deprecated. You should use AX_CHECK_ENABLE_DEBUG instead and
-replace uses of GNOME_ENABLE_DEBUG with ENABLE_DEBUG.
-See: http://www.gnu.org/software/autoconf-archive/ax_check_enable_debug.html#ax_check_enable_debug]])
-
-dnl GNOME_MAINTAINER_MODE_DEFINES ()
-dnl define DISABLE_DEPRECATED
-dnl
-AU_DEFUN([GNOME_MAINTAINER_MODE_DEFINES],
-[
-	AC_REQUIRE([AM_MAINTAINER_MODE])
-
-	DISABLE_DEPRECATED=""
-	if test $USE_MAINTAINER_MODE = yes; then
-	        DOMAINS="GCONF BONOBO BONOBO_UI GNOME LIBGLADE GNOME_VFS WNCK LIBSOUP"
-	        for DOMAIN in $DOMAINS; do
-	               DISABLE_DEPRECATED="$DISABLE_DEPRECATED -D${DOMAIN}_DISABLE_DEPRECATED -D${DOMAIN}_DISABLE_SINGLE_INCLUDES"
-	        done
-	fi
-
-	AC_SUBST(DISABLE_DEPRECATED)
-],
-[[$0: This macro is deprecated. All of the modules it disables deprecations for
-are obsolete. Remove it and all uses of DISABLE_DEPRECATED.]])
-
 dnl GLIB_GSETTINGS
 dnl Defines GSETTINGS_SCHEMAS_INSTALL which controls whether
 dnl the schema should be compiled
@@ -677,13 +644,13 @@ dnl This file is free software; the Free Software Foundation
 dnl gives unlimited permission to copy and/or distribute it,
 dnl with or without modifications, as long as this notice is preserved.
 dnl
-dnl This file can can be used in projects which are not available under
+dnl This file can be used in projects which are not available under
 dnl the GNU General Public License or the GNU Library General Public
 dnl License but which still want to provide support for the GNU gettext
 dnl functionality.
 dnl Please note that the actual code of the GNU gettext library is covered
 dnl by the GNU Library General Public License, and the rest of the GNU
-dnl gettext package package is covered by the GNU General Public License.
+dnl gettext package is covered by the GNU General Public License.
 dnl They are *not* in the public domain.
 
 dnl Authors:

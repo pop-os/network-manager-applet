@@ -17,12 +17,11 @@
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  *
- * (C) Copyright 2010 Red Hat, Inc.
+ * Copyright 2010 - 2014 Red Hat, Inc.
  */
 
 #include <ctype.h>
 #include <glib/gi18n.h>
-#include <nm-utils.h>
 
 #define SECRET_API_SUBJECT_TO_CHANGE
 #include <libsecret/secret.h>
@@ -136,7 +135,6 @@ mobile_helper_get_tech_icon_name (guint32 tech)
 		return "nm-tech-hspa";
 	case MB_TECH_LTE:
 		return "nm-tech-lte";
-	case MB_TECH_WIMAX:
 	default:
 		return NULL;
 	}
@@ -170,7 +168,7 @@ mobile_wizard_done (NMAMobileWizard *wizard,
 			goto done;
 		}
 
-		connection = nm_connection_new ();
+		connection = nm_simple_connection_new ();
 
 		if (method->devtype == NM_DEVICE_MODEM_CAPABILITY_CDMA_EVDO) {
 			setting_name = NM_SETTING_CDMA_SETTING_NAME;
@@ -196,11 +194,11 @@ mobile_wizard_done (NMAMobileWizard *wizard,
 
 		/* Default to IPv4 & IPv6 'automatic' addressing */
 		setting = nm_setting_ip4_config_new ();
-		g_object_set (setting, "method", NM_SETTING_IP4_CONFIG_METHOD_AUTO, NULL);
+		g_object_set (setting, NM_SETTING_IP_CONFIG_METHOD, NM_SETTING_IP4_CONFIG_METHOD_AUTO, NULL);
 		nm_connection_add_setting (connection, setting);
 
 		setting = nm_setting_ip6_config_new ();
-		g_object_set (setting, "method", NM_SETTING_IP6_CONFIG_METHOD_AUTO, NULL);
+		g_object_set (setting, NM_SETTING_IP_CONFIG_METHOD, NM_SETTING_IP6_CONFIG_METHOD_AUTO, NULL);
 		nm_connection_add_setting (connection, setting);
 
 		nm_connection_add_setting (connection, nm_setting_ppp_new ());
@@ -384,7 +382,7 @@ get_secrets_cb (GtkDialog *dialog,
 				              NULL);
 			} else {
 				error = g_error_new (NM_SECRET_AGENT_ERROR,
-				                     NM_SECRET_AGENT_ERROR_INTERNAL_ERROR,
+				                     NM_SECRET_AGENT_ERROR_FAILED,
 				                     "%s.%d (%s): no GSM setting",
 				                     __FILE__, __LINE__, __func__);
 			}
@@ -398,7 +396,7 @@ get_secrets_cb (GtkDialog *dialog,
 					              NULL);
 				} else {
 					error = g_error_new (NM_SECRET_AGENT_ERROR,
-					                     NM_SECRET_AGENT_ERROR_INTERNAL_ERROR,
+					                     NM_SECRET_AGENT_ERROR_FAILED,
 					                     "%s.%d (%s): no CDMA setting",
 					                     __FILE__, __LINE__, __func__);
 				}
@@ -505,7 +503,7 @@ mobile_helper_get_secrets (NMDeviceModemCapabilities capabilities,
 	if (!req->hints || !g_strv_length (req->hints)) {
 		g_set_error (error,
 		             NM_SECRET_AGENT_ERROR,
-		             NM_SECRET_AGENT_ERROR_INTERNAL_ERROR,
+		             NM_SECRET_AGENT_ERROR_FAILED,
 		             "%s.%d (%s): missing secrets hints.",
 		             __FILE__, __LINE__, __func__);
 		return FALSE;
@@ -523,7 +521,7 @@ mobile_helper_get_secrets (NMDeviceModemCapabilities capabilities,
 	else {
 		g_set_error (error,
 		             NM_SECRET_AGENT_ERROR,
-		             NM_SECRET_AGENT_ERROR_INTERNAL_ERROR,
+		             NM_SECRET_AGENT_ERROR_FAILED,
 		             "%s.%d (%s): unknown modem capabilities (0x%X).",
 		             __FILE__, __LINE__, __func__, capabilities);
 		return FALSE;
@@ -537,7 +535,7 @@ mobile_helper_get_secrets (NMDeviceModemCapabilities capabilities,
 	else {
 		g_set_error (error,
 		             NM_SECRET_AGENT_ERROR,
-		             NM_SECRET_AGENT_ERROR_INTERNAL_ERROR,
+		             NM_SECRET_AGENT_ERROR_FAILED,
 		             "%s.%d (%s): unknown secrets hint '%s'.",
 		             __FILE__, __LINE__, __func__, info->secret_name);
 		return FALSE;
@@ -548,7 +546,7 @@ mobile_helper_get_secrets (NMDeviceModemCapabilities capabilities,
 	if (!widget || !secret_entry) {
 		g_set_error (error,
 		             NM_SECRET_AGENT_ERROR,
-		             NM_SECRET_AGENT_ERROR_INTERNAL_ERROR,
+		             NM_SECRET_AGENT_ERROR_FAILED,
 		             "%s.%d (%s): error asking for mobile secrets.",
 		             __FILE__, __LINE__, __func__);
 		return FALSE;

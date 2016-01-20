@@ -15,8 +15,8 @@
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  *
- * Copyright (C) 2004 - 2011 Red Hat, Inc.
- * Copyright (C) 2005 - 2008 Novell, Inc.
+ * Copyright 2004 - 2014 Red Hat, Inc.
+ * Copyright 2005 - 2008 Novell, Inc.
  */
 
 #ifndef APPLET_H
@@ -36,16 +36,15 @@
 
 #include <libnotify/notify.h>
 
-#include <nm-connection.h>
-#include <nm-client.h>
-#include <nm-access-point.h>
-#include <nm-device.h>
+#ifdef ENABLE_INDICATOR
+#include <libappindicator/app-indicator.h>
+#endif
+
 #include <NetworkManager.h>
-#include <nm-active-connection.h>
-#include <nm-remote-settings.h>
+
 #include "applet-agent.h"
 
-#if WITH_MODEM_MANAGER_1
+#if WITH_WWAN
 #include <libmm-glib.h>
 #endif
 
@@ -83,16 +82,14 @@ typedef struct
 {
 	GObject parent_instance;
 
-	GMainLoop *loop;
 	DBusGConnection *session_bus;
 
 	NMClient *nm_client;
-	NMRemoteSettings *settings;
 	AppletAgent *agent;
 
 	GSettings *gsettings;
 
-#if WITH_MODEM_MANAGER_1
+#if WITH_WWAN
 	MMManager *mm1;
 	gboolean   mm1_running;
 #endif
@@ -105,54 +102,49 @@ typedef struct
 	/* Device classes */
 	NMADeviceClass *ethernet_class;
 	NMADeviceClass *wifi_class;
-	NMADeviceClass *gsm_class;
-	NMADeviceClass *cdma_class;
-#if WITH_MODEM_MANAGER_1
+#if WITH_WWAN
 	NMADeviceClass *broadband_class;
 #endif
 	NMADeviceClass *bt_class;
-	NMADeviceClass *wimax_class;
-	NMADeviceClass *vlan_class;
-	NMADeviceClass *bond_class;
-	NMADeviceClass *team_class;
-	NMADeviceClass *bridge_class;
-	NMADeviceClass *infiniband_class;
 
 	/* Data model elements */
 	guint			update_icon_id;
-
-	GtkIconTheme *	icon_theme;
-	GHashTable *	icon_cache;
-#define NUM_CONNECTING_FRAMES 11
-#define NUM_VPN_CONNECTING_FRAMES 14
-	GdkPixbuf *		fallback_icon;
-
-	/* Active status icon pixbufs */
-	GdkPixbuf *		icon_layers[ICON_LAYER_MAX + 1];
+	char *			tip;
 
 	/* Animation stuff */
 	int				animation_step;
 	guint			animation_id;
+#define NUM_CONNECTING_FRAMES 11
+#define NUM_VPN_CONNECTING_FRAMES 14
 
-	/* Direct UI elements */
-	GtkStatusIcon * status_icon;
+	GtkIconTheme *	icon_theme;
+	GHashTable *	icon_cache;
+	GdkPixbuf *		fallback_icon;
 	int             icon_size;
 
-	GtkWidget *		menu;
-	char *          tip;
+	/* Active status icon pixbufs */
+	GdkPixbuf *		icon_layers[ICON_LAYER_MAX + 1];
 
+	/* Direct UI elements */
+#ifdef ENABLE_INDICATOR
+	AppIndicator *  app_indicator;
+	guint           update_menu_id;
+#else
+	GtkStatusIcon * status_icon;
+
+	GtkWidget *		menu;
 	GtkWidget *		context_menu;
+
+	GtkWidget *		notifications_enabled_item;
+	guint			notifications_enabled_toggled_id;
+#endif
+
 	GtkWidget *		networking_enabled_item;
 	guint           networking_enabled_toggled_id;
 	GtkWidget *		wifi_enabled_item;
 	guint           wifi_enabled_toggled_id;
 	GtkWidget *		wwan_enabled_item;
 	guint           wwan_enabled_toggled_id;
-	GtkWidget *		wimax_enabled_item;
-	guint           wimax_enabled_toggled_id;
-
-	GtkWidget *     notifications_enabled_item;
-	guint           notifications_enabled_toggled_id;
 
 	GtkWidget *		info_menu_item;
 	GtkWidget *		connections_menu_item;
@@ -191,7 +183,7 @@ struct _SecretsRequest {
 void applet_secrets_request_set_free_func (SecretsRequest *req,
                                            SecretsRequestFreeFunc free_func);
 void applet_secrets_request_complete (SecretsRequest *req,
-                                      GHashTable *settings,
+                                      GVariant *settings,
                                       GError *error);
 void applet_secrets_request_complete_setting (SecretsRequest *req,
                                               const char *setting_name,
@@ -206,7 +198,7 @@ struct NMADeviceClass {
 
 	void           (*add_menu_item)        (NMDevice *device,
 	                                        gboolean multiple_devices,
-	                                        GSList *connections,
+	                                        const GPtrArray *connections,
 	                                        NMConnection *active,
 	                                        GtkWidget *menu,
 	                                        NMApplet *applet);
@@ -244,10 +236,11 @@ GType nma_get_type (void);
 NMApplet *nm_applet_new (void);
 
 void applet_schedule_update_icon (NMApplet *applet);
+void applet_schedule_update_menu (NMApplet *applet);
 
-NMRemoteSettings *applet_get_settings (NMApplet *applet);
+NMClient *applet_get_settings (NMApplet *applet);
 
-GSList *applet_get_all_connections (NMApplet *applet);
+GPtrArray *applet_get_all_connections (NMApplet *applet);
 
 gboolean nma_menu_device_check_unusable (NMDevice *device);
 
@@ -313,7 +306,7 @@ typedef enum {
 } NMAAddActiveInactiveEnum;
 
 void applet_add_connection_items (NMDevice *device,
-                                  GSList *connections,
+                                  const GPtrArray *connections,
                                   gboolean sensitive,
                                   NMConnection *active,
                                   NMAAddActiveInactiveEnum flag,
