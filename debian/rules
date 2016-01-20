@@ -14,10 +14,8 @@ override_dh_auto_configure:
 	dh_auto_configure -- \
 		--libexecdir=/usr/lib/NetworkManager \
 		--disable-more-warnings \
-		--disable-migration \
 		--enable-introspection \
-		--with-modem-manager-1 \
-		--without-bluetooth
+		--with-wwan
 
 override_dh_install:
 	dh_install -X.la -X.a --list-missing

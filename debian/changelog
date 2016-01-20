@@ -2,6 +2,9 @@ network-manager-applet (1.1.90-1) UNRELEASED; urgency=medium
 
   * New upstream release (1.2 beta1).
   * Bump dependency on network-manager and related dev packages to (>= 1.1).
+  * Update configure switches. The gnome-bluetooth plugin and the migration
+    tool were dropped upstream, the --with-modem-manager-1 configure switch
+    was renamed to --with-wwan.
 
  -- Michael Biebl <biebl@debian.org>  Wed, 20 Jan 2016 19:19:14 +0100
 
