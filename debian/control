@@ -17,6 +17,7 @@ Build-Depends: debhelper (>= 9),
                libnm-glib-dev (>= 1.1),
                libnm-glib-vpn-dev (>= 1.1),
                network-manager-dev (>= 1.1),
+               libnm-dev (>= 1.1),
                libmm-glib-dev,
                libgudev-1.0-dev (>= 147),
                iso-codes,
@@ -33,7 +34,7 @@ Section: gnome
 Pre-Depends: ${misc:Pre-Depends}
 Depends: ${shlibs:Depends},
          ${misc:Depends},
-         libnm-gtk0 (= ${binary:Version}),
+         libnma0 (= ${binary:Version}),
          network-manager (>= 1.1),
          policykit-1-gnome,
          gnome-icon-theme,
@@ -69,7 +70,7 @@ Depends: ${shlibs:Depends},
          ${misc:Depends},
          libnm-gtk-common (= ${source:Version})
 Breaks: network-manager-gnome (<< 0.9.10.0)
-Description: library for wireless and mobile dialogs
+Description: library for wireless and mobile dialogs (libnm-glib version)
  This library provides Gtk+ dialogs for NetworkManager.
 
 Package: libnm-gtk-common
@@ -111,6 +112,56 @@ Description: GObject introspection data for libnm-gtk
  The libnm-gtk library provides Gtk+ dialogs for NetworkManager.
  .
  This package contains introspection data for libnm-gtk.
+ .
+ It can be used by packages using the GIRepository format to generate
+ dynamic bindings.
+
+Package: libnma0
+Architecture: linux-any
+Multi-Arch: same
+Section: libs
+Pre-Depends: ${misc:Pre-Depends}
+Depends: ${shlibs:Depends},
+         ${misc:Depends},
+         libnma-common (= ${source:Version})
+Description: library for wireless and mobile dialogs (libnm version)
+ This library provides Gtk+ dialogs for NetworkManager.
+
+Package: libnma-common
+Architecture: all
+Multi-Arch: foreign
+Section: libs
+Depends: ${misc:Depends}
+Description: library for wireless and mobile dialogs - common files
+ The libnm-gtk library provides Gtk+ dialogs for NetworkManager.
+ .
+ This package contains data files used by libnm-gtk.
+
+Package: libnma-dev
+Architecture: linux-any
+Multi-Arch: same
+Section: libdevel
+Depends: ${shlibs:Depends},
+         ${misc:Depends},
+         libnma0 (= ${binary:Version}),
+         gir1.2-nma-1.0 (= ${binary:Version}),
+         libnm-dev (>= 1.0.0)
+Description: library for wireless and mobile dialogs - development files
+ The libnm-gtk library provides Gtk+ dialogs for NetworkManager.
+ .
+ This package contains the development files.
+
+Package: gir1.2-nma-1.0
+Section: introspection
+Architecture: linux-any
+Multi-Arch: same
+Depends: ${gir:Depends},
+         ${shlibs:Depends},
+         ${misc:Depends}
+Description: GObject introspection data for libnma
+ The libnma library provides Gtk+ dialogs for NetworkManager.
+ .
+ This package contains introspection data for libnma.
  .
  It can be used by packages using the GIRepository format to generate
  dynamic bindings.
