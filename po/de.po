@@ -23,7 +23,7 @@ msgstr ""
 "Project-Id-Version: network-manager-applet master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=NetworkManager&keywords=I18N+L10N&component=nm-applet\n"
-"POT-Creation-Date: 2015-09-22 11:49+0000\n"
+"POT-Creation-Date: 2015-10-01 23:55+0000\n"
 "PO-Revision-Date: 2015-10-02 09:17+0200\n"
 "Last-Translator: Bernd Homuth <dev@hmt.im>\n"
 "Language-Team: Deutsch <gnome-de@gnome.org>\n"
@@ -1311,8 +1311,7 @@ msgstr ""
 "Netzwerkverbindung verwendet."
 
 #: ../src/connection-editor/ce-new-connection.ui.h:1
-#: ../src/libnm-gtk/wifi.ui.h:1
-#: ../src/wireless-security/eap-method-fast.ui.h:1
+#: ../src/libnm-gtk/wifi.ui.h:1 ../src/wireless-security/eap-method-fast.ui.h:1
 #: ../src/wireless-security/eap-method-peap.ui.h:1
 #: ../src/wireless-security/eap-method-ttls.ui.h:1
 #: ../src/wireless-security/ws-dynamic-wep.ui.h:1
@@ -2312,8 +2311,8 @@ msgid "Bluetooth"
 msgstr "Bluetooth"
 
 #: ../src/connection-editor/connection-helpers.c:133
-#: ../src/connection-editor/page-wimax.c:121
-#: ../src/libnm-gtk/nm-ui-utils.c:332 ../src/mb-menu-item.c:74
+#: ../src/connection-editor/page-wimax.c:121 ../src/libnm-gtk/nm-ui-utils.c:332
+#: ../src/mb-menu-item.c:74
 msgid "WiMAX"
 msgstr "WiMAX"
 
@@ -2432,19 +2431,16 @@ msgid "Editing un-named connection"
 msgstr "Unbenannte Verbindung bearbeiten"
 
 #: ../src/connection-editor/nm-connection-editor.c:150
-#| msgid "Connection _name:"
 msgid "Missing connection name"
 msgstr "Fehlender Verbindungsname:"
 
 #: ../src/connection-editor/nm-connection-editor.c:213
-#| msgid "Error initializing editor"
 msgid "Editor initializing..."
 msgstr "Editors wird initialisiert …"
 
 #
 #: ../src/connection-editor/nm-connection-editor.c:220
 #: ../src/connection-editor/nm-connection-list.c:412
-#| msgid "Connection add failed"
 msgid "Connection cannot be modified"
 msgstr "Verbindung kann nicht bearbeitet werden"
 
@@ -2640,7 +2636,6 @@ msgid "Select the type of the Bluetooth connection profile."
 msgstr "Wählen Sie die Art des Bluetooth-Verbindungsprofils."
 
 #: ../src/connection-editor/page-bluetooth.c:296
-#| msgid "Ethernet Network"
 msgid "_Personal Area Network"
 msgstr "_Privates Netzwerk"
 
@@ -3590,22 +3585,18 @@ msgid "%s %s"
 msgstr "%s-%s"
 
 #: ../src/libnm-gtk/nm-ui-utils.c:620
-#| msgid "Store the password only for this _user"
 msgid "Store the password only for this user"
 msgstr "Passwort nur für diesen Benuzer speichern"
 
 #: ../src/libnm-gtk/nm-ui-utils.c:621
-#| msgid "Store the password for _all users"
 msgid "Store the password for all users"
 msgstr "Passwort für alle Benutzer speichern"
 
 #: ../src/libnm-gtk/nm-ui-utils.c:622
-#| msgid "As_k for this password every time"
 msgid "Ask for this password every time"
 msgstr "Jedesmal nach diesem Passwort fragen"
 
 #: ../src/libnm-gtk/nm-ui-utils.c:623
-#| msgid "The password is _not required"
 msgid "The password is not required"
 msgstr "Das Passwort ist nicht erforderlich"
 
@@ -3614,7 +3605,6 @@ msgid "_Secondary Password:"
 msgstr "_Sekundäres Passwort:"
 
 #: ../src/libnm-gtk/nm-vpn-password-dialog.c:105
-#| msgid "_Secondary Password:"
 msgid "_Ternary Password:"
 msgstr "_Tertiäres Passwort:"
 
@@ -3962,7 +3952,6 @@ msgstr ""
 
 #: ../src/wireless-security/eap-method-tls.c:75
 #, c-format
-#| msgid "C_A certificate:"
 msgid "invalid EAP-TLS CA certificate: %s"
 msgstr "Ungültiges EAP-TLS CA-Zertifikat: %s"
 

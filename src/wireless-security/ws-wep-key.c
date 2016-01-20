@@ -17,19 +17,16 @@
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  *
- * (C) Copyright 2007 - 2010 Red Hat, Inc.
+ * Copyright 2007 - 2014 Red Hat, Inc.
  */
 
 #include <string.h>
 #include <glib.h>
 #include <glib/gi18n.h>
 
-#include <nm-setting-wireless.h>
-#include <nm-setting-wireless-security.h>
-
 #include "wireless-security.h"
 #include "utils.h"
-#include "nm-ui-utils.h"
+#include "nma-ui-utils.h"
 
 struct _WirelessSecurityWEPKey {
 	WirelessSecurity parent;

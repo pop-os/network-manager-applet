@@ -1,7 +1,7 @@
 /* config.h.in.  Generated from configure.ac by autoheader.  */
 
-/* Define when building nm-applet-migration-tool */
-#undef BUILD_MIGRATION_TOOL
+/* Enable using libappindicator */
+#undef ENABLE_INDICATOR
 
 /* always defined to indicate that i18n is enabled */
 #undef ENABLE_NLS
@@ -115,8 +115,8 @@
 /* Version number of package */
 #undef VERSION
 
-/* Define if you have ModemManager1 support */
-#undef WITH_MODEM_MANAGER_1
+/* Define if you have ModemManager/WWAN support */
+#undef WITH_WWAN
 
 /* Define to 1 if on MINIX. */
 #undef _MINIX
