@@ -4,6 +4,8 @@ network-manager-applet (1.1.90-3) UNRELEASED; urgency=medium
   * Bump Standards-Version to 3.9.7.
   * Fix test suite failure for non-C locales. Patch cherry-picked from
     upstream Git.
+  * Fix fix macro name GLIB_GSETTINGS in configure.ac. Patch cherry-picked
+    from upstream Git.
 
  -- Michael Biebl <biebl@debian.org>  Thu, 04 Feb 2016 05:59:17 +0100
 

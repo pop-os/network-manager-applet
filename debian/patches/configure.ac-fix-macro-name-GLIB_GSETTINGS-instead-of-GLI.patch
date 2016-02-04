@@ -1,0 +1,24 @@
+From: Mikhail Efremov <sem@altlinux.org>
+Date: Fri, 22 Jan 2016 17:42:27 +0300
+Subject: configure.ac: fix macro name GLIB_GSETTINGS instead of GLIB_SETTINGS
+
+https://mail.gnome.org/archives/networkmanager-list/2016-January/msg00034.html
+
+Fixes: 21319f4e975228bc11ec6cfa07ca5e3df927f715
+---
+ configure.ac | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/configure.ac b/configure.ac
+index ee130a4..25a98c7 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -142,7 +142,7 @@ dnl Check for gobject introspection
+ GOBJECT_INTROSPECTION_CHECK([0.9.6])
+ 
+ GLIB_CONFIG_NMA
+-GLIB_SETTINGS
++GLIB_GSETTINGS
+ 
+ dnl
+ dnl Compiler flags
