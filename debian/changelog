@@ -1,3 +1,9 @@
+network-manager-applet (1.1.90-3) UNRELEASED; urgency=medium
+
+  * Upload to unstable.
+
+ -- Michael Biebl <biebl@debian.org>  Thu, 04 Feb 2016 05:59:17 +0100
+
 network-manager-applet (1.1.90-2) experimental; urgency=medium
 
   * Update debian/copyright.
