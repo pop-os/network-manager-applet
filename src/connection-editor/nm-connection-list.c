@@ -21,14 +21,12 @@
  * Copyright 2007 - 2014 Red Hat, Inc.
  */
 
-#include <config.h>
+#include "nm-default.h"
+
 #include <string.h>
 #include <sys/types.h>
 #include <unistd.h>
-
-#include <gtk/gtk.h>
 #include <gdk/gdkx.h>
-#include <glib/gi18n.h>
 
 #include "ce-page.h"
 #include "nm-connection-editor.h"
@@ -590,7 +588,7 @@ initialize_treeview (NMConnectionList *self)
 	GtkTreeSelection *selection;
 	ConnectionTypeData *types;
 	GtkTreeIter iter;
-	char *id;
+	char *id, *tmp;
 	int i;
 
 	/* Model */
@@ -650,7 +648,11 @@ initialize_treeview (NMConnectionList *self)
 	/* Fill in connection types */
 	types = get_connection_type_list ();
 	for (i = 0; types[i].name; i++) {
-		id = g_strdup_printf ("<b>%s</b>", types[i].name);
+
+		tmp = g_markup_escape_text (types[i].name, -1);
+		id = g_strdup_printf ("<b>%s</b>", tmp);
+		g_free (tmp);
+
 		gtk_tree_store_append (GTK_TREE_STORE (self->model), &iter, NULL);
 		gtk_tree_store_set (GTK_TREE_STORE (self->model), &iter,
 		                    COL_ID, id,
@@ -778,7 +780,7 @@ connection_added (NMClient *client,
 	NMConnectionList *self = NM_CONNECTION_LIST (user_data);
 	GtkTreeIter parent_iter, iter;
 	NMSettingConnection *s_con;
-	char *last_used;
+	char *last_used, *id;
 	gboolean expand = TRUE;
 
 	if (!get_parent_iter_for_connection (self, connection, &parent_iter))
@@ -788,14 +790,17 @@ connection_added (NMClient *client,
 
 	last_used = format_last_used (nm_setting_connection_get_timestamp (s_con));
 
+	id = g_markup_escape_text (nm_setting_connection_get_id (s_con), -1);
+
 	gtk_tree_store_append (GTK_TREE_STORE (self->model), &iter, &parent_iter);
 	gtk_tree_store_set (GTK_TREE_STORE (self->model), &iter,
-	                    COL_ID, nm_setting_connection_get_id (s_con),
+	                    COL_ID, id,
 	                    COL_LAST_USED, last_used,
 	                    COL_TIMESTAMP, nm_setting_connection_get_timestamp (s_con),
 	                    COL_CONNECTION, connection,
 	                    -1);
 
+	g_free (id);
 	g_free (last_used);
 
 	if (self->displayed_type) {

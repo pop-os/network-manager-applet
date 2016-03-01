@@ -20,17 +20,12 @@
  * Copyright 2008 - 2014 Red Hat, Inc.
  */
 
-#ifdef HAVE_CONFIG_H
-#include <config.h>
-#endif
+#include "nm-default.h"
 
 #include <netinet/in.h>
 #include <arpa/inet.h>
 #include <netinet/ether.h>
 #include <ctype.h>
-
-#include <glib/gi18n.h>
-#include <gtk/gtk.h>
 
 #include "applet.h"
 #include "applet-device-wifi.h"
@@ -1230,13 +1225,20 @@ wifi_notify_connected (NMDevice *device,
 	NMAccessPoint *ap;
 	char *esc_ssid;
 	char *ssid_msg;
+	const char *signal_strength_icon;
 
 	ap = g_object_get_data (G_OBJECT (device), ACTIVE_AP_TAG);
 
 	esc_ssid = get_ssid_utf8 (ap);
+
+	if (!ap)
+		signal_strength_icon = "nm-device-wireless";
+	else
+		signal_strength_icon = mobile_helper_get_quality_icon_name (nm_access_point_get_strength (ap));
+
 	ssid_msg = g_strdup_printf (_("You are now connected to the Wi-Fi network '%s'."), esc_ssid);
 	applet_do_notify_with_pref (applet, _("Connection Established"),
-	                            ssid_msg, "nm-device-wireless",
+	                            ssid_msg, signal_strength_icon,
 	                            PREF_DISABLE_CONNECTED_NOTIFICATIONS);
 	g_free (ssid_msg);
 	g_free (esc_ssid);

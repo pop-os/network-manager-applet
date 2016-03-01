@@ -19,11 +19,8 @@
  * Copyright 2011 - 2014 Red Hat, Inc.
  */
 
-#ifdef HAVE_CONFIG_H
-#include <config.h>
-#endif
+#include "nm-default.h"
 
-#include <glib/gi18n.h>
 #include <string.h>
 
 #define SECRET_API_SUBJECT_TO_CHANGE

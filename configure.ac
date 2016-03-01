@@ -1,6 +1,6 @@
 AC_PREREQ([2.63])
 AC_INIT([nm-applet],
-        [1.1.90],
+        [1.1.91],
         [https://bugzilla.gnome.org/enter_bug.cgi?product=NetworkManager],
         [network-manager-applet])
 
@@ -82,9 +82,9 @@ PKG_CHECK_MODULES(LIBNM_GLIB,
 		 libnm-util >= 1.1
 		 libnm-glib-vpn >= 1.1
 		 gmodule-export-2.0])
-NMA_CFLAGS="$NMA_CFLAGS -DGLIB_VERSION_MIN_REQUIRED=GLIB_VERSION_2_32"
-NMA_CFLAGS="$NMA_CFLAGS -DNM_VERSION_MIN_REQUIRED=NM_VERSION_1_2"
-NMA_CFLAGS="$NMA_CFLAGS -DNM_VERSION_MAX_ALLOWED=NM_VERSION_1_2"
+LIBNM_GLIB_CFLAGS="$LIBNM_GLIB_CFLAGS -DGLIB_VERSION_MIN_REQUIRED=GLIB_VERSION_2_32"
+LIBNM_GLIB_CFLAGS="$LIBNM_GLIB_CFLAGS -DNM_VERSION_MIN_REQUIRED=NM_VERSION_1_2"
+LIBNM_GLIB_CFLAGS="$LIBNM_GLIB_CFLAGS -DNM_VERSION_MAX_ALLOWED=NM_VERSION_1_2"
 
 PKG_CHECK_MODULES(LIBNM, [libnm gio-2.0 >= 2.32 gmodule-export-2.0])
 LIBNM_CFLAGS="$LIBNM_CFLAGS -DGLIB_VERSION_MIN_REQUIRED=GLIB_VERSION_2_32"
@@ -142,12 +142,26 @@ dnl Check for gobject introspection
 GOBJECT_INTROSPECTION_CHECK([0.9.6])
 
 GLIB_CONFIG_NMA
-GLIB_SETTINGS
+GLIB_GSETTINGS
 
 dnl
 dnl Compiler flags
 dnl
 NM_COMPILER_WARNINGS
+
+
+AC_ARG_WITH(more-asserts,
+            AS_HELP_STRING([--with-more-asserts=level], [Enable more assertions for debugging (default: 0)]),
+            [more_asserts=${with_more_asserts}],
+            [more_asserts=no])
+if test "${more_asserts}" = "no"; then
+    more_asserts=0
+else
+    if test "${more_asserts}" = "yes"; then
+        more_asserts=100
+    fi
+fi
+AC_DEFINE_UNQUOTED(NM_MORE_ASSERTS, $more_asserts, [Define if more asserts are enabled])
 
 
 AC_CONFIG_FILES([
@@ -173,6 +187,7 @@ po/Makefile.in
 man/Makefile
 man/nm-applet.1
 man/nm-connection-editor.1
+shared/Makefile
 org.gnome.nm-applet.gschema.xml
 ])
 AC_OUTPUT

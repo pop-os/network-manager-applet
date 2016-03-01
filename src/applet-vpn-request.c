@@ -20,17 +20,15 @@
  * Copyright 2004 - 2014 Red Hat, Inc.
  */
 
-#include <config.h>
+#include "nm-default.h"
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <sys/types.h>
 #include <sys/wait.h>
-#include <glib.h>
 #include <unistd.h>
 #include <errno.h>
-
-#include <glib-object.h>
 
 #include <NetworkManager.h>
 
@@ -83,8 +81,6 @@ typedef struct {
 	SecretsRequest req;
 	AppletVpnRequest *vpn;
 } VpnSecretsInfo;
-
-#define DBUS_TYPE_G_MAP_OF_STRING (dbus_g_type_get_map ("GHashTable", G_TYPE_STRING, G_TYPE_STRING))
 
 static void 
 child_finished_cb (GPid pid, gint status, gpointer user_data)

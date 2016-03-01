@@ -18,13 +18,9 @@
  * Copyright 2012 - 2014 Red Hat, Inc.
  */
 
-#include "config.h"
-
-#include <gtk/gtk.h>
-#include <glib/gi18n.h>
+#include "nm-default.h"
 
 #include "page-general.h"
-#include "nm-glib-compat.h"
 
 G_DEFINE_TYPE (CEPageGeneral, ce_page_general, CE_TYPE_PAGE)
 

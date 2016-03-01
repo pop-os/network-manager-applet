@@ -427,7 +427,7 @@ top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
 ACLOCAL_AMFLAGS = -I m4 ${ACLOCAL_FLAGS}
-SUBDIRS = src icons po man
+SUBDIRS = src icons po man shared
 EXTRA_DIST = CONTRIBUTING intltool-extract.in intltool-merge.in \
 	intltool-update.in Makefile.glib autogen.sh $(convert_DATA) \
 	$(appdata_in_files) $(autostart_in_files) $(desktop_in_files)

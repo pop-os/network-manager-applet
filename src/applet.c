@@ -27,23 +27,14 @@
  * Copyright 2001, 2002 Free Software Foundation
  */
 
-#ifdef HAVE_CONFIG_H
-#include <config.h>
-#endif
+#include "nm-default.h"
 
 #include <time.h>
 #include <string.h>
 #include <strings.h>
-#include <gtk/gtk.h>
-#include <glib/gi18n.h>
 #include <unistd.h>
 #include <sys/socket.h>
 #include <stdlib.h>
-
-#include <gio/gio.h>
-#include <dbus/dbus-glib.h>
-#include <dbus/dbus-glib-lowlevel.h>
-
 #include <libnotify/notify.h>
 
 #include "applet.h"
@@ -64,131 +55,7 @@
 extern gboolean shell_debug;
 extern gboolean with_agent;
 
-static void nma_initable_interface_init (GInitableIface *iface, gpointer iface_data);
-
-G_DEFINE_TYPE_WITH_CODE (NMApplet, nma, G_TYPE_OBJECT,
-                         G_IMPLEMENT_INTERFACE (G_TYPE_INITABLE,
-                                                nma_initable_interface_init)
-                         )
-
-/********************************************************************/
-/* Temporary dbus interface stuff */
-
-static gboolean
-impl_dbus_connect_to_hidden_network (NMApplet *applet, GError **error)
-{
-	if (!applet_wifi_connect_to_hidden_network (applet)) {
-		g_set_error_literal (error,
-		                     NM_SECRET_AGENT_ERROR,
-		                     NM_SECRET_AGENT_ERROR_FAILED,
-		                     "Failed to create Wi-Fi dialog");
-		return FALSE;
-	}
-
-	return TRUE;
-}
-
-static gboolean
-impl_dbus_create_wifi_network (NMApplet *applet, GError **error)
-{
-	if (!applet_wifi_can_create_wifi_network (applet)) {
-		g_set_error_literal (error,
-		                     NM_SECRET_AGENT_ERROR,
-		                     NM_SECRET_AGENT_ERROR_PERMISSION_DENIED,
-		                     "Creation of Wi-Fi networks has been disabled by system policy.");
-		return FALSE;
-	}
-
-	if (!applet_wifi_create_wifi_network (applet)) {
-		g_set_error_literal (error,
-		                     NM_SECRET_AGENT_ERROR,
-		                     NM_SECRET_AGENT_ERROR_FAILED,
-		                     "Failed to create Wi-Fi dialog");
-		return FALSE;
-	}
-
-	return TRUE;
-}
-
-static gboolean
-impl_dbus_connect_to_8021x_network (NMApplet *applet,
-                                    const char *device_path,
-                                    const char *ap_path,
-                                    GError **error)
-{
-	NMDevice *device;
-	NMAccessPoint *ap;
-
-	device = nm_client_get_device_by_path (applet->nm_client, device_path);
-	if (!device || NM_IS_DEVICE_WIFI (device) == FALSE) {
-		g_set_error_literal (error,
-		                     NM_SECRET_AGENT_ERROR,
-		                     NM_SECRET_AGENT_ERROR_FAILED,
-		                     "The device could not be found.");
-		return FALSE;
-	}
-
-	ap = nm_device_wifi_get_access_point_by_path (NM_DEVICE_WIFI (device), ap_path);
-	if (!ap) {
-		g_set_error_literal (error,
-		                     NM_SECRET_AGENT_ERROR,
-		                     NM_SECRET_AGENT_ERROR_FAILED,
-		                     "The access point could not be found.");
-		return FALSE;
-	}
-
-	/* FIXME: this doesn't account for Dynamic WEP */
-	if (   !(nm_access_point_get_wpa_flags (ap) & NM_802_11_AP_SEC_KEY_MGMT_802_1X)
-	    && !(nm_access_point_get_rsn_flags (ap) & NM_802_11_AP_SEC_KEY_MGMT_802_1X)) {
-		g_set_error_literal (error,
-		                     NM_SECRET_AGENT_ERROR,
-		                     NM_SECRET_AGENT_ERROR_FAILED,
-		                     "The access point had no 802.1x capabilities");
-		return FALSE;
-	}
-
-	if (!applet_wifi_connect_to_8021x_network (applet, device, ap)) {
-		g_set_error_literal (error,
-		                     NM_SECRET_AGENT_ERROR,
-		                     NM_SECRET_AGENT_ERROR_FAILED,
-		                     "Failed to create Wi-Fi dialog");
-		return FALSE;
-	}
-
-	return TRUE;
-}
-
-static gboolean
-impl_dbus_connect_to_3g_network (NMApplet *applet,
-                                 const char *device_path,
-                                 GError **error)
-{
-	NMDevice *device;
-
-	device = nm_client_get_device_by_path (applet->nm_client, device_path);
-	if (!device || NM_IS_DEVICE_MODEM (device) == FALSE) {
-		g_set_error_literal (error,
-		                     NM_SECRET_AGENT_ERROR,
-		                     NM_SECRET_AGENT_ERROR_FAILED,
-		                     "The device could not be found.");
-		return FALSE;
-	}
-
-#if WITH_WWAN
-	if (applet->mm1_running) {
-		applet_broadband_connect_network (applet, device);
-		return TRUE;
-	}
-#endif
-
-	g_set_error_literal (error,
-	                     NM_SECRET_AGENT_ERROR,
-	                     NM_SECRET_AGENT_ERROR_FAILED,
-	                     "ModemManager was not found");
-	return FALSE;
-}
-
-#include "applet-dbus-bindings.h"
+G_DEFINE_TYPE (NMApplet, nma, G_TYPE_APPLICATION)
 
 /********************************************************************/
 
@@ -2174,6 +2041,10 @@ applet_schedule_update_menu (NMApplet *applet)
 static void
 foo_set_icon (NMApplet *applet, guint32 layer, GdkPixbuf *pixbuf, char *icon_name)
 {
+#ifndef ENABLE_INDICATOR
+	gs_unref_object GdkPixbuf *pixbuf_free = NULL;
+#endif
+
 	g_return_if_fail (layer == ICON_LAYER_LINK || layer == ICON_LAYER_VPN);
 
 #ifdef ENABLE_INDICATOR
@@ -2194,10 +2065,7 @@ foo_set_icon (NMApplet *applet, guint32 layer, GdkPixbuf *pixbuf, char *icon_nam
 	if (applet->icon_layers[layer] == pixbuf)
 		return;
 
-	if (applet->icon_layers[layer]) {
-		g_object_unref (applet->icon_layers[layer]);
-		applet->icon_layers[layer] = NULL;
-	}
+	g_clear_object (&applet->icon_layers[layer]);
 
 	if (pixbuf)
 		applet->icon_layers[layer] = g_object_ref (pixbuf);
@@ -2205,7 +2073,7 @@ foo_set_icon (NMApplet *applet, guint32 layer, GdkPixbuf *pixbuf, char *icon_nam
 	if (applet->icon_layers[0]) {
 		int i;
 
-		pixbuf = gdk_pixbuf_copy (applet->icon_layers[0]);
+		pixbuf = applet->icon_layers[0];
 
 		for (i = ICON_LAYER_LINK + 1; i <= ICON_LAYER_MAX; i++) {
 			GdkPixbuf *top = applet->icon_layers[i];
@@ -2213,16 +2081,18 @@ foo_set_icon (NMApplet *applet, guint32 layer, GdkPixbuf *pixbuf, char *icon_nam
 			if (!top)
 				continue;
 
+			if (!pixbuf_free)
+				pixbuf = pixbuf_free = gdk_pixbuf_copy (pixbuf);
+
 			gdk_pixbuf_composite (top, pixbuf, 0, 0, gdk_pixbuf_get_width (top),
-							  gdk_pixbuf_get_height (top),
-							  0, 0, 1.0, 1.0,
-							  GDK_INTERP_NEAREST, 255);
+			                      gdk_pixbuf_get_height (top),
+			                      0, 0, 1.0, 1.0,
+			                      GDK_INTERP_NEAREST, 255);
 		}
 	} else
-		pixbuf = g_object_ref (nma_icon_check_and_load ("nm-no-connection", applet));
+		pixbuf = nma_icon_check_and_load ("nm-no-connection", applet);
 
 	gtk_status_icon_set_from_pixbuf (applet->status_icon, pixbuf);
-	g_object_unref (pixbuf);
 #endif
 }
 
@@ -3050,24 +2920,14 @@ applet_agent_cancel_secrets_cb (AppletAgent *agent,
 
 /*****************************************************************************/
 
-static void
-nma_clear_icon (GdkPixbuf **icon, NMApplet *applet)
-{
-	g_return_if_fail (icon != NULL);
-	g_return_if_fail (applet != NULL);
-
-	if (*icon && (*icon != applet->fallback_icon)) {
-		g_object_unref (*icon);
-		*icon = NULL;
-	}
-}
-
 static void nma_icons_free (NMApplet *applet)
 {
-	int i;
+	guint i;
+
+	g_return_if_fail (NM_IS_APPLET (applet));
 
 	for (i = 0; i <= ICON_LAYER_MAX; i++)
-		nma_clear_icon (&applet->icon_layers[i], applet);
+		g_clear_object (&applet->icon_layers[i]);
 }
 
 GdkPixbuf *
@@ -3087,13 +2947,13 @@ nma_icon_check_and_load (const char *name, NMApplet *applet)
 	 * the icon to the fallback icon if requested.
 	 */
 	if (!(icon = gtk_icon_theme_load_icon (applet->icon_theme, name, applet->icon_size, GTK_ICON_LOOKUP_FORCE_SIZE, &error))) {
-		g_warning ("Icon %s missing: (%d) %s",
+		g_warning ("Icon %s missing: %s",
 		           name,
-		           error ? error->code : -1,
-			       (error && error->message) ? error->message : "(unknown)");
+		           error->message);
 		g_clear_error (&error);
 
-		icon = applet->fallback_icon;
+		if (applet->fallback_icon)
+			icon = g_object_ref (applet->fallback_icon);
 	}
 
 	g_hash_table_insert (applet->icon_cache, g_strdup (name), icon);
@@ -3103,13 +2963,13 @@ nma_icon_check_and_load (const char *name, NMApplet *applet)
 
 #include "fallback-icon.h"
 
-static gboolean
-nma_icons_reload (NMApplet *applet)
+static void
+nma_icons_reload (NMApplet *applet, gpointer user_data)
 {
 	GError *error = NULL;
-	GdkPixbufLoader *loader;
+	gs_unref_object GdkPixbufLoader *loader = NULL;
 
-	g_return_val_if_fail (applet->icon_size > 0, FALSE);
+	g_return_if_fail (applet->icon_size > 0);
 
 	g_hash_table_remove_all (applet->icon_cache);
 	nma_icons_free (applet);
@@ -3127,21 +2987,15 @@ nma_icons_reload (NMApplet *applet)
 	if (!gdk_pixbuf_loader_close (loader, &error))
 		goto error;
 
+	g_clear_object (&applet->fallback_icon);
 	applet->fallback_icon = gdk_pixbuf_loader_get_pixbuf (loader);
+	g_return_if_fail (applet->fallback_icon);
 	g_object_ref (applet->fallback_icon);
-	g_assert (applet->fallback_icon);
-	g_object_unref (loader);
-
-	return TRUE;
+	return;
 
 error:
-	g_warning ("Could not load fallback icon: (%d) %s",
-	           error ? error->code : -1,
-		       (error && error->message) ? error->message : "(unknown)");
+	g_critical ("Failed loading default-icon: %s", error->message);
 	g_clear_error (&error);
-	/* Die if we can't get a fallback icon */
-	g_assert (FALSE);
-	return FALSE;
 }
 
 static void nma_icons_init (NMApplet *applet)
@@ -3150,8 +3004,8 @@ static void nma_icons_init (NMApplet *applet)
 
 	if (applet->icon_theme) {
 		g_signal_handlers_disconnect_by_func (applet->icon_theme,
-						      G_CALLBACK (nma_icons_reload),
-						      applet);
+		                                      G_CALLBACK (nma_icons_reload),
+		                                      applet);
 		g_object_unref (G_OBJECT (applet->icon_theme));
 	}
 
@@ -3163,12 +3017,12 @@ static void nma_icons_init (NMApplet *applet)
 
 	/* If not done yet, append our search path */
 	path_appended = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (applet->icon_theme),
-					 		    "NMAIconPathAppended"));
+	                                 "NMAIconPathAppended"));
 	if (path_appended == FALSE) {
 		gtk_icon_theme_append_search_path (applet->icon_theme, ICONDIR);
 		g_object_set_data (G_OBJECT (applet->icon_theme),
-				   "NMAIconPathAppended",
-				   GINT_TO_POINTER (TRUE));
+		                   "NMAIconPathAppended",
+		                   GINT_TO_POINTER (TRUE));
 	}
 
 	g_signal_connect (applet->icon_theme, "changed", G_CALLBACK (nma_icons_reload), applet);
@@ -3181,7 +3035,7 @@ status_icon_screen_changed_cb (GtkStatusIcon *icon,
                                NMApplet *applet)
 {
 	nma_icons_init (applet);
-	nma_icons_reload (applet);
+	nma_icons_reload (applet, NULL);
 }
 
 static gboolean
@@ -3194,9 +3048,14 @@ status_icon_size_changed_cb (GtkStatusIcon *icon,
 	/* icon_size may be 0 if for example the panel hasn't given us any space
 	 * yet.  We'll get resized later, but for now just load the 16x16 icons.
 	 */
-	applet->icon_size = size ? size : 16;
+	if (size > 0)
+		applet->icon_size = size;
+	else {
+		applet->icon_size = 16;
+		g_warn_if_fail (size == 0);
+	}
 
-	nma_icons_reload (applet);
+	nma_icons_reload (applet, NULL);
 
 	applet_schedule_update_icon (applet);
 
@@ -3329,36 +3188,6 @@ register_agent (NMApplet *applet)
 #endif
 }
 
-static gboolean
-dbus_setup (NMApplet *applet, GError **error)
-{
-	DBusGProxy *proxy;
-	guint result;
-	gboolean success;
-
-	applet->session_bus = dbus_g_bus_get (DBUS_BUS_SESSION, error);
-	if (!applet->session_bus)
-		return FALSE;
-
-	dbus_g_connection_register_g_object (applet->session_bus,
-	                                     "/org/gnome/network_manager_applet",
-	                                     G_OBJECT (applet));
-
-	proxy = dbus_g_proxy_new_for_name (applet->session_bus,
-	                                   DBUS_SERVICE_DBUS,
-	                                   DBUS_PATH_DBUS,
-	                                   DBUS_INTERFACE_DBUS);
-	success = dbus_g_proxy_call (proxy, "RequestName", error,
-	                             G_TYPE_STRING, "org.gnome.network_manager_applet",
-	                             G_TYPE_UINT, DBUS_NAME_FLAG_DO_NOT_QUEUE,
-	                             G_TYPE_INVALID,
-	                             G_TYPE_UINT, &result,
-	                             G_TYPE_INVALID);
-	g_object_unref (proxy);
-
-	return success;
-}
-
 static void
 applet_gsettings_show_changed (GSettings *settings,
                                gchar *key,
@@ -3376,19 +3205,29 @@ applet_gsettings_show_changed (GSettings *settings,
 #endif
 }
 
-static gboolean
-initable_init (GInitable *initable, GCancellable *cancellable, GError **error)
+/****************************************************************/
+
+static void
+applet_activate (GApplication *app, gpointer user_data)
 {
-	NMApplet *applet = NM_APPLET (initable);
+	/* Nothing to do, but glib requires this handler */
+}
+
+static void
+applet_startup (GApplication *app, gpointer user_data)
+{
+	NMApplet *applet = NM_APPLET (app);
+	gs_free_error GError *error = NULL;
 
 	g_set_application_name (_("NetworkManager Applet"));
 	gtk_window_set_default_icon_name (GTK_STOCK_NETWORK);
 
 	applet->info_dialog_ui = gtk_builder_new ();
 
-	if (!gtk_builder_add_from_file (applet->info_dialog_ui, UIDIR "/info.ui", error)) {
-		g_prefix_error (error, "Couldn't load info dialog ui file: ");
-		return FALSE;
+	if (!gtk_builder_add_from_file (applet->info_dialog_ui, UIDIR "/info.ui", &error)) {
+		g_warning ("Could not load info dialog UI file: %s", error->message);
+		g_application_quit (app);
+		return;
 	}
 
 	applet->gsettings = g_settings_new (APPLET_PREFS_SCHEMA);
@@ -3400,9 +3239,9 @@ initable_init (GInitable *initable, GCancellable *cancellable, GError **error)
 
 	/* Load pixmaps and create applet widgets */
 	if (!setup_widgets (applet)) {
-		g_set_error_literal (error, NMA_ERROR, NMA_ERROR_GENERIC,
-		                     "Could not initialize widgets");
-		return FALSE;
+		g_warning ("Could not initialize applet widgets.");
+		g_application_quit (app);
+		return;
 	}
 	applet->icon_cache = g_hash_table_new_full (g_str_hash,
 	                                            g_str_equal,
@@ -3412,11 +3251,6 @@ initable_init (GInitable *initable, GCancellable *cancellable, GError **error)
 
 	if (!notify_is_initted ())
 		notify_init ("NetworkManager");
-
-	if (!dbus_setup (applet, error)) {
-		g_prefix_error (error, "Failed to initialize D-Bus: ");
-		return FALSE;
-	}
 
 	/* Initialize device classes */
 	applet->ethernet_class = applet_device_ethernet_get_class (applet);
@@ -3449,7 +3283,7 @@ initable_init (GInitable *initable, GCancellable *cancellable, GError **error)
 	if (with_agent)
 		register_agent (applet);
 
-	return TRUE;
+	g_application_hold (G_APPLICATION (applet));
 }
 
 static void finalize (GObject *object)
@@ -3496,7 +3330,6 @@ static void finalize (GObject *object)
 #endif
 
 	g_clear_object (&applet->agent);
-	g_clear_pointer (&applet->session_bus, dbus_g_connection_unref);
 
 	G_OBJECT_CLASS (nma_parent_class)->finalize (object);
 }
@@ -3504,6 +3337,9 @@ static void finalize (GObject *object)
 static void nma_init (NMApplet *applet)
 {
 	applet->icon_size = 16;
+
+	g_signal_connect (applet, "startup", G_CALLBACK (applet_startup), NULL);
+	g_signal_connect (applet, "activate", G_CALLBACK (applet_activate), NULL);
 }
 
 static void nma_class_init (NMAppletClass *klass)
@@ -3511,27 +3347,5 @@ static void nma_class_init (NMAppletClass *klass)
 	GObjectClass *oclass = G_OBJECT_CLASS (klass);
 
 	oclass->finalize = finalize;
-
-	dbus_g_object_type_install_info (NM_TYPE_APPLET, &dbus_glib_nma_object_info);
-}
-
-static void
-nma_initable_interface_init (GInitableIface *iface, gpointer iface_data)
-{
-	iface->init = initable_init;
-}
-
-NMApplet *
-nm_applet_new (void)
-{
-	NMApplet *applet;
-	GError *error = NULL;
-
-	applet = g_initable_new (NM_TYPE_APPLET, NULL, &error, NULL);
-	if (!applet) {
-		g_warning ("%s", error->message);
-		g_error_free (error);
-	}
-	return applet;
 }
 

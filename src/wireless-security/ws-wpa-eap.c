@@ -20,7 +20,8 @@
  * Copyright 2007 - 2014 Red Hat, Inc.
  */
 
-#include <glib/gi18n.h>
+#include "nm-default.h"
+
 #include <ctype.h>
 #include <string.h>
 
