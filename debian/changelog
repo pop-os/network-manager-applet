@@ -4,6 +4,7 @@ network-manager-applet (1.1.91-1) UNRELEASED; urgency=medium
   * Rebase patches.
   * Fix build system to run tests on "make check".
   * Dump the contents of test-suite.log to stdout when the test suite fails.
+  * Skip the test suite if "nocheck" is set via DEB_BUILD_OPTIONS.
 
  -- Michael Biebl <biebl@debian.org>  Tue, 01 Mar 2016 19:54:25 +0100
 

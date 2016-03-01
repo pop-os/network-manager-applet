@@ -21,4 +21,6 @@ override_dh_install:
 	dh_install -X.la -X.a --list-missing
 
 override_dh_auto_test:
+ifeq (, $(filter nocheck, $(DEB_BUILD_OPTIONS)))
 	make check || ( find . -name test-suite.log -exec cat {} \;; exit 1; )
+endif
