@@ -1,4 +1,2 @@
 Allow-to-create-connections-without-admin-privileges.patch
 Force-online-state-with-unmanaged-devices.patch
-libnm-gtk-tests-fix-test-failure-in-test-mobile-providers.patch
-configure.ac-fix-macro-name-GLIB_GSETTINGS-instead-of-GLI.patch
