@@ -21,11 +21,8 @@
  * Copyright 2008 - 2014 Red Hat, Inc.
  */
 
-#ifdef HAVE_CONFIG_H
-#include <config.h>
-#endif
+#include "nm-default.h"
 
-#include <glib/gi18n.h>
 
 #include "ethernet-dialog.h"
 #include "wireless-security.h"

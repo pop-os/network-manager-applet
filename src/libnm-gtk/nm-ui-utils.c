@@ -18,13 +18,10 @@
  * Copyright 2007 - 2015 Red Hat, Inc.
  */
 
-#ifdef HAVE_CONFIG_H
-#include <config.h>
-#endif
+#include "nm-default.h"
 
 #include <string.h>
 
-#include <glib/gi18n-lib.h>
 #include <gudev/gudev.h>
 
 #include <nm-device.h>

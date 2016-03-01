@@ -20,10 +20,9 @@
  * Copyright 2009 - 2014 Red Hat, Inc.
  */
 
-#include <string.h>
+#include "nm-default.h"
 
-#include <gtk/gtk.h>
-#include <glib/gi18n.h>
+#include <string.h>
 
 #include "ce-polkit-button.h"
 

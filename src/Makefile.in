@@ -138,7 +138,6 @@ am__DEPENDENCIES_1 =
 nm_applet_DEPENDENCIES = $(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
 	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
 	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
-	$(am__DEPENDENCIES_1) \
 	${top_builddir}/src/utils/libutils-libnm.la \
 	${top_builddir}/src/wireless-security/libwireless-security-libnm.la \
 	${top_builddir}/src/libnma/libnma.la
@@ -484,12 +483,11 @@ nm_applet_CPPFLAGS = \
 	-DVPN_NAME_FILES_DIR=\""$(sysconfdir)/NetworkManager/VPN"\"	\
 	-DNMALOCALEDIR=\"$(datadir)/locale\"					\
 	-DG_LOG_DOMAIN=\""nm-applet"\" \
-	$(DBUS_GLIB_CFLAGS) \
+	"-I${top_srcdir}/shared/" \
 	-I${top_srcdir}/src/utils \
 	-I${top_srcdir}/src/wireless-security \
 	-I${top_srcdir}/src/libnma
 
-BUILT_SOURCES = applet-dbus-bindings.h
 nm_applet_SOURCES = main.c applet.c applet.h applet-agent.c \
 	applet-agent.h applet-vpn-request.c applet-vpn-request.h \
 	ethernet-dialog.h ethernet-dialog.c applet-dialogs.h \
@@ -502,7 +500,6 @@ nm_applet_SOURCES = main.c applet.c applet.h applet-agent.c \
 nm_applet_LDADD = \
 	-lm \
 	$(GTK_LIBS) \
-	$(DBUS_GLIB_LIBS) \
 	$(LIBNM_LIBS) \
 	$(LIBSECRET_LIBS) \
 	$(NOTIFY_LIBS) \
@@ -514,13 +511,8 @@ nm_applet_LDADD = \
 
 uidir = $(datadir)/nm-applet
 ui_DATA = gsm-unlock.ui info.ui 8021x.ui keyring.png
-CLEANFILES = *.bak $(BUILT_SOURCES)
-EXTRA_DIST = \
-	$(ui_DATA) \
-	nm-applet-introspection.xml
-
-all: $(BUILT_SOURCES)
-	$(MAKE) $(AM_MAKEFLAGS) all-recursive
+EXTRA_DIST = $(ui_DATA)
+all: all-recursive
 
 .SUFFIXES:
 .SUFFIXES: .c .lo .o .obj
@@ -1015,16 +1007,14 @@ distdir: $(DISTFILES)
 	  fi; \
 	done
 check-am: all-am
-check: $(BUILT_SOURCES)
-	$(MAKE) $(AM_MAKEFLAGS) check-recursive
+check: check-recursive
 all-am: Makefile $(PROGRAMS) $(DATA)
 installdirs: installdirs-recursive
 installdirs-am:
 	for dir in "$(DESTDIR)$(bindir)" "$(DESTDIR)$(uidir)"; do \
 	  test -z "$$dir" || $(MKDIR_P) "$$dir"; \
 	done
-install: $(BUILT_SOURCES)
-	$(MAKE) $(AM_MAKEFLAGS) install-recursive
+install: install-recursive
 install-exec: install-exec-recursive
 install-data: install-data-recursive
 uninstall: uninstall-recursive
@@ -1046,7 +1036,6 @@ install-strip:
 mostlyclean-generic:
 
 clean-generic:
-	-test -z "$(CLEANFILES)" || rm -f $(CLEANFILES)
 
 distclean-generic:
 	-test -z "$(CONFIG_CLEAN_FILES)" || rm -f $(CONFIG_CLEAN_FILES)
@@ -1055,7 +1044,6 @@ distclean-generic:
 maintainer-clean-generic:
 	@echo "This command is intended for maintainers to use"
 	@echo "it deletes files that may require special tools to rebuild."
-	-test -z "$(BUILT_SOURCES)" || rm -f $(BUILT_SOURCES)
 clean: clean-recursive
 
 clean-am: clean-binPROGRAMS clean-generic clean-libtool mostlyclean-am
@@ -1126,8 +1114,7 @@ ps-am:
 
 uninstall-am: uninstall-binPROGRAMS uninstall-uiDATA
 
-.MAKE: $(am__recursive_targets) all check install install-am \
-	install-strip
+.MAKE: $(am__recursive_targets) install-am install-strip
 
 .PHONY: $(am__recursive_targets) CTAGS GTAGS TAGS all all-am check \
 	check-am clean clean-binPROGRAMS clean-generic clean-libtool \
@@ -1147,9 +1134,6 @@ uninstall-am: uninstall-binPROGRAMS uninstall-uiDATA
 
 .PRECIOUS: Makefile
 
-
-applet-dbus-bindings.h: nm-applet-introspection.xml
-	$(AM_V_GEN) dbus-binding-tool --mode=glib-server --prefix=nma --output=$@ $<
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.

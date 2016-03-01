@@ -20,8 +20,9 @@
  * Copyright 2010 - 2014 Red Hat, Inc.
  */
 
+#include "nm-default.h"
+
 #include <ctype.h>
-#include <glib/gi18n.h>
 
 #define SECRET_API_SUBJECT_TO_CHANGE
 #include <libsecret/secret.h>

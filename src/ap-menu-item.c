@@ -21,12 +21,9 @@
  * Copyright 2005 - 2014 Red Hat, Inc.
  */
 
-#ifdef HAVE_CONFIG_H
-#include <config.h>
-#endif
+#include "nm-default.h"
 
 #include <stdio.h>
-#include <glib/gi18n.h>
 #include <string.h>
 
 #include <NetworkManager.h>

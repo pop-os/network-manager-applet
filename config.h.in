@@ -66,6 +66,9 @@
 /* git commit id of the original source code version */
 #undef NMA_GIT_SHA
 
+/* Define if more asserts are enabled */
+#undef NM_MORE_ASSERTS
+
 /* Name of package */
 #undef PACKAGE
 

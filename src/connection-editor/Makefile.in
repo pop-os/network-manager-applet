@@ -143,7 +143,7 @@ am__DEPENDENCIES_1 =
 nm_connection_editor_DEPENDENCIES = ${top_builddir}/src/wireless-security/libwireless-security-libnm.la \
 	${top_builddir}/src/utils/libutils-libnm.la \
 	${top_builddir}/src/libnma/libnma.la $(am__DEPENDENCIES_1) \
-	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1)
+	$(am__DEPENDENCIES_1)
 AM_V_lt = $(am__v_lt_@AM_V@)
 am__v_lt_ = $(am__v_lt_@AM_DEFAULT_V@)
 am__v_lt_0 = --silent
@@ -437,7 +437,7 @@ nm_connection_editor_CPPFLAGS = \
 	-DLIBDIR=\""$(libdir)"\" \
 	-DDATADIR=\""$(datadir)"\" \
 	-DNMALOCALEDIR=\"$(datadir)/locale\" \
-	$(DBUS_GLIB_CFLAGS) \
+	"-I${top_srcdir}/shared/" \
 	-I${top_srcdir}/src/utils \
 	-I${top_srcdir}/src/wireless-security \
 	-I${top_srcdir}/src/libnma
@@ -510,7 +510,6 @@ nm_connection_editor_LDADD = \
 	${top_builddir}/src/utils/libutils-libnm.la \
 	${top_builddir}/src/libnma/libnma.la \
 	$(GTK_LIBS) \
-	$(DBUS_GLIB_LIBS) \
 	$(LIBNM_LIBS) \
 	-lm
 
@@ -540,11 +539,8 @@ ui_DATA = \
 	ce-page-vlan.ui \
 	ce-page-dcb.ui
 
-BUILT_SOURCES = nm-connection-editor-service-glue.h
-CLEANFILES = *.bak $(BUILT_SOURCES)
-EXTRA_DIST = $(ui_DATA) nm-connection-editor-service.xml
-all: $(BUILT_SOURCES)
-	$(MAKE) $(AM_MAKEFLAGS) all-am
+EXTRA_DIST = $(ui_DATA)
+all: all-am
 
 .SUFFIXES:
 .SUFFIXES: .c .lo .o .obj
@@ -1237,15 +1233,13 @@ distdir: $(DISTFILES)
 	  fi; \
 	done
 check-am: all-am
-check: $(BUILT_SOURCES)
-	$(MAKE) $(AM_MAKEFLAGS) check-am
+check: check-am
 all-am: Makefile $(PROGRAMS) $(DATA)
 installdirs:
 	for dir in "$(DESTDIR)$(bindir)" "$(DESTDIR)$(uidir)"; do \
 	  test -z "$$dir" || $(MKDIR_P) "$$dir"; \
 	done
-install: $(BUILT_SOURCES)
-	$(MAKE) $(AM_MAKEFLAGS) install-am
+install: install-am
 install-exec: install-exec-am
 install-data: install-data-am
 uninstall: uninstall-am
@@ -1267,7 +1261,6 @@ install-strip:
 mostlyclean-generic:
 
 clean-generic:
-	-test -z "$(CLEANFILES)" || rm -f $(CLEANFILES)
 
 distclean-generic:
 	-test -z "$(CONFIG_CLEAN_FILES)" || rm -f $(CONFIG_CLEAN_FILES)
@@ -1276,7 +1269,6 @@ distclean-generic:
 maintainer-clean-generic:
 	@echo "This command is intended for maintainers to use"
 	@echo "it deletes files that may require special tools to rebuild."
-	-test -z "$(BUILT_SOURCES)" || rm -f $(BUILT_SOURCES)
 clean: clean-am
 
 clean-am: clean-binPROGRAMS clean-generic clean-libtool mostlyclean-am
@@ -1347,7 +1339,7 @@ ps-am:
 
 uninstall-am: uninstall-binPROGRAMS uninstall-uiDATA
 
-.MAKE: all check install install-am install-strip
+.MAKE: install-am install-strip
 
 .PHONY: CTAGS GTAGS TAGS all all-am check check-am clean \
 	clean-binPROGRAMS clean-generic clean-libtool cscopelist-am \
@@ -1366,9 +1358,6 @@ uninstall-am: uninstall-binPROGRAMS uninstall-uiDATA
 
 .PRECIOUS: Makefile
 
-
-nm-connection-editor-service-glue.h: $(top_srcdir)/src/connection-editor/nm-connection-editor-service.xml
-	$(AM_V_GEN) dbus-binding-tool --prefix=nm_connection_editor_service --mode=glib-server --output=$@ $<
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.

@@ -20,6 +20,8 @@
  * Copyright 2008 - 2014 Red Hat, Inc.
  */
 
+#include "nm-default.h"
+
 #include <netinet/in.h>
 #include <sys/types.h>
 #include <sys/socket.h>
@@ -28,7 +30,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include <glib/gi18n.h>
 
 #include <NetworkManager.h>
 

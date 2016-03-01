@@ -366,7 +366,8 @@ test_utils_CPPFLAGS = \
 	-I $(top_srcdir)/src/utils \
 	-DLIBNM_BUILD \
 	$(GTK_CFLAGS) \
-	$(LIBNM_CFLAGS)
+	$(LIBNM_CFLAGS) \
+	"-I${top_srcdir}/shared/"
 
 test_utils_LDADD = \
 	${top_builddir}/src/utils/libutils-libnm.la \
@@ -555,7 +556,6 @@ distdir: $(DISTFILES)
 	  fi; \
 	done
 check-am: all-am
-	$(MAKE) $(AM_MAKEFLAGS) check-local
 check: check-am
 all-am: Makefile $(PROGRAMS)
 installdirs:
@@ -660,11 +660,11 @@ ps-am:
 
 uninstall-am:
 
-.MAKE: check-am install-am install-strip
+.MAKE: install-am install-strip
 
-.PHONY: CTAGS GTAGS TAGS all all-am check check-am check-local clean \
-	clean-generic clean-libtool clean-noinstPROGRAMS cscopelist-am \
-	ctags ctags-am distclean distclean-compile distclean-generic \
+.PHONY: CTAGS GTAGS TAGS all all-am check check-am clean clean-generic \
+	clean-libtool clean-noinstPROGRAMS cscopelist-am ctags \
+	ctags-am distclean distclean-compile distclean-generic \
 	distclean-libtool distclean-tags distdir dvi dvi-am html \
 	html-am info info-am install install-am install-data \
 	install-data-am install-dvi install-dvi-am install-exec \
@@ -679,8 +679,7 @@ uninstall-am:
 .PRECIOUS: Makefile
 
 
-check-local: test-utils
-	$(abs_builddir)/test-utils
+TESTS: test-utils
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.
