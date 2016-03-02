@@ -1,4 +1,4 @@
-network-manager-applet (1.1.91-1) UNRELEASED; urgency=medium
+network-manager-applet (1.1.91-1) unstable; urgency=medium
 
   * New upstream release (1.2 beta2).
   * Rebase patches.
@@ -6,7 +6,7 @@ network-manager-applet (1.1.91-1) UNRELEASED; urgency=medium
   * Dump the contents of test-suite.log to stdout when the test suite fails.
   * Skip the test suite if "nocheck" is set via DEB_BUILD_OPTIONS.
 
- -- Michael Biebl <biebl@debian.org>  Tue, 01 Mar 2016 19:54:25 +0100
+ -- Michael Biebl <biebl@debian.org>  Wed, 02 Mar 2016 01:30:35 +0100
 
 network-manager-applet (1.1.90-3) unstable; urgency=medium
 
