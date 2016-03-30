@@ -247,6 +247,7 @@ mode_combo_changed_cb (GtkComboBox *combo,
  	switch (gtk_combo_box_get_active (GTK_COMBO_BOX (combo))) {
 	case 1: /* hotspot */
 		hotspot = TRUE;
+		/* fallthrough */
  	case 2: /* adhoc */
 		/* BSSID is random and is created by kernel for Ad-Hoc networks
 		 * http://lxr.linux.no/linux+v3.7.6/net/mac80211/ibss.c#L685
@@ -351,10 +352,10 @@ populate_ui (CEPageWifi *self)
 
 	gtk_widget_set_sensitive (GTK_WIDGET (priv->channel), FALSE);
 	if (band) {
-		if (!strcmp (band ? band : "", "a")) {
+		if (!strcmp (band, "a")) {
 			band_idx = 1;
 			gtk_widget_set_sensitive (GTK_WIDGET (priv->channel), TRUE);
-		} else if (!strcmp (band ? band : "", "bg")) {
+		} else if (!strcmp (band, "bg")) {
 			band_idx = 2;
 			gtk_widget_set_sensitive (GTK_WIDGET (priv->channel), TRUE);
 		}

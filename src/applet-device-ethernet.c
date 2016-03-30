@@ -147,6 +147,9 @@ ethernet_get_icon (NMDevice *device,
 	NMSettingConnection *s_con;
 	const char *id;
 
+	g_return_if_fail (out_icon_name && !*out_icon_name);
+	g_return_if_fail (tip && !*tip);
+
 	id = nm_device_get_iface (NM_DEVICE (device));
 	if (connection) {
 		s_con = nm_connection_get_setting_connection (connection);
@@ -167,7 +170,7 @@ ethernet_get_icon (NMDevice *device,
 		*tip = g_strdup_printf (_("Requesting an ethernet network address for '%s'..."), id);
 		break;
 	case NM_DEVICE_STATE_ACTIVATED:
-		*out_icon_name = g_strdup_printf ("nm-device-wired");
+		*out_icon_name = "nm-device-wired";
 		*tip = g_strdup_printf (_("Ethernet network connection '%s' active"), id);
 		break;
 	default:

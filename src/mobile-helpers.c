@@ -38,9 +38,7 @@ mobile_helper_get_status_pixbuf (guint32 quality,
                                  guint32 access_tech,
                                  NMApplet *applet)
 {
-	GdkPixbuf *pixbuf, *qual_pixbuf, *wwan_pixbuf, *tmp;
-
-	wwan_pixbuf = nma_icon_check_and_load ("nm-wwan-tower", applet);
+	GdkPixbuf *pixbuf, *qual_pixbuf, *tmp;
 
 	if (!quality_valid)
 		quality = 0;
@@ -48,35 +46,42 @@ mobile_helper_get_status_pixbuf (guint32 quality,
 
 	pixbuf = gdk_pixbuf_new (GDK_COLORSPACE_RGB,
 	                         TRUE,
-	                         gdk_pixbuf_get_bits_per_sample (qual_pixbuf),
-	                         gdk_pixbuf_get_width (qual_pixbuf),
-	                         gdk_pixbuf_get_height (qual_pixbuf));
+	                         qual_pixbuf ? gdk_pixbuf_get_bits_per_sample (qual_pixbuf) : 8,
+	                         qual_pixbuf ? gdk_pixbuf_get_width (qual_pixbuf) : 22,
+	                         qual_pixbuf ? gdk_pixbuf_get_height (qual_pixbuf) : 22);
 	gdk_pixbuf_fill (pixbuf, 0xFFFFFF00);
 
 	/* Composite the tower icon into the final icon at the bottom layer */
-	gdk_pixbuf_composite (wwan_pixbuf, pixbuf,
-	                      0, 0,
-	                      gdk_pixbuf_get_width (wwan_pixbuf),
-						  gdk_pixbuf_get_height (wwan_pixbuf),
-						  0, 0, 1.0, 1.0,
-						  GDK_INTERP_BILINEAR, 255);
+	tmp = nma_icon_check_and_load ("nm-wwan-tower", applet);
+	if (tmp) {
+		gdk_pixbuf_composite (tmp, pixbuf,
+		                      0, 0,
+		                      gdk_pixbuf_get_width (tmp),
+		                      gdk_pixbuf_get_height (tmp),
+		                      0, 0, 1.0, 1.0,
+		                      GDK_INTERP_BILINEAR, 255);
+	}
 
 	/* Composite the signal quality onto the icon on top of the WWAN tower */
-	gdk_pixbuf_composite (qual_pixbuf, pixbuf,
-	                      0, 0,
-	                      gdk_pixbuf_get_width (qual_pixbuf),
-						  gdk_pixbuf_get_height (qual_pixbuf),
-						  0, 0, 1.0, 1.0,
-						  GDK_INTERP_BILINEAR, 255);
+	if (qual_pixbuf) {
+		gdk_pixbuf_composite (qual_pixbuf, pixbuf,
+		                      0, 0,
+		                      gdk_pixbuf_get_width (qual_pixbuf),
+		                      gdk_pixbuf_get_height (qual_pixbuf),
+		                      0, 0, 1.0, 1.0,
+		                      GDK_INTERP_BILINEAR, 255);
+	}
 
 	/* And finally the roaming or technology icon */
 	if (state == MB_STATE_ROAMING) {
 		tmp = nma_icon_check_and_load ("nm-mb-roam", applet);
-		gdk_pixbuf_composite (tmp, pixbuf, 0, 0,
-		                      gdk_pixbuf_get_width (tmp),
-							  gdk_pixbuf_get_height (tmp),
-							  0, 0, 1.0, 1.0,
-							  GDK_INTERP_BILINEAR, 255);
+		if (tmp) {
+			gdk_pixbuf_composite (tmp, pixbuf, 0, 0,
+			                      gdk_pixbuf_get_width (tmp),
+			                      gdk_pixbuf_get_height (tmp),
+			                       0, 0, 1.0, 1.0,
+			                      GDK_INTERP_BILINEAR, 255);
+		}
 	} else {
 		const gchar *tech_icon_name;
 
@@ -110,7 +115,7 @@ mobile_helper_get_quality_icon_name (guint32 quality)
 		return "nm-signal-50";
 	else if (quality > 5)
 		return "nm-signal-25";
-	else 
+	else
 		return "nm-signal-00";
 }
 
@@ -579,6 +584,9 @@ mobile_helper_get_icon (NMDevice *device,
 {
 	NMSettingConnection *s_con;
 	const char *id;
+
+	g_return_if_fail (out_icon_name && !*out_icon_name);
+	g_return_if_fail (tip && !*tip);
 
 	id = nm_device_get_iface (NM_DEVICE (device));
 	if (connection) {
