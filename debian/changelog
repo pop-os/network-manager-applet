@@ -2,6 +2,7 @@ network-manager-applet (1.1.92-1) UNRELEASED; urgency=medium
 
   * New upstream release (1.2 beta3).
   * Drop dependency on libdbus-glib-1-dev.
+  * Rebase patches.
 
  -- Michael Biebl <biebl@debian.org>  Thu, 31 Mar 2016 00:11:47 +0200
 

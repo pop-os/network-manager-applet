@@ -31,10 +31,10 @@ Closes: #696256
  10 files changed, 86 insertions(+)
 
 diff --git a/src/applet-device-wifi.c b/src/applet-device-wifi.c
-index b768fb0..6e74da8 100644
+index 9944fb4..1c287b0 100644
 --- a/src/applet-device-wifi.c
 +++ b/src/applet-device-wifi.c
-@@ -378,6 +378,7 @@ _do_new_auto_connection (NMApplet *applet,
+@@ -526,6 +526,7 @@ _do_new_auto_connection (NMApplet *applet,
  	NMSettingWirelessSecurity *s_wsec = NULL;
  	NMSetting8021x *s_8021x = NULL;
  	GBytes *ssid;
@@ -42,7 +42,7 @@ index b768fb0..6e74da8 100644
  	NM80211ApSecurityFlags wpa_flags, rsn_flags;
  	GtkWidget *dialog;
  	MoreInfo *more_info;
-@@ -409,6 +410,7 @@ _do_new_auto_connection (NMApplet *applet,
+@@ -557,6 +558,7 @@ _do_new_auto_connection (NMApplet *applet,
  	/* If the AP is WPA[2]-Enterprise then we need to set up a minimal 802.1x
  	 * setting and ask the user for more information.
  	 */
@@ -50,7 +50,7 @@ index b768fb0..6e74da8 100644
  	rsn_flags = nm_access_point_get_rsn_flags (ap);
  	wpa_flags = nm_access_point_get_wpa_flags (ap);
  	if (   (rsn_flags & NM_802_11_AP_SEC_KEY_MGMT_802_1X)
-@@ -437,6 +439,29 @@ _do_new_auto_connection (NMApplet *applet,
+@@ -585,6 +587,29 @@ _do_new_auto_connection (NMApplet *applet,
  		nm_connection_add_setting (connection, NM_SETTING (s_8021x));
  	}
  
@@ -150,7 +150,7 @@ index d07f491..0a4d538 100644
  	g_object_set (s_vpn, NM_SETTING_VPN_SERVICE_TYPE, detail, NULL);
  	nm_connection_add_setting (connection, s_vpn);
 diff --git a/src/connection-editor/page-wifi.c b/src/connection-editor/page-wifi.c
-index 44dd4d3..633a43e 100644
+index 8215cb3..394e977 100644
 --- a/src/connection-editor/page-wifi.c
 +++ b/src/connection-editor/page-wifi.c
 @@ -26,6 +26,8 @@
@@ -162,7 +162,7 @@ index 44dd4d3..633a43e 100644
  #include "page-wifi.h"
  
  G_DEFINE_TYPE (CEPageWifi, ce_page_wifi, CE_TYPE_PAGE)
-@@ -620,6 +622,17 @@ wifi_connection_new (GtkWindow *parent,
+@@ -621,6 +623,17 @@ wifi_connection_new (GtkWindow *parent,
  	                                     TRUE,
  	                                     client,
  	                                     user_data);
@@ -203,10 +203,10 @@ index 1bf1bf4..7c29a5b 100644
  
  		s_wireless = (NMSettingWireless *) nm_setting_wireless_new ();
 diff --git a/src/mobile-helpers.c b/src/mobile-helpers.c
-index 7a6b61d..d0fef76 100644
+index 406e3e0..751bea1 100644
 --- a/src/mobile-helpers.c
 +++ b/src/mobile-helpers.c
-@@ -178,6 +178,7 @@ mobile_wizard_done (NMAMobileWizard *wizard,
+@@ -183,6 +183,7 @@ mobile_wizard_done (NMAMobileWizard *wizard,
  			              NM_SETTING_CDMA_NUMBER, "#777",
  			              NM_SETTING_CDMA_USERNAME, method->username,
  			              NM_SETTING_CDMA_PASSWORD, method->password,
@@ -214,7 +214,7 @@ index 7a6b61d..d0fef76 100644
  			              NULL);
  			nm_connection_add_setting (connection, setting);
  		} else if (method->devtype == NM_DEVICE_MODEM_CAPABILITY_GSM_UMTS) {
-@@ -188,6 +189,7 @@ mobile_wizard_done (NMAMobileWizard *wizard,
+@@ -193,6 +194,7 @@ mobile_wizard_done (NMAMobileWizard *wizard,
  			              NM_SETTING_GSM_USERNAME, method->username,
  			              NM_SETTING_GSM_PASSWORD, method->password,
  			              NM_SETTING_GSM_APN, method->gsm_apn,
@@ -222,7 +222,7 @@ index 7a6b61d..d0fef76 100644
  			              NULL);
  			nm_connection_add_setting (connection, setting);
  		} else
-@@ -218,6 +220,7 @@ mobile_wizard_done (NMAMobileWizard *wizard,
+@@ -223,6 +225,7 @@ mobile_wizard_done (NMAMobileWizard *wizard,
  		                                      "user", g_get_user_name (), NULL);
  		g_free (uuid);
  		g_free (id);
@@ -267,7 +267,7 @@ index 908741c..64a53ea 100644
  
  typedef enum  {
 diff --git a/src/wireless-security/ws-wep-key.c b/src/wireless-security/ws-wep-key.c
-index a95695b..b1ccf30 100644
+index 3628d67..18d9300 100644
 --- a/src/wireless-security/ws-wep-key.c
 +++ b/src/wireless-security/ws-wep-key.c
 @@ -157,6 +157,7 @@ static void
