@@ -26,12 +26,12 @@
 #include <stdlib.h>
 #include <signal.h>
 
-#include <dbus/dbus.h>
 #include <glib-unix.h>
 
 #include "gsystem-local-alloc.h"
 #include "nm-connection-list.h"
 #include "nm-connection-editor.h"
+#include "nm-dbus-compat.h"
 
 gboolean nm_ce_keep_above;
 
@@ -207,7 +207,7 @@ try_existing_instance (GDBusConnection *bus,
 {
 	gs_free char *owner = NULL;
 	gs_free_error GError *error = NULL;
-	gs_unref_variant GVariant *reply = NULL, *args = NULL;
+	gs_unref_variant GVariant *reply = NULL;
 	GVariantBuilder builder;
 
 	g_assert (bus);

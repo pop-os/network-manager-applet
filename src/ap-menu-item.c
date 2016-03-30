@@ -33,18 +33,16 @@
 #include "mobile-helpers.h"
 
 
-G_DEFINE_TYPE (NMNetworkMenuItem, nm_network_menu_item, GTK_TYPE_IMAGE_MENU_ITEM);
+G_DEFINE_TYPE (NMNetworkMenuItem, nm_network_menu_item, GTK_TYPE_MENU_ITEM);
 
 #define NM_NETWORK_MENU_ITEM_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), NM_TYPE_NETWORK_MENU_ITEM, NMNetworkMenuItemPrivate))
 
 typedef struct {
-#ifndef ENABLE_INDICATOR
 	GtkWidget * ssid;
 	GtkWidget * strength;
 	GtkWidget * hbox;
-#endif
 
-	char      * ssid_string;
+	char *      ssid_string;
 	guint32     int_strength;
 	gchar *     hash;
 	GSList *    dupes;
@@ -98,7 +96,8 @@ static void
 update_icon (NMNetworkMenuItem *item, NMApplet *applet)
 {
 	NMNetworkMenuItemPrivate *priv = NM_NETWORK_MENU_ITEM_GET_PRIVATE (item);
-	GdkPixbuf *icon, *scaled = NULL;
+	gs_unref_object GdkPixbuf *icon_free = NULL, *icon_free2 = NULL;
+	GdkPixbuf *icon;
 	const char *icon_name = NULL;
 
 	if (priv->is_adhoc)
@@ -106,38 +105,28 @@ update_icon (NMNetworkMenuItem *item, NMApplet *applet)
 	else
 		icon_name = mobile_helper_get_quality_icon_name (priv->int_strength);
 
-	icon = gdk_pixbuf_copy (nma_icon_check_and_load (icon_name, applet));
+	icon = nma_icon_check_and_load (icon_name, applet);
+	if (icon) {
+		if (priv->is_encrypted) {
+			GdkPixbuf *encrypted = nma_icon_check_and_load ("nm-secure-lock", applet);
 
-	if (priv->is_encrypted) {
-		GdkPixbuf *encrypted = nma_icon_check_and_load ("nm-secure-lock", applet);
+			if (encrypted) {
+				icon = icon_free = gdk_pixbuf_copy (icon);
 
-		gdk_pixbuf_composite (encrypted, icon, 0, 0,
-		                      gdk_pixbuf_get_width (encrypted),
-		                      gdk_pixbuf_get_height (encrypted),
-		                      0, 0, 1.0, 1.0,
-		                      GDK_INTERP_NEAREST, 255);
+				gdk_pixbuf_composite (encrypted, icon, 0, 0,
+				                      gdk_pixbuf_get_width (encrypted),
+				                      gdk_pixbuf_get_height (encrypted),
+				                      0, 0, 1.0, 1.0,
+				                      GDK_INTERP_NEAREST, 255);
+			}
+		}
+
+		/* Scale to menu size if larger so the menu doesn't look awful */
+		if (gdk_pixbuf_get_height (icon) > 24 || gdk_pixbuf_get_width (icon) > 24)
+			icon = icon_free2 = gdk_pixbuf_scale_simple (icon, 24, 24, GDK_INTERP_BILINEAR);
 	}
 
-	/* Scale to menu size if larger so the menu doesn't look awful */
-	if (gdk_pixbuf_get_height (icon) > 24 || gdk_pixbuf_get_width (icon) > 24) {
-		scaled = gdk_pixbuf_scale_simple (icon, 24, 24, GDK_INTERP_BILINEAR);
-		g_object_unref (icon);
-		icon = scaled;
-	}
-
-#ifdef ENABLE_INDICATOR
-#ifdef DBUSMENU_PIXMAP_SUPPORT
-	gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (item), gtk_image_new_from_pixbuf (icon));
-#else
-	gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (item),
-	                               gtk_image_new_from_icon_name (icon_name, GTK_ICON_SIZE_MENU));
-#endif
-	/* For some reason we must always re-set always-show after setting the image */
-	gtk_image_menu_item_set_always_show_image (GTK_IMAGE_MENU_ITEM (item), TRUE);
-#else
 	gtk_image_set_from_pixbuf (GTK_IMAGE (priv->strength), icon);
-#endif
-	g_object_unref (icon);
 }
 
 void
@@ -192,9 +181,6 @@ update_label (NMNetworkMenuItem *item, gboolean use_bold)
 {
 	NMNetworkMenuItemPrivate *priv = NM_NETWORK_MENU_ITEM_GET_PRIVATE (item);
 
-#ifdef ENABLE_INDICATOR
-	gtk_menu_item_set_label (GTK_MENU_ITEM (item), priv->ssid_string);
-#else
 	gtk_label_set_use_markup (GTK_LABEL (priv->ssid), use_bold);
 	if (use_bold) {
 		char *markup = g_markup_printf_escaped ("<b>%s</b>", priv->ssid_string);
@@ -203,7 +189,6 @@ update_label (NMNetworkMenuItem *item, gboolean use_bold)
 		g_free (markup);
 	} else
 		gtk_label_set_text (GTK_LABEL (priv->ssid), priv->ssid_string);
-#endif
 }
 
 void
@@ -316,7 +301,6 @@ nm_network_menu_item_new (NMAccessPoint *ap,
 static void
 nm_network_menu_item_init (NMNetworkMenuItem *item)
 {
-#ifndef ENABLE_INDICATOR
 	NMNetworkMenuItemPrivate *priv = NM_NETWORK_MENU_ITEM_GET_PRIVATE (item);
 
 	priv->hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
@@ -332,9 +316,6 @@ nm_network_menu_item_init (NMNetworkMenuItem *item)
 
 	gtk_widget_show (priv->ssid);
 	gtk_widget_show (priv->hbox);
-#else
-	gtk_image_menu_item_set_always_show_image (GTK_IMAGE_MENU_ITEM (item), TRUE);
-#endif
 }
 
 static void

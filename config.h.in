@@ -1,8 +1,5 @@
 /* config.h.in.  Generated from configure.ac by autoheader.  */
 
-/* Enable using libappindicator */
-#undef ENABLE_INDICATOR
-
 /* always defined to indicate that i18n is enabled */
 #undef ENABLE_NLS
 
@@ -117,6 +114,9 @@
 
 /* Version number of package */
 #undef VERSION
+
+/* Enable using libappindicator */
+#undef WITH_APPINDICATOR
 
 /* Define if you have ModemManager/WWAN support */
 #undef WITH_WWAN

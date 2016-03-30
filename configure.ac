@@ -1,6 +1,6 @@
 AC_PREREQ([2.63])
 AC_INIT([nm-applet],
-        [1.1.91],
+        [1.1.92],
         [https://bugzilla.gnome.org/enter_bug.cgi?product=NetworkManager],
         [network-manager-applet])
 
@@ -73,8 +73,6 @@ else
     AC_DEFINE_UNQUOTED([ISO_CODES_PREFIX],["$prefix"],[ISO codes prefix])
 fi
 
-PKG_CHECK_MODULES(DBUS_GLIB, [dbus-glib-1 >= 0.74])
-
 PKG_CHECK_MODULES(LIBNM_GLIB,
 		[gio-2.0 >= 2.32
 		 NetworkManager >= 1.1
@@ -106,7 +104,8 @@ GTK_CFLAGS="$GTK_CFLAGS -DGDK_VERSION_MIN_REQUIRED=GDK_VERSION_3_4"
 AC_ARG_WITH([appindicator], AS_HELP_STRING([--with-appindicator|--without-appindicator], [Build with libappindicator support instead of xembed systray support.]))
 if test "$with_appindicator" == "yes"; then
 	PKG_CHECK_MODULES(APPINDICATOR, appindicator3-0.1)
-	AC_DEFINE([ENABLE_INDICATOR], 1, [Enable using libappindicator])
+	PKG_CHECK_MODULES(DBUSMENU, dbusmenu-gtk3-0.4 >= 16.04.0)
+	AC_DEFINE([WITH_APPINDICATOR], 1, [Enable using libappindicator])
 fi
 
 AM_CONDITIONAL(HAVE_GBT, test x"$have_gbt" = "xyes")
