@@ -1,11 +1,11 @@
-network-manager-applet (1.2.0-1) UNRELEASED; urgency=medium
+network-manager-applet (1.2.0-1) unstable; urgency=medium
 
   * New upstream release.
   * Update debian/copyright.
   * Bump dependencies of libnm-gtk-dev and libnma-dev on the NetworkManager
     dev packages to (>= 1.1).
 
- -- Michael Biebl <biebl@debian.org>  Fri, 22 Apr 2016 17:28:42 +0200
+ -- Michael Biebl <biebl@debian.org>  Fri, 22 Apr 2016 17:30:12 +0200
 
 network-manager-applet (1.1.93-1) unstable; urgency=medium
 
