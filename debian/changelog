@@ -1,6 +1,7 @@
 network-manager-applet (1.2.0-1) UNRELEASED; urgency=medium
 
   * New upstream release.
+  * Update debian/copyright.
 
  -- Michael Biebl <biebl@debian.org>  Fri, 22 Apr 2016 17:03:05 +0200
 
