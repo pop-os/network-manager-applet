@@ -35,7 +35,7 @@ Depends: ${shlibs:Depends},
          ${misc:Depends},
          libnma0 (= ${binary:Version}),
          network-manager (>= 1.2),
-         policykit-1-gnome,
+         policykit-1-gnome | polkit-1-auth-agent,
          dbus-x11
 Recommends: notification-daemon,
             gnome-keyring,
