@@ -36,7 +36,6 @@ Depends: ${shlibs:Depends},
          libnma0 (= ${binary:Version}),
          network-manager (>= 1.2),
          policykit-1-gnome,
-         gnome-icon-theme,
          dbus-x11
 Recommends: notification-daemon,
             gnome-keyring,
