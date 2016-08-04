@@ -1,6 +1,7 @@
 network-manager-applet (1.2.4-1) UNRELEASED; urgency=medium
 
   * New upstream release.
+  * Rebase patches.
 
  -- Michael Biebl <biebl@debian.org>  Thu, 04 Aug 2016 08:09:35 +0200
 

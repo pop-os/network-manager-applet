@@ -203,7 +203,7 @@ index 1bf1bf4..7c29a5b 100644
  
  		s_wireless = (NMSettingWireless *) nm_setting_wireless_new ();
 diff --git a/src/mobile-helpers.c b/src/mobile-helpers.c
-index 406e3e0..751bea1 100644
+index 8969fd3..76294a1 100644
 --- a/src/mobile-helpers.c
 +++ b/src/mobile-helpers.c
 @@ -183,6 +183,7 @@ mobile_wizard_done (NMAMobileWizard *wizard,
