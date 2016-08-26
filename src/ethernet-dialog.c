@@ -83,7 +83,7 @@ nma_ethernet_dialog_new (NMConnection *connection)
 	if (!gtk_builder_add_from_file (builder, UIDIR "/8021x.ui", &error)) {
 		g_warning ("Couldn't load builder file: %s", error->message);
 		g_error_free (error);
-		applet_warning_dialog_show (_("The NetworkManager Applet could not find some required resources (the .ui file was not found)."));
+		applet_missing_ui_warning_dialog_show ();
 		g_object_unref (builder);
 		return NULL;
 	}
@@ -91,7 +91,7 @@ nma_ethernet_dialog_new (NMConnection *connection)
 	dialog = (GtkWidget *) gtk_builder_get_object (builder, "8021x_dialog");
 	if (!dialog) {
 		g_warning ("Couldn't find wireless_dialog widget.");
-		applet_warning_dialog_show (_("The NetworkManager Applet could not find some required resources (the .ui file was not found)."));
+		applet_missing_ui_warning_dialog_show ();
 		g_object_unref (builder);
 		return NULL;
 	}
@@ -156,6 +156,10 @@ nma_ethernet_dialog_get_connection (GtkWidget *dialog)
 	/* Save new CA cert ignore values to GSettings */
 	eap_method_ca_cert_ignore_save (tmp_connection);
 
+	/* Remove the 8021x setting to prevent the clearing of secrets when the
+	 * simple-connection is destroyed.
+	 */
+	nm_connection_remove_setting (tmp_connection, NM_TYPE_SETTING_802_1X);
 	g_object_unref (tmp_connection);
 
 	return connection;

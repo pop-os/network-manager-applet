@@ -90,7 +90,7 @@ build_triplet = @build@
 host_triplet = @host@
 subdir = .
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
-am__aclocal_m4_deps = $(top_srcdir)/m4/compiler_warnings.m4 \
+am__aclocal_m4_deps = $(top_srcdir)/m4/compiler_options.m4 \
 	$(top_srcdir)/m4/glib-makefile.m4 $(top_srcdir)/m4/intltool.m4 \
 	$(top_srcdir)/m4/introspection.m4 $(top_srcdir)/m4/libtool.m4 \
 	$(top_srcdir)/m4/ltoptions.m4 $(top_srcdir)/m4/ltsugar.m4 \
@@ -314,6 +314,8 @@ INTROSPECTION_SCANNER = @INTROSPECTION_SCANNER@
 INTROSPECTION_TYPELIBDIR = @INTROSPECTION_TYPELIBDIR@
 ISO_CODES_CFLAGS = @ISO_CODES_CFLAGS@
 ISO_CODES_LIBS = @ISO_CODES_LIBS@
+JANSSON_CFLAGS = @JANSSON_CFLAGS@
+JANSSON_LIBS = @JANSSON_LIBS@
 LD = @LD@
 LDFLAGS = @LDFLAGS@
 LIBNM_CFLAGS = @LIBNM_CFLAGS@
@@ -443,7 +445,7 @@ desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
 gsettings_SCHEMAS = org.gnome.nm-applet.gschema.xml
 appdatadir = $(datadir)/appdata
 appdata_DATA = $(appdata_in_files:.xml.in=.xml)
-appdata_in_files = org.gnome.nm-connection-editor.appdata.xml.in
+appdata_in_files = nm-connection-editor.appdata.xml.in
 convertdir = $(datadir)/GConf/gsettings
 convert_DATA = nm-applet.convert
 DISTCHECK_CONFIGURE_FLAGS = --enable-more-warnings=yes

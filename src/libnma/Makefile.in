@@ -93,7 +93,7 @@ host_triplet = @host@
 @HAVE_INTROSPECTION_TRUE@am__append_1 = NMA-1.0.gir
 subdir = src/libnma
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
-am__aclocal_m4_deps = $(top_srcdir)/m4/compiler_warnings.m4 \
+am__aclocal_m4_deps = $(top_srcdir)/m4/compiler_options.m4 \
 	$(top_srcdir)/m4/glib-makefile.m4 $(top_srcdir)/m4/intltool.m4 \
 	$(top_srcdir)/m4/introspection.m4 $(top_srcdir)/m4/libtool.m4 \
 	$(top_srcdir)/m4/ltoptions.m4 $(top_srcdir)/m4/ltsugar.m4 \
@@ -293,6 +293,8 @@ INTROSPECTION_SCANNER = @INTROSPECTION_SCANNER@
 INTROSPECTION_TYPELIBDIR = @INTROSPECTION_TYPELIBDIR@
 ISO_CODES_CFLAGS = @ISO_CODES_CFLAGS@
 ISO_CODES_LIBS = @ISO_CODES_LIBS@
+JANSSON_CFLAGS = @JANSSON_CFLAGS@
+JANSSON_LIBS = @JANSSON_LIBS@
 LD = @LD@
 LDFLAGS = @LDFLAGS@
 LIBNM_CFLAGS = @LIBNM_CFLAGS@
@@ -437,7 +439,6 @@ libnma_la_CFLAGS = \
 	-DLIBEXECDIR=\""$(libexecdir)"\" \
 	-DDATADIR=\""$(datadir)"\" \
 	-DAUTOSTARTDIR=\""$(sysconfdir)/xdg/autostart"\" \
-	-DVPN_NAME_FILES_DIR=\""$(sysconfdir)/NetworkManager/VPN"\" \
 	-DNMALOCALEDIR=\"$(datadir)/locale\" \
 	-DNETWORKMANAGER_COMPILATION=NM_NETWORKMANAGER_COMPILATION_LIB \
 	"-I${top_srcdir}/shared/" \

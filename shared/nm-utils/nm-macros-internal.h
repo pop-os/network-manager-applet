@@ -22,9 +22,19 @@
 #ifndef __NM_MACROS_INTERNAL_H__
 #define __NM_MACROS_INTERNAL_H__
 
+#include <stdlib.h>
+
+#include "nm-glib.h"
+
 /********************************************************/
 
-#define nm_auto(fcn) __attribute ((cleanup(fcn)))
+#define _nm_packed __attribute__ ((packed))
+#define _nm_unused __attribute__ ((unused))
+#define _nm_pure   __attribute__ ((pure))
+#define _nm_const  __attribute__ ((const))
+#define _nm_printf(a,b) __attribute__ ((__format__ (__printf__, a, b)))
+
+#define nm_auto(fcn) __attribute__ ((cleanup(fcn)))
 
 /**
  * nm_auto_free:
@@ -33,6 +43,13 @@
  */
 #define nm_auto_free nm_auto(_nm_auto_free_impl)
 GS_DEFINE_CLEANUP_FUNCTION(void*, _nm_auto_free_impl, free)
+
+static inline void
+_nm_auto_unset_gvalue_impl (GValue *v)
+{
+	g_value_unset (v);
+}
+#define nm_auto_unset_gvalue nm_auto(_nm_auto_unset_gvalue_impl)
 
 /********************************************************/
 
@@ -285,10 +302,28 @@ _NM_IN_STRSET_streq (const char *x, const char *s)
 
 /*****************************************************************************/
 
+/* glib/C provides the following kind of assertions:
+ *   - assert() -- disable with NDEBUG
+ *   - g_return_if_fail() -- disable with G_DISABLE_CHECKS
+ *   - g_assert() -- disable with G_DISABLE_ASSERT
+ * but they are all enabled by default and usually even production builds have
+ * these kind of assertions enabled. It also means, that disabling assertions
+ * is an untested configuration, and might have bugs.
+ *
+ * Add our own assertion macro nm_assert(), which is disabled by default and must
+ * be explicitly enabled. They are useful for more expensive checks or checks that
+ * depend less on runtime conditions (that is, are generally expected to be true). */
+
+#ifndef NM_MORE_ASSERTS
+#define NM_MORE_ASSERTS 0
+#endif
+
 #if NM_MORE_ASSERTS
 #define nm_assert(cond) G_STMT_START { g_assert (cond); } G_STMT_END
+#define nm_assert_not_reached() G_STMT_START { g_assert_not_reached (); } G_STMT_END
 #else
 #define nm_assert(cond) G_STMT_START { if (FALSE) { if (cond) { } } } G_STMT_END
+#define nm_assert_not_reached() G_STMT_START { ; } G_STMT_END
 #endif
 
 /*****************************************************************************/
@@ -449,6 +484,36 @@ nm_strstrip (char *str)
 {
 	/* g_strstrip doesn't like NULL. */
 	return str ? g_strstrip (str) : NULL;
+}
+
+/* g_ptr_array_sort()'s compare function takes pointers to the
+ * value. Thus, you cannot use strcmp directly. You can use
+ * nm_strcmp_p().
+ *
+ * Like strcmp(), this function is not forgiving to accept %NULL. */
+static inline int
+nm_strcmp_p (gconstpointer a, gconstpointer b)
+{
+	const char *s1 = *((const char **) a);
+	const char *s2 = *((const char **) b);
+
+	return strcmp (s1, s2);
+}
+
+/* like nm_strcmp_p(), suitable for g_ptr_array_sort_with_data().
+ * g_ptr_array_sort() just casts nm_strcmp_p() to a function of different
+ * signature. I guess, in glib there are knowledgeable people that ensure
+ * that this additional argument doesn't cause problems due to different ABI
+ * for every architecture that glib supports.
+ * For NetworkManager, we'd rather avoid such stunts.
+ **/
+static inline int
+nm_strcmp_p_with_data (gconstpointer a, gconstpointer b, gpointer user_data)
+{
+	const char *s1 = *((const char **) a);
+	const char *s2 = *((const char **) b);
+
+	return strcmp (s1, s2);
 }
 
 /*****************************************************************************/
