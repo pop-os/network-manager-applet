@@ -1,4 +1,4 @@
-network-manager-applet (1.4.0-1) UNRELEASED; urgency=medium
+network-manager-applet (1.4.0-1) unstable; urgency=medium
 
   * New upstream release.
   * Rebase patches.
@@ -6,7 +6,7 @@ network-manager-applet (1.4.0-1) UNRELEASED; urgency=medium
   * Enable team and team-port configuration support. Requires Jansson for
     handling JSON data.
 
- -- Michael Biebl <biebl@debian.org>  Fri, 26 Aug 2016 16:16:37 +0200
+ -- Michael Biebl <biebl@debian.org>  Fri, 26 Aug 2016 16:45:48 +0200
 
 network-manager-applet (1.2.4-1) unstable; urgency=medium
 
