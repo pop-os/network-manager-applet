@@ -441,7 +441,7 @@ display_dns_info (const char * const *dns, GtkGrid *grid, int *row)
 {
 	GtkWidget *desc_widget, *data_widget = NULL;
 	AtkObject *desc_object, *data_object = NULL;
-	char *label[] = { "Primary DNS:", "Secondary DNS:", "Ternary DNS:" };
+	char *label[] = { "Primary DNS:", "Secondary DNS:", "Tertiary DNS:" };
 	int i;
 
 	for (i = 0; dns && dns[i] && i < 3; i++) {
@@ -993,11 +993,12 @@ applet_about_dialog_show (NMApplet *applet)
 }
 
 GtkWidget *
-applet_warning_dialog_show (const char *message)
+applet_missing_ui_warning_dialog_show (void)
 {
 	GtkWidget *dialog;
 
-	dialog = gtk_message_dialog_new (NULL, GTK_DIALOG_MODAL, GTK_MESSAGE_ERROR, GTK_BUTTONS_OK, message, NULL);
+	dialog = gtk_message_dialog_new (NULL, GTK_DIALOG_MODAL, GTK_MESSAGE_ERROR, GTK_BUTTONS_OK,
+					 _("The NetworkManager Applet could not find some required resources (the .ui file was not found)."));
 
 	/* Bash focus-stealing prevention in the face */
 	gtk_window_set_position (GTK_WINDOW (dialog), GTK_WIN_POS_CENTER_ALWAYS);

@@ -68,7 +68,7 @@ finish_setup (CEPage8021xSecurity *self, gpointer unused, GError *error, gpointe
 
 	priv->security = (WirelessSecurity *) ws_wpa_eap_new (parent->connection, TRUE, FALSE);
 	if (!priv->security) {
-		g_warning ("Could not load 802.1x user interface.");
+		g_warning ("Could not load 802.1X user interface.");
 		return;
 	}
 
@@ -106,9 +106,9 @@ ce_page_8021x_security_new (NMConnectionEditor *editor,
 	                                            client,
 	                                            NULL,
 	                                            NULL,
-	                                            _("802.1x Security")));
+	                                            _("802.1X Security")));
 	if (!self) {
-		g_set_error_literal (error, NMA_ERROR, NMA_ERROR_GENERIC, _("Could not load 802.1x Security user interface."));
+		g_set_error_literal (error, NMA_ERROR, NMA_ERROR_GENERIC, _("Could not load 802.1X Security user interface."));
 		return NULL;
 	}
 
@@ -130,6 +130,19 @@ ce_page_8021x_security_new (NMConnectionEditor *editor,
 		*out_secrets_setting_name = NM_SETTING_802_1X_SETTING_NAME;
 
 	return CE_PAGE (self);
+}
+
+static void
+clear_widget_errors (GtkWidget *widget,
+                     gpointer   user_data)
+{
+	if (GTK_IS_CONTAINER (widget)) {
+		gtk_container_forall (GTK_CONTAINER (widget),
+		                      clear_widget_errors,
+		                      NULL);
+	} else {
+		widget_unset_error (widget);
+	}
 }
 
 static gboolean
@@ -159,11 +172,14 @@ ce_page_validate_v (CEPage *page, NMConnection *connection, GError **error)
 			ws_802_1x_fill_connection (priv->security, "wpa_eap_auth_combo", tmp_connection);
 
 			s_8021x = nm_connection_get_setting (tmp_connection, NM_TYPE_SETTING_802_1X);
-			nm_connection_add_setting (connection, NM_SETTING (g_object_ref (s_8021x)));
+			nm_connection_add_setting (connection, nm_setting_duplicate (s_8021x));
 
 			g_object_unref (tmp_connection);
 		}
 	} else {
+		gtk_container_forall (GTK_CONTAINER (priv->security_widget),
+		                      clear_widget_errors,
+		                      NULL);
 		nm_connection_remove_setting (connection, NM_TYPE_SETTING_802_1X);
 		valid = TRUE;
 	}

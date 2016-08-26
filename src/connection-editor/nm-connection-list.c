@@ -857,9 +857,12 @@ nm_connection_list_new (void)
 
 	gtk_window_set_default_icon_name ("preferences-system-network");
 
-	list->client = nm_client_new (NULL, NULL);
-	if (!list->client)
+	list->client = nm_client_new (NULL, &error);
+	if (!list->client) {
+		g_warning ("Couldn't construct the client instance: %s", error->message);
+		g_error_free (error);
 		goto error;
+	}
 	g_signal_connect (list->client,
 	                  NM_CLIENT_CONNECTION_ADDED,
 	                  G_CALLBACK (connection_added),
@@ -895,7 +898,6 @@ void
 nm_connection_list_create (NMConnectionList *self, GType ctype, const char *detail)
 {
 	ConnectionTypeData *types;
-	char *error_msg;
 	int i;
 
 	g_return_if_fail (NM_IS_CONNECTION_LIST (self));
@@ -908,16 +910,17 @@ nm_connection_list_create (NMConnectionList *self, GType ctype, const char *deta
 			break;
 	}
 	if (!types[i].name) {
-		if (ctype == NM_TYPE_SETTING_VPN)
-			error_msg = g_strdup (_("No VPN plugins are installed."));
-		else
-			error_msg = g_strdup_printf (_("Don't know how to create '%s' connections"), g_type_name (ctype));
-
-		nm_connection_editor_error (NULL, _("Error creating connection"), error_msg);
-		g_free (error_msg);
+		if (ctype == NM_TYPE_SETTING_VPN) {
+			nm_connection_editor_error (NULL, _("Error creating connection"),
+			                            _("No VPN plugins are installed."));
+		} else {
+			nm_connection_editor_error (NULL, _("Error creating connection"),
+			                            _("Don't know how to create '%s' connections"), g_type_name (ctype));
+		}
 	} else {
 		new_connection_of_type (GTK_WINDOW (self->dialog),
 		                        detail,
+		                        NULL,
 		                        self->client,
 		                        types[i].new_connection_func,
 		                        really_add_connection,

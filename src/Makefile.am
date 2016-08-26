@@ -10,15 +10,14 @@ nm_applet_CPPFLAGS = \
 	$(MM_GLIB_CFLAGS) \
 	$(APPINDICATOR_CFLAGS) \
 	-DLIBNM_BUILD \
-	-DNM_VERSION_MIN_REQUIRED=NM_VERSION_1_2 \
-	-DNM_VERSION_MAX_ALLOWED=NM_VERSION_1_2 \
+	-DNM_VERSION_MIN_REQUIRED=NM_VERSION_1_4 \
+	-DNM_VERSION_MAX_ALLOWED=NM_VERSION_1_4 \
 	-DICONDIR=\""$(datadir)/icons"\"						\
 	-DUIDIR=\""$(uidir)"\"							\
 	-DBINDIR=\""$(bindir)"\"								\
 	-DSYSCONFDIR=\""$(sysconfdir)"\"						\
 	-DLIBEXECDIR=\""$(libexecdir)"\" \
 	-DAUTOSTARTDIR=\""$(sysconfdir)/xdg/autostart"\"			\
-	-DVPN_NAME_FILES_DIR=\""$(sysconfdir)/NetworkManager/VPN"\"	\
 	-DNMALOCALEDIR=\"$(datadir)/locale\"					\
 	-DG_LOG_DOMAIN=\""nm-applet"\" \
 	"-I${top_srcdir}/shared/" \

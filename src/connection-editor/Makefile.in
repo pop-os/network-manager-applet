@@ -92,7 +92,7 @@ host_triplet = @host@
 bin_PROGRAMS = nm-connection-editor$(EXEEXT)
 subdir = src/connection-editor
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
-am__aclocal_m4_deps = $(top_srcdir)/m4/compiler_warnings.m4 \
+am__aclocal_m4_deps = $(top_srcdir)/m4/compiler_options.m4 \
 	$(top_srcdir)/m4/glib-makefile.m4 $(top_srcdir)/m4/intltool.m4 \
 	$(top_srcdir)/m4/introspection.m4 $(top_srcdir)/m4/libtool.m4 \
 	$(top_srcdir)/m4/ltoptions.m4 $(top_srcdir)/m4/ltsugar.m4 \
@@ -144,7 +144,7 @@ am__DEPENDENCIES_1 =
 nm_connection_editor_DEPENDENCIES = ${top_builddir}/src/wireless-security/libwireless-security-libnm.la \
 	${top_builddir}/src/utils/libutils-libnm.la \
 	${top_builddir}/src/libnma/libnma.la $(am__DEPENDENCIES_1) \
-	$(am__DEPENDENCIES_1)
+	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1)
 AM_V_lt = $(am__v_lt_@AM_V@)
 am__v_lt_ = $(am__v_lt_@AM_DEFAULT_V@)
 am__v_lt_0 = --silent
@@ -312,6 +312,8 @@ INTROSPECTION_SCANNER = @INTROSPECTION_SCANNER@
 INTROSPECTION_TYPELIBDIR = @INTROSPECTION_TYPELIBDIR@
 ISO_CODES_CFLAGS = @ISO_CODES_CFLAGS@
 ISO_CODES_LIBS = @ISO_CODES_LIBS@
+JANSSON_CFLAGS = @JANSSON_CFLAGS@
+JANSSON_LIBS = @JANSSON_LIBS@
 LD = @LD@
 LDFLAGS = @LDFLAGS@
 LIBNM_CFLAGS = @LIBNM_CFLAGS@
@@ -428,9 +430,10 @@ top_srcdir = @top_srcdir@
 nm_connection_editor_CPPFLAGS = \
 	$(GTK_CFLAGS) \
 	$(LIBNM_CFLAGS) \
+	$(JANSSON_CFLAGS) \
 	-DLIBNM_BUILD \
-	-DNM_VERSION_MIN_REQUIRED=NM_VERSION_1_2 \
-	-DNM_VERSION_MAX_ALLOWED=NM_VERSION_1_2 \
+	-DNM_VERSION_MIN_REQUIRED=NM_VERSION_1_4 \
+	-DNM_VERSION_MAX_ALLOWED=NM_VERSION_1_4 \
 	-DICONDIR=\""$(datadir)/icons"\" \
 	-DUIDIR=\""$(uidir)"\" \
 	-DBINDIR=\""$(bindir)"\" \
@@ -512,6 +515,7 @@ nm_connection_editor_LDADD = \
 	${top_builddir}/src/libnma/libnma.la \
 	$(GTK_LIBS) \
 	$(LIBNM_LIBS) \
+	$(JANSSON_LIBS) \
 	-lm
 
 uidir = $(datadir)/nm-applet

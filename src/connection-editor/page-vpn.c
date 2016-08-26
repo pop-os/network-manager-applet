@@ -22,12 +22,14 @@
 
 #include "nm-default.h"
 
+#include "page-vpn.h"
+
 #include <string.h>
 
-#include "page-vpn.h"
 #include "connection-helpers.h"
 #include "nm-connection-editor.h"
 #include "vpn-helpers.h"
+#include "nm-utils/nm-vpn-editor-plugin-call.h"
 
 G_DEFINE_TYPE (CEPageVpn, ce_page_vpn, CE_TYPE_PAGE)
 
@@ -53,21 +55,13 @@ finish_setup (CEPageVpn *self, gpointer unused, GError *error, gpointer user_dat
 {
 	CEPage *parent = CE_PAGE (self);
 	CEPageVpnPrivate *priv = CE_PAGE_VPN_GET_PRIVATE (self);
-	GError *vpn_error = NULL;
 
 	if (error)
 		return;
 
-	g_return_if_fail (priv->plugin != NULL);
+	g_return_if_fail (NM_IS_VPN_EDITOR_PLUGIN (priv->plugin));
+	g_return_if_fail (NM_IS_VPN_EDITOR (priv->editor));
 
-	priv->editor = nm_vpn_editor_plugin_get_editor (priv->plugin, parent->connection, &vpn_error);
-	if (!priv->editor) {
-		g_warning ("Could not load VPN user interface for service '%s': %s.",
-		           priv->service_type,
-		           (vpn_error && vpn_error->message) ? vpn_error->message : "(unknown)");
-		g_error_free (vpn_error);
-		return;
-	}
 	g_signal_connect (priv->editor, "changed", G_CALLBACK (vpn_plugin_changed_cb), self);
 
 	parent->page = GTK_WIDGET (nm_vpn_editor_get_widget (priv->editor));
@@ -90,6 +84,7 @@ ce_page_vpn_new (NMConnectionEditor *editor,
 	CEPageVpn *self;
 	CEPageVpnPrivate *priv;
 	const char *service_type;
+	GError *local = NULL;
 
 	self = CE_PAGE_VPN (ce_page_new (CE_TYPE_PAGE_VPN,
 	                                 editor,
@@ -115,7 +110,18 @@ ce_page_vpn_new (NMConnectionEditor *editor,
 
 	priv->plugin = vpn_get_plugin_by_service (service_type);
 	if (!priv->plugin) {
-		g_set_error (error, NMA_ERROR, NMA_ERROR_GENERIC, _("Could not find VPN plugin service for '%s'."), service_type);
+		g_set_error (error, NMA_ERROR, NMA_ERROR_GENERIC, _("Could not find VPN plugin for '%s'."), service_type);
+		g_object_unref (self);
+		return NULL;
+	}
+	priv->plugin = g_object_ref (priv->plugin);
+
+	priv->editor = nm_vpn_editor_plugin_get_editor (priv->plugin, CE_PAGE (self)->connection, &local);
+	if (!priv->editor) {
+		g_set_error (error, NMA_ERROR, NMA_ERROR_GENERIC,
+		             _("Could not load editor VPN plugin for '%s' (%s)."),
+		             service_type, local ? local->message : _("unknown failure"));
+		g_clear_error (&local);
 		g_object_unref (self);
 		return NULL;
 	}
@@ -132,7 +138,7 @@ ce_page_vpn_can_export (CEPageVpn *page)
 {
 	CEPageVpnPrivate *priv = CE_PAGE_VPN_GET_PRIVATE (page);
 
-	return 	(nm_vpn_editor_plugin_get_capabilities (priv->plugin) & NM_VPN_EDITOR_PLUGIN_CAPABILITY_EXPORT) != 0;
+	return (nm_vpn_editor_plugin_get_capabilities (priv->plugin) & NM_VPN_EDITOR_PLUGIN_CAPABILITY_EXPORT) != 0;
 }
 
 static gboolean
@@ -154,8 +160,13 @@ dispose (GObject *object)
 {
 	CEPageVpnPrivate *priv = CE_PAGE_VPN_GET_PRIVATE (object);
 
-	g_clear_object (&priv->editor);
+	if (priv->editor) {
+		g_signal_handlers_disconnect_by_func (priv->editor, G_CALLBACK (vpn_plugin_changed_cb), object);
+		g_clear_object (&priv->editor);
+	}
 	g_clear_pointer (&priv->service_type, g_free);
+
+	g_clear_object (&priv->plugin);
 
 	G_OBJECT_CLASS (ce_page_vpn_parent_class)->dispose (object);
 }
@@ -238,6 +249,7 @@ import_cb (NMConnection *connection, gpointer user_data)
 void
 vpn_connection_import (GtkWindow *parent,
                        const char *detail,
+                       gpointer detail_data,
                        NMClient *client,
                        PageNewConnectionResultFunc result_func,
                        gpointer user_data)
@@ -272,12 +284,21 @@ vpn_type_result_func (NMConnection *connection, gpointer user_data)
 void
 vpn_connection_new (GtkWindow *parent,
                     const char *detail,
+                    gpointer detail_data,
                     NMClient *client,
                     PageNewConnectionResultFunc result_func,
                     gpointer user_data)
 {
 	NMConnection *connection;
 	NMSetting *s_vpn;
+	const char *service_type;
+	gs_free char *service_type_free = NULL;
+	gs_free char *add_detail_key_free = NULL;
+	gs_free char *add_detail_val_free = NULL;
+	const CEPageVpnDetailData *vpn_data = detail_data;
+	gssize split_idx, l;
+	const char *add_detail_key = NULL;
+	const char *add_detail_val = NULL;
 
 	if (!detail) {
 		NewVpnInfo *info;
@@ -297,13 +318,60 @@ vpn_connection_new (GtkWindow *parent,
 		return;
 	}
 
+	service_type = detail;
+	add_detail_key = vpn_data ? vpn_data->add_detail_key : NULL;
+	add_detail_val = vpn_data ? vpn_data->add_detail_val : NULL;
+
+	service_type_free = nm_vpn_plugin_info_list_find_service_type (vpn_get_plugin_infos (), detail);
+	if (service_type_free)
+		service_type = service_type_free;
+	else if (!vpn_data) {
+		/* when called without @vpn_data, it means that @detail may contain "<SERVICE_TYPE>:<ADD_DETAIL>".
+		 * Try to parse them by spliting @detail at the colons and try to interpret the first part as
+		 * @service_type and the remainder as add-detail. */
+		l = strlen (detail);
+		for (split_idx = 1; split_idx < l - 1; split_idx++) {
+			if (detail[split_idx] == ':') {
+				gs_free char *detail_main = g_strndup (detail, split_idx);
+				NMVpnEditorPlugin *plugin;
+
+				service_type_free = nm_vpn_plugin_info_list_find_service_type (vpn_get_plugin_infos (), detail_main);
+				if (!service_type_free)
+					continue;
+				plugin = vpn_get_plugin_by_service (service_type_free);
+				if (!plugin) {
+					g_clear_pointer (&service_type_free, g_free);
+					continue;
+				}
+
+				/* we found a @service_type. Try to use the remainder as add-detail. */
+				service_type = service_type_free;
+				if (nm_vpn_editor_plugin_get_service_add_detail (plugin, service_type, &detail[split_idx + 1],
+				                                                 NULL, NULL,
+				                                                 &add_detail_key_free, &add_detail_val_free, NULL)
+				    && add_detail_key_free && add_detail_key_free[0]
+				    && add_detail_val_free && add_detail_val_free[0]) {
+					add_detail_key = add_detail_key_free;
+					add_detail_val = add_detail_val_free;
+				}
+				break;
+			}
+		}
+	}
+	if (!service_type)
+		service_type = detail;
+
 	connection = ce_page_new_connection (_("VPN connection %d"),
 	                                     NM_SETTING_VPN_SETTING_NAME,
 	                                     FALSE,
 	                                     client,
 	                                     user_data);
 	s_vpn = nm_setting_vpn_new ();
-	g_object_set (s_vpn, NM_SETTING_VPN_SERVICE_TYPE, detail, NULL);
+	g_object_set (s_vpn, NM_SETTING_VPN_SERVICE_TYPE, service_type, NULL);
+
+	if (add_detail_key)
+		nm_setting_vpn_add_data_item ((NMSettingVpn *) s_vpn, add_detail_key, add_detail_val);
+
 	nm_connection_add_setting (connection, s_vpn);
 
 	(*result_func) (connection, FALSE, NULL, user_data);

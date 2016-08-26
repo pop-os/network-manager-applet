@@ -118,6 +118,9 @@
 /* Enable using libappindicator */
 #undef WITH_APPINDICATOR
 
+/* Define if Jansson is available */
+#undef WITH_JANSSON
+
 /* Define if you have ModemManager/WWAN support */
 #undef WITH_WWAN
 
