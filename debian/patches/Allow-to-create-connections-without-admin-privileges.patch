@@ -24,11 +24,11 @@ Closes: #696256
  src/connection-editor/page-wifi.c   | 13 +++++++++++++
  src/libnm-gtk/nm-wifi-dialog.c      |  4 ++++
  src/mobile-helpers.c                |  3 +++
- src/utils/utils.c                   |  7 +++++++
+ src/utils/utils.c                   |  8 ++++++++
  src/utils/utils.h                   |  3 +++
  src/wireless-security/ws-wep-key.c  |  7 +++++++
  src/wireless-security/ws-wpa-psk.c  |  5 +++++
- 10 files changed, 86 insertions(+)
+ 10 files changed, 87 insertions(+)
 
 diff --git a/src/applet-device-wifi.c b/src/applet-device-wifi.c
 index 9944fb4..1c287b0 100644
@@ -81,7 +81,7 @@ index 9944fb4..1c287b0 100644
  	 * Dialog Of Doom.
  	 */
 diff --git a/src/connection-editor/page-mobile.c b/src/connection-editor/page-mobile.c
-index 8a1aa64..44c0f81 100644
+index 149db65..076ec04 100644
 --- a/src/connection-editor/page-mobile.c
 +++ b/src/connection-editor/page-mobile.c
 @@ -442,6 +442,7 @@ new_connection_mobile_wizard_done (NMAMobileWizard *wizard,
@@ -123,18 +123,18 @@ index 8a1aa64..44c0f81 100644
  		nm_connection_add_setting (connection, nm_setting_ppp_new ());
  	}
 diff --git a/src/connection-editor/page-vpn.c b/src/connection-editor/page-vpn.c
-index d07f491..0a4d538 100644
+index a688866..3b0d076 100644
 --- a/src/connection-editor/page-vpn.c
 +++ b/src/connection-editor/page-vpn.c
-@@ -277,6 +277,7 @@ vpn_connection_new (GtkWindow *parent,
+@@ -290,6 +290,7 @@ vpn_connection_new (GtkWindow *parent,
                      gpointer user_data)
  {
  	NMConnection *connection;
 +	NMSettingConnection *s_con;
  	NMSetting *s_vpn;
- 
- 	if (!detail) {
-@@ -302,6 +303,14 @@ vpn_connection_new (GtkWindow *parent,
+ 	const char *service_type;
+ 	gs_free char *service_type_free = NULL;
+@@ -366,6 +367,14 @@ vpn_connection_new (GtkWindow *parent,
  	                                     FALSE,
  	                                     client,
  	                                     user_data);
@@ -147,10 +147,10 @@ index d07f491..0a4d538 100644
 +	nm_setting_connection_add_permission (s_con, "user", g_get_user_name (), NULL);
 +
  	s_vpn = nm_setting_vpn_new ();
- 	g_object_set (s_vpn, NM_SETTING_VPN_SERVICE_TYPE, detail, NULL);
- 	nm_connection_add_setting (connection, s_vpn);
+ 	g_object_set (s_vpn, NM_SETTING_VPN_SERVICE_TYPE, service_type, NULL);
+ 
 diff --git a/src/connection-editor/page-wifi.c b/src/connection-editor/page-wifi.c
-index 8215cb3..394e977 100644
+index 7bf9987..3241a40 100644
 --- a/src/connection-editor/page-wifi.c
 +++ b/src/connection-editor/page-wifi.c
 @@ -26,6 +26,8 @@
@@ -162,7 +162,7 @@ index 8215cb3..394e977 100644
  #include "page-wifi.h"
  
  G_DEFINE_TYPE (CEPageWifi, ce_page_wifi, CE_TYPE_PAGE)
-@@ -621,6 +623,17 @@ wifi_connection_new (GtkWindow *parent,
+@@ -615,6 +617,17 @@ wifi_connection_new (GtkWindow *parent,
  	                                     TRUE,
  	                                     client,
  	                                     user_data);
@@ -231,13 +231,14 @@ index 8969fd3..76294a1 100644
  	}
  
 diff --git a/src/utils/utils.c b/src/utils/utils.c
-index fd573cc..172d3f8 100644
+index 000ccd4..c31ca09 100644
 --- a/src/utils/utils.c
 +++ b/src/utils/utils.c
-@@ -370,3 +370,10 @@ utils_fake_return_key (GdkEventKey *event)
- 	g_free (keys);
- }
+@@ -385,3 +385,11 @@ widget_unset_error (GtkWidget *widget)
  
+ 	gtk_style_context_remove_class (gtk_widget_get_style_context (widget), "error");
+ }
++
 +gboolean
 +utils_default_to_private_connection (NMClient *client)
 +{
@@ -246,7 +247,7 @@ index fd573cc..172d3f8 100644
 +	return (perms != NM_CLIENT_PERMISSION_RESULT_YES);
 +}
 diff --git a/src/utils/utils.h b/src/utils/utils.h
-index 908741c..64a53ea 100644
+index 8202127..f2c42f9 100644
 --- a/src/utils/utils.h
 +++ b/src/utils/utils.h
 @@ -34,6 +34,7 @@
@@ -267,10 +268,10 @@ index 908741c..64a53ea 100644
  
  typedef enum  {
 diff --git a/src/wireless-security/ws-wep-key.c b/src/wireless-security/ws-wep-key.c
-index 3628d67..18d9300 100644
+index 045ac4b..e86c90b 100644
 --- a/src/wireless-security/ws-wep-key.c
 +++ b/src/wireless-security/ws-wep-key.c
-@@ -157,6 +157,7 @@ static void
+@@ -164,6 +164,7 @@ static void
  fill_connection (WirelessSecurity *parent, NMConnection *connection)
  {
  	WirelessSecurityWEPKey *sec = (WirelessSecurityWEPKey *) parent;
@@ -278,7 +279,7 @@ index 3628d67..18d9300 100644
  	NMSettingWirelessSecurity *s_wsec;
  	NMSettingSecretFlags secret_flags;
  	GtkWidget *widget, *passwd_entry;
-@@ -183,6 +184,12 @@ fill_connection (WirelessSecurity *parent, NMConnection *connection)
+@@ -190,6 +191,12 @@ fill_connection (WirelessSecurity *parent, NMConnection *connection)
  	              NM_SETTING_WIRELESS_SECURITY_WEP_KEY_TYPE, sec->type,
  	              NULL);
  
@@ -292,10 +293,10 @@ index 3628d67..18d9300 100644
  		if (strlen (sec->keys[i]))
  			nm_setting_wireless_security_set_wep_key (s_wsec, i, sec->keys[i]);
 diff --git a/src/wireless-security/ws-wpa-psk.c b/src/wireless-security/ws-wpa-psk.c
-index aec5563..6bdb852 100644
+index e56f348..5dc2a14 100644
 --- a/src/wireless-security/ws-wpa-psk.c
 +++ b/src/wireless-security/ws-wpa-psk.c
-@@ -103,12 +103,14 @@ fill_connection (WirelessSecurity *parent, NMConnection *connection)
+@@ -106,12 +106,14 @@ fill_connection (WirelessSecurity *parent, NMConnection *connection)
  	WirelessSecurityWPAPSK *wpa_psk = (WirelessSecurityWPAPSK *) parent;
  	GtkWidget *widget, *passwd_entry;
  	const char *key;
@@ -310,7 +311,7 @@ index aec5563..6bdb852 100644
  	s_wireless = nm_connection_get_setting_wireless (connection);
  	g_assert (s_wireless);
  
-@@ -124,6 +126,9 @@ fill_connection (WirelessSecurity *parent, NMConnection *connection)
+@@ -127,6 +129,9 @@ fill_connection (WirelessSecurity *parent, NMConnection *connection)
  	passwd_entry = widget;
  	key = gtk_entry_get_text (GTK_ENTRY (widget));
  	g_object_set (s_wireless_sec, NM_SETTING_WIRELESS_SECURITY_PSK, key, NULL);
