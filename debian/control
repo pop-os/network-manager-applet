@@ -19,6 +19,7 @@ Build-Depends: debhelper (>= 9),
                libnm-dev (>= 1.4),
                libmm-glib-dev,
                libgudev-1.0-dev (>= 147),
+               libjansson-dev (>= 2.3),
                iso-codes,
                libgirepository1.0-dev,
                gobject-introspection

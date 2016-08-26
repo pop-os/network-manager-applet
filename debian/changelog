@@ -3,6 +3,8 @@ network-manager-applet (1.4.0-1) UNRELEASED; urgency=medium
   * New upstream release.
   * Rebase patches.
   * Bump network-manager related (build-)dependencies to >= 1.4.
+  * Enable team and team-port configuration support. Requires Jansson for
+    handling JSON data.
 
  -- Michael Biebl <biebl@debian.org>  Fri, 26 Aug 2016 16:16:37 +0200
 
