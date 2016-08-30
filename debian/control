@@ -37,7 +37,7 @@ Depends: ${shlibs:Depends},
          libnma0 (= ${binary:Version}),
          network-manager (>= 1.4),
          policykit-1-gnome | polkit-1-auth-agent,
-         dbus-x11
+         default-dbus-session-bus | dbus-session-bus
 Recommends: notification-daemon,
             gnome-keyring,
             mobile-broadband-provider-info,
