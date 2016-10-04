@@ -1,6 +1,8 @@
 network-manager-applet (1.4.2-1) UNRELEASED; urgency=medium
 
   * New upstream release.
+  * Drop override for dh_auto_test. We don't explicitly need to dump the log
+    files as dh_auto_test runs with VERBOSE=1 by default.
 
  -- Michael Biebl <biebl@debian.org>  Tue, 04 Oct 2016 16:49:55 +0200
 
