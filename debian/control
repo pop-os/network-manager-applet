@@ -3,9 +3,7 @@ Section: gnome
 Priority: optional
 Maintainer: Utopia Maintenance Team <pkg-utopia-maintainers@lists.alioth.debian.org>
 Uploaders: Michael Biebl <biebl@debian.org>
-Build-Depends: debhelper (>= 9),
-               autotools-dev,
-               dh-autoreconf,
+Build-Depends: debhelper (>= 10),
                gnome-common,
                intltool,
                libsecret-1-dev,

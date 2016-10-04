@@ -5,7 +5,7 @@ DEB_HOST_MULTIARCH ?= $(shell dpkg-architecture -qDEB_HOST_MULTIARCH)
 export DEB_LDFLAGS_MAINT_APPEND = -Wl,-z,defs -Wl,--as-needed
 
 %:
-	dh $@ --with autoreconf,gir
+	dh $@ --with gir
 
 override_dh_autoreconf:
 	dh_autoreconf --as-needed
