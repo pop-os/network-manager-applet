@@ -1,10 +1,16 @@
-network-manager-applet (1.4.4-1) UNRELEASED; urgency=medium
+network-manager-applet (1.4.4-1) unstable; urgency=medium
 
   * New upstream release.
   * Bump debhelper compat level to 10.
   * Update Vcs-* according to the latest recommendation.
+  * Rebase patches.
+  * Drop libnma-common and libnm-gtk-common.
+    The .ui files and icons are now compiled in using GResource.
+  * Bump network-manager related (build-)dependencies to >= 1.6.
+    This enables support for editing the Proxy setting which requires
+    NetworkManager 1.6 or newer.
 
- -- Michael Biebl <biebl@debian.org>  Tue, 04 Oct 2016 17:07:39 +0200
+ -- Michael Biebl <biebl@debian.org>  Wed, 25 Jan 2017 21:42:52 +0100
 
 network-manager-applet (1.4.2-1) unstable; urgency=medium
 
