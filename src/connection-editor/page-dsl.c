@@ -122,7 +122,7 @@ ce_page_dsl_new (NMConnectionEditor *editor,
 	                                 connection,
 	                                 parent_window,
 	                                 client,
-	                                 UIDIR "/ce-page-dsl.ui",
+	                                 "/org/freedesktop/network-manager-applet/ce-page-dsl.ui",
 	                                 "DslPage",
 	                                 _("DSL")));
 	if (!self) {
@@ -202,21 +202,24 @@ ce_page_dsl_class_init (CEPageDslClass *dsl_class)
 
 
 void
-dsl_connection_new (GtkWindow *parent,
+dsl_connection_new (FUNC_TAG_PAGE_NEW_CONNECTION_IMPL,
+                    GtkWindow *parent,
                     const char *detail,
                     gpointer detail_data,
+                    NMConnection *connection,
                     NMClient *client,
                     PageNewConnectionResultFunc result_func,
                     gpointer user_data)
 {
-	NMConnection *connection;
 	NMSetting *setting;
+	gs_unref_object NMConnection *connection_tmp = NULL;
 
-	connection = ce_page_new_connection (_("DSL connection %d"),
-	                                     NM_SETTING_PPPOE_SETTING_NAME,
-	                                     FALSE,
-	                                     client,
-	                                     user_data);
+	connection = _ensure_connection_other (connection, &connection_tmp);
+	ce_page_complete_connection (connection,
+	                             _("DSL connection %d"),
+	                             NM_SETTING_PPPOE_SETTING_NAME,
+	                             FALSE,
+	                             client);
 	nm_connection_add_setting (connection, nm_setting_pppoe_new ());
 	nm_connection_add_setting (connection, nm_setting_wired_new ());
 	setting = nm_setting_ppp_new ();
@@ -227,7 +230,5 @@ dsl_connection_new (GtkWindow *parent,
 	              NULL);
 	nm_connection_add_setting (connection, setting);
 
-	(*result_func) (connection, FALSE, NULL, user_data);
+	(*result_func) (FUNC_TAG_PAGE_NEW_CONNECTION_RESULT_CALL, connection, FALSE, NULL, user_data);
 }
-
-

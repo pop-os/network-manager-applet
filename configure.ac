@@ -1,13 +1,13 @@
 AC_PREREQ([2.63])
 AC_INIT([nm-applet],
-        [1.4.2],
+        [1.4.4],
         [https://bugzilla.gnome.org/enter_bug.cgi?product=NetworkManager],
         [network-manager-applet])
 
 AC_CONFIG_HEADERS([config.h])
 AC_CONFIG_MACRO_DIR([m4])
 
-AM_INIT_AUTOMAKE([1.11 subdir-objects no-dist-gzip dist-xz -Wno-portability])
+AM_INIT_AUTOMAKE([1.11 no-dist-gzip dist-xz -Wno-portability])
 AM_MAINTAINER_MODE([enable])
 AM_SILENT_RULES([yes])
 
@@ -25,9 +25,7 @@ dnl Initialize libtool
 LT_PREREQ([2.2.6])
 LT_INIT
 
-m4_define([nma_git_sha], [m4_esyscmd([ ( [ -d ./.git/ ] && [ "$(readlink -f ./.git/)" = "$(readlink -f "$(git rev-parse --git-dir 2>/dev/null)" 2>/dev/null)" ] && git rev-parse --verify -q HEAD 2>/dev/null ) || true ])])
-NMA_GIT_SHA=nma_git_sha
-AC_DEFINE_UNQUOTED(NMA_GIT_SHA,"$NMA_GIT_SHA",[git commit id of the original source code version])
+GIT_SHA_RECORD(NMA_GIT_SHA)
 
 dnl
 dnl Checks for typedefs, structures, and compiler characteristics.
@@ -142,6 +140,7 @@ GOBJECT_INTROSPECTION_CHECK([0.9.6])
 
 GLIB_CONFIG_NMA
 GLIB_GSETTINGS
+AC_PATH_PROG(GLIB_COMPILE_RESOURCES, glib-compile-resources)
 
 dnl
 dnl Compiler flags

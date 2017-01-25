@@ -52,7 +52,7 @@ typedef struct {
 	GtkEntry *parent_entry;
 	GtkSpinButton *id_entry;
 	GtkEntry *name_entry;
-	GtkEntry *cloned_mac;
+	GtkComboBoxText *cloned_mac;
 	GtkSpinButton *mtu;
 	GtkToggleButton *flag_reorder_hdr, *flag_gvrp, *flag_loose_binding, *flag_mvrp;
 
@@ -84,7 +84,7 @@ vlan_private_init (CEPageVlan *self)
 
 	priv->id_entry = GTK_SPIN_BUTTON (gtk_builder_get_object (builder, "vlan_id_entry"));
 	priv->name_entry = GTK_ENTRY (gtk_builder_get_object (builder, "vlan_name_entry"));
-	priv->cloned_mac = GTK_ENTRY (gtk_builder_get_object (builder, "vlan_cloned_mac_entry"));
+	priv->cloned_mac = GTK_COMBO_BOX_TEXT (gtk_builder_get_object (builder, "vlan_cloned_mac_entry"));
 	priv->mtu = GTK_SPIN_BUTTON (gtk_builder_get_object (builder, "vlan_mtu"));
 	priv->flag_reorder_hdr = GTK_TOGGLE_BUTTON (gtk_builder_get_object (builder, "reorder_hdr_flag"));
 	priv->flag_gvrp = GTK_TOGGLE_BUTTON (gtk_builder_get_object (builder, "gvrp_flag"));
@@ -224,8 +224,9 @@ finish:
 }
 
 static void
-edit_parent (NMConnection *connection,
-                           gpointer user_data)
+edit_parent (FUNC_TAG_NEW_CONNECTION_RESULT_IMPL,
+             NMConnection *connection,
+             gpointer user_data)
 {
 	CEPageVlan *self = user_data;
 	CEPageVlanPrivate *priv = CE_PAGE_VLAN_GET_PRIVATE (self);
@@ -237,24 +238,24 @@ edit_parent (NMConnection *connection,
 
 	s_con = nm_connection_get_setting_connection (CE_PAGE (self)->connection);
 	g_object_set (G_OBJECT (s_con),
-		      NM_SETTING_CONNECTION_AUTOCONNECT, TRUE,
-		      NULL);
+	              NM_SETTING_CONNECTION_AUTOCONNECT, TRUE,
+	              NULL);
 
 
 	editor = nm_connection_editor_new (priv->toplevel,
-					   connection,
-					   CE_PAGE (self)->client);
-	if (!editor) {
-		g_object_unref (connection);
+	                                   connection,
+	                                   CE_PAGE (self)->client);
+	if (!editor)
 		return;
-	}
 
 	g_signal_connect (editor, "done", G_CALLBACK (edit_parent_cb), self);
 	nm_connection_editor_run (editor);
 }
 
 static gboolean
-connection_type_filter (GType type, gpointer user_data)
+connection_type_filter (FUNC_TAG_NEW_CONNECTION_TYPE_FILTER_IMPL,
+                        GType type,
+                        gpointer self)
 {
 	return nm_utils_check_virtual_device_compatibility (NM_TYPE_SETTING_VLAN, type);
 }
@@ -272,10 +273,10 @@ parent_changed (GtkWidget *widget, gpointer user_data)
 	if (parent_id == priv->parents_len - 1) {
 		gtk_entry_set_text (priv->parent_entry, "");
 		new_connection_dialog (priv->toplevel,
-				       CE_PAGE (self)->client,
-				       connection_type_filter,
-				       edit_parent,
-				       self);
+		                       CE_PAGE (self)->client,
+		                       connection_type_filter,
+		                       edit_parent,
+		                       self);
 		return;
 	}
 
@@ -284,7 +285,7 @@ parent_changed (GtkWidget *widget, gpointer user_data)
 		gtk_widget_set_sensitive (GTK_WIDGET (priv->mtu), TRUE);
 	} else {
 		gtk_widget_set_sensitive (GTK_WIDGET (priv->cloned_mac), FALSE);
-		gtk_entry_set_text (priv->cloned_mac, "");
+		ce_page_setup_cloned_mac_combo (priv->cloned_mac, NULL);
 		gtk_widget_set_sensitive (GTK_WIDGET (priv->mtu), FALSE);
 		gtk_spin_button_set_value (priv->mtu, 1500);
 	}
@@ -333,7 +334,7 @@ get_vlan_devices (CEPageVlan *self)
 	GSList *devices;
 	NMDevice *device;
 	int i;
-	
+
 	devices_array = nm_client_get_devices (CE_PAGE (self)->client);
 	devices = NULL;
 	for (i = 0; i < devices_array->len; i++) {
@@ -411,7 +412,7 @@ build_vlan_parent_list (CEPageVlan *self, GSList *devices)
 				/* Translators: the first %s is a device name (eg, "em1"), the
 				 * second is a connection name (eg, "Auto Ethernet").
 				 */
-				parent->label = g_strdup_printf (_("%s (via \"%s\")"), iface, id);
+				parent->label = g_strdup_printf (_("%s (via “%s”)"), iface, id);
 				g_ptr_array_add (parents, parent);
 				/* no break here; the connection may apply to multiple devices */
 			}
@@ -423,7 +424,7 @@ build_vlan_parent_list (CEPageVlan *self, GSList *devices)
 	parent = g_slice_new (VlanParent);
 	parent->device = NULL;
 	parent->connection = NULL;
-	parent->label = g_strdup_printf (_("New connection..."));
+	parent->label = g_strdup_printf (_("New connection…"));
 	g_ptr_array_add (parents, parent);
 
 	g_ptr_array_add (parents, NULL);
@@ -531,8 +532,9 @@ populate_ui (CEPageVlan *self)
 	/* Cloned MAC address */
 	if (NM_IS_SETTING_WIRED (priv->s_hw)) {
 		const char *mac = nm_setting_wired_get_cloned_mac_address (NM_SETTING_WIRED (priv->s_hw));
-		if (mac)
-			gtk_entry_set_text (priv->cloned_mac, mac);
+		ce_page_setup_cloned_mac_combo (priv->cloned_mac, mac);
+	} else {
+		ce_page_setup_cloned_mac_combo (priv->cloned_mac, NULL);
 	}
 	g_signal_connect (priv->cloned_mac, "changed", G_CALLBACK (stuff_changed), self);
 
@@ -587,7 +589,7 @@ ce_page_vlan_new (NMConnectionEditor *editor,
 	                                  connection,
 	                                  parent_window,
 	                                  client,
-	                                  UIDIR "/ce-page-vlan.ui",
+	                                  "/org/freedesktop/network-manager-applet/ce-page-vlan.ui",
 	                                  "VlanPage",
 	                                  _("VLAN")));
 	if (!self) {
@@ -692,7 +694,7 @@ ui_to_setting (CEPageVlan *self)
 	              NULL);
 
 	if (hwtype != G_TYPE_NONE) {
-		cloned_mac = gtk_entry_get_text (priv->cloned_mac);
+		cloned_mac = ce_page_cloned_mac_get (priv->cloned_mac);
 		if (cloned_mac && !*cloned_mac)
 			cloned_mac = NULL;
 		mtu_set = g_ascii_isdigit (*gtk_entry_get_text (GTK_ENTRY (priv->mtu)));
@@ -736,7 +738,7 @@ ce_page_validate_v (CEPage *page, NMConnection *connection, GError **error)
 		g_free (parent_iface);
 	}
 
-	if (!ce_page_mac_entry_valid (priv->cloned_mac, ARPHRD_ETHER, _("cloned MAC"), error))
+	if (!ce_page_cloned_mac_combo_valid (priv->cloned_mac, ARPHRD_ETHER, _("cloned MAC"), error))
 		return FALSE;
 
 	ui_to_setting (self);
@@ -784,22 +786,24 @@ ce_page_vlan_class_init (CEPageVlanClass *vlan_class)
 
 
 void
-vlan_connection_new (GtkWindow *parent,
+vlan_connection_new (FUNC_TAG_PAGE_NEW_CONNECTION_IMPL,
+                     GtkWindow *parent,
                      const char *detail,
                      gpointer detail_data,
+                     NMConnection *connection,
                      NMClient *client,
                      PageNewConnectionResultFunc result_func,
                      gpointer user_data)
 {
-	NMConnection *connection;
+	gs_unref_object NMConnection *connection_tmp = NULL;
 
-	connection = ce_page_new_connection (_("VLAN connection %d"),
-	                                     NM_SETTING_VLAN_SETTING_NAME,
-	                                     TRUE,
-	                                     client,
-	                                     user_data);
+	connection = _ensure_connection_other (connection, &connection_tmp);
+	ce_page_complete_connection (connection,
+	                             _("VLAN connection %d"),
+	                             NM_SETTING_VLAN_SETTING_NAME,
+	                             TRUE,
+	                             client);
 	nm_connection_add_setting (connection, nm_setting_vlan_new ());
 
-	(*result_func) (connection, FALSE, NULL, user_data);
+	(*result_func) (FUNC_TAG_PAGE_NEW_CONNECTION_RESULT_CALL, connection, FALSE, NULL, user_data);
 }
-

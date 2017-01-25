@@ -38,8 +38,10 @@
 #include "page-8021x-security.h"
 #include "page-wifi.h"
 #include "page-wifi-security.h"
+#include "page-proxy.h"
 #include "page-ip4.h"
 #include "page-ip6.h"
+#include "page-ip-tunnel.h"
 #include "page-dsl.h"
 #include "page-mobile.h"
 #include "page-bluetooth.h"
@@ -180,12 +182,12 @@ connection_editor_validate (NMConnectionEditor *editor)
 {
 	NMSettingConnection *s_con;
 	GSList *iter;
-	char *validation_error = NULL;
+	gs_free char *validation_error = NULL;
 	GError *error = NULL;
 
 	if (!editor_is_initialized (editor)) {
-		validation_error = g_strdup (_("Editor initializing..."));
-		goto done;
+		validation_error = g_strdup (_("Editor initializing…"));
+		goto done_silent;
 	}
 
 	s_con = nm_connection_get_setting_connection (editor->connection);
@@ -221,12 +223,12 @@ done:
 		g_free (editor->last_validation_error);
 		editor->last_validation_error = g_strdup (validation_error);
 	}
+
+done_silent:
 	ce_polkit_button_set_validation_error (CE_POLKIT_BUTTON (editor->ok_button), validation_error);
 	gtk_widget_set_sensitive (editor->export_button, !validation_error);
 
 	update_sensitivity (editor);
-
-	g_free (validation_error);
 }
 
 static void
@@ -269,11 +271,11 @@ nm_connection_editor_init (NMConnectionEditor *editor)
 
 	editor->builder = gtk_builder_new ();
 
-	if (!gtk_builder_add_objects_from_file (editor->builder,
-	                                        UIDIR "/nm-connection-editor.ui",
-	                                        (char **) objects,
-	                                        &error)) {
-		g_warning ("Couldn't load builder file " UIDIR "/nm-connection-editor.ui: %s", error->message);
+	if (!gtk_builder_add_objects_from_resource (editor->builder,
+	                                            "/org/freedesktop/network-manager-applet/nm-connection-editor.ui",
+	                                            (char **) objects,
+	                                            &error)) {
+		g_warning ("Couldn't load builder resource " "/org/freedesktop/network-manager-applet/nm-connection-editor.ui: %s", error->message);
 		g_error_free (error);
 
 		dialog = gtk_message_dialog_new (NULL, 0,
@@ -308,68 +310,49 @@ static void
 dispose (GObject *object)
 {
 	NMConnectionEditor *editor = NM_CONNECTION_EDITOR (object);
-	GSList *iter;
 
-	if (editor->disposed)
-		goto out;
 	editor->disposed = TRUE;
 
-	if (active_editors)
+	if (active_editors && editor->orig_connection)
 		g_hash_table_remove (active_editors, editor->orig_connection);
 
-	g_slist_foreach (editor->initializing_pages, (GFunc) g_object_unref, NULL);
-	g_slist_free (editor->initializing_pages);
+	g_slist_free_full (editor->initializing_pages, g_object_unref);
 	editor->initializing_pages = NULL;
 
-	g_slist_foreach (editor->pages, (GFunc) g_object_unref, NULL);
-	g_slist_free (editor->pages);
+	g_slist_free_full (editor->pages, g_object_unref);
 	editor->pages = NULL;
 
 	/* Mark any in-progress secrets call as canceled; it will clean up after itself. */
 	if (editor->secrets_call)
 		editor->secrets_call->canceled = TRUE;
 
-	/* Kill any pending secrets calls */
-	for (iter = editor->pending_secrets_calls; iter; iter = g_slist_next (iter)) {
-		get_secrets_info_free ((GetSecretsInfo *) iter->data);
-	}
-	g_slist_free (editor->pending_secrets_calls);
-	editor->pending_secrets_calls = NULL;
-
-	if (editor->validate_id) {
-		g_source_remove (editor->validate_id);
-		editor->validate_id = 0;
+	while (editor->pending_secrets_calls) {
+		get_secrets_info_free ((GetSecretsInfo *) editor->pending_secrets_calls->data);
+		editor->pending_secrets_calls = g_slist_delete_link (editor->pending_secrets_calls, editor->pending_secrets_calls);
 	}
 
-	if (editor->connection) {
-		g_object_unref (editor->connection);
-		editor->connection = NULL;
-	}
-	if (editor->orig_connection) {
-		g_object_unref (editor->orig_connection);
-		editor->orig_connection = NULL;
-	}
+	nm_clear_g_source (&editor->validate_id);
+
+	g_clear_object (&editor->connection);
+	g_clear_object (&editor->orig_connection);
+
 	if (editor->window) {
 		gtk_widget_destroy (editor->window);
 		editor->window = NULL;
 	}
-	if (editor->parent_window) {
-		g_object_unref (editor->parent_window);
-		editor->parent_window = NULL;
-	}
-	if (editor->builder) {
-		g_object_unref (editor->builder);
-		editor->builder = NULL;
-	}
+	g_clear_object (&editor->parent_window);
+	g_clear_object (&editor->builder);
 
-	g_signal_handler_disconnect (editor->client, editor->permission_id);
-	g_object_unref (editor->client);
+	nm_clear_g_signal_handler (editor->client, &editor->permission_id);
+	g_clear_object (&editor->client);
 
 	g_clear_pointer (&editor->last_validation_error, g_free);
 
-	g_hash_table_destroy (editor->inter_page_hash);
+	if (editor->inter_page_hash) {
+		g_hash_table_destroy (editor->inter_page_hash);
+		editor->inter_page_hash = NULL;
+	}
 
-out:
 	G_OBJECT_CLASS (nm_connection_editor_parent_class)->dispose (object);
 }
 
@@ -443,8 +426,8 @@ nm_connection_editor_new (GtkWindow *parent_window,
 	}
 
 	if (!active_editors)
-		active_editors = g_hash_table_new (NULL, NULL);
-	g_hash_table_insert (active_editors, connection, editor);
+		active_editors = g_hash_table_new_full (NULL, NULL, g_object_unref, NULL);
+	g_hash_table_insert (active_editors, g_object_ref (connection), editor);
 
 	return editor;
 }
@@ -452,10 +435,7 @@ nm_connection_editor_new (GtkWindow *parent_window,
 NMConnectionEditor *
 nm_connection_editor_get (NMConnection *connection)
 {
-	if (!active_editors)
-		return NULL;
-
-	return g_hash_table_lookup (active_editors, connection);
+	return active_editors ? g_hash_table_lookup (active_editors, connection) : NULL;
 }
 
 /* Returns an editor for @slave's master, if any */
@@ -776,6 +756,9 @@ nm_connection_editor_set_connection (NMConnectionEditor *editor,
 	} else if (!strcmp (connection_type, NM_SETTING_VPN_SETTING_NAME)) {
 		if (!add_page (editor, ce_page_vpn_new, editor->connection, error))
 			goto out;
+	} else if (!strcmp (connection_type, NM_SETTING_IP_TUNNEL_SETTING_NAME)) {
+		if (!add_page (editor, ce_page_ip_tunnel_new, editor->connection, error))
+			goto out;
 	} else if (!strcmp (connection_type, NM_SETTING_PPPOE_SETTING_NAME)) {
 		if (!add_page (editor, ce_page_dsl_new, editor->connection, error))
 			goto out;
@@ -830,6 +813,13 @@ nm_connection_editor_set_connection (NMConnectionEditor *editor,
 			goto out;
 	}
 
+#if NM_LIBNM_COMPAT_PROXY_SUPPORTED
+	G_GNUC_BEGIN_IGNORE_DEPRECATIONS
+	if (   nm_connection_get_setting_proxy (editor->connection)
+	    && !add_page (editor, ce_page_proxy_new, editor->connection, error))
+		goto out;
+	G_GNUC_END_IGNORE_DEPRECATIONS
+#endif
 	if (   nm_connection_get_setting_ip4_config (editor->connection)
 	    && !add_page (editor, ce_page_ip4_new, editor->connection, error))
 		goto out;

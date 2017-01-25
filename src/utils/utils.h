@@ -23,24 +23,11 @@
 #ifndef UTILS_H
 #define UTILS_H
 
-#include <glib.h>
-#include <gtk/gtk.h>
-
 #include <net/ethernet.h>
-
-#if defined (LIBNM_BUILD)
-#include <NetworkManager.h>
-#elif defined (LIBNM_GLIB_BUILD)
-#include <nm-connection.h>
-#include <nm-device.h>
-#include <nm-access-point.h>
-#else
-#error neither LIBNM_BUILD nor LIBNM_GLIB_BUILD defined
-#endif
 
 gboolean utils_ether_addr_valid (const struct ether_addr *test_addr);
 
-#ifdef LIBNM_BUILD
+#if LIBNM_BUILD
 char *utils_hash_ap (GBytes *ssid,
                      NM80211Mode mode,
                      guint32 flags,
@@ -96,6 +83,30 @@ void utils_fake_return_key (GdkEventKey *event);
 
 void widget_set_error   (GtkWidget *widget);
 void widget_unset_error (GtkWidget *widget);
+
+gboolean utils_tree_model_get_int64 (GtkTreeModel *model,
+                                     GtkTreeIter *iter,
+                                     int column,
+                                     gint64 min_value,
+                                     gint64 max_value,
+                                     gboolean fail_if_missing,
+                                     gint64 *out,
+                                     char **out_raw);
+
+gboolean utils_tree_model_get_address (GtkTreeModel *model,
+                                       GtkTreeIter *iter,
+                                       int column,
+                                       int family,
+                                       gboolean fail_if_missing,
+                                       char **out,
+                                       char **out_raw);
+
+gboolean utils_tree_model_get_ip4_prefix (GtkTreeModel *model,
+                                          GtkTreeIter *iter,
+                                          int column,
+                                          gboolean fail_if_missing,
+                                          guint32 *out,
+                                          char **out_raw);
 
 #endif /* UTILS_H */
 

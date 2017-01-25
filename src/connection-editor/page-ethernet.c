@@ -35,28 +35,35 @@ typedef struct {
 	NMSettingWired *setting;
 
 	GtkComboBoxText *device_combo; /* Device identification (ifname and/or MAC) */
-	GtkEntry *cloned_mac;          /* Cloned MAC - used for MAC spoofing */
+	GtkComboBoxText *cloned_mac;   /* Cloned MAC - used for MAC spoofing */
 	GtkComboBox *port;
 	GtkComboBox *speed;
-	GtkToggleButton *duplex;
-	GtkToggleButton *autonegotiate;
+	GtkComboBox *duplex;
+	GtkComboBox *linkneg;
 	GtkSpinButton *mtu;
 	GtkToggleButton *wol_default, *wol_ignore, *wol_phy, *wol_unicast, *wol_multicast,
 	                *wol_broadcast, *wol_arp, *wol_magic;
 	GtkEntry *wol_passwd;
+	gboolean mtu_enabled;
 } CEPageEthernetPrivate;
 
-#define PORT_DEFAULT  0
-#define PORT_TP       1
-#define PORT_AUI      2
-#define PORT_BNC      3
-#define PORT_MII      4
+#define PORT_DEFAULT 0
+#define PORT_TP      1
+#define PORT_AUI     2
+#define PORT_BNC     3
+#define PORT_MII     4
 
-#define SPEED_DEFAULT 0
-#define SPEED_10      1
-#define SPEED_100     2
-#define SPEED_1000    3
-#define SPEED_10000   4
+#define LINKNEG_IGNORE 0
+#define LINKNEG_AUTO   1
+#define LINKNEG_MANUAL 2
+
+#define SPEED_10    0
+#define SPEED_100   1
+#define SPEED_1000  2
+#define SPEED_10000 3
+
+#define DUPLEX_HALF 0
+#define DUPLEX_FULL 1
 
 static void
 ethernet_private_init (CEPageEthernet *self)
@@ -73,7 +80,7 @@ ethernet_private_init (CEPageEthernet *self)
 	gtk_widget_set_tooltip_text (GTK_WIDGET (priv->device_combo),
 	                             _("This option locks this connection to the network device specified "
 	                               "either by its interface name or permanent MAC or both. Examples: "
-	                               "\"em1\", \"3C:97:0E:42:1A:19\", \"em1 (3C:97:0E:42:1A:19)\""));
+	                               "“em1”, “3C:97:0E:42:1A:19”, “em1 (3C:97:0E:42:1A:19)”"));
 
 	vbox = GTK_WIDGET (gtk_builder_get_object (builder, "ethernet_device_vbox"));
 	gtk_container_add (GTK_CONTAINER (vbox), GTK_WIDGET (priv->device_combo));
@@ -84,11 +91,11 @@ ethernet_private_init (CEPageEthernet *self)
 	label = GTK_LABEL (gtk_builder_get_object (builder, "ethernet_device_label"));
 	gtk_label_set_mnemonic_widget (label, GTK_WIDGET (priv->device_combo));
 
-	priv->cloned_mac = GTK_ENTRY (gtk_builder_get_object (builder, "ethernet_cloned_mac"));
+	priv->cloned_mac = GTK_COMBO_BOX_TEXT (gtk_builder_get_object (builder, "ethernet_cloned_mac"));
 	priv->port = GTK_COMBO_BOX (gtk_builder_get_object (builder, "ethernet_port"));
 	priv->speed = GTK_COMBO_BOX (gtk_builder_get_object (builder, "ethernet_speed"));
-	priv->duplex = GTK_TOGGLE_BUTTON (gtk_builder_get_object (builder, "ethernet_duplex"));
-	priv->autonegotiate = GTK_TOGGLE_BUTTON (gtk_builder_get_object (builder, "ethernet_autonegotiate"));
+	priv->duplex = GTK_COMBO_BOX (gtk_builder_get_object (builder, "ethernet_duplex"));
+	priv->linkneg = GTK_COMBO_BOX (gtk_builder_get_object (builder, "ethernet_linkneg"));
 	priv->mtu = GTK_SPIN_BUTTON (gtk_builder_get_object (builder, "ethernet_mtu"));
 	priv->wol_default = GTK_TOGGLE_BUTTON (gtk_builder_get_object (builder, "wol_default"));
 	priv->wol_ignore = GTK_TOGGLE_BUTTON (gtk_builder_get_object (builder, "wol_ignore"));
@@ -99,12 +106,29 @@ ethernet_private_init (CEPageEthernet *self)
 	priv->wol_arp = GTK_TOGGLE_BUTTON (gtk_builder_get_object (builder, "wol_arp"));
 	priv->wol_magic = GTK_TOGGLE_BUTTON (gtk_builder_get_object (builder, "wol_magic"));
 	priv->wol_passwd = GTK_ENTRY (gtk_builder_get_object (builder, "ethernet_wol_passwd"));
+
+	gtk_widget_set_sensitive(GTK_WIDGET (priv->mtu), priv->mtu_enabled);
 }
 
 static void
 stuff_changed (GtkWidget *w, gpointer user_data)
 {
 	ce_page_changed (CE_PAGE (user_data));
+}
+
+static void
+link_special_changed_cb (GtkWidget *widget, gpointer user_data)
+{
+	CEPageEthernet *self = CE_PAGE_ETHERNET (user_data);
+	CEPageEthernetPrivate *priv = CE_PAGE_ETHERNET_GET_PRIVATE (self);
+	gboolean enable = false;
+
+	if (gtk_combo_box_get_active (GTK_COMBO_BOX (widget)) == LINKNEG_MANUAL)
+		enable = true;
+	gtk_widget_set_sensitive (GTK_WIDGET (priv->speed), enable);
+	gtk_widget_set_sensitive (GTK_WIDGET (priv->duplex), enable);
+
+	stuff_changed (NULL, self);
 }
 
 static void
@@ -156,9 +180,12 @@ populate_ui (CEPageEthernet *self)
 	CEPageEthernetPrivate *priv = CE_PAGE_ETHERNET_GET_PRIVATE (self);
 	NMSettingWired *setting = priv->setting;
 	const char *port;
+	guint32 speed;
 	const char *duplex;
 	int port_idx = PORT_DEFAULT;
-	int speed_idx;
+	int speed_idx = SPEED_100;
+	int duplex_idx = DUPLEX_FULL;
+	int linkneg_idx = LINKNEG_IGNORE;
 	int mtu_def;
 	const char *s_mac, *s_ifname, *s_wol_passwd;
 	NMSettingWiredWakeOnLan wol;
@@ -178,7 +205,8 @@ populate_ui (CEPageEthernet *self)
 	gtk_combo_box_set_active (priv->port, port_idx);
 
 	/* Speed */
-	switch (nm_setting_wired_get_speed (setting)) {
+	speed = nm_setting_wired_get_speed (setting);
+	switch (speed) {
 	case 10:
 		speed_idx = SPEED_10;
 		break;
@@ -191,42 +219,48 @@ populate_ui (CEPageEthernet *self)
 	case 10000:
 		speed_idx = SPEED_10000;
 		break;
-	default:
-		speed_idx = SPEED_DEFAULT;
-		break;
 	}
 	gtk_combo_box_set_active (priv->speed, speed_idx);
 
 	/* Duplex */
 	duplex = nm_setting_wired_get_duplex (setting);
-	if (duplex && !strcmp (duplex, "half"))
-		gtk_toggle_button_set_active (priv->duplex, FALSE);
-	else
-		gtk_toggle_button_set_active (priv->duplex, TRUE);
+	if (duplex) {
+		if (!strcmp (duplex, "half"))
+			duplex_idx = DUPLEX_HALF;
+		else
+			duplex_idx = DUPLEX_FULL;
+	}
+	gtk_combo_box_set_active (priv->duplex, duplex_idx);
 
-	/* Autonegotiate */
-	gtk_toggle_button_set_active (priv->autonegotiate, 
-	                              nm_setting_wired_get_auto_negotiate (setting));
+	/* Link Negotiation */
+	if (nm_setting_wired_get_auto_negotiate (setting))
+		linkneg_idx = LINKNEG_AUTO;
+	else if (speed && duplex)
+		linkneg_idx = LINKNEG_MANUAL;
+	gtk_combo_box_set_active (priv->linkneg, linkneg_idx);
 
 	/* Device ifname/MAC */
-        s_ifname = nm_connection_get_interface_name (CE_PAGE (self)->connection);
+	s_ifname = nm_connection_get_interface_name (CE_PAGE (self)->connection);
 	s_mac = nm_setting_wired_get_mac_address (setting);
 	ce_page_setup_device_combo (CE_PAGE (self), GTK_COMBO_BOX (priv->device_combo),
 	                            NM_TYPE_DEVICE_ETHERNET, s_ifname,
-	                            s_mac, NM_DEVICE_ETHERNET_PERMANENT_HW_ADDRESS, TRUE);
+	                            s_mac, NM_DEVICE_ETHERNET_PERMANENT_HW_ADDRESS);
 	g_signal_connect (priv->device_combo, "changed", G_CALLBACK (stuff_changed), self);
 
 	/* Cloned MAC address */
 	s_mac = nm_setting_wired_get_cloned_mac_address (setting);
-	if (s_mac)
-		gtk_entry_set_text (priv->cloned_mac, s_mac);
+	ce_page_setup_cloned_mac_combo (priv->cloned_mac, s_mac);
 	g_signal_connect (priv->cloned_mac, "changed", G_CALLBACK (stuff_changed), self);
 
 	/* MTU */
-	mtu_def = ce_get_property_default (NM_SETTING (setting), NM_SETTING_WIRED_MTU);
-	ce_spin_automatic_val (priv->mtu, mtu_def);
+	if (priv->mtu_enabled) {
+		mtu_def = ce_get_property_default (NM_SETTING (setting), NM_SETTING_WIRED_MTU);
+		ce_spin_automatic_val (priv->mtu, mtu_def);
 
-	gtk_spin_button_set_value (priv->mtu, (gdouble) nm_setting_wired_get_mtu (setting));
+		gtk_spin_button_set_value (priv->mtu, (gdouble) nm_setting_wired_get_mtu (setting));
+	} else {
+		gtk_entry_set_text (GTK_ENTRY (priv->mtu), _("ignored"));
+	}
 
 	/* Wake-on-LAN */
 	wol = nm_setting_wired_get_wake_on_lan (priv->setting);
@@ -268,16 +302,19 @@ finish_setup (CEPageEthernet *self, gpointer unused, GError *error, gpointer use
 
 	populate_ui (self);
 
+	g_signal_connect (priv->linkneg, "changed", G_CALLBACK (link_special_changed_cb), self);
+	link_special_changed_cb (GTK_WIDGET (priv->linkneg), self);
 	g_signal_connect (priv->port, "changed", G_CALLBACK (stuff_changed), self);
 	g_signal_connect (priv->speed, "changed", G_CALLBACK (stuff_changed), self);
-	g_signal_connect (priv->duplex, "toggled", G_CALLBACK (stuff_changed), self);
-	g_signal_connect (priv->autonegotiate, "toggled", G_CALLBACK (stuff_changed), self);
+	g_signal_connect (priv->duplex, "changed", G_CALLBACK (stuff_changed), self);
 	g_signal_connect (priv->mtu, "value-changed", G_CALLBACK (stuff_changed), self);
 
 	g_signal_connect (priv->wol_default,   "toggled", G_CALLBACK (wol_special_toggled_cb), self);
 	g_signal_connect (priv->wol_ignore,    "toggled", G_CALLBACK (wol_special_toggled_cb), self);
-	wol_special_toggled_cb (GTK_WIDGET (priv->wol_default), self);
-	wol_special_toggled_cb (GTK_WIDGET (priv->wol_ignore), self);
+	if (gtk_toggle_button_get_active (priv->wol_default))
+		wol_special_toggled_cb (GTK_WIDGET (priv->wol_default), self);
+	else
+		wol_special_toggled_cb (GTK_WIDGET (priv->wol_ignore), self);
 	g_signal_connect (priv->wol_phy,       "toggled", G_CALLBACK (stuff_changed), self);
 	g_signal_connect (priv->wol_unicast,   "toggled", G_CALLBACK (stuff_changed), self);
 	g_signal_connect (priv->wol_multicast, "toggled", G_CALLBACK (stuff_changed), self);
@@ -290,16 +327,6 @@ finish_setup (CEPageEthernet *self, gpointer unused, GError *error, gpointer use
 	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "ethernet_port_label"));
 	gtk_widget_hide (widget);
 	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "ethernet_port"));
-	gtk_widget_hide (widget);
-
-	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "ethernet_speed_label"));
-	gtk_widget_hide (widget);
-	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "ethernet_speed"));
-	gtk_widget_hide (widget);
-
-	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "ethernet_duplex"));
-	gtk_widget_hide (widget);
-	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "ethernet_autonegotiate"));
 	gtk_widget_hide (widget);
 }
 
@@ -319,7 +346,7 @@ ce_page_ethernet_new (NMConnectionEditor *editor,
 	                                      connection,
 	                                      parent_window,
 	                                      client,
-	                                      UIDIR "/ce-page-ethernet.ui",
+	                                      "/org/freedesktop/network-manager-applet/ce-page-ethernet.ui",
 	                                      "EthernetPage",
 	                                      _("Ethernet")));
 	if (!self) {
@@ -327,8 +354,15 @@ ce_page_ethernet_new (NMConnectionEditor *editor,
 		return NULL;
 	}
 
-	ethernet_private_init (self);
 	priv = CE_PAGE_ETHERNET_GET_PRIVATE (self);
+
+	if (nm_streq0 (nm_connection_get_connection_type (connection),
+	               NM_SETTING_PPPOE_SETTING_NAME))
+		priv->mtu_enabled = FALSE;
+	else
+		priv->mtu_enabled = TRUE;
+
+	ethernet_private_init (self);
 
 	priv->setting = nm_connection_get_setting_wired (connection);
 	if (!priv->setting) {
@@ -348,6 +382,7 @@ ui_to_setting (CEPageEthernet *self)
 	NMSettingConnection *s_con;
 	const char *port;
 	guint32 speed;
+	const char *duplex;
 	char *ifname = NULL;
 	char *device_mac = NULL;
 	const char *cloned_mac;
@@ -377,29 +412,48 @@ ui_to_setting (CEPageEthernet *self)
 		break;
 	}
 
-	/* Speed */
-	switch (gtk_combo_box_get_active (priv->speed)) {
-	case SPEED_10:
-		speed = 10;
-		break;
-	case SPEED_100:
-		speed = 100;
-		break;
-	case SPEED_1000:
-		speed = 1000;
-		break;
-	case SPEED_10000:
-		speed = 10000;
-		break;
-	default:
+	/* Speed & Duplex */
+	if (gtk_combo_box_get_active (priv->linkneg) != LINKNEG_MANUAL) {
 		speed = 0;
-		break;
+		duplex = NULL;
+	} else {
+		switch (gtk_combo_box_get_active (priv->speed)) {
+		case SPEED_10:
+			speed = 10;
+			break;
+		case SPEED_100:
+			speed = 100;
+			break;
+		case SPEED_1000:
+			speed = 1000;
+			break;
+		case SPEED_10000:
+			speed = 10000;
+			break;
+		default:
+			g_warn_if_reached();
+			speed = 0;
+			break;
+		}
+
+		switch (gtk_combo_box_get_active (priv->duplex)) {
+		case DUPLEX_HALF:
+			duplex = "half";
+			break;
+		case DUPLEX_FULL:
+			duplex = "full";
+			break;
+		default:
+			g_warn_if_reached();
+			duplex = NULL;
+			break;
+		}
 	}
 
 	entry = gtk_bin_get_child (GTK_BIN (priv->device_combo));
 	if (entry)
 		ce_page_device_entry_get (GTK_ENTRY (entry), ARPHRD_ETHER, TRUE, &ifname, &device_mac, NULL, NULL);
-	cloned_mac = gtk_entry_get_text (priv->cloned_mac);
+	cloned_mac = ce_page_cloned_mac_get (priv->cloned_mac);
 
 	/* Wake-on-LAN */
 	if (gtk_toggle_button_get_active (priv->wol_default))
@@ -432,12 +486,17 @@ ui_to_setting (CEPageEthernet *self)
 	              NM_SETTING_WIRED_CLONED_MAC_ADDRESS, cloned_mac && *cloned_mac ? cloned_mac : NULL,
 	              NM_SETTING_WIRED_PORT, port,
 	              NM_SETTING_WIRED_SPEED, speed,
-	              NM_SETTING_WIRED_DUPLEX, gtk_toggle_button_get_active (priv->duplex) ? "full" : "half",
-	              NM_SETTING_WIRED_AUTO_NEGOTIATE, gtk_toggle_button_get_active (priv->autonegotiate),
-	              NM_SETTING_WIRED_MTU, (guint32) gtk_spin_button_get_value_as_int (priv->mtu),
+	              NM_SETTING_WIRED_DUPLEX, duplex,
+	              NM_SETTING_WIRED_AUTO_NEGOTIATE, (gtk_combo_box_get_active (priv->linkneg) == LINKNEG_AUTO),
 	              NM_SETTING_WIRED_WAKE_ON_LAN, wol,
 	              NM_SETTING_WIRED_WAKE_ON_LAN_PASSWORD, wol_passwd && *wol_passwd ? wol_passwd : NULL,
 	              NULL);
+
+	if (priv->mtu_enabled) {
+		g_object_set (priv->setting,
+		              NM_SETTING_WIRED_MTU, (guint32) gtk_spin_button_get_value_as_int (priv->mtu),
+		              NULL);
+	}
 
 	g_free (ifname);
 	g_free (device_mac);
@@ -456,7 +515,7 @@ ce_page_validate_v (CEPage *page, NMConnection *connection, GError **error)
 			return FALSE;
 	}
 
-	if (!ce_page_mac_entry_valid (priv->cloned_mac, ARPHRD_ETHER, _("cloned MAC"), error))
+	if (!ce_page_cloned_mac_combo_valid (priv->cloned_mac, ARPHRD_ETHER, _("cloned MAC"), error))
 		return FALSE;
 
 	if (gtk_widget_get_sensitive (GTK_WIDGET (priv->wol_passwd))) {
@@ -487,22 +546,24 @@ ce_page_ethernet_class_init (CEPageEthernetClass *ethernet_class)
 
 
 void
-ethernet_connection_new (GtkWindow *parent,
+ethernet_connection_new (FUNC_TAG_PAGE_NEW_CONNECTION_IMPL,
+                         GtkWindow *parent,
                          const char *detail,
                          gpointer detail_data,
+                         NMConnection *connection,
                          NMClient *client,
                          PageNewConnectionResultFunc result_func,
                          gpointer user_data)
 {
-	NMConnection *connection;
+	gs_unref_object NMConnection *connection_tmp = NULL;
 
-	connection = ce_page_new_connection (_("Ethernet connection %d"),
-	                                     NM_SETTING_WIRED_SETTING_NAME,
-	                                     TRUE,
-	                                     client,
-	                                     user_data);
+	connection = _ensure_connection_other (connection, &connection_tmp);
+	ce_page_complete_connection (connection,
+	                             _("Ethernet connection %d"),
+	                             NM_SETTING_WIRED_SETTING_NAME,
+	                             TRUE,
+	                             client);
 	nm_connection_add_setting (connection, nm_setting_wired_new ());
 
-	(*result_func) (connection, FALSE, NULL, user_data);
+	(*result_func) (FUNC_TAG_PAGE_NEW_CONNECTION_RESULT_CALL, connection, FALSE, NULL, user_data);
 }
-

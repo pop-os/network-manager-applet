@@ -162,7 +162,9 @@ create_connection (CEPageMaster *master, NMConnection *connection)
 }
 
 static gboolean
-connection_type_filter (GType type, gpointer user_data)
+connection_type_filter (FUNC_TAG_NEW_CONNECTION_TYPE_FILTER_IMPL,
+                        GType type,
+                        gpointer self)
 {
 	return nm_utils_check_virtual_device_compatibility (NM_TYPE_SETTING_BRIDGE, type);
 }
@@ -205,7 +207,7 @@ ce_page_bridge_new (NMConnectionEditor *editor,
 	                                  connection,
 	                                  parent_window,
 	                                  client,
-	                                  UIDIR "/ce-page-bridge.ui",
+	                                  "/org/freedesktop/network-manager-applet/ce-page-bridge.ui",
 	                                  "BridgePage",
 	                                  _("Bridge")));
 	if (!self) {
@@ -293,26 +295,29 @@ ce_page_bridge_class_init (CEPageBridgeClass *bridge_class)
 }
 
 void
-bridge_connection_new (GtkWindow *parent,
+bridge_connection_new (FUNC_TAG_PAGE_NEW_CONNECTION_IMPL,
+                       GtkWindow *parent,
                        const char *detail,
                        gpointer detail_data,
+                       NMConnection *connection,
                        NMClient *client,
                        PageNewConnectionResultFunc result_func,
                        gpointer user_data)
 {
-	NMConnection *connection;
 	NMSettingConnection *s_con;
 	int bridge_num = 0, num, i;
 	const GPtrArray *connections;
 	NMConnection *conn2;
 	const char *iface;
 	char *my_iface;
+	gs_unref_object NMConnection *connection_tmp = NULL;
 
-	connection = ce_page_new_connection (_("Bridge connection %d"),
-	                                     NM_SETTING_BRIDGE_SETTING_NAME,
-	                                     TRUE,
-	                                     client,
-	                                     user_data);
+	connection = _ensure_connection_other (connection, &connection_tmp);
+	ce_page_complete_connection (connection,
+	                             _("Bridge connection %d"),
+	                             NM_SETTING_BRIDGE_SETTING_NAME,
+	                             TRUE,
+	                             client);
 	nm_connection_add_setting (connection, nm_setting_bridge_new ());
 
 	/* Find an available interface name */
@@ -338,6 +343,5 @@ bridge_connection_new (GtkWindow *parent,
 	              NULL);
 	g_free (my_iface);
 
-	(*result_func) (connection, FALSE, NULL, user_data);
+	(*result_func) (FUNC_TAG_PAGE_NEW_CONNECTION_RESULT_CALL, connection, FALSE, NULL, user_data);
 }
-

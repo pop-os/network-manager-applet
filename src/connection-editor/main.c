@@ -30,6 +30,8 @@
 
 #include "nm-connection-list.h"
 #include "nm-connection-editor.h"
+#include "connection-helpers.h"
+#include "vpn-helpers.h"
 
 gboolean nm_ce_keep_above;
 
@@ -39,6 +41,7 @@ static GMainLoop *loop = NULL;
 #define ARG_CREATE    "create"
 #define ARG_SHOW      "show"
 #define ARG_UUID      "uuid"
+#define ARG_IMPORT    "import"
 
 #define NM_CE_DBUS_SERVICE   "org.gnome.nm_connection_editor"
 #define NM_CE_DBUS_INTERFACE "org.gnome.nm_connection_editor"
@@ -47,14 +50,36 @@ static GDBusNodeInfo *introspection_data = NULL;
 
 /*************************************************/
 
+typedef struct {
+	gboolean create;
+	NMConnectionList *list;
+	GType ctype;
+	char *detail;
+	NMConnection *connection;
+} CreateConnectionInfo;
+
 static gboolean
 idle_create_connection (gpointer user_data)
 {
-	NMConnectionList *list = user_data;
-	GType ctype = (GType) GPOINTER_TO_SIZE (g_object_get_data (G_OBJECT (list), "nm-connection-editor-ctype"));
-	char *detail = g_object_get_data (G_OBJECT (list), "nm-connection-editor-detail");
+	CreateConnectionInfo *info = user_data;
 
-	nm_connection_list_create (list, ctype, detail);
+	if (info->create) {
+		if (!info->ctype)
+			nm_connection_list_add (info->list);
+		else {
+			nm_connection_list_create (info->list, info->ctype,
+			                           info->detail, NULL);
+		}
+	} else {
+		/* import */
+		nm_connection_list_create (info->list, info->ctype,
+		                           info->detail, info->connection);
+	}
+
+	g_object_unref (info->list);
+	g_free (info->detail);
+	nm_g_object_unref (info->connection);
+	g_slice_free (CreateConnectionInfo, info);
 	return FALSE;
 }
 
@@ -64,12 +89,14 @@ handle_arguments (NMConnectionList *list,
                   gboolean create,
                   gboolean show,
                   const char *edit_uuid,
+                  const char *import,
                   gboolean quit_after)
 {
 	gboolean show_list = TRUE;
-	GType ctype;
-	char *type_tmp = NULL;
+	GType ctype = 0;
+	gs_free char *type_tmp = NULL;
 	const char *p, *detail = NULL;
+	CreateConnectionInfo *info;
 
 	if (type) {
 		p = strchr (type, ':');
@@ -77,36 +104,41 @@ handle_arguments (NMConnectionList *list,
 			type = type_tmp = g_strndup (type, p - type);
 			detail = p + 1;
 		}
-	} else
-		type = NM_SETTING_WIRED_SETTING_NAME;
+		ctype = nm_setting_lookup_type (type);
+		if (ctype == 0 && !p) {
+			gs_free char *service_type = NULL;
 
-	/* Grab type to create or show */
-	ctype = nm_setting_lookup_type (type);
-	if (ctype == 0) {
-		g_warning ("Unknown connection type '%s'", type);
-		g_free (type_tmp);
-		return TRUE;
+			/* allow using the VPN name directly, without "vpn:" prefix. */
+			service_type = nm_vpn_plugin_info_list_find_service_type (vpn_get_plugin_infos (), type);
+			if (service_type) {
+				ctype = NM_TYPE_SETTING_VPN;
+				detail = type;
+			}
+		}
+		if (ctype == 0) {
+			g_warning ("Unknown connection type '%s'", type);
+			return TRUE;
+		}
 	}
 
 	if (show) {
 		/* Just show the given connection type page */
 		nm_connection_list_set_type (list, ctype);
-	} else if (create) {
-		if (!type) {
-			g_warning ("'create' requested but no connection type given.");
-			g_free (type_tmp);
-			return TRUE;
-		}
-
+	} else if (create || import) {
 		/* If type is "vpn" and the user cancels the "vpn type" dialog, we need
 		 * to quit. But we haven't even started yet. So postpone this to an idle.
 		 */
-		g_idle_add (idle_create_connection, list);
-		g_object_set_data (G_OBJECT (list), "nm-connection-editor-ctype",
-		                   GSIZE_TO_POINTER (ctype));
-		g_object_set_data_full (G_OBJECT (list), "nm-connection-editor-detail",
-		                        g_strdup (detail), g_free);
-
+		info = g_slice_new0 (CreateConnectionInfo);
+		info->list = g_object_ref (list);
+		info->create = create;
+		info->detail = g_strdup (detail);
+		if (create)
+			info->ctype = ctype;
+		else {
+			info->ctype = NM_TYPE_SETTING_VPN;
+			info->connection = vpn_connection_from_file (import);
+		}
+		g_idle_add (idle_create_connection, info);
 		show_list = FALSE;
 	} else if (edit_uuid) {
 		/* Show the edit dialog for the given UUID */
@@ -118,7 +150,6 @@ handle_arguments (NMConnectionList *list,
 	if (show_list == FALSE && quit_after == TRUE)
 		g_signal_connect_swapped (list, "editing-done", G_CALLBACK (g_main_loop_quit), loop);
 
-	g_free (type_tmp);
 	return show_list;
 }
 
@@ -133,7 +164,7 @@ handle_method_call (GDBusConnection       *connection,
                     gpointer               user_data)
 {
 	NMConnectionList *list = NM_CONNECTION_LIST (user_data);
-	char *type = NULL, *uuid = NULL;
+	char *type = NULL, *uuid = NULL, *import = NULL;
 	gboolean create = FALSE, show = FALSE;
 
 	if (g_strcmp0 (method_name, "Start") == 0) {
@@ -145,7 +176,8 @@ handle_method_call (GDBusConnection       *connection,
 			g_variant_lookup (dict, ARG_UUID, "s", &uuid);
 			g_variant_lookup (dict, ARG_CREATE, "b", &create);
 			g_variant_lookup (dict, ARG_SHOW, "b", &show);
-			if (handle_arguments (list, type, create, show, uuid, FALSE))
+			g_variant_lookup (dict, ARG_IMPORT, "s", &import);
+			if (handle_arguments (list, type, create, show, uuid, import, FALSE))
 				nm_connection_list_present (list);
 
 			g_dbus_method_invocation_return_value (invocation, NULL);
@@ -201,7 +233,8 @@ try_existing_instance (GDBusConnection *bus,
                        const char *type,
                        gboolean create,
                        gboolean show,
-                       const char *uuid)
+                       const char *uuid,
+                       const char *import)
 {
 	gs_free char *owner = NULL;
 	gs_free_error GError *error = NULL;
@@ -242,6 +275,8 @@ try_existing_instance (GDBusConnection *bus,
 		g_variant_builder_add (&builder, "{sv}", ARG_SHOW, g_variant_new_boolean (TRUE));
 	if (uuid)
 		g_variant_builder_add (&builder, "{sv}", ARG_UUID, g_variant_new_string (uuid));
+	if (import)
+		g_variant_builder_add (&builder, "{sv}", ARG_IMPORT, g_variant_new_string (import));
 
 	reply = g_dbus_connection_call_sync (bus,
 	                                     NM_CE_DBUS_SERVICE,
@@ -281,7 +316,7 @@ main (int argc, char *argv[])
 	NMConnectionList *list = NULL;
 	guint owner_id = 0, registration_id = 0;
 	GDBusConnection *bus = NULL;
-	gs_free char *type = NULL, *uuid = NULL;
+	gs_free char *type = NULL, *uuid = NULL, *import = NULL;
 	gboolean create = FALSE, show = FALSE;
 	int ret = 1;
 
@@ -290,6 +325,7 @@ main (int argc, char *argv[])
 		{ ARG_CREATE, 'c', 0, G_OPTION_ARG_NONE,   &create, "Create a new connection", NULL },
 		{ ARG_SHOW,   's', 0, G_OPTION_ARG_NONE,   &show,   "Show a given connection type page", NULL },
 		{ "edit",     'e', 0, G_OPTION_ARG_STRING, &uuid,   "Edit an existing connection with a given UUID", "UUID" },
+		{ ARG_IMPORT, 'i', 0, G_OPTION_ARG_STRING, &import, "Import a VPN connection from given file", NULL },
 
 		/* This is not passed over D-Bus. */
 		{ "keep-above", 0, G_OPTION_FLAG_HIDDEN, G_OPTION_ARG_NONE, &nm_ce_keep_above, NULL, NULL },
@@ -305,7 +341,7 @@ main (int argc, char *argv[])
 	g_option_context_set_summary (opt_ctx, "Allows users to view and edit network connection settings");
 	g_option_context_add_main_entries (opt_ctx, entries, NULL);
 	if (!g_option_context_parse (opt_ctx, &argc, &argv, &error)) {
-		g_warning ("Failed to parse options: %s", error->message);
+		g_printerr ("Failed to parse options: %s\n", error->message);
 		goto out;
 	}
 
@@ -321,7 +357,7 @@ main (int argc, char *argv[])
 		 * is one, send the arguments to it and exit instead of opening
 		 * a second instance of the connection editor.
 		 */
-		if (try_existing_instance (bus, type, create, show, uuid)) {
+		if (try_existing_instance (bus, type, create, show, uuid, import)) {
 			/* success */
 			ret = 0;
 			goto out;
@@ -337,10 +373,11 @@ main (int argc, char *argv[])
 	}
 	g_signal_connect_swapped (list, "done", G_CALLBACK (g_main_loop_quit), loop);
 
-	owner_id = start_service (bus, list, &registration_id);
+	if (bus)
+		owner_id = start_service (bus, list, &registration_id);
 
 	/* Figure out what page or editor window we'll show initially */
-	if (handle_arguments (list, type, create, show, uuid, (create || show || uuid)))
+	if (handle_arguments (list, type, create, show, uuid, import, (create || show || uuid || import)))
 		nm_connection_list_present (list);
 
 	g_unix_signal_add (SIGTERM, signal_handler, GINT_TO_POINTER (SIGTERM));

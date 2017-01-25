@@ -50,9 +50,11 @@ CEPage *ce_page_team_new (NMConnectionEditor *editor,
                           const char **out_secrets_setting_name,
                           GError **error);
 
-void team_connection_new (GtkWindow *parent,
+void team_connection_new (FUNC_TAG_PAGE_NEW_CONNECTION_IMPL,
+                          GtkWindow *parent,
                           const char *detail,
                           gpointer detail_data,
+                          NMConnection *connection,
                           NMClient *client,
                           PageNewConnectionResultFunc result_func,
                           gpointer user_data);

@@ -36,16 +36,25 @@
 /* for ARPHRD_ETHER / ARPHRD_INFINIBAND for MAC utilies */
 #include <net/if_arp.h>
 
-typedef void (*PageNewConnectionResultFunc) (NMConnection *connection,
+struct _func_tag_page_new_connection_result;
+#define FUNC_TAG_PAGE_NEW_CONNECTION_RESULT_IMPL struct _func_tag_page_new_connection_result *_dummy
+#define FUNC_TAG_PAGE_NEW_CONNECTION_RESULT_CALL ((struct _func_tag_page_new_connection_result *) NULL)
+typedef void (*PageNewConnectionResultFunc) (FUNC_TAG_PAGE_NEW_CONNECTION_RESULT_IMPL,
+                                             NMConnection *connection, /* allow-none, don't transfer reference, allow-keep */
                                              gboolean canceled,
                                              GError *error,
                                              gpointer user_data);
 
 typedef GSList * (*PageGetConnectionsFunc) (gpointer user_data);
 
-typedef void (*PageNewConnectionFunc) (GtkWindow *parent,
+struct _func_tag_page_new_connection;
+#define FUNC_TAG_PAGE_NEW_CONNECTION_IMPL struct _func_tag_page_new_connection *_dummy
+#define FUNC_TAG_PAGE_NEW_CONNECTION_CALL ((struct _func_tag_page_new_connection *) NULL)
+typedef void (*PageNewConnectionFunc) (FUNC_TAG_PAGE_NEW_CONNECTION_IMPL,
+                                       GtkWindow *parent,
                                        const char *detail,
                                        gpointer detail_data,
+                                       NMConnection *connection,
                                        NMClient *client,
                                        PageNewConnectionResultFunc result_func,
                                        gpointer user_data);
@@ -99,6 +108,19 @@ typedef CEPage* (*CEPageNewFunc)(NMConnectionEditor *editor,
                                  const char **out_secrets_setting_name,
                                  GError **error);
 
+#define CE_TOOLTIP_ADDR_AUTO _("IP addresses identify your computer on the network. " \
+                               "Click the “Add” button to add static IP address to be " \
+                               "configured in addition to the automatic ones.")
+#define CE_TOOLTIP_ADDR_MANUAL _("IP addresses identify your computer on the network. " \
+                                 "Click the “Add” button to add an IP address.")
+#define CE_TOOLTIP_ADDR_SHARED _("The IP address identify your computer on the network and " \
+                                 "determines the address range distributed to other computers. " \
+                                 "Click the “Add” button to add an IP address. "\
+                                 "If no address is provided, range will be determined automatically.")
+
+#define CE_LABEL_ADDR_AUTO _("Additional static addresses")
+#define CE_LABEL_ADDR_MANUAL _("Addresses")
+#define CE_LABEL_ADDR_SHARED _("Address (optional)")
 
 GType ce_page_get_type (void);
 
@@ -114,13 +136,13 @@ void ce_page_setup_mac_combo (CEPage *self, GtkComboBox *combo,
                               const char *mac, char **mac_list);
 void ce_page_setup_data_combo (CEPage *self, GtkComboBox *combo,
                                const char *data, char **list);
+void ce_page_setup_cloned_mac_combo (GtkComboBoxText *combo, const char *current);
 void ce_page_setup_device_combo (CEPage *self,
                                  GtkComboBox *combo,
                                  GType device_type,
                                  const char *ifname,
                                  const char *mac,
-                                 const char *mac_property,
-                                 gboolean ifname_first);
+                                 const char *mac_property);
 gboolean ce_page_mac_entry_valid (GtkEntry *entry, int type, const char *property_name, GError **error);
 gboolean ce_page_interface_name_valid (const char *iface, const char *property_name, GError **error);
 gboolean ce_page_device_entry_get (GtkEntry *entry, int type,
@@ -128,6 +150,8 @@ gboolean ce_page_device_entry_get (GtkEntry *entry, int type,
                                    char **ifname, char **mac,
                                    const char *device_name,
                                    GError **error);
+const char *ce_page_cloned_mac_get (GtkComboBoxText *combo);
+gboolean ce_page_cloned_mac_combo_valid (GtkComboBoxText *combo, int type, const char *property_name, GError **error);
 
 void ce_page_changed (CEPage *self);
 
@@ -146,18 +170,34 @@ gboolean ce_page_get_initialized (CEPage *self);
 char *ce_page_get_next_available_name (const GPtrArray *connections, const char *format);
 
 /* Only for subclasses */
-NMConnection *ce_page_new_connection (const char *format,
-                                      const char *ctype,
-                                      gboolean autoconnect,
-                                      NMClient *client,
-                                      gpointer user_data);
+void ce_page_complete_connection (NMConnection *connection,
+                                  const char *format,
+                                  const char *ctype,
+                                  gboolean autoconnect,
+                                  NMClient *client);
+
+static inline NMConnection *
+_ensure_connection_own (NMConnection **connection)
+{
+	return (*connection) ?: (*connection = nm_simple_connection_new ());
+}
+
+static inline NMConnection *
+_ensure_connection_other (NMConnection *connection, NMConnection **connection_to_free)
+{
+	if (connection) {
+		*connection_to_free = NULL;
+		return connection;
+	}
+	return (*connection_to_free = nm_simple_connection_new ());
+}
 
 CEPage *ce_page_new (GType page_type,
                      NMConnectionEditor *editor,
                      NMConnection *connection,
                      GtkWindow *parent_window,
                      NMClient *client,
-                     const char *ui_file,
+                     const char *ui_resource,
                      const char *widget_name,
                      const char *title);
 

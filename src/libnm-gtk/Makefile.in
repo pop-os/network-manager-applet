@@ -94,11 +94,9 @@ host_triplet = @host@
 subdir = src/libnm-gtk
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/m4/compiler_options.m4 \
-	$(top_srcdir)/m4/glib-makefile.m4 $(top_srcdir)/m4/intltool.m4 \
-	$(top_srcdir)/m4/introspection.m4 $(top_srcdir)/m4/libtool.m4 \
-	$(top_srcdir)/m4/ltoptions.m4 $(top_srcdir)/m4/ltsugar.m4 \
-	$(top_srcdir)/m4/ltversion.m4 $(top_srcdir)/m4/lt~obsolete.m4 \
-	$(top_srcdir)/configure.ac
+	$(top_srcdir)/m4/git-sha-record.m4 \
+	$(top_srcdir)/m4/glib-makefile.m4 \
+	$(top_srcdir)/m4/introspection.m4 $(top_srcdir)/configure.ac
 am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
 	$(ACLOCAL_M4)
 DIST_COMMON = $(srcdir)/Makefile.am $(libnmgtk_HEADERS) \
@@ -136,7 +134,7 @@ am__uninstall_files_from_dir = { \
   }
 am__installdirs = "$(DESTDIR)$(libdir)" "$(DESTDIR)$(girdir)" \
 	"$(DESTDIR)$(pkgconfigdir)" "$(DESTDIR)$(typelibdir)" \
-	"$(DESTDIR)$(uidir)" "$(DESTDIR)$(libnmgtkdir)"
+	"$(DESTDIR)$(libnmgtkdir)"
 LTLIBRARIES = $(lib_LTLIBRARIES)
 am__DEPENDENCIES_1 =
 libnm_gtk_la_DEPENDENCIES = $(am__DEPENDENCIES_1) \
@@ -146,7 +144,8 @@ am_libnm_gtk_la_OBJECTS = libnm_gtk_la-nm-wifi-dialog.lo \
 	libnm_gtk_la-nm-wireless-dialog.lo \
 	libnm_gtk_la-nm-mobile-wizard.lo libnm_gtk_la-nm-ui-utils.lo \
 	libnm_gtk_la-nm-mobile-providers.lo \
-	libnm_gtk_la-nm-vpn-password-dialog.lo libnm_gtk_la-init.lo
+	libnm_gtk_la-nm-vpn-password-dialog.lo \
+	libnm_gtk_la-nm-resources.lo libnm_gtk_la-init.lo
 libnm_gtk_la_OBJECTS = $(am_libnm_gtk_la_OBJECTS)
 AM_V_lt = $(am__v_lt_@AM_V@)
 am__v_lt_ = $(am__v_lt_@AM_DEFAULT_V@)
@@ -204,7 +203,7 @@ am__can_run_installinfo = \
     n|no|NO) false;; \
     *) (install-info --version) >/dev/null 2>&1;; \
   esac
-DATA = $(gir_DATA) $(pkgconfig_DATA) $(typelib_DATA) $(ui_DATA)
+DATA = $(gir_DATA) $(pkgconfig_DATA) $(typelib_DATA)
 HEADERS = $(libnmgtk_HEADERS)
 RECURSIVE_CLEAN_TARGETS = mostlyclean-recursive clean-recursive	\
   distclean-recursive maintainer-clean-recursive
@@ -297,6 +296,7 @@ EXEEXT = @EXEEXT@
 FGREP = @FGREP@
 GETTEXT_PACKAGE = @GETTEXT_PACKAGE@
 GLIB_CFLAGS = @GLIB_CFLAGS@
+GLIB_COMPILE_RESOURCES = @GLIB_COMPILE_RESOURCES@
 GLIB_COMPILE_SCHEMAS = @GLIB_COMPILE_SCHEMAS@
 GLIB_GENMARSHAL = @GLIB_GENMARSHAL@
 GLIB_LIBS = @GLIB_LIBS@
@@ -451,8 +451,6 @@ top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
 SUBDIRS = . tests examples
-uidir = $(datadir)/libnm-gtk
-ui_DATA = wifi.ui
 libnmgtkdir = $(includedir)/libnm-gtk
 libnmgtk_HEADERS = \
 	nm-wifi-dialog.h \
@@ -463,6 +461,10 @@ libnmgtk_HEADERS = \
 	nm-vpn-password-dialog.h
 
 lib_LTLIBRARIES = libnm-gtk.la
+BUILT_SOURCES = \
+	nm-resources.h \
+	nm-resources.c
+
 libnm_gtk_la_SOURCES = \
 	nm-wifi-dialog.c \
 	nm-wireless-dialog.c \
@@ -470,22 +472,22 @@ libnm_gtk_la_SOURCES = \
 	nm-ui-utils.c \
 	nm-mobile-providers.c \
 	nm-vpn-password-dialog.c \
+	nm-resources.h \
+	nm-resources.c \
 	init.c
 
 libnm_gtk_la_CFLAGS = \
 	$(GTK_CFLAGS) \
 	$(LIBNM_GLIB_CFLAGS) \
 	$(GUDEV_CFLAGS) \
-	-DLIBNM_GLIB_BUILD \
+	-DNETWORKMANAGER_COMPILATION=NM_NETWORKMANAGER_COMPILATION_LIB_LEGACY \
 	-DICONDIR=\""$(datadir)/icons"\" \
-	-DUIDIR=\""$(uidir)"\" \
 	-DBINDIR=\""$(bindir)"\" \
 	-DSYSCONFDIR=\""$(sysconfdir)"\" \
 	-DLIBEXECDIR=\""$(libexecdir)"\" \
 	-DDATADIR=\""$(datadir)"\" \
 	-DAUTOSTARTDIR=\""$(sysconfdir)/xdg/autostart"\" \
 	-DNMALOCALEDIR=\"$(datadir)/locale\" \
-	-DNETWORKMANAGER_COMPILATION=NM_NETWORKMANAGER_COMPILATION_LIB_LEGACY \
 	"-I${top_srcdir}/shared/" \
 	-I${top_srcdir}/src/utils \
 	-I${top_srcdir}/src/wireless-security
@@ -504,8 +506,8 @@ pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA = libnm-gtk.pc
 INTROSPECTION_GIRS = $(am__append_1)
 @HAVE_INTROSPECTION_TRUE@introspection_sources = \
-@HAVE_INTROSPECTION_TRUE@	$(filter-out			\
-@HAVE_INTROSPECTION_TRUE@		nm-wireless-dialog.%,	\
+@HAVE_INTROSPECTION_TRUE@	$(filter-out					\
+@HAVE_INTROSPECTION_TRUE@		$(BUILT_SOURCES) nm-wireless-dialog.%,	\
 @HAVE_INTROSPECTION_TRUE@		$(libnmgtk_HEADERS) $(libnm_gtk_la_SOURCES))
 
 @HAVE_INTROSPECTION_TRUE@NMGtk_1_0_gir_INCLUDES = NMClient-1.0 NetworkManager-1.0 Gtk-3.0
@@ -519,8 +521,15 @@ INTROSPECTION_GIRS = $(am__append_1)
 @HAVE_INTROSPECTION_TRUE@typelibdir = $(libdir)/girepository-1.0
 @HAVE_INTROSPECTION_TRUE@typelib_DATA = $(INTROSPECTION_GIRS:.gir=.typelib)
 @HAVE_INTROSPECTION_TRUE@CLEANFILES = $(gir_DATA) $(typelib_DATA)
-EXTRA_DIST = libnm-gtk.pc.in libnm-gtk.ver check-exports.sh $(ui_DATA)
-all: all-recursive
+EXTRA_DIST = \
+	libnm-gtk.pc.in \
+	libnm-gtk.ver \
+	check-exports.sh \
+	wifi.ui \
+	nm.gresource.xml
+
+all: $(BUILT_SOURCES)
+	$(MAKE) $(AM_MAKEFLAGS) all-recursive
 
 .SUFFIXES:
 .SUFFIXES: .c .lo .o .obj
@@ -603,31 +612,29 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libnm_gtk_la-init.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libnm_gtk_la-nm-mobile-providers.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libnm_gtk_la-nm-mobile-wizard.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libnm_gtk_la-nm-resources.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libnm_gtk_la-nm-ui-utils.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libnm_gtk_la-nm-vpn-password-dialog.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libnm_gtk_la-nm-wifi-dialog.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libnm_gtk_la-nm-wireless-dialog.Plo@am__quote@
 
 .c.o:
-@am__fastdepCC_TRUE@	$(AM_V_CC)depbase=`echo $@ | sed 's|[^/]*$$|$(DEPDIR)/&|;s|\.o$$||'`;\
-@am__fastdepCC_TRUE@	$(COMPILE) -MT $@ -MD -MP -MF $$depbase.Tpo -c -o $@ $< &&\
-@am__fastdepCC_TRUE@	$(am__mv) $$depbase.Tpo $$depbase.Po
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(COMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/$*.Tpo $(DEPDIR)/$*.Po
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='$<' object='$@' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(COMPILE) -c -o $@ $<
 
 .c.obj:
-@am__fastdepCC_TRUE@	$(AM_V_CC)depbase=`echo $@ | sed 's|[^/]*$$|$(DEPDIR)/&|;s|\.obj$$||'`;\
-@am__fastdepCC_TRUE@	$(COMPILE) -MT $@ -MD -MP -MF $$depbase.Tpo -c -o $@ `$(CYGPATH_W) '$<'` &&\
-@am__fastdepCC_TRUE@	$(am__mv) $$depbase.Tpo $$depbase.Po
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(COMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ `$(CYGPATH_W) '$<'`
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/$*.Tpo $(DEPDIR)/$*.Po
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='$<' object='$@' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(COMPILE) -c -o $@ `$(CYGPATH_W) '$<'`
 
 .c.lo:
-@am__fastdepCC_TRUE@	$(AM_V_CC)depbase=`echo $@ | sed 's|[^/]*$$|$(DEPDIR)/&|;s|\.lo$$||'`;\
-@am__fastdepCC_TRUE@	$(LTCOMPILE) -MT $@ -MD -MP -MF $$depbase.Tpo -c -o $@ $< &&\
-@am__fastdepCC_TRUE@	$(am__mv) $$depbase.Tpo $$depbase.Plo
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LTCOMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/$*.Tpo $(DEPDIR)/$*.Plo
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='$<' object='$@' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LTCOMPILE) -c -o $@ $<
@@ -673,6 +680,13 @@ libnm_gtk_la-nm-vpn-password-dialog.lo: nm-vpn-password-dialog.c
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='nm-vpn-password-dialog.c' object='libnm_gtk_la-nm-vpn-password-dialog.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libnm_gtk_la_CFLAGS) $(CFLAGS) -c -o libnm_gtk_la-nm-vpn-password-dialog.lo `test -f 'nm-vpn-password-dialog.c' || echo '$(srcdir)/'`nm-vpn-password-dialog.c
+
+libnm_gtk_la-nm-resources.lo: nm-resources.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libnm_gtk_la_CFLAGS) $(CFLAGS) -MT libnm_gtk_la-nm-resources.lo -MD -MP -MF $(DEPDIR)/libnm_gtk_la-nm-resources.Tpo -c -o libnm_gtk_la-nm-resources.lo `test -f 'nm-resources.c' || echo '$(srcdir)/'`nm-resources.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libnm_gtk_la-nm-resources.Tpo $(DEPDIR)/libnm_gtk_la-nm-resources.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='nm-resources.c' object='libnm_gtk_la-nm-resources.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libnm_gtk_la_CFLAGS) $(CFLAGS) -c -o libnm_gtk_la-nm-resources.lo `test -f 'nm-resources.c' || echo '$(srcdir)/'`nm-resources.c
 
 libnm_gtk_la-init.lo: init.c
 @am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libnm_gtk_la_CFLAGS) $(CFLAGS) -MT libnm_gtk_la-init.lo -MD -MP -MF $(DEPDIR)/libnm_gtk_la-init.Tpo -c -o libnm_gtk_la-init.lo `test -f 'init.c' || echo '$(srcdir)/'`init.c
@@ -749,27 +763,6 @@ uninstall-typelibDATA:
 	@list='$(typelib_DATA)'; test -n "$(typelibdir)" || list=; \
 	files=`for p in $$list; do echo $$p; done | sed -e 's|^.*/||'`; \
 	dir='$(DESTDIR)$(typelibdir)'; $(am__uninstall_files_from_dir)
-install-uiDATA: $(ui_DATA)
-	@$(NORMAL_INSTALL)
-	@list='$(ui_DATA)'; test -n "$(uidir)" || list=; \
-	if test -n "$$list"; then \
-	  echo " $(MKDIR_P) '$(DESTDIR)$(uidir)'"; \
-	  $(MKDIR_P) "$(DESTDIR)$(uidir)" || exit 1; \
-	fi; \
-	for p in $$list; do \
-	  if test -f "$$p"; then d=; else d="$(srcdir)/"; fi; \
-	  echo "$$d$$p"; \
-	done | $(am__base_list) | \
-	while read files; do \
-	  echo " $(INSTALL_DATA) $$files '$(DESTDIR)$(uidir)'"; \
-	  $(INSTALL_DATA) $$files "$(DESTDIR)$(uidir)" || exit $$?; \
-	done
-
-uninstall-uiDATA:
-	@$(NORMAL_UNINSTALL)
-	@list='$(ui_DATA)'; test -n "$(uidir)" || list=; \
-	files=`for p in $$list; do echo $$p; done | sed -e 's|^.*/||'`; \
-	dir='$(DESTDIR)$(uidir)'; $(am__uninstall_files_from_dir)
 install-libnmgtkHEADERS: $(libnmgtk_HEADERS)
 	@$(NORMAL_INSTALL)
 	@list='$(libnmgtk_HEADERS)'; test -n "$(libnmgtkdir)" || list=; \
@@ -949,14 +942,16 @@ distdir: $(DISTFILES)
 @HAVE_INTROSPECTION_FALSE@check-local:
 check-am: all-am
 	$(MAKE) $(AM_MAKEFLAGS) check-local
-check: check-recursive
+check: $(BUILT_SOURCES)
+	$(MAKE) $(AM_MAKEFLAGS) check-recursive
 all-am: Makefile $(LTLIBRARIES) $(DATA) $(HEADERS)
 installdirs: installdirs-recursive
 installdirs-am:
-	for dir in "$(DESTDIR)$(libdir)" "$(DESTDIR)$(girdir)" "$(DESTDIR)$(pkgconfigdir)" "$(DESTDIR)$(typelibdir)" "$(DESTDIR)$(uidir)" "$(DESTDIR)$(libnmgtkdir)"; do \
+	for dir in "$(DESTDIR)$(libdir)" "$(DESTDIR)$(girdir)" "$(DESTDIR)$(pkgconfigdir)" "$(DESTDIR)$(typelibdir)" "$(DESTDIR)$(libnmgtkdir)"; do \
 	  test -z "$$dir" || $(MKDIR_P) "$$dir"; \
 	done
-install: install-recursive
+install: $(BUILT_SOURCES)
+	$(MAKE) $(AM_MAKEFLAGS) install-recursive
 install-exec: install-exec-recursive
 install-data: install-data-recursive
 uninstall: uninstall-recursive
@@ -987,6 +982,7 @@ distclean-generic:
 maintainer-clean-generic:
 	@echo "This command is intended for maintainers to use"
 	@echo "it deletes files that may require special tools to rebuild."
+	-test -z "$(BUILT_SOURCES)" || rm -f $(BUILT_SOURCES)
 clean: clean-recursive
 
 clean-am: clean-generic clean-libLTLIBRARIES clean-libtool \
@@ -1011,7 +1007,7 @@ info: info-recursive
 info-am:
 
 install-data-am: install-girDATA install-libnmgtkHEADERS \
-	install-pkgconfigDATA install-typelibDATA install-uiDATA
+	install-pkgconfigDATA install-typelibDATA
 
 install-dvi: install-dvi-recursive
 
@@ -1059,9 +1055,10 @@ ps-am:
 
 uninstall-am: uninstall-girDATA uninstall-libLTLIBRARIES \
 	uninstall-libnmgtkHEADERS uninstall-pkgconfigDATA \
-	uninstall-typelibDATA uninstall-uiDATA
+	uninstall-typelibDATA
 
-.MAKE: $(am__recursive_targets) check-am install-am install-strip
+.MAKE: $(am__recursive_targets) all check check-am install install-am \
+	install-strip
 
 .PHONY: $(am__recursive_targets) CTAGS GTAGS TAGS all all-am check \
 	check-am check-local clean clean-generic clean-libLTLIBRARIES \
@@ -1073,17 +1070,22 @@ uninstall-am: uninstall-girDATA uninstall-libLTLIBRARIES \
 	install-html install-html-am install-info install-info-am \
 	install-libLTLIBRARIES install-libnmgtkHEADERS install-man \
 	install-pdf install-pdf-am install-pkgconfigDATA install-ps \
-	install-ps-am install-strip install-typelibDATA install-uiDATA \
-	installcheck installcheck-am installdirs installdirs-am \
-	maintainer-clean maintainer-clean-generic mostlyclean \
-	mostlyclean-compile mostlyclean-generic mostlyclean-libtool \
-	pdf pdf-am ps ps-am tags tags-am uninstall uninstall-am \
-	uninstall-girDATA uninstall-libLTLIBRARIES \
-	uninstall-libnmgtkHEADERS uninstall-pkgconfigDATA \
-	uninstall-typelibDATA uninstall-uiDATA
+	install-ps-am install-strip install-typelibDATA installcheck \
+	installcheck-am installdirs installdirs-am maintainer-clean \
+	maintainer-clean-generic mostlyclean mostlyclean-compile \
+	mostlyclean-generic mostlyclean-libtool pdf pdf-am ps ps-am \
+	tags tags-am uninstall uninstall-am uninstall-girDATA \
+	uninstall-libLTLIBRARIES uninstall-libnmgtkHEADERS \
+	uninstall-pkgconfigDATA uninstall-typelibDATA
 
 .PRECIOUS: Makefile
 
+
+nm-resources.h: $(srcdir)/nm.gresource.xml
+	$(AM_V_GEN) $(GLIB_COMPILE_RESOURCES) $< --target=$@ --sourcedir=$(srcdir) --generate-header --internal
+
+nm-resources.c: $(srcdir)/nm.gresource.xml $(shell $(GLIB_COMPILE_RESOURCES) --sourcedir=$(srcdir) --generate-dependencies $(srcdir)/nm.gresource.xml)
+	$(AM_V_GEN) $(GLIB_COMPILE_RESOURCES) $< --target=$@ --sourcedir=$(srcdir) --generate-source --internal
 
 -include $(INTROSPECTION_MAKEFILE)
 

@@ -462,7 +462,7 @@ connection_combo_init (NMAWifiDialog *self, NMConnection *connection)
 
 		gtk_list_store_append (store, &tree_iter);
 		gtk_list_store_set (store, &tree_iter,
-		                    C_NAME_COLUMN, _("New..."),
+		                    C_NAME_COLUMN, _("New…"),
 		                    C_NEW_COLUMN, TRUE, -1);
 
 		gtk_list_store_append (store, &tree_iter);
@@ -1158,7 +1158,7 @@ internal_init (NMAWifiDialog *self,
 		if (ssid)
 			esc_ssid = nm_utils_ssid_to_utf8 (ssid);
 
-		tmp = g_strdup_printf (_("Passwords or encryption keys are required to access the Wi-Fi network '%s'."),
+		tmp = g_strdup_printf (_("Passwords or encryption keys are required to access the Wi-Fi network “%s”."),
 		                       esc_ssid ? esc_ssid : "<unknown>");
 		gtk_window_set_title (GTK_WINDOW (self), _("Wi-Fi Network Authentication Required"));
 		label = g_strdup_printf ("<span size=\"larger\" weight=\"bold\">%s</span>\n\n%s",
@@ -1396,8 +1396,8 @@ nma_wifi_dialog_init (NMAWifiDialog *self)
 
 	priv->builder = gtk_builder_new ();
 
-	if (!gtk_builder_add_from_file (priv->builder, UIDIR "/wifi.ui", &error)) {
-		g_warning ("Couldn't load builder file: %s", error->message);
+	if (!gtk_builder_add_from_resource (priv->builder, "/org/freedesktop/network-manager-applet/wifi.ui", &error)) {
+		g_warning ("Couldn't load builder resource: %s", error->message);
 		g_error_free (error);
 	}
 }

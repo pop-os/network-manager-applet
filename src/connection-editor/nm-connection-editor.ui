@@ -6,8 +6,8 @@
     <property name="border_width">5</property>
     <property name="title" translatable="yes">Network Connections</property>
     <property name="window_position">center</property>
-    <property name="default_width">400</property>
-    <property name="default_height">300</property>
+    <property name="default_width">600</property>
+    <property name="default_height">400</property>
     <property name="icon_name">preferences-system-network</property>
     <property name="type_hint">dialog</property>
     <child internal-child="vbox">
@@ -203,7 +203,7 @@
                 <property name="spacing">6</property>
                 <child>
                   <object class="GtkButton" id="export_button">
-                    <property name="label" translatable="yes">_Export...</property>
+                    <property name="label" translatable="yes">_Export…</property>
                     <property name="can_focus">True</property>
                     <property name="receives_default">True</property>
                     <property name="use_underline">True</property>

@@ -107,14 +107,15 @@ stuff_changed_cb (WirelessSecurity *sec, gpointer user_data)
 static void
 wsec_size_group_clear (GtkSizeGroup *group)
 {
-	GSList *children;
 	GSList *iter;
 
 	g_return_if_fail (group != NULL);
 
-	children = gtk_size_group_get_widgets (group);
-	for (iter = children; iter; iter = g_slist_next (iter))
+	iter = gtk_size_group_get_widgets (group);
+	while (iter) {
 		gtk_size_group_remove_widget (group, GTK_WIDGET (iter->data));
+		iter = gtk_size_group_get_widgets (group);
+	}
 }
 
 static WirelessSecurity *
@@ -419,7 +420,7 @@ ce_page_wifi_security_new (NMConnectionEditor *editor,
 	                                           connection,
 	                                           parent_window,
 	                                           client,
-	                                           UIDIR "/ce-page-wifi-security.ui",
+	                                           "/org/freedesktop/network-manager-applet/ce-page-wifi-security.ui",
 	                                           "WifiSecurityPage",
 	                                           _("Wi-Fi Security")));
 	if (!self) {
