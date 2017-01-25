@@ -1,5 +1,6 @@
-network-manager-applet (1.4.2-2) UNRELEASED; urgency=medium
+network-manager-applet (1.4.4-1) UNRELEASED; urgency=medium
 
+  * New upstream release.
   * Bump debhelper compat level to 10.
   * Update Vcs-* according to the latest recommendation.
 
