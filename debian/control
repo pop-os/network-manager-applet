@@ -65,20 +65,9 @@ Section: libs
 Pre-Depends: ${misc:Pre-Depends}
 Depends: ${shlibs:Depends},
          ${misc:Depends},
-         libnm-gtk-common (= ${source:Version})
 Breaks: network-manager-gnome (<< 0.9.10.0)
 Description: library for wireless and mobile dialogs (libnm-glib version)
  This library provides Gtk+ dialogs for NetworkManager.
-
-Package: libnm-gtk-common
-Architecture: all
-Multi-Arch: foreign
-Section: libs
-Depends: ${misc:Depends}
-Description: library for wireless and mobile dialogs - common files
- The libnm-gtk library provides Gtk+ dialogs for NetworkManager.
- .
- This package contains data files used by libnm-gtk.
 
 Package: libnm-gtk-dev
 Architecture: linux-any
@@ -119,19 +108,8 @@ Section: libs
 Pre-Depends: ${misc:Pre-Depends}
 Depends: ${shlibs:Depends},
          ${misc:Depends},
-         libnma-common (= ${source:Version})
 Description: library for wireless and mobile dialogs (libnm version)
  This library provides Gtk+ dialogs for NetworkManager.
-
-Package: libnma-common
-Architecture: all
-Multi-Arch: foreign
-Section: libs
-Depends: ${misc:Depends}
-Description: library for wireless and mobile dialogs - common files
- The libnm-gtk library provides Gtk+ dialogs for NetworkManager.
- .
- This package contains data files used by libnm-gtk.
 
 Package: libnma-dev
 Architecture: linux-any
