@@ -1,6 +1,7 @@
 network-manager-applet (1.4.2-2) UNRELEASED; urgency=medium
 
   * Bump debhelper compat level to 10.
+  * Update Vcs-* according to the latest recommendation.
 
  -- Michael Biebl <biebl@debian.org>  Tue, 04 Oct 2016 17:07:39 +0200
 
