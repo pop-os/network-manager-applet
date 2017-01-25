@@ -12,10 +12,10 @@ Closes: #471191
  1 file changed, 6 insertions(+)
 
 diff --git a/src/applet.c b/src/applet.c
-index 08be772..06fc585 100644
+index fff0b65e..d48a4734 100644
 --- a/src/applet.c
 +++ b/src/applet.c
-@@ -2611,6 +2611,12 @@ applet_update_icon (gpointer user_data)
+@@ -2640,6 +2640,12 @@ applet_update_icon (gpointer user_data)
  		applet_get_device_icon_for_state (applet, &pixbuf, &icon_name_free, &dev_tip_free);
  		icon_name = icon_name_free;
  		dev_tip = dev_tip_free;
