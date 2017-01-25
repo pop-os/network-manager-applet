@@ -1,8 +1,5 @@
 SUBDIRS = . tests examples
 
-uidir = $(datadir)/libnm-gtk
-ui_DATA = wifi.ui
-
 libnmgtkdir = $(includedir)/libnm-gtk
 
 libnmgtk_HEADERS = \
@@ -15,6 +12,10 @@ libnmgtk_HEADERS = \
 
 lib_LTLIBRARIES = libnm-gtk.la
 
+BUILT_SOURCES = \
+	nm-resources.h \
+	nm-resources.c
+
 libnm_gtk_la_SOURCES = \
 	nm-wifi-dialog.c \
 	nm-wireless-dialog.c \
@@ -22,22 +23,22 @@ libnm_gtk_la_SOURCES = \
 	nm-ui-utils.c \
 	nm-mobile-providers.c \
 	nm-vpn-password-dialog.c \
+	nm-resources.h \
+	nm-resources.c \
 	init.c
 
 libnm_gtk_la_CFLAGS = \
 	$(GTK_CFLAGS) \
 	$(LIBNM_GLIB_CFLAGS) \
 	$(GUDEV_CFLAGS) \
-	-DLIBNM_GLIB_BUILD \
+	-DNETWORKMANAGER_COMPILATION=NM_NETWORKMANAGER_COMPILATION_LIB_LEGACY \
 	-DICONDIR=\""$(datadir)/icons"\" \
-	-DUIDIR=\""$(uidir)"\" \
 	-DBINDIR=\""$(bindir)"\" \
 	-DSYSCONFDIR=\""$(sysconfdir)"\" \
 	-DLIBEXECDIR=\""$(libexecdir)"\" \
 	-DDATADIR=\""$(datadir)"\" \
 	-DAUTOSTARTDIR=\""$(sysconfdir)/xdg/autostart"\" \
 	-DNMALOCALEDIR=\"$(datadir)/locale\" \
-	-DNETWORKMANAGER_COMPILATION=NM_NETWORKMANAGER_COMPILATION_LIB_LEGACY \
 	"-I${top_srcdir}/shared/" \
 	-I${top_srcdir}/src/utils \
 	-I${top_srcdir}/src/wireless-security
@@ -53,6 +54,12 @@ EXTRA_libnm_gtk_la_DEPENDENCIES = $(srcdir)/libnm-gtk.ver
 libnm_gtk_la_LDFLAGS = -Wl,-no-undefined \
 	-Wl,--version-script=$(srcdir)/libnm-gtk.ver
 
+nm-resources.h: $(srcdir)/nm.gresource.xml
+	$(AM_V_GEN) $(GLIB_COMPILE_RESOURCES) $< --target=$@ --sourcedir=$(srcdir) --generate-header --internal
+
+nm-resources.c: $(srcdir)/nm.gresource.xml $(shell $(GLIB_COMPILE_RESOURCES) --sourcedir=$(srcdir) --generate-dependencies $(srcdir)/nm.gresource.xml)
+	$(AM_V_GEN) $(GLIB_COMPILE_RESOURCES) $< --target=$@ --sourcedir=$(srcdir) --generate-source --internal
+
 pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA = libnm-gtk.pc
 
@@ -60,9 +67,9 @@ pkgconfig_DATA = libnm-gtk.pc
 INTROSPECTION_GIRS =
 
 if HAVE_INTROSPECTION
-introspection_sources =			\
-	$(filter-out			\
-		nm-wireless-dialog.%,	\
+introspection_sources =					\
+	$(filter-out					\
+		$(BUILT_SOURCES) nm-wireless-dialog.%,	\
 		$(libnmgtk_HEADERS) $(libnm_gtk_la_SOURCES))
 
 NMGtk-1.0.gir: libnm-gtk.la
@@ -86,4 +93,9 @@ check-local:
 CLEANFILES = $(gir_DATA) $(typelib_DATA)
 endif
 
-EXTRA_DIST = libnm-gtk.pc.in libnm-gtk.ver check-exports.sh $(ui_DATA)
+EXTRA_DIST = \
+	libnm-gtk.pc.in \
+	libnm-gtk.ver \
+	check-exports.sh \
+	wifi.ui \
+	nm.gresource.xml

@@ -220,7 +220,7 @@ import_button_clicked_cb (GtkWidget *widget, CEPageTeamPort *self)
 		g_file_get_contents (filename, &buf, &buf_len, NULL);
 		if (buf_len > 100000) {
 			g_free (buf);
-			buf = g_strdup (_("Error: file doesn't contain a valid JSON configuration"));
+			buf = g_strdup (_("Error: file doesn’t contain a valid JSON configuration"));
 		}
 
 		buffer = gtk_text_view_get_buffer (priv->json_config_widget);
@@ -724,7 +724,7 @@ ce_page_team_port_new (NMConnectionEditor *editor,
 	                                       connection,
 	                                       parent_window,
 	                                       client,
-	                                       UIDIR "/ce-page-team-port.ui",
+	                                       "/org/freedesktop/network-manager-applet/ce-page-team-port.ui",
 	                                       "TeamPortPage",
 	                                       /* Translators: a "Team Port" is a network
 	                                        * device that is part of a team.

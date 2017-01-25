@@ -9,11 +9,9 @@ nm_applet_CPPFLAGS = \
 	$(NOTIFY_CFLAGS) \
 	$(MM_GLIB_CFLAGS) \
 	$(APPINDICATOR_CFLAGS) \
-	-DLIBNM_BUILD \
 	-DNM_VERSION_MIN_REQUIRED=NM_VERSION_1_4 \
 	-DNM_VERSION_MAX_ALLOWED=NM_VERSION_1_4 \
 	-DICONDIR=\""$(datadir)/icons"\"						\
-	-DUIDIR=\""$(uidir)"\"							\
 	-DBINDIR=\""$(bindir)"\"								\
 	-DSYSCONFDIR=\""$(sysconfdir)"\"						\
 	-DLIBEXECDIR=\""$(libexecdir)"\" \
@@ -49,6 +47,8 @@ nm_applet_SOURCES = \
 	mobile-helpers.h \
 	applet-device-bt.h \
 	applet-device-bt.c \
+	applet-resources.h \
+	applet-resources.c \
 	fallback-icon.h
 
 if WITH_WWAN
@@ -56,6 +56,10 @@ nm_applet_SOURCES += \
 	applet-device-broadband.h \
 	applet-device-broadband.c
 endif
+
+BUILT_SOURCES = \
+	applet-resources.h \
+	applet-resources.c
 
 nm_applet_LDADD = \
 	-lm \
@@ -69,8 +73,14 @@ nm_applet_LDADD = \
 	${top_builddir}/src/wireless-security/libwireless-security-libnm.la \
 	${top_builddir}/src/libnma/libnma.la
 
-uidir = $(datadir)/nm-applet
-ui_DATA = gsm-unlock.ui info.ui 8021x.ui keyring.png
+applet-resources.h: $(srcdir)/applet.gresource.xml
+	$(AM_V_GEN) $(GLIB_COMPILE_RESOURCES) $< --target=$@ --sourcedir=$(srcdir) --generate-header --internal
 
-EXTRA_DIST = $(ui_DATA)
+applet-resources.c: $(srcdir)/applet.gresource.xml $(shell $(GLIB_COMPILE_RESOURCES) --sourcedir=$(srcdir) --generate-dependencies $(srcdir)/applet.gresource.xml)
+	$(AM_V_GEN) $(GLIB_COMPILE_RESOURCES) $< --target=$@ --sourcedir=$(srcdir) --generate-source --internal
 
+EXTRA_DIST = \
+	8021x.ui \
+	gsm-unlock.ui \
+	info.ui \
+	applet.gresource.xml

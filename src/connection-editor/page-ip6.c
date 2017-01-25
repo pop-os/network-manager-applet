@@ -58,6 +58,7 @@ typedef struct {
 	GtkButton *addr_delete;
 	GtkTreeView *addr_list;
 	GtkCellRenderer *addr_cells[COL_LAST + 1];
+	GtkTreeModel *addr_saved;
 
 	/* DNS servers */
 	GtkWidget *dns_servers_label;
@@ -114,7 +115,7 @@ ip6_private_init (CEPageIP6 *self, NMConnection *connection)
 	NMSettingConnection *s_con;
 	const char *connection_type;
 	char *str_auto = NULL, *str_auto_only = NULL;
-	GList *cells;
+	gs_free_list GList *cells = NULL;
 
 	builder = CE_PAGE (self)->builder;
 
@@ -203,7 +204,7 @@ ip6_private_init (CEPageIP6 *self, NMConnection *connection)
 		gtk_list_store_set (priv->method_store, &iter,
 		                    METHOD_COL_NAME, _("Shared to other computers"),
 		                    METHOD_COL_NUM, IP6_METHOD_SHARED,
-		                    METHOD_COL_ENABLED, FALSE,
+		                    METHOD_COL_ENABLED, TRUE,
 		                    -1);
 	}
 
@@ -246,6 +247,8 @@ method_changed (GtkComboBox *combo, gpointer user_data)
 	gboolean ip6_required_enabled = TRUE;
 	gboolean method_auto = FALSE;
 	GtkTreeIter iter;
+	GtkListStore *store;
+	const char *tooltip = NULL, *label = NULL;
 
 	if (gtk_combo_box_get_active_iter (priv->method, &iter)) {
 		gtk_tree_model_get (GTK_TREE_MODEL (priv->method_store), &iter,
@@ -254,23 +257,36 @@ method_changed (GtkComboBox *combo, gpointer user_data)
 
 	switch (method) {
 	case IP6_METHOD_AUTO:
-		addr_enabled = FALSE;
+		addr_enabled = TRUE;
 		routes_enabled = TRUE;
 		dns_enabled = TRUE;
 		method_auto = TRUE;
 		ip6_privacy_enabled = TRUE;
+		tooltip = CE_TOOLTIP_ADDR_AUTO;
+		label = CE_LABEL_ADDR_AUTO;
 		break;
 	case IP6_METHOD_AUTO_ADDRESSES:
-		addr_enabled = FALSE;
+		addr_enabled = TRUE;
 		dns_enabled = routes_enabled = TRUE;
 		ip6_privacy_enabled = TRUE;
+		tooltip = CE_TOOLTIP_ADDR_AUTO;
+		label = CE_LABEL_ADDR_AUTO;
 		break;
 	case IP6_METHOD_AUTO_DHCP_ONLY:
-		addr_enabled = FALSE;
+		addr_enabled = TRUE;
 		routes_enabled = TRUE;
+		tooltip = CE_TOOLTIP_ADDR_AUTO;
+		label = CE_LABEL_ADDR_AUTO;
 		break;
 	case IP6_METHOD_MANUAL:
 		addr_enabled = dns_enabled = routes_enabled = TRUE;
+		tooltip = CE_TOOLTIP_ADDR_MANUAL;
+		label = CE_LABEL_ADDR_MANUAL;
+		break;
+	case IP6_METHOD_SHARED:
+		addr_enabled = dns_enabled = routes_enabled = TRUE;
+		tooltip = CE_TOOLTIP_ADDR_SHARED;
+		label = CE_LABEL_ADDR_SHARED;
 		break;
 	case IP6_METHOD_IGNORE:
 		ip6_required_enabled = FALSE;
@@ -279,15 +295,28 @@ method_changed (GtkComboBox *combo, gpointer user_data)
 		break;
 	}
 
+	gtk_widget_set_tooltip_text (GTK_WIDGET (priv->addr_list), tooltip);
+	gtk_label_set_text (GTK_LABEL (priv->addr_label), label);
+
 	gtk_widget_set_sensitive (priv->addr_label, addr_enabled);
 	gtk_widget_set_sensitive (GTK_WIDGET (priv->addr_add), addr_enabled);
 	gtk_widget_set_sensitive (GTK_WIDGET (priv->addr_delete), addr_enabled);
 	gtk_widget_set_sensitive (GTK_WIDGET (priv->addr_list), addr_enabled);
-	if (!addr_enabled) {
-		GtkListStore *store;
 
-		store = GTK_LIST_STORE (gtk_tree_view_get_model (priv->addr_list));
-		gtk_list_store_clear (store);
+	if (addr_enabled) {
+		if (priv->addr_saved) {
+			/* Restore old entries */
+			gtk_tree_view_set_model (priv->addr_list, priv->addr_saved);
+			g_clear_object (&priv->addr_saved);
+		}
+	} else {
+		if (!priv->addr_saved) {
+			/* Save current entries, set empty list */
+			priv->addr_saved = g_object_ref (gtk_tree_view_get_model (priv->addr_list));
+			store = gtk_list_store_new (3, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_STRING);
+			gtk_tree_view_set_model (priv->addr_list, GTK_TREE_MODEL (store));
+			g_object_unref (store);
+		}
 	}
 
 	gtk_widget_set_sensitive (priv->dns_servers_label, dns_enabled);
@@ -1150,7 +1179,7 @@ ce_page_ip6_new (NMConnectionEditor *editor,
 	                                 connection,
 	                                 parent_window,
 	                                 client,
-	                                 UIDIR "/ce-page-ip6.ui",
+	                                 "/org/freedesktop/network-manager-applet/ce-page-ip6.ui",
 	                                 "IP6Page",
 	                                 _("IPv6 Settings")));
 	if (!self) {
@@ -1245,7 +1274,7 @@ ui_to_setting (CEPageIP6 *self, GError **error)
 		if (   !addr_str
 		    || !nm_utils_ipaddr_valid (AF_INET6, addr_str)
 		    || is_address_unspecified (addr_str)) {
-			g_set_error (error, NMA_ERROR, NMA_ERROR_GENERIC, _("IPv6 address \"%s\" invalid"), addr_str ? addr_str : "");
+			g_set_error (error, NMA_ERROR, NMA_ERROR_GENERIC, _("IPv6 address “%s” invalid"), addr_str ? addr_str : "");
 			g_free (addr_str);
 			g_free (prefix_str);
 			g_free (addr_gw_str);
@@ -1253,7 +1282,7 @@ ui_to_setting (CEPageIP6 *self, GError **error)
 		}
 
 		if (!is_prefix_valid (prefix_str, &prefix)) {
-			g_set_error (error, NMA_ERROR, NMA_ERROR_GENERIC, _("IPv6 prefix \"%s\" invalid"), prefix_str ? prefix_str : "");
+			g_set_error (error, NMA_ERROR, NMA_ERROR_GENERIC, _("IPv6 prefix “%s” invalid"), prefix_str ? prefix_str : "");
 			g_free (addr_str);
 			g_free (prefix_str);
 			g_free (addr_gw_str);
@@ -1262,7 +1291,7 @@ ui_to_setting (CEPageIP6 *self, GError **error)
 
 		/* Gateway is optional... */
 		if (addr_gw_str && *addr_gw_str && !nm_utils_ipaddr_valid (AF_INET6, addr_gw_str)) {
-			g_set_error (error, NMA_ERROR, NMA_ERROR_GENERIC, _("IPv6 gateway \"%s\" invalid"), addr_gw_str);
+			g_set_error (error, NMA_ERROR, NMA_ERROR_GENERIC, _("IPv6 gateway “%s” invalid"), addr_gw_str);
 			g_free (addr_str);
 			g_free (prefix_str);
 			g_free (addr_gw_str);
@@ -1304,7 +1333,7 @@ ui_to_setting (CEPageIP6 *self, GError **error)
 			if (inet_pton (AF_INET6, stripped, &tmp_addr)) {
 				nm_setting_ip_config_add_dns (priv->setting, stripped);
 			} else {
-				g_set_error (error, NMA_ERROR, NMA_ERROR_GENERIC, _("IPv6 DNS server \"%s\" invalid"), stripped);
+				g_set_error (error, NMA_ERROR, NMA_ERROR_GENERIC, _("IPv6 DNS server “%s” invalid"), stripped);
 				g_strfreev (items);
 				goto out;
 			}
@@ -1422,10 +1451,14 @@ change_method_combo (CEPage *page, gboolean is_hotspot)
 
 	/* Set active method */
 	if (is_hotspot) {
-		if (priv->hotspot_method_idx != -1)
+		if (priv->hotspot_method_idx == -1) {
+			int method = IP6_METHOD_SHARED;
+			if (g_strcmp0 (nm_setting_ip_config_get_method (priv->setting),
+			               NM_SETTING_IP6_CONFIG_METHOD_IGNORE) == 0)
+				method = IP6_METHOD_IGNORE;
+			gtk_combo_box_set_active (priv->method, method);
+		} else
 			gtk_combo_box_set_active (priv->method, priv->hotspot_method_idx);
-		else
-			gtk_combo_box_set_active (priv->method, IP6_METHOD_IGNORE);
 	} else {
 		if (priv->normal_method_idx != -1)
 			gtk_combo_box_set_active (priv->method, priv->normal_method_idx);

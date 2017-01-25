@@ -38,7 +38,7 @@ typedef struct {
 	GtkEntry *ssid;
 	GtkComboBoxText *bssid;
 	GtkComboBoxText *device_combo; /* Device identification (ifname and/or MAC) */
-	GtkEntry *cloned_mac;          /* Cloned MAC - used for MAC spoofing */
+	GtkComboBoxText *cloned_mac;   /* Cloned MAC - used for MAC spoofing */
 	GtkComboBox *mode;
 	GtkComboBox *band;
 	GtkSpinButton *channel;
@@ -65,7 +65,7 @@ wifi_private_init (CEPageWifi *self)
 	priv->group = gtk_size_group_new (GTK_SIZE_GROUP_HORIZONTAL);
 
 	priv->ssid     = GTK_ENTRY (gtk_builder_get_object (builder, "wifi_ssid"));
-	priv->cloned_mac = GTK_ENTRY (gtk_builder_get_object (builder, "wifi_cloned_mac"));
+	priv->cloned_mac = GTK_COMBO_BOX_TEXT (gtk_builder_get_object (builder, "wifi_cloned_mac"));
 	priv->mode     = GTK_COMBO_BOX (gtk_builder_get_object (builder, "wifi_mode"));
 	priv->band     = GTK_COMBO_BOX (gtk_builder_get_object (builder, "wifi_band"));
 	priv->channel  = GTK_SPIN_BUTTON (gtk_builder_get_object (builder, "wifi_channel"));
@@ -74,7 +74,7 @@ wifi_private_init (CEPageWifi *self)
 	priv->bssid = GTK_COMBO_BOX_TEXT (gtk_combo_box_text_new_with_entry ());
 	gtk_combo_box_set_entry_text_column (GTK_COMBO_BOX (priv->bssid), 0);
 	gtk_widget_set_tooltip_text (GTK_WIDGET (priv->bssid),
-	                             _("This option locks this connection to the Wi-Fi access point (AP) specified by the BSSID entered here.  Example: 00:11:22:33:44:55"));
+	                             _("This option locks this connection to the Wi-Fi access point (AP) specified by the BSSID entered here. Example: 00:11:22:33:44:55"));
 
 	vbox = GTK_WIDGET (gtk_builder_get_object (builder, "wifi_bssid_vbox"));
 	gtk_container_add (GTK_CONTAINER (vbox), GTK_WIDGET (priv->bssid));
@@ -87,7 +87,7 @@ wifi_private_init (CEPageWifi *self)
 	gtk_widget_set_tooltip_text (GTK_WIDGET (priv->device_combo),
 	                             _("This option locks this connection to the network device specified "
 	                               "either by its interface name or permanent MAC or both. Examples: "
-	                               "\"wlan0\", \"3C:97:0E:42:1A:19\", \"wlan0 (3C:97:0E:42:1A:19)\""));
+	                               "“wlan0”, “3C:97:0E:42:1A:19”, “wlan0 (3C:97:0E:42:1A:19)”"));
 
 	vbox = GTK_WIDGET (gtk_builder_get_object (builder, "wifi_device_vbox"));
 	gtk_container_add (GTK_CONTAINER (vbox), GTK_WIDGET (priv->device_combo));
@@ -382,13 +382,12 @@ populate_ui (CEPageWifi *self)
 	s_mac = nm_setting_wireless_get_mac_address (setting);
 	ce_page_setup_device_combo (CE_PAGE (self), GTK_COMBO_BOX (priv->device_combo),
 	                            NM_TYPE_DEVICE_WIFI, s_ifname,
-	                            s_mac, NM_DEVICE_WIFI_PERMANENT_HW_ADDRESS, TRUE);
+	                            s_mac, NM_DEVICE_WIFI_PERMANENT_HW_ADDRESS);
 	g_signal_connect_swapped (priv->device_combo, "changed", G_CALLBACK (ce_page_changed), self);
 
 	/* Cloned MAC address */
 	s_mac = nm_setting_wireless_get_cloned_mac_address (setting);
-	if (s_mac)
-		gtk_entry_set_text (priv->cloned_mac, s_mac);
+	ce_page_setup_cloned_mac_combo (priv->cloned_mac, s_mac);
 	g_signal_connect_swapped (priv->cloned_mac, "changed", G_CALLBACK (ce_page_changed), self);
 
 	gtk_spin_button_set_value (priv->rate, (gdouble) nm_setting_wireless_get_rate (setting));
@@ -436,7 +435,7 @@ ce_page_wifi_new (NMConnectionEditor *editor,
 	                                  connection,
 	                                  parent_window,
 	                                  client,
-	                                  UIDIR "/ce-page-wifi.ui",
+	                                  "/org/freedesktop/network-manager-applet/ce-page-wifi.ui",
 	                                  "WifiPage",
 	                                  _("Wi-Fi")));
 	if (!self) {
@@ -528,7 +527,7 @@ ui_to_setting (CEPageWifi *self)
 	entry = gtk_bin_get_child (GTK_BIN (priv->device_combo));
 	if (entry)
 		ce_page_device_entry_get (GTK_ENTRY (entry), ARPHRD_ETHER, TRUE, &ifname, &device_mac, NULL, NULL);
-	cloned_mac = gtk_entry_get_text (priv->cloned_mac);
+	cloned_mac = ce_page_cloned_mac_get (priv->cloned_mac);
 
 	g_object_set (s_con,
 	              NM_SETTING_CONNECTION_INTERFACE_NAME, ifname,
@@ -571,7 +570,7 @@ ce_page_validate_v (CEPage *page, NMConnection *connection, GError **error)
 			return FALSE;
 	}
 
-	if (!ce_page_mac_entry_valid (priv->cloned_mac, ARPHRD_ETHER, _("cloned MAC"), error))
+	if (!ce_page_cloned_mac_combo_valid (priv->cloned_mac, ARPHRD_ETHER, _("cloned MAC"), error))
 		return FALSE;
 
 	ui_to_setting (self);
@@ -600,26 +599,27 @@ ce_page_wifi_class_init (CEPageWifiClass *wifi_class)
 
 
 void
-wifi_connection_new (GtkWindow *parent,
+wifi_connection_new (FUNC_TAG_PAGE_NEW_CONNECTION_IMPL,
+                     GtkWindow *parent,
                      const char *detail,
                      gpointer detail_data,
+                     NMConnection *connection,
                      NMClient *client,
                      PageNewConnectionResultFunc result_func,
                      gpointer user_data)
 {
-	NMConnection *connection;
 	NMSetting *s_wifi;
+	gs_unref_object NMConnection *connection_tmp = NULL;
 
-	connection = ce_page_new_connection (_("Wi-Fi connection %d"),
-	                                     NM_SETTING_WIRELESS_SETTING_NAME,
-	                                     TRUE,
-	                                     client,
-	                                     user_data);
+	connection = _ensure_connection_other (connection, &connection_tmp);
+	ce_page_complete_connection (connection,
+	                             _("Wi-Fi connection %d"),
+	                             NM_SETTING_WIRELESS_SETTING_NAME,
+	                             TRUE,
+	                             client);
 	s_wifi = nm_setting_wireless_new ();
 	g_object_set (s_wifi, NM_SETTING_WIRELESS_MODE, "infrastructure", NULL);
 	nm_connection_add_setting (connection, s_wifi);
 
-	(*result_func) (connection, FALSE, NULL, user_data);
+	(*result_func) (FUNC_TAG_PAGE_NEW_CONNECTION_RESULT_CALL, connection, FALSE, NULL, user_data);
 }
-
-

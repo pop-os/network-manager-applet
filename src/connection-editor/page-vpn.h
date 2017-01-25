@@ -59,18 +59,13 @@ CEPage *ce_page_vpn_new (NMConnectionEditor *editor,
 
 gboolean ce_page_vpn_can_export (CEPageVpn *page);
 
-void vpn_connection_new (GtkWindow *parent,
+void vpn_connection_new (FUNC_TAG_PAGE_NEW_CONNECTION_IMPL,
+                         GtkWindow *parent,
                          const char *detail,
                          gpointer detail_data,
+                         NMConnection *connection,
                          NMClient *client,
                          PageNewConnectionResultFunc result_func,
                          gpointer user_data);
-
-void vpn_connection_import (GtkWindow *parent,
-                            const char *detail,
-                            gpointer detail_data,
-                            NMClient *client,
-                            PageNewConnectionResultFunc result_func,
-                            gpointer user_data);
 
 #endif  /* __PAGE_VPN_H__ */

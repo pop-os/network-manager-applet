@@ -358,7 +358,7 @@ import_button_clicked_cb (GtkWidget *widget, CEPageTeam *self)
 		g_file_get_contents (filename, &buf, &buf_len, NULL);
 		if (buf_len > 100000) {
 			g_free (buf);
-			buf = g_strdup (_("Error: file doesn't contain a valid JSON configuration"));
+			buf = g_strdup (_("Error: file doesn’t contain a valid JSON configuration"));
 		}
 
 		buffer = gtk_text_view_get_buffer (priv->json_config_widget);
@@ -1070,7 +1070,9 @@ create_connection (CEPageMaster *master, NMConnection *connection)
 }
 
 static gboolean
-connection_type_filter (GType type, gpointer self)
+connection_type_filter (FUNC_TAG_NEW_CONNECTION_TYPE_FILTER_IMPL,
+                        GType type,
+                        gpointer self)
 {
 	CEPageTeamPrivate *priv = CE_PAGE_TEAM_GET_PRIVATE (self);
 
@@ -1101,6 +1103,7 @@ add_slave (CEPageMaster *master, NewConnectionResultFunc result_func)
 
 	if (priv->slave_arptype == ARPHRD_INFINIBAND) {
 		new_connection_of_type (GTK_WINDOW (toplevel),
+		                        NULL,
 		                        NULL,
 		                        NULL,
 		                        CE_PAGE (self)->client,
@@ -1145,7 +1148,7 @@ ce_page_team_new (NMConnectionEditor *editor,
 	                                  connection,
 	                                  parent_window,
 	                                  client,
-	                                  UIDIR "/ce-page-team.ui",
+	                                  "/org/freedesktop/network-manager-applet/ce-page-team.ui",
 	                                  "TeamPage",
 	                                  _("Team")));
 	if (!self) {
@@ -1228,26 +1231,29 @@ ce_page_team_class_init (CEPageTeamClass *team_class)
 
 
 void
-team_connection_new (GtkWindow *parent,
+team_connection_new (FUNC_TAG_PAGE_NEW_CONNECTION_IMPL,
+                     GtkWindow *parent,
                      const char *detail,
                      gpointer detail_data,
+                     NMConnection *connection,
                      NMClient *client,
                      PageNewConnectionResultFunc result_func,
                      gpointer user_data)
 {
-	NMConnection *connection;
 	NMSettingConnection *s_con;
 	int team_num, num, i;
 	const GPtrArray *connections;
 	NMConnection *conn2;
 	const char *iface;
 	char *my_iface;
+	gs_unref_object NMConnection *connection_tmp = NULL;
 
-	connection = ce_page_new_connection (_("Team connection %d"),
-	                                     NM_SETTING_TEAM_SETTING_NAME,
-	                                     TRUE,
-	                                     client,
-	                                     user_data);
+	connection = _ensure_connection_other (connection, &connection_tmp);
+	ce_page_complete_connection (connection,
+	                             _("Team connection %d"),
+	                             NM_SETTING_TEAM_SETTING_NAME,
+	                             TRUE,
+	                             client);
 	nm_connection_add_setting (connection, nm_setting_team_new ());
 
 	/* Find an available interface name */
@@ -1274,6 +1280,5 @@ team_connection_new (GtkWindow *parent,
 	              NULL);
 	g_free (my_iface);
 
-	(*result_func) (connection, FALSE, NULL, user_data);
+	(*result_func) (FUNC_TAG_PAGE_NEW_CONNECTION_RESULT_CALL, connection, FALSE, NULL, user_data);
 }
-

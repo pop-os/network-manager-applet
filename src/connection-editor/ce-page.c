@@ -287,14 +287,53 @@ ce_page_setup_mac_combo (CEPage *self, GtkComboBox *combo,
 	_set_active_combo_item (combo, mac, active_mac, active_idx);
 }
 
-gboolean
-ce_page_mac_entry_valid (GtkEntry *entry, int type, const char *property_name, GError **error)
+void
+ce_page_setup_cloned_mac_combo (GtkComboBoxText *combo, const char *current)
 {
-	const char *mac;
+	GtkWidget *entry;
+	static const char *entries[][2] = { { "preserve",  N_("Preserve") },
+	                                    { "permanent", N_("Permanent") },
+	                                    { "random",    N_("Random") },
+	                                    { "stable",    N_("Stable") } };
+	int i, active = -1;
 
-	g_return_val_if_fail (GTK_IS_ENTRY (entry), FALSE);
+	gtk_widget_set_tooltip_text (GTK_WIDGET (combo),
+		_("The MAC address entered here will be used as hardware address for "
+		  "the network device this connection is activated on. This feature is "
+		  "known as MAC cloning or spoofing. Example: 00:11:22:33:44:55"));
 
-	mac = gtk_entry_get_text (entry);
+	gtk_combo_box_text_remove_all (combo);
+
+	for (i = 0; i < G_N_ELEMENTS (entries); i++) {
+		gtk_combo_box_text_append (combo, entries[i][0], _(entries[i][1]));
+		if (nm_streq0 (current, entries[i][0]))
+			active = i;
+	}
+
+	if (active != -1) {
+		gtk_combo_box_set_active (GTK_COMBO_BOX (combo), active);
+	} else if (current && current[0]) {
+		entry = gtk_bin_get_child (GTK_BIN (combo));
+		g_assert (entry);
+		gtk_entry_set_text (GTK_ENTRY (entry), current);
+	}
+}
+
+const char *
+ce_page_cloned_mac_get (GtkComboBoxText *combo)
+{
+	const char *id;
+
+	id = gtk_combo_box_get_active_id (GTK_COMBO_BOX (combo));
+	if (id)
+		return id;
+
+	return gtk_combo_box_text_get_active_text (combo);
+}
+
+static gboolean
+mac_valid (const char *mac, int type, const char *property_name, GError **error)
+{
 	if (mac && *mac) {
 		if (!nm_utils_hwaddr_valid (mac, nm_utils_hwaddr_len (type))) {
 			const char *addr_type;
@@ -312,7 +351,28 @@ ce_page_mac_entry_valid (GtkEntry *entry, int type, const char *property_name, G
 			return FALSE;
 		}
 	}
+
 	return TRUE;
+}
+
+gboolean
+ce_page_cloned_mac_combo_valid (GtkComboBoxText *combo, int type, const char *property_name, GError **error)
+{
+	if (gtk_combo_box_get_active (GTK_COMBO_BOX (combo)) != -1)
+		return TRUE;
+
+	return mac_valid (gtk_combo_box_text_get_active_text (combo),
+	                  type,
+	                  property_name,
+	                  error);
+}
+
+gboolean
+ce_page_mac_entry_valid (GtkEntry *entry, int type, const char *property_name, GError **error)
+{
+	g_return_val_if_fail (GTK_IS_ENTRY (entry), FALSE);
+
+	return mac_valid (gtk_entry_get_text (entry), type, property_name, error);
 }
 
 gboolean
@@ -339,8 +399,7 @@ static char **
 _get_device_list (CEPage *self,
                   GType device_type,
                   gboolean set_ifname,
-                  const char *mac_property,
-                  gboolean ifname_first)
+                  const char *mac_property)
 {
 	const GPtrArray *devices;
 	GPtrArray *interfaces;
@@ -360,7 +419,8 @@ _get_device_list (CEPage *self,
 		char *mac = NULL;
 		char *item;
 
-		if (!G_TYPE_CHECK_INSTANCE_TYPE (dev, device_type))
+		if (   device_type != G_TYPE_NONE
+		    && !G_TYPE_CHECK_INSTANCE_TYPE (dev, device_type))
 			continue;
 
 		if (device_type == NM_TYPE_DEVICE_BT)
@@ -370,17 +430,18 @@ _get_device_list (CEPage *self,
 		if (mac_property)
 			g_object_get (G_OBJECT (dev), mac_property, &mac, NULL);
 
-		if (set_ifname && mac_property) {
-			if (ifname_first)
-				item = g_strdup_printf ("%s (%s)", ifname, mac);
-			else
-				item = g_strdup_printf ("%s (%s)", mac, ifname);
-		} else
+		if (mac && !mac[0])
+			nm_clear_g_free (&mac);
+
+		if (set_ifname && mac_property)
+			item = g_strdup_printf ("%s%s%s%s", ifname, NM_PRINT_FMT_QUOTED (mac, " (", mac, ")", ""));
+		else
 			item = g_strdup (set_ifname ? ifname : mac);
 
-		g_ptr_array_add (interfaces, item);
-		if (mac_property)
-			g_free (mac);
+		if (item)
+			g_ptr_array_add (interfaces, item);
+
+		g_free (mac);
 	}
 	g_ptr_array_add (interfaces, NULL);
 
@@ -459,15 +520,14 @@ ce_page_setup_device_combo (CEPage *self,
                             GType device_type,
                             const char *ifname,
                             const char *mac,
-                            const char *mac_property,
-                            gboolean ifname_first)
+                            const char *mac_property)
 {
 	char **iter, *active_item = NULL;
 	int i, active_idx = -1;
 	char **device_list;
 	char *item;
 
-	device_list = _get_device_list (self, device_type, TRUE, mac_property, ifname_first);
+	device_list = _get_device_list (self, device_type, TRUE, mac_property);
 
 	if (ifname && mac)
 		item = g_strdup_printf ("%s (%s)", ifname, mac);
@@ -808,39 +868,37 @@ ce_page_class_init (CEPageClass *page_class)
 }
 
 
-NMConnection *
-ce_page_new_connection (const char *format,
-                        const char *ctype,
-                        gboolean autoconnect,
-                        NMClient *client,
-                        gpointer user_data)
+void
+ce_page_complete_connection (NMConnection *connection,
+                             const char *format,
+                             const char *ctype,
+                             gboolean autoconnect,
+                             NMClient *client)
 {
-	NMConnection *connection;
 	NMSettingConnection *s_con;
-	char *uuid, *id;
+	char *id, *uuid;
 	const GPtrArray *connections;
 
-	connection = nm_simple_connection_new ();
+	s_con = nm_connection_get_setting_connection (connection);
+	if (!s_con) {
+		s_con = NM_SETTING_CONNECTION (nm_setting_connection_new ());
+		nm_connection_add_setting (connection, NM_SETTING (s_con));
+	}
 
-	s_con = NM_SETTING_CONNECTION (nm_setting_connection_new ());
-	nm_connection_add_setting (connection, NM_SETTING (s_con));
+	if (!nm_setting_connection_get_id (s_con)) {
+		connections = nm_client_get_connections (client);
+		id = ce_page_get_next_available_name (connections, format);
+		g_object_set (s_con, NM_SETTING_CONNECTION_ID, id, NULL);
+		g_free (id);
+	}
 
 	uuid = nm_utils_uuid_generate ();
-
-	connections = nm_client_get_connections (client);
-	id = ce_page_get_next_available_name (connections, format);
-
 	g_object_set (s_con,
 	              NM_SETTING_CONNECTION_UUID, uuid,
-	              NM_SETTING_CONNECTION_ID, id,
 	              NM_SETTING_CONNECTION_TYPE, ctype,
 	              NM_SETTING_CONNECTION_AUTOCONNECT, autoconnect,
 	              NULL);
-
 	g_free (uuid);
-	g_free (id);
-
-	return connection;
 }
 
 CEPage *
@@ -849,7 +907,7 @@ ce_page_new (GType page_type,
              NMConnection *connection,
              GtkWindow *parent_window,
              NMClient *client,
-             const char *ui_file,
+             const char *ui_resource,
              const char *widget_name,
              const char *title)
 {
@@ -857,7 +915,7 @@ ce_page_new (GType page_type,
 	GError *error = NULL;
 
 	g_return_val_if_fail (title != NULL, NULL);
-	if (ui_file)
+	if (ui_resource)
 		g_return_val_if_fail (widget_name != NULL, NULL);
 
 	self = CE_PAGE (g_object_new (page_type,
@@ -868,9 +926,9 @@ ce_page_new (GType page_type,
 	self->client = client;
 	self->editor = editor;
 
-	if (ui_file) {
-		if (!gtk_builder_add_from_file (self->builder, ui_file, &error)) {
-			g_warning ("Couldn't load builder file: %s", error->message);
+	if (ui_resource) {
+		if (!gtk_builder_add_from_resource (self->builder, ui_resource, &error)) {
+			g_warning ("Couldn't load builder resource: %s", error->message);
 			g_error_free (error);
 			g_object_unref (self);
 			return NULL;
@@ -878,7 +936,7 @@ ce_page_new (GType page_type,
 
 		self->page = GTK_WIDGET (gtk_builder_get_object (self->builder, widget_name));
 		if (!self->page) {
-			g_warning ("Couldn't load page widget '%s' from %s", widget_name, ui_file);
+			g_warning ("Couldn't load page widget '%s' from %s", widget_name, ui_resource);
 			g_object_unref (self);
 			return NULL;
 		}

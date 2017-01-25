@@ -158,20 +158,20 @@ ethernet_get_icon (NMDevice *device,
 
 	switch (state) {
 	case NM_DEVICE_STATE_PREPARE:
-		*tip = g_strdup_printf (_("Preparing ethernet network connection '%s'..."), id);
+		*tip = g_strdup_printf (_("Preparing ethernet network connection “%s”…"), id);
 		break;
 	case NM_DEVICE_STATE_CONFIG:
-		*tip = g_strdup_printf (_("Configuring ethernet network connection '%s'..."), id);
+		*tip = g_strdup_printf (_("Configuring ethernet network connection “%s”…"), id);
 		break;
 	case NM_DEVICE_STATE_NEED_AUTH:
-		*tip = g_strdup_printf (_("User authentication required for ethernet network connection '%s'..."), id);
+		*tip = g_strdup_printf (_("User authentication required for ethernet network connection “%s”…"), id);
 		break;
 	case NM_DEVICE_STATE_IP_CONFIG:
-		*tip = g_strdup_printf (_("Requesting an ethernet network address for '%s'..."), id);
+		*tip = g_strdup_printf (_("Requesting an ethernet network address for “%s”…"), id);
 		break;
 	case NM_DEVICE_STATE_ACTIVATED:
 		*out_icon_name = "nm-device-wired";
-		*tip = g_strdup_printf (_("Ethernet network connection '%s' active"), id);
+		*tip = g_strdup_printf (_("Ethernet network connection “%s” active"), id);
 		break;
 	default:
 		break;
@@ -321,7 +321,7 @@ pppoe_get_secrets (SecretsRequest *req, GError **error)
 
 	builder = gtk_builder_new ();
 
-	if (!gtk_builder_add_from_file (builder, UIDIR "/ce-page-dsl.ui", &tmp_error)) {
+	if (!gtk_builder_add_from_resource (builder, "/org/freedesktop/network-manager-applet/connection-editor/ce-page-dsl.ui", &tmp_error)) {
 		g_set_error (error,
 		             NM_SECRET_AGENT_ERROR,
 		             NM_SECRET_AGENT_ERROR_FAILED,

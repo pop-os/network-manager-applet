@@ -1,6 +1,3 @@
-uidir = $(datadir)/libnma
-ui_DATA = wifi.ui
-
 libnmadir = $(includedir)/libnma
 
 libnma_HEADERS = \
@@ -12,21 +9,25 @@ libnma_HEADERS = \
 
 lib_LTLIBRARIES = libnma.la
 
+BUILT_SOURCES = \
+	nma-resources.h \
+	nma-resources.c
+
 libnma_la_SOURCES = \
 	nma-wifi-dialog.c \
 	nma-mobile-wizard.c \
 	nma-mobile-providers.c \
 	nma-vpn-password-dialog.c \
 	nma-ui-utils.c \
+	nma-resources.h \
+	nma-resources.c \
 	init.c
 
 libnma_la_CFLAGS = \
 	$(GTK_CFLAGS) \
 	$(LIBNM_CFLAGS) \
 	$(GUDEV_CFLAGS) \
-	-DLIBNM_BUILD \
 	-DICONDIR=\""$(datadir)/icons"\" \
-	-DUIDIR=\""$(uidir)"\" \
 	-DBINDIR=\""$(bindir)"\" \
 	-DSYSCONFDIR=\""$(sysconfdir)"\" \
 	-DLIBEXECDIR=\""$(libexecdir)"\" \
@@ -49,6 +50,11 @@ EXTRA_libnma_la_DEPENDENCIES = $(srcdir)/libnma.ver
 libnma_la_LDFLAGS = -Wl,-no-undefined \
 	-Wl,--version-script=$(srcdir)/libnma.ver
 
+nma-resources.h: $(srcdir)/nma.gresource.xml
+	$(AM_V_GEN) $(GLIB_COMPILE_RESOURCES) $< --target=$@ --sourcedir=$(srcdir) --generate-header --internal
+
+nma-resources.c: $(srcdir)/nma.gresource.xml $(shell $(GLIB_COMPILE_RESOURCES) --sourcedir=$(srcdir) --generate-dependencies $(srcdir)/nma.gresource.xml)
+	$(AM_V_GEN) $(GLIB_COMPILE_RESOURCES) $< --target=$@ --sourcedir=$(srcdir) --generate-source --internal
 
 pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA = libnma.pc
@@ -77,4 +83,8 @@ typelib_DATA = $(INTROSPECTION_GIRS:.gir=.typelib)
 CLEANFILES = $(gir_DATA) $(typelib_DATA)
 endif
 
-EXTRA_DIST = libnma.pc.in libnma.ver $(ui_DATA)
+EXTRA_DIST = \
+	libnma.pc.in \
+	libnma.ver \
+	wifi.ui \
+	nma.gresource.xml
