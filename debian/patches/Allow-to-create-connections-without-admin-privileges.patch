@@ -31,7 +31,7 @@ Closes: #696256
  10 files changed, 87 insertions(+)
 
 diff --git a/src/applet-device-wifi.c b/src/applet-device-wifi.c
-index 7b8fa6e1..47c622ff 100644
+index 7b8fa6e..47c622f 100644
 --- a/src/applet-device-wifi.c
 +++ b/src/applet-device-wifi.c
 @@ -527,6 +527,7 @@ _do_new_auto_connection (NMApplet *applet,
@@ -81,7 +81,7 @@ index 7b8fa6e1..47c622ff 100644
  	 * Dialog Of Doom.
  	 */
 diff --git a/src/connection-editor/page-mobile.c b/src/connection-editor/page-mobile.c
-index 02ccd671..eb629f54 100644
+index f95c26b..3cbf3e1 100644
 --- a/src/connection-editor/page-mobile.c
 +++ b/src/connection-editor/page-mobile.c
 @@ -442,6 +442,7 @@ new_connection_mobile_wizard_done (NMAMobileWizard *wizard,
@@ -123,7 +123,7 @@ index 02ccd671..eb629f54 100644
  		nm_connection_add_setting (info->connection, nm_setting_ppp_new ());
  	}
 diff --git a/src/connection-editor/page-vpn.c b/src/connection-editor/page-vpn.c
-index 96cfb6ca..376f9c0a 100644
+index 96cfb6c..376f9c0 100644
 --- a/src/connection-editor/page-vpn.c
 +++ b/src/connection-editor/page-vpn.c
 @@ -241,6 +241,7 @@ vpn_connection_new (FUNC_TAG_PAGE_NEW_CONNECTION_IMPL,
@@ -149,7 +149,7 @@ index 96cfb6ca..376f9c0a 100644
  		g_object_set (s_vpn, NM_SETTING_VPN_SERVICE_TYPE, service_type, NULL);
  
 diff --git a/src/connection-editor/page-wifi.c b/src/connection-editor/page-wifi.c
-index f97365dc..8cee0f3b 100644
+index fb648d1..007dac4 100644
 --- a/src/connection-editor/page-wifi.c
 +++ b/src/connection-editor/page-wifi.c
 @@ -26,6 +26,8 @@
@@ -161,7 +161,7 @@ index f97365dc..8cee0f3b 100644
  #include "page-wifi.h"
  
  G_DEFINE_TYPE (CEPageWifi, ce_page_wifi, CE_TYPE_PAGE)
-@@ -617,6 +619,17 @@ wifi_connection_new (FUNC_TAG_PAGE_NEW_CONNECTION_IMPL,
+@@ -618,6 +620,17 @@ wifi_connection_new (FUNC_TAG_PAGE_NEW_CONNECTION_IMPL,
  	                             NM_SETTING_WIRELESS_SETTING_NAME,
  	                             TRUE,
  	                             client);
@@ -180,7 +180,7 @@ index f97365dc..8cee0f3b 100644
  	g_object_set (s_wifi, NM_SETTING_WIRELESS_MODE, "infrastructure", NULL);
  	nm_connection_add_setting (connection, s_wifi);
 diff --git a/src/libnm-gtk/nm-wifi-dialog.c b/src/libnm-gtk/nm-wifi-dialog.c
-index 0e5e8cc2..49e3ff58 100644
+index 0e5e8cc..49e3ff5 100644
 --- a/src/libnm-gtk/nm-wifi-dialog.c
 +++ b/src/libnm-gtk/nm-wifi-dialog.c
 @@ -36,6 +36,7 @@
@@ -202,7 +202,7 @@ index 0e5e8cc2..49e3ff58 100644
  
  		s_wireless = (NMSettingWireless *) nm_setting_wireless_new ();
 diff --git a/src/mobile-helpers.c b/src/mobile-helpers.c
-index 81b2ac36..ded70c69 100644
+index 81b2ac3..ded70c6 100644
 --- a/src/mobile-helpers.c
 +++ b/src/mobile-helpers.c
 @@ -183,6 +183,7 @@ mobile_wizard_done (NMAMobileWizard *wizard,
@@ -230,7 +230,7 @@ index 81b2ac36..ded70c69 100644
  	}
  
 diff --git a/src/utils/utils.c b/src/utils/utils.c
-index c3b806e2..b2c442dc 100644
+index c3b806e..b2c442d 100644
 --- a/src/utils/utils.c
 +++ b/src/utils/utils.c
 @@ -519,3 +519,11 @@ out:
@@ -246,7 +246,7 @@ index c3b806e2..b2c442dc 100644
 +	return (perms != NM_CLIENT_PERMISSION_RESULT_YES);
 +}
 diff --git a/src/utils/utils.h b/src/utils/utils.h
-index 544833a4..3e408fa7 100644
+index 544833a..3e408fa 100644
 --- a/src/utils/utils.h
 +++ b/src/utils/utils.h
 @@ -25,6 +25,8 @@
@@ -268,7 +268,7 @@ index 544833a4..3e408fa7 100644
  
  typedef enum  {
 diff --git a/src/wireless-security/ws-wep-key.c b/src/wireless-security/ws-wep-key.c
-index c7472ca3..cc1cb1ec 100644
+index c7472ca..cc1cb1e 100644
 --- a/src/wireless-security/ws-wep-key.c
 +++ b/src/wireless-security/ws-wep-key.c
 @@ -164,6 +164,7 @@ static void
@@ -293,7 +293,7 @@ index c7472ca3..cc1cb1ec 100644
  		if (strlen (sec->keys[i]))
  			nm_setting_wireless_security_set_wep_key (s_wsec, i, sec->keys[i]);
 diff --git a/src/wireless-security/ws-wpa-psk.c b/src/wireless-security/ws-wpa-psk.c
-index befe68b0..09268594 100644
+index befe68b..0926859 100644
 --- a/src/wireless-security/ws-wpa-psk.c
 +++ b/src/wireless-security/ws-wpa-psk.c
 @@ -106,12 +106,14 @@ fill_connection (WirelessSecurity *parent, NMConnection *connection)
