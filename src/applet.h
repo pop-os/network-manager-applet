@@ -145,6 +145,8 @@ typedef struct {
 
 	/* Tracker objects for secrets requests */
 	GSList *        secrets_reqs;
+
+	guint           wifi_scan_id;
 } NMApplet;
 
 typedef void (*AppletNewAutoConnectionCallback) (NMConnection *connection,
@@ -285,9 +287,6 @@ GdkPixbuf * nma_icon_check_and_load (const char *name,
                                      NMApplet *applet);
 
 gboolean applet_wifi_connect_to_hidden_network (NMApplet *applet);
-gboolean applet_wifi_connect_to_8021x_network (NMApplet *applet,
-                                               NMDevice *device,
-                                               NMAccessPoint *ap);
 gboolean applet_wifi_create_wifi_network (NMApplet *applet);
 gboolean applet_wifi_can_create_wifi_network (NMApplet *applet);
 

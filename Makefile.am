@@ -27,7 +27,13 @@ TESTS =
 DISTCLEANFILES =
 
 DISTCHECK_CONFIGURE_FLAGS = \
-	--enable-more-warnings=yes
+	--disable-dependency-tracking \
+	--enable-gtk-doc \
+	--enable-introspection \
+	--enable-more-warnings=error \
+	--with-wwan \
+	--with-team \
+	--with-gcr
 
 man_MANS =
 
@@ -268,6 +274,7 @@ src_wireless_security_libwireless_security_libnm_la_CPPFLAGS = \
 	"-I$(srcdir)/shared" \
 	"-I$(srcdir)/src/utils" \
 	"-I$(srcdir)/src/libnma" \
+	-Isrc/libnma \
 	$(GTK_CFLAGS) \
 	$(LIBNM_CFLAGS)
 
@@ -294,6 +301,7 @@ src_wireless_security_libwireless_security_libnm_glib_la_CPPFLAGS = \
 	"-I$(srcdir)/shared" \
 	"-I$(srcdir)/src/utils" \
 	"-I$(srcdir)/src/libnma" \
+	-Isrc/libnma \
 	$(LIBNM_GLIB_CFLAGS)
 
 src_wireless_security_libwireless_security_libnm_glib_la_LIBADD = \
@@ -345,7 +353,8 @@ libnm_gtk_h_pub = \
 	src/libnm-gtk/nm-mobile-wizard.h \
 	src/libnm-gtk/nm-ui-utils.h \
 	src/libnm-gtk/nm-mobile-providers.h \
-	src/libnm-gtk/nm-vpn-password-dialog.h
+	src/libnm-gtk/nm-vpn-password-dialog.h \
+	src/libnm-gtk/nm-cert-chooser.h
 
 libnm_gtk_c_real = \
 	src/libnm-gtk/nm-wifi-dialog.c \
@@ -354,6 +363,8 @@ libnm_gtk_c_real = \
 	src/libnm-gtk/nm-ui-utils.c \
 	src/libnm-gtk/nm-mobile-providers.c \
 	src/libnm-gtk/nm-vpn-password-dialog.c \
+	src/libnma/nma-cert-chooser.c \
+	src/libnma/nma-file-cert-chooser.c \
 	src/libnm-gtk/init.c
 
 src_libnm_gtk_libnmgtkdir = $(includedir)/libnm-gtk
@@ -382,6 +393,7 @@ src_libnm_gtk_libnm_gtk_la_CFLAGS = \
 	"-I$(srcdir)/src/utils" \
 	"-I$(srcdir)/src/wireless-security" \
 	"-I$(srcdir)/src/libnm-gtk" \
+	-Isrc/libnma \
 	$(GTK_CFLAGS) \
 	$(LIBNM_GLIB_CFLAGS) \
 	$(GUDEV_CFLAGS)
@@ -469,11 +481,13 @@ libnma_c_gen = \
 	src/libnma/nma-resources.c
 
 libnma_h_pub = \
+	src/libnma/nma-version.h \
 	src/libnma/nma-wifi-dialog.h \
 	src/libnma/nma-mobile-wizard.h \
 	src/libnma/nma-mobile-providers.h \
 	src/libnma/nma-vpn-password-dialog.h \
-	src/libnma/nma-ui-utils.h
+	src/libnma/nma-ui-utils.h \
+	src/libnma/nma-cert-chooser.h
 
 libnma_c_real = \
 	src/libnma/nma-wifi-dialog.c \
@@ -481,7 +495,25 @@ libnma_c_real = \
 	src/libnma/nma-mobile-providers.c \
 	src/libnma/nma-vpn-password-dialog.c \
 	src/libnma/nma-ui-utils.c \
-	src/libnma/init.c
+	src/libnma/init.c \
+	src/libnma/nma-cert-chooser.c \
+	src/libnma/nma-file-cert-chooser.c
+
+libnma_h_priv_real = \
+	src/libnma/nma-cert-chooser-private.h
+
+if WITH_GCR
+libnma_h_priv_real += \
+	src/libnma/nma-pkcs11-token-login-dialog.h \
+	src/libnma/nma-pkcs11-cert-chooser-dialog.h \
+	src/libnma/nma-cert-chooser-button.h
+
+libnma_c_real += \
+	src/libnma/nma-pkcs11-token-login-dialog.c \
+	src/libnma/nma-pkcs11-cert-chooser-dialog.c \
+	src/libnma/nma-cert-chooser-button.c \
+	src/libnma/nma-pkcs11-cert-chooser.c
+endif
 
 src_libnma_libnmadir = $(includedir)/libnma
 
@@ -491,9 +523,11 @@ src_libnma_libnma_HEADERS = \
 lib_LTLIBRARIES += src/libnma/libnma.la
 
 src_libnma_libnma_la_SOURCES = \
+	$(libnma_h_priv_real) \
 	$(libnma_c_real)
 
 nodist_src_libnma_libnma_la_SOURCES = \
+	$(libnma_h_priv_gen) \
 	$(libnma_c_gen)
 
 src_libnma_libnma_la_CFLAGS = \
@@ -509,17 +543,18 @@ src_libnma_libnma_la_CFLAGS = \
 	"-I$(srcdir)/src/utils" \
 	"-I$(srcdir)/src/wireless-security" \
 	"-I$(srcdir)/src/libnma" \
+	-Isrc/libnma \
 	$(GTK_CFLAGS) \
 	$(LIBNM_CFLAGS) \
-	$(GUDEV_CFLAGS)
+	$(GUDEV_CFLAGS) \
+	$(GCR_CFLAGS)
 
 src_libnma_libnma_la_LIBADD = \
 	src/wireless-security/libwireless-security-libnm.la \
 	$(GTK_LIBS) \
 	$(LIBNM_LIBS) \
-	$(GUDEV_LIBS)
-
-$(src_libnma_libnma_la_OBJECTS): $(libnma_h_priv_gen)
+	$(GUDEV_LIBS) \
+	$(GCR_LIBS)
 
 EXTRA_src_libnma_libnma_la_DEPENDENCIES = src/libnma/libnma.ver
 
@@ -532,7 +567,7 @@ pkgconfig_DATA += src/libnma/libnma.pc
 
 if HAVE_INTROSPECTION
 src/libnma/NMA-1.0.gir: src/libnma/libnma.la
-src_libnma_NMA_1_0_gir_INCLUDES = NMClient-1.0 NetworkManager-1.0 Gtk-3.0
+src_libnma_NMA_1_0_gir_INCLUDES = NM-1.0 Gtk-3.0
 src_libnma_NMA_1_0_gir_EXPORT_PACKAGES = libnma
 src_libnma_NMA_1_0_gir_CFLAGS = $(src_libnma_libnma_la_CFLAGS)
 src_libnma_NMA_1_0_gir_LIBS = src/libnma/libnma.la
@@ -544,9 +579,12 @@ INTROSPECTION_GIRS += src/libnma/NMA-1.0.gir
 endif
 
 EXTRA_DIST += \
+	src/libnma/nma-version.h.in \
 	src/libnma/libnma.pc.in \
 	src/libnma/libnma.ver \
 	src/libnma/wifi.ui \
+	src/libnma/nma-pkcs11-token-login-dialog.ui \
+	src/libnma/nma-pkcs11-cert-chooser-dialog.ui \
 	src/libnma/nma.gresource.xml
 
 ###############################################################################
@@ -643,8 +681,6 @@ nodist_src_connection_editor_nm_connection_editor_SOURCES = \
 	$(connection_editor_c_gen)
 
 src_connection_editor_nm_connection_editor_CPPFLAGS = \
-	-DNM_VERSION_MIN_REQUIRED=NM_VERSION_1_4 \
-	-DNM_VERSION_MAX_ALLOWED=NM_VERSION_1_4 \
 	-DICONDIR=\""$(datadir)/icons"\" \
 	-DBINDIR=\""$(bindir)"\" \
 	-DSYSCONFDIR=\""$(sysconfdir)"\" \
@@ -655,9 +691,11 @@ src_connection_editor_nm_connection_editor_CPPFLAGS = \
 	"-I$(srcdir)/src/utils" \
 	"-I$(srcdir)/src/wireless-security" \
 	"-I$(srcdir)/src/libnma" \
+	-Isrc/libnma \
 	$(GTK_CFLAGS) \
 	$(LIBNM_CFLAGS) \
-	$(JANSSON_CFLAGS)
+	$(JANSSON_CFLAGS) \
+	$(SELINUX_CFLAGS)
 
 src_connection_editor_nm_connection_editor_LDADD = \
 	src/wireless-security/libwireless-security-libnm.la \
@@ -665,6 +703,7 @@ src_connection_editor_nm_connection_editor_LDADD = \
 	$(GTK_LIBS) \
 	$(LIBNM_LIBS) \
 	$(JANSSON_LIBS) \
+	$(SELINUX_LIBS) \
 	-lm
 
 $(src_connection_editor_nm_connection_editor_OBJECTS): $(connection_editor_h_gen)
@@ -762,8 +801,6 @@ nodist_src_nm_applet_SOURCES = \
 	$(nm_applet_c_gen)
 
 src_nm_applet_CPPFLAGS = \
-	-DNM_VERSION_MIN_REQUIRED=NM_VERSION_1_4 \
-	-DNM_VERSION_MAX_ALLOWED=NM_VERSION_1_4 \
 	-DICONDIR=\""$(datadir)/icons"\" \
 	-DBINDIR=\""$(bindir)"\" \
 	-DSYSCONFDIR=\""$(sysconfdir)"\" \
@@ -775,6 +812,7 @@ src_nm_applet_CPPFLAGS = \
 	"-I$(srcdir)/src/utils" \
 	"-I$(srcdir)/src/wireless-security" \
 	"-I$(srcdir)/src/libnma" \
+	-Isrc/libnma \
 	$(GTK_CFLAGS) \
 	$(LIBNM_CFLAGS) \
 	$(LIBSECRET_CFLAGS) \
@@ -846,10 +884,20 @@ HFILE_GLOB = $(top_srcdir)/src/libnma/*.h
 CFILE_GLOB = $(top_srcdir)/src/libnma/*.c
 
 IGNORE_HFILES = \
-	nma-resources.h
+	nma-resources.h \
+	nma-version.h \
+	nma-cert-chooser-private.h \
+	nma-pkcs11-token-login-dialog.h \
+	nma-pkcs11-cert-chooser-dialog.h \
+	nma-cert-chooser-button.h
 
 mkdb_ignore_c_files = \
-	nma-resources.c
+	nma-resources.c \
+	nma-file-cert-chooser.c \
+	nma-pkcs11-token-login-dialog.c \
+	nma-pkcs11-cert-chooser-dialog.c \
+	nma-cert-chooser-button.c \
+	nma-pkcs11-cert-chooser.c
 
 MKDB_OPTIONS = --ignore-files "$(IGNORE_HFILES) $(mkdb_ignore_c_files)"
 

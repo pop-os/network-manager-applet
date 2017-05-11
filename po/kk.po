@@ -1,15 +1,14 @@
 # Kazakh translation for network-manager-applet.
 # Copyright (C) 2013 network-manager-applet's COPYRIGHT HOLDER
 # This file is distributed under the same license as the network-manager-applet package.
-# Baurzhan Muftakhidinov <baurthefirst@gmail.com>, 2011-2016.
+# Baurzhan Muftakhidinov <baurthefirst@gmail.com>, 2011-2017.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: network-manager-applet master\n"
-"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
-"product=NetworkManager&keywords=I18N+L10N&component=nm-applet\n"
-"POT-Creation-Date: 2016-12-04 15:00+0000\n"
-"PO-Revision-Date: 2016-12-10 21:11+0500\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-05-10 12:44+0200\n"
+"PO-Revision-Date: 2017-03-20 08:18+0500\n"
 "Last-Translator: Baurzhan Muftakhidinov <baurthefirst@gmail.com>\n"
 "Language-Team: Kazakh <kk_KZ@googlegroups.com>\n"
 "Language: kk\n"
@@ -17,9 +16,9 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 1.8.11\n"
+"X-Generator: Poedit 1.8.12\n"
 
-#: ../nm-applet.desktop.in.h:1 ../src/applet.c:3113
+#: ../nm-applet.desktop.in.h:1 ../src/applet.c:3175
 msgid "Network"
 msgstr "Желі"
 
@@ -140,6 +139,8 @@ msgid ""
 "The nm-connection-editor program works with NetworkManager to create and "
 "edit existing connection profiles for NetworkManager."
 msgstr ""
+"nm-connection-editor бағдарламасы NetworkManager-мен бірге NetworkManager "
+"үшін байланыс профильдерін жасауға және түзетуге жұмыс істейді."
 
 #: ../nm-connection-editor.appdata.xml.in.h:5
 msgid "The NetworkManager Developers"
@@ -188,8 +189,8 @@ msgstr "802.1X аутентификациясы"
 #: ../src/connection-editor/ce-new-connection.ui.h:1
 #: ../src/connection-editor/ce-page-dcb.ui.h:17
 #: ../src/connection-editor/ce-ppp-auth-methods.ui.h:1
-#: ../src/connection-editor/nm-connection-editor.ui.h:6
-#: ../src/gsm-unlock.ui.h:1
+#: ../src/connection-editor/nm-connection-editor.ui.h:8
+#: ../src/gsm-unlock.ui.h:1 ../src/libnma/nma-pkcs11-token-login-dialog.ui.h:1
 msgid "_Cancel"
 msgstr "Ба_с тарту"
 
@@ -209,120 +210,37 @@ msgstr "ad-hoc"
 msgid "secure."
 msgstr "қауіпсіз."
 
-#: ../src/applet.c:345
+#: ../src/applet.c:381
 msgid "Failed to add/activate connection"
 msgstr "Байланысты қосу/белсендіру мүмкін емес"
 
-#: ../src/applet.c:347 ../src/applet.c:401 ../src/applet.c:436
-#: ../src/applet-device-wifi.c:1445 ../src/applet-device-wifi.c:1468
+#: ../src/applet.c:383 ../src/applet.c:437 ../src/applet.c:472
+#: ../src/applet-device-wifi.c:1387 ../src/applet-device-wifi.c:1410
 msgid "Unknown error"
 msgstr "Белгісіз қате"
 
-#: ../src/applet.c:350 ../src/applet.c:439 ../src/applet-device-wifi.c:1448
-#: ../src/applet-device-wifi.c:1471
+#: ../src/applet.c:386 ../src/applet.c:475 ../src/applet-device-wifi.c:539
+#: ../src/applet-device-wifi.c:1390 ../src/applet-device-wifi.c:1413
 msgid "Connection failure"
 msgstr "Байланысты орнату сәтсіз"
 
-#: ../src/applet.c:399
+#: ../src/applet.c:435
 msgid "Device disconnect failed"
 msgstr "Құрылғыны ажырату сәтсіз"
 
-#: ../src/applet.c:404
+#: ../src/applet.c:440
 msgid "Disconnect failure"
 msgstr "Ажырату сәтсіз"
 
-#: ../src/applet.c:434
+#: ../src/applet.c:470
 msgid "Connection activation failed"
 msgstr "Байланысты іске қосу сәтсіз"
 
-#: ../src/applet.c:757 ../src/applet-device-wifi.c:1185
+#: ../src/applet.c:793 ../src/applet-device-wifi.c:1126
 msgid "Don’t show this message again"
 msgstr "Бұл хабарламаны келесіде көрсетпеу"
 
-#: ../src/applet.c:844
-#, c-format
-msgid ""
-"\n"
-"The VPN connection “%s” failed because the network connection was "
-"interrupted."
-msgstr ""
-"\n"
-"\"%s\" VPN байланысы сәтсіз, өйткені желілік байланыс үзілді."
-
-#: ../src/applet.c:847
-#, c-format
-msgid ""
-"\n"
-"The VPN connection “%s” failed because the VPN service stopped unexpectedly."
-msgstr ""
-"\n"
-"\"%s\" VPN байланысы сәтсіз, өйткені VPN қызметі күтпегенде тоқтады."
-
-#: ../src/applet.c:850
-#, c-format
-msgid ""
-"\n"
-"The VPN connection “%s” failed because the VPN service returned invalid "
-"configuration."
-msgstr ""
-"\n"
-"\"%s\" VPN байланысы сәтсіз, өйткені VPN қызметі қате баптауларды қайтарды."
-
-#: ../src/applet.c:853
-#, c-format
-msgid ""
-"\n"
-"The VPN connection “%s” failed because the connection attempt timed out."
-msgstr ""
-"\n"
-"\"%s\" VPN байланысы сәтсіз, өйткені байланысты орнатудың күту уақыты бітті."
-
-#: ../src/applet.c:856
-#, c-format
-msgid ""
-"\n"
-"The VPN connection “%s” failed because the VPN service did not start in time."
-msgstr ""
-"\n"
-"\"%s\" VPN байланысы сәтсіз, өйткені VPN қызметі уақытында іске қосылмады."
-
-#: ../src/applet.c:859
-#, c-format
-msgid ""
-"\n"
-"The VPN connection “%s” failed because the VPN service failed to start."
-msgstr ""
-"\n"
-"\"%s\" VPN байланысы сәтсіз, өйткені VPN қызметі іске қосыла алмады."
-
-#: ../src/applet.c:862
-#, c-format
-msgid ""
-"\n"
-"The VPN connection “%s” failed because there were no valid VPN secrets."
-msgstr ""
-"\n"
-"\"%s\" VPN байланысы сәтсіз, өйткені жарамды VPN парольдері табылмады."
-
-#: ../src/applet.c:865
-#, c-format
-msgid ""
-"\n"
-"The VPN connection “%s” failed because of invalid VPN secrets."
-msgstr ""
-"\n"
-"\"%s\" VPN байланысы сәтсіз, өйткені VPN парольдері жарамсыз."
-
-#: ../src/applet.c:872
-#, c-format
-msgid ""
-"\n"
-"The VPN connection “%s” failed."
-msgstr ""
-"\n"
-"\"%s\" VPN байланысы сәтсіз."
-
-#: ../src/applet.c:888
+#: ../src/applet.c:883
 #, c-format
 msgid ""
 "\n"
@@ -332,25 +250,90 @@ msgstr ""
 "\n"
 "\"%s\" VPN байланысы желілік байланыс үзілген соң ажыратылды."
 
+#: ../src/applet.c:885
+#, c-format
+msgid ""
+"\n"
+"The VPN connection “%s” failed because the network connection was "
+"interrupted."
+msgstr ""
+"\n"
+"\"%s\" VPN байланысы сәтсіз, өйткені желілік байланыс үзілді."
+
+#: ../src/applet.c:887
+#, c-format
+msgid ""
+"\n"
+"The VPN connection “%s” failed because the VPN service stopped unexpectedly."
+msgstr ""
+"\n"
+"\"%s\" VPN байланысы сәтсіз, өйткені VPN қызметі күтпегенде тоқтады."
+
+#: ../src/applet.c:889
+#, c-format
+msgid ""
+"\n"
+"The VPN connection “%s” failed because the VPN service returned invalid "
+"configuration."
+msgstr ""
+"\n"
+"\"%s\" VPN байланысы сәтсіз, өйткені VPN қызметі қате баптауларды қайтарды."
+
 #: ../src/applet.c:891
 #, c-format
 msgid ""
 "\n"
-"The VPN connection “%s” disconnected because the VPN service stopped."
+"The VPN connection “%s” failed because the connection attempt timed out."
 msgstr ""
 "\n"
-"\"%s\" VPN байланысы VPN қызметі тоқталған соң ажыратылды."
+"\"%s\" VPN байланысы сәтсіз, өйткені байланысты орнатудың күту уақыты бітті."
+
+#: ../src/applet.c:893
+#, c-format
+msgid ""
+"\n"
+"The VPN connection “%s” failed because the VPN service did not start in time."
+msgstr ""
+"\n"
+"\"%s\" VPN байланысы сәтсіз, өйткені VPN қызметі уақытында іске қосылмады."
+
+#: ../src/applet.c:895
+#, c-format
+msgid ""
+"\n"
+"The VPN connection “%s” failed because the VPN service failed to start."
+msgstr ""
+"\n"
+"\"%s\" VPN байланысы сәтсіз, өйткені VPN қызметі іске қосыла алмады."
 
 #: ../src/applet.c:897
 #, c-format
 msgid ""
 "\n"
-"The VPN connection “%s” disconnected."
+"The VPN connection “%s” failed because there were no valid VPN secrets."
 msgstr ""
 "\n"
-"\"%s\" VPN байланысы ажыратылды."
+"\"%s\" VPN байланысы сәтсіз, өйткені жарамды VPN парольдері табылмады."
 
-#: ../src/applet.c:927
+#: ../src/applet.c:899
+#, c-format
+msgid ""
+"\n"
+"The VPN connection “%s” failed because of invalid VPN secrets."
+msgstr ""
+"\n"
+"\"%s\" VPN байланысы сәтсіз, өйткені VPN парольдері жарамсыз."
+
+#: ../src/applet.c:904
+#, c-format
+msgid ""
+"\n"
+"The VPN connection “%s” failed."
+msgstr ""
+"\n"
+"\"%s\" VPN байланысы сәтсіз."
+
+#: ../src/applet.c:931
 #, c-format
 msgid ""
 "VPN connection has been successfully established.\n"
@@ -361,19 +344,19 @@ msgstr ""
 "\n"
 "%s\n"
 
-#: ../src/applet.c:929
+#: ../src/applet.c:933
 msgid "VPN connection has been successfully established.\n"
 msgstr "VPN байланысы сәтті орнатылды.\n"
 
-#: ../src/applet.c:931
+#: ../src/applet.c:935
 msgid "VPN Login Message"
 msgstr "VPN кіру хабарламасы"
 
-#: ../src/applet.c:937 ../src/applet.c:945 ../src/applet.c:986
+#: ../src/applet.c:943 ../src/applet.c:983
 msgid "VPN Connection Failed"
 msgstr "VPN байланысы сәтсіз"
 
-#: ../src/applet.c:990
+#: ../src/applet.c:987
 #, c-format
 msgid ""
 "\n"
@@ -386,7 +369,7 @@ msgstr ""
 "\n"
 "%s"
 
-#: ../src/applet.c:993
+#: ../src/applet.c:990
 #, c-format
 msgid ""
 "\n"
@@ -399,48 +382,48 @@ msgstr ""
 "\n"
 "%s"
 
-#: ../src/applet.c:1281
+#: ../src/applet.c:1279
 msgid "device not ready (firmware missing)"
 msgstr "құрылғы дайын емес (firmware жоқ)"
 
-#: ../src/applet.c:1283
+#: ../src/applet.c:1281
 msgid "device not ready"
 msgstr "құрылғы дайын емес"
 
 #. Notify user of unmanaged or unavailable device
-#: ../src/applet.c:1293 ../src/applet-device-ethernet.c:109
+#: ../src/applet.c:1291 ../src/applet-device-ethernet.c:109
 msgid "disconnected"
 msgstr "байланыспаған"
 
-#: ../src/applet.c:1309
+#: ../src/applet.c:1307
 msgid "Disconnect"
 msgstr "Байланысты үзу"
 
-#: ../src/applet.c:1323
+#: ../src/applet.c:1321
 msgid "device not managed"
 msgstr "құрылғы басқарылмайды"
 
-#: ../src/applet.c:1396
+#: ../src/applet.c:1394
 msgid "No network devices available"
 msgstr "Бірді-бір желілік құрылғы қолжетерсіз"
 
-#: ../src/applet.c:1450
+#: ../src/applet.c:1448
 msgid "_VPN Connections"
 msgstr "_VPN байланыстары"
 
-#: ../src/applet.c:1494
+#: ../src/applet.c:1492
 msgid "_Configure VPN…"
 msgstr "VPN ба_птау…"
 
-#: ../src/applet.c:1497
+#: ../src/applet.c:1495
 msgid "_Add a VPN connection…"
 msgstr "VPN байланысын қ_осу…"
 
-#: ../src/applet.c:1603
+#: ../src/applet.c:1601
 msgid "NetworkManager is not running…"
 msgstr "NetworkManager орындалып тұрған жоқ…"
 
-#: ../src/applet.c:1608 ../src/applet.c:2613
+#: ../src/applet.c:1606 ../src/applet.c:2671
 msgid "Networking disabled"
 msgstr "Желі сөндірілген"
 
@@ -478,121 +461,121 @@ msgstr "Байланыстарды түзету…"
 msgid "_About"
 msgstr "Осы т_уралы"
 
-#: ../src/applet.c:2165
+#: ../src/applet.c:2191
 #, c-format
 msgid "You are now connected to “%s”."
 msgstr "\"%s\" желісіне байланыс орнатылды."
 
-#: ../src/applet.c:2208
+#: ../src/applet.c:2231
 msgid "Disconnected"
 msgstr "Ажыратылған"
 
-#: ../src/applet.c:2209
+#: ../src/applet.c:2232
 msgid "The network connection has been disconnected."
 msgstr "Желілік байланыс ажыратылды."
 
-#: ../src/applet.c:2475
+#: ../src/applet.c:2534
 #, c-format
 msgid "Preparing network connection “%s”…"
 msgstr "\"%s\" желілік байланысын дайындау…"
 
-#: ../src/applet.c:2478
+#: ../src/applet.c:2537
 #, c-format
 msgid "User authentication required for network connection “%s”…"
 msgstr "\"%s\" желілік байланысы үшін пайдаланушы аутентификациясы керек…"
 
-#: ../src/applet.c:2481 ../src/applet-device-bt.c:125
+#: ../src/applet.c:2540 ../src/applet-device-bt.c:125
 #: ../src/mobile-helpers.c:608
 #, c-format
 msgid "Requesting a network address for “%s”…"
 msgstr "\"%s\" үшін желілік адресті сұрау…"
 
-#: ../src/applet.c:2484
+#: ../src/applet.c:2543
 #, c-format
 msgid "Network connection “%s” active"
 msgstr "\"%s\" желілік байланысы белсенді"
 
-#: ../src/applet.c:2558
+#: ../src/applet.c:2616
 #, c-format
 msgid "Starting VPN connection “%s”…"
 msgstr "\"%s\" VPN байланысын іске қосу…"
 
-#: ../src/applet.c:2561
+#: ../src/applet.c:2619
 #, c-format
 msgid "User authentication required for VPN connection “%s”…"
 msgstr "\"%s\" VPN байланысы үшін пайдаланушы аутентификациясы керек…"
 
-#: ../src/applet.c:2564
+#: ../src/applet.c:2622
 #, c-format
 msgid "Requesting a VPN address for “%s”…"
 msgstr "\"%s\" үшін VPN адресін сұрау…"
 
-#: ../src/applet.c:2567
+#: ../src/applet.c:2625
 #, c-format
 msgid "VPN connection active"
 msgstr "VPN байланысы белсенді"
 
-#: ../src/applet.c:2617
+#: ../src/applet.c:2675
 msgid "No network connection"
 msgstr "Желілік байланыстар жоқ"
 
-#: ../src/applet.c:3212
+#: ../src/applet.c:3276
 msgid "NetworkManager Applet"
 msgstr "NetworkManager апплеті"
 
-#: ../src/applet-device-broadband.c:159
+#: ../src/applet-device-broadband.c:161
 msgid "Wrong PUK code; please contact your provider."
 msgstr "PUK коды қате; провайдеріңізге хабарласыңыз."
 
-#: ../src/applet-device-broadband.c:201
+#: ../src/applet-device-broadband.c:203
 msgid "Wrong PIN code; please contact your provider."
 msgstr "PIN коды қате; провайдеріңізге хабарласыңыз."
 
 #. Start the spinner to show the progress of the unlock
-#: ../src/applet-device-broadband.c:252
+#: ../src/applet-device-broadband.c:254
 msgid "Sending unlock code…"
 msgstr "Босату кодын жіберу…"
 
-#: ../src/applet-device-broadband.c:734 ../src/applet-dialogs.c:506
+#: ../src/applet-device-broadband.c:736 ../src/applet-dialogs.c:506
 #, c-format
 msgid "Mobile Broadband (%s)"
 msgstr "Мобильді кеңжолақты (%s)"
 
-#: ../src/applet-device-broadband.c:736
+#: ../src/applet-device-broadband.c:738
 #: ../src/connection-editor/connection-helpers.c:107
 #: ../src/connection-editor/page-mobile.c:308
 #: ../src/libnm-gtk/nm-ui-utils.c:329
 msgid "Mobile Broadband"
 msgstr "Мобильді кеңжолақты"
 
-#: ../src/applet-device-broadband.c:788 ../src/applet-device-bt.c:75
-#: ../src/applet-device-ethernet.c:117 ../src/applet-device-wifi.c:970
+#: ../src/applet-device-broadband.c:790 ../src/applet-device-bt.c:75
+#: ../src/applet-device-ethernet.c:117 ../src/applet-device-wifi.c:906
 msgid "Available"
 msgstr "Қолжетерлік"
 
 #. Default connection item
-#: ../src/applet-device-broadband.c:801
+#: ../src/applet-device-broadband.c:803
 msgid "New Mobile Broadband connection…"
 msgstr "Жаңа мобильді кеңжолақты байланысы…"
 
-#: ../src/applet-device-broadband.c:815 ../src/applet-device-bt.c:87
-#: ../src/applet-device-ethernet.c:132 ../src/applet-device-wifi.c:1366
+#: ../src/applet-device-broadband.c:817 ../src/applet-device-bt.c:87
+#: ../src/applet-device-ethernet.c:132 ../src/applet-device-wifi.c:1308
 msgid "Connection Established"
 msgstr "Байланыс орнатылды"
 
-#: ../src/applet-device-broadband.c:816
+#: ../src/applet-device-broadband.c:818
 msgid "You are now connected to the Mobile Broadband network."
 msgstr "Сіз мобильді кеңжолақты желісіне байланыс орнаттыңыз."
 
-#: ../src/applet-device-broadband.c:956 ../src/applet-device-broadband.c:962
+#: ../src/applet-device-broadband.c:958 ../src/applet-device-broadband.c:964
 msgid "Mobile Broadband network."
 msgstr "Мобильді кеңжолақты желісі."
 
-#: ../src/applet-device-broadband.c:957
+#: ../src/applet-device-broadband.c:959
 msgid "You are now registered on the home network."
 msgstr "Сіз үй желісінде тіркелдіңіз."
 
-#: ../src/applet-device-broadband.c:963
+#: ../src/applet-device-broadband.c:965
 msgid "You are now registered on a roaming network."
 msgstr "Сіз роуминг желісінде тіркелдіңіз."
 
@@ -677,102 +660,106 @@ msgstr "\"%s\" ethernet желілік байланысы белсенді"
 msgid "DSL authentication"
 msgstr "DSL аутентификациясы"
 
-#: ../src/applet-device-wifi.c:231
+#: ../src/applet-device-wifi.c:225
 msgid "_Connect to Hidden Wi-Fi Network…"
 msgstr "Жасырын Wi-Fi желісіне байланы_су…"
 
-#: ../src/applet-device-wifi.c:282
+#: ../src/applet-device-wifi.c:276
 msgid "Create _New Wi-Fi Network…"
 msgstr "_Жаңа Wi-Fi желісін жасау…"
 
-#: ../src/applet-device-wifi.c:432
+#: ../src/applet-device-wifi.c:358
 msgid "(none)"
 msgstr "(ешнәрсе)"
 
-#: ../src/applet-device-wifi.c:902
+#: ../src/applet-device-wifi.c:536 ../src/applet-device-wifi.c:1408
+msgid "Failed to add new connection"
+msgstr "Жаңа байланысты қосу мүмкін емес"
+
+#: ../src/applet-device-wifi.c:537
+msgid "Insufficient privileges."
+msgstr ""
+
+#: ../src/applet-device-wifi.c:838
 #, c-format
 msgid "Wi-Fi Networks (%s)"
 msgstr "Wi-Fi желілері (%s)"
 
-#: ../src/applet-device-wifi.c:904
+#: ../src/applet-device-wifi.c:840
 #, c-format
 msgid "Wi-Fi Network (%s)"
 msgstr "Wi-Fi желісі (%s)"
 
-#: ../src/applet-device-wifi.c:906
+#: ../src/applet-device-wifi.c:842
 msgid "Wi-Fi Network"
 msgid_plural "Wi-Fi Networks"
 msgstr[0] "Wi-Fi желі(лер)"
 
-#: ../src/applet-device-wifi.c:935
+#: ../src/applet-device-wifi.c:871
 msgid "Wi-Fi is disabled"
 msgstr "Wi-Fi сөндірілген"
 
-#: ../src/applet-device-wifi.c:936
+#: ../src/applet-device-wifi.c:872
 msgid "Wi-Fi is disabled by hardware switch"
 msgstr "Wi-Fi құрылғы қосқышымен сөндірілген"
 
-#: ../src/applet-device-wifi.c:997
+#: ../src/applet-device-wifi.c:933
 msgid "More networks"
 msgstr "Көбірек желілер"
 
-#: ../src/applet-device-wifi.c:1181
+#: ../src/applet-device-wifi.c:1122
 msgid "Wi-Fi Networks Available"
 msgstr "Wi-Fi желілері қолжетерлік"
 
-#: ../src/applet-device-wifi.c:1182
+#: ../src/applet-device-wifi.c:1123
 msgid "Use the network menu to connect to a Wi-Fi network"
 msgstr "Wi-Fi желісіне байланысты орнату үшін желі мәзірін қолданыңыз"
 
-#: ../src/applet-device-wifi.c:1365
+#: ../src/applet-device-wifi.c:1307
 #, c-format
 msgid "You are now connected to the Wi-Fi network “%s”."
 msgstr "\"%s\" Wi-Fi желісіне байланыс орнатылды."
 
-#: ../src/applet-device-wifi.c:1400
+#: ../src/applet-device-wifi.c:1342
 #, c-format
 msgid "Preparing Wi-Fi network connection “%s”…"
 msgstr "\"%s\" Wi-Fi желілік байланысын дайындау…"
 
-#: ../src/applet-device-wifi.c:1403
+#: ../src/applet-device-wifi.c:1345
 #, c-format
 msgid "Configuring Wi-Fi network connection “%s”…"
 msgstr "\"%s\" Wi-Fi желі байланысын баптау…"
 
-#: ../src/applet-device-wifi.c:1406
+#: ../src/applet-device-wifi.c:1348
 #, c-format
 msgid "User authentication required for Wi-Fi network “%s”…"
 msgstr "\"%s\" Wi-Fi желісі үшін пайдаланушы аутентификациясы керек…"
 
-#: ../src/applet-device-wifi.c:1409
+#: ../src/applet-device-wifi.c:1351
 #, c-format
 msgid "Requesting a Wi-Fi network address for “%s”…"
 msgstr "\"%s\" үшін Wi-Fi желілік адресті сұрау…"
 
-#: ../src/applet-device-wifi.c:1420
+#: ../src/applet-device-wifi.c:1362
 #, c-format
 msgid "Wi-Fi network connection “%s” active: %s (%d%%)"
 msgstr "\"%s\" Wi-Fi желілік байланысы белсенді: %s (%d%%)"
 
-#: ../src/applet-device-wifi.c:1424
+#: ../src/applet-device-wifi.c:1366
 #, c-format
 msgid "Wi-Fi network connection “%s” active"
 msgstr "\"%s\" Wi-Fi желілік байланысы белсенді"
 
-#: ../src/applet-device-wifi.c:1443
+#: ../src/applet-device-wifi.c:1385
 msgid "Failed to activate connection"
 msgstr "Байланысты белсендіру мүмкін емес"
-
-#: ../src/applet-device-wifi.c:1466
-msgid "Failed to add new connection"
-msgstr "Жаңа байланысты қосу мүмкін емес"
 
 #: ../src/applet-dialogs.c:41
 msgid "Error displaying connection information:"
 msgstr "Байланыс ақпаратын көрсету сәтсіз:"
 
-#: ../src/applet-dialogs.c:72 ../src/connection-editor/page-wifi-security.c:332
-#: ../src/libnma/nma-wifi-dialog.c:946 ../src/libnm-gtk/nm-wifi-dialog.c:948
+#: ../src/applet-dialogs.c:72 ../src/connection-editor/page-wifi-security.c:379
+#: ../src/libnma/nma-wifi-dialog.c:949 ../src/libnm-gtk/nm-wifi-dialog.c:948
 #: ../src/wireless-security/wireless-security.c:448
 msgid "LEAP"
 msgstr "LEAP"
@@ -796,7 +783,7 @@ msgid "WEP"
 msgstr "WEP"
 
 #: ../src/applet-dialogs.c:234 ../src/applet-dialogs.c:243
-#: ../src/connection-editor/page-wifi-security.c:283
+#: ../src/connection-editor/page-wifi-security.c:330
 msgctxt "Wi-Fi/Ethernet security"
 msgid "None"
 msgstr "Ешнәрсе"
@@ -1086,7 +1073,7 @@ msgstr "Қо_су"
 #: ../src/connection-editor/ce-page-ip4.ui.h:8
 #: ../src/connection-editor/ce-page-ip6.ui.h:11
 #: ../src/connection-editor/ce-page-team.ui.h:15
-#: ../src/connection-editor/nm-connection-list.c:708
+#: ../src/connection-editor/nm-connection-list.c:711
 msgid "_Delete"
 msgstr "Ө_шіру"
 
@@ -1110,7 +1097,8 @@ msgstr ""
 "байланыс ретінде ешқашан қолданылмайтын болады."
 
 #: ../src/connection-editor/ce-new-connection.ui.h:2
-msgid "Create…"
+#, fuzzy
+msgid "C_reate…"
 msgstr "Жасау…"
 
 #: ../src/connection-editor/ce-new-connection.ui.h:3
@@ -1169,7 +1157,7 @@ msgid "Bonded _connections:"
 msgstr ""
 
 #: ../src/connection-editor/ce-page-bond.ui.h:11
-#: ../src/connection-editor/ce-page-wifi.ui.h:19
+#: ../src/connection-editor/ce-page-wifi.ui.h:18
 msgid "M_ode:"
 msgstr "Реж_имі:"
 
@@ -1177,7 +1165,7 @@ msgstr "Реж_имі:"
 #: ../src/connection-editor/ce-page-bond.ui.h:13
 #: ../src/connection-editor/ce-page-bridge.ui.h:3
 #: ../src/connection-editor/ce-page-team.ui.h:14
-#: ../src/connection-editor/nm-connection-list.c:692
+#: ../src/connection-editor/nm-connection-list.c:695
 msgid "_Edit"
 msgstr "Түз_ету"
 
@@ -1228,7 +1216,7 @@ msgid ""
 msgstr ""
 
 #: ../src/connection-editor/ce-page-bond.ui.h:25
-#: ../src/connection-editor/ce-page-ethernet.ui.h:18
+#: ../src/connection-editor/ce-page-ethernet.ui.h:17
 #: ../src/connection-editor/ce-page-infiniband.ui.h:4
 #: ../src/connection-editor/ce-page-team.ui.h:17
 #: ../src/connection-editor/ce-page-vlan.ui.h:4
@@ -1237,7 +1225,7 @@ msgid "_MTU:"
 msgstr "_MTU:"
 
 #: ../src/connection-editor/ce-page-bond.ui.h:26
-#: ../src/connection-editor/ce-page-ethernet.ui.h:19
+#: ../src/connection-editor/ce-page-ethernet.ui.h:18
 #: ../src/connection-editor/ce-page-infiniband.ui.h:3
 #: ../src/connection-editor/ce-page-team.ui.h:18
 #: ../src/connection-editor/ce-page-vlan.ui.h:5
@@ -1307,45 +1295,87 @@ msgstr "бастапқы"
 msgid "unspecified error"
 msgstr "көрсетілмеген қате"
 
-#: ../src/connection-editor/ce-page.c:302
+#: ../src/connection-editor/ce-page.c:294
+msgid "Preserve"
+msgstr ""
+
+#: ../src/connection-editor/ce-page.c:295
+msgid "Permanent"
+msgstr ""
+
+#: ../src/connection-editor/ce-page.c:296
+msgid "Random"
+msgstr ""
+
+#: ../src/connection-editor/ce-page.c:297
+msgid "Stable"
+msgstr "Тұрақты"
+
+#: ../src/connection-editor/ce-page.c:301
+msgid ""
+"The MAC address entered here will be used as hardware address for the "
+"network device this connection is activated on. This feature is known as MAC "
+"cloning or spoofing. Example: 00:11:22:33:44:55"
+msgstr ""
+
+#: ../src/connection-editor/ce-page.c:341
 msgid "MAC address"
 msgstr "MAC адресі"
 
-#: ../src/connection-editor/ce-page.c:302
+#: ../src/connection-editor/ce-page.c:341
 msgid "HW address"
 msgstr "Құрылғылық адресі"
 
-#: ../src/connection-editor/ce-page.c:305
+#: ../src/connection-editor/ce-page.c:344
 #, c-format
 msgid "invalid %s for %s (%s)"
 msgstr ""
 
-#: ../src/connection-editor/ce-page.c:309
-#: ../src/connection-editor/ce-page.c:542
+#: ../src/connection-editor/ce-page.c:348
 #, c-format
 msgid "invalid %s (%s)"
 msgstr "жарамсыз %s (%s)"
 
-#: ../src/connection-editor/ce-page.c:325
+#: ../src/connection-editor/ce-page.c:388
 #, c-format
-msgid "invalid interface-name for %s (%s)"
+msgid "invalid interface-name for %s (%s): "
 msgstr ""
 
-#: ../src/connection-editor/ce-page.c:329
+#: ../src/connection-editor/ce-page.c:392
 #, c-format
-msgid "invalid interface-name (%s)"
+msgid "invalid interface-name (%s): "
+msgstr "интерфейс аты қате (%s): "
+
+#: ../src/connection-editor/ce-page.c:571
+msgid "can’t parse device name"
 msgstr ""
 
-#: ../src/connection-editor/ce-page.c:543
+#: ../src/connection-editor/ce-page.c:589
+msgid "invalid hardware address"
+msgstr "құрылғылық адресі қате"
+
+#: ../src/connection-editor/ce-page.c:611
+#, c-format
+msgid "invalid %s (%s): "
+msgstr "жарамсыз %s (%s): "
+
+#: ../src/connection-editor/ce-page.c:612
+#: ../src/connection-editor/ce-page.c:617
 msgid "device"
 msgstr "құрылғы"
 
-#: ../src/connection-editor/ce-page.c:651
+#: ../src/connection-editor/ce-page.c:616
+#, c-format
+msgid "invalid %s (%s) "
+msgstr "жарамсыз %s (%s) "
+
+#: ../src/connection-editor/ce-page.c:725
 msgid "Failed to update connection secrets due to an unknown error."
 msgstr ""
 
 #: ../src/connection-editor/ce-page-dcb.ui.h:1
-msgid "Use Data Center Bridging (DCB) for this connection"
+#, fuzzy
+msgid "_Use Data Center Bridging (DCB) for this connection"
 msgstr "Бұл байланыс үшін Data Center Bridging (DCB) қолдану"
 
 #: ../src/connection-editor/ce-page-dcb.ui.h:2
@@ -1503,7 +1533,6 @@ msgstr "Қы_змет:"
 #: ../src/connection-editor/ce-page-dsl.ui.h:3
 #: ../src/wireless-security/eap-method-leap.ui.h:3
 #: ../src/wireless-security/eap-method-simple.ui.h:3
-#: ../src/wireless-security/eap-method-tls.ui.h:7
 #: ../src/wireless-security/ws-leap.ui.h:3
 #: ../src/wireless-security/ws-wpa-psk.ui.h:3
 msgid "Sho_w password"
@@ -1523,6 +1552,7 @@ msgstr "_Пароль:"
 #: ../src/connection-editor/ce-page-ethernet.ui.h:1
 #: ../src/connection-editor/ce-page-ip4.ui.h:1
 #: ../src/connection-editor/ce-page-ip6.ui.h:1
+#: ../src/connection-editor/ce-page-proxy.ui.h:3
 #: ../src/connection-editor/ce-page-wifi.ui.h:1
 #: ../src/connection-editor/page-ip4.c:131
 #: ../src/connection-editor/page-ip6.c:136
@@ -1594,91 +1624,82 @@ msgid "_Device:"
 msgstr "Құр_ылғы:"
 
 #: ../src/connection-editor/ce-page-ethernet.ui.h:16
-#: ../src/connection-editor/ce-page-wifi.ui.h:11
+#: ../src/connection-editor/ce-page-wifi.ui.h:10
 msgid "C_loned MAC address:"
 msgstr "Кл_ондалған MAC адресі:"
 
-#: ../src/connection-editor/ce-page-ethernet.ui.h:17
-#: ../src/connection-editor/ce-page-wifi.ui.h:10
-msgid ""
-"The MAC address entered here will be used as hardware address for the "
-"network device this connection is activated on. This feature is known as MAC "
-"cloning or spoofing. Example: 00:11:22:33:44:55"
-msgstr ""
-
-#: ../src/connection-editor/ce-page-ethernet.ui.h:20
+#: ../src/connection-editor/ce-page-ethernet.ui.h:19
 msgid "Wake on LAN:"
 msgstr ""
 
-#: ../src/connection-editor/ce-page-ethernet.ui.h:21
+#: ../src/connection-editor/ce-page-ethernet.ui.h:20
 msgid "De_fault"
 msgstr "Ба_стапқы"
 
-#: ../src/connection-editor/ce-page-ethernet.ui.h:22
+#: ../src/connection-editor/ce-page-ethernet.ui.h:21
 msgid "_Ignore"
 msgstr "Еле_меу"
 
-#: ../src/connection-editor/ce-page-ethernet.ui.h:23
+#: ../src/connection-editor/ce-page-ethernet.ui.h:22
 msgid "_Phy"
 msgstr ""
 
-#: ../src/connection-editor/ce-page-ethernet.ui.h:24
+#: ../src/connection-editor/ce-page-ethernet.ui.h:23
 msgid "_Unicast"
 msgstr ""
 
-#: ../src/connection-editor/ce-page-ethernet.ui.h:25
+#: ../src/connection-editor/ce-page-ethernet.ui.h:24
 msgid "Mul_ticast"
 msgstr ""
 
-#: ../src/connection-editor/ce-page-ethernet.ui.h:26
+#: ../src/connection-editor/ce-page-ethernet.ui.h:25
 msgid "_Broadcast"
 msgstr "К_ең таратылым"
 
-#: ../src/connection-editor/ce-page-ethernet.ui.h:27
+#: ../src/connection-editor/ce-page-ethernet.ui.h:26
 msgid "_Arp"
 msgstr ""
 
-#: ../src/connection-editor/ce-page-ethernet.ui.h:28
+#: ../src/connection-editor/ce-page-ethernet.ui.h:27
 msgid "Ma_gic"
 msgstr ""
 
-#: ../src/connection-editor/ce-page-ethernet.ui.h:29
+#: ../src/connection-editor/ce-page-ethernet.ui.h:28
 msgid "_Wake on LAN password:"
 msgstr ""
 
-#: ../src/connection-editor/ce-page-ethernet.ui.h:30
+#: ../src/connection-editor/ce-page-ethernet.ui.h:29
 msgid ""
 "Wake-on-LAN password (an Ethernet MAC). It is only valid for magic packets."
 msgstr ""
 
-#: ../src/connection-editor/ce-page-ethernet.ui.h:31
-#| msgid "_Link Monitoring:"
+#: ../src/connection-editor/ce-page-ethernet.ui.h:30
 msgid "Lin_k negotiation:"
 msgstr ""
 
-#: ../src/connection-editor/ce-page-ethernet.ui.h:32
+#: ../src/connection-editor/ce-page-ethernet.ui.h:31
 msgid ""
 "Device link negotiation. If “Manual” is chosen, “Speed” and “Duplex” values "
 "will be forced without checking the device compatibility. If unsure, leave "
 "here “Ignore” or pick “Automatic”."
 msgstr ""
 
-#: ../src/connection-editor/ce-page-ethernet.ui.h:33
+#: ../src/connection-editor/ce-page-ethernet.ui.h:32
 msgid "_Speed:"
 msgstr "Ж_ылдамдық:"
 
-#: ../src/connection-editor/ce-page-ethernet.ui.h:34
+#: ../src/connection-editor/ce-page-ethernet.ui.h:33
 msgid ""
 "Speed value for static link negotiation, required only when “Ignore” and "
 "“Automatic” options are not selected. Before specifying a speed value be "
 "sure your device supports it."
 msgstr ""
 
-#: ../src/connection-editor/ce-page-ethernet.ui.h:35
+#: ../src/connection-editor/ce-page-ethernet.ui.h:34
 msgid "Duple_x:"
 msgstr ""
 
-#: ../src/connection-editor/ce-page-ethernet.ui.h:36
+#: ../src/connection-editor/ce-page-ethernet.ui.h:35
 msgid ""
 "Duplex value for static link negotiation, required only when “Ignore” and "
 "“Automatic” options are not selected. Before specifying a duplex mode be "
@@ -1725,19 +1746,23 @@ msgstr ""
 msgid ""
 "The IP address identify your computer on the network and determines the "
 "address range distributed to other computers. Click the “Add” button to add "
-"an IP address. If no address is provided, one in the 10.42.x.x range will be "
-"used."
+"an IP address. If no address is provided, range will be determined "
+"automatically."
 msgstr ""
+"IP адресі компьютеріңізді желіде сипаттайды және басқа компьютерлерге "
+"таратылатын адрестер аумағын анықтайды. IP адресін қосу үшін, \"Қосу\" "
+"батырмасын басыңыз. Егер адресі көрсетілмесе, аумақ автоматты түрде "
+"анықталатын болады."
 
-#: ../src/connection-editor/ce-page.h:122
+#: ../src/connection-editor/ce-page.h:121
 msgid "Additional static addresses"
 msgstr "Қосымша статикалық адрестер"
 
-#: ../src/connection-editor/ce-page.h:123
+#: ../src/connection-editor/ce-page.h:122
 msgid "Addresses"
 msgstr "Адрестер"
 
-#: ../src/connection-editor/ce-page.h:124
+#: ../src/connection-editor/ce-page.h:123
 msgid "Address (optional)"
 msgstr "Адрес (міндетті емес)"
 
@@ -1820,7 +1845,6 @@ msgid "Output key"
 msgstr ""
 
 #: ../src/connection-editor/ce-page-ip-tunnel.ui.h:17
-#| msgid "_MTU:"
 msgid "MTU"
 msgstr "MTU"
 
@@ -1867,14 +1891,14 @@ msgstr ""
 #: ../src/connection-editor/ce-page-ip4.ui.h:12
 #: ../src/connection-editor/ce-page-ip6.ui.h:13
 #: ../src/connection-editor/page-ip4.c:372
-#: ../src/connection-editor/page-ip6.c:330
+#: ../src/connection-editor/page-ip6.c:335
 msgid "S_earch domains:"
 msgstr "І_здеу домендері:"
 
 #: ../src/connection-editor/ce-page-ip4.ui.h:13
 #: ../src/connection-editor/ce-page-ip6.ui.h:14
 #: ../src/connection-editor/page-ip4.c:363
-#: ../src/connection-editor/page-ip6.c:321
+#: ../src/connection-editor/page-ip6.c:326
 msgid "DNS ser_vers:"
 msgstr "DNS _серверлері:"
 
@@ -2018,6 +2042,39 @@ msgstr ""
 msgid "Send PPP _echo packets"
 msgstr ""
 
+#: ../src/connection-editor/ce-page-proxy.ui.h:1
+msgid "Method:"
+msgstr "Тәсіл:"
+
+#: ../src/connection-editor/ce-page-proxy.ui.h:2
+#: ../src/connection-editor/ce-page-team.ui.h:25
+msgid "None"
+msgstr "Ешнәрсе"
+
+#: ../src/connection-editor/ce-page-proxy.ui.h:4
+msgid "For browser only"
+msgstr ""
+
+#: ../src/connection-editor/ce-page-proxy.ui.h:5
+msgid "Use this proxy configuration for only browser clients/schemes."
+msgstr ""
+
+#: ../src/connection-editor/ce-page-proxy.ui.h:6
+msgid "PAC URL:"
+msgstr ""
+
+#: ../src/connection-editor/ce-page-proxy.ui.h:7
+msgid "URL from where the PAC script is to be obtained."
+msgstr ""
+
+#: ../src/connection-editor/ce-page-proxy.ui.h:8
+msgid "PAC script:"
+msgstr ""
+
+#: ../src/connection-editor/ce-page-proxy.ui.h:9
+msgid "Import script from a file…"
+msgstr "Скриптті файлдан импорттау…"
+
 #: ../src/connection-editor/ce-page-team-port.ui.h:1
 #: ../src/connection-editor/ce-page-team.ui.h:19
 msgid "Ad_vanced…"
@@ -2147,7 +2204,6 @@ msgstr ""
 
 #: ../src/connection-editor/ce-page-team-port.ui.h:27
 #: ../src/connection-editor/ce-page-team.ui.h:73
-#| msgid "_Parent interface:"
 msgid "Send _interval:"
 msgstr ""
 
@@ -2313,28 +2369,21 @@ msgstr ""
 msgid "LACP"
 msgstr "LACP"
 
-#: ../src/connection-editor/ce-page-team.ui.h:25
-#| msgctxt "Wi-Fi/Ethernet security"
-#| msgid "None"
-msgid "None"
-msgstr "Ешнәрсе"
-
 #: ../src/connection-editor/ce-page-team.ui.h:27
 #: ../src/connection-editor/connection-helpers.c:104
-#: ../src/connection-editor/page-ethernet.c:352
+#: ../src/connection-editor/page-ethernet.c:351
 #: ../src/libnm-gtk/nm-ui-utils.c:321
 msgid "Ethernet"
 msgstr "Ethernet"
 
 #: ../src/connection-editor/ce-page-team.ui.h:28
 #: ../src/connection-editor/connection-helpers.c:119
-#: ../src/connection-editor/page-vlan.c:593 ../src/libnm-gtk/nm-ui-utils.c:339
+#: ../src/connection-editor/page-vlan.c:594 ../src/libnm-gtk/nm-ui-utils.c:339
 #: ../src/libnm-gtk/nm-ui-utils.c:583
 msgid "VLAN"
 msgstr "VLAN"
 
 #: ../src/connection-editor/ce-page-team.ui.h:31
-#| msgid "FIP"
 msgid "IP"
 msgstr "IP"
 
@@ -2343,7 +2392,6 @@ msgid "Any L3 protocol"
 msgstr ""
 
 #: ../src/connection-editor/ce-page-team.ui.h:33
-#| msgid "GTC"
 msgid "TCP"
 msgstr "TCP"
 
@@ -2457,7 +2505,7 @@ msgid ""
 msgstr ""
 
 #: ../src/connection-editor/ce-page-team.ui.h:64
-msgid "_Fields for tramsmission hash"
+msgid "_Fields for transmission hash"
 msgstr ""
 
 #: ../src/connection-editor/ce-page-team.ui.h:65
@@ -2550,35 +2598,35 @@ msgstr "Қатынау нүктесі"
 msgid "Ad-hoc"
 msgstr "Ad-hoc"
 
-#: ../src/connection-editor/ce-page-wifi.ui.h:12
+#: ../src/connection-editor/ce-page-wifi.ui.h:11
 msgid "mW"
 msgstr "мВт"
 
-#: ../src/connection-editor/ce-page-wifi.ui.h:13
+#: ../src/connection-editor/ce-page-wifi.ui.h:12
 msgid "Transmission po_wer:"
 msgstr ""
 
-#: ../src/connection-editor/ce-page-wifi.ui.h:14
+#: ../src/connection-editor/ce-page-wifi.ui.h:13
 msgid "Mb/s"
 msgstr "Мб/с"
 
-#: ../src/connection-editor/ce-page-wifi.ui.h:15
+#: ../src/connection-editor/ce-page-wifi.ui.h:14
 msgid "_Rate:"
 msgstr ""
 
-#: ../src/connection-editor/ce-page-wifi.ui.h:16
+#: ../src/connection-editor/ce-page-wifi.ui.h:15
 msgid "_BSSID:"
 msgstr "_BSSID:"
 
-#: ../src/connection-editor/ce-page-wifi.ui.h:17
+#: ../src/connection-editor/ce-page-wifi.ui.h:16
 msgid "C_hannel:"
 msgstr "Ар_на:"
 
-#: ../src/connection-editor/ce-page-wifi.ui.h:18
+#: ../src/connection-editor/ce-page-wifi.ui.h:17
 msgid "Ban_d:"
 msgstr ""
 
-#: ../src/connection-editor/ce-page-wifi.ui.h:20
+#: ../src/connection-editor/ce-page-wifi.ui.h:19
 msgid "SS_ID:"
 msgstr "SS_ID:"
 
@@ -2637,7 +2685,7 @@ msgid ""
 msgstr ""
 
 #: ../src/connection-editor/connection-helpers.c:105
-#: ../src/connection-editor/page-wifi.c:441 ../src/libnm-gtk/nm-ui-utils.c:323
+#: ../src/connection-editor/page-wifi.c:440 ../src/libnm-gtk/nm-ui-utils.c:323
 msgid "Wi-Fi"
 msgstr "Wi-Fi"
 
@@ -2719,6 +2767,7 @@ msgid "unknown error"
 msgstr "белгісіз қате"
 
 #: ../src/connection-editor/connection-helpers.c:303
+#: ../src/connection-editor/page-proxy.c:118
 #: ../src/connection-editor/page-team.c:341
 #: ../src/connection-editor/page-team-port.c:203
 msgid "Select file to import"
@@ -2759,7 +2808,7 @@ msgstr "%s байланысын өшіруді шынымен қалайсыз �
 #: ../src/connection-editor/ip4-routes-dialog.c:697
 #: ../src/connection-editor/ip6-routes-dialog.c:718
 #: ../src/connection-editor/page-ip4.c:1136
-#: ../src/connection-editor/page-ip6.c:1090
+#: ../src/connection-editor/page-ip6.c:1095
 msgid "Address"
 msgstr "Адрес"
 
@@ -2771,7 +2820,7 @@ msgstr "Желілік маскасы"
 #: ../src/connection-editor/ip4-routes-dialog.c:735
 #: ../src/connection-editor/ip6-routes-dialog.c:756
 #: ../src/connection-editor/page-ip4.c:1174
-#: ../src/connection-editor/page-ip6.c:1128
+#: ../src/connection-editor/page-ip6.c:1133
 msgid "Gateway"
 msgstr "Шлюз"
 
@@ -2781,73 +2830,79 @@ msgid "Metric"
 msgstr "Метрика"
 
 #: ../src/connection-editor/ip6-routes-dialog.c:737
-#: ../src/connection-editor/page-ip6.c:1109
+#: ../src/connection-editor/page-ip6.c:1114
 msgid "Prefix"
 msgstr "Префикс"
 
-#: ../src/connection-editor/nm-connection-editor.c:101
+#: ../src/connection-editor/nm-connection-editor.c:108
 #, c-format
 msgid "Editing %s"
 msgstr "%s түзету"
 
-#: ../src/connection-editor/nm-connection-editor.c:105
+#: ../src/connection-editor/nm-connection-editor.c:112
 msgid "Editing un-named connection"
 msgstr "Атаусыз байланысты түзету"
 
-#: ../src/connection-editor/nm-connection-editor.c:125
+#: ../src/connection-editor/nm-connection-editor.c:132
 msgid "Missing connection name"
 msgstr "Байланыс аты жоқ"
 
-#: ../src/connection-editor/nm-connection-editor.c:188
+#: ../src/connection-editor/nm-connection-editor.c:352
 msgid "Editor initializing…"
 msgstr "Түзеткіш іске қосылуда…"
 
-#: ../src/connection-editor/nm-connection-editor.c:195
-#: ../src/connection-editor/nm-connection-list.c:406
+#: ../src/connection-editor/nm-connection-editor.c:359
+#: ../src/connection-editor/nm-connection-list.c:408
 msgid "Connection cannot be modified"
 msgstr "Байланысты түзету мүмкін емес"
 
-#: ../src/connection-editor/nm-connection-editor.c:208
+#: ../src/connection-editor/nm-connection-editor.c:374
 #, c-format
 msgid "Invalid setting %s: %s"
 msgstr "%s қате қасиеті: %s"
 
-#: ../src/connection-editor/nm-connection-editor.c:284
+#: ../src/connection-editor/nm-connection-editor.c:450
 msgid ""
 "The connection editor could not find some required resources (the .ui file "
 "was not found)."
 msgstr ""
 
-#: ../src/connection-editor/nm-connection-editor.c:401
+#: ../src/connection-editor/nm-connection-editor.c:577
 msgid "_Save"
 msgstr "_Сақтау"
 
-#: ../src/connection-editor/nm-connection-editor.c:402
+#: ../src/connection-editor/nm-connection-editor.c:578
 msgid "Save any changes made to this connection."
 msgstr "Бұл байланысқа жасалған өзгерістерді сақтау."
 
-#: ../src/connection-editor/nm-connection-editor.c:403
+#: ../src/connection-editor/nm-connection-editor.c:579
 msgid "Authenticate to save this connection for all users of this machine."
 msgstr ""
 "Бұл машинадағы барлық пайдаланушылары үшін сақтауға аутентификациядан өту."
 
-#: ../src/connection-editor/nm-connection-editor.c:419
+#: ../src/connection-editor/nm-connection-editor.c:595
 msgid "Could not create connection"
 msgstr "Байланысты жасау мүмкін емес"
 
-#: ../src/connection-editor/nm-connection-editor.c:419
+#: ../src/connection-editor/nm-connection-editor.c:595
 msgid "Could not edit connection"
 msgstr "Байланысты түзету мүмкін емес"
 
-#: ../src/connection-editor/nm-connection-editor.c:421
+#: ../src/connection-editor/nm-connection-editor.c:597
 msgid "Unknown error creating connection editor dialog."
 msgstr ""
 
-#: ../src/connection-editor/nm-connection-editor.c:560
+#: ../src/connection-editor/nm-connection-editor.c:738
+msgid ""
+"Warning: the connection contains some properties not supported by the "
+"editor. They will be cleared upon save."
+msgstr ""
+
+#: ../src/connection-editor/nm-connection-editor.c:758
 msgid "Error initializing editor"
 msgstr "Түзеткішті іске қосу қатесі"
 
-#: ../src/connection-editor/nm-connection-editor.c:903
+#: ../src/connection-editor/nm-connection-editor.c:1142
 msgid "Connection add failed"
 msgstr "Байланысты қосу сәтсіз"
 
@@ -2856,12 +2911,45 @@ msgid "_Close"
 msgstr "_Жабу"
 
 #: ../src/connection-editor/nm-connection-editor.ui.h:4
+msgid "Fix"
+msgstr ""
+
+#: ../src/connection-editor/nm-connection-editor.ui.h:5
+msgid ""
+"Security labels may prevent some files from being used with certificate "
+"authentication."
+msgstr ""
+
+#: ../src/connection-editor/nm-connection-editor.ui.h:6
 msgid "Connection _name:"
 msgstr "Байланыс а_ты:"
 
-#: ../src/connection-editor/nm-connection-editor.ui.h:5
+#: ../src/connection-editor/nm-connection-editor.ui.h:7
 msgid "_Export…"
 msgstr "_Экспорт…"
+
+#: ../src/connection-editor/nm-connection-editor.ui.h:9
+msgid "File Relabel"
+msgstr ""
+
+#: ../src/connection-editor/nm-connection-editor.ui.h:10
+msgid "_Relabel"
+msgstr ""
+
+#: ../src/connection-editor/nm-connection-editor.ui.h:11
+msgid ""
+"The following files are not labelled for use with certificate "
+"authentication. Do you wish to adjust the labels?"
+msgstr ""
+
+#: ../src/connection-editor/nm-connection-editor.ui.h:12
+msgid "Relabel"
+msgstr ""
+
+#: ../src/connection-editor/nm-connection-editor.ui.h:13
+#, fuzzy
+msgid "Filename"
+msgstr "Құрылғы аты"
 
 #: ../src/connection-editor/nm-connection-list.c:127
 msgid "never"
@@ -2903,49 +2991,50 @@ msgid "%d year ago"
 msgid_plural "%d years ago"
 msgstr[0] "%d жыл бұрын"
 
-#: ../src/connection-editor/nm-connection-list.c:632
+#: ../src/connection-editor/nm-connection-list.c:635
+#: ../src/libnma/nma-pkcs11-cert-chooser-dialog.ui.h:2
 msgid "Name"
 msgstr "Аты"
 
-#: ../src/connection-editor/nm-connection-list.c:645
+#: ../src/connection-editor/nm-connection-list.c:648
 msgid "Last Used"
 msgstr "Соңғы рет қолданылған"
 
-#: ../src/connection-editor/nm-connection-list.c:693
+#: ../src/connection-editor/nm-connection-list.c:696
 msgid "Edit the selected connection"
 msgstr "Таңдалған байланысты түзету"
 
-#: ../src/connection-editor/nm-connection-list.c:694
+#: ../src/connection-editor/nm-connection-list.c:697
 msgid "Authenticate to edit the selected connection"
 msgstr "Таңдалған байланысты түзету үшін аутентификациядан өтіңіз"
 
-#: ../src/connection-editor/nm-connection-list.c:709
+#: ../src/connection-editor/nm-connection-list.c:712
 msgid "Delete the selected connection"
 msgstr "Таңдалған байланысты өшіру"
 
-#: ../src/connection-editor/nm-connection-list.c:710
+#: ../src/connection-editor/nm-connection-list.c:713
 msgid "Authenticate to delete the selected connection"
 msgstr "Таңдалған байланысты өшіру үішн аутентификациядан өтіңіз"
 
-#: ../src/connection-editor/nm-connection-list.c:926
-#: ../src/connection-editor/nm-connection-list.c:929
+#: ../src/connection-editor/nm-connection-list.c:935
+#: ../src/connection-editor/nm-connection-list.c:938
 msgid "Error creating connection"
 msgstr "Байланысты жасау қатесі"
 
-#: ../src/connection-editor/nm-connection-list.c:927
+#: ../src/connection-editor/nm-connection-list.c:936
 msgid "No VPN plugins are installed."
 msgstr "VPN плагиндері орнатылмаған."
 
-#: ../src/connection-editor/nm-connection-list.c:930
+#: ../src/connection-editor/nm-connection-list.c:939
 #, c-format
 msgid "Don’t know how to create “%s” connections"
 msgstr "\"%s\" байланыстарын жасау жолы белгісіз"
 
-#: ../src/connection-editor/nm-connection-list.c:954
+#: ../src/connection-editor/nm-connection-list.c:970
 msgid "Error editing connection"
 msgstr "Байланысты түзету қатесі"
 
-#: ../src/connection-editor/nm-connection-list.c:955
+#: ../src/connection-editor/nm-connection-list.c:971
 #, c-format
 msgid "Did not find a connection with UUID “%s”"
 msgstr "UUID \"%s\" байланысы табылмады"
@@ -3053,11 +3142,11 @@ msgid ""
 "“3C:97:0E:42:1A:19”, “em1 (3C:97:0E:42:1A:19)”"
 msgstr ""
 
-#: ../src/connection-editor/page-ethernet.c:263
+#: ../src/connection-editor/page-ethernet.c:262
 msgid "ignored"
 msgstr "елемейтін"
 
-#: ../src/connection-editor/page-ethernet.c:354
+#: ../src/connection-editor/page-ethernet.c:353
 msgid "Could not load ethernet user interface."
 msgstr "Ethernet пайдаланушы интерфейсін жүктеу мүмкін емес."
 
@@ -3066,7 +3155,7 @@ msgid "Ethernet device"
 msgstr "Ethernet құрылғысы"
 
 #: ../src/connection-editor/page-ethernet.c:519
-#: ../src/connection-editor/page-vlan.c:740
+#: ../src/connection-editor/page-vlan.c:742
 #: ../src/connection-editor/page-wifi.c:574
 msgid "cloned MAC"
 msgstr "клондалған MAC"
@@ -3082,7 +3171,7 @@ msgstr "Ethernet байланысы %d"
 
 #. TRANSLATORS: Default zone set for firewall, when no zone is selected
 #: ../src/connection-editor/page-general.c:54
-#: ../src/libnma/nma-mobile-providers.c:806
+#: ../src/libnma/nma-mobile-providers.c:817
 #: ../src/libnm-gtk/nm-mobile-providers.c:806
 msgid "Default"
 msgstr "Бастапқы"
@@ -3123,7 +3212,7 @@ msgstr "InfiniBand байланысы %d"
 msgid "Could not load IP tunnel user interface."
 msgstr "IPv4 туннелі пайдаланушы интерфейсін жүктеу мүмкін емес."
 
-#: ../src/connection-editor/page-ip-tunnel.c:294
+#: ../src/connection-editor/page-ip-tunnel.c:292
 #, c-format
 msgid "IP tunnel connection %d"
 msgstr "IP туннелі байланысы %d"
@@ -3167,12 +3256,12 @@ msgid "Link-Local Only"
 msgstr "Тек Link-Local"
 
 #: ../src/connection-editor/page-ip4.c:361
-#: ../src/connection-editor/page-ip6.c:319
+#: ../src/connection-editor/page-ip6.c:324
 msgid "Additional DNS ser_vers:"
 msgstr "Қосымша DNS _серверлері:"
 
 #: ../src/connection-editor/page-ip4.c:370
-#: ../src/connection-editor/page-ip6.c:328
+#: ../src/connection-editor/page-ip6.c:333
 msgid "Additional s_earch domains:"
 msgstr "Қосымша і_здеу домендері:"
 
@@ -3213,57 +3302,57 @@ msgstr "\"%s\" IPv4 DNS сервері жарамсыз"
 msgid "Automatic, DHCP only"
 msgstr "Автоматты, тек DHCP"
 
-#: ../src/connection-editor/page-ip6.c:988
+#: ../src/connection-editor/page-ip6.c:993
 #, c-format
 msgid "Editing IPv6 routes for %s"
 msgstr "%s үшін IPv6 маршруттарын түзету"
 
-#: ../src/connection-editor/page-ip6.c:1179
+#: ../src/connection-editor/page-ip6.c:1184
 msgid "IPv6 Settings"
 msgstr "IPv6 баптаулары"
 
-#: ../src/connection-editor/page-ip6.c:1181
+#: ../src/connection-editor/page-ip6.c:1186
 msgid "Could not load IPv6 user interface."
 msgstr "IPv6 пайдаланушы интерфейсін жүктеу мүмкін емес."
 
-#: ../src/connection-editor/page-ip6.c:1272
+#: ../src/connection-editor/page-ip6.c:1277
 #, c-format
 msgid "IPv6 address “%s” invalid"
 msgstr "\"%s\" IPv6 адресі жарамсыз"
 
-#: ../src/connection-editor/page-ip6.c:1280
+#: ../src/connection-editor/page-ip6.c:1285
 #, c-format
 msgid "IPv6 prefix “%s” invalid"
 msgstr "\"%s\" IPv6 адрес префиксі жарамсыз"
 
-#: ../src/connection-editor/page-ip6.c:1289
+#: ../src/connection-editor/page-ip6.c:1294
 #, c-format
 msgid "IPv6 gateway “%s” invalid"
 msgstr "\"%s\" IPv6 шлюзі жарамсыз"
 
-#: ../src/connection-editor/page-ip6.c:1331
+#: ../src/connection-editor/page-ip6.c:1336
 #, c-format
 msgid "IPv6 DNS server “%s” invalid"
 msgstr "\"%s\" IPv6 DNS сервері жарамсыз"
 
-#: ../src/connection-editor/page-master.c:248
-#: ../src/connection-editor/page-master.c:259
+#: ../src/connection-editor/page-master.c:247
+#: ../src/connection-editor/page-master.c:258
 msgid "Duplicate slaves"
 msgstr ""
 
-#: ../src/connection-editor/page-master.c:249
+#: ../src/connection-editor/page-master.c:248
 #, c-format
 msgid "Slaves “%s” and “%s” both apply to device “%s”"
 msgstr ""
 
-#: ../src/connection-editor/page-master.c:260
+#: ../src/connection-editor/page-master.c:259
 #, c-format
 msgid ""
 "Slaves “%s” and “%s” apply to different virtual ports (“%s” and “%s”) of the "
 "same physical device."
 msgstr ""
 
-#: ../src/connection-editor/page-master.c:386
+#: ../src/connection-editor/page-master.c:385
 #, c-format
 msgid "%s slave %d"
 msgstr ""
@@ -3297,6 +3386,8 @@ msgstr ""
 "Менің провайдерім GSM не_гізіндегі технологияны қолдануда (мыс. GPRS, EDGE, "
 "UMTS, HSDPA)"
 
+#. Translators: CDMA has 'D' accelerator key; 'C' collides with 'Cancel' button.
+#. You may need to change it according to your language.
 #: ../src/connection-editor/page-mobile.c:579
 msgid "My provider uses C_DMA-based technology (i.e. 1xRTT, EVDO)"
 msgstr ""
@@ -3317,24 +3408,24 @@ msgid "EAP"
 msgstr "EAP"
 
 #: ../src/connection-editor/page-ppp.c:130
-#: ../src/wireless-security/eap-method-ttls.c:258
+#: ../src/wireless-security/eap-method-ttls.c:260
 msgid "PAP"
 msgstr "PAP"
 
 #: ../src/connection-editor/page-ppp.c:131
-#: ../src/wireless-security/eap-method-ttls.c:303
+#: ../src/wireless-security/eap-method-ttls.c:322
 msgid "CHAP"
 msgstr "CHAP"
 
 #: ../src/connection-editor/page-ppp.c:132
-#: ../src/wireless-security/eap-method-fast.c:283
-#: ../src/wireless-security/eap-method-peap.c:272
-#: ../src/wireless-security/eap-method-ttls.c:288
+#: ../src/wireless-security/eap-method-fast.c:284
+#: ../src/wireless-security/eap-method-peap.c:273
+#: ../src/wireless-security/eap-method-ttls.c:290
 msgid "MSCHAPv2"
 msgstr "MSCHAPv2"
 
 #: ../src/connection-editor/page-ppp.c:133
-#: ../src/wireless-security/eap-method-ttls.c:273
+#: ../src/wireless-security/eap-method-ttls.c:275
 msgid "MSCHAP"
 msgstr "MSCHAP"
 
@@ -3356,10 +3447,18 @@ msgstr "PPP баптаулары"
 msgid "Could not load PPP user interface."
 msgstr "PPP пайдаланушы интерфейсін жүктеу мүмкін емес."
 
+#: ../src/connection-editor/page-proxy.c:215
+msgid "Proxy"
+msgstr "Прокси"
+
+#: ../src/connection-editor/page-proxy.c:217
+msgid "Could not load proxy user interface."
+msgstr "Прокси пайдаланушы интерфейсін жүктеу мүмкін емес."
+
 #: ../src/connection-editor/page-team.c:361
 #: ../src/connection-editor/page-team-port.c:223
 msgid "Error: file doesn’t contain a valid JSON configuration"
-msgstr ""
+msgstr "Қате: файлда жарамды JSON баптаулары жоқ"
 
 #: ../src/connection-editor/page-team.c:1156
 msgid "Could not load team user interface."
@@ -3395,15 +3494,15 @@ msgstr "%s (\"%s\" арқылы)"
 msgid "New connection…"
 msgstr "Жаңа байланыс…"
 
-#: ../src/connection-editor/page-vlan.c:595
+#: ../src/connection-editor/page-vlan.c:596
 msgid "Could not load vlan user interface."
 msgstr "Vlan пайдаланушы интерфейсін жүктеу мүмкін емес."
 
-#: ../src/connection-editor/page-vlan.c:733
+#: ../src/connection-editor/page-vlan.c:735
 msgid "vlan parent"
 msgstr ""
 
-#: ../src/connection-editor/page-vlan.c:801
+#: ../src/connection-editor/page-vlan.c:803
 #, c-format
 msgid "VLAN connection %d"
 msgstr "VLAN байланысы %d"
@@ -3460,7 +3559,7 @@ msgstr ""
 msgid "%u (%u MHz)"
 msgstr "%u (%u МГц)"
 
-#: ../src/connection-editor/page-wifi.c:443
+#: ../src/connection-editor/page-wifi.c:442
 msgid "Could not load Wi-Fi user interface."
 msgstr "Wi-Fi пайдаланушы интерфейсін жүктеу мүмкін емес."
 
@@ -3477,50 +3576,50 @@ msgstr "Wi-Fi құрылғысы"
 msgid "Wi-Fi connection %d"
 msgstr "Wi-Fi байланысы %d"
 
-#: ../src/connection-editor/page-wifi-security.c:309
-#: ../src/libnma/nma-wifi-dialog.c:920 ../src/libnm-gtk/nm-wifi-dialog.c:922
+#: ../src/connection-editor/page-wifi-security.c:356
+#: ../src/libnma/nma-wifi-dialog.c:923 ../src/libnm-gtk/nm-wifi-dialog.c:922
 msgid "WEP 40/128-bit Key (Hex or ASCII)"
 msgstr "WEP 40/128 биттік кілті (Hex не ASCII)"
 
-#: ../src/connection-editor/page-wifi-security.c:319
-#: ../src/libnma/nma-wifi-dialog.c:929 ../src/libnm-gtk/nm-wifi-dialog.c:931
+#: ../src/connection-editor/page-wifi-security.c:366
+#: ../src/libnma/nma-wifi-dialog.c:932 ../src/libnm-gtk/nm-wifi-dialog.c:931
 msgid "WEP 128-bit Passphrase"
 msgstr "WEP 128 биттік кілттік фразасы"
 
-#: ../src/connection-editor/page-wifi-security.c:345
+#: ../src/connection-editor/page-wifi-security.c:392
 msgid "Dynamic WEP (802.1X)"
 msgstr "Динамикалы WEP (802.1X)"
 
-#: ../src/connection-editor/page-wifi-security.c:358
-#: ../src/libnma/nma-wifi-dialog.c:973 ../src/libnm-gtk/nm-wifi-dialog.c:975
+#: ../src/connection-editor/page-wifi-security.c:405
+#: ../src/libnma/nma-wifi-dialog.c:976 ../src/libnm-gtk/nm-wifi-dialog.c:975
 msgid "WPA & WPA2 Personal"
 msgstr "WPA & WPA2 Personal"
 
-#: ../src/connection-editor/page-wifi-security.c:371
-#: ../src/libnma/nma-wifi-dialog.c:987 ../src/libnm-gtk/nm-wifi-dialog.c:989
+#: ../src/connection-editor/page-wifi-security.c:418
+#: ../src/libnma/nma-wifi-dialog.c:990 ../src/libnm-gtk/nm-wifi-dialog.c:989
 msgid "WPA & WPA2 Enterprise"
 msgstr "WPA & WPA2 Enterprise"
 
-#: ../src/connection-editor/page-wifi-security.c:413
+#: ../src/connection-editor/page-wifi-security.c:461
 msgid "Could not load Wi-Fi security user interface; missing Wi-Fi setting."
 msgstr ""
 "Wi-Fi қауіпсіздігінің пайдаланушы интерфейсін жүктеу мүмкін емес: Wi-Fi "
 "баптауы жоқ."
 
-#: ../src/connection-editor/page-wifi-security.c:424
+#: ../src/connection-editor/page-wifi-security.c:472
 msgid "Wi-Fi Security"
 msgstr "Wi-Fi қауіпсіздігі"
 
-#: ../src/connection-editor/page-wifi-security.c:426
+#: ../src/connection-editor/page-wifi-security.c:474
 msgid "Could not load Wi-Fi security user interface."
 msgstr "Wi-Fi қауіпсіздігінің пайдаланушы интерфейсін жүктеу мүмкін емес."
 
-#: ../src/connection-editor/page-wifi-security.c:506
+#: ../src/connection-editor/page-wifi-security.c:558
 #, c-format
 msgid "missing SSID"
 msgstr "SSID жоқ"
 
-#: ../src/connection-editor/page-wifi-security.c:512
+#: ../src/connection-editor/page-wifi-security.c:564
 #, c-format
 msgid "Security not compatible with Ad-Hoc mode"
 msgstr ""
@@ -3573,6 +3672,45 @@ msgstr "Байланыс ақпараты"
 #: ../src/info.ui.h:3
 msgid "Active Network Connections"
 msgstr "Белсенді желілік байланыстары"
+
+#: ../src/libnma/nma-file-cert-chooser.c:108
+#: ../src/libnma/nma-pkcs11-cert-chooser.c:140
+msgid "No certificate set"
+msgstr "Сертификат көрсетілмеген"
+
+#: ../src/libnma/nma-file-cert-chooser.c:126
+#: ../src/libnma/nma-pkcs11-cert-chooser.c:164
+msgid "No key set"
+msgstr "Кілт көрсетілмеді"
+
+#: ../src/libnma/nma-file-cert-chooser.c:246
+#: ../src/libnma/nma-pkcs11-cert-chooser.c:364
+#, c-format
+msgid "Choose a key for %s Certificate"
+msgstr "%s сертификаты үшін кілтті таңдаңыз"
+
+#: ../src/libnma/nma-file-cert-chooser.c:250
+#: ../src/libnma/nma-pkcs11-cert-chooser.c:368
+#, c-format
+msgid "%s private _key:"
+msgstr "%s жеке _кілті:"
+
+#: ../src/libnma/nma-file-cert-chooser.c:254
+#: ../src/libnma/nma-pkcs11-cert-chooser.c:372
+#, c-format
+msgid "%s key _password:"
+msgstr "%s кілт _паролі:"
+
+#: ../src/libnma/nma-file-cert-chooser.c:258
+#, c-format
+msgid "Choose %s Certificate"
+msgstr "%s сертификатын таңдаңыз"
+
+#: ../src/libnma/nma-file-cert-chooser.c:262
+#: ../src/libnma/nma-pkcs11-cert-chooser.c:380
+#, c-format
+msgid "%s _certificate:"
+msgstr "%s _сертификаты:"
 
 #: ../src/libnma/nma-mobile-wizard.c:198
 #: ../src/libnm-gtk/nm-mobile-wizard.c:199
@@ -3660,7 +3798,7 @@ msgstr "Провайдер"
 #: ../src/libnma/nma-mobile-wizard.c:748
 #: ../src/libnm-gtk/nm-mobile-wizard.c:749
 msgid "I can’t find my provider and I wish to enter it _manually:"
-msgstr ""
+msgstr "Өз провайдерімді таба алмадым, оны қол_мен енгіземін:"
 
 #: ../src/libnma/nma-mobile-wizard.c:761
 #: ../src/libnm-gtk/nm-mobile-wizard.c:762
@@ -3754,18 +3892,90 @@ msgstr "Кез-келген құрылғы"
 msgid "Set up a Mobile Broadband Connection"
 msgstr "Мобильді кеңжолақты байланысты орнату"
 
-#: ../src/libnma/nma-mobile-wizard.c:1613
+#: ../src/libnma/nma-mobile-wizard.c:1620
 #: ../src/libnm-gtk/nm-mobile-wizard.c:1614
 msgid "New Mobile Broadband Connection"
 msgstr "Жаңа мобильді кеңжолақты байланысы"
 
+#: ../src/libnma/nma-cert-chooser-button.c:162
+msgid "(None)"
+msgstr "(Ешнәрсе)"
+
+#: ../src/libnma/nma-cert-chooser-button.c:170
+#, c-format
+msgid "Key in %s"
+msgstr "%s ішіндегі кілт"
+
+#: ../src/libnma/nma-cert-chooser-button.c:171
+#, c-format
+msgid "Certificate in %s"
+msgstr "%s ішіндегі сертификаты"
+
+#: ../src/libnma/nma-cert-chooser-button.c:190
+#: ../src/libnma/nma-pkcs11-cert-chooser-dialog.c:183
+msgid "(Unknown)"
+msgstr "(Белгісіз)"
+
+#: ../src/libnma/nma-cert-chooser-button.c:212
+#: ../src/libnma/nma-cert-chooser-button.c:242
+msgid "Select"
+msgstr "Таңдау"
+
+#: ../src/libnma/nma-cert-chooser-button.c:213
+#: ../src/libnma/nma-cert-chooser-button.c:243
+msgid "Cancel"
+msgstr "Бас тарту"
+
+#: ../src/libnma/nma-cert-chooser-button.c:469
+msgid "Select from file…"
+msgstr "Файлдан таңдау…"
+
+#: ../src/libnma/nma-pkcs11-cert-chooser.c:376
+#, c-format
+msgid "Choose a %s Certificate"
+msgstr "%s сертификатын таңдау"
+
+#: ../src/libnma/nma-pkcs11-cert-chooser.c:384
+#, c-format
+msgid "%s certificate _password:"
+msgstr "%s сертификат _паролі:"
+
+#: ../src/libnma/nma-pkcs11-cert-chooser-dialog.c:255
+msgid "Error logging in: "
+msgstr "Кіру қатесі: "
+
+#: ../src/libnma/nma-pkcs11-cert-chooser-dialog.c:277
+msgid "Error opening a session: "
+msgstr "Сессияны ашу қатесі: "
+
+#: ../src/libnma/nma-pkcs11-cert-chooser-dialog.ui.h:1
+msgid "_Unlock token"
+msgstr "Токенді бо_сату"
+
+#: ../src/libnma/nma-pkcs11-cert-chooser-dialog.ui.h:3
+msgid "Issued By"
+msgstr "Шығарған"
+
+#: ../src/libnma/nma-pkcs11-token-login-dialog.c:146
+#, c-format
+msgid "Enter %s PIN"
+msgstr "%s PIN кодын енгізіңіз"
+
+#: ../src/libnma/nma-pkcs11-token-login-dialog.ui.h:2
+msgid "_Login"
+msgstr ""
+
+#: ../src/libnma/nma-pkcs11-token-login-dialog.ui.h:3
+msgid "_Remember PIN"
+msgstr "PIN кодын _есте сақтау"
+
 #: ../src/libnma/nma-ui-utils.c:49 ../src/libnm-gtk/nm-ui-utils.c:615
 msgid "Store the password only for this user"
-msgstr ""
+msgstr "Парольді тек бұл пайдаланушы үшін сақтау"
 
 #: ../src/libnma/nma-ui-utils.c:50 ../src/libnm-gtk/nm-ui-utils.c:616
 msgid "Store the password for all users"
-msgstr ""
+msgstr "Парольді барлық пайдаланушылар үшін сақтау"
 
 #: ../src/libnma/nma-ui-utils.c:51 ../src/libnm-gtk/nm-ui-utils.c:617
 msgid "Ask for this password every time"
@@ -3799,59 +4009,61 @@ msgid ""
 "Either a password is missing or the connection is invalid. In the latter "
 "case, you have to edit the connection with nm-connection-editor first"
 msgstr ""
+"Пароль жоқ болып тұр, немесе байланыс жарамсыз болып тұр. Егер жарамсыз "
+"болса, алдымен байланысты nm-connection-editor көмегімен түзетуіңіз керек"
 
-#: ../src/libnma/nma-wifi-dialog.c:465 ../src/libnm-gtk/nm-wifi-dialog.c:465
+#: ../src/libnma/nma-wifi-dialog.c:468 ../src/libnm-gtk/nm-wifi-dialog.c:465
 msgid "New…"
 msgstr "Жаңа…"
 
-#: ../src/libnma/nma-wifi-dialog.c:903 ../src/libnm-gtk/nm-wifi-dialog.c:905
+#: ../src/libnma/nma-wifi-dialog.c:906 ../src/libnm-gtk/nm-wifi-dialog.c:905
 msgctxt "Wifi/wired security"
 msgid "None"
 msgstr "Ешнәрсе"
 
-#: ../src/libnma/nma-wifi-dialog.c:959 ../src/libnm-gtk/nm-wifi-dialog.c:961
+#: ../src/libnma/nma-wifi-dialog.c:962 ../src/libnm-gtk/nm-wifi-dialog.c:961
 msgid "Dynamic WEP (802.1x)"
 msgstr "Динамикалық WEP (802.1x)"
 
-#: ../src/libnma/nma-wifi-dialog.c:1071 ../src/libnm-gtk/nm-wifi-dialog.c:1075
+#: ../src/libnma/nma-wifi-dialog.c:1074 ../src/libnm-gtk/nm-wifi-dialog.c:1075
 msgid "C_reate"
 msgstr "Жаса_у"
 
-#: ../src/libnma/nma-wifi-dialog.c:1157 ../src/libnm-gtk/nm-wifi-dialog.c:1161
+#: ../src/libnma/nma-wifi-dialog.c:1160 ../src/libnm-gtk/nm-wifi-dialog.c:1161
 #, c-format
 msgid ""
 "Passwords or encryption keys are required to access the Wi-Fi network “%s”."
 msgstr "\"%s\" Wi-Fi желісіне байланысу үшін пароль не шифрлеу кілттері керек."
 
-#: ../src/libnma/nma-wifi-dialog.c:1159 ../src/libnm-gtk/nm-wifi-dialog.c:1163
+#: ../src/libnma/nma-wifi-dialog.c:1162 ../src/libnm-gtk/nm-wifi-dialog.c:1163
 msgid "Wi-Fi Network Authentication Required"
 msgstr "Wi-Fi желі аутентификациясы керек"
 
-#: ../src/libnma/nma-wifi-dialog.c:1161 ../src/libnm-gtk/nm-wifi-dialog.c:1165
+#: ../src/libnma/nma-wifi-dialog.c:1164 ../src/libnm-gtk/nm-wifi-dialog.c:1165
 msgid "Authentication required by Wi-Fi network"
 msgstr "Wi-Fi желісі үшін аутентификация керек"
 
-#: ../src/libnma/nma-wifi-dialog.c:1166 ../src/libnm-gtk/nm-wifi-dialog.c:1170
+#: ../src/libnma/nma-wifi-dialog.c:1169 ../src/libnm-gtk/nm-wifi-dialog.c:1170
 msgid "Create New Wi-Fi Network"
 msgstr "Жаңа Wi-Fi желісін жасау"
 
-#: ../src/libnma/nma-wifi-dialog.c:1168 ../src/libnm-gtk/nm-wifi-dialog.c:1172
+#: ../src/libnma/nma-wifi-dialog.c:1171 ../src/libnm-gtk/nm-wifi-dialog.c:1172
 msgid "New Wi-Fi network"
 msgstr "Жаңа Wi-Fi желісі"
 
-#: ../src/libnma/nma-wifi-dialog.c:1169 ../src/libnm-gtk/nm-wifi-dialog.c:1173
+#: ../src/libnma/nma-wifi-dialog.c:1172 ../src/libnm-gtk/nm-wifi-dialog.c:1173
 msgid "Enter a name for the Wi-Fi network you wish to create."
 msgstr "Жасалатын Wi-Fi желісінің атын енгізіңіз."
 
-#: ../src/libnma/nma-wifi-dialog.c:1171 ../src/libnm-gtk/nm-wifi-dialog.c:1175
+#: ../src/libnma/nma-wifi-dialog.c:1174 ../src/libnm-gtk/nm-wifi-dialog.c:1175
 msgid "Connect to Hidden Wi-Fi Network"
 msgstr "Жасырын Wi-Fi желісіне байланысу"
 
-#: ../src/libnma/nma-wifi-dialog.c:1173 ../src/libnm-gtk/nm-wifi-dialog.c:1177
+#: ../src/libnma/nma-wifi-dialog.c:1176 ../src/libnm-gtk/nm-wifi-dialog.c:1177
 msgid "Hidden Wi-Fi network"
 msgstr "Жасырын Wi-Fi желісі"
 
-#: ../src/libnma/nma-wifi-dialog.c:1174 ../src/libnm-gtk/nm-wifi-dialog.c:1178
+#: ../src/libnma/nma-wifi-dialog.c:1177 ../src/libnm-gtk/nm-wifi-dialog.c:1178
 msgid ""
 "Enter the name and security details of the hidden Wi-Fi network you wish to "
 "connect to."
@@ -4007,7 +4219,7 @@ msgstr "Роуминг желісі"
 #: ../src/mobile-helpers.c:331
 #, c-format
 msgid "PIN code for SIM card “%s” on “%s”"
-msgstr ""
+msgstr "\"%s\" SIM картасы үшін PIN коды, \"%s\" жерінде"
 
 #: ../src/mobile-helpers.c:464
 msgid "PIN code required"
@@ -4032,45 +4244,50 @@ msgstr "роуминг"
 msgid "%s connection"
 msgstr "%s байланысы"
 
-#: ../src/wireless-security/eap-method.c:57
-msgid "undefined error in 802.1X security (wpa-eap)"
-msgstr ""
+#: ../src/utils/utils.c:563
+msgid "PEM certificates (*.pem, *.crt, *.cer)"
+msgstr "PEM сертификаттары (*.pem, *.crt, *.cer)"
 
-#: ../src/wireless-security/eap-method.c:233
-msgid "no file selected"
-msgstr "ешбір файл таңдалмады"
-
-#: ../src/wireless-security/eap-method.c:264
-msgid "unspecified error validating eap-method file"
-msgstr "eap-method файлын растаудағы анықталмаған қате"
-
-#: ../src/wireless-security/eap-method.c:439
+#: ../src/utils/utils.c:575
 msgid "DER, PEM, or PKCS#12 private keys (*.der, *.pem, *.p12, *.key)"
 msgstr "DER, PEM, не PKCS#12 жеке кілттері (*.der, *.pem, *.p12, *.key)"
 
-#: ../src/wireless-security/eap-method.c:442
-msgid "DER or PEM certificates (*.der, *.pem, *.crt, *.cer)"
-msgstr "DER не PEM сертификаттары (*.der, *.pem, *.crt, *.cer)"
+#: ../src/wireless-security/eap-method.c:57
+msgid "undefined error in 802.1X security (wpa-eap)"
+msgstr "802.1X қауіпсіздігі (wpa-eap) ішіндегі анықталмаған қате"
 
-#: ../src/wireless-security/eap-method-fast.c:72
+#: ../src/wireless-security/eap-method.c:227
+msgid "no file selected"
+msgstr "ешбір файл таңдалмады"
+
+#: ../src/wireless-security/eap-method.c:235
+#, fuzzy, c-format
+msgid "file “%s” does not exist"
+msgstr "\"%s\" аты бар файл бар болып тұр."
+
+#: ../src/wireless-security/eap-method.c:258
+msgid "unspecified error validating eap-method file"
+msgstr "eap-method файлын растаудағы анықталмаған қате"
+
+#: ../src/wireless-security/eap-method-fast.c:73
 msgid "missing EAP-FAST PAC file"
 msgstr "EAP-FAST PAC файлы жоқ"
 
-#: ../src/wireless-security/eap-method-fast.c:268
-#: ../src/wireless-security/eap-method-peap.c:302
-#: ../src/wireless-security/eap-method-ttls.c:333
+#: ../src/wireless-security/eap-method-fast.c:269
+#: ../src/wireless-security/eap-method-peap.c:303
+#: ../src/wireless-security/eap-method-ttls.c:352
 msgid "GTC"
 msgstr "GTC"
 
-#: ../src/wireless-security/eap-method-fast.c:406
+#: ../src/wireless-security/eap-method-fast.c:407
 msgid "Choose a PAC file"
 msgstr "PAC файлын таңдаңыз"
 
-#: ../src/wireless-security/eap-method-fast.c:413
+#: ../src/wireless-security/eap-method-fast.c:414
 msgid "PAC files (*.pac)"
 msgstr "PAC файлдары (*.pac)"
 
-#: ../src/wireless-security/eap-method-fast.c:417
+#: ../src/wireless-security/eap-method-fast.c:418
 msgid "All files"
 msgstr "Барлық файлдар"
 
@@ -4106,32 +4323,31 @@ msgstr "І_шкі аутентификация:"
 msgid "Allow automatic PAC pro_visioning"
 msgstr "Автоматты PAC ұсы_нуды рұқсат ету"
 
-#: ../src/wireless-security/eap-method-leap.c:65
+#: ../src/wireless-security/eap-method-leap.c:66
 msgid "missing EAP-LEAP username"
 msgstr "EAP-LEAP пайдаланушы аты жоқ"
 
-#: ../src/wireless-security/eap-method-leap.c:74
+#: ../src/wireless-security/eap-method-leap.c:75
 msgid "missing EAP-LEAP password"
 msgstr "EAP-LEAP паролі жоқ"
 
-#: ../src/wireless-security/eap-method-peap.c:63
+#: ../src/wireless-security/eap-method-peap.c:64
 #, c-format
 msgid "invalid EAP-PEAP CA certificate: %s"
 msgstr "жарамсыз EAP-PEAP CA сертификаты: %s"
 
-#: ../src/wireless-security/eap-method-peap.c:68
+#: ../src/wireless-security/eap-method-peap.c:69
 msgid "invalid EAP-PEAP CA certificate: no certificate specified"
 msgstr "жарамсыз EAP-PEAP CA сертификаты: сертификат көрсетілмеген"
 
-#: ../src/wireless-security/eap-method-peap.c:287
-#: ../src/wireless-security/eap-method-ttls.c:318
+#: ../src/wireless-security/eap-method-peap.c:288
+#: ../src/wireless-security/eap-method-ttls.c:337
 #: ../src/wireless-security/wireless-security.c:424
 msgid "MD5"
 msgstr "MD5"
 
-#: ../src/wireless-security/eap-method-peap.c:381
-#: ../src/wireless-security/eap-method-tls.c:501
-#: ../src/wireless-security/eap-method-ttls.c:412
+#: ../src/wireless-security/eap-method-peap.c:382
+#: ../src/wireless-security/eap-method-ttls.c:431
 msgid "Choose a Certificate Authority certificate"
 msgstr "Сертификаттау орталығының сертификатын таңдаңыз"
 
@@ -4144,13 +4360,12 @@ msgid "Version 1"
 msgstr "Нұсқасы 1"
 
 #: ../src/wireless-security/eap-method-peap.ui.h:5
-#: ../src/wireless-security/eap-method-tls.ui.h:3
 #: ../src/wireless-security/eap-method-ttls.ui.h:2
 msgid "C_A certificate:"
 msgstr "С_О сертификаты:"
 
 #: ../src/wireless-security/eap-method-peap.ui.h:6
-#: ../src/wireless-security/eap-method-tls.ui.h:4
+#: ../src/wireless-security/eap-method-tls.ui.h:2
 #: ../src/wireless-security/eap-method-ttls.ui.h:3
 msgid "No CA certificate is _required"
 msgstr "CA сертификаты керек е_мес"
@@ -4159,95 +4374,62 @@ msgstr "CA сертификаты керек е_мес"
 msgid "PEAP _version:"
 msgstr "_PEAP нұсқасы:"
 
-#: ../src/wireless-security/eap-method-simple.c:74
+#: ../src/wireless-security/eap-method-simple.c:75
 msgid "missing EAP username"
 msgstr "EAP пайдаланушы аты жоқ"
 
-#: ../src/wireless-security/eap-method-simple.c:87
+#: ../src/wireless-security/eap-method-simple.c:88
 msgid "missing EAP password"
 msgstr "EAP паролі жоқ"
 
-#: ../src/wireless-security/eap-method-tls.c:68
+#: ../src/wireless-security/eap-method-tls.c:64
 msgid "missing EAP-TLS identity"
 msgstr "EAP-TLS identity жоқ"
 
-#: ../src/wireless-security/eap-method-tls.c:77
-#, c-format
-msgid "invalid EAP-TLS CA certificate: %s"
-msgstr "Жарамсыз EAP-TLS СО сертификаты: %s"
+#: ../src/wireless-security/eap-method-tls.c:238
+msgid "no user certificate selected"
+msgstr "пайдаланушы сертификаты таңдалмады"
 
-#: ../src/wireless-security/eap-method-tls.c:84
-msgid "invalid EAP-TLS CA certificate: no certificate specified"
-msgstr "жарамсыз EAP-TLS CA сертификаты: сертификат көрсетілмеген"
+#: ../src/wireless-security/eap-method-tls.c:243
+msgid "selected user certificate file does not exist"
+msgstr "таңдалған пайдаланушы сертификат файлы жоқ болып тұр"
 
-#: ../src/wireless-security/eap-method-tls.c:95
-msgid "invalid EAP-TLS password: missing"
-msgstr "жарамсыз EAP-TLS паролі: жоқ болып тұр"
+#: ../src/wireless-security/eap-method-tls.c:263
+msgid "no key selected"
+msgstr "кілт таңдалмады"
 
-#: ../src/wireless-security/eap-method-tls.c:109
-#, c-format
-msgid "invalid EAP-TLS private-key: %s"
-msgstr "жарамсыз EAP-TLS жеке кілті: %s"
+#: ../src/wireless-security/eap-method-tls.c:268
+msgid "selected key file does not exist"
+msgstr "таңдалған кілттер файлы жоқ болып тұр"
 
-#: ../src/wireless-security/eap-method-tls.c:119
-#, c-format
-msgid "invalid EAP-TLS user-certificate: %s"
-msgstr "жарамсыз EAP-TLS пайдаланушы сертификаты: %s"
-
-#: ../src/wireless-security/eap-method-tls.c:316
-msgid "Unencrypted private keys are insecure"
-msgstr "Шифрленбеген жеке кілттері қауіпсіз емес болады"
+#: ../src/wireless-security/eap-method-tls.c:314
+msgid "no CA certificate selected"
+msgstr "СО сертификаты таңдалмады"
 
 #: ../src/wireless-security/eap-method-tls.c:319
-msgid ""
-"The selected private key does not appear to be protected by a password. This "
-"could allow your security credentials to be compromised. Please select a "
-"password-protected private key.\n"
-"\n"
-"(You can password-protect your private key with openssl)"
-msgstr ""
-"Таңдалған жеке кілт парольмен қорғалмаған сияқты. Бұл сіздің қауіпсіздік "
-"есептік жазба деректерінің әшкерелеуіне әкеп соғуы мүмкін. Парольмен "
-"қорғалған жеке кілтті таңдаңыз.\n"
-"\n"
-"(Сіз жеке кілтіңізді openssl көмегімен парольмен қорғай аласыз)"
-
-#: ../src/wireless-security/eap-method-tls.c:495
-msgid "Choose your personal certificate"
-msgstr "Жеке сертификатыңызды таңдаңыз"
-
-#: ../src/wireless-security/eap-method-tls.c:507
-msgid "Choose your private key"
-msgstr "Жеке кілтіңізді таңдаңыз"
+msgid "selected CA certificate file does not exist"
+msgstr "таңдалған СО сертификат файлы жоқ болып тұр"
 
 #: ../src/wireless-security/eap-method-tls.ui.h:1
 msgid "I_dentity:"
 msgstr ""
 
-#: ../src/wireless-security/eap-method-tls.ui.h:2
-msgid "_User certificate:"
-msgstr "Па_йдаланушы сертификаты:"
-
-#: ../src/wireless-security/eap-method-tls.ui.h:5
-msgid "Private _key:"
-msgstr "Жеке _кілт:"
-
-#: ../src/wireless-security/eap-method-tls.ui.h:6
-msgid "_Private key password:"
-msgstr "Ж_еке кілт паролі:"
-
-#: ../src/wireless-security/eap-method-ttls.c:63
+#: ../src/wireless-security/eap-method-ttls.c:64
 #, c-format
 msgid "invalid EAP-TTLS CA certificate: %s"
 msgstr "жарамсыз EAP-TTLS CA сертификаты: %s"
 
-#: ../src/wireless-security/eap-method-ttls.c:68
+#: ../src/wireless-security/eap-method-ttls.c:69
 msgid "invalid EAP-TTLS CA certificate: no certificate specified"
 msgstr "жарамсыз EAP-TTLS CA сертификаты: сертификат көрсетілмеген"
 
+#: ../src/wireless-security/eap-method-ttls.c:306
+msgid "MSCHAPv2 (no EAP)"
+msgstr "MSCHAPv2 (EAP жоқ)"
+
 #: ../src/wireless-security/wireless-security.c:72
 msgid "Unknown error validating 802.1X security"
-msgstr ""
+msgstr "802.1X қауіпсіздігін тексерудің белгісіз қатесі"
 
 #: ../src/wireless-security/wireless-security.c:436
 msgid "TLS"
@@ -4339,7 +4521,7 @@ msgstr "Кіл_тті көрсету"
 
 #: ../src/wireless-security/ws-wep-key.ui.h:7
 msgid "WEP inde_x:"
-msgstr ""
+msgstr "WEP и_ндексі:"
 
 #: ../src/wireless-security/ws-wpa-psk.c:70
 #, c-format
@@ -4359,6 +4541,57 @@ msgstr ""
 #: ../src/wireless-security/ws-wpa-psk.ui.h:2
 msgid "_Type:"
 msgstr "_Түрі:"
+
+#~ msgid ""
+#~ "\n"
+#~ "The VPN connection “%s” disconnected because the VPN service stopped."
+#~ msgstr ""
+#~ "\n"
+#~ "\"%s\" VPN байланысы VPN қызметі тоқталған соң ажыратылды."
+
+#~ msgid ""
+#~ "\n"
+#~ "The VPN connection “%s” disconnected."
+#~ msgstr ""
+#~ "\n"
+#~ "\"%s\" VPN байланысы ажыратылды."
+
+#~ msgid "invalid EAP-TLS CA certificate: %s"
+#~ msgstr "Жарамсыз EAP-TLS СО сертификаты: %s"
+
+#~ msgid "invalid EAP-TLS CA certificate: no certificate specified"
+#~ msgstr "жарамсыз EAP-TLS CA сертификаты: сертификат көрсетілмеген"
+
+#~ msgid "invalid EAP-TLS password: missing"
+#~ msgstr "жарамсыз EAP-TLS паролі: жоқ болып тұр"
+
+#~ msgid "invalid EAP-TLS private-key: %s"
+#~ msgstr "жарамсыз EAP-TLS жеке кілті: %s"
+
+#~ msgid "invalid EAP-TLS user-certificate: %s"
+#~ msgstr "жарамсыз EAP-TLS пайдаланушы сертификаты: %s"
+
+#~ msgid "Unencrypted private keys are insecure"
+#~ msgstr "Шифрленбеген жеке кілттері қауіпсіз емес болады"
+
+#~ msgid ""
+#~ "The selected private key does not appear to be protected by a password. "
+#~ "This could allow your security credentials to be compromised. Please "
+#~ "select a password-protected private key.\n"
+#~ "\n"
+#~ "(You can password-protect your private key with openssl)"
+#~ msgstr ""
+#~ "Таңдалған жеке кілт парольмен қорғалмаған сияқты. Бұл сіздің қауіпсіздік "
+#~ "есептік жазба деректерінің әшкерелеуіне әкеп соғуы мүмкін. Парольмен "
+#~ "қорғалған жеке кілтті таңдаңыз.\n"
+#~ "\n"
+#~ "(Сіз жеке кілтіңізді openssl көмегімен парольмен қорғай аласыз)"
+
+#~ msgid "Choose your personal certificate"
+#~ msgstr "Жеке сертификатыңызды таңдаңыз"
+
+#~ msgid "Choose your private key"
+#~ msgstr "Жеке кілтіңізді таңдаңыз"
 
 #~ msgid "New Mobile Broadband connection..."
 #~ msgstr "Жаңа мобильді кеңжолақты байланысы..."
@@ -4665,9 +4898,6 @@ msgstr "_Түрі:"
 
 #~ msgid "No Certificate Authority certificate chosen"
 #~ msgstr "Сертификаттау орталығының  (CA) сертификаты таңдалмады"
-
-#~ msgid "Choose CA Certificate"
-#~ msgstr "СО сертификатын таңдаңыз"
 
 #~ msgid "No"
 #~ msgstr "Жоқ"
