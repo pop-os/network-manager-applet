@@ -76,7 +76,7 @@ change_password_storage_icon (GtkWidget *passwd_entry, MenuItem item)
 	                                   icon_name_table[item]);
 	gtk_entry_set_icon_tooltip_text (GTK_ENTRY (passwd_entry),
 	                                 GTK_ENTRY_ICON_SECONDARY,
-	                                 gettext (icon_desc_table[item]));
+	                                 _(icon_desc_table[item]));
 
 	/* We want to make entry insensitive when ITEM_STORAGE_ASK is selected
 	 * Unfortunately, making GtkEntry insensitive will also make the icon
@@ -240,7 +240,7 @@ icon_release_cb (GtkEntry *entry,
  * @setting: #NMSetting containing the password, or NULL
  * @password_flags_name: name of the secret flags (like psk-flags), or NULL
  * @with_not_required: whether to include "Not required" menu item
- * @ask_mode: %TRUE if the entrie is shown in ASK mode. That means,
+ * @ask_mode: %TRUE if the entry is shown in ASK mode. That means,
  *   while prompting for a password, contrary to being inside the
  *   editor mode.
  *   If %TRUE, the entry should be sensivive on selected "always-ask"
@@ -277,12 +277,12 @@ nma_utils_setup_password_storage (GtkWidget *passwd_entry,
 	g_object_set_data (G_OBJECT (popup_menu), PASSWORD_STORAGE_MENU_TAG, GUINT_TO_POINTER (TRUE));
 	g_object_set_data (G_OBJECT (popup_menu), MENU_WITH_NOT_REQUIRED_TAG, GUINT_TO_POINTER (with_not_required));
 	group = NULL;
-	item[0] = gtk_radio_menu_item_new_with_label (group, gettext (icon_desc_table[0]));
+	item[0] = gtk_radio_menu_item_new_with_label (group, _(icon_desc_table[0]));
 	group = gtk_radio_menu_item_get_group (GTK_RADIO_MENU_ITEM (item[0]));
-	item[1] = gtk_radio_menu_item_new_with_label (group, gettext (icon_desc_table[1]));
-	item[2] = gtk_radio_menu_item_new_with_label (group, gettext (icon_desc_table[2]));
+	item[1] = gtk_radio_menu_item_new_with_label (group, _(icon_desc_table[1]));
+	item[2] = gtk_radio_menu_item_new_with_label (group, _(icon_desc_table[2]));
 	if (with_not_required)
-		item[3] = gtk_radio_menu_item_new_with_label (group, gettext (icon_desc_table[3]));
+		item[3] = gtk_radio_menu_item_new_with_label (group, _(icon_desc_table[3]));
 
 	gtk_menu_shell_append (GTK_MENU_SHELL (popup_menu), item[0]);
 	gtk_menu_shell_append (GTK_MENU_SHELL (popup_menu), item[1]);

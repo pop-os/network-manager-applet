@@ -7,9 +7,11 @@
       <sub name="NMAMobileProvidersDatabase" link="NMAMobileProvidersDatabase.html"/>
       <sub name="NMAVpnPasswordDialog" link="NMAVpnPasswordDialog.html"/>
       <sub name="NMAWifiDialog" link="NMAWifiDialog.html"/>
+      <sub name="NMACertChooser" link="NMACertChooser.html"/>
     </sub>
     <sub name="Object Hierarchy" link="object-tree.html"/>
     <sub name="API Index" link="api-index-full.html"/>
+    <sub name="Index of API available in version 1.8.0" link="api-index-1.8.0.html"/>
     <sub name="Index of deprecated API" link="deprecated-api-index.html"/>
     <sub name="Annotation Glossary" link="annotation-glossary.html"/>
   </chapters>
@@ -82,9 +84,42 @@
     <keyword type="function" name="nma_wifi_dialog_set_nag_ignored ()" link="NMAWifiDialog.html#nma-wifi-dialog-set-nag-ignored" deprecated=""/>
     <keyword type="function" name="nma_wifi_dialog_get_nag_ignored ()" link="NMAWifiDialog.html#nma-wifi-dialog-get-nag-ignored" deprecated=""/>
     <keyword type="function" name="nma_wifi_dialog_new_for_other ()" link="NMAWifiDialog.html#nma-wifi-dialog-new-for-other" deprecated=""/>
+    <keyword type="function" name="nma_cert_chooser_set_cert ()" link="NMACertChooser.html#nma-cert-chooser-set-cert" since="1.8.0"/>
+    <keyword type="function" name="nma_cert_chooser_set_cert_uri ()" link="NMACertChooser.html#nma-cert-chooser-set-cert-uri" since="1.8.0"/>
+    <keyword type="function" name="nma_cert_chooser_get_cert ()" link="NMACertChooser.html#nma-cert-chooser-get-cert" since="1.8.0"/>
+    <keyword type="function" name="nma_cert_chooser_get_cert_uri ()" link="NMACertChooser.html#nma-cert-chooser-get-cert-uri" since="1.8.0"/>
+    <keyword type="function" name="nma_cert_chooser_set_cert_password ()" link="NMACertChooser.html#nma-cert-chooser-set-cert-password" since="1.8.0"/>
+    <keyword type="function" name="nma_cert_chooser_get_cert_password ()" link="NMACertChooser.html#nma-cert-chooser-get-cert-password" since="1.8.0"/>
+    <keyword type="function" name="nma_cert_chooser_set_key ()" link="NMACertChooser.html#nma-cert-chooser-set-key" since="1.8.0"/>
+    <keyword type="function" name="nma_cert_chooser_set_key_uri ()" link="NMACertChooser.html#nma-cert-chooser-set-key-uri" since="1.8.0"/>
+    <keyword type="function" name="nma_cert_chooser_get_key ()" link="NMACertChooser.html#nma-cert-chooser-get-key" since="1.8.0"/>
+    <keyword type="function" name="nma_cert_chooser_get_key_uri ()" link="NMACertChooser.html#nma-cert-chooser-get-key-uri" since="1.8.0"/>
+    <keyword type="function" name="nma_cert_chooser_set_key_password ()" link="NMACertChooser.html#nma-cert-chooser-set-key-password" since="1.8.0"/>
+    <keyword type="function" name="nma_cert_chooser_get_key_password ()" link="NMACertChooser.html#nma-cert-chooser-get-key-password" since="1.8.0"/>
+    <keyword type="function" name="nma_cert_chooser_new ()" link="NMACertChooser.html#nma-cert-chooser-new" since="1.8.0"/>
+    <keyword type="function" name="nma_cert_chooser_add_to_size_group ()" link="NMACertChooser.html#nma-cert-chooser-add-to-size-group" since="1.8.0"/>
+    <keyword type="function" name="nma_cert_chooser_validate ()" link="NMACertChooser.html#nma-cert-chooser-validate" since="1.8.0"/>
+    <keyword type="function" name="nma_cert_chooser_setup_cert_password_storage ()" link="NMACertChooser.html#nma-cert-chooser-setup-cert-password-storage" since="1.8.0"/>
+    <keyword type="function" name="nma_cert_chooser_update_cert_password_storage ()" link="NMACertChooser.html#nma-cert-chooser-update-cert-password-storage" since="1.8.0"/>
+    <keyword type="function" name="nma_cert_chooser_get_cert_password_flags ()" link="NMACertChooser.html#nma-cert-chooser-get-cert-password-flags" since="1.8.0"/>
+    <keyword type="function" name="nma_cert_chooser_setup_key_password_storage ()" link="NMACertChooser.html#nma-cert-chooser-setup-key-password-storage" since="1.8.0"/>
+    <keyword type="function" name="nma_cert_chooser_update_key_password_storage ()" link="NMACertChooser.html#nma-cert-chooser-update-key-password-storage" since="1.8.0"/>
+    <keyword type="function" name="nma_cert_chooser_get_key_password_flags ()" link="NMACertChooser.html#nma-cert-chooser-get-key-password-flags" since="1.8.0"/>
+    <keyword type="enum" name="enum NMACertChooserFlags" link="NMACertChooser.html#NMACertChooserFlags" since="1.8.0"/>
+    <keyword type="property" name="The “flags” property" link="NMACertChooser.html#NMACertChooser--flags"/>
+    <keyword type="property" name="The “title” property" link="NMACertChooser.html#NMACertChooser--title"/>
+    <keyword type="signal" name="The “cert-password-validate” signal" link="NMACertChooser.html#NMACertChooser-cert-password-validate"/>
+    <keyword type="signal" name="The “cert-validate” signal" link="NMACertChooser.html#NMACertChooser-cert-validate"/>
+    <keyword type="signal" name="The “changed” signal" link="NMACertChooser.html#NMACertChooser-changed"/>
+    <keyword type="signal" name="The “key-password-validate” signal" link="NMACertChooser.html#NMACertChooser-key-password-validate"/>
+    <keyword type="signal" name="The “key-validate” signal" link="NMACertChooser.html#NMACertChooser-key-validate"/>
     <keyword type="constant" name="NMA_MOBILE_FAMILY_UNKNOWN" link="NMAMobileProvidersDatabase.html#NMA-MOBILE-FAMILY-UNKNOWN:CAPS"/>
     <keyword type="constant" name="NMA_MOBILE_FAMILY_3GPP" link="NMAMobileProvidersDatabase.html#NMA-MOBILE-FAMILY-3GPP:CAPS"/>
     <keyword type="constant" name="NMA_MOBILE_FAMILY_CDMA" link="NMAMobileProvidersDatabase.html#NMA-MOBILE-FAMILY-CDMA:CAPS"/>
+    <keyword type="constant" name="NMA_CERT_CHOOSER_FLAG_NONE" link="NMACertChooser.html#NMA-CERT-CHOOSER-FLAG-NONE:CAPS"/>
+    <keyword type="constant" name="NMA_CERT_CHOOSER_FLAG_CERT" link="NMACertChooser.html#NMA-CERT-CHOOSER-FLAG-CERT:CAPS"/>
+    <keyword type="constant" name="NMA_CERT_CHOOSER_FLAG_PASSWORDS" link="NMACertChooser.html#NMA-CERT-CHOOSER-FLAG-PASSWORDS:CAPS"/>
+    <keyword type="constant" name="NMA_CERT_CHOOSER_FLAG_PEM" link="NMACertChooser.html#NMA-CERT-CHOOSER-FLAG-PEM:CAPS"/>
     <keyword type="member" name="NMAMobileWizardAccessMethod.provider-name" link="libnma-nma-mobile-wizard.html#NMAMobileWizardAccessMethod.provider-name"/>
     <keyword type="member" name="NMAMobileWizardAccessMethod.plan-name" link="libnma-nma-mobile-wizard.html#NMAMobileWizardAccessMethod.plan-name"/>
     <keyword type="member" name="NMAMobileWizardAccessMethod.devtype" link="libnma-nma-mobile-wizard.html#NMAMobileWizardAccessMethod.devtype"/>

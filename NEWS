@@ -1,4 +1,21 @@
 ======================================================
+network-manager-applet-1.8
+Overview of changes since network-manager-applet-1.4.6
+======================================================
+
+This is a new stable release of network-manager-applet.  Notable changes include:
+
+* Warn editor users if certificates have wrong SELinux labels
+* Added a PKCS#11 capable certificate chooser to EAP-TLS
+* Request Wi-Fi scan when showing the menu and update the scan
+    result list dynamically.
+* Prevent the use from opening a file open dialog if they don't have
+    permission to edit connections (e.g. in the login manager session)
+    (CVE-2017-6590)
+* Fix broken libnma's pygobject library
+* Add version macros to libnma.
+
+======================================================
 network-manager-applet-1.4.6
 Overview of changes since network-manager-applet-1.4.4
 ======================================================
