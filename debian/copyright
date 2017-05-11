@@ -1,6 +1,6 @@
-Format: http://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
 Upstream-Name: network-manager-applet
-Source: http://ftp.gnome.org/pub/GNOME/sources/network-manager-applet/
+Source: https://ftp.gnome.org/pub/GNOME/sources/network-manager-applet/
 
 Files: *
 Copyright: 2004 - 2015 Red Hat, Inc.
