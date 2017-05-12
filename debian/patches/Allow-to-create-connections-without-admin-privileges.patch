@@ -18,7 +18,7 @@ The logic is:
 
 Closes: #696256
 ---
- src/applet-device-wifi.c            | 25 +++++++++++++++++++++++++
+ src/applet-device-wifi.c            | 27 ++++++++++++++++++++++++++-
  src/connection-editor/page-mobile.c | 10 ++++++++++
  src/connection-editor/page-vpn.c    |  8 ++++++++
  src/connection-editor/page-wifi.c   | 13 +++++++++++++
@@ -28,21 +28,25 @@ Closes: #696256
  src/utils/utils.h                   |  4 ++++
  src/wireless-security/ws-wep-key.c  |  7 +++++++
  src/wireless-security/ws-wpa-psk.c  |  5 +++++
- 10 files changed, 87 insertions(+)
+ 10 files changed, 88 insertions(+), 1 deletion(-)
 
 diff --git a/src/applet-device-wifi.c b/src/applet-device-wifi.c
-index 7b8fa6e..47c622f 100644
+index 98fe6a2..7af9c0f 100644
 --- a/src/applet-device-wifi.c
 +++ b/src/applet-device-wifi.c
-@@ -527,6 +527,7 @@ _do_new_auto_connection (NMApplet *applet,
- 	NMSettingWirelessSecurity *s_wsec = NULL;
+@@ -461,9 +461,10 @@ wifi_new_auto_connection (NMDevice *device,
+ 	NMConnection *connection;
+ 	NMSettingConnection *s_con;
+ 	NMSettingWireless *s_wifi = NULL;
+-	NMSettingWirelessSecurity *s_wsec;
++	NMSettingWirelessSecurity *s_wsec = NULL;
  	NMSetting8021x *s_8021x = NULL;
  	GBytes *ssid;
 +	NM80211ApFlags flags;
  	NM80211ApSecurityFlags wpa_flags, rsn_flags;
  	GtkWidget *dialog;
  	MoreInfo *more_info;
-@@ -558,6 +559,7 @@ _do_new_auto_connection (NMApplet *applet,
+@@ -499,6 +500,7 @@ wifi_new_auto_connection (NMDevice *device,
  	/* If the AP is WPA[2]-Enterprise then we need to set up a minimal 802.1x
  	 * setting and ask the user for more information.
  	 */
@@ -50,7 +54,7 @@ index 7b8fa6e..47c622f 100644
  	rsn_flags = nm_access_point_get_rsn_flags (ap);
  	wpa_flags = nm_access_point_get_wpa_flags (ap);
  	if (   (rsn_flags & NM_802_11_AP_SEC_KEY_MGMT_802_1X)
-@@ -586,6 +588,29 @@ _do_new_auto_connection (NMApplet *applet,
+@@ -527,6 +529,29 @@ wifi_new_auto_connection (NMDevice *device,
  		nm_connection_add_setting (connection, NM_SETTING (s_8021x));
  	}
  
@@ -230,12 +234,12 @@ index 81b2ac3..ded70c6 100644
  	}
  
 diff --git a/src/utils/utils.c b/src/utils/utils.c
-index c3b806e..b2c442d 100644
+index 684987b..1d328bd 100644
 --- a/src/utils/utils.c
 +++ b/src/utils/utils.c
-@@ -519,3 +519,11 @@ out:
- 		g_free (item);
- 	return success;
+@@ -576,3 +576,11 @@ utils_key_filter (void)
+ 
+ 	return filter;
  }
 +
 +gboolean
@@ -246,7 +250,7 @@ index c3b806e..b2c442d 100644
 +	return (perms != NM_CLIENT_PERMISSION_RESULT_YES);
 +}
 diff --git a/src/utils/utils.h b/src/utils/utils.h
-index 544833a..3e408fa 100644
+index ccc653f..3611d5b 100644
 --- a/src/utils/utils.h
 +++ b/src/utils/utils.h
 @@ -25,6 +25,8 @@
