@@ -1,5 +1,28 @@
 libnm-gtk.so.0 libnm-gtk0 #MINVER#
  libnm_gtk_1_0_6@libnm_gtk_1_0_6 1.0.6
+ libnm_gtk_1_8_0@libnm_gtk_1_8_0 1.8.0
+ nma_cert_chooser_add_to_size_group@libnm_gtk_1_8_0 1.8.0
+ nma_cert_chooser_get_cert@libnm_gtk_1_8_0 1.8.0
+ nma_cert_chooser_get_cert_password@libnm_gtk_1_8_0 1.8.0
+ nma_cert_chooser_get_cert_password_flags@libnm_gtk_1_8_0 1.8.0
+ nma_cert_chooser_get_cert_uri@libnm_gtk_1_8_0 1.8.0
+ nma_cert_chooser_get_key@libnm_gtk_1_8_0 1.8.0
+ nma_cert_chooser_get_key_password@libnm_gtk_1_8_0 1.8.0
+ nma_cert_chooser_get_key_password_flags@libnm_gtk_1_8_0 1.8.0
+ nma_cert_chooser_get_key_uri@libnm_gtk_1_8_0 1.8.0
+ nma_cert_chooser_get_type@libnm_gtk_1_8_0 1.8.0
+ nma_cert_chooser_new@libnm_gtk_1_8_0 1.8.0
+ nma_cert_chooser_set_cert@libnm_gtk_1_8_0 1.8.0
+ nma_cert_chooser_set_cert_password@libnm_gtk_1_8_0 1.8.0
+ nma_cert_chooser_set_cert_uri@libnm_gtk_1_8_0 1.8.0
+ nma_cert_chooser_set_key@libnm_gtk_1_8_0 1.8.0
+ nma_cert_chooser_set_key_password@libnm_gtk_1_8_0 1.8.0
+ nma_cert_chooser_set_key_uri@libnm_gtk_1_8_0 1.8.0
+ nma_cert_chooser_setup_cert_password_storage@libnm_gtk_1_8_0 1.8.0
+ nma_cert_chooser_setup_key_password_storage@libnm_gtk_1_8_0 1.8.0
+ nma_cert_chooser_update_cert_password_storage@libnm_gtk_1_8_0 1.8.0
+ nma_cert_chooser_update_key_password_storage@libnm_gtk_1_8_0 1.8.0
+ nma_cert_chooser_validate@libnm_gtk_1_8_0 1.8.0
  nma_country_info_get_country_code@Base 0.9.7.995
  nma_country_info_get_country_name@Base 0.9.7.995
  nma_country_info_get_providers@Base 0.9.7.995

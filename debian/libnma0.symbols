@@ -1,5 +1,28 @@
 libnma.so.0 libnma0 #MINVER#
  libnma_1_2_0@libnma_1_2_0 1.1.90
+ libnma_1_8_0@libnma_1_8_0 1.8.0
+ nma_cert_chooser_add_to_size_group@libnma_1_8_0 1.8.0
+ nma_cert_chooser_get_cert@libnma_1_8_0 1.8.0
+ nma_cert_chooser_get_cert_password@libnma_1_8_0 1.8.0
+ nma_cert_chooser_get_cert_password_flags@libnma_1_8_0 1.8.0
+ nma_cert_chooser_get_cert_uri@libnma_1_8_0 1.8.0
+ nma_cert_chooser_get_key@libnma_1_8_0 1.8.0
+ nma_cert_chooser_get_key_password@libnma_1_8_0 1.8.0
+ nma_cert_chooser_get_key_password_flags@libnma_1_8_0 1.8.0
+ nma_cert_chooser_get_key_uri@libnma_1_8_0 1.8.0
+ nma_cert_chooser_get_type@libnma_1_8_0 1.8.0
+ nma_cert_chooser_new@libnma_1_8_0 1.8.0
+ nma_cert_chooser_set_cert@libnma_1_8_0 1.8.0
+ nma_cert_chooser_set_cert_password@libnma_1_8_0 1.8.0
+ nma_cert_chooser_set_cert_uri@libnma_1_8_0 1.8.0
+ nma_cert_chooser_set_key@libnma_1_8_0 1.8.0
+ nma_cert_chooser_set_key_password@libnma_1_8_0 1.8.0
+ nma_cert_chooser_set_key_uri@libnma_1_8_0 1.8.0
+ nma_cert_chooser_setup_cert_password_storage@libnma_1_8_0 1.8.0
+ nma_cert_chooser_setup_key_password_storage@libnma_1_8_0 1.8.0
+ nma_cert_chooser_update_cert_password_storage@libnma_1_8_0 1.8.0
+ nma_cert_chooser_update_key_password_storage@libnma_1_8_0 1.8.0
+ nma_cert_chooser_validate@libnma_1_8_0 1.8.0
  nma_country_info_get_country_code@libnma_1_2_0 1.1.90
  nma_country_info_get_country_name@libnma_1_2_0 1.1.90
  nma_country_info_get_providers@libnma_1_2_0 1.1.90
