@@ -206,10 +206,10 @@ index 0e5e8cc..49e3ff5 100644
  
  		s_wireless = (NMSettingWireless *) nm_setting_wireless_new ();
 diff --git a/src/mobile-helpers.c b/src/mobile-helpers.c
-index 81b2ac3..ded70c6 100644
+index 65a56a3..f508e0d 100644
 --- a/src/mobile-helpers.c
 +++ b/src/mobile-helpers.c
-@@ -183,6 +183,7 @@ mobile_wizard_done (NMAMobileWizard *wizard,
+@@ -182,6 +182,7 @@ mobile_wizard_done (NMAMobileWizard *wizard,
  			              NM_SETTING_CDMA_NUMBER, "#777",
  			              NM_SETTING_CDMA_USERNAME, method->username,
  			              NM_SETTING_CDMA_PASSWORD, method->password,
@@ -217,7 +217,7 @@ index 81b2ac3..ded70c6 100644
  			              NULL);
  			nm_connection_add_setting (connection, setting);
  		} else if (method->devtype == NM_DEVICE_MODEM_CAPABILITY_GSM_UMTS) {
-@@ -193,6 +194,7 @@ mobile_wizard_done (NMAMobileWizard *wizard,
+@@ -192,6 +193,7 @@ mobile_wizard_done (NMAMobileWizard *wizard,
  			              NM_SETTING_GSM_USERNAME, method->username,
  			              NM_SETTING_GSM_PASSWORD, method->password,
  			              NM_SETTING_GSM_APN, method->gsm_apn,
@@ -225,7 +225,7 @@ index 81b2ac3..ded70c6 100644
  			              NULL);
  			nm_connection_add_setting (connection, setting);
  		} else
-@@ -223,6 +225,7 @@ mobile_wizard_done (NMAMobileWizard *wizard,
+@@ -222,6 +224,7 @@ mobile_wizard_done (NMAMobileWizard *wizard,
  		                                      "user", g_get_user_name (), NULL);
  		g_free (uuid);
  		g_free (id);
