@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>nma-ui-utils: libnma Reference Manual</title>
-<meta name="generator" content="DocBook XSL Stylesheets V1.79.1">
+<meta name="generator" content="DocBook XSL Stylesheets Vsnapshot">
 <link rel="home" href="index.html" title="libnma Reference Manual">
 <link rel="up" href="api-reference.html" title="libnma API reference">
 <link rel="prev" href="api-reference.html" title="libnma API reference">
@@ -74,12 +74,12 @@
 <div class="refsect2">
 <a name="nma-utils-setup-password-storage"></a><h3>nma_utils_setup_password_storage ()</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>
-nma_utils_setup_password_storage (<em class="parameter"><code><span class="type">GtkWidget</span> *passwd_entry</code></em>,
+nma_utils_setup_password_storage (<em class="parameter"><code><a href="/usr/share/gtk-doc/html/gtk3GtkWidget.html#GtkWidget-struct"><span class="type">GtkWidget</span></a> *passwd_entry</code></em>,
                                   <em class="parameter"><code><a href="/usr/share/gtk-doc/html/libnm-utilNMSetting.html#NMSettingSecretFlags"><span class="type">NMSettingSecretFlags</span></a> initial_flags</code></em>,
                                   <em class="parameter"><code><a href="/usr/share/gtk-doc/html/libnm-utilNMSetting.html#NMSetting-struct"><span class="type">NMSetting</span></a> *setting</code></em>,
                                   <em class="parameter"><code>const <span class="type">char</span> *password_flags_name</code></em>,
-                                  <em class="parameter"><code><span class="type">gboolean</span> with_not_required</code></em>,
-                                  <em class="parameter"><code><span class="type">gboolean</span> ask_mode</code></em>);</pre>
+                                  <em class="parameter"><code><a href="/usr/share/gtk-doc/html/glibglib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a> with_not_required</code></em>,
+                                  <em class="parameter"><code><a href="/usr/share/gtk-doc/html/glibglib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a> ask_mode</code></em>);</pre>
 <p>Adds a secondary icon and creates a popup menu for password entry.
 The active menu item is set up according to initial_flags, or
 from <em class="parameter"><code>setting</code></em>
@@ -100,7 +100,7 @@ be automatically updated in the setting when menu is changed.</p>
 <tbody>
 <tr>
 <td class="parameter_name"><p>passwd_entry</p></td>
-<td class="parameter_description"><p>password <span class="type">GtkEntry</span> which the icon is attached to</p></td>
+<td class="parameter_description"><p>password <a href="/usr/share/gtk-doc/html/gtk3GtkEntry.html#GtkEntry-struct"><span class="type">GtkEntry</span></a> which the icon is attached to</p></td>
 <td class="parameter_annotations"> </td>
 </tr>
 <tr>
@@ -125,13 +125,13 @@ be automatically updated in the setting when menu is changed.</p>
 </tr>
 <tr>
 <td class="parameter_name"><p>ask_mode</p></td>
-<td class="parameter_description"><p><code class="literal">TRUE</code> if the entry is shown in ASK mode. That means,
+<td class="parameter_description"><p><a href="/usr/share/gtk-doc/html/glibglib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> if the entry is shown in ASK mode. That means,
 while prompting for a password, contrary to being inside the
 editor mode.
-If <code class="literal">TRUE</code>, the entry should be sensivive on selected "always-ask"
+If <a href="/usr/share/gtk-doc/html/glibglib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a>, the entry should be sensivive on selected "always-ask"
 icon (this is e.f. for nm-applet asking for password), otherwise
 not.
-If <code class="literal">TRUE</code>, it shall not be possible to select a different storage,
+If <a href="/usr/share/gtk-doc/html/glibglib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a>, it shall not be possible to select a different storage,
 because we only prompt for a password, we cannot change the password
 location.</p></td>
 <td class="parameter_annotations"> </td>
@@ -144,7 +144,7 @@ location.</p></td>
 <div class="refsect2">
 <a name="nma-utils-menu-to-secret-flags"></a><h3>nma_utils_menu_to_secret_flags ()</h3>
 <pre class="programlisting"><a href="/usr/share/gtk-doc/html/libnm-utilNMSetting.html#NMSettingSecretFlags"><span class="returnvalue">NMSettingSecretFlags</span></a>
-nma_utils_menu_to_secret_flags (<em class="parameter"><code><span class="type">GtkWidget</span> *passwd_entry</code></em>);</pre>
+nma_utils_menu_to_secret_flags (<em class="parameter"><code><a href="/usr/share/gtk-doc/html/gtk3GtkWidget.html#GtkWidget-struct"><span class="type">GtkWidget</span></a> *passwd_entry</code></em>);</pre>
 <p>Returns secret flags corresponding to the selected password storage menu
 in the attached icon</p>
 <div class="refsect3">
@@ -157,7 +157,7 @@ in the attached icon</p>
 </colgroup>
 <tbody><tr>
 <td class="parameter_name"><p>passwd_entry</p></td>
-<td class="parameter_description"><p>password <span class="type">GtkEntry</span> which the password icon/menu is attached to</p></td>
+<td class="parameter_description"><p>password <a href="/usr/share/gtk-doc/html/gtk3GtkEntry.html#GtkEntry-struct"><span class="type">GtkEntry</span></a> which the password icon/menu is attached to</p></td>
 <td class="parameter_annotations"> </td>
 </tr></tbody>
 </table></div>
@@ -171,7 +171,7 @@ in the attached icon</p>
 <div class="refsect2">
 <a name="nma-utils-update-password-storage"></a><h3>nma_utils_update_password_storage ()</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>
-nma_utils_update_password_storage (<em class="parameter"><code><span class="type">GtkWidget</span> *passwd_entry</code></em>,
+nma_utils_update_password_storage (<em class="parameter"><code><a href="/usr/share/gtk-doc/html/gtk3GtkWidget.html#GtkWidget-struct"><span class="type">GtkWidget</span></a> *passwd_entry</code></em>,
                                    <em class="parameter"><code><a href="/usr/share/gtk-doc/html/libnm-utilNMSetting.html#NMSettingSecretFlags"><span class="type">NMSettingSecretFlags</span></a> secret_flags</code></em>,
                                    <em class="parameter"><code><a href="/usr/share/gtk-doc/html/libnm-utilNMSetting.html#NMSetting-struct"><span class="type">NMSetting</span></a> *setting</code></em>,
                                    <em class="parameter"><code>const <span class="type">char</span> *password_flags_name</code></em>);</pre>
@@ -191,7 +191,7 @@ in the <em class="parameter"><code>setting</code></em>
 <tbody>
 <tr>
 <td class="parameter_name"><p>passwd_entry</p></td>
-<td class="parameter_description"><p><span class="type">GtkEntry</span> with the password</p></td>
+<td class="parameter_description"><p><a href="/usr/share/gtk-doc/html/gtk3GtkEntry.html#GtkEntry-struct"><span class="type">GtkEntry</span></a> with the password</p></td>
 <td class="parameter_annotations"> </td>
 </tr>
 <tr>
