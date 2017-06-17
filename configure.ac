@@ -2,7 +2,7 @@ AC_PREREQ([2.63])
 
 m4_define([nma_major_version], [1])
 m4_define([nma_minor_version], [8])
-m4_define([nma_micro_version], [0])
+m4_define([nma_micro_version], [2])
 m4_define([nma_version],
           [nma_major_version.nma_minor_version.nma_micro_version])
 
@@ -117,7 +117,7 @@ LIBNM_CFLAGS="$LIBNM_CFLAGS -DGLIB_VERSION_MIN_REQUIRED=GLIB_VERSION_2_32"
 LIBNM_CFLAGS="$LIBNM_CFLAGS -DNM_VERSION_MIN_REQUIRED=NM_VERSION_1_8"
 LIBNM_CFLAGS="$LIBNM_CFLAGS -DNM_VERSION_MAX_ALLOWED=NM_VERSION_1_8"
 
-PKG_CHECK_MODULES(LIBSECRET, [libsecret-unstable])
+PKG_CHECK_MODULES(LIBSECRET, [libsecret-1 >= 0.18])
 
 # Check for libnotify >= 0.7
 PKG_CHECK_MODULES(LIBNOTIFY_07, [libnotify >= 0.7], [have_libnotify_07=yes],[have_libnotify_07=no])
