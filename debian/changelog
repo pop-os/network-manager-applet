@@ -1,3 +1,11 @@
+network-manager-applet (1.8.2-1) unstable; urgency=medium
+
+  * New upstream version 1.8.2
+  * Rebase patches
+  * Drop migration code from pre-wheezy
+
+ -- Michael Biebl <biebl@debian.org>  Sat, 17 Jun 2017 23:29:48 +0200
+
 network-manager-applet (1.8.0-1) experimental; urgency=medium
 
   * New upstream version 1.8.0
