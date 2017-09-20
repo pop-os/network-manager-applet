@@ -20,7 +20,7 @@ override_dh_auto_configure:
 		--with-selinux \
 		--with-wwan
 
-override_dh_install:
-	find debian/tmp -name '*.a' -delete
-	find debian/tmp -name '*.la' -delete
-	dh_install --fail-missing
+override_dh_missing:
+	find debian/tmp -name '*.a' -print -delete
+	find debian/tmp -name '*.la' -print -delete
+	dh_missing --fail-missing
