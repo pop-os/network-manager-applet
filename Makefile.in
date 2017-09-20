@@ -392,6 +392,7 @@ am__objects_14 = src/connection-editor/src_connection_editor_nm_connection_edito
 	src/connection-editor/src_connection_editor_nm_connection_editor-page-ip4.$(OBJEXT) \
 	src/connection-editor/src_connection_editor_nm_connection_editor-page-ip6.$(OBJEXT) \
 	src/connection-editor/src_connection_editor_nm_connection_editor-page-dsl.$(OBJEXT) \
+	src/connection-editor/src_connection_editor_nm_connection_editor-page-macsec.$(OBJEXT) \
 	src/connection-editor/src_connection_editor_nm_connection_editor-page-mobile.$(OBJEXT) \
 	src/connection-editor/src_connection_editor_nm_connection_editor-page-bluetooth.$(OBJEXT) \
 	src/connection-editor/src_connection_editor_nm_connection_editor-page-ppp.$(OBJEXT) \
@@ -410,6 +411,7 @@ am__objects_14 = src/connection-editor/src_connection_editor_nm_connection_edito
 	src/connection-editor/src_connection_editor_nm_connection_editor-ip6-routes-dialog.$(OBJEXT) \
 	src/connection-editor/src_connection_editor_nm_connection_editor-ppp-auth-methods-dialog.$(OBJEXT) \
 	src/connection-editor/src_connection_editor_nm_connection_editor-ce-polkit-button.$(OBJEXT) \
+	src/connection-editor/src_connection_editor_nm_connection_editor-ce-polkit.$(OBJEXT) \
 	src/connection-editor/src_connection_editor_nm_connection_editor-connection-helpers.$(OBJEXT)
 am_src_connection_editor_nm_connection_editor_OBJECTS =  \
 	$(am__objects_14)
@@ -1091,6 +1093,7 @@ EXTRA_DIST = $(HTML_IMAGES) $(SETUP_FILES) $(icon16_DATA) \
 	src/connection-editor/ce-page-ip4.ui \
 	src/connection-editor/ce-page-ip6.ui \
 	src/connection-editor/ce-page-ip-tunnel.ui \
+	src/connection-editor/ce-page-macsec.ui \
 	src/connection-editor/ce-page-mobile.ui \
 	src/connection-editor/ce-page-ppp.ui \
 	src/connection-editor/ce-page-proxy.ui \
@@ -1101,6 +1104,7 @@ EXTRA_DIST = $(HTML_IMAGES) $(SETUP_FILES) $(icon16_DATA) \
 	src/connection-editor/ce-page-wifi.ui \
 	src/connection-editor/ce-ppp-auth-methods.ui \
 	src/connection-editor/nm-connection-editor.ui \
+	src/connection-editor/nm-connection-list.ui \
 	src/connection-editor/ce.gresource.xml src/8021x.ui \
 	src/gsm-unlock.ui src/info.ui src/applet.gresource.xml \
 	shared/nm-utils/gsystem-local-alloc.h \
@@ -1617,6 +1621,8 @@ connection_editor_hc_real = \
 	src/connection-editor/page-ip6.c \
 	src/connection-editor/page-dsl.h \
 	src/connection-editor/page-dsl.c \
+	src/connection-editor/page-macsec.h \
+	src/connection-editor/page-macsec.c \
 	src/connection-editor/page-mobile.h \
 	src/connection-editor/page-mobile.c \
 	src/connection-editor/page-bluetooth.h \
@@ -1653,6 +1659,8 @@ connection_editor_hc_real = \
 	src/connection-editor/ppp-auth-methods-dialog.h \
 	src/connection-editor/ce-polkit-button.c \
 	src/connection-editor/ce-polkit-button.h \
+	src/connection-editor/ce-polkit.c \
+	src/connection-editor/ce-polkit.h \
 	src/connection-editor/connection-helpers.c \
 	src/connection-editor/connection-helpers.h
 
@@ -2232,6 +2240,9 @@ src/connection-editor/src_connection_editor_nm_connection_editor-page-ip6.$(OBJE
 src/connection-editor/src_connection_editor_nm_connection_editor-page-dsl.$(OBJEXT):  \
 	src/connection-editor/$(am__dirstamp) \
 	src/connection-editor/$(DEPDIR)/$(am__dirstamp)
+src/connection-editor/src_connection_editor_nm_connection_editor-page-macsec.$(OBJEXT):  \
+	src/connection-editor/$(am__dirstamp) \
+	src/connection-editor/$(DEPDIR)/$(am__dirstamp)
 src/connection-editor/src_connection_editor_nm_connection_editor-page-mobile.$(OBJEXT):  \
 	src/connection-editor/$(am__dirstamp) \
 	src/connection-editor/$(DEPDIR)/$(am__dirstamp)
@@ -2284,6 +2295,9 @@ src/connection-editor/src_connection_editor_nm_connection_editor-ppp-auth-method
 	src/connection-editor/$(am__dirstamp) \
 	src/connection-editor/$(DEPDIR)/$(am__dirstamp)
 src/connection-editor/src_connection_editor_nm_connection_editor-ce-polkit-button.$(OBJEXT):  \
+	src/connection-editor/$(am__dirstamp) \
+	src/connection-editor/$(DEPDIR)/$(am__dirstamp)
+src/connection-editor/src_connection_editor_nm_connection_editor-ce-polkit.$(OBJEXT):  \
 	src/connection-editor/$(am__dirstamp) \
 	src/connection-editor/$(DEPDIR)/$(am__dirstamp)
 src/connection-editor/src_connection_editor_nm_connection_editor-connection-helpers.$(OBJEXT):  \
@@ -2399,6 +2413,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/src_nm_applet-mobile-helpers.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@src/connection-editor/$(DEPDIR)/src_connection_editor_nm_connection_editor-ce-page.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@src/connection-editor/$(DEPDIR)/src_connection_editor_nm_connection_editor-ce-polkit-button.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@src/connection-editor/$(DEPDIR)/src_connection_editor_nm_connection_editor-ce-polkit.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@src/connection-editor/$(DEPDIR)/src_connection_editor_nm_connection_editor-ce-resources.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@src/connection-editor/$(DEPDIR)/src_connection_editor_nm_connection_editor-connection-helpers.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@src/connection-editor/$(DEPDIR)/src_connection_editor_nm_connection_editor-ip4-routes-dialog.Po@am__quote@
@@ -2419,6 +2434,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@src/connection-editor/$(DEPDIR)/src_connection_editor_nm_connection_editor-page-ip-tunnel.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@src/connection-editor/$(DEPDIR)/src_connection_editor_nm_connection_editor-page-ip4.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@src/connection-editor/$(DEPDIR)/src_connection_editor_nm_connection_editor-page-ip6.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@src/connection-editor/$(DEPDIR)/src_connection_editor_nm_connection_editor-page-macsec.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@src/connection-editor/$(DEPDIR)/src_connection_editor_nm_connection_editor-page-master.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@src/connection-editor/$(DEPDIR)/src_connection_editor_nm_connection_editor-page-mobile.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@src/connection-editor/$(DEPDIR)/src_connection_editor_nm_connection_editor-page-ppp.Po@am__quote@
@@ -3108,6 +3124,20 @@ src/connection-editor/src_connection_editor_nm_connection_editor-page-dsl.obj: s
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(src_connection_editor_nm_connection_editor_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o src/connection-editor/src_connection_editor_nm_connection_editor-page-dsl.obj `if test -f 'src/connection-editor/page-dsl.c'; then $(CYGPATH_W) 'src/connection-editor/page-dsl.c'; else $(CYGPATH_W) '$(srcdir)/src/connection-editor/page-dsl.c'; fi`
 
+src/connection-editor/src_connection_editor_nm_connection_editor-page-macsec.o: src/connection-editor/page-macsec.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(src_connection_editor_nm_connection_editor_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT src/connection-editor/src_connection_editor_nm_connection_editor-page-macsec.o -MD -MP -MF src/connection-editor/$(DEPDIR)/src_connection_editor_nm_connection_editor-page-macsec.Tpo -c -o src/connection-editor/src_connection_editor_nm_connection_editor-page-macsec.o `test -f 'src/connection-editor/page-macsec.c' || echo '$(srcdir)/'`src/connection-editor/page-macsec.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) src/connection-editor/$(DEPDIR)/src_connection_editor_nm_connection_editor-page-macsec.Tpo src/connection-editor/$(DEPDIR)/src_connection_editor_nm_connection_editor-page-macsec.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='src/connection-editor/page-macsec.c' object='src/connection-editor/src_connection_editor_nm_connection_editor-page-macsec.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(src_connection_editor_nm_connection_editor_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o src/connection-editor/src_connection_editor_nm_connection_editor-page-macsec.o `test -f 'src/connection-editor/page-macsec.c' || echo '$(srcdir)/'`src/connection-editor/page-macsec.c
+
+src/connection-editor/src_connection_editor_nm_connection_editor-page-macsec.obj: src/connection-editor/page-macsec.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(src_connection_editor_nm_connection_editor_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT src/connection-editor/src_connection_editor_nm_connection_editor-page-macsec.obj -MD -MP -MF src/connection-editor/$(DEPDIR)/src_connection_editor_nm_connection_editor-page-macsec.Tpo -c -o src/connection-editor/src_connection_editor_nm_connection_editor-page-macsec.obj `if test -f 'src/connection-editor/page-macsec.c'; then $(CYGPATH_W) 'src/connection-editor/page-macsec.c'; else $(CYGPATH_W) '$(srcdir)/src/connection-editor/page-macsec.c'; fi`
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) src/connection-editor/$(DEPDIR)/src_connection_editor_nm_connection_editor-page-macsec.Tpo src/connection-editor/$(DEPDIR)/src_connection_editor_nm_connection_editor-page-macsec.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='src/connection-editor/page-macsec.c' object='src/connection-editor/src_connection_editor_nm_connection_editor-page-macsec.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(src_connection_editor_nm_connection_editor_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o src/connection-editor/src_connection_editor_nm_connection_editor-page-macsec.obj `if test -f 'src/connection-editor/page-macsec.c'; then $(CYGPATH_W) 'src/connection-editor/page-macsec.c'; else $(CYGPATH_W) '$(srcdir)/src/connection-editor/page-macsec.c'; fi`
+
 src/connection-editor/src_connection_editor_nm_connection_editor-page-mobile.o: src/connection-editor/page-mobile.c
 @am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(src_connection_editor_nm_connection_editor_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT src/connection-editor/src_connection_editor_nm_connection_editor-page-mobile.o -MD -MP -MF src/connection-editor/$(DEPDIR)/src_connection_editor_nm_connection_editor-page-mobile.Tpo -c -o src/connection-editor/src_connection_editor_nm_connection_editor-page-mobile.o `test -f 'src/connection-editor/page-mobile.c' || echo '$(srcdir)/'`src/connection-editor/page-mobile.c
 @am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) src/connection-editor/$(DEPDIR)/src_connection_editor_nm_connection_editor-page-mobile.Tpo src/connection-editor/$(DEPDIR)/src_connection_editor_nm_connection_editor-page-mobile.Po
@@ -3359,6 +3389,20 @@ src/connection-editor/src_connection_editor_nm_connection_editor-ce-polkit-butto
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='src/connection-editor/ce-polkit-button.c' object='src/connection-editor/src_connection_editor_nm_connection_editor-ce-polkit-button.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(src_connection_editor_nm_connection_editor_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o src/connection-editor/src_connection_editor_nm_connection_editor-ce-polkit-button.obj `if test -f 'src/connection-editor/ce-polkit-button.c'; then $(CYGPATH_W) 'src/connection-editor/ce-polkit-button.c'; else $(CYGPATH_W) '$(srcdir)/src/connection-editor/ce-polkit-button.c'; fi`
+
+src/connection-editor/src_connection_editor_nm_connection_editor-ce-polkit.o: src/connection-editor/ce-polkit.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(src_connection_editor_nm_connection_editor_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT src/connection-editor/src_connection_editor_nm_connection_editor-ce-polkit.o -MD -MP -MF src/connection-editor/$(DEPDIR)/src_connection_editor_nm_connection_editor-ce-polkit.Tpo -c -o src/connection-editor/src_connection_editor_nm_connection_editor-ce-polkit.o `test -f 'src/connection-editor/ce-polkit.c' || echo '$(srcdir)/'`src/connection-editor/ce-polkit.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) src/connection-editor/$(DEPDIR)/src_connection_editor_nm_connection_editor-ce-polkit.Tpo src/connection-editor/$(DEPDIR)/src_connection_editor_nm_connection_editor-ce-polkit.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='src/connection-editor/ce-polkit.c' object='src/connection-editor/src_connection_editor_nm_connection_editor-ce-polkit.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(src_connection_editor_nm_connection_editor_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o src/connection-editor/src_connection_editor_nm_connection_editor-ce-polkit.o `test -f 'src/connection-editor/ce-polkit.c' || echo '$(srcdir)/'`src/connection-editor/ce-polkit.c
+
+src/connection-editor/src_connection_editor_nm_connection_editor-ce-polkit.obj: src/connection-editor/ce-polkit.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(src_connection_editor_nm_connection_editor_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT src/connection-editor/src_connection_editor_nm_connection_editor-ce-polkit.obj -MD -MP -MF src/connection-editor/$(DEPDIR)/src_connection_editor_nm_connection_editor-ce-polkit.Tpo -c -o src/connection-editor/src_connection_editor_nm_connection_editor-ce-polkit.obj `if test -f 'src/connection-editor/ce-polkit.c'; then $(CYGPATH_W) 'src/connection-editor/ce-polkit.c'; else $(CYGPATH_W) '$(srcdir)/src/connection-editor/ce-polkit.c'; fi`
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) src/connection-editor/$(DEPDIR)/src_connection_editor_nm_connection_editor-ce-polkit.Tpo src/connection-editor/$(DEPDIR)/src_connection_editor_nm_connection_editor-ce-polkit.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='src/connection-editor/ce-polkit.c' object='src/connection-editor/src_connection_editor_nm_connection_editor-ce-polkit.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(src_connection_editor_nm_connection_editor_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o src/connection-editor/src_connection_editor_nm_connection_editor-ce-polkit.obj `if test -f 'src/connection-editor/ce-polkit.c'; then $(CYGPATH_W) 'src/connection-editor/ce-polkit.c'; else $(CYGPATH_W) '$(srcdir)/src/connection-editor/ce-polkit.c'; fi`
 
 src/connection-editor/src_connection_editor_nm_connection_editor-connection-helpers.o: src/connection-editor/connection-helpers.c
 @am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(src_connection_editor_nm_connection_editor_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT src/connection-editor/src_connection_editor_nm_connection_editor-connection-helpers.o -MD -MP -MF src/connection-editor/$(DEPDIR)/src_connection_editor_nm_connection_editor-connection-helpers.Tpo -c -o src/connection-editor/src_connection_editor_nm_connection_editor-connection-helpers.o `test -f 'src/connection-editor/connection-helpers.c' || echo '$(srcdir)/'`src/connection-editor/connection-helpers.c

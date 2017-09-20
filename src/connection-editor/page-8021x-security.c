@@ -37,6 +37,7 @@ typedef struct {
 	GtkToggleButton *enabled;
 	GtkWidget *security_widget;
 	WirelessSecurity *security;
+	GtkSizeGroup *group;
 
 	gboolean initial_have_8021x;
 } CEPage8021xSecurityPrivate;
@@ -51,8 +52,12 @@ static void
 enable_toggled (GtkToggleButton *button, gpointer user_data)
 {
 	CEPage8021xSecurityPrivate *priv = CE_PAGE_8021X_SECURITY_GET_PRIVATE (user_data);
+	gboolean active = gtk_toggle_button_get_active (priv->enabled);
 
-	gtk_widget_set_sensitive (priv->security_widget, gtk_toggle_button_get_active (priv->enabled));
+	gtk_widget_set_sensitive (priv->security_widget, active);
+	nm_connection_editor_inter_page_set_value (CE_PAGE (user_data)->editor,
+	                                           INTER_PAGE_CHANGE_802_1X_ENABLE,
+	                                           GINT_TO_POINTER (active));
 	ce_page_changed (CE_PAGE (user_data));
 }
 
@@ -71,6 +76,8 @@ finish_setup (CEPage8021xSecurity *self, gpointer unused, GError *error, gpointe
 		g_warning ("Could not load 802.1X user interface.");
 		return;
 	}
+
+	wireless_security_add_to_size_group (priv->security, priv->group);
 
 	wireless_security_set_changed_notify (priv->security, stuff_changed, self);
 	priv->security_widget = wireless_security_get_widget (priv->security);
@@ -123,6 +130,8 @@ ce_page_8021x_security_new (NMConnectionEditor *editor,
 		priv->initial_have_8021x = TRUE;
 
 	priv->enabled = GTK_TOGGLE_BUTTON (gtk_check_button_new_with_mnemonic (_("Use 802.1_X security for this connection")));
+
+	priv->group = gtk_size_group_new (GTK_SIZE_GROUP_HORIZONTAL);
 
 	g_signal_connect (self, "initialized", G_CALLBACK (finish_setup), NULL);
 
@@ -191,6 +200,23 @@ ce_page_validate_v (CEPage *page, NMConnection *connection, GError **error)
 	return valid;
 }
 
+static gboolean
+inter_page_change (CEPage *page)
+{
+	CEPage8021xSecurityPrivate *priv = CE_PAGE_8021X_SECURITY_GET_PRIVATE (page);
+	gpointer macsec_mode;
+
+	if (nm_connection_editor_inter_page_get_value (page->editor,
+	                                               INTER_PAGE_CHANGE_MACSEC_MODE,
+	                                               &macsec_mode)) {
+		gtk_toggle_button_set_active (priv->enabled,
+		                              GPOINTER_TO_INT (macsec_mode) == NM_SETTING_MACSEC_MODE_EAP);
+		enable_toggled (priv->enabled, page);
+	}
+
+	return TRUE;
+}
+
 static void
 ce_page_8021x_security_init (CEPage8021xSecurity *self)
 {
@@ -201,6 +227,8 @@ dispose (GObject *object)
 {
 	CEPage *parent = CE_PAGE (object);
 	CEPage8021xSecurityPrivate *priv = CE_PAGE_8021X_SECURITY_GET_PRIVATE (object);
+
+	g_clear_object (&priv->group);
 
 	if (priv->security_widget) {
 		gtk_container_remove (GTK_CONTAINER (parent->page), priv->security_widget);
@@ -227,4 +255,5 @@ ce_page_8021x_security_class_init (CEPage8021xSecurityClass *security_class)
 	object_class->dispose = dispose;
 
 	parent_class->ce_page_validate_v = ce_page_validate_v;
+	parent_class->inter_page_change = inter_page_change;
 }

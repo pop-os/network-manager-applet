@@ -92,10 +92,6 @@ add_to_size_group (EAPMethod *parent, GtkSizeGroup *group)
 	EAPMethodTLS *method = (EAPMethodTLS *) parent;
 	GtkWidget *widget;
 
-	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_tls_ca_cert_not_required_checkbox"));
-	g_assert (widget);
-	gtk_size_group_add_widget (group, widget);
-
 	widget = GTK_WIDGET (gtk_builder_get_object (parent->builder, "eap_tls_identity_label"));
 	g_assert (widget);
 	gtk_size_group_add_widget (group, widget);
@@ -143,7 +139,7 @@ fill_connection (EAPMethod *parent, NMConnection *connection)
 #endif
 
 	/* TLS private key */
-	password = g_strdup (nma_cert_chooser_get_key_password (NMA_CERT_CHOOSER (method->client_cert_chooser)));
+	password = nma_cert_chooser_get_key_password (NMA_CERT_CHOOSER (method->client_cert_chooser));
 	value = nma_cert_chooser_get_key (NMA_CERT_CHOOSER (method->client_cert_chooser), &scheme);
 
 	if (parent->phase2) {
@@ -157,10 +153,11 @@ fill_connection (EAPMethod *parent, NMConnection *connection)
 			g_clear_error (&error);
 		}
 	}
+	g_free (value);
 
 #if LIBNM_BUILD
 /* libnm-glib doesn't support these. */
-	/* Save CA certificate PIN password flags to the connection */
+	/* Save CA certificate PIN and its flags to the connection */
 	secret_flags = nma_cert_chooser_get_cert_password_flags (NMA_CERT_CHOOSER (method->ca_cert_chooser));
 	nm_setting_set_secret_flags (NM_SETTING (s_8021x), method->ca_cert_password_flags_name,
 	                             secret_flags, NULL);
@@ -169,9 +166,12 @@ fill_connection (EAPMethod *parent, NMConnection *connection)
 		nma_cert_chooser_update_cert_password_storage (NMA_CERT_CHOOSER (method->ca_cert_chooser),
 		                                               secret_flags, NM_SETTING (s_8021x),
 		                                               method->ca_cert_password_flags_name);
+		g_object_set (s_8021x, method->ca_cert_password_flags_name,
+		              nma_cert_chooser_get_cert_password (NMA_CERT_CHOOSER (method->ca_cert_chooser)),
+		              NULL);
 	}
 
-	/* Save user certificate PIN password flags to the connection */
+	/* Save user certificate PIN and its flags flags to the connection */
 	secret_flags = nma_cert_chooser_get_cert_password_flags (NMA_CERT_CHOOSER (method->client_cert_chooser));
 	nm_setting_set_secret_flags (NM_SETTING (s_8021x), method->client_cert_password_flags_name,
 	                             secret_flags, NULL);
@@ -179,6 +179,9 @@ fill_connection (EAPMethod *parent, NMConnection *connection)
 		nma_cert_chooser_update_cert_password_storage (NMA_CERT_CHOOSER (method->client_cert_chooser),
 		                                               secret_flags, NM_SETTING (s_8021x),
 		                                               method->client_cert_password_flags_name);
+		g_object_set (s_8021x, method->client_cert_password_flags_name,
+		              nma_cert_chooser_get_cert_password (NMA_CERT_CHOOSER (method->client_cert_chooser)),
+		              NULL);
 	}
 #endif
 
@@ -216,6 +219,8 @@ fill_connection (EAPMethod *parent, NMConnection *connection)
 	/* TLS CA certificate */
 	if (gtk_widget_get_sensitive (method->ca_cert_chooser))
 		value = nma_cert_chooser_get_cert (NMA_CERT_CHOOSER (method->ca_cert_chooser), &scheme);
+	else
+		value = NULL;
 	format = NM_SETTING_802_1X_CK_FORMAT_UNKNOWN;
 	if (parent->phase2) {
 		if (!nm_setting_802_1x_set_phase2_ca_cert (s_8021x, value, scheme, &format, &error)) {

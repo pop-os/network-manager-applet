@@ -634,6 +634,8 @@ connection_editor_hc_real = \
 	src/connection-editor/page-ip6.c \
 	src/connection-editor/page-dsl.h \
 	src/connection-editor/page-dsl.c \
+	src/connection-editor/page-macsec.h \
+	src/connection-editor/page-macsec.c \
 	src/connection-editor/page-mobile.h \
 	src/connection-editor/page-mobile.c \
 	src/connection-editor/page-bluetooth.h \
@@ -670,6 +672,8 @@ connection_editor_hc_real = \
 	src/connection-editor/ppp-auth-methods-dialog.h \
 	src/connection-editor/ce-polkit-button.c \
 	src/connection-editor/ce-polkit-button.h \
+	src/connection-editor/ce-polkit.c \
+	src/connection-editor/ce-polkit.h \
 	src/connection-editor/connection-helpers.c \
 	src/connection-editor/connection-helpers.h
 
@@ -731,6 +735,7 @@ EXTRA_DIST += \
 	src/connection-editor/ce-page-ip4.ui \
 	src/connection-editor/ce-page-ip6.ui \
 	src/connection-editor/ce-page-ip-tunnel.ui \
+	src/connection-editor/ce-page-macsec.ui \
 	src/connection-editor/ce-page-mobile.ui \
 	src/connection-editor/ce-page-ppp.ui \
 	src/connection-editor/ce-page-proxy.ui \
@@ -741,6 +746,7 @@ EXTRA_DIST += \
 	src/connection-editor/ce-page-wifi.ui \
 	src/connection-editor/ce-ppp-auth-methods.ui \
 	src/connection-editor/nm-connection-editor.ui \
+	src/connection-editor/nm-connection-list.ui \
 	src/connection-editor/ce.gresource.xml
 
 ###############################################################################
