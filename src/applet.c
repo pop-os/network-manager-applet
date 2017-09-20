@@ -15,7 +15,7 @@
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  *
- * Copyright (C) 2004 - 2015 Red Hat, Inc.
+ * Copyright (C) 2004 - 2017 Red Hat, Inc.
  * Copyright (C) 2005 - 2008 Novell, Inc.
  *
  * This applet used the GNOME Wireless Applet as a skeleton to build from.
@@ -225,7 +225,8 @@ applet_get_best_activating_connection (NMApplet *applet, NMDevice **device)
 }
 
 static NMActiveConnection *
-applet_get_default_active_connection (NMApplet *applet, NMDevice **device)
+applet_get_default_active_connection (NMApplet *applet, NMDevice **device,
+                                      gboolean only_known_devices)
 {
 	NMActiveConnection *default_ac = NULL;
 	NMDevice *non_default_device = NULL;
@@ -248,6 +249,10 @@ applet_get_default_active_connection (NMApplet *applet, NMDevice **device)
 			continue;
 
 		candidate_dev = g_ptr_array_index (devices, 0);
+
+		if (   only_known_devices
+		    && !get_device_class (candidate_dev, applet))
+			continue;
 
 		/* We have to return default connection/device even if they are of an
 		 * unknown class - otherwise we may end up returning non
@@ -535,7 +540,7 @@ applet_menu_item_add_complex_separator_helper (GtkWidget *menu,
                                                NMApplet *applet,
                                                const gchar *label)
 {
-	GtkWidget *menu_item, *box, *xlabel;
+	GtkWidget *menu_item, *box, *xlabel, *separator;
 
 	if (INDICATOR_ENABLED (applet)) {
 		/* Indicator doesn't draw complex separators */
@@ -549,11 +554,16 @@ applet_menu_item_add_complex_separator_helper (GtkWidget *menu,
 		xlabel = gtk_label_new (NULL);
 		gtk_label_set_markup (GTK_LABEL (xlabel), label);
 
-		gtk_box_pack_start (GTK_BOX (box), gtk_separator_new (GTK_ORIENTATION_HORIZONTAL), TRUE, TRUE, 0);
+		separator = gtk_separator_new (GTK_ORIENTATION_HORIZONTAL);
+		g_object_set (G_OBJECT (separator), "valign", GTK_ALIGN_CENTER, NULL);
+		gtk_box_pack_start (GTK_BOX (box), separator, TRUE, TRUE, 0);
+
 		gtk_box_pack_start (GTK_BOX (box), xlabel, FALSE, FALSE, 2);
 	}
 
-	gtk_box_pack_start (GTK_BOX (box), gtk_separator_new (GTK_ORIENTATION_HORIZONTAL), TRUE, TRUE, 0);
+	separator = gtk_separator_new (GTK_ORIENTATION_HORIZONTAL);
+	g_object_set (G_OBJECT (separator), "valign", GTK_ALIGN_CENTER, NULL);
+	gtk_box_pack_start (GTK_BOX (box), separator, TRUE, TRUE, 0);
 
 	g_object_set (G_OBJECT (menu_item),
 		          "child", box,
@@ -737,7 +747,7 @@ applet_do_notify (NMApplet *applet,
 	escaped = utils_escape_notify_message (message);
 	notify = notify_notification_new (summary,
 	                                  escaped,
-	                                  icon ? icon : GTK_STOCK_NETWORK
+	                                  icon ? icon : "network-workgroup"
 #if HAVE_LIBNOTIFY_07
 	                                  );
 #else
@@ -1033,7 +1043,7 @@ nma_menu_vpn_item_clicked (GtkMenuItem *item, gpointer user_data)
 		return;
 	}
 
-	active = applet_get_default_active_connection (applet, &device);
+	active = applet_get_default_active_connection (applet, &device, FALSE);
 	if (!active || !device) {
 		g_warning ("%s: no active connection or device.", __func__);
 		return;
@@ -2023,9 +2033,9 @@ applet_update_menu (gpointer user_data)
 
 	/* Update the menu */
 	if (INDICATOR_ENABLED (applet)) {
-		nma_context_menu_populate (applet, menu);
 		nma_menu_show_cb (GTK_WIDGET (menu), applet);
 		nma_menu_add_separator_item (GTK_WIDGET (menu));
+		nma_context_menu_populate (applet, menu);
 		nma_context_menu_update (applet);
 	} else
 		nma_menu_show_cb (GTK_WIDGET (menu), applet);
@@ -2577,7 +2587,7 @@ applet_get_device_icon_for_state (NMApplet *applet,
 		/* If there aren't any activating devices, then show the state of
 		 * the default active connection instead.
 		 */
-		active = applet_get_default_active_connection (applet, &device);
+		active = applet_get_default_active_connection (applet, &device, TRUE);
 		if (!active || !device)
 			goto out;
 	}
@@ -3280,7 +3290,7 @@ applet_startup (GApplication *app, gpointer user_data)
 	gs_free_error GError *error = NULL;
 
 	g_set_application_name (_("NetworkManager Applet"));
-	gtk_window_set_default_icon_name (GTK_STOCK_NETWORK);
+	gtk_window_set_default_icon_name ("network-workgroup");
 
 	applet->info_dialog_ui = gtk_builder_new ();
 

@@ -2,7 +2,7 @@ AC_PREREQ([2.63])
 
 m4_define([nma_major_version], [1])
 m4_define([nma_minor_version], [8])
-m4_define([nma_micro_version], [2])
+m4_define([nma_micro_version], [4])
 m4_define([nma_version],
           [nma_major_version.nma_minor_version.nma_micro_version])
 
@@ -95,7 +95,7 @@ GTK_DOC_CHECK(1.0)
 AC_ARG_WITH(libnm-gtk, AS_HELP_STRING([--without-libnm-gtk], [dont build legacy library libnm-gtk which depends on libnm-glib/libnm-util/dbus-glib]))
 if test "$with_libnm_gtk" != no; then
 	PKG_CHECK_MODULES(LIBNM_GLIB,
-			[gio-2.0 >= 2.32
+			[gio-2.0 >= 2.38
 			 NetworkManager >= 1.7
 			 libnm-glib >= 1.7
 			 libnm-util >= 1.7
@@ -106,14 +106,16 @@ if test "$with_libnm_gtk" != no; then
 
 Configure with --without-libnm-gtk if you do not need the legacy library])])
 	with_libnm_gtk=yes
-	LIBNM_GLIB_CFLAGS="$LIBNM_GLIB_CFLAGS -DGLIB_VERSION_MIN_REQUIRED=GLIB_VERSION_2_32"
+	LIBNM_GLIB_CFLAGS="$LIBNM_GLIB_CFLAGS -DGLIB_VERSION_MIN_REQUIRED=GLIB_VERSION_2_38"
+	LIBNM_GLIB_CFLAGS="$LIBNM_GLIB_CFLAGS -DGLIB_VERSION_MAX_ALLOWED=GLIB_VERSION_2_38"
 	LIBNM_GLIB_CFLAGS="$LIBNM_GLIB_CFLAGS -DNM_VERSION_MIN_REQUIRED=NM_VERSION_1_4"
 	LIBNM_GLIB_CFLAGS="$LIBNM_GLIB_CFLAGS -DNM_VERSION_MAX_ALLOWED=NM_VERSION_1_4"
 fi
 AM_CONDITIONAL(WITH_LIBNM_GTK, test "$with_libnm_gtk" != "no")
 
-PKG_CHECK_MODULES(LIBNM, [libnm >= 1.7 gio-2.0 >= 2.32 gmodule-export-2.0])
-LIBNM_CFLAGS="$LIBNM_CFLAGS -DGLIB_VERSION_MIN_REQUIRED=GLIB_VERSION_2_32"
+PKG_CHECK_MODULES(LIBNM, [libnm >= 1.7 gio-2.0 >= 2.38 gmodule-export-2.0])
+LIBNM_CFLAGS="$LIBNM_CFLAGS -DGLIB_VERSION_MIN_REQUIRED=GLIB_VERSION_2_38"
+LIBNM_CFLAGS="$LIBNM_CFLAGS -DGLIB_VERSION_MAX_ALLOWED=GLIB_VERSION_2_38"
 LIBNM_CFLAGS="$LIBNM_CFLAGS -DNM_VERSION_MIN_REQUIRED=NM_VERSION_1_8"
 LIBNM_CFLAGS="$LIBNM_CFLAGS -DNM_VERSION_MAX_ALLOWED=NM_VERSION_1_8"
 
@@ -171,7 +173,7 @@ if (test "${with_team}" == "no"); then
     AC_DEFINE(WITH_JANSSON, 0, [Define if Jansson is available])
 else
     PKG_CHECK_MODULES(JANSSON,
-                      [jansson >= 2.3],,
+                      [jansson >= 2.7],,
                       AC_MSG_ERROR([jansson is needed for team configuration editor. Use --without-team to build without it.]))
     AC_DEFINE(WITH_JANSSON, 1, [Define if Jansson is available])
 fi

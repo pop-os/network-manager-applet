@@ -19,7 +19,7 @@
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  *
- * Copyright 2007 - 2014 Red Hat, Inc.
+ * Copyright 2007 - 2017 Red Hat, Inc.
  * Copyright 2007 - 2008 Novell, Inc.
  */
 
@@ -61,6 +61,7 @@
 #include "page-bridge-port.h"
 #include "page-vlan.h"
 #include "page-dcb.h"
+#include "page-macsec.h"
 #include "ce-polkit-button.h"
 #include "vpn-helpers.h"
 #include "eap-method.h"
@@ -577,7 +578,7 @@ nm_connection_editor_new (GtkWindow *parent_window,
 	editor->ok_button = ce_polkit_button_new (_("_Save"),
 	                                          _("Save any changes made to this connection."),
 	                                          _("Authenticate to save this connection for all users of this machine."),
-	                                          GTK_STOCK_APPLY,
+	                                          "emblem-ok-symbolic",
 	                                          client,
 	                                          NM_CLIENT_PERMISSION_SETTINGS_MODIFY_SYSTEM);
 	gtk_button_set_use_underline (GTK_BUTTON (editor->ok_button), TRUE);
@@ -997,8 +998,6 @@ nm_connection_editor_set_connection (NMConnectionEditor *editor,
 	} else if (!strcmp (connection_type, NM_SETTING_PPPOE_SETTING_NAME)) {
 		if (!add_page (editor, ce_page_dsl_new, editor->connection, error))
 			goto out;
-		if (!add_page (editor, ce_page_ethernet_new, editor->connection, error))
-			goto out;
 		if (!add_page (editor, ce_page_ppp_new, editor->connection, error))
 			goto out;
 	} else if (!strcmp (connection_type, NM_SETTING_GSM_SETTING_NAME) || 
@@ -1034,6 +1033,11 @@ nm_connection_editor_set_connection (NMConnectionEditor *editor,
 			goto out;
 	} else if (!strcmp (connection_type, NM_SETTING_VLAN_SETTING_NAME)) {
 		if (!add_page (editor, ce_page_vlan_new, editor->connection, error))
+			goto out;
+	} else if (!strcmp (connection_type, NM_SETTING_MACSEC_SETTING_NAME)) {
+		if (!add_page (editor, ce_page_macsec_new, editor->connection, error))
+			goto out;
+		if (!add_page (editor, ce_page_8021x_security_new, editor->connection, error))
 			goto out;
 	} else {
 		g_warning ("Unhandled setting type '%s'", connection_type);
@@ -1124,6 +1128,17 @@ static void
 editor_closed_cb (GtkWidget *widget, GdkEvent *event, gpointer user_data)
 {
 	cancel_button_clicked_cb (widget, user_data);
+}
+
+static gboolean
+key_press_cb (GtkWidget *widget, GdkEventKey *event, gpointer user_data)
+{
+	if (event->keyval == GDK_KEY_Escape) {
+		gtk_window_close (GTK_WINDOW (widget));
+		return TRUE;
+	}
+
+	return FALSE;
 }
 
 static void
@@ -1274,6 +1289,8 @@ nm_connection_editor_run (NMConnectionEditor *self)
 
 	g_signal_connect (G_OBJECT (self->window), "delete-event",
 	                  G_CALLBACK (editor_closed_cb), self);
+	g_signal_connect (G_OBJECT (self->window), "key-press-event",
+	                  G_CALLBACK (key_press_cb), self);
 
 	g_signal_connect (G_OBJECT (self->ok_button), "clicked",
 	                  G_CALLBACK (ok_button_clicked_cb), self);
