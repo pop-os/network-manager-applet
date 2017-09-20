@@ -31,7 +31,7 @@ Closes: #696256
  10 files changed, 88 insertions(+), 1 deletion(-)
 
 diff --git a/src/applet-device-wifi.c b/src/applet-device-wifi.c
-index 98fe6a2..7af9c0f 100644
+index d0ea6a1..e0c5dff 100644
 --- a/src/applet-device-wifi.c
 +++ b/src/applet-device-wifi.c
 @@ -461,9 +461,10 @@ wifi_new_auto_connection (NMDevice *device,
@@ -85,7 +85,7 @@ index 98fe6a2..7af9c0f 100644
  	 * Dialog Of Doom.
  	 */
 diff --git a/src/connection-editor/page-mobile.c b/src/connection-editor/page-mobile.c
-index f95c26b..3cbf3e1 100644
+index a9d0a92..fba8d90 100644
 --- a/src/connection-editor/page-mobile.c
 +++ b/src/connection-editor/page-mobile.c
 @@ -442,6 +442,7 @@ new_connection_mobile_wizard_done (NMAMobileWizard *wizard,
@@ -184,7 +184,7 @@ index fb648d1..007dac4 100644
  	g_object_set (s_wifi, NM_SETTING_WIRELESS_MODE, "infrastructure", NULL);
  	nm_connection_add_setting (connection, s_wifi);
 diff --git a/src/libnm-gtk/nm-wifi-dialog.c b/src/libnm-gtk/nm-wifi-dialog.c
-index 0e5e8cc..49e3ff5 100644
+index d6786fd..2740ae2 100644
 --- a/src/libnm-gtk/nm-wifi-dialog.c
 +++ b/src/libnm-gtk/nm-wifi-dialog.c
 @@ -36,6 +36,7 @@
@@ -195,7 +195,7 @@ index 0e5e8cc..49e3ff5 100644
  
  G_DEFINE_TYPE (NMAWifiDialog, nma_wifi_dialog, GTK_TYPE_DIALOG)
  
-@@ -1229,6 +1230,9 @@ nma_wifi_dialog_get_connection (NMAWifiDialog *self,
+@@ -1218,6 +1219,9 @@ nma_wifi_dialog_get_connection (NMAWifiDialog *self,
  			      NM_SETTING_CONNECTION_UUID, uuid,
  			      NULL);
  		g_free (uuid);
@@ -206,7 +206,7 @@ index 0e5e8cc..49e3ff5 100644
  
  		s_wireless = (NMSettingWireless *) nm_setting_wireless_new ();
 diff --git a/src/mobile-helpers.c b/src/mobile-helpers.c
-index 65a56a3..f508e0d 100644
+index 9c1c965..2fdde7d 100644
 --- a/src/mobile-helpers.c
 +++ b/src/mobile-helpers.c
 @@ -182,6 +182,7 @@ mobile_wizard_done (NMAMobileWizard *wizard,
@@ -234,10 +234,10 @@ index 65a56a3..f508e0d 100644
  	}
  
 diff --git a/src/utils/utils.c b/src/utils/utils.c
-index 684987b..1d328bd 100644
+index c355be3..b77427b 100644
 --- a/src/utils/utils.c
 +++ b/src/utils/utils.c
-@@ -576,3 +576,11 @@ utils_key_filter (void)
+@@ -578,3 +578,11 @@ utils_key_filter (void)
  
  	return filter;
  }
