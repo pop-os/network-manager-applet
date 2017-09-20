@@ -14,6 +14,7 @@ override_dh_auto_configure:
 	dh_auto_configure -- \
 		--libexecdir=/usr/lib/NetworkManager \
 		--disable-more-warnings \
+		--disable-static \
 		--enable-introspection \
 		--enable-gtk-doc \
 		--with-gcr \
@@ -21,6 +22,5 @@ override_dh_auto_configure:
 		--with-wwan
 
 override_dh_missing:
-	find debian/tmp -name '*.a' -print -delete
 	find debian/tmp -name '*.la' -print -delete
 	dh_missing --fail-missing
