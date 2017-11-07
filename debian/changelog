@@ -1,8 +1,11 @@
-network-manager-applet (1.8.6-1) UNRELEASED; urgency=medium
+network-manager-applet (1.8.6-1) unstable; urgency=medium
 
   * New upstream version 1.8.6
+  * Don't use Unicode in patch header
+  * Bump Build-Depends on libgtk-3-dev to (>= 3.10)
+  * Bump Standards-Version to 4.1.1
 
- -- Michael Biebl <biebl@debian.org>  Tue, 07 Nov 2017 20:05:56 +0100
+ -- Michael Biebl <biebl@debian.org>  Tue, 07 Nov 2017 20:57:13 +0100
 
 network-manager-applet (1.8.4-1) unstable; urgency=medium
 
