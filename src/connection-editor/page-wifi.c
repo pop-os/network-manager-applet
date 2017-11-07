@@ -240,7 +240,7 @@ mode_combo_changed_cb (GtkComboBox *combo,
 	CEPageWifiPrivate *priv = CE_PAGE_WIFI_GET_PRIVATE (self);
 	CEPage *parent = CE_PAGE (self);
 	GtkWidget *widget_band_label, *widget_chan_label, *widget_bssid_label;
-	gboolean show_freq = FALSE;
+	gboolean show_freq = TRUE;
 	gboolean show_bssid = TRUE;
 	gboolean hotspot = FALSE;
 
@@ -254,10 +254,8 @@ mode_combo_changed_cb (GtkComboBox *combo,
 		 * For AP-mode, the BSSID is the MAC address of the device.
 		 */
 		show_bssid = FALSE;
-		show_freq = TRUE;
 		break;
 	default: /* infrastructure */
-		show_freq = FALSE;
 		break;
 	}
 	nm_connection_editor_inter_page_set_value (parent->editor,
@@ -336,12 +334,14 @@ populate_ui (CEPageWifi *self)
 	mode_combo_changed_cb (priv->mode, self);
 	g_signal_connect (priv->mode, "changed", G_CALLBACK (mode_combo_changed_cb), self);
 
-	g_signal_connect (priv->channel, "output",
-	                  G_CALLBACK (channel_spin_output_cb),
-	                  self);
-	g_signal_connect (priv->channel, "input",
-	                  G_CALLBACK (channel_spin_input_cb),
-	                  self);
+	g_signal_connect_object (priv->channel, "output",
+	                         G_CALLBACK (channel_spin_output_cb),
+	                         self,
+	                         0);
+	g_signal_connect_object (priv->channel, "input",
+	                         G_CALLBACK (channel_spin_input_cb),
+	                         self,
+	                         0);
 
 	gtk_widget_set_sensitive (GTK_WIDGET (priv->channel), FALSE);
 	if (band) {
