@@ -1,16 +1,13 @@
 From: Michael Biebl <biebl@debian.org>
 Date: Tue, 18 Mar 2014 10:49:13 +0100
 Subject: Allow to create connections without admin privileges
-MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
 
 Set passwords as agent-owned when they need to, to allow users without
 root permissions to easily configure their connections.
 The logic is:
 - Bluetooth, CDMA and GSM connections: always user-owned
 - WEP/WPA connections: system-owned if user has the permissions
-  (with NM’s config, that is netdev or sudo membership), user-owned
+  (with NM's config, that is netdev or sudo membership), user-owned
   otherwise. The password is stored in the keyring for WPA, not for
   WEP.
 - WiMax / Wired connections: always system-owned (with 802.1x
@@ -153,7 +150,7 @@ index 96cfb6c..376f9c0 100644
  		g_object_set (s_vpn, NM_SETTING_VPN_SERVICE_TYPE, service_type, NULL);
  
 diff --git a/src/connection-editor/page-wifi.c b/src/connection-editor/page-wifi.c
-index fb648d1..007dac4 100644
+index c6948a5..4db5548 100644
 --- a/src/connection-editor/page-wifi.c
 +++ b/src/connection-editor/page-wifi.c
 @@ -26,6 +26,8 @@
