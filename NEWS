@@ -1,4 +1,27 @@
 ======================================================
+network-manager-applet-1.8.10
+Overview of changes since network-manager-applet-1.8.8
+======================================================
+
+This is a new stable release of network-manager-applet.  Notable changes include:
+
+* Don't request secrets for Bluetooth connections. Works around a bug in GNOME
+  Shell secret agent.
+* Fix a bug that caused invalid connections to be non-editable (and thus not
+  fixable).
+
+======================================================
+network-manager-applet-1.8.8
+Overview of changes since network-manager-applet-1.8.6
+======================================================
+
+This is a new stable release of network-manager-applet.  Notable changes include:
+
+* Fix loading of secrets when editing a VPN connection.
+* Fixes to the experimental Meson support.
+* Update to then Japanese, Indonesian, Polish, Croatian and Danish translations.
+
+======================================================
 network-manager-applet-1.8.6
 Overview of changes since network-manager-applet-1.8.4
 ======================================================
@@ -6,6 +29,8 @@ Overview of changes since network-manager-applet-1.8.4
 This is a new stable release of network-manager-applet.  Notable changes include:
 
 * Added an option to build with Meson build system.
+* Wi-Fi client connections now support setting a band and a channel too.
+* Setting IPv6 address generation mode is now supported.
 * Fixed a possible crash after editing Wi-Fi connections.
 * Updated Danish, Dutch and German translations.
 
