@@ -437,8 +437,9 @@ src_libnm_gtk_tests_test_mobile_providers_OBJECTS = src/libnm-gtk/tests/src_libn
 @WITH_LIBNM_GTK_TRUE@src_libnm_gtk_tests_test_mobile_providers_DEPENDENCIES =  \
 @WITH_LIBNM_GTK_TRUE@	src/libnm-gtk/libnm-gtk.la \
 @WITH_LIBNM_GTK_TRUE@	$(am__DEPENDENCIES_1)
-am__src_nm_applet_SOURCES_DIST = src/main.c src/applet.c src/applet.h \
-	src/applet-agent.c src/applet-agent.h src/applet-vpn-request.c \
+am__src_nm_applet_SOURCES_DIST = shared/nm-utils/nm-compat.c \
+	src/main.c src/applet.c src/applet.h src/applet-agent.c \
+	src/applet-agent.h src/applet-vpn-request.c \
 	src/applet-vpn-request.h src/ethernet-dialog.h \
 	src/ethernet-dialog.c src/applet-dialogs.h \
 	src/applet-dialogs.c src/applet-device-ethernet.h \
@@ -449,7 +450,8 @@ am__src_nm_applet_SOURCES_DIST = src/main.c src/applet.c src/applet.h \
 	src/applet-device-bt.c src/fallback-icon.h \
 	src/applet-device-broadband.h src/applet-device-broadband.c
 @WITH_WWAN_TRUE@am__objects_16 = src/src_nm_applet-applet-device-broadband.$(OBJEXT)
-am__objects_17 = src/src_nm_applet-main.$(OBJEXT) \
+am__objects_17 = shared/nm-utils/src_nm_applet-nm-compat.$(OBJEXT) \
+	src/src_nm_applet-main.$(OBJEXT) \
 	src/src_nm_applet-applet.$(OBJEXT) \
 	src/src_nm_applet-applet-agent.$(OBJEXT) \
 	src/src_nm_applet-applet-vpn-request.$(OBJEXT) \
@@ -1111,6 +1113,7 @@ EXTRA_DIST = $(HTML_IMAGES) $(SETUP_FILES) $(icon16_DATA) \
 	src/connection-editor/meson.build src/8021x.ui \
 	src/gsm-unlock.ui src/info.ui src/applet.gresource.xml \
 	src/meson.build shared/nm-utils/gsystem-local-alloc.h \
+	shared/nm-utils/nm-compat.c shared/nm-utils/nm-compat.h \
 	shared/nm-utils/nm-glib.h shared/nm-utils/nm-macros-internal.h \
 	shared/nm-utils/nm-shared-utils.c \
 	shared/nm-utils/nm-shared-utils.h \
@@ -1712,8 +1715,9 @@ nm_applet_h_gen = \
 nm_applet_c_gen = \
 	src/applet-resources.c
 
-nm_applet_hc_real = src/main.c src/applet.c src/applet.h \
-	src/applet-agent.c src/applet-agent.h src/applet-vpn-request.c \
+nm_applet_hc_real = shared/nm-utils/nm-compat.c src/main.c \
+	src/applet.c src/applet.h src/applet-agent.c \
+	src/applet-agent.h src/applet-vpn-request.c \
 	src/applet-vpn-request.h src/ethernet-dialog.h \
 	src/ethernet-dialog.c src/applet-dialogs.h \
 	src/applet-dialogs.c src/applet-device-ethernet.h \
@@ -2329,6 +2333,9 @@ src/libnm-gtk/tests/src_libnm_gtk_tests_test_mobile_providers-test-mobile-provid
 src/libnm-gtk/tests/test-mobile-providers$(EXEEXT): $(src_libnm_gtk_tests_test_mobile_providers_OBJECTS) $(src_libnm_gtk_tests_test_mobile_providers_DEPENDENCIES) $(EXTRA_src_libnm_gtk_tests_test_mobile_providers_DEPENDENCIES) src/libnm-gtk/tests/$(am__dirstamp)
 	@rm -f src/libnm-gtk/tests/test-mobile-providers$(EXEEXT)
 	$(AM_V_CCLD)$(LINK) $(src_libnm_gtk_tests_test_mobile_providers_OBJECTS) $(src_libnm_gtk_tests_test_mobile_providers_LDADD) $(LIBS)
+shared/nm-utils/src_nm_applet-nm-compat.$(OBJEXT):  \
+	shared/nm-utils/$(am__dirstamp) \
+	shared/nm-utils/$(DEPDIR)/$(am__dirstamp)
 src/$(am__dirstamp):
 	@$(MKDIR_P) src
 	@: > src/$(am__dirstamp)
@@ -2401,6 +2408,7 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
+@AMDEP_TRUE@@am__include@ @am__quote@shared/nm-utils/$(DEPDIR)/src_nm_applet-nm-compat.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@shared/nm-utils/$(DEPDIR)/src_utils_libutils_libnm_glib_la-nm-shared-utils.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@shared/nm-utils/$(DEPDIR)/src_utils_libutils_libnm_la-nm-shared-utils.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/src_nm_applet-ap-menu-item.Po@am__quote@
@@ -3451,6 +3459,20 @@ src/libnm-gtk/tests/src_libnm_gtk_tests_test_mobile_providers-test-mobile-provid
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='src/libnm-gtk/tests/test-mobile-providers.c' object='src/libnm-gtk/tests/src_libnm_gtk_tests_test_mobile_providers-test-mobile-providers.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(src_libnm_gtk_tests_test_mobile_providers_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o src/libnm-gtk/tests/src_libnm_gtk_tests_test_mobile_providers-test-mobile-providers.obj `if test -f 'src/libnm-gtk/tests/test-mobile-providers.c'; then $(CYGPATH_W) 'src/libnm-gtk/tests/test-mobile-providers.c'; else $(CYGPATH_W) '$(srcdir)/src/libnm-gtk/tests/test-mobile-providers.c'; fi`
+
+shared/nm-utils/src_nm_applet-nm-compat.o: shared/nm-utils/nm-compat.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(src_nm_applet_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT shared/nm-utils/src_nm_applet-nm-compat.o -MD -MP -MF shared/nm-utils/$(DEPDIR)/src_nm_applet-nm-compat.Tpo -c -o shared/nm-utils/src_nm_applet-nm-compat.o `test -f 'shared/nm-utils/nm-compat.c' || echo '$(srcdir)/'`shared/nm-utils/nm-compat.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) shared/nm-utils/$(DEPDIR)/src_nm_applet-nm-compat.Tpo shared/nm-utils/$(DEPDIR)/src_nm_applet-nm-compat.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='shared/nm-utils/nm-compat.c' object='shared/nm-utils/src_nm_applet-nm-compat.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(src_nm_applet_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o shared/nm-utils/src_nm_applet-nm-compat.o `test -f 'shared/nm-utils/nm-compat.c' || echo '$(srcdir)/'`shared/nm-utils/nm-compat.c
+
+shared/nm-utils/src_nm_applet-nm-compat.obj: shared/nm-utils/nm-compat.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(src_nm_applet_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT shared/nm-utils/src_nm_applet-nm-compat.obj -MD -MP -MF shared/nm-utils/$(DEPDIR)/src_nm_applet-nm-compat.Tpo -c -o shared/nm-utils/src_nm_applet-nm-compat.obj `if test -f 'shared/nm-utils/nm-compat.c'; then $(CYGPATH_W) 'shared/nm-utils/nm-compat.c'; else $(CYGPATH_W) '$(srcdir)/shared/nm-utils/nm-compat.c'; fi`
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) shared/nm-utils/$(DEPDIR)/src_nm_applet-nm-compat.Tpo shared/nm-utils/$(DEPDIR)/src_nm_applet-nm-compat.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='shared/nm-utils/nm-compat.c' object='shared/nm-utils/src_nm_applet-nm-compat.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(src_nm_applet_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o shared/nm-utils/src_nm_applet-nm-compat.obj `if test -f 'shared/nm-utils/nm-compat.c'; then $(CYGPATH_W) 'shared/nm-utils/nm-compat.c'; else $(CYGPATH_W) '$(srcdir)/shared/nm-utils/nm-compat.c'; fi`
 
 src/src_nm_applet-main.o: src/main.c
 @am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(src_nm_applet_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT src/src_nm_applet-main.o -MD -MP -MF src/$(DEPDIR)/src_nm_applet-main.Tpo -c -o src/src_nm_applet-main.o `test -f 'src/main.c' || echo '$(srcdir)/'`src/main.c

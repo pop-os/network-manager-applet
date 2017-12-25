@@ -39,7 +39,8 @@ incs = [
   top_inc,
   shared_inc,
   src_inc,
-  libnma_inc
+  libnma_inc,
+  wireless_security_inc
 ]
 
 deps = [
@@ -47,7 +48,6 @@ deps = [
   gudev_dep,
   libnm_glib_dep,
   libutils_libnm_glib_dep,
-  libwireless_security_libnm_glib_dep
 ]
 
 cflags = [
@@ -77,6 +77,7 @@ libnm_gtk = shared_library(
   c_args: cflags,
   link_args: ldflags,
   link_depends: symbol_map,
+  link_whole: libwireless_security_libnm_glib,
   install: true,
   install_dir: nma_libdir
 )
@@ -91,7 +92,7 @@ pkg.generate(
   requires: [
     'NetworkManager ' + nm_req_version,
     'libnm-util ' + nm_req_version,
-    'linm-glib ' + nm_req_version,
+    'libnm-glib ' + nm_req_version,
     'gtk+-3.0 ' + gtk_req_version
   ],
   variables: 'exec_prefix=' + nma_prefix,

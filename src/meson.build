@@ -31,8 +31,6 @@ endif
 
 subdir('connection-editor')
 
-program_name = 'nm-applet'
-
 sources = files(
   'ap-menu-item.c',
   'applet-agent.c',
@@ -61,13 +59,20 @@ sources += gnome.compile_resources(
   dependencies: resource_data
 )
 
+incs = [
+  top_inc,
+  utils_inc,
+  src_inc,
+  shared_inc,
+  wireless_security_inc
+]
+
 deps = [
   gtk_dep,
   libnm_dep,
   libnma_dep,
   libnotify_dep,
   libsecret_dep,
-  libwireless_security_libnm_dep,
   m_dep
 ]
 
@@ -80,7 +85,7 @@ cflags = [
   '-DSYSCONFDIR="@0@"'.format(nma_sysconfdir),
   '-DAUTOSTARTDIR="@0@"'.format(nma_autostartdir),
   '-DICONDIR="@0@"'.format(nma_icondir),
-  '-DG_LOG_DOMAIN="@0@"'.format(program_name)
+  '-DG_LOG_DOMAIN="@0@"'.format(nma_name)
 ]
 
 ldflags = []
@@ -102,13 +107,14 @@ if enable_wwan
 endif
 
 executable(
-  program_name,
+  nma_name,
   sources,
   include_directories: incs,
   dependencies: deps,
   c_args: cflags,
   link_args: ldflags,
   link_depends: linker_script_ver,
+  link_whole: libwireless_security_libnm,
   install: true,
   install_dir: nma_bindir
 )
