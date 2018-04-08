@@ -2,3 +2,4 @@ Allow-to-create-connections-without-admin-privileges.patch
 Force-online-state-with-unmanaged-devices.patch
 shared-compat-fix-memory-handling-of-nm_setting_vpn_get_-.patch
 shared-compat-fix-memory-handling-of-nm_setting_vpn_get_--1.patch
+libnma-cert-chooser-handle-case-of-no-avalable-modules.patch
