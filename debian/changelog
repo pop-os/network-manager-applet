@@ -1,3 +1,16 @@
+network-manager-applet (1.8.10-3) unstable; urgency=medium
+
+  * Set Rules-Requires-Root to no
+  * Update Vcs-* to point to https://salsa.debian.org
+  * libnma/cert-chooser: Handle case of no available modules.
+    Fixes a segfault when editing an existing connection.
+    (Closes: #865013)
+  * Drop README.Debian.
+    The documentation about group netdev is outdated and no longer relevant.
+    (Closes: #743450)
+
+ -- Michael Biebl <biebl@debian.org>  Sun, 08 Apr 2018 18:58:14 +0200
+
 network-manager-applet (1.8.10-2) unstable; urgency=medium
 
   * shared/compat: Fix memory handling of nm_setting_vpn_get_*_keys
