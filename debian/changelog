@@ -1,3 +1,11 @@
+network-manager-applet (1.8.10-4) unstable; urgency=medium
+
+  * Stop building the legacy libnm-gtk library.
+    The successor is libnma, a libnm-based client library which no longer
+    uses the obsolete libnm-glib/libnm-util/dbus-glib libraries.
+
+ -- Michael Biebl <biebl@debian.org>  Wed, 11 Apr 2018 13:52:07 +0200
+
 network-manager-applet (1.8.10-3) unstable; urgency=medium
 
   * Set Rules-Requires-Root to no
