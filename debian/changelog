@@ -1,3 +1,9 @@
+network-manager-applet (1.8.10-5) unstable; urgency=medium
+
+  * Enable Ayatana AppIndicator support (Closes: #880169)
+
+ -- Michael Biebl <biebl@debian.org>  Sun, 22 Apr 2018 14:57:11 +0200
+
 network-manager-applet (1.8.10-4) unstable; urgency=medium
 
   * Stop building the legacy libnm-gtk library.
