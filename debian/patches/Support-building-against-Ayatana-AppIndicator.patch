@@ -1,0 +1,166 @@
+From: Mike Gabriel <mike.gabriel@das-netzwerkteam.de>
+Date: Tue, 17 Apr 2018 16:51:13 +0200
+Subject: Support building against Ayatana AppIndicator.
+
+https://bugzilla.gnome.org/show_bug.cgi?id=795333
+(cherry picked from commit bfd4f4cc7b14a6312c861a427bd4bf60bc405901)
+---
+ config.h.meson    |  3 +++
+ configure.ac      | 37 +++++++++++++++++++++++++++++++++----
+ meson.build       | 33 +++++++++++++++++++++++++++++++--
+ meson_options.txt |  2 +-
+ src/applet.h      |  6 +++++-
+ src/meson.build   |  2 +-
+ 6 files changed, 74 insertions(+), 9 deletions(-)
+
+diff --git a/config.h.meson b/config.h.meson
+index 5befcc9..8e56634 100644
+--- a/config.h.meson
++++ b/config.h.meson
+@@ -41,6 +41,9 @@
+ /* Enable using libappindicator */
+ #mesondefine WITH_APPINDICATOR
+ 
++/* Use Ayatana AppIndicator, rathern than Ubuntu's AppIndicator */
++#mesondefine USE_AYATANA_INDICATORS
++
+ /* Define if Gcr is available */
+ #mesondefine WITH_GCR
+ 
+diff --git a/configure.ac b/configure.ac
+index 9750bbd..6033188 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -131,11 +131,40 @@ PKG_CHECK_MODULES(NOTIFY, [libnotify >= 0.4.3])
+ PKG_CHECK_MODULES(GTK, gtk+-3.0 >= 3.10)
+ GTK_CFLAGS="$GTK_CFLAGS -DGDK_VERSION_MIN_REQUIRED=GDK_VERSION_3_4 -DGTK_VERSION_MAX_ALLOWED=GTK_VERSION_3_4"
+ 
+-AC_ARG_WITH([appindicator], AS_HELP_STRING([--with-appindicator|--without-appindicator], [Build with libappindicator support instead of xembed systray support.]))
+-if test "$with_appindicator" == "yes"; then
+-	PKG_CHECK_MODULES(APPINDICATOR, appindicator3-0.1)
++AC_ARG_WITH([appindicator], AS_HELP_STRING([--with-appindicator|--without-appindicator], [Build with lib(ayatana-)appindicator support instead of xembed systray support.]))
++
++if (test "x$with_appindicator" = "xyes"); then
++
++	AC_ARG_VAR([APPINDICATOR_VARIANT], [Set to "auto" (default), "ubuntu" (for libappindicator) or "ayatana" (for libayatana-appindicator)])
++
++	if (test "x${APPINDICATOR_VARIANT}" = "x"); then
++		APPINDICATOR_VARIANT=auto
++	fi
++
++	if (test "x${APPINDICATOR_VARIANT}" = "xauto"); then
++		PKG_CHECK_EXISTS(appindicator3-0.1,
++			[APPINDICATOR_VARIANT=ubuntu])
++		PKG_CHECK_EXISTS(ayatana-appindicator3-0.1,
++			[APPINDICATOR_VARIANT=ayatana])
++	fi
++
++	if (test "x${APPINDICATOR_VARIANT}" = "xauto"); then
++		AC_MSG_ERROR([Neither Ubuntu's AppIndicator nor Ayatana AppIndicator found.])
++	fi
++
++	if (test "x${APPINDICATOR_VARIANT}" != "xubuntu" -a "x${APPINDICATOR_VARIANT}" != "xayatana"); then
++		AC_MSG_ERROR([Options allowed for APPINDICATOR_VARIANT=<str> are: auto, ubuntu, ayatana.])
++	fi
++
++	if (test "x${APPINDICATOR_VARIANT}" = "xayatana"); then
++		PKG_CHECK_MODULES(APPINDICATOR, ayatana-appindicator3-0.1)
++		AC_DEFINE([WITH_APPINDICATOR], 1, [Enable AppIndicator support and use Ayatana AppIndicator])
++		AC_DEFINE([USE_AYATANA_INDICATORS], 1, [Explicitly enforce Ayatana AppIndicator])
++	elif (test "x${APPINDICATOR_VARIANT}" = "xubuntu"); then
++		PKG_CHECK_MODULES(APPINDICATOR, appindicator3-0.1)
++		AC_DEFINE([WITH_APPINDICATOR], 1, [Enable AppIndicator support and use Ubuntu AppIndicator])
++	fi
+ 	PKG_CHECK_MODULES(DBUSMENU, dbusmenu-gtk3-0.4 >= 16.04.0)
+-	AC_DEFINE([WITH_APPINDICATOR], 1, [Enable using libappindicator])
+ fi
+ 
+ AM_CONDITIONAL(HAVE_GBT, test x"$have_gbt" = "xyes")
+diff --git a/meson.build b/meson.build
+index 7cd469c..a73f0eb 100644
+--- a/meson.build
++++ b/meson.build
+@@ -201,11 +201,40 @@ if enable_libnm_gtk
+ endif
+ 
+ enable_appindicator = get_option('appindicator')
+-if enable_appindicator
++if enable_appindicator == 'auto'
++
++  # prefer building against Ayatana AppIndicator
++
++  appindicator_dep = dependency('ayatana-appindicator3-0.1', required: false)
++  if appindicator_dep.found()
++    enable_appindicator = 'ayatana'
++  else
++
++    # fall back to Ubuntu's AppIndicator if needed
++
++    appindicator_dep = dependency('appindicator3-0.1',required: false)
++    if appindicator_dep.found()
++      enable_appindicator = 'ubuntu'
++    endif
++  endif
++
++  # bail out, if 'yes' was given, but not AppIndicator shared lib is available
++  assert(appindicator_dep.found(), 'Neither Ubuntu\'s AppIndicator nor Ayatana AppIndicator found.')
++
++endif
++
++if enable_appindicator == 'ubuntu'
+   appindicator_dep = dependency('appindicator3-0.1')
+   dbusmenu_dep = dependency('dbusmenu-gtk3-0.4', version: '>= 16.04.0')
++  config_h.set('WITH_APPINDICATOR', true)
++elif enable_appindicator == 'ayatana'
++  config_h.set('USE_AYATANA_INDICATORS', true)
++  appindicator_dep = dependency('ayatana-appindicator3-0.1')
++  dbusmenu_dep = dependency('dbusmenu-gtk3-0.4', version: '>= 16.04.0')
++  config_h.set('WITH_APPINDICATOR', true)
++else
++  error('Options allowed for -Dappindicator=<str> are: auto, ubuntu, ayatana.')
+ endif
+-config_h.set('WITH_APPINDICATOR', enable_appindicator)
+ 
+ # ModemManager1 with libmm-glib for WWAN support
+ enable_wwan = get_option('wwan')
+diff --git a/meson_options.txt b/meson_options.txt
+index 666dfe3..86b825c 100644
+--- a/meson_options.txt
++++ b/meson_options.txt
+@@ -1,5 +1,5 @@
+ option('libnm_gtk', type: 'boolean', value: true, description: 'build legacy library libnm-gtk which depends on libnm-glib/libnm-util/dbus-glib')
+-option('appindicator', type: 'boolean', value: false, description: 'Build with libappindicator support instead of xembed systray support.')
++option('appindicator', type: 'string', value: 'no', description: 'Build with lib(ayatana-)appindicator support instead of xembed systray support (auto|ubuntu|ayatana).')
+ option('wwan', type: 'boolean', value: true, description: 'Enable WWAN support.')
+ option('selinux', type: 'boolean', value: true, description: 'Enable support for adjusting SELinux labels in configuration editor.')
+ option('team', type: 'boolean', value: true, description: 'Enable team configuration editor.')
+diff --git a/src/applet.h b/src/applet.h
+index 5392a3e..64ae15a 100644
+--- a/src/applet.h
++++ b/src/applet.h
+@@ -32,7 +32,11 @@
+ #include <libnotify/notify.h>
+ 
+ #ifdef WITH_APPINDICATOR
+-#include <libappindicator/app-indicator.h>
++# ifdef USE_AYATANA_INDICATORS
++#  include <libayatana-appindicator/app-indicator.h>
++# else
++#  include <libappindicator/app-indicator.h>
++# endif
+ #endif
+ 
+ #include <NetworkManager.h>
+diff --git a/src/meson.build b/src/meson.build
+index c5638bb..c96f9d0 100644
+--- a/src/meson.build
++++ b/src/meson.build
+@@ -93,7 +93,7 @@ if have_version_script
+   ldflags += '-Wl,--version-script,@0@'.format(linker_script_ver)
+ endif
+ 
+-if enable_appindicator
++if enable_appindicator == 'ayatana' or enable_appindicator == 'ubuntu'
+   deps += [
+     appindicator_dep,
+     dbusmenu_dep

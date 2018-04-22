@@ -17,6 +17,7 @@ override_dh_auto_configure:
 		--disable-static \
 		--enable-introspection \
 		--enable-gtk-doc \
+		--with-appindicator=ayatana \
 		--with-gcr \
 		--with-selinux \
 		--with-wwan \
