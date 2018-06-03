@@ -1,6 +1,6 @@
 From: Michael Biebl <biebl@debian.org>
 Date: Tue, 18 Mar 2014 10:49:13 +0100
-Subject: Allow to create connections without admin privileges
+Subject: Allow creation of connections without admin privileges
 
 Set passwords as agent-owned when they need to, to allow users without
 root permissions to easily configure their connections.
