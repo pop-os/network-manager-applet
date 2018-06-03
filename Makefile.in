@@ -15,6 +15,24 @@
 @SET_MAKE@
 
 # -*- mode: makefile -*-
+#
+# gtk-doc.make - make rules for gtk-doc
+# Copyright (C) 2003 James Henstridge
+#               2004-2007 Damon Chaplin
+#               2007-2017 Stefan Sauer
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 ####################################
 # Everything below here is generic #
@@ -114,15 +132,11 @@ TESTS = $(am__EXEEXT_2)
 @HAVE_INTROSPECTION_TRUE@@WITH_LIBNM_GTK_TRUE@am__append_7 = src/libnm-gtk/NMGtk-1.0.gir
 @WITH_LIBNM_GTK_TRUE@am__append_8 = src/libnm-gtk/tests/test-mobile-providers
 @WITH_GCR_TRUE@am__append_9 = \
-@WITH_GCR_TRUE@	src/libnma/nma-pkcs11-token-login-dialog.h \
-@WITH_GCR_TRUE@	src/libnma/nma-pkcs11-cert-chooser-dialog.h \
-@WITH_GCR_TRUE@	src/libnma/nma-cert-chooser-button.h
+@WITH_GCR_TRUE@	$(libnma_h_priv_gcr) \
+@WITH_GCR_TRUE@	$(libnma_c_gcr)
 
-@WITH_GCR_TRUE@am__append_10 = \
-@WITH_GCR_TRUE@	src/libnma/nma-pkcs11-token-login-dialog.c \
-@WITH_GCR_TRUE@	src/libnma/nma-pkcs11-cert-chooser-dialog.c \
-@WITH_GCR_TRUE@	src/libnma/nma-cert-chooser-button.c \
-@WITH_GCR_TRUE@	src/libnma/nma-pkcs11-cert-chooser.c
+@HAVE_INTROSPECTION_TRUE@@WITH_GCR_TRUE@am__append_10 = \
+@HAVE_INTROSPECTION_TRUE@@WITH_GCR_TRUE@	$(libnma_c_gcr)
 
 @HAVE_INTROSPECTION_TRUE@am__append_11 = src/libnma/NMA-1.0.gir
 @WITH_WWAN_TRUE@am__append_12 = \
@@ -238,34 +252,34 @@ src_libnma_libnma_la_DEPENDENCIES =  \
 	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1)
 am__src_libnma_libnma_la_SOURCES_DIST =  \
 	src/libnma/nma-cert-chooser-private.h \
-	src/libnma/nma-pkcs11-token-login-dialog.h \
-	src/libnma/nma-pkcs11-cert-chooser-dialog.h \
-	src/libnma/nma-cert-chooser-button.h \
 	src/libnma/nma-wifi-dialog.c src/libnma/nma-mobile-wizard.c \
 	src/libnma/nma-mobile-providers.c \
 	src/libnma/nma-vpn-password-dialog.c src/libnma/nma-ui-utils.c \
 	src/libnma/init.c src/libnma/nma-cert-chooser.c \
 	src/libnma/nma-file-cert-chooser.c \
+	src/libnma/nma-pkcs11-token-login-dialog.h \
+	src/libnma/nma-pkcs11-cert-chooser-dialog.h \
+	src/libnma/nma-cert-chooser-button.h \
 	src/libnma/nma-pkcs11-token-login-dialog.c \
 	src/libnma/nma-pkcs11-cert-chooser-dialog.c \
 	src/libnma/nma-cert-chooser-button.c \
 	src/libnma/nma-pkcs11-cert-chooser.c
 am__objects_3 =
-am__objects_4 = $(am__objects_3)
-@WITH_GCR_TRUE@am__objects_5 = src/libnma/src_libnma_libnma_la-nma-pkcs11-token-login-dialog.lo \
-@WITH_GCR_TRUE@	src/libnma/src_libnma_libnma_la-nma-pkcs11-cert-chooser-dialog.lo \
-@WITH_GCR_TRUE@	src/libnma/src_libnma_libnma_la-nma-cert-chooser-button.lo \
-@WITH_GCR_TRUE@	src/libnma/src_libnma_libnma_la-nma-pkcs11-cert-chooser.lo
-am__objects_6 = src/libnma/src_libnma_libnma_la-nma-wifi-dialog.lo \
+am__objects_4 = src/libnma/src_libnma_libnma_la-nma-wifi-dialog.lo \
 	src/libnma/src_libnma_libnma_la-nma-mobile-wizard.lo \
 	src/libnma/src_libnma_libnma_la-nma-mobile-providers.lo \
 	src/libnma/src_libnma_libnma_la-nma-vpn-password-dialog.lo \
 	src/libnma/src_libnma_libnma_la-nma-ui-utils.lo \
 	src/libnma/src_libnma_libnma_la-init.lo \
 	src/libnma/src_libnma_libnma_la-nma-cert-chooser.lo \
-	src/libnma/src_libnma_libnma_la-nma-file-cert-chooser.lo \
-	$(am__objects_5)
-am_src_libnma_libnma_la_OBJECTS = $(am__objects_4) $(am__objects_6)
+	src/libnma/src_libnma_libnma_la-nma-file-cert-chooser.lo
+am__objects_5 = src/libnma/src_libnma_libnma_la-nma-pkcs11-token-login-dialog.lo \
+	src/libnma/src_libnma_libnma_la-nma-pkcs11-cert-chooser-dialog.lo \
+	src/libnma/src_libnma_libnma_la-nma-cert-chooser-button.lo \
+	src/libnma/src_libnma_libnma_la-nma-pkcs11-cert-chooser.lo
+@WITH_GCR_TRUE@am__objects_6 = $(am__objects_3) $(am__objects_5)
+am_src_libnma_libnma_la_OBJECTS = $(am__objects_3) $(am__objects_4) \
+	$(am__objects_6)
 am__objects_7 = src/libnma/src_libnma_libnma_la-nma-resources.lo
 nodist_src_libnma_libnma_la_OBJECTS = $(am__objects_3) \
 	$(am__objects_7)
@@ -874,14 +888,14 @@ GMOFILES = @GMOFILES@
 GMSGFMT = @GMSGFMT@
 GREP = @GREP@
 GSETTINGS_DISABLE_SCHEMAS_COMPILE = @GSETTINGS_DISABLE_SCHEMAS_COMPILE@
+GTK3_CFLAGS = @GTK3_CFLAGS@
+GTK3_LIBS = @GTK3_LIBS@
 GTKDOC_CHECK = @GTKDOC_CHECK@
 GTKDOC_CHECK_PATH = @GTKDOC_CHECK_PATH@
 GTKDOC_DEPS_CFLAGS = @GTKDOC_DEPS_CFLAGS@
 GTKDOC_DEPS_LIBS = @GTKDOC_DEPS_LIBS@
 GTKDOC_MKPDF = @GTKDOC_MKPDF@
 GTKDOC_REBASE = @GTKDOC_REBASE@
-GTK_CFLAGS = @GTK_CFLAGS@
-GTK_LIBS = @GTK_LIBS@
 GUDEV_CFLAGS = @GUDEV_CFLAGS@
 GUDEV_LIBS = @GUDEV_LIBS@
 HTML_DIR = @HTML_DIR@
@@ -1079,8 +1093,10 @@ EXTRA_DIST = $(HTML_IMAGES) $(SETUP_FILES) $(icon16_DATA) \
 	src/libnm-gtk/examples/mobile-providers.js $(NULL) \
 	src/libnma/nma-version.h.in src/libnma/libnma.pc.in \
 	src/libnma/libnma.ver src/libnma/wifi.ui \
+	src/libnma/nma-mobile-wizard.ui \
 	src/libnma/nma-pkcs11-token-login-dialog.ui \
 	src/libnma/nma-pkcs11-cert-chooser-dialog.ui \
+	src/libnma/nma-vpn-password-dialog.ui \
 	src/libnma/nma.gresource.xml src/libnma/meson.build \
 	src/connection-editor/ce-ip4-routes.ui \
 	src/connection-editor/ce-ip6-routes.ui \
@@ -1107,6 +1123,7 @@ EXTRA_DIST = $(HTML_IMAGES) $(SETUP_FILES) $(icon16_DATA) \
 	src/connection-editor/ce-page-wifi-security.ui \
 	src/connection-editor/ce-page-wifi.ui \
 	src/connection-editor/ce-ppp-auth-methods.ui \
+	src/connection-editor/gtk/menus.ui \
 	src/connection-editor/nm-connection-editor.ui \
 	src/connection-editor/nm-connection-list.ui \
 	src/connection-editor/ce.gresource.xml \
@@ -1321,7 +1338,7 @@ shared_files = \
 
 src_utils_libutils_libnm_la_CPPFLAGS = \
 	"-I$(srcdir)/shared" \
-	$(GTK_CFLAGS) \
+	$(GTK3_CFLAGS) \
 	$(LIBNM_CFLAGS)
 
 src_utils_libutils_libnm_la_SOURCES = \
@@ -1330,13 +1347,13 @@ src_utils_libutils_libnm_la_SOURCES = \
 	src/utils/utils.h
 
 src_utils_libutils_libnm_la_LIBADD = \
-	$(GTK_LIBS) \
+	$(GTK3_LIBS) \
 	$(LIBNM_LIBS)
 
 @WITH_LIBNM_GTK_TRUE@src_utils_libutils_libnm_glib_la_CPPFLAGS = \
 @WITH_LIBNM_GTK_TRUE@	-DNETWORKMANAGER_COMPILATION=NM_NETWORKMANAGER_COMPILATION_LIB_LEGACY \
 @WITH_LIBNM_GTK_TRUE@	"-I$(srcdir)/shared" \
-@WITH_LIBNM_GTK_TRUE@	$(GTK_CFLAGS) \
+@WITH_LIBNM_GTK_TRUE@	$(GTK3_CFLAGS) \
 @WITH_LIBNM_GTK_TRUE@	$(LIBNM_GLIB_CFLAGS)
 
 @WITH_LIBNM_GTK_TRUE@src_utils_libutils_libnm_glib_la_SOURCES = \
@@ -1345,19 +1362,19 @@ src_utils_libutils_libnm_la_LIBADD = \
 @WITH_LIBNM_GTK_TRUE@	src/utils/utils.h
 
 @WITH_LIBNM_GTK_TRUE@src_utils_libutils_libnm_glib_la_LIBADD = \
-@WITH_LIBNM_GTK_TRUE@	$(GTK_LIBS) \
+@WITH_LIBNM_GTK_TRUE@	$(GTK3_LIBS) \
 @WITH_LIBNM_GTK_TRUE@	$(LIBNM_GLIB_LIBS)
 
 src_utils_tests_test_utils_SOURCES = src/utils/tests/test-utils.c
 src_utils_tests_test_utils_CPPFLAGS = \
 	"-I$(srcdir)/shared/" \
 	"-I$(srcdir)/src/utils" \
-	$(GTK_CFLAGS) \
+	$(GTK3_CFLAGS) \
 	$(LIBNM_CFLAGS)
 
 src_utils_tests_test_utils_LDADD = \
 	src/utils/libutils-libnm.la \
-	$(GTK_LIBS) \
+	$(GTK3_LIBS) \
 	$(LIBNM_LIBS)
 
 wireless_security_h_gen = \
@@ -1407,12 +1424,12 @@ src_wireless_security_libwireless_security_libnm_la_CPPFLAGS = \
 	"-I$(srcdir)/src/utils" \
 	"-I$(srcdir)/src/libnma" \
 	-Isrc/libnma \
-	$(GTK_CFLAGS) \
+	$(GTK3_CFLAGS) \
 	$(LIBNM_CFLAGS)
 
 src_wireless_security_libwireless_security_libnm_la_LIBADD = \
 	src/utils/libutils-libnm.la \
-	$(GTK_LIBS) \
+	$(GTK3_LIBS) \
 	$(LIBNM_LIBS)
 
 @WITH_LIBNM_GTK_TRUE@src_wireless_security_libwireless_security_libnm_glib_la_SOURCES = \
@@ -1422,7 +1439,7 @@ src_wireless_security_libwireless_security_libnm_la_LIBADD = \
 @WITH_LIBNM_GTK_TRUE@	$(wireless_security_c_gen)
 
 @WITH_LIBNM_GTK_TRUE@src_wireless_security_libwireless_security_libnm_glib_la_CPPFLAGS = \
-@WITH_LIBNM_GTK_TRUE@	$(GTK_CFLAGS) \
+@WITH_LIBNM_GTK_TRUE@	$(GTK3_CFLAGS) \
 @WITH_LIBNM_GTK_TRUE@	-DNETWORKMANAGER_COMPILATION=NM_NETWORKMANAGER_COMPILATION_LIB_LEGACY \
 @WITH_LIBNM_GTK_TRUE@	"-I$(srcdir)/shared" \
 @WITH_LIBNM_GTK_TRUE@	"-I$(srcdir)/src/utils" \
@@ -1432,7 +1449,7 @@ src_wireless_security_libwireless_security_libnm_la_LIBADD = \
 
 @WITH_LIBNM_GTK_TRUE@src_wireless_security_libwireless_security_libnm_glib_la_LIBADD = \
 @WITH_LIBNM_GTK_TRUE@	src/utils/libutils-libnm-glib.la \
-@WITH_LIBNM_GTK_TRUE@	$(GTK_LIBS) \
+@WITH_LIBNM_GTK_TRUE@	$(GTK3_LIBS) \
 @WITH_LIBNM_GTK_TRUE@	$(LIBNM_GLIB_LIBS)
 
 @WITH_LIBNM_GTK_TRUE@libnm_gtk_h_priv_gen = \
@@ -1486,13 +1503,13 @@ src_wireless_security_libwireless_security_libnm_la_LIBADD = \
 @WITH_LIBNM_GTK_TRUE@	"-I$(srcdir)/src/libnm-gtk" \
 @WITH_LIBNM_GTK_TRUE@	"-I$(srcdir)/src/libnma" \
 @WITH_LIBNM_GTK_TRUE@	-Isrc/libnma \
-@WITH_LIBNM_GTK_TRUE@	$(GTK_CFLAGS) \
+@WITH_LIBNM_GTK_TRUE@	$(GTK3_CFLAGS) \
 @WITH_LIBNM_GTK_TRUE@	$(LIBNM_GLIB_CFLAGS) \
 @WITH_LIBNM_GTK_TRUE@	$(GUDEV_CFLAGS)
 
 @WITH_LIBNM_GTK_TRUE@src_libnm_gtk_libnm_gtk_la_LIBADD = \
 @WITH_LIBNM_GTK_TRUE@	src/wireless-security/libwireless-security-libnm-glib.la \
-@WITH_LIBNM_GTK_TRUE@	$(GTK_LIBS) \
+@WITH_LIBNM_GTK_TRUE@	$(GTK3_LIBS) \
 @WITH_LIBNM_GTK_TRUE@	$(LIBNM_GLIB_LIBS) \
 @WITH_LIBNM_GTK_TRUE@	$(GUDEV_LIBS)
 
@@ -1514,7 +1531,7 @@ src_wireless_security_libwireless_security_libnm_la_LIBADD = \
 @WITH_LIBNM_GTK_TRUE@	-DTEST_DATA_DIR=\""$(abs_srcdir)/src/libnm-gtk/tests"\" \
 @WITH_LIBNM_GTK_TRUE@	"-I$(srcdir)/shared" \
 @WITH_LIBNM_GTK_TRUE@	"-I$(srcdir)/src/libnm-gtk" \
-@WITH_LIBNM_GTK_TRUE@	$(GTK_CFLAGS) \
+@WITH_LIBNM_GTK_TRUE@	$(GTK3_CFLAGS) \
 @WITH_LIBNM_GTK_TRUE@	$(LIBNM_GLIB_CFLAGS)
 
 @WITH_LIBNM_GTK_TRUE@src_libnm_gtk_tests_test_mobile_providers_LDADD = \
@@ -1536,22 +1553,36 @@ libnma_h_pub = \
 	src/libnma/nma-ui-utils.h \
 	src/libnma/nma-cert-chooser.h
 
-libnma_c_real = src/libnma/nma-wifi-dialog.c \
+libnma_c_real = \
+	src/libnma/nma-wifi-dialog.c \
 	src/libnma/nma-mobile-wizard.c \
 	src/libnma/nma-mobile-providers.c \
-	src/libnma/nma-vpn-password-dialog.c src/libnma/nma-ui-utils.c \
-	src/libnma/init.c src/libnma/nma-cert-chooser.c \
-	src/libnma/nma-file-cert-chooser.c $(am__append_10)
-libnma_h_priv_real = src/libnma/nma-cert-chooser-private.h \
-	$(am__append_9)
+	src/libnma/nma-vpn-password-dialog.c \
+	src/libnma/nma-ui-utils.c \
+	src/libnma/init.c \
+	src/libnma/nma-cert-chooser.c \
+	src/libnma/nma-file-cert-chooser.c
+
+libnma_h_priv_real = \
+	src/libnma/nma-cert-chooser-private.h
+
+libnma_h_priv_gcr = \
+	src/libnma/nma-pkcs11-token-login-dialog.h \
+	src/libnma/nma-pkcs11-cert-chooser-dialog.h \
+	src/libnma/nma-cert-chooser-button.h
+
+libnma_c_gcr = \
+	src/libnma/nma-pkcs11-token-login-dialog.c \
+	src/libnma/nma-pkcs11-cert-chooser-dialog.c \
+	src/libnma/nma-cert-chooser-button.c \
+	src/libnma/nma-pkcs11-cert-chooser.c
+
 src_libnma_libnmadir = $(includedir)/libnma
 src_libnma_libnma_HEADERS = \
 	$(libnma_h_pub)
 
-src_libnma_libnma_la_SOURCES = \
-	$(libnma_h_priv_real) \
-	$(libnma_c_real)
-
+src_libnma_libnma_la_SOURCES = $(libnma_h_priv_real) $(libnma_c_real) \
+	$(am__append_9)
 nodist_src_libnma_libnma_la_SOURCES = \
 	$(libnma_h_priv_gen) \
 	$(libnma_c_gen)
@@ -1570,14 +1601,14 @@ src_libnma_libnma_la_CFLAGS = \
 	"-I$(srcdir)/src/wireless-security" \
 	"-I$(srcdir)/src/libnma" \
 	-Isrc/libnma \
-	$(GTK_CFLAGS) \
+	$(GTK3_CFLAGS) \
 	$(LIBNM_CFLAGS) \
 	$(GUDEV_CFLAGS) \
 	$(GCR_CFLAGS)
 
 src_libnma_libnma_la_LIBADD = \
 	src/wireless-security/libwireless-security-libnm.la \
-	$(GTK_LIBS) \
+	$(GTK3_LIBS) \
 	$(LIBNM_LIBS) \
 	$(GUDEV_LIBS) \
 	$(GCR_LIBS)
@@ -1591,10 +1622,9 @@ src_libnma_libnma_la_LDFLAGS = \
 @HAVE_INTROSPECTION_TRUE@src_libnma_NMA_1_0_gir_EXPORT_PACKAGES = libnma
 @HAVE_INTROSPECTION_TRUE@src_libnma_NMA_1_0_gir_CFLAGS = $(src_libnma_libnma_la_CFLAGS)
 @HAVE_INTROSPECTION_TRUE@src_libnma_NMA_1_0_gir_LIBS = src/libnma/libnma.la
-@HAVE_INTROSPECTION_TRUE@src_libnma_NMA_1_0_gir_FILES = \
-@HAVE_INTROSPECTION_TRUE@	$(libnma_h_pub) \
-@HAVE_INTROSPECTION_TRUE@	$(libnma_c_real)
-
+@HAVE_INTROSPECTION_TRUE@src_libnma_NMA_1_0_gir_FILES =  \
+@HAVE_INTROSPECTION_TRUE@	$(libnma_h_pub) $(libnma_c_real) \
+@HAVE_INTROSPECTION_TRUE@	$(am__append_10)
 @HAVE_INTROSPECTION_TRUE@src_libnma_NMA_1_0_gir_SCANNERFLAGS = --warn-all --identifier-prefix=NMA --symbol-prefix=nma
 connection_editor_h_gen = \
 	src/connection-editor/ce-resources.h
@@ -1691,7 +1721,7 @@ src_connection_editor_nm_connection_editor_CPPFLAGS = \
 	"-I$(srcdir)/src/wireless-security" \
 	"-I$(srcdir)/src/libnma" \
 	-Isrc/libnma \
-	$(GTK_CFLAGS) \
+	$(GTK3_CFLAGS) \
 	$(LIBNM_CFLAGS) \
 	$(JANSSON_CFLAGS) \
 	$(SELINUX_CFLAGS)
@@ -1699,7 +1729,7 @@ src_connection_editor_nm_connection_editor_CPPFLAGS = \
 src_connection_editor_nm_connection_editor_LDADD = \
 	src/wireless-security/libwireless-security-libnm.la \
 	src/libnma/libnma.la \
-	$(GTK_LIBS) \
+	$(GTK3_LIBS) \
 	$(LIBNM_LIBS) \
 	$(JANSSON_LIBS) \
 	$(SELINUX_LIBS) \
@@ -1745,7 +1775,7 @@ src_nm_applet_CPPFLAGS = \
 	"-I$(srcdir)/src/wireless-security" \
 	"-I$(srcdir)/src/libnma" \
 	-Isrc/libnma \
-	$(GTK_CFLAGS) \
+	$(GTK3_CFLAGS) \
 	$(LIBNM_CFLAGS) \
 	$(LIBSECRET_CFLAGS) \
 	$(NOTIFY_CFLAGS) \
@@ -1755,7 +1785,7 @@ src_nm_applet_CPPFLAGS = \
 src_nm_applet_LDADD = \
 	src/wireless-security/libwireless-security-libnm.la \
 	src/libnma/libnma.la \
-	$(GTK_LIBS) \
+	$(GTK3_LIBS) \
 	$(LIBNM_LIBS) \
 	$(LIBSECRET_LIBS) \
 	$(NOTIFY_LIBS) \
@@ -4797,6 +4827,9 @@ sgml-build.stamp: setup-build.stamp $(DOC_MODULE)-decl.txt $(SCANOBJ_FILES) $(HF
 	$(AM_V_at)touch sgml-build.stamp
 
 sgml.stamp: sgml-build.stamp
+	@true
+
+$(DOC_MAIN_SGML_FILE): sgml-build.stamp
 	@true
 
 xml/gtkdocentities.ent: Makefile

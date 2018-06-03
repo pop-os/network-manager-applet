@@ -98,6 +98,9 @@
 /* Define to 1 if you have the ANSI C header files. */
 #undef STDC_HEADERS
 
+/* Explicitly enforce Ayatana AppIndicator */
+#undef USE_AYATANA_INDICATORS
+
 /* Enable extensions on AIX 3, Interix.  */
 #ifndef _ALL_SOURCE
 # undef _ALL_SOURCE
@@ -123,7 +126,7 @@
 /* Version number of package */
 #undef VERSION
 
-/* Enable using libappindicator */
+/* Enable AppIndicator support and use Ubuntu AppIndicator */
 #undef WITH_APPINDICATOR
 
 /* Define if Gcr is available */

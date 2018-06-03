@@ -89,12 +89,20 @@ nma_mobile_providers_database_get_type
 
 <SECTION>
 <FILE>nma-mobile-wizard</FILE>
-NMAMobileWizard
 NMAMobileWizardAccessMethod
 NMAMobileWizardCallback
 nma_mobile_wizard_new
 nma_mobile_wizard_present
 nma_mobile_wizard_destroy
+<SUBSECTION Standard>
+NMAMobileWizard
+NMAMobileWizardClass
+NMA_IS_MOBILE_WIZARD
+NMA_MOBILE_WIZARD
+NMA_MOBILE_WIZARD_CLASS
+NMA_MOBILE_WIZARD_GET_CLASS
+NMA_TYPE_MOBILE_WIZARD
+nma_mobile_wizard_get_type
 </SECTION>
 
 <SECTION>

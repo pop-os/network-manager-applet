@@ -8,15 +8,15 @@
     <property name="hexpand">True</property>
     <property name="border_width">12</property>
     <property name="row_spacing">6</property>
-    <property name="column_spacing">12</property>
+    <property name="column_spacing">6</property>
     <child>
       <object class="GtkLabel" id="label24">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
-        <property name="label" translatable="yes">_Username:</property>
+        <property name="label" translatable="yes">_Username</property>
         <property name="use_underline">True</property>
         <property name="mnemonic_widget">dsl_username</property>
-        <property name="xalign">0</property>
+        <property name="xalign">1</property>
       </object>
       <packing>
         <property name="left_attach">0</property>
@@ -33,6 +33,7 @@
       <packing>
         <property name="left_attach">1</property>
         <property name="top_attach">2</property>
+        <property name="width">2</property>
       </packing>
     </child>
     <child>
@@ -45,16 +46,17 @@
       <packing>
         <property name="left_attach">1</property>
         <property name="top_attach">3</property>
+        <property name="width">2</property>
       </packing>
     </child>
     <child>
       <object class="GtkLabel" id="label26">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
-        <property name="label" translatable="yes">_Service:</property>
+        <property name="label" translatable="yes">_Service</property>
         <property name="use_underline">True</property>
         <property name="mnemonic_widget">dsl_service</property>
-        <property name="xalign">0</property>
+        <property name="xalign">1</property>
       </object>
       <packing>
         <property name="left_attach">0</property>
@@ -74,6 +76,7 @@
       <packing>
         <property name="left_attach">1</property>
         <property name="top_attach">5</property>
+        <property name="width">2</property>
       </packing>
     </child>
     <child>
@@ -86,16 +89,17 @@
       <packing>
         <property name="left_attach">1</property>
         <property name="top_attach">4</property>
+        <property name="width">2</property>
       </packing>
     </child>
     <child>
       <object class="GtkLabel" id="label25">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
-        <property name="label" translatable="yes">_Password:</property>
+        <property name="label" translatable="yes">_Password</property>
         <property name="use_underline">True</property>
         <property name="mnemonic_widget">dsl_password</property>
-        <property name="xalign">0</property>
+        <property name="xalign">1</property>
       </object>
       <packing>
         <property name="left_attach">0</property>
@@ -106,10 +110,10 @@
       <object class="GtkLabel" id="dsl_interface_label">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
-        <property name="label" translatable="yes">PPP _interface:</property>
+        <property name="label" translatable="yes">PPP _interface</property>
         <property name="use_underline">True</property>
         <property name="mnemonic_widget">dsl_interface</property>
-        <property name="xalign">0</property>
+        <property name="xalign">1</property>
       </object>
       <packing>
         <property name="left_attach">0</property>
@@ -120,10 +124,10 @@
       <object class="GtkLabel">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
-        <property name="label" translatable="yes">P_arent interface:</property>
+        <property name="label" translatable="yes">P_arent interface</property>
         <property name="use_underline">True</property>
         <property name="mnemonic_widget">dsl_parent</property>
-        <property name="xalign">0</property>
+        <property name="xalign">1</property>
       </object>
       <packing>
         <property name="left_attach">0</property>
@@ -139,6 +143,7 @@
       <packing>
         <property name="left_attach">1</property>
         <property name="top_attach">1</property>
+        <property name="width">2</property>
       </packing>
     </child>
     <child>
@@ -155,6 +160,21 @@
       </object>
       <packing>
         <property name="left_attach">1</property>
+        <property name="top_attach">0</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkCheckButton" id="dsl_claim_button">
+        <property name="label" translatable="yes">C_laim interface</property>
+        <property name="visible">True</property>
+        <property name="can_focus">True</property>
+        <property name="receives_default">False</property>
+        <property name="tooltip_text" translatable="yes">If selected, the connection will take exclusive control of the interface and it won’t be possible to activate another connection on it. Note that the option can only be used for Ethernet interfaces. nm-applet is able to activate the connection only if this option is selected.</property>
+        <property name="use_underline">True</property>
+        <property name="draw_indicator">True</property>
+      </object>
+      <packing>
+        <property name="left_attach">2</property>
         <property name="top_attach">0</property>
       </packing>
     </child>

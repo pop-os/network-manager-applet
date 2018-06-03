@@ -294,7 +294,7 @@ typedef struct {
 } WifiMenuItemInfo;
 
 static void
-wifi_menu_item_info_destroy (gpointer data)
+wifi_menu_item_info_destroy (gpointer data, GClosure *closure)
 {
 	WifiMenuItemInfo *info = (WifiMenuItemInfo *) data;
 
@@ -645,14 +645,14 @@ create_new_ap_item (NMDeviceWifi *device,
 
 			info = g_slice_new0 (WifiMenuItemInfo);
 			info->applet = applet;
-			info->device = g_object_ref (G_OBJECT (device));
-			info->ap = g_object_ref (G_OBJECT (ap));
-			info->connection = g_object_ref (G_OBJECT (connection));
+			info->device = g_object_ref (device);
+			info->ap = g_object_ref (ap);
+			info->connection = g_object_ref (connection);
 
 			g_signal_connect_data (subitem, "activate",
 			                       G_CALLBACK (wifi_menu_item_activate),
 			                       info,
-			                       (GClosureNotify) wifi_menu_item_info_destroy, 0);
+			                       wifi_menu_item_info_destroy, 0);
 
 			gtk_menu_shell_append (GTK_MENU_SHELL (submenu), GTK_WIDGET (subitem));
 			gtk_widget_show (subitem);
@@ -664,8 +664,8 @@ create_new_ap_item (NMDeviceWifi *device,
 
 		info = g_slice_new0 (WifiMenuItemInfo);
 		info->applet = applet;
-		info->device = g_object_ref (G_OBJECT (device));
-		info->ap = g_object_ref (G_OBJECT (ap));
+		info->device = g_object_ref (device);
+		info->ap = g_object_ref (ap);
 
 		if (ap_connections->len == 1) {
 			connection = NM_CONNECTION (ap_connections->pdata[0]);
@@ -676,7 +676,7 @@ create_new_ap_item (NMDeviceWifi *device,
 		                       "activate",
 		                       G_CALLBACK (wifi_menu_item_activate),
 		                       info,
-		                       (GClosureNotify) wifi_menu_item_info_destroy,
+		                       wifi_menu_item_info_destroy,
 		                       0);
 	}
 
