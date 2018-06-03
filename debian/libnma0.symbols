@@ -1,6 +1,7 @@
 libnma.so.0 libnma0 #MINVER#
  libnma_1_2_0@libnma_1_2_0 1.1.90
  libnma_1_8_0@libnma_1_8_0 1.8.0
+ libnma_1_8_12@libnma_1_8_12 1.8.12
  nma_cert_chooser_add_to_size_group@libnma_1_8_0 1.8.0
  nma_cert_chooser_get_cert@libnma_1_8_0 1.8.0
  nma_cert_chooser_get_cert_password@libnma_1_8_0 1.8.0
@@ -57,6 +58,7 @@ libnma.so.0 libnma0 #MINVER#
  nma_mobile_providers_database_new_sync@libnma_1_2_0 1.1.90
  nma_mobile_providers_split_3gpp_mcc_mnc@libnma_1_2_0 1.1.90
  nma_mobile_wizard_destroy@libnma_1_2_0 1.1.90
+ nma_mobile_wizard_get_type@libnma_1_8_12 1.8.12
  nma_mobile_wizard_new@libnma_1_2_0 1.1.90
  nma_mobile_wizard_present@libnma_1_2_0 1.1.90
  nma_utils_menu_to_secret_flags@libnma_1_2_0 1.1.90
