@@ -28,7 +28,7 @@ Closes: #696256
  10 files changed, 88 insertions(+), 1 deletion(-)
 
 diff --git a/src/applet-device-wifi.c b/src/applet-device-wifi.c
-index d0ea6a1..e0c5dff 100644
+index d8a31a0..f5843c2 100644
 --- a/src/applet-device-wifi.c
 +++ b/src/applet-device-wifi.c
 @@ -461,9 +461,10 @@ wifi_new_auto_connection (NMDevice *device,
@@ -82,7 +82,7 @@ index d0ea6a1..e0c5dff 100644
  	 * Dialog Of Doom.
  	 */
 diff --git a/src/connection-editor/page-mobile.c b/src/connection-editor/page-mobile.c
-index a9d0a92..fba8d90 100644
+index 62cdfa5..e8f019c 100644
 --- a/src/connection-editor/page-mobile.c
 +++ b/src/connection-editor/page-mobile.c
 @@ -442,6 +442,7 @@ new_connection_mobile_wizard_done (NMAMobileWizard *wizard,
@@ -150,7 +150,7 @@ index ab40700..14d90cc 100644
  		g_object_set (s_vpn, NM_SETTING_VPN_SERVICE_TYPE, service_type, NULL);
  
 diff --git a/src/connection-editor/page-wifi.c b/src/connection-editor/page-wifi.c
-index c6948a5..4db5548 100644
+index d11ff5b..13a992b 100644
 --- a/src/connection-editor/page-wifi.c
 +++ b/src/connection-editor/page-wifi.c
 @@ -26,6 +26,8 @@
@@ -181,7 +181,7 @@ index c6948a5..4db5548 100644
  	g_object_set (s_wifi, NM_SETTING_WIRELESS_MODE, "infrastructure", NULL);
  	nm_connection_add_setting (connection, s_wifi);
 diff --git a/src/libnm-gtk/nm-wifi-dialog.c b/src/libnm-gtk/nm-wifi-dialog.c
-index d6786fd..2740ae2 100644
+index 71c5bd3..41234a1 100644
 --- a/src/libnm-gtk/nm-wifi-dialog.c
 +++ b/src/libnm-gtk/nm-wifi-dialog.c
 @@ -36,6 +36,7 @@
