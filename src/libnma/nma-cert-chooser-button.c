@@ -64,6 +64,8 @@ is_this_a_slot_nobody_loves (GckSlot *slot)
 	gboolean ret_value = FALSE;
 
 	slot_info = gck_slot_get_info (slot);
+	if (!slot_info)
+		return TRUE;
 
 	/* The p11-kit CA trusts do use their filesystem paths for description. */
 	if (g_str_has_prefix (slot_info->slot_description, "/"))
@@ -93,10 +95,10 @@ modules_initialized (GObject *object, GAsyncResult *res, gpointer user_data)
 	gchar *label;
 
 	modules = gck_modules_initialize_registered_finish (res, &error);
-	if (!modules) {
+	if (error) {
 		/* The Front Fell Off. */
-		g_critical ("Error getting registered modules: %s", error->message);
-		g_error_free (error);
+		g_warning ("Error getting registered modules: %s", error->message);
+		g_clear_error (&error);
 	}
 
 	model = GTK_LIST_STORE (gtk_combo_box_get_model (GTK_COMBO_BOX (self)));

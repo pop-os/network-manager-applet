@@ -45,7 +45,7 @@
  * Evaluates to the micro version number of NetworkManager which this source
  * compiled against.
  */
-#define NMA_MICRO_VERSION (10)
+#define NMA_MICRO_VERSION (12)
 
 /**
  * NMA_CHECK_VERSION:

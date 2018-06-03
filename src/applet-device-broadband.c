@@ -668,8 +668,10 @@ typedef struct {
 } BroadbandMenuItemInfo;
 
 static void
-menu_item_info_destroy (BroadbandMenuItemInfo *info)
+menu_item_info_destroy (gpointer data, GClosure *closure)
 {
+	BroadbandMenuItemInfo *info = data;
+
 	g_object_unref (G_OBJECT (info->device));
 	if (info->connection)
 		g_object_unref (info->connection);
@@ -698,7 +700,7 @@ add_connection_item (NMDevice *device,
 
 	info = g_slice_new0 (BroadbandMenuItemInfo);
 	info->applet = applet;
-	info->device = g_object_ref (G_OBJECT (device));
+	info->device = g_object_ref (device);
 	info->connection = connection ? g_object_ref (connection) : NULL;
 
 	g_signal_connect_data (item, "activate",

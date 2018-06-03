@@ -161,8 +161,7 @@ route_delete_clicked (GtkButton *button, gpointer user_data)
 	if (gtk_tree_model_get_iter (model, &iter, (GtkTreePath *) selected_rows->data))
 		gtk_list_store_remove (GTK_LIST_STORE (model), &iter);
 
-	g_list_foreach (selected_rows, (GFunc) gtk_tree_path_free, NULL);
-	g_list_free (selected_rows);
+	g_list_free_full (selected_rows, (GDestroyNotify) gtk_tree_path_free);
 
 	num_rows = gtk_tree_model_iter_n_children (model, NULL);
 	if (num_rows && gtk_tree_model_iter_nth_child (model, &iter, NULL, num_rows - 1)) {
@@ -624,7 +623,7 @@ ip4_routes_dialog_new (NMSettingIPConfig *s_ip4, gboolean automatic)
 
 	builder = gtk_builder_new ();
 
-	if (!gtk_builder_add_from_resource (builder, "/org/freedesktop/network-manager-applet/ce-ip4-routes.ui", &error)) {
+	if (!gtk_builder_add_from_resource (builder, "/org/gnome/nm_connection_editor/ce-ip4-routes.ui", &error)) {
 		g_warning ("Couldn't load builder resource: %s", error->message);
 		g_error_free (error);
 		return NULL;

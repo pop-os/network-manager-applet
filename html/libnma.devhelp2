@@ -23,7 +23,6 @@
     <keyword type="function" name="nma_mobile_wizard_new ()" link="libnma-nma-mobile-wizard.html#nma-mobile-wizard-new"/>
     <keyword type="function" name="nma_mobile_wizard_present ()" link="libnma-nma-mobile-wizard.html#nma-mobile-wizard-present"/>
     <keyword type="function" name="nma_mobile_wizard_destroy ()" link="libnma-nma-mobile-wizard.html#nma-mobile-wizard-destroy"/>
-    <keyword type="typedef" name="NMAMobileWizard" link="libnma-nma-mobile-wizard.html#NMAMobileWizard"/>
     <keyword type="struct" name="NMAMobileWizardAccessMethod" link="libnma-nma-mobile-wizard.html#NMAMobileWizardAccessMethod"/>
     <keyword type="function" name="nma_mobile_access_method_ref ()" link="NMAMobileProvidersDatabase.html#nma-mobile-access-method-ref"/>
     <keyword type="function" name="nma_mobile_access_method_unref ()" link="NMAMobileProvidersDatabase.html#nma-mobile-access-method-unref"/>
