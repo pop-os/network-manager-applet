@@ -1,3 +1,9 @@
+network-manager-applet (1.8.12-2) unstable; urgency=medium
+
+  * NMNetworkMenuItem: Don't double-free priv->dupes (Closes: #900869)
+
+ -- Michael Biebl <biebl@debian.org>  Wed, 06 Jun 2018 19:59:19 +0200
+
 network-manager-applet (1.8.12-1) unstable; urgency=medium
 
   * New upstream version 1.8.12
