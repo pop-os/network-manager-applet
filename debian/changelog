@@ -1,8 +1,10 @@
-network-manager-applet (1.8.14-1) UNRELEASED; urgency=medium
+network-manager-applet (1.8.14-1) unstable; urgency=medium
 
   * New upstream version 1.8.14
+  * Rebase patches
+  * Update install path for AppStream metadata files
 
- -- Michael Biebl <biebl@debian.org>  Tue, 03 Jul 2018 23:59:57 +0200
+ -- Michael Biebl <biebl@debian.org>  Wed, 04 Jul 2018 00:27:31 +0200
 
 network-manager-applet (1.8.12-2) unstable; urgency=medium
 
