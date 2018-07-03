@@ -2,13 +2,13 @@ AC_PREREQ([2.63])
 
 m4_define([nma_major_version], [1])
 m4_define([nma_minor_version], [8])
-m4_define([nma_micro_version], [12])
+m4_define([nma_micro_version], [14])
 m4_define([nma_version],
           [nma_major_version.nma_minor_version.nma_micro_version])
 
 AC_INIT([nm-applet],
         [nma_version],
-        [https://bugzilla.gnome.org/enter_bug.cgi?product=NetworkManager],
+        [https://gitlab.gnome.org/GNOME/network-manager-applet/issues],
         [network-manager-applet])
 
 AC_CONFIG_HEADERS([config.h])
@@ -33,6 +33,16 @@ dnl
 AC_PROG_CC
 AM_PROG_CC_C_O
 PKG_PROG_PKG_CONFIG
+
+AC_CHECK_PROG([has_file], file, yes, no)
+if test x$has_file = xno ; then
+    AC_MSG_ERROR(["file" utility not found.])
+fi
+
+AC_CHECK_PROG([has_find], find, yes, no)
+if test x$has_find = xno ; then
+    AC_MSG_ERROR(["find" utility not found.])
+fi
 
 dnl Define _GNU_SOURCE for various things like strcasestr()
 AC_USE_SYSTEM_EXTENSIONS
@@ -132,7 +142,7 @@ PKG_CHECK_MODULES(GTK3, gtk+-3.0 >= 3.10)
 GTK3_CFLAGS="$GTK3_CFLAGS -DGDK_VERSION_MIN_REQUIRED=GDK_VERSION_3_4 -DGTK_VERSION_MAX_ALLOWED=GTK_VERSION_3_4"
 
 AC_ARG_WITH([appindicator],
-            AS_HELP_STRING([--with-appindicator=no|yes|auto|ayatana|ubuntu], [Build with lib(ayatana-)appindicator support instead of xembed systray support.]),
+            AS_HELP_STRING([--with-appindicator=no|yes|auto|ayatana|ubuntu], [Build with lib(ayatana-)appindicator support in addition to xembed systray support.]),
             [], [with_appindicator=no])
 if test "$with_appindicator" != "no"; then
 	if test "$with_appindicator" = "yes" -o "$with_appindicator" = "auto"; then

@@ -68,15 +68,21 @@ icon22dir = $(datadir)/icons/hicolor/22x22/apps
 icon22_DATA = \
 	icons/22/nm-adhoc.png \
 	icons/22/nm-device-wired.png \
+	icons/22/nm-device-wired-secure.png \
 	icons/22/nm-device-wwan.png \
 	icons/22/nm-mb-roam.png \
 	icons/22/nm-no-connection.png \
 	icons/22/nm-secure-lock.png \
 	icons/22/nm-signal-00.png \
+	icons/22/nm-signal-00-secure.png \
 	icons/22/nm-signal-100.png \
+	icons/22/nm-signal-100-secure.png \
 	icons/22/nm-signal-25.png \
+	icons/22/nm-signal-25-secure.png \
 	icons/22/nm-signal-50.png \
+	icons/22/nm-signal-50-secure.png \
 	icons/22/nm-signal-75.png \
+	icons/22/nm-signal-75-secure.png \
 	icons/22/nm-stage01-connecting01.png \
 	icons/22/nm-stage01-connecting02.png \
 	icons/22/nm-stage01-connecting03.png \
@@ -973,7 +979,7 @@ desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
 gsettings_SCHEMAS = org.gnome.nm-applet.gschema.xml
 @GSETTINGS_RULES@
 
-appdatadir = $(datadir)/appdata
+appdatadir = $(datadir)/metainfo
 appdata_DATA = $(appdata_in_files:.xml.in=.xml)
 appdata_in_files = nm-connection-editor.appdata.xml.in
 @INTLTOOL_XML_RULE@
