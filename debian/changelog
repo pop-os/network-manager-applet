@@ -1,8 +1,11 @@
-network-manager-applet (1.8.16-1) UNRELEASED; urgency=medium
+network-manager-applet (1.8.16-1) unstable; urgency=medium
 
   * New upstream version 1.8.16
+  * Rebase patches
+  * Add Build-Depends on mobile-broadband-provider-info.
+    This is required to get the database path at build time
 
- -- Michael Biebl <biebl@debian.org>  Tue, 14 Aug 2018 23:20:08 +0200
+ -- Michael Biebl <biebl@debian.org>  Tue, 14 Aug 2018 23:38:55 +0200
 
 network-manager-applet (1.8.14-1) unstable; urgency=medium
 
