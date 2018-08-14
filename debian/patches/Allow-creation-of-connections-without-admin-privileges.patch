@@ -231,10 +231,10 @@ index 9c1c965..2fdde7d 100644
  	}
  
 diff --git a/src/utils/utils.c b/src/utils/utils.c
-index c355be3..b77427b 100644
+index 694c521..694ef71 100644
 --- a/src/utils/utils.c
 +++ b/src/utils/utils.c
-@@ -578,3 +578,11 @@ utils_key_filter (void)
+@@ -562,3 +562,11 @@ utils_key_filter (void)
  
  	return filter;
  }
@@ -247,7 +247,7 @@ index c355be3..b77427b 100644
 +	return (perms != NM_CLIENT_PERMISSION_RESULT_YES);
 +}
 diff --git a/src/utils/utils.h b/src/utils/utils.h
-index ccc653f..3611d5b 100644
+index 4425789..fcc0ad3 100644
 --- a/src/utils/utils.h
 +++ b/src/utils/utils.h
 @@ -25,6 +25,8 @@
