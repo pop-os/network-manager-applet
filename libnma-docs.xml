@@ -12,11 +12,12 @@
     <releaseinfo>
       for libnma &package_version;.
       The latest version of this documentation can be found on-line at
-      <ulink role="online-location" url="https://developer.gnome.org/libnma/index.html">https://developer.gnome.org/libnma/</ulink>.
+      <ulink role="online-location" url="https://gnome.pages.gitlab.gnome.org/network-manager-applet/libnma/">https://gnome.pages.gitlab.gnome.org/network-manager-applet/libnma/</ulink>
     </releaseinfo>
 
     <copyright>
- ]    <year>2017</year>
+      <year>2017</year>
+      <year>2018</year>
       <holder>The &package_tarname; Authors</holder>
     </copyright>
 

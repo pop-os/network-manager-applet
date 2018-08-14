@@ -39,37 +39,10 @@ gboolean nm_ce_keep_above;
 
 /*************************************************/
 
-typedef struct {
-	gboolean create;
-	NMConnectionList *list;
-	GType ctype;
-	char *detail;
-	char *import_filename;
-} CreateConnectionInfo;
-
-static gboolean
-idle_create_connection (gpointer user_data)
+static void
+editor_created (NMConnectionList *list, gpointer user_data)
 {
-	CreateConnectionInfo *info = user_data;
-
-	if (info->create) {
-		if (!info->ctype)
-			nm_connection_list_add (info->list);
-		else {
-			nm_connection_list_create (info->list, info->ctype,
-			                           info->detail, NULL);
-		}
-	} else {
-		/* import */
-		nm_connection_list_create (info->list, info->ctype,
-		                           info->detail, info->import_filename);
-	}
-
-	g_object_unref (info->list);
-	g_free (info->detail);
-	g_free (info->import_filename);
-	g_slice_free (CreateConnectionInfo, info);
-	return FALSE;
+	g_application_release (G_APPLICATION (user_data));
 }
 
 static gboolean
@@ -85,7 +58,6 @@ handle_arguments (GApplication *application,
 	GType ctype = 0;
 	gs_free char *type_tmp = NULL;
 	const char *p, *detail = NULL;
-	CreateConnectionInfo *info;
 
 	if (type) {
 		p = strchr (type, ':');
@@ -113,21 +85,19 @@ handle_arguments (GApplication *application,
 	if (show) {
 		/* Just show the given connection type page */
 		nm_connection_list_set_type (list, ctype);
-	} else if (create || import) {
-		/* If type is "vpn" and the user cancels the "vpn type" dialog, we need
-		 * to quit. But we haven't even started yet. So postpone this to an idle.
-		 */
-		info = g_slice_new0 (CreateConnectionInfo);
-		info->list = g_object_ref (list);
-		info->create = create;
-		info->detail = g_strdup (detail);
-		if (create)
-			info->ctype = ctype;
-		else {
-			info->ctype = NM_TYPE_SETTING_VPN;
-			info->import_filename = g_strdup (import);
-		}
-		g_idle_add (idle_create_connection, info);
+	} else if (create) {
+		g_application_hold (application);
+		if (!ctype)
+			nm_connection_list_add (list, editor_created, application);
+		else
+			nm_connection_list_create (list, ctype, detail, NULL,
+			                           editor_created, application);
+		show_list = FALSE;
+	} else if (import) {
+		/* import */
+		g_application_hold (application);
+		nm_connection_list_create (list, ctype, detail, import,
+		                           editor_created, application);
 		show_list = FALSE;
 	} else if (edit_uuid) {
 		/* Show the edit dialog for the given UUID */
@@ -288,6 +258,7 @@ main (int argc, char *argv[])
 
 	opt_ctx = g_option_context_new (NULL);
 	g_option_context_add_main_entries (opt_ctx, entries, NULL);
+	g_option_context_set_help_enabled (opt_ctx, FALSE);
 	g_option_context_set_ignore_unknown_options (opt_ctx, TRUE);
 	g_option_context_parse (opt_ctx, &argc, &argv, NULL);
 	g_option_context_free (opt_ctx);
