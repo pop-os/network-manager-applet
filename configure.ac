@@ -2,7 +2,7 @@ AC_PREREQ([2.63])
 
 m4_define([nma_major_version], [1])
 m4_define([nma_minor_version], [8])
-m4_define([nma_micro_version], [14])
+m4_define([nma_micro_version], [16])
 m4_define([nma_version],
           [nma_major_version.nma_minor_version.nma_micro_version])
 
@@ -95,6 +95,29 @@ if test x$disable_iso_codes_check = "xno" ; then
          exit 1;])
 else
     AC_DEFINE_UNQUOTED([ISO_CODES_PREFIX],["$prefix"],[ISO codes prefix])
+fi
+
+# Check for mobile-broadband-provider-info for Mobile Broadband wizard
+AC_MSG_CHECKING([whether to disable mobile-broadband-provider-info at build-time])
+AC_ARG_ENABLE([mobile-broadband-provider-info],
+    AS_HELP_STRING([--disable-mobile-broadband-provider-info],[do not check for mobile-broadband-provider-info at build-time]),
+    [],[disable_mobile_broadband_provider_info_check=no])
+if test x$disable_mobile_broadband_provider_info_check = xno ; then
+    AC_MSG_RESULT([no])
+else
+    AC_MSG_RESULT([yes])
+fi
+
+if test x$disable_mobile_broadband_provider_info_check = "xno" ; then
+    AC_DEFINE_UNQUOTED([MOBILE_BROADBAND_PROVIDER_INFO_DATABASE],["`$PKG_CONFIG --variable=database mobile-broadband-provider-info`"],[Mobile Broadband Service Provider Information Database location])
+    PKG_CHECK_MODULES(MOBILE_BROADBAND_PROVIDER_INFO, [mobile-broadband-provider-info],
+        [],
+        [echo -e "\n$MOBILE_BROADBAND_PROVIDER_INFO_PKG_ERRORS.\n"
+         echo "Consider installing the package or adjusting the PKG_CONFIG_PATH environment variable."
+         echo "You can also disable build-time check for 'mobile-broadband-provider-info' via --disable-mobile-broadband-provider-info";
+         exit 1;])
+else
+    AC_DEFINE_UNQUOTED([MOBILE_BROADBAND_PROVIDER_INFO_DATABASE],["$prefix/share/mobile-broadband-provider-info/serviceproviders.xml"],[Mobile Broadband Service Provider Information Database location])
 fi
 
 dnl
@@ -290,10 +313,9 @@ GLIB_CONFIG_NMA
 GLIB_GSETTINGS
 AC_PATH_PROG(GLIB_COMPILE_RESOURCES, glib-compile-resources)
 
-NM_COMPILER_WARNINGS([yes])
+NM_COMPILER_WARNINGS(CFLAGS, [yes])
 NM_LTO
 NM_LD_GC
-
 
 AC_ARG_WITH(more-asserts,
             AS_HELP_STRING([--with-more-asserts=level], [Enable more assertions for debugging (default: 0)]),

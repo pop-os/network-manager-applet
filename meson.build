@@ -1,6 +1,6 @@
 project(
   'network-manager-applet', 'c',
-  version: '1.8.14',
+  version: '1.8.16',
   license: 'GPL2+',
   default_options: [
     'buildtype=debugoptimized',
@@ -128,6 +128,16 @@ if enable_iso_codes
   config_h.set_quoted('ISO_CODES_PREFIX', iso_codes_dep.get_pkgconfig_variable('prefix'))
 else
   config_h.set_quoted('ISO_CODES_PREFIX', nma_prefix)
+endif
+
+# Check for mobile-broadband-provider-info for Mobile Broadband wizard
+enable_mobile_broadband_provider_info = get_option('mobile_broadband_provider_info')
+message('whether to enable mobile-broadband-provider-info at build-time: ' + enable_mobile_broadband_provider_info.to_string())
+if enable_mobile_broadband_provider_info
+  mobile_broadband_provider_info_dep = dependency('mobile-broadband-provider-info')
+  config_h.set_quoted('MOBILE_BROADBAND_PROVIDER_INFO_DATABASE', mobile_broadband_provider_info_dep.get_pkgconfig_variable('database'))
+else
+  config_h.set_quoted('MOBILE_BROADBAND_PROVIDER_INFO_DATABASE', join_paths(nma_prefix, 'share', 'mobile-broadband-provider-info', 'serviceproviders.xml'))
 endif
 
 gio_dep = dependency('gio-2.0', version: '>= 2.38')
