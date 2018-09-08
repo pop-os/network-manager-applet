@@ -1,8 +1,12 @@
-network-manager-applet (1.8.18-1) UNRELEASED; urgency=medium
+network-manager-applet (1.8.18-1) unstable; urgency=medium
 
   * New upstream version 1.8.18
+    - libnma: fix wrongly showing hidden GUI elements, which causes connection
+      editing to behave wrong (Closes: #907902)
+  * Bump Standards-Version to 4.2.1
+  * Rebase patches
 
- -- Michael Biebl <biebl@debian.org>  Sat, 08 Sep 2018 18:33:25 +0200
+ -- Michael Biebl <biebl@debian.org>  Sat, 08 Sep 2018 18:42:36 +0200
 
 network-manager-applet (1.8.16-1) unstable; urgency=medium
 
