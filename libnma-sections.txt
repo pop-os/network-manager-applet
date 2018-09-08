@@ -1,6 +1,5 @@
 <SECTION>
 <FILE>nma-cert-chooser</FILE>
-<TITLE>NMACertChooser</TITLE>
 NMACertChooserFlags
 nma_cert_chooser_set_cert
 nma_cert_chooser_set_cert_uri
@@ -90,7 +89,6 @@ nma_mobile_providers_database_get_type
 
 <SECTION>
 <FILE>nma-mobile-wizard</FILE>
-<TITLE>NMAMobileWizard</TITLE>
 NMAMobileWizardAccessMethod
 NMAMobileWizardCallback
 nma_mobile_wizard_new

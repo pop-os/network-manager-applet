@@ -3,7 +3,7 @@
   <chapters>
     <sub name="libnma API reference" link="api-reference.html">
       <sub name="nma-ui-utils" link="libnma-nma-ui-utils.html"/>
-      <sub name="NMAMobileWizard" link="NMAMobileWizard.html"/>
+      <sub name="nma-mobile-wizard" link="libnma-nma-mobile-wizard.html"/>
       <sub name="NMAMobileProvidersDatabase" link="NMAMobileProvidersDatabase.html"/>
       <sub name="NMAVpnPasswordDialog" link="NMAVpnPasswordDialog.html"/>
       <sub name="NMAWifiDialog" link="NMAWifiDialog.html"/>
@@ -19,11 +19,11 @@
     <keyword type="function" name="nma_utils_setup_password_storage ()" link="libnma-nma-ui-utils.html#nma-utils-setup-password-storage"/>
     <keyword type="function" name="nma_utils_menu_to_secret_flags ()" link="libnma-nma-ui-utils.html#nma-utils-menu-to-secret-flags"/>
     <keyword type="function" name="nma_utils_update_password_storage ()" link="libnma-nma-ui-utils.html#nma-utils-update-password-storage"/>
-    <keyword type="function" name="NMAMobileWizardCallback ()" link="NMAMobileWizard.html#NMAMobileWizardCallback"/>
-    <keyword type="function" name="nma_mobile_wizard_new ()" link="NMAMobileWizard.html#nma-mobile-wizard-new"/>
-    <keyword type="function" name="nma_mobile_wizard_present ()" link="NMAMobileWizard.html#nma-mobile-wizard-present"/>
-    <keyword type="function" name="nma_mobile_wizard_destroy ()" link="NMAMobileWizard.html#nma-mobile-wizard-destroy"/>
-    <keyword type="struct" name="NMAMobileWizardAccessMethod" link="NMAMobileWizard.html#NMAMobileWizardAccessMethod"/>
+    <keyword type="function" name="NMAMobileWizardCallback ()" link="libnma-nma-mobile-wizard.html#NMAMobileWizardCallback"/>
+    <keyword type="function" name="nma_mobile_wizard_new ()" link="libnma-nma-mobile-wizard.html#nma-mobile-wizard-new"/>
+    <keyword type="function" name="nma_mobile_wizard_present ()" link="libnma-nma-mobile-wizard.html#nma-mobile-wizard-present"/>
+    <keyword type="function" name="nma_mobile_wizard_destroy ()" link="libnma-nma-mobile-wizard.html#nma-mobile-wizard-destroy"/>
+    <keyword type="struct" name="NMAMobileWizardAccessMethod" link="libnma-nma-mobile-wizard.html#NMAMobileWizardAccessMethod"/>
     <keyword type="function" name="nma_mobile_access_method_ref ()" link="NMAMobileProvidersDatabase.html#nma-mobile-access-method-ref"/>
     <keyword type="function" name="nma_mobile_access_method_unref ()" link="NMAMobileProvidersDatabase.html#nma-mobile-access-method-unref"/>
     <keyword type="function" name="nma_mobile_access_method_get_name ()" link="NMAMobileProvidersDatabase.html#nma-mobile-access-method-get-name"/>
@@ -119,11 +119,11 @@
     <keyword type="constant" name="NMA_CERT_CHOOSER_FLAG_CERT" link="NMACertChooser.html#NMA-CERT-CHOOSER-FLAG-CERT:CAPS"/>
     <keyword type="constant" name="NMA_CERT_CHOOSER_FLAG_PASSWORDS" link="NMACertChooser.html#NMA-CERT-CHOOSER-FLAG-PASSWORDS:CAPS"/>
     <keyword type="constant" name="NMA_CERT_CHOOSER_FLAG_PEM" link="NMACertChooser.html#NMA-CERT-CHOOSER-FLAG-PEM:CAPS"/>
-    <keyword type="member" name="NMAMobileWizardAccessMethod.provider-name" link="NMAMobileWizard.html#NMAMobileWizardAccessMethod.provider-name"/>
-    <keyword type="member" name="NMAMobileWizardAccessMethod.plan-name" link="NMAMobileWizard.html#NMAMobileWizardAccessMethod.plan-name"/>
-    <keyword type="member" name="NMAMobileWizardAccessMethod.devtype" link="NMAMobileWizard.html#NMAMobileWizardAccessMethod.devtype"/>
-    <keyword type="member" name="NMAMobileWizardAccessMethod.username" link="NMAMobileWizard.html#NMAMobileWizardAccessMethod.username"/>
-    <keyword type="member" name="NMAMobileWizardAccessMethod.password" link="NMAMobileWizard.html#NMAMobileWizardAccessMethod.password"/>
-    <keyword type="member" name="NMAMobileWizardAccessMethod.gsm-apn" link="NMAMobileWizard.html#NMAMobileWizardAccessMethod.gsm-apn"/>
+    <keyword type="member" name="NMAMobileWizardAccessMethod.provider-name" link="libnma-nma-mobile-wizard.html#NMAMobileWizardAccessMethod.provider-name"/>
+    <keyword type="member" name="NMAMobileWizardAccessMethod.plan-name" link="libnma-nma-mobile-wizard.html#NMAMobileWizardAccessMethod.plan-name"/>
+    <keyword type="member" name="NMAMobileWizardAccessMethod.devtype" link="libnma-nma-mobile-wizard.html#NMAMobileWizardAccessMethod.devtype"/>
+    <keyword type="member" name="NMAMobileWizardAccessMethod.username" link="libnma-nma-mobile-wizard.html#NMAMobileWizardAccessMethod.username"/>
+    <keyword type="member" name="NMAMobileWizardAccessMethod.password" link="libnma-nma-mobile-wizard.html#NMAMobileWizardAccessMethod.password"/>
+    <keyword type="member" name="NMAMobileWizardAccessMethod.gsm-apn" link="libnma-nma-mobile-wizard.html#NMAMobileWizardAccessMethod.gsm-apn"/>
   </functions>
 </book>
