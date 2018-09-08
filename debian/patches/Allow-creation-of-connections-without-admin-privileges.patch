@@ -124,10 +124,10 @@ index 7cc7202..15f64ec 100644
  		nm_connection_add_setting (info->connection, nm_setting_ppp_new ());
  	}
 diff --git a/src/connection-editor/page-vpn.c b/src/connection-editor/page-vpn.c
-index da99f7b..7fc0a8a 100644
+index 667340d..faf3ebf 100644
 --- a/src/connection-editor/page-vpn.c
 +++ b/src/connection-editor/page-vpn.c
-@@ -235,6 +235,7 @@ vpn_connection_new (FUNC_TAG_PAGE_NEW_CONNECTION_IMPL,
+@@ -234,6 +234,7 @@ vpn_connection_new (FUNC_TAG_PAGE_NEW_CONNECTION_IMPL,
                      gpointer user_data)
  {
  	NMSetting *s_vpn;
@@ -135,7 +135,7 @@ index da99f7b..7fc0a8a 100644
  	const char *service_type;
  	gs_free char *service_type_free = NULL;
  	gs_free char *add_detail_key_free = NULL;
-@@ -308,6 +309,13 @@ vpn_connection_new (FUNC_TAG_PAGE_NEW_CONNECTION_IMPL,
+@@ -307,6 +308,13 @@ vpn_connection_new (FUNC_TAG_PAGE_NEW_CONNECTION_IMPL,
  		if (!service_type)
  			service_type = detail;
  
