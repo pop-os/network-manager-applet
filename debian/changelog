@@ -1,3 +1,12 @@
+network-manager-applet (1.8.18-2) unstable; urgency=medium
+
+  * debian/patches/Revert*: Cherry-pick patches to fix "Apply" button
+    sensitivity. The previous fixes for upstream bug #20 AKA #907902 caused
+    the Apply button in the connection editor to never become sensitive in
+    some cases, for example when configuring OpenVPN VPNs.
+
+ -- Iain Lane <laney@debian.org>  Mon, 01 Oct 2018 11:53:20 +0100
+
 network-manager-applet (1.8.18-1) unstable; urgency=medium
 
   * New upstream version 1.8.18
