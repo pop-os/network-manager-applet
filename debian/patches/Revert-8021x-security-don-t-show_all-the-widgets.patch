@@ -1,0 +1,24 @@
+From: Thomas Haller <thaller@redhat.com>
+Date: Thu, 13 Sep 2018 21:28:36 +0200
+Subject: Revert "8021x-security: don't show_all() the widgets"
+
+This reverts commit 546539e3c9fe40ab71ed3d62312e9768df661371.
+
+Origin: https://gitlab.gnome.org/GNOME/network-manager-applet/commit/9b5c5eed6aa68eae373d948375adbbc3fabcea27
+Applied-Upstream: 1.18.9
+---
+ src/connection-editor/page-8021x-security.c | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/src/connection-editor/page-8021x-security.c b/src/connection-editor/page-8021x-security.c
+index 874384a..bbe614b 100644
+--- a/src/connection-editor/page-8021x-security.c
++++ b/src/connection-editor/page-8021x-security.c
+@@ -88,6 +88,7 @@ finish_setup (CEPage8021xSecurity *self, gpointer user_data)
+ 
+ 	gtk_box_pack_start (GTK_BOX (parent->page), GTK_WIDGET (priv->enabled), FALSE, TRUE, 12);
+ 	gtk_box_pack_start (GTK_BOX (parent->page), priv->security_widget, TRUE, TRUE, 0);
++	gtk_widget_show_all (parent->page);
+ }
+ 
+ CEPage *
