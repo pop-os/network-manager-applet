@@ -1,6 +1,2 @@
-Revert-8021x-security-don-t-show_all-the-widgets.patch
-Revert-editor-vpn-don-t-show_all-the-widgets.patch
-Revert-libnma-drop-use-of-GtkWidget.no-show-all-property.patch
-
 Allow-creation-of-connections-without-admin-privileges.patch
 Force-online-state-with-unmanaged-devices.patch

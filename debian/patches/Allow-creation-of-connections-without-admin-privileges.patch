@@ -28,7 +28,7 @@ Closes: #696256
  10 files changed, 88 insertions(+), 1 deletion(-)
 
 diff --git a/src/applet-device-wifi.c b/src/applet-device-wifi.c
-index d8a31a0..f5843c2 100644
+index a95d1f5..3697c2d 100644
 --- a/src/applet-device-wifi.c
 +++ b/src/applet-device-wifi.c
 @@ -461,9 +461,10 @@ wifi_new_auto_connection (NMDevice *device,
@@ -124,10 +124,10 @@ index 7cc7202..15f64ec 100644
  		nm_connection_add_setting (info->connection, nm_setting_ppp_new ());
  	}
 diff --git a/src/connection-editor/page-vpn.c b/src/connection-editor/page-vpn.c
-index 667340d..faf3ebf 100644
+index da99f7b..7fc0a8a 100644
 --- a/src/connection-editor/page-vpn.c
 +++ b/src/connection-editor/page-vpn.c
-@@ -234,6 +234,7 @@ vpn_connection_new (FUNC_TAG_PAGE_NEW_CONNECTION_IMPL,
+@@ -235,6 +235,7 @@ vpn_connection_new (FUNC_TAG_PAGE_NEW_CONNECTION_IMPL,
                      gpointer user_data)
  {
  	NMSetting *s_vpn;
@@ -135,7 +135,7 @@ index 667340d..faf3ebf 100644
  	const char *service_type;
  	gs_free char *service_type_free = NULL;
  	gs_free char *add_detail_key_free = NULL;
-@@ -307,6 +308,13 @@ vpn_connection_new (FUNC_TAG_PAGE_NEW_CONNECTION_IMPL,
+@@ -308,6 +309,13 @@ vpn_connection_new (FUNC_TAG_PAGE_NEW_CONNECTION_IMPL,
  		if (!service_type)
  			service_type = detail;
  
@@ -181,7 +181,7 @@ index 1aed778..8713904 100644
  	g_object_set (s_wifi, NM_SETTING_WIRELESS_MODE, "infrastructure", NULL);
  	nm_connection_add_setting (connection, s_wifi);
 diff --git a/src/libnm-gtk/nm-wifi-dialog.c b/src/libnm-gtk/nm-wifi-dialog.c
-index 71c5bd3..41234a1 100644
+index 8b45a3a..63ca7ed 100644
 --- a/src/libnm-gtk/nm-wifi-dialog.c
 +++ b/src/libnm-gtk/nm-wifi-dialog.c
 @@ -36,6 +36,7 @@
@@ -203,7 +203,7 @@ index 71c5bd3..41234a1 100644
  
  		s_wireless = (NMSettingWireless *) nm_setting_wireless_new ();
 diff --git a/src/mobile-helpers.c b/src/mobile-helpers.c
-index 9c1c965..2fdde7d 100644
+index 89b07ad..46e01ce 100644
 --- a/src/mobile-helpers.c
 +++ b/src/mobile-helpers.c
 @@ -182,6 +182,7 @@ mobile_wizard_done (NMAMobileWizard *wizard,
