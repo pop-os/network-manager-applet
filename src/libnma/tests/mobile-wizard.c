@@ -1,8 +1,4 @@
-/* -*- Mode: C; tab-width: 4; indent-tabs-mode: t; c-basic-offset: 4 -*- */
-/* NetworkManager Applet -- allow user control over networking
- *
- * Dan Williams <dcbw@redhat.com>
- *
+/*
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
@@ -17,17 +13,30 @@
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  *
- * Copyright 2007 - 2014 Red Hat, Inc.
+ * Copyright 2018 Red Hat, Inc.
  */
 
-#ifndef WS_WPA_EAP_H
-#define WS_WPA_EAP_H
+#include "nm-default.h"
 
-typedef struct _WirelessSecurityWPAEAP WirelessSecurityWPAEAP;
+#include <gtk/gtk.h>
+#include "nma-mobile-wizard.h"
 
-WirelessSecurityWPAEAP * ws_wpa_eap_new (NMConnection *connection,
-                                         gboolean is_editor,
-                                         gboolean secrets_only,
-                                         const char *const*secrets_hints);
+static void
+wizard_cb (NMAMobileWizard *self, gboolean canceled, NMAMobileWizardAccessMethod *method, gpointer user_data)
+{
+	gtk_main_quit ();
+}
 
-#endif /* WS_WPA_EAP_H */
+int
+main (int argc, char *argv[])
+{
+	NMAMobileWizard *wizard;
+
+	gtk_init (&argc, &argv);
+
+	wizard = nma_mobile_wizard_new (NULL, NULL, NM_DEVICE_MODEM_CAPABILITY_NONE, TRUE, wizard_cb, NULL);
+
+	nma_mobile_wizard_present (wizard);
+	gtk_main ();
+	nma_mobile_wizard_destroy (wizard);
+}
