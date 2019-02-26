@@ -1,8 +1,15 @@
-network-manager-applet (1.8.20-1) UNRELEASED; urgency=medium
+network-manager-applet (1.8.20-1) unstable; urgency=medium
 
   * New upstream version 1.8.20
+  * Rebase patches
+  * Revert upstream change which marks all WiFi connections as user
+    connections by default.
+    Thanks to Dean Serenevy <dean@serenevy.net> (Closes: #916187)
+  * Update symbols file for libnma0
+  * Use debhelper-compat (= 12) Build-Depends and drop debian/compat
+  * Bump Standards-Version to 4.3.0
 
- -- Michael Biebl <biebl@debian.org>  Tue, 26 Feb 2019 18:27:31 +0100
+ -- Michael Biebl <biebl@debian.org>  Tue, 26 Feb 2019 18:47:42 +0100
 
 network-manager-applet (1.8.18-2) unstable; urgency=medium
 
