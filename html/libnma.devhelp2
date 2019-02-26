@@ -76,6 +76,7 @@
     <keyword type="typedef" name="NMAVpnPasswordDialog" link="NMAVpnPasswordDialog.html#NMAVpnPasswordDialog"/>
     <keyword type="typedef" name="NMAVpnPasswordDialogClass" link="NMAVpnPasswordDialog.html#NMAVpnPasswordDialogClass"/>
     <keyword type="function" name="nma_wifi_dialog_new ()" link="NMAWifiDialog.html#nma-wifi-dialog-new"/>
+    <keyword type="function" name="nma_wifi_dialog_new_for_secrets ()" link="NMAWifiDialog.html#nma-wifi-dialog-new-for-secrets"/>
     <keyword type="function" name="nma_wifi_dialog_new_for_hidden ()" link="NMAWifiDialog.html#nma-wifi-dialog-new-for-hidden"/>
     <keyword type="function" name="nma_wifi_dialog_new_for_create ()" link="NMAWifiDialog.html#nma-wifi-dialog-new-for-create"/>
     <keyword type="function" name="nma_wifi_dialog_get_connection ()" link="NMAWifiDialog.html#nma-wifi-dialog-get-connection"/>

@@ -146,6 +146,7 @@ nma_vpn_password_dialog_get_type
 <FILE>nma-wifi-dialog</FILE>
 <TITLE>NMAWifiDialog</TITLE>
 nma_wifi_dialog_new
+nma_wifi_dialog_new_for_secrets
 nma_wifi_dialog_new_for_hidden
 nma_wifi_dialog_new_for_create
 nma_wifi_dialog_get_connection
