@@ -15,7 +15,7 @@ The logic is:
 
 Closes: #696256
 ---
- src/applet-device-wifi.c            | 27 ++++++++++++++++++++++++++-
+ src/applet-device-wifi.c            | 28 ++++++++++++++++++++++++++--
  src/connection-editor/page-mobile.c | 10 ++++++++++
  src/connection-editor/page-vpn.c    |  8 ++++++++
  src/connection-editor/page-wifi.c   | 13 +++++++++++++
@@ -25,10 +25,10 @@ Closes: #696256
  src/utils/utils.h                   |  4 ++++
  src/wireless-security/ws-wep-key.c  |  7 +++++++
  src/wireless-security/ws-wpa-psk.c  |  5 +++++
- 10 files changed, 88 insertions(+), 1 deletion(-)
+ 10 files changed, 88 insertions(+), 2 deletions(-)
 
 diff --git a/src/applet-device-wifi.c b/src/applet-device-wifi.c
-index a95d1f5..3697c2d 100644
+index a95d1f5..88a17b6 100644
 --- a/src/applet-device-wifi.c
 +++ b/src/applet-device-wifi.c
 @@ -461,9 +461,10 @@ wifi_new_auto_connection (NMDevice *device,
@@ -43,7 +43,15 @@ index a95d1f5..3697c2d 100644
  	NM80211ApSecurityFlags wpa_flags, rsn_flags;
  	GtkWidget *dialog;
  	MoreInfo *more_info;
-@@ -499,6 +500,7 @@ wifi_new_auto_connection (NMDevice *device,
+@@ -481,7 +482,6 @@ wifi_new_auto_connection (NMDevice *device,
+ 
+ 	/* Make the new connection available only for the current user */
+ 	s_con = (NMSettingConnection *) nm_setting_connection_new ();
+-	nm_setting_connection_add_permission (s_con, "user", g_get_user_name (), NULL);
+ 	nm_connection_add_setting (connection, NM_SETTING (s_con));
+ 
+ 	ssid = nm_access_point_get_ssid (ap);
+@@ -499,6 +499,7 @@ wifi_new_auto_connection (NMDevice *device,
  	/* If the AP is WPA[2]-Enterprise then we need to set up a minimal 802.1x
  	 * setting and ask the user for more information.
  	 */
@@ -51,7 +59,7 @@ index a95d1f5..3697c2d 100644
  	rsn_flags = nm_access_point_get_rsn_flags (ap);
  	wpa_flags = nm_access_point_get_wpa_flags (ap);
  	if (   (rsn_flags & NM_802_11_AP_SEC_KEY_MGMT_802_1X)
-@@ -527,6 +529,29 @@ wifi_new_auto_connection (NMDevice *device,
+@@ -527,6 +528,29 @@ wifi_new_auto_connection (NMDevice *device,
  		nm_connection_add_setting (connection, NM_SETTING (s_8021x));
  	}
  
