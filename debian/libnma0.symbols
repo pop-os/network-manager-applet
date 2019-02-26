@@ -2,6 +2,7 @@ libnma.so.0 libnma0 #MINVER#
  libnma_1_2_0@libnma_1_2_0 1.1.90
  libnma_1_8_0@libnma_1_8_0 1.8.0
  libnma_1_8_12@libnma_1_8_12 1.8.12
+ libnma_1_8_20@libnma_1_8_20 1.8.20
  nma_cert_chooser_add_to_size_group@libnma_1_8_0 1.8.0
  nma_cert_chooser_get_cert@libnma_1_8_0 1.8.0
  nma_cert_chooser_get_cert_password@libnma_1_8_0 1.8.0
@@ -90,4 +91,5 @@ libnma.so.0 libnma0 #MINVER#
  nma_wifi_dialog_new_for_create@libnma_1_2_0 1.1.90
  nma_wifi_dialog_new_for_hidden@libnma_1_2_0 1.1.90
  nma_wifi_dialog_new_for_other@libnma_1_2_0 1.1.90
+ nma_wifi_dialog_new_for_secrets@libnma_1_8_20 1.8.20
  nma_wifi_dialog_set_nag_ignored@libnma_1_2_0 1.1.90
