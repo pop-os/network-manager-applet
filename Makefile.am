@@ -33,10 +33,14 @@ DISTCHECK_CONFIGURE_FLAGS = \
 	--enable-gtk-doc \
 	--enable-introspection \
 	--enable-more-warnings=error \
-	--with-libnm-gtk \
 	--with-wwan \
 	--with-team \
 	--with-gcr
+
+
+if WITH_LIBNM_GTK
+DISTCHECK_CONFIGURE_FLAGS += --with-libnm-gtk
+endif
 
 man_MANS =
 
@@ -511,7 +515,9 @@ libnma_h_pub = \
 	src/libnma/nma-mobile-providers.h \
 	src/libnma/nma-vpn-password-dialog.h \
 	src/libnma/nma-ui-utils.h \
-	src/libnma/nma-cert-chooser.h
+	src/libnma/nma-cert-chooser.h \
+	src/libnma/nma-bar-code-widget.h \
+	src/libnma/nma-bar-code.h
 
 libnma_c_real = \
 	src/libnma/nma-wifi-dialog.c \
@@ -521,7 +527,13 @@ libnma_c_real = \
 	src/libnma/nma-ui-utils.c \
 	src/libnma/init.c \
 	src/libnma/nma-cert-chooser.c \
-	src/libnma/nma-file-cert-chooser.c
+	src/libnma/nma-file-cert-chooser.c \
+	src/libnma/nma-bar-code-widget.c \
+	src/libnma/nma-bar-code.c
+
+EXTRA_DIST += \
+	src/libnma/qrcodegen.c \
+	src/libnma/qrcodegen.h
 
 libnma_h_priv_real = \
 	src/libnma/nma-cert-chooser-private.h
@@ -696,12 +708,47 @@ src_libnma_tests_run_vpn_LDADD = \
 	$(LIBNM_LIBS) \
 	src/libnma/libnma.la
 
+check_PROGRAMS_norun += src/libnma/tests/cert-chooser
+
+src_libnma_tests_cert_chooser_CPPFLAGS = \
+	$(dflt_cppflags) \
+	$(GLIB_CFLAGS) \
+	$(GTK3_CFLAGS) \
+	$(LIBNM_CFLAGS) \
+	"-I$(srcdir)/shared/" \
+	"-I$(srcdir)/src/libnma" \
+	-Isrc/libnma
+
+src_libnma_tests_cert_chooser_LDADD = \
+	$(GLIB_LIBS) \
+	$(GTK3_LIBS) \
+	$(LIBNM_LIBS) \
+	src/libnma/libnma.la
+
+check_PROGRAMS_norun += src/libnma/tests/bar-code
+
+src_libnma_tests_bar_code_CPPFLAGS = \
+	$(dflt_cppflags) \
+	$(GLIB_CFLAGS) \
+	$(GTK3_CFLAGS) \
+	$(LIBNM_CFLAGS) \
+	"-I$(srcdir)/shared/" \
+	"-I$(srcdir)/src/libnma" \
+	-Isrc/libnma
+
+src_libnma_tests_bar_code_LDADD = \
+	$(GLIB_LIBS) \
+	$(GTK3_LIBS) \
+	$(LIBNM_LIBS) \
+	src/libnma/libnma.la
+
 EXTRA_DIST += \
 	src/libnma/nma-version.h.in \
 	src/libnma/libnma.pc.in \
 	src/libnma/libnma.ver \
 	src/libnma/wifi.ui \
 	src/libnma/nma-mobile-wizard.ui \
+	src/libnma/nma-bar-code-widget.ui \
 	src/libnma/nma-pkcs11-token-login-dialog.ui \
 	src/libnma/nma-pkcs11-cert-chooser-dialog.ui \
 	src/libnma/nma-vpn-password-dialog.ui \
@@ -1053,9 +1100,6 @@ TESTS += $(check_programs)
 EXTRA_DIST += \
 	linker-script-binary.ver \
 	CONTRIBUTING \
-	intltool-extract.in \
-	intltool-merge.in \
-	intltool-update.in \
 	Makefile.glib \
 	autogen.sh \
 	meson.build \
@@ -1071,13 +1115,18 @@ autostartdir = $(sysconfdir)/xdg/autostart
 autostart_in_files = nm-applet.desktop.in
 autostart_DATA = $(autostart_in_files:.desktop.in=.desktop)
 
+nm-applet.desktop: nm-applet.desktop.in
+	$(AM_V_GEN)$(MSGFMT) --desktop --template $< -d $(top_srcdir)/po -o $@
+
 applicationsdir = $(datadir)/applications
 applications_DATA = $(autostart_DATA)
 
 desktopdir = $(datadir)/applications
 desktop_in_files = nm-connection-editor.desktop.in
 desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
-@INTLTOOL_DESKTOP_RULE@
+
+nm-connection-editor.desktop: nm-connection-editor.desktop.in
+	$(AM_V_GEN)$(MSGFMT) --desktop --template $< -d $(top_srcdir)/po -o $@
 
 gsettings_SCHEMAS = org.gnome.nm-applet.gschema.xml
 @GSETTINGS_RULES@
@@ -1085,7 +1134,9 @@ gsettings_SCHEMAS = org.gnome.nm-applet.gschema.xml
 appdatadir = $(datadir)/metainfo
 appdata_DATA = $(appdata_in_files:.xml.in=.xml)
 appdata_in_files = nm-connection-editor.appdata.xml.in
-@INTLTOOL_XML_RULE@
+
+nm-connection-editor.appdata.xml: nm-connection-editor.appdata.xml.in
+	$(AM_V_GEN)$(MSGFMT) --xml --template $< -d $(top_srcdir)/po -o $@
 
 convertdir=$(datadir)/GConf/gsettings
 convert_DATA=nm-applet.convert
@@ -1104,8 +1155,3 @@ CLEANFILES += \
 	$(desktop_DATA) \
 	$(appdata_DATA) \
 	$(BUILT_SOURCES)
-
-DISTCLEANFILES += \
-	intltool-extract \
-	intltool-merge \
-	intltool-update
