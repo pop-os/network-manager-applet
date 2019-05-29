@@ -1,8 +1,12 @@
-network-manager-applet (1.8.22-1) UNRELEASED; urgency=medium
+network-manager-applet (1.8.22-1) experimental; urgency=medium
 
   * New upstream version 1.8.22
+  * Rebase patches
+  * Update symbols file for libnma0
+  * Drop obsolete gnome-common Build-Depends
+  * Replace intltool Build-Depends with gettext (>= 0.18)
 
- -- Michael Biebl <biebl@debian.org>  Wed, 29 May 2019 12:28:08 +0200
+ -- Michael Biebl <biebl@debian.org>  Wed, 29 May 2019 12:58:48 +0200
 
 network-manager-applet (1.8.20-1.1) unstable; urgency=medium
 
