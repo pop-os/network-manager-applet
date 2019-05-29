@@ -1,12 +1,12 @@
 project(
   'network-manager-applet', 'c',
-  version: '1.8.20',
+  version: '1.8.22',
   license: 'GPL2+',
   default_options: [
     'buildtype=debugoptimized',
     'c_std=gnu99'
   ],
-  meson_version: '>= 0.43.0'
+  meson_version: '>= 0.46.0'
 )
 
 nma_name = 'nm-applet'
@@ -70,9 +70,8 @@ if enable_ld_gc
 
   test_ldflags = ['-Wl,--gc-sections']
 
-  foreach cflag: test_cflags + test_ldflags
-    assert(cc.has_argument(cflag), 'Unused symbol eviction requested but not supported. Use -Dld_gc=false to build without it.')
-  endforeach
+  assert(cc.has_multi_arguments(test_cflags), 'Unused symbol eviction requested but not supported. Use -Dld_gc=false to build without it.')
+  assert(cc.has_multi_link_arguments(test_ldflags), 'Unused symbol eviction requested but not supported. Use -Dld_gc=false to build without it.')
 
   common_flags += test_cflags
   common_ldflags += test_ldflags
@@ -106,9 +105,6 @@ endif
 
 add_project_arguments(common_flags, language: 'c')
 add_project_link_arguments(common_ldflags, language: 'c')
-
-ldflag = '-Wl,--version-script'
-have_version_script = host_machine.system().contains('linux') and cc.has_argument(ldflag)
 
 linker_script_ver = join_paths(meson.source_root(), 'linker-script-binary.ver')
 
@@ -147,13 +143,13 @@ libsecret_dep = dependency('libsecret-1', version: '>= 0.18')
 m_dep = cc.find_library('m')
 
 # Check for gtk+
-gtk_req_version = '>= 3.4'
+gtk_req_version = '>= 3.10'
 
 gtk_dep = declare_dependency(
   dependencies: dependency('gtk+-3.0', version: gtk_req_version),
   compile_args: [
-    '-DGDK_VERSION_MIN_REQUIRED=GDK_VERSION_3_4',
-    '-DGTK_VERSION_MAX_ALLOWED=GTK_VERSION_3_4'
+    '-DGDK_VERSION_MIN_REQUIRED=GDK_VERSION_3_10',
+    '-DGDK_VERSION_MAX_ALLOWED=GDK_VERSION_3_10'
   ]
 )
 
@@ -363,11 +359,6 @@ pkg = import('pkgconfig')
 
 po_dir = join_paths(meson.source_root(), 'po')
 
-intltool_merge = find_program('intltool-merge')
-intltool_cache = join_paths(po_dir, '.intltool-merge-cache')
-intltool_desktop_cmd = [intltool_merge, '-d', '-u', '-c', intltool_cache, po_dir, '@INPUT@', '@OUTPUT@']
-intltool_xml_cmd = [intltool_merge, '-x', '-u', '-c', intltool_cache, po_dir, '@INPUT@', '@OUTPUT@']
-
 top_inc = include_directories('.')
 
 subdir('po')
@@ -376,45 +367,57 @@ subdir('shared')
 subdir('src')
 subdir('man')
 
-desktop = 'nm-applet.desktop'
+i18n = import('i18n')
 
 # FIXME: The same target can not be copied into two directories.
 #        There is a workaround in meson_post_install.py until proper solution arises:
 #        https://groups.google.com/forum/#!topic/mesonbuild/3iIoYPrN4P0
-custom_target(
-  desktop,
-  input: desktop + '.in',
-  output: desktop,
-  command: intltool_desktop_cmd,
-  install: true,
-  install_dir: nma_appdir
-  #install_dir: [
-  #  nma_appdir,
-  #  nma_autostartdir
-  #]
-)
+desktop_files = [
+  'nm-applet',
+  'nm-connection-editor',
+]
 
-desktop = 'nm-connection-editor.desktop'
+desktop_file_validate = find_program('desktop-file-validate', required: false)
 
-custom_target(
-  desktop,
-  input: desktop + '.in',
-  output: desktop,
-  command: intltool_desktop_cmd,
-  install: true,
-  install_dir: nma_appdir
-)
+foreach desktop: desktop_files
+  i18n.merge_file(
+    desktop + '-desktop',
+    input: desktop + '.desktop.in',
+    output: desktop + '.desktop',
+    install: true,
+    install_dir: nma_appdir,
+    po_dir: po_dir,
+    type: 'desktop',
+  )
+
+  if desktop_file_validate.found()
+    test('validate-' + desktop + '-desktop',
+      desktop_file_validate,
+      args: desktop + '.desktop',
+      workdir: meson.current_build_dir(),
+    )
+  endif
+endforeach
 
 appdata = 'nm-connection-editor.appdata.xml'
 
-custom_target(
-  appdata,
+i18n.merge_file(
+  'desktop',
   input: appdata + '.in',
   output: appdata,
-  command: intltool_xml_cmd,
   install: true,
-  install_dir: join_paths(nma_datadir, 'metainfo')
+  install_dir: join_paths(nma_datadir, 'metainfo'),
+  po_dir: po_dir,
 )
+
+appstream_util = find_program('appstream-util', required: false)
+if appstream_util.found()
+  test('validate-appdata',
+    appstream_util,
+    args: ['validate', '--nonet', appdata],
+    workdir: meson.current_build_dir(),
+  )
+endif
 
 schema_conf = configuration_data()
 schema_conf.set('GETTEXT_PACKAGE', nma_name)

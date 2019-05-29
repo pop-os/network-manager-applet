@@ -120,26 +120,27 @@ bin_PROGRAMS = src/connection-editor/nm-connection-editor$(EXEEXT) \
 noinst_PROGRAMS = $(am__EXEEXT_3)
 check_PROGRAMS = $(am__EXEEXT_2)
 TESTS = $(am__EXEEXT_2)
-@WITH_LIBNM_GTK_TRUE@am__append_1 = src/utils/libutils-libnm-glib.la
-@WITH_LIBNM_GTK_TRUE@am__append_2 = src/wireless-security/libwireless-security-libnm-glib.la
-@WITH_LIBNM_GTK_TRUE@am__append_3 = \
+@WITH_LIBNM_GTK_TRUE@am__append_1 = --with-libnm-gtk
+@WITH_LIBNM_GTK_TRUE@am__append_2 = src/utils/libutils-libnm-glib.la
+@WITH_LIBNM_GTK_TRUE@am__append_3 = src/wireless-security/libwireless-security-libnm-glib.la
+@WITH_LIBNM_GTK_TRUE@am__append_4 = \
 @WITH_LIBNM_GTK_TRUE@	$(libnm_gtk_h_priv_gen) \
 @WITH_LIBNM_GTK_TRUE@	$(libnm_gtk_c_gen)
 
-@WITH_LIBNM_GTK_TRUE@am__append_4 = src/libnm-gtk/libnm-gtk.la
-@WITH_LIBNM_GTK_TRUE@am__append_5 = check-local-exports-libnm-gtk
-@WITH_LIBNM_GTK_TRUE@am__append_6 = src/libnm-gtk/libnm-gtk.pc
-@HAVE_INTROSPECTION_TRUE@@WITH_LIBNM_GTK_TRUE@am__append_7 = src/libnm-gtk/NMGtk-1.0.gir
-@WITH_LIBNM_GTK_TRUE@am__append_8 = src/libnm-gtk/tests/test-mobile-providers
-@WITH_GCR_TRUE@am__append_9 = \
+@WITH_LIBNM_GTK_TRUE@am__append_5 = src/libnm-gtk/libnm-gtk.la
+@WITH_LIBNM_GTK_TRUE@am__append_6 = check-local-exports-libnm-gtk
+@WITH_LIBNM_GTK_TRUE@am__append_7 = src/libnm-gtk/libnm-gtk.pc
+@HAVE_INTROSPECTION_TRUE@@WITH_LIBNM_GTK_TRUE@am__append_8 = src/libnm-gtk/NMGtk-1.0.gir
+@WITH_LIBNM_GTK_TRUE@am__append_9 = src/libnm-gtk/tests/test-mobile-providers
+@WITH_GCR_TRUE@am__append_10 = \
 @WITH_GCR_TRUE@	$(libnma_h_priv_gcr) \
 @WITH_GCR_TRUE@	$(libnma_c_gcr)
 
-@HAVE_INTROSPECTION_TRUE@@WITH_GCR_TRUE@am__append_10 = \
+@HAVE_INTROSPECTION_TRUE@@WITH_GCR_TRUE@am__append_11 = \
 @HAVE_INTROSPECTION_TRUE@@WITH_GCR_TRUE@	$(libnma_c_gcr)
 
-@HAVE_INTROSPECTION_TRUE@am__append_11 = src/libnma/NMA-1.0.gir
-@WITH_WWAN_TRUE@am__append_12 = \
+@HAVE_INTROSPECTION_TRUE@am__append_12 = src/libnma/NMA-1.0.gir
+@WITH_WWAN_TRUE@am__append_13 = \
 @WITH_WWAN_TRUE@	src/applet-device-broadband.h \
 @WITH_WWAN_TRUE@	src/applet-device-broadband.c
 
@@ -147,12 +148,16 @@ subdir = .
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/m4/attributes.m4 \
 	$(top_srcdir)/m4/compiler_options.m4 \
-	$(top_srcdir)/m4/git-sha-record.m4 \
+	$(top_srcdir)/m4/gettext.m4 $(top_srcdir)/m4/git-sha-record.m4 \
 	$(top_srcdir)/m4/glib-makefile.m4 $(top_srcdir)/m4/gtk-doc.m4 \
-	$(top_srcdir)/m4/intltool.m4 $(top_srcdir)/m4/introspection.m4 \
+	$(top_srcdir)/m4/iconv.m4 $(top_srcdir)/m4/intlmacosx.m4 \
+	$(top_srcdir)/m4/introspection.m4 $(top_srcdir)/m4/lib-ld.m4 \
+	$(top_srcdir)/m4/lib-link.m4 $(top_srcdir)/m4/lib-prefix.m4 \
 	$(top_srcdir)/m4/libtool.m4 $(top_srcdir)/m4/ltoptions.m4 \
 	$(top_srcdir)/m4/ltsugar.m4 $(top_srcdir)/m4/ltversion.m4 \
-	$(top_srcdir)/m4/lt~obsolete.m4 $(top_srcdir)/configure.ac
+	$(top_srcdir)/m4/lt~obsolete.m4 $(top_srcdir)/m4/nls.m4 \
+	$(top_srcdir)/m4/po.m4 $(top_srcdir)/m4/progtest.m4 \
+	$(top_srcdir)/configure.ac
 am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
 	$(ACLOCAL_M4)
 DIST_COMMON = $(srcdir)/Makefile.am $(top_srcdir)/configure \
@@ -183,7 +188,9 @@ am__EXEEXT_3 = src/libnma/tests/mobile-wizard$(EXEEXT) \
 	src/libnma/tests/vpn-password-dialog$(EXEEXT) \
 	src/libnma/tests/wifi-dialog$(EXEEXT) \
 	src/libnma/tests/wifi-dialog-secrets$(EXEEXT) \
-	src/libnma/tests/run-vpn$(EXEEXT)
+	src/libnma/tests/run-vpn$(EXEEXT) \
+	src/libnma/tests/cert-chooser$(EXEEXT) \
+	src/libnma/tests/bar-code$(EXEEXT)
 PROGRAMS = $(bin_PROGRAMS) $(noinst_PROGRAMS)
 am__vpath_adj_setup = srcdirstrip=`echo "$(srcdir)" | sed 's|.|.|g'`;
 am__vpath_adj = case $$p in \
@@ -265,6 +272,7 @@ am__src_libnma_libnma_la_SOURCES_DIST =  \
 	src/libnma/nma-vpn-password-dialog.c src/libnma/nma-ui-utils.c \
 	src/libnma/init.c src/libnma/nma-cert-chooser.c \
 	src/libnma/nma-file-cert-chooser.c \
+	src/libnma/nma-bar-code-widget.c src/libnma/nma-bar-code.c \
 	src/libnma/nma-pkcs11-token-login-dialog.h \
 	src/libnma/nma-pkcs11-cert-chooser-dialog.h \
 	src/libnma/nma-cert-chooser-button.h \
@@ -280,7 +288,9 @@ am__objects_4 = src/libnma/libnma_la-nma-wifi-dialog.lo \
 	src/libnma/libnma_la-nma-ui-utils.lo \
 	src/libnma/libnma_la-init.lo \
 	src/libnma/libnma_la-nma-cert-chooser.lo \
-	src/libnma/libnma_la-nma-file-cert-chooser.lo
+	src/libnma/libnma_la-nma-file-cert-chooser.lo \
+	src/libnma/libnma_la-nma-bar-code-widget.lo \
+	src/libnma/libnma_la-nma-bar-code.lo
 am__objects_5 = src/libnma/libnma_la-nma-pkcs11-token-login-dialog.lo \
 	src/libnma/libnma_la-nma-pkcs11-cert-chooser-dialog.lo \
 	src/libnma/libnma_la-nma-cert-chooser-button.lo \
@@ -457,6 +467,19 @@ src_libnm_gtk_tests_test_mobile_providers_OBJECTS = src/libnm-gtk/tests/test_mob
 @WITH_LIBNM_GTK_TRUE@src_libnm_gtk_tests_test_mobile_providers_DEPENDENCIES =  \
 @WITH_LIBNM_GTK_TRUE@	src/libnm-gtk/libnm-gtk.la \
 @WITH_LIBNM_GTK_TRUE@	$(am__DEPENDENCIES_1)
+src_libnma_tests_bar_code_SOURCES = src/libnma/tests/bar-code.c
+src_libnma_tests_bar_code_OBJECTS =  \
+	src/libnma/tests/bar_code-bar-code.$(OBJEXT)
+src_libnma_tests_bar_code_DEPENDENCIES = $(am__DEPENDENCIES_1) \
+	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
+	src/libnma/libnma.la
+src_libnma_tests_cert_chooser_SOURCES =  \
+	src/libnma/tests/cert-chooser.c
+src_libnma_tests_cert_chooser_OBJECTS =  \
+	src/libnma/tests/cert_chooser-cert-chooser.$(OBJEXT)
+src_libnma_tests_cert_chooser_DEPENDENCIES = $(am__DEPENDENCIES_1) \
+	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
+	src/libnma/libnma.la
 src_libnma_tests_mobile_wizard_SOURCES =  \
 	src/libnma/tests/mobile-wizard.c
 src_libnma_tests_mobile_wizard_OBJECTS =  \
@@ -615,6 +638,8 @@ am__depfiles_remade =  \
 	src/libnma/$(DEPDIR)/libnm_gtk_libnm_gtk_la-nma-cert-chooser.Plo \
 	src/libnma/$(DEPDIR)/libnm_gtk_libnm_gtk_la-nma-file-cert-chooser.Plo \
 	src/libnma/$(DEPDIR)/libnma_la-init.Plo \
+	src/libnma/$(DEPDIR)/libnma_la-nma-bar-code-widget.Plo \
+	src/libnma/$(DEPDIR)/libnma_la-nma-bar-code.Plo \
 	src/libnma/$(DEPDIR)/libnma_la-nma-cert-chooser-button.Plo \
 	src/libnma/$(DEPDIR)/libnma_la-nma-cert-chooser.Plo \
 	src/libnma/$(DEPDIR)/libnma_la-nma-file-cert-chooser.Plo \
@@ -627,6 +652,8 @@ am__depfiles_remade =  \
 	src/libnma/$(DEPDIR)/libnma_la-nma-ui-utils.Plo \
 	src/libnma/$(DEPDIR)/libnma_la-nma-vpn-password-dialog.Plo \
 	src/libnma/$(DEPDIR)/libnma_la-nma-wifi-dialog.Plo \
+	src/libnma/tests/$(DEPDIR)/bar_code-bar-code.Po \
+	src/libnma/tests/$(DEPDIR)/cert_chooser-cert-chooser.Po \
 	src/libnma/tests/$(DEPDIR)/mobile_wizard-mobile-wizard.Po \
 	src/libnma/tests/$(DEPDIR)/run_vpn-run-vpn.Po \
 	src/libnma/tests/$(DEPDIR)/vpn_password_dialog-vpn-password-dialog.Po \
@@ -697,6 +724,7 @@ SOURCES = $(src_libnm_gtk_libnm_gtk_la_SOURCES) \
 	$(src_connection_editor_nm_connection_editor_SOURCES) \
 	$(nodist_src_connection_editor_nm_connection_editor_SOURCES) \
 	src/libnm-gtk/tests/test-mobile-providers.c \
+	src/libnma/tests/bar-code.c src/libnma/tests/cert-chooser.c \
 	src/libnma/tests/mobile-wizard.c src/libnma/tests/run-vpn.c \
 	src/libnma/tests/vpn-password-dialog.c \
 	src/libnma/tests/wifi-dialog.c \
@@ -711,6 +739,7 @@ DIST_SOURCES = $(am__src_libnm_gtk_libnm_gtk_la_SOURCES_DIST) \
 	$(src_wireless_security_libwireless_security_libnm_la_SOURCES) \
 	$(src_connection_editor_nm_connection_editor_SOURCES) \
 	src/libnm-gtk/tests/test-mobile-providers.c \
+	src/libnma/tests/bar-code.c src/libnma/tests/cert-chooser.c \
 	src/libnma/tests/mobile-wizard.c src/libnma/tests/run-vpn.c \
 	src/libnma/tests/vpn-password-dialog.c \
 	src/libnma/tests/wifi-dialog.c \
@@ -959,9 +988,10 @@ am__DIST_COMMON = $(srcdir)/Makefile.in $(srcdir)/config.h.in \
 	$(top_srcdir)/man/nm-connection-editor.1.in \
 	$(top_srcdir)/src/libnm-gtk/libnm-gtk.pc.in \
 	$(top_srcdir)/src/libnma/libnma.pc.in \
-	$(top_srcdir)/src/libnma/nma-version.h.in AUTHORS COPYING \
-	ChangeLog INSTALL NEWS README compile config.guess config.sub \
-	depcomp install-sh ltmain.sh missing test-driver
+	$(top_srcdir)/src/libnma/nma-version.h.in ABOUT-NLS AUTHORS \
+	COPYING ChangeLog INSTALL NEWS README compile config.guess \
+	config.rpath config.sub depcomp install-sh ltmain.sh missing \
+	test-driver
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
 distdir = $(PACKAGE)-$(VERSION)
 top_distdir = $(distdir)
@@ -1005,7 +1035,6 @@ am__distuninstallcheck_listfiles = $(distuninstallcheck_listfiles) \
   | sed 's|^\./|$(prefix)/|' | grep -v '$(infodir)/dir$$'
 distcleancheck_listfiles = find . -type f -print
 ACLOCAL = @ACLOCAL@
-ALL_LINGUAS = @ALL_LINGUAS@
 AMTAR = @AMTAR@
 AM_DEFAULT_VERBOSITY = @AM_DEFAULT_VERBOSITY@
 APPINDICATOR_CFLAGS = @APPINDICATOR_CFLAGS@
@@ -1015,15 +1044,12 @@ AUTOCONF = @AUTOCONF@
 AUTOHEADER = @AUTOHEADER@
 AUTOMAKE = @AUTOMAKE@
 AWK = @AWK@
-CATALOGS = @CATALOGS@
-CATOBJEXT = @CATOBJEXT@
 CC = @CC@
 CCDEPMODE = @CCDEPMODE@
 CFLAGS = @CFLAGS@
 CPP = @CPP@
 CPPFLAGS = @CPPFLAGS@
 CYGPATH_W = @CYGPATH_W@
-DATADIRNAME = @DATADIRNAME@
 DBUSMENU_CFLAGS = @DBUSMENU_CFLAGS@
 DBUSMENU_LIBS = @DBUSMENU_LIBS@
 DEFS = @DEFS@
@@ -1039,6 +1065,7 @@ EXEEXT = @EXEEXT@
 FGREP = @FGREP@
 GCR_CFLAGS = @GCR_CFLAGS@
 GCR_LIBS = @GCR_LIBS@
+GETTEXT_MACRO_VERSION = @GETTEXT_MACRO_VERSION@
 GETTEXT_PACKAGE = @GETTEXT_PACKAGE@
 GLIB_CFLAGS = @GLIB_CFLAGS@
 GLIB_COMPILE_RESOURCES = @GLIB_COMPILE_RESOURCES@
@@ -1047,8 +1074,8 @@ GLIB_GENMARSHAL = @GLIB_GENMARSHAL@
 GLIB_LIBS = @GLIB_LIBS@
 GLIB_MAKEFILE = @GLIB_MAKEFILE@
 GLIB_MKENUMS = @GLIB_MKENUMS@
-GMOFILES = @GMOFILES@
 GMSGFMT = @GMSGFMT@
+GMSGFMT_015 = @GMSGFMT_015@
 GREP = @GREP@
 GSETTINGS_DISABLE_SCHEMAS_COMPILE = @GSETTINGS_DISABLE_SCHEMAS_COMPILE@
 GTK3_CFLAGS = @GTK3_CFLAGS@
@@ -1067,16 +1094,7 @@ INSTALL_DATA = @INSTALL_DATA@
 INSTALL_PROGRAM = @INSTALL_PROGRAM@
 INSTALL_SCRIPT = @INSTALL_SCRIPT@
 INSTALL_STRIP_PROGRAM = @INSTALL_STRIP_PROGRAM@
-INSTOBJEXT = @INSTOBJEXT@
 INTLLIBS = @INTLLIBS@
-INTLTOOL_EXTRACT = @INTLTOOL_EXTRACT@
-INTLTOOL_MERGE = @INTLTOOL_MERGE@
-INTLTOOL_PERL = @INTLTOOL_PERL@
-INTLTOOL_UPDATE = @INTLTOOL_UPDATE@
-INTLTOOL_V_MERGE = @INTLTOOL_V_MERGE@
-INTLTOOL_V_MERGE_OPTIONS = @INTLTOOL_V_MERGE_OPTIONS@
-INTLTOOL__v_MERGE_ = @INTLTOOL__v_MERGE_@
-INTLTOOL__v_MERGE_0 = @INTLTOOL__v_MERGE_0@
 INTL_MACOSX_LIBS = @INTL_MACOSX_LIBS@
 INTROSPECTION_CFLAGS = @INTROSPECTION_CFLAGS@
 INTROSPECTION_COMPILER = @INTROSPECTION_COMPILER@
@@ -1092,6 +1110,8 @@ JANSSON_CFLAGS = @JANSSON_CFLAGS@
 JANSSON_LIBS = @JANSSON_LIBS@
 LD = @LD@
 LDFLAGS = @LDFLAGS@
+LIBICONV = @LIBICONV@
+LIBINTL = @LIBINTL@
 LIBNM_CFLAGS = @LIBNM_CFLAGS@
 LIBNM_GLIB_CFLAGS = @LIBNM_GLIB_CFLAGS@
 LIBNM_GLIB_LIBS = @LIBNM_GLIB_LIBS@
@@ -1105,19 +1125,20 @@ LIBSECRET_LIBS = @LIBSECRET_LIBS@
 LIBTOOL = @LIBTOOL@
 LIPO = @LIPO@
 LN_S = @LN_S@
+LTLIBICONV = @LTLIBICONV@
+LTLIBINTL = @LTLIBINTL@
 LTLIBOBJS = @LTLIBOBJS@
 LT_SYS_LIBRARY_PATH = @LT_SYS_LIBRARY_PATH@
 MAINT = @MAINT@
 MAKEINFO = @MAKEINFO@
 MANIFEST_TOOL = @MANIFEST_TOOL@
 MKDIR_P = @MKDIR_P@
-MKINSTALLDIRS = @MKINSTALLDIRS@
 MM_GLIB_CFLAGS = @MM_GLIB_CFLAGS@
 MM_GLIB_LIBS = @MM_GLIB_LIBS@
 MOBILE_BROADBAND_PROVIDER_INFO_CFLAGS = @MOBILE_BROADBAND_PROVIDER_INFO_CFLAGS@
 MOBILE_BROADBAND_PROVIDER_INFO_LIBS = @MOBILE_BROADBAND_PROVIDER_INFO_LIBS@
 MSGFMT = @MSGFMT@
-MSGFMT_OPTS = @MSGFMT_OPTS@
+MSGFMT_015 = @MSGFMT_015@
 MSGMERGE = @MSGMERGE@
 NM = @NM@
 NMA_MAJOR_VERSION = @NMA_MAJOR_VERSION@
@@ -1142,10 +1163,7 @@ PATH_SEPARATOR = @PATH_SEPARATOR@
 PKG_CONFIG = @PKG_CONFIG@
 PKG_CONFIG_LIBDIR = @PKG_CONFIG_LIBDIR@
 PKG_CONFIG_PATH = @PKG_CONFIG_PATH@
-POFILES = @POFILES@
 POSUB = @POSUB@
-PO_IN_DATADIR_FALSE = @PO_IN_DATADIR_FALSE@
-PO_IN_DATADIR_TRUE = @PO_IN_DATADIR_TRUE@
 RANLIB = @RANLIB@
 SED = @SED@
 SELINUX_CFLAGS = @SELINUX_CFLAGS@
@@ -1156,6 +1174,8 @@ STRIP = @STRIP@
 USE_NLS = @USE_NLS@
 VERSION = @VERSION@
 XGETTEXT = @XGETTEXT@
+XGETTEXT_015 = @XGETTEXT_015@
+XGETTEXT_EXTRA_OPTIONS = @XGETTEXT_EXTRA_OPTIONS@
 abs_builddir = @abs_builddir@
 abs_srcdir = @abs_srcdir@
 abs_top_builddir = @abs_top_builddir@
@@ -1192,8 +1212,6 @@ htmldir = @htmldir@
 includedir = @includedir@
 infodir = @infodir@
 install_sh = @install_sh@
-intltool__v_merge_options_ = @intltool__v_merge_options_@
-intltool__v_merge_options_0 = @intltool__v_merge_options_0@
 libdir = @libdir@
 libexecdir = @libexecdir@
 localedir = @localedir@
@@ -1258,9 +1276,11 @@ EXTRA_DIST = $(HTML_IMAGES) $(SETUP_FILES) $(icon16_DATA) \
 	src/libnm-gtk/tests/iso3166-test.xml \
 	src/libnm-gtk/tests/serviceproviders-test.xml \
 	src/libnm-gtk/examples/mobile-providers.js $(NULL) \
+	src/libnma/qrcodegen.c src/libnma/qrcodegen.h \
 	src/libnma/nma-version.h.in src/libnma/libnma.pc.in \
 	src/libnma/libnma.ver src/libnma/wifi.ui \
 	src/libnma/nma-mobile-wizard.ui \
+	src/libnma/nma-bar-code-widget.ui \
 	src/libnma/nma-pkcs11-token-login-dialog.ui \
 	src/libnma/nma-pkcs11-cert-chooser-dialog.ui \
 	src/libnma/nma-vpn-password-dialog.ui \
@@ -1306,8 +1326,7 @@ EXTRA_DIST = $(HTML_IMAGES) $(SETUP_FILES) $(icon16_DATA) \
 	shared/nm-utils/nm-vpn-editor-plugin-call.h \
 	shared/nm-default.h shared/nm-libnm-compat.h \
 	shared/meson.build $(NULL) man/meson.build \
-	linker-script-binary.ver CONTRIBUTING intltool-extract.in \
-	intltool-merge.in intltool-update.in Makefile.glib autogen.sh \
+	linker-script-binary.ver CONTRIBUTING Makefile.glib autogen.sh \
 	meson.build meson_options.txt meson_post_install.py \
 	config.h.meson gtkdocentities.ent.in po/meson.build \
 	$(convert_DATA) $(appdata_in_files) $(autostart_in_files) \
@@ -1330,7 +1349,7 @@ REPORT_FILES = \
 
 CLEANFILES = $(SCANOBJ_FILES) $(REPORT_FILES) $(DOC_STAMPS) \
 	gtkdoc-check.test $(wireless_security_h_gen) \
-	$(wireless_security_c_gen) $(am__append_3) \
+	$(wireless_security_c_gen) $(am__append_4) \
 	$(libnma_h_priv_gen) $(libnma_c_gen) \
 	$(connection_editor_h_gen) $(connection_editor_c_gen) \
 	$(nm_applet_h_gen) $(nm_applet_c_gen) $(INTROSPECTION_GIRS) \
@@ -1374,37 +1393,32 @@ GTK_DOC_V_PDF_0 = @echo "  DOC   Building PDF";
 ACLOCAL_AMFLAGS = -I m4 ${ACLOCAL_FLAGS}
 AUTOMAKE_OPTIONS = subdir-objects
 BUILT_SOURCES = $(gir_DATA) $(typelib_DATA)
-lib_LTLIBRARIES = $(am__append_4) src/libnma/libnma.la
-noinst_LTLIBRARIES = src/utils/libutils-libnm.la $(am__append_1) \
+lib_LTLIBRARIES = $(am__append_5) src/libnma/libnma.la
+noinst_LTLIBRARIES = src/utils/libutils-libnm.la $(am__append_2) \
 	src/wireless-security/libwireless-security-libnm.la \
-	$(am__append_2)
+	$(am__append_3)
 check_PROGRAMS_norun = src/libnma/tests/mobile-wizard \
 	src/libnma/tests/vpn-password-dialog \
 	src/libnma/tests/wifi-dialog \
-	src/libnma/tests/wifi-dialog-secrets src/libnma/tests/run-vpn
-check_programs = src/utils/tests/test-utils $(am__append_8)
-check_local = $(am__append_5)
-DISTCLEANFILES = intltool-extract intltool-merge intltool-update
-DISTCHECK_CONFIGURE_FLAGS = \
-	--disable-dependency-tracking \
-	--enable-gtk-doc \
-	--enable-introspection \
-	--enable-more-warnings=error \
-	--with-libnm-gtk \
-	--with-wwan \
-	--with-team \
-	--with-gcr
-
+	src/libnma/tests/wifi-dialog-secrets src/libnma/tests/run-vpn \
+	src/libnma/tests/cert-chooser src/libnma/tests/bar-code
+check_programs = src/utils/tests/test-utils $(am__append_9)
+check_local = $(am__append_6)
+DISTCLEANFILES = 
+DISTCHECK_CONFIGURE_FLAGS = --disable-dependency-tracking \
+	--enable-gtk-doc --enable-introspection \
+	--enable-more-warnings=error --with-wwan --with-team \
+	--with-gcr $(am__append_1)
 
 ###############################################################################
 man_MANS = man/nm-applet.1 man/nm-connection-editor.1
-pkgconfig_DATA = $(am__append_6) src/libnma/libnma.pc
+pkgconfig_DATA = $(am__append_7) src/libnma/libnma.pc
 pkgconfigdir = $(libdir)/pkgconfig
 girdir = $(datadir)/gir-1.0
 gir_DATA = $(INTROSPECTION_GIRS)
 typelibdir = $(libdir)/girepository-1.0
 typelib_DATA = $(INTROSPECTION_GIRS:.gir=.typelib)
-INTROSPECTION_GIRS = $(am__append_7) $(am__append_11)
+INTROSPECTION_GIRS = $(am__append_8) $(am__append_12)
 SUBDIRS = \
 	. \
 	po
@@ -1738,7 +1752,9 @@ libnma_h_pub = \
 	src/libnma/nma-mobile-providers.h \
 	src/libnma/nma-vpn-password-dialog.h \
 	src/libnma/nma-ui-utils.h \
-	src/libnma/nma-cert-chooser.h
+	src/libnma/nma-cert-chooser.h \
+	src/libnma/nma-bar-code-widget.h \
+	src/libnma/nma-bar-code.h
 
 libnma_c_real = \
 	src/libnma/nma-wifi-dialog.c \
@@ -1748,7 +1764,9 @@ libnma_c_real = \
 	src/libnma/nma-ui-utils.c \
 	src/libnma/init.c \
 	src/libnma/nma-cert-chooser.c \
-	src/libnma/nma-file-cert-chooser.c
+	src/libnma/nma-file-cert-chooser.c \
+	src/libnma/nma-bar-code-widget.c \
+	src/libnma/nma-bar-code.c
 
 libnma_h_priv_real = \
 	src/libnma/nma-cert-chooser-private.h
@@ -1769,7 +1787,7 @@ src_libnma_libnma_HEADERS = \
 	$(libnma_h_pub)
 
 src_libnma_libnma_la_SOURCES = $(libnma_h_priv_real) $(libnma_c_real) \
-	$(am__append_9)
+	$(am__append_10)
 nodist_src_libnma_libnma_la_SOURCES = \
 	$(libnma_h_priv_gen) \
 	$(libnma_c_gen)
@@ -1812,7 +1830,7 @@ src_libnma_libnma_la_LDFLAGS = \
 @HAVE_INTROSPECTION_TRUE@src_libnma_NMA_1_0_gir_LIBS = src/libnma/libnma.la
 @HAVE_INTROSPECTION_TRUE@src_libnma_NMA_1_0_gir_FILES =  \
 @HAVE_INTROSPECTION_TRUE@	$(libnma_h_pub) $(libnma_c_real) \
-@HAVE_INTROSPECTION_TRUE@	$(am__append_10)
+@HAVE_INTROSPECTION_TRUE@	$(am__append_11)
 @HAVE_INTROSPECTION_TRUE@src_libnma_NMA_1_0_gir_SCANNERFLAGS = --warn-all --identifier-prefix=NMA --symbol-prefix=nma
 src_libnma_tests_mobile_wizard_CPPFLAGS = \
 	$(dflt_cppflags) \
@@ -1884,6 +1902,36 @@ src_libnma_tests_run_vpn_CPPFLAGS = \
 	-Isrc/libnma
 
 src_libnma_tests_run_vpn_LDADD = \
+	$(GLIB_LIBS) \
+	$(GTK3_LIBS) \
+	$(LIBNM_LIBS) \
+	src/libnma/libnma.la
+
+src_libnma_tests_cert_chooser_CPPFLAGS = \
+	$(dflt_cppflags) \
+	$(GLIB_CFLAGS) \
+	$(GTK3_CFLAGS) \
+	$(LIBNM_CFLAGS) \
+	"-I$(srcdir)/shared/" \
+	"-I$(srcdir)/src/libnma" \
+	-Isrc/libnma
+
+src_libnma_tests_cert_chooser_LDADD = \
+	$(GLIB_LIBS) \
+	$(GTK3_LIBS) \
+	$(LIBNM_LIBS) \
+	src/libnma/libnma.la
+
+src_libnma_tests_bar_code_CPPFLAGS = \
+	$(dflt_cppflags) \
+	$(GLIB_CFLAGS) \
+	$(GTK3_CFLAGS) \
+	$(LIBNM_CFLAGS) \
+	"-I$(srcdir)/shared/" \
+	"-I$(srcdir)/src/libnma" \
+	-Isrc/libnma
+
+src_libnma_tests_bar_code_LDADD = \
 	$(GLIB_LIBS) \
 	$(GTK3_LIBS) \
 	$(LIBNM_LIBS) \
@@ -2021,7 +2069,7 @@ nm_applet_hc_real = shared/nm-utils/nm-compat.c src/main.c \
 	src/applet-device-wifi.c src/ap-menu-item.h src/ap-menu-item.c \
 	src/mb-menu-item.h src/mb-menu-item.c src/mobile-helpers.c \
 	src/mobile-helpers.h src/applet-device-bt.h \
-	src/applet-device-bt.c src/fallback-icon.h $(am__append_12)
+	src/applet-device-bt.c src/fallback-icon.h $(am__append_13)
 src_nm_applet_SOURCES = \
 	$(nm_applet_hc_real)
 
@@ -2346,6 +2394,11 @@ src/libnma/libnma_la-nma-cert-chooser.lo: src/libnma/$(am__dirstamp) \
 src/libnma/libnma_la-nma-file-cert-chooser.lo:  \
 	src/libnma/$(am__dirstamp) \
 	src/libnma/$(DEPDIR)/$(am__dirstamp)
+src/libnma/libnma_la-nma-bar-code-widget.lo:  \
+	src/libnma/$(am__dirstamp) \
+	src/libnma/$(DEPDIR)/$(am__dirstamp)
+src/libnma/libnma_la-nma-bar-code.lo: src/libnma/$(am__dirstamp) \
+	src/libnma/$(DEPDIR)/$(am__dirstamp)
 src/libnma/libnma_la-nma-pkcs11-token-login-dialog.lo:  \
 	src/libnma/$(am__dirstamp) \
 	src/libnma/$(DEPDIR)/$(am__dirstamp)
@@ -2633,6 +2686,20 @@ src/libnma/tests/$(am__dirstamp):
 src/libnma/tests/$(DEPDIR)/$(am__dirstamp):
 	@$(MKDIR_P) src/libnma/tests/$(DEPDIR)
 	@: > src/libnma/tests/$(DEPDIR)/$(am__dirstamp)
+src/libnma/tests/bar_code-bar-code.$(OBJEXT):  \
+	src/libnma/tests/$(am__dirstamp) \
+	src/libnma/tests/$(DEPDIR)/$(am__dirstamp)
+
+src/libnma/tests/bar-code$(EXEEXT): $(src_libnma_tests_bar_code_OBJECTS) $(src_libnma_tests_bar_code_DEPENDENCIES) $(EXTRA_src_libnma_tests_bar_code_DEPENDENCIES) src/libnma/tests/$(am__dirstamp)
+	@rm -f src/libnma/tests/bar-code$(EXEEXT)
+	$(AM_V_CCLD)$(LINK) $(src_libnma_tests_bar_code_OBJECTS) $(src_libnma_tests_bar_code_LDADD) $(LIBS)
+src/libnma/tests/cert_chooser-cert-chooser.$(OBJEXT):  \
+	src/libnma/tests/$(am__dirstamp) \
+	src/libnma/tests/$(DEPDIR)/$(am__dirstamp)
+
+src/libnma/tests/cert-chooser$(EXEEXT): $(src_libnma_tests_cert_chooser_OBJECTS) $(src_libnma_tests_cert_chooser_DEPENDENCIES) $(EXTRA_src_libnma_tests_cert_chooser_DEPENDENCIES) src/libnma/tests/$(am__dirstamp)
+	@rm -f src/libnma/tests/cert-chooser$(EXEEXT)
+	$(AM_V_CCLD)$(LINK) $(src_libnma_tests_cert_chooser_OBJECTS) $(src_libnma_tests_cert_chooser_LDADD) $(LIBS)
 src/libnma/tests/mobile_wizard-mobile-wizard.$(OBJEXT):  \
 	src/libnma/tests/$(am__dirstamp) \
 	src/libnma/tests/$(DEPDIR)/$(am__dirstamp)
@@ -2810,6 +2877,8 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@src/libnma/$(DEPDIR)/libnm_gtk_libnm_gtk_la-nma-cert-chooser.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/libnma/$(DEPDIR)/libnm_gtk_libnm_gtk_la-nma-file-cert-chooser.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/libnma/$(DEPDIR)/libnma_la-init.Plo@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@src/libnma/$(DEPDIR)/libnma_la-nma-bar-code-widget.Plo@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@src/libnma/$(DEPDIR)/libnma_la-nma-bar-code.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/libnma/$(DEPDIR)/libnma_la-nma-cert-chooser-button.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/libnma/$(DEPDIR)/libnma_la-nma-cert-chooser.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/libnma/$(DEPDIR)/libnma_la-nma-file-cert-chooser.Plo@am__quote@ # am--include-marker
@@ -2822,6 +2891,8 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@src/libnma/$(DEPDIR)/libnma_la-nma-ui-utils.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/libnma/$(DEPDIR)/libnma_la-nma-vpn-password-dialog.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/libnma/$(DEPDIR)/libnma_la-nma-wifi-dialog.Plo@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@src/libnma/tests/$(DEPDIR)/bar_code-bar-code.Po@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@src/libnma/tests/$(DEPDIR)/cert_chooser-cert-chooser.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/libnma/tests/$(DEPDIR)/mobile_wizard-mobile-wizard.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/libnma/tests/$(DEPDIR)/run_vpn-run-vpn.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/libnma/tests/$(DEPDIR)/vpn_password_dialog-vpn-password-dialog.Po@am__quote@ # am--include-marker
@@ -3016,6 +3087,20 @@ src/libnma/libnma_la-nma-file-cert-chooser.lo: src/libnma/nma-file-cert-chooser.
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='src/libnma/nma-file-cert-chooser.c' object='src/libnma/libnma_la-nma-file-cert-chooser.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(src_libnma_libnma_la_CFLAGS) $(CFLAGS) -c -o src/libnma/libnma_la-nma-file-cert-chooser.lo `test -f 'src/libnma/nma-file-cert-chooser.c' || echo '$(srcdir)/'`src/libnma/nma-file-cert-chooser.c
+
+src/libnma/libnma_la-nma-bar-code-widget.lo: src/libnma/nma-bar-code-widget.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(src_libnma_libnma_la_CFLAGS) $(CFLAGS) -MT src/libnma/libnma_la-nma-bar-code-widget.lo -MD -MP -MF src/libnma/$(DEPDIR)/libnma_la-nma-bar-code-widget.Tpo -c -o src/libnma/libnma_la-nma-bar-code-widget.lo `test -f 'src/libnma/nma-bar-code-widget.c' || echo '$(srcdir)/'`src/libnma/nma-bar-code-widget.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) src/libnma/$(DEPDIR)/libnma_la-nma-bar-code-widget.Tpo src/libnma/$(DEPDIR)/libnma_la-nma-bar-code-widget.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='src/libnma/nma-bar-code-widget.c' object='src/libnma/libnma_la-nma-bar-code-widget.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(src_libnma_libnma_la_CFLAGS) $(CFLAGS) -c -o src/libnma/libnma_la-nma-bar-code-widget.lo `test -f 'src/libnma/nma-bar-code-widget.c' || echo '$(srcdir)/'`src/libnma/nma-bar-code-widget.c
+
+src/libnma/libnma_la-nma-bar-code.lo: src/libnma/nma-bar-code.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(src_libnma_libnma_la_CFLAGS) $(CFLAGS) -MT src/libnma/libnma_la-nma-bar-code.lo -MD -MP -MF src/libnma/$(DEPDIR)/libnma_la-nma-bar-code.Tpo -c -o src/libnma/libnma_la-nma-bar-code.lo `test -f 'src/libnma/nma-bar-code.c' || echo '$(srcdir)/'`src/libnma/nma-bar-code.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) src/libnma/$(DEPDIR)/libnma_la-nma-bar-code.Tpo src/libnma/$(DEPDIR)/libnma_la-nma-bar-code.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='src/libnma/nma-bar-code.c' object='src/libnma/libnma_la-nma-bar-code.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(src_libnma_libnma_la_CFLAGS) $(CFLAGS) -c -o src/libnma/libnma_la-nma-bar-code.lo `test -f 'src/libnma/nma-bar-code.c' || echo '$(srcdir)/'`src/libnma/nma-bar-code.c
 
 src/libnma/libnma_la-nma-pkcs11-token-login-dialog.lo: src/libnma/nma-pkcs11-token-login-dialog.c
 @am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(src_libnma_libnma_la_CFLAGS) $(CFLAGS) -MT src/libnma/libnma_la-nma-pkcs11-token-login-dialog.lo -MD -MP -MF src/libnma/$(DEPDIR)/libnma_la-nma-pkcs11-token-login-dialog.Tpo -c -o src/libnma/libnma_la-nma-pkcs11-token-login-dialog.lo `test -f 'src/libnma/nma-pkcs11-token-login-dialog.c' || echo '$(srcdir)/'`src/libnma/nma-pkcs11-token-login-dialog.c
@@ -3821,6 +3906,34 @@ src/libnm-gtk/tests/test_mobile_providers-test-mobile-providers.obj: src/libnm-g
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='src/libnm-gtk/tests/test-mobile-providers.c' object='src/libnm-gtk/tests/test_mobile_providers-test-mobile-providers.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(src_libnm_gtk_tests_test_mobile_providers_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o src/libnm-gtk/tests/test_mobile_providers-test-mobile-providers.obj `if test -f 'src/libnm-gtk/tests/test-mobile-providers.c'; then $(CYGPATH_W) 'src/libnm-gtk/tests/test-mobile-providers.c'; else $(CYGPATH_W) '$(srcdir)/src/libnm-gtk/tests/test-mobile-providers.c'; fi`
+
+src/libnma/tests/bar_code-bar-code.o: src/libnma/tests/bar-code.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(src_libnma_tests_bar_code_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT src/libnma/tests/bar_code-bar-code.o -MD -MP -MF src/libnma/tests/$(DEPDIR)/bar_code-bar-code.Tpo -c -o src/libnma/tests/bar_code-bar-code.o `test -f 'src/libnma/tests/bar-code.c' || echo '$(srcdir)/'`src/libnma/tests/bar-code.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) src/libnma/tests/$(DEPDIR)/bar_code-bar-code.Tpo src/libnma/tests/$(DEPDIR)/bar_code-bar-code.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='src/libnma/tests/bar-code.c' object='src/libnma/tests/bar_code-bar-code.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(src_libnma_tests_bar_code_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o src/libnma/tests/bar_code-bar-code.o `test -f 'src/libnma/tests/bar-code.c' || echo '$(srcdir)/'`src/libnma/tests/bar-code.c
+
+src/libnma/tests/bar_code-bar-code.obj: src/libnma/tests/bar-code.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(src_libnma_tests_bar_code_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT src/libnma/tests/bar_code-bar-code.obj -MD -MP -MF src/libnma/tests/$(DEPDIR)/bar_code-bar-code.Tpo -c -o src/libnma/tests/bar_code-bar-code.obj `if test -f 'src/libnma/tests/bar-code.c'; then $(CYGPATH_W) 'src/libnma/tests/bar-code.c'; else $(CYGPATH_W) '$(srcdir)/src/libnma/tests/bar-code.c'; fi`
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) src/libnma/tests/$(DEPDIR)/bar_code-bar-code.Tpo src/libnma/tests/$(DEPDIR)/bar_code-bar-code.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='src/libnma/tests/bar-code.c' object='src/libnma/tests/bar_code-bar-code.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(src_libnma_tests_bar_code_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o src/libnma/tests/bar_code-bar-code.obj `if test -f 'src/libnma/tests/bar-code.c'; then $(CYGPATH_W) 'src/libnma/tests/bar-code.c'; else $(CYGPATH_W) '$(srcdir)/src/libnma/tests/bar-code.c'; fi`
+
+src/libnma/tests/cert_chooser-cert-chooser.o: src/libnma/tests/cert-chooser.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(src_libnma_tests_cert_chooser_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT src/libnma/tests/cert_chooser-cert-chooser.o -MD -MP -MF src/libnma/tests/$(DEPDIR)/cert_chooser-cert-chooser.Tpo -c -o src/libnma/tests/cert_chooser-cert-chooser.o `test -f 'src/libnma/tests/cert-chooser.c' || echo '$(srcdir)/'`src/libnma/tests/cert-chooser.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) src/libnma/tests/$(DEPDIR)/cert_chooser-cert-chooser.Tpo src/libnma/tests/$(DEPDIR)/cert_chooser-cert-chooser.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='src/libnma/tests/cert-chooser.c' object='src/libnma/tests/cert_chooser-cert-chooser.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(src_libnma_tests_cert_chooser_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o src/libnma/tests/cert_chooser-cert-chooser.o `test -f 'src/libnma/tests/cert-chooser.c' || echo '$(srcdir)/'`src/libnma/tests/cert-chooser.c
+
+src/libnma/tests/cert_chooser-cert-chooser.obj: src/libnma/tests/cert-chooser.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(src_libnma_tests_cert_chooser_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT src/libnma/tests/cert_chooser-cert-chooser.obj -MD -MP -MF src/libnma/tests/$(DEPDIR)/cert_chooser-cert-chooser.Tpo -c -o src/libnma/tests/cert_chooser-cert-chooser.obj `if test -f 'src/libnma/tests/cert-chooser.c'; then $(CYGPATH_W) 'src/libnma/tests/cert-chooser.c'; else $(CYGPATH_W) '$(srcdir)/src/libnma/tests/cert-chooser.c'; fi`
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) src/libnma/tests/$(DEPDIR)/cert_chooser-cert-chooser.Tpo src/libnma/tests/$(DEPDIR)/cert_chooser-cert-chooser.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='src/libnma/tests/cert-chooser.c' object='src/libnma/tests/cert_chooser-cert-chooser.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(src_libnma_tests_cert_chooser_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o src/libnma/tests/cert_chooser-cert-chooser.obj `if test -f 'src/libnma/tests/cert-chooser.c'; then $(CYGPATH_W) 'src/libnma/tests/cert-chooser.c'; else $(CYGPATH_W) '$(srcdir)/src/libnma/tests/cert-chooser.c'; fi`
 
 src/libnma/tests/mobile_wizard-mobile-wizard.o: src/libnma/tests/mobile-wizard.c
 @am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(src_libnma_tests_mobile_wizard_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT src/libnma/tests/mobile_wizard-mobile-wizard.o -MD -MP -MF src/libnma/tests/$(DEPDIR)/mobile_wizard-mobile-wizard.Tpo -c -o src/libnma/tests/mobile_wizard-mobile-wizard.o `test -f 'src/libnma/tests/mobile-wizard.c' || echo '$(srcdir)/'`src/libnma/tests/mobile-wizard.c
@@ -5108,6 +5221,8 @@ distclean: distclean-recursive
 	-rm -f src/libnma/$(DEPDIR)/libnm_gtk_libnm_gtk_la-nma-cert-chooser.Plo
 	-rm -f src/libnma/$(DEPDIR)/libnm_gtk_libnm_gtk_la-nma-file-cert-chooser.Plo
 	-rm -f src/libnma/$(DEPDIR)/libnma_la-init.Plo
+	-rm -f src/libnma/$(DEPDIR)/libnma_la-nma-bar-code-widget.Plo
+	-rm -f src/libnma/$(DEPDIR)/libnma_la-nma-bar-code.Plo
 	-rm -f src/libnma/$(DEPDIR)/libnma_la-nma-cert-chooser-button.Plo
 	-rm -f src/libnma/$(DEPDIR)/libnma_la-nma-cert-chooser.Plo
 	-rm -f src/libnma/$(DEPDIR)/libnma_la-nma-file-cert-chooser.Plo
@@ -5120,6 +5235,8 @@ distclean: distclean-recursive
 	-rm -f src/libnma/$(DEPDIR)/libnma_la-nma-ui-utils.Plo
 	-rm -f src/libnma/$(DEPDIR)/libnma_la-nma-vpn-password-dialog.Plo
 	-rm -f src/libnma/$(DEPDIR)/libnma_la-nma-wifi-dialog.Plo
+	-rm -f src/libnma/tests/$(DEPDIR)/bar_code-bar-code.Po
+	-rm -f src/libnma/tests/$(DEPDIR)/cert_chooser-cert-chooser.Po
 	-rm -f src/libnma/tests/$(DEPDIR)/mobile_wizard-mobile-wizard.Po
 	-rm -f src/libnma/tests/$(DEPDIR)/run_vpn-run-vpn.Po
 	-rm -f src/libnma/tests/$(DEPDIR)/vpn_password_dialog-vpn-password-dialog.Po
@@ -5277,6 +5394,8 @@ maintainer-clean: maintainer-clean-recursive
 	-rm -f src/libnma/$(DEPDIR)/libnm_gtk_libnm_gtk_la-nma-cert-chooser.Plo
 	-rm -f src/libnma/$(DEPDIR)/libnm_gtk_libnm_gtk_la-nma-file-cert-chooser.Plo
 	-rm -f src/libnma/$(DEPDIR)/libnma_la-init.Plo
+	-rm -f src/libnma/$(DEPDIR)/libnma_la-nma-bar-code-widget.Plo
+	-rm -f src/libnma/$(DEPDIR)/libnma_la-nma-bar-code.Plo
 	-rm -f src/libnma/$(DEPDIR)/libnma_la-nma-cert-chooser-button.Plo
 	-rm -f src/libnma/$(DEPDIR)/libnma_la-nma-cert-chooser.Plo
 	-rm -f src/libnma/$(DEPDIR)/libnma_la-nma-file-cert-chooser.Plo
@@ -5289,6 +5408,8 @@ maintainer-clean: maintainer-clean-recursive
 	-rm -f src/libnma/$(DEPDIR)/libnma_la-nma-ui-utils.Plo
 	-rm -f src/libnma/$(DEPDIR)/libnma_la-nma-vpn-password-dialog.Plo
 	-rm -f src/libnma/$(DEPDIR)/libnma_la-nma-wifi-dialog.Plo
+	-rm -f src/libnma/tests/$(DEPDIR)/bar_code-bar-code.Po
+	-rm -f src/libnma/tests/$(DEPDIR)/cert_chooser-cert-chooser.Po
 	-rm -f src/libnma/tests/$(DEPDIR)/mobile_wizard-mobile-wizard.Po
 	-rm -f src/libnma/tests/$(DEPDIR)/run_vpn-run-vpn.Po
 	-rm -f src/libnma/tests/$(DEPDIR)/vpn_password_dialog-vpn-password-dialog.Po
@@ -5658,9 +5779,16 @@ $(src_nm_applet_OBJECTS): $(nm_applet_h_gen)
 scan-build.stamp: $(GTKDOC_LIBS)
 
 check-local: $(check_local)
-@INTLTOOL_DESKTOP_RULE@
+
+nm-applet.desktop: nm-applet.desktop.in
+	$(AM_V_GEN)$(MSGFMT) --desktop --template $< -d $(top_srcdir)/po -o $@
+
+nm-connection-editor.desktop: nm-connection-editor.desktop.in
+	$(AM_V_GEN)$(MSGFMT) --desktop --template $< -d $(top_srcdir)/po -o $@
 @GSETTINGS_RULES@
-@INTLTOOL_XML_RULE@
+
+nm-connection-editor.appdata.xml: nm-connection-editor.appdata.xml.in
+	$(AM_V_GEN)$(MSGFMT) --xml --template $< -d $(top_srcdir)/po -o $@
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.
