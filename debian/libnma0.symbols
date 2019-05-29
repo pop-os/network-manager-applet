@@ -3,6 +3,13 @@ libnma.so.0 libnma0 #MINVER#
  libnma_1_8_0@libnma_1_8_0 1.8.0
  libnma_1_8_12@libnma_1_8_12 1.8.12
  libnma_1_8_20@libnma_1_8_20 1.8.20
+ libnma_1_8_22@libnma_1_8_22 1.8.22
+ nma_bar_code_draw@libnma_1_8_22 1.8.22
+ nma_bar_code_get_size@libnma_1_8_22 1.8.22
+ nma_bar_code_get_type@libnma_1_8_22 1.8.22
+ nma_bar_code_new@libnma_1_8_22 1.8.22
+ nma_bar_code_widget_get_type@libnma_1_8_22 1.8.22
+ nma_bar_code_widget_new@libnma_1_8_22 1.8.22
  nma_cert_chooser_add_to_size_group@libnma_1_8_0 1.8.0
  nma_cert_chooser_get_cert@libnma_1_8_0 1.8.0
  nma_cert_chooser_get_cert_password@libnma_1_8_0 1.8.0
