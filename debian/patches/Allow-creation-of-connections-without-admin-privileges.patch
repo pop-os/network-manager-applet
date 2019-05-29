@@ -28,7 +28,7 @@ Closes: #696256
  10 files changed, 88 insertions(+), 2 deletions(-)
 
 diff --git a/src/applet-device-wifi.c b/src/applet-device-wifi.c
-index a95d1f5..88a17b6 100644
+index ecb4051..2f79a08 100644
 --- a/src/applet-device-wifi.c
 +++ b/src/applet-device-wifi.c
 @@ -461,9 +461,10 @@ wifi_new_auto_connection (NMDevice *device,
