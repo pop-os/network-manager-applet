@@ -1,3 +1,9 @@
+network-manager-applet (1.8.22-2) unstable; urgency=medium
+
+  * Upload to unstable
+
+ -- Michael Biebl <biebl@debian.org>  Thu, 11 Jul 2019 00:44:50 +0200
+
 network-manager-applet (1.8.22-1) experimental; urgency=medium
 
   * New upstream version 1.8.22
