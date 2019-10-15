@@ -25,7 +25,7 @@ Build-Depends: debhelper-compat (= 12),
                gtk-doc-tools,
                libgtk-3-doc,
                libglib2.0-doc,
-Standards-Version: 4.3.0
+Standards-Version: 4.4.1
 Rules-Requires-Root: no
 Vcs-Git: https://salsa.debian.org/utopia-team/network-manager-applet.git
 Vcs-Browser: https://salsa.debian.org/utopia-team/network-manager-applet
