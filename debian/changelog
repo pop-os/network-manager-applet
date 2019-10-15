@@ -1,8 +1,10 @@
-network-manager-applet (1.8.24-1) UNRELEASED; urgency=medium
+network-manager-applet (1.8.24-1) unstable; urgency=medium
 
   * New upstream version 1.8.24
+  * Rebase patches
+  * Bump Standards-Version to 4.4.1
 
- -- Michael Biebl <biebl@debian.org>  Tue, 15 Oct 2019 21:39:07 +0200
+ -- Michael Biebl <biebl@debian.org>  Tue, 15 Oct 2019 21:54:39 +0200
 
 network-manager-applet (1.8.22-2) unstable; urgency=medium
 
