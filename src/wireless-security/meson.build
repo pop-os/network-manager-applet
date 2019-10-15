@@ -12,6 +12,7 @@ sources = [version_header] + files(
   'wireless-security.c',
   'ws-dynamic-wep.c',
   'ws-leap.c',
+  'ws-sae.c',
   'ws-wep-key.c',
   'ws-wpa-eap.c',
   'ws-wpa-psk.c'
@@ -26,6 +27,7 @@ resource_data = files(
   'eap-method-ttls.ui',
   'ws-dynamic-wep.ui',
   'ws-leap.ui',
+  'ws-sae.ui',
   'ws-wep-key.ui',
   'ws-wpa-eap.ui',
   'ws-wpa-psk.ui'
@@ -56,6 +58,22 @@ libwireless_security_libnm = static_library(
   include_directories: incs,
   dependencies: deps
 )
+
+if enable_libnma_gtk4
+  deps = [
+    gtk4_dep,
+    libnm_dep,
+    libutils_libnm_dep
+  ]
+
+  libwireless_security_libnma_gtk4 = static_library(
+    'wireless-security-libnma-gtk4',
+    sources: sources,
+    include_directories: incs,
+    dependencies: deps,
+    c_args: cflags
+  )
+endif
 
 if enable_libnm_gtk
   deps = [

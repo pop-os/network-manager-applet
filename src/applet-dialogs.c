@@ -1,21 +1,7 @@
-/* -*- Mode: C; tab-width: 4; indent-tabs-mode: t; c-basic-offset: 4 -*- */
+// SPDX-License-Identifier: GPL-2.0+
 /* NetworkManager Applet -- allow user control over networking
  *
  * Dan Williams <dcbw@redhat.com>
- *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
- * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  *
  * Copyright 2008 - 2017 Red Hat, Inc.
  */
@@ -240,6 +226,8 @@ create_info_label_security (NMConnection *connection)
 				label = g_strdup (_("WPA/WPA2"));
 			else if (!strcmp (key_mgmt, "wpa-psk"))
 				label = g_strdup (_("WPA/WPA2"));
+			else if (!strcmp (key_mgmt, "sae"))
+				label = g_strdup (_("WPA3"));
 			else
 				label = get_eap_label (s_wireless_sec, s_8021x);
 		} else {
@@ -1110,8 +1098,7 @@ applet_info_dialog_show (NMApplet *applet)
 	g_signal_connect_swapped (dialog, "response", G_CALLBACK (gtk_widget_hide), dialog);
 	gtk_widget_realize (dialog);
 	gtk_window_set_position (GTK_WINDOW(dialog), GTK_WIN_POS_CENTER_ALWAYS);
-	gtk_window_present_with_time (GTK_WINDOW (dialog),
-		gdk_x11_get_server_time (gtk_widget_get_window (dialog)));
+	gtk_window_present (GTK_WINDOW (dialog));
 }
 
 void
@@ -1166,8 +1153,7 @@ applet_missing_ui_warning_dialog_show (void)
 	gtk_window_set_title (GTK_WINDOW (dialog), _("Missing resources"));
 	gtk_widget_realize (dialog);
 	gtk_widget_show (dialog);
-	gtk_window_present_with_time (GTK_WINDOW (dialog),
-		gdk_x11_get_server_time (gtk_widget_get_window (dialog)));
+	gtk_window_present (GTK_WINDOW (dialog));
 
 	g_signal_connect_swapped (dialog, "response",
 	                          G_CALLBACK (gtk_widget_destroy),
