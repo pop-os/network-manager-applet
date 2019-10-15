@@ -131,6 +131,9 @@
 /* Define if Gcr is available */
 #undef WITH_GCR
 
+/* Define if GTK4 Gcr is available */
+#undef WITH_GCR_GTK4
+
 /* Define if Jansson is available */
 #undef WITH_JANSSON
 
