@@ -1,3 +1,9 @@
+network-manager-applet (1.16.0-1) UNRELEASED; urgency=medium
+
+  * New upstream version 1.16.0
+
+ -- Michael Biebl <biebl@debian.org>  Sun, 08 Mar 2020 20:46:54 +0100
+
 network-manager-applet (1.8.24-1) unstable; urgency=medium
 
   * New upstream version 1.8.24
