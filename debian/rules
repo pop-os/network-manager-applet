@@ -5,7 +5,7 @@ include /usr/share/dpkg/architecture.mk
 export DEB_LDFLAGS_MAINT_APPEND = -Wl,-z,defs -Wl,--as-needed
 
 %:
-	dh $@ --with gir
+	dh $@
 
 override_dh_autoreconf:
 	dh_autoreconf --as-needed
