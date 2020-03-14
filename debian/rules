@@ -14,11 +14,7 @@ override_dh_auto_configure:
 	dh_auto_configure -- \
 		--libexecdir=/usr/lib/NetworkManager \
 		--disable-more-warnings \
-		--disable-static \
-		--enable-introspection \
-		--enable-gtk-doc \
 		--with-appindicator=ayatana \
-		--with-gcr \
 		--with-selinux \
 		--with-wwan \
-		--without-libnm-gtk
+		--with-team
