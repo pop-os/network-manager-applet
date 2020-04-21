@@ -3,7 +3,7 @@ Section: gnome
 Priority: optional
 Maintainer: Utopia Maintenance Team <pkg-utopia-maintainers@lists.alioth.debian.org>
 Uploaders: Michael Biebl <biebl@debian.org>
-Build-Depends: debhelper-compat (= 12),
+Build-Depends: debhelper-compat (= 13),
                meson (>= 0.46.0),
                gettext (>= 0.18),
                libsecret-1-dev (>= 0.18),
