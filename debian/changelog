@@ -1,8 +1,21 @@
-network-manager-applet (1.16.0-1) UNRELEASED; urgency=medium
+network-manager-applet (1.16.0-1) unstable; urgency=medium
 
   * New upstream version 1.16.0
+  * Drop libnma, now built from a separate source package
+  * Drop override for dh_install and dh_missing.
+    No longer necessary as we only build a single binary package now.
+  * Drop gir dh addon, no longer needed
+  * Update Build-Depends
+  * Update configure switches
+  * Switch from autotools to meson
+  * Bump Standards-Version to 4.5.0
+  * Bump debhelper compatibility level to 13
+  * Remove Allow-creation-of-connections-without-admin-privileges.patch.
+    This patch requires ongoing maintenance work and no longer applies with
+    libnma being split off. A sustainable alternative will require buy-in
+    from upstream.
 
- -- Michael Biebl <biebl@debian.org>  Sun, 08 Mar 2020 20:46:54 +0100
+ -- Michael Biebl <biebl@debian.org>  Wed, 22 Apr 2020 18:06:30 +0200
 
 network-manager-applet (1.8.24-1) unstable; urgency=medium
 
