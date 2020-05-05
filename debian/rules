@@ -1,7 +1,5 @@
 #!/usr/bin/make -f
 
-include /usr/share/dpkg/architecture.mk
-
 export DEB_LDFLAGS_MAINT_APPEND = -Wl,-z,defs
 
 %:
