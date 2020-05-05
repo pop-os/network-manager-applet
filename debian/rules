@@ -2,7 +2,7 @@
 
 include /usr/share/dpkg/architecture.mk
 
-export DEB_LDFLAGS_MAINT_APPEND = -Wl,-z,defs -Wl,--as-needed
+export DEB_LDFLAGS_MAINT_APPEND = -Wl,-z,defs
 
 %:
 	dh $@ --without=autoreconf --buildsystem=meson
