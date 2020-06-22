@@ -21,7 +21,7 @@ msgstr ""
 "Project-Id-Version: network-manager-applet 1.8.22\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/network-manager-"
 "applet/\n"
-"POT-Creation-Date: 2020-03-07 16:57+0100\n"
+"POT-Creation-Date: 2020-06-22 17:23+0200\n"
 "PO-Revision-Date: 2019-10-21 16:12+0200\n"
 "Last-Translator: Charles Monzat <charles.monzat@free.fr>\n"
 "Language-Team: GNOME French Team <gnomefr@traduc.org>\n"
@@ -39,10 +39,6 @@ msgstr "Réseau"
 #: nm-applet.desktop.in:4
 msgid "Manage your network connections"
 msgstr "Gérer vos connexions réseau"
-
-#: nm-applet.desktop.in:5
-msgid "nm-device-wireless"
-msgstr "nm-device-wireless"
 
 #: nm-connection-editor.appdata.xml.in:7
 msgid "NetworkManager"
@@ -79,10 +75,6 @@ msgstr "Configuration réseau avancée"
 #: nm-connection-editor.desktop.in:4
 msgid "Manage and change your network connection settings"
 msgstr "Gérer et modifier les paramètres des connexions réseau"
-
-#: nm-connection-editor.desktop.in:5
-msgid "preferences-system-network"
-msgstr "preferences-system-network"
 
 #: shared/nm-utils/nm-shared-utils.c:793
 #, c-format
@@ -137,9 +129,10 @@ msgstr "Authentification 802.1X"
 #: src/connection-editor/ce-new-connection.ui:50
 #: src/connection-editor/ce-page-dcb.ui:569
 #: src/connection-editor/ce-page-dcb.ui:1019
+#: src/connection-editor/ce-page-wireguard.ui:41
 #: src/connection-editor/ce-ppp-auth-methods.ui:28
-#: src/connection-editor/connection-helpers.c:282
-#: src/connection-editor/connection-helpers.c:745
+#: src/connection-editor/connection-helpers.c:284
+#: src/connection-editor/connection-helpers.c:747
 #: src/connection-editor/nm-connection-editor.ui:197
 #: src/connection-editor/page-bluetooth.c:293
 #: src/connection-editor/page-mobile.c:530
@@ -186,7 +179,7 @@ msgid "Mobile Broadband (%s)"
 msgstr "Connexion mobile (%s)"
 
 #: src/applet-device-broadband.c:727
-#: src/connection-editor/connection-helpers.c:94
+#: src/connection-editor/connection-helpers.c:95
 #: src/connection-editor/page-mobile.c:295
 msgid "Mobile Broadband"
 msgstr "Connexion mobile"
@@ -437,7 +430,7 @@ msgstr "Erreur inconnue"
 msgid "Error displaying connection information:"
 msgstr "Erreur lors de l’affichage des informations de connexion :"
 
-#: src/applet-dialogs.c:60 src/connection-editor/page-wifi-security.c:369
+#: src/applet-dialogs.c:60 src/connection-editor/page-wifi-security.c:374
 #: src/wireless-security/wireless-security.c:435
 msgid "LEAP"
 msgstr "LEAP"
@@ -464,7 +457,7 @@ msgid "WPA3"
 msgstr "WPA3"
 
 #: src/applet-dialogs.c:234 src/applet-dialogs.c:243
-#: src/connection-editor/page-wifi-security.c:320
+#: src/connection-editor/page-wifi-security.c:325
 msgctxt "Wi-Fi/Ethernet security"
 msgid "None"
 msgstr "Aucune"
@@ -742,16 +735,16 @@ msgstr "Resaisissez le nouveau code PIN :"
 msgid "Show PIN/PUK codes"
 msgstr "Afficher les codes PIN/PUK"
 
-#: src/applet-vpn-request.c:426
+#: src/applet-vpn-request.c:427
 msgid "Connection had no VPN setting"
 msgstr "La connexion n’avait pas de réglage VPN"
 
-#: src/applet-vpn-request.c:476
+#: src/applet-vpn-request.c:477
 #, c-format
 msgid "Failed to write connection to VPN UI: %s (%d)"
 msgstr "Échec d’écriture de la connexion vers l’interface VPN : %s (%d)"
 
-#: src/applet-vpn-request.c:484
+#: src/applet-vpn-request.c:485
 msgid "Failed to write connection to VPN UI: incomplete write"
 msgstr ""
 "Échec d’écriture de la connexion vers l’interface VPN : écriture incomplète"
@@ -1047,7 +1040,7 @@ msgid "NetworkManager Applet"
 msgstr "Applet NetworkManager"
 
 #: src/connection-editor/ce-ip4-routes.ui:88
-#: src/connection-editor/ce-ip6-routes.ui:88 src/connection-editor/ce-page.h:98
+#: src/connection-editor/ce-ip6-routes.ui:88 src/connection-editor/ce-page.h:97
 msgid ""
 "IP addresses identify your computer on the network. Click the “Add” button "
 "to add an IP address."
@@ -1062,6 +1055,7 @@ msgstr ""
 #: src/connection-editor/ce-page-ip4.ui:150
 #: src/connection-editor/ce-page-ip6.ui:181
 #: src/connection-editor/ce-page-team.ui:234
+#: src/connection-editor/ce-page-wireguard.ui:603
 #: src/connection-editor/nm-connection-list.ui:87
 msgid "_Add"
 msgstr "_Ajouter"
@@ -1073,7 +1067,8 @@ msgstr "_Ajouter"
 #: src/connection-editor/ce-page-ip4.ui:165
 #: src/connection-editor/ce-page-ip6.ui:196
 #: src/connection-editor/ce-page-team.ui:262
-#: src/connection-editor/connection-helpers.c:746
+#: src/connection-editor/ce-page-wireguard.ui:617
+#: src/connection-editor/connection-helpers.c:748
 #: src/connection-editor/nm-connection-list.ui:101
 msgid "_Delete"
 msgstr "_Supprimer"
@@ -1192,6 +1187,7 @@ msgstr "ms"
 #: src/connection-editor/ce-page-bond.ui:291
 #: src/connection-editor/ce-page-bridge.ui:192
 #: src/connection-editor/ce-page-team.ui:293
+#: src/connection-editor/ce-page-wireguard.ui:373
 msgid "_Interface name"
 msgstr "Nom de l’interface"
 
@@ -1237,6 +1233,7 @@ msgstr ""
 #: src/connection-editor/ce-page-team.ui:320
 #: src/connection-editor/ce-page-vlan.ui:87
 #: src/connection-editor/ce-page-wifi.ui:111
+#: src/connection-editor/ce-page-wireguard.ui:474
 msgid "_MTU"
 msgstr "MT_U"
 
@@ -1246,6 +1243,7 @@ msgstr "MT_U"
 #: src/connection-editor/ce-page-team.ui:356
 #: src/connection-editor/ce-page-vlan.ui:122
 #: src/connection-editor/ce-page-wifi.ui:92
+#: src/connection-editor/ce-page-wireguard.ui:518
 msgid "bytes"
 msgstr "octets"
 
@@ -1405,9 +1403,9 @@ msgstr "Groupes de priorités"
 
 #: src/connection-editor/ce-page-dcb.ui:419
 #: src/connection-editor/ce-page-dcb.ui:442
-#: src/connection-editor/ce-page-dcb.ui:465 src/connection-editor/ce-page.c:72
-#: src/connection-editor/ce-page.c:107 src/connection-editor/page-wifi.c:154
-#: src/connection-editor/page-wifi.c:158 src/connection-editor/page-wifi.c:179
+#: src/connection-editor/ce-page-dcb.ui:465 src/connection-editor/ce-page.c:111
+#: src/connection-editor/page-wifi.c:154 src/connection-editor/page-wifi.c:158
+#: src/connection-editor/page-wifi.c:179
 msgid "default"
 msgstr "par défaut"
 
@@ -1438,6 +1436,10 @@ msgstr ""
 #: src/connection-editor/ce-page-dcb.ui:1822
 #: src/connection-editor/ce-page-dcb.ui:2154
 #: src/connection-editor/ce-page-dcb.ui:2486
+#: src/connection-editor/ce-page-wireguard.ui:282
+#: src/connection-editor/ce-page-wireguard.ui:444
+#: src/connection-editor/ce-page-wireguard.ui:530
+#: src/connection-editor/ce-page-wireguard.ui:544
 msgid "0"
 msgstr "0"
 
@@ -2627,13 +2629,13 @@ msgid "LACP"
 msgstr "LACP"
 
 #: src/connection-editor/ce-page-team.ui:485
-#: src/connection-editor/connection-helpers.c:91
+#: src/connection-editor/connection-helpers.c:92
 #: src/connection-editor/page-ethernet.c:334
 msgid "Ethernet"
 msgstr "Ethernet"
 
 #: src/connection-editor/ce-page-team.ui:489
-#: src/connection-editor/connection-helpers.c:106
+#: src/connection-editor/connection-helpers.c:107
 #: src/connection-editor/page-vlan.c:575
 msgid "VLAN"
 msgstr "VLAN"
@@ -2898,31 +2900,156 @@ msgstr "Ban_de"
 msgid "SS_ID"
 msgstr "SS_ID"
 
-#: src/connection-editor/ce-page.c:64 src/connection-editor/ce-page.c:98
+#: src/connection-editor/ce-page-wireguard.ui:23
+msgid "Edit WireGuard peer"
+msgstr ""
+
+#: src/connection-editor/ce-page-wireguard.ui:55
+msgid "_Apply"
+msgstr ""
+
+#: src/connection-editor/ce-page-wireguard.ui:159
+msgid "_Public key"
+msgstr ""
+
+#: src/connection-editor/ce-page-wireguard.ui:173
+#, fuzzy
+msgid "Allowed _IPs"
+msgstr "Méthodes autorisées"
+
+#: src/connection-editor/ce-page-wireguard.ui:187
+msgid "_Endpoint"
+msgstr ""
+
+#: src/connection-editor/ce-page-wireguard.ui:201
+#, fuzzy
+msgid "Pre_shared key"
+msgstr "À clé partagée"
+
+#: src/connection-editor/ce-page-wireguard.ui:215
+msgid "Persistent _keepalive"
+msgstr ""
+
+#: src/connection-editor/ce-page-wireguard.ui:228
+msgid "A base64 public key calculated by 'wg pubkey' from a private key."
+msgstr ""
+
+#: src/connection-editor/ce-page-wireguard.ui:240
+msgid ""
+"Comma-separated list of IP (v4 or v6) addresses with CIDR masks from which "
+"incoming traffic for this peer is allowed and to which outgoing traffic for "
+"this peer is directed."
+msgstr ""
+
+#: src/connection-editor/ce-page-wireguard.ui:252
+msgid ""
+"An endpoint IP or hostname, followed by a colon, and then a port number."
+msgstr ""
+
+#: src/connection-editor/ce-page-wireguard.ui:264
+msgid ""
+"A base64 preshared key generated by 'wg genpsk'. Optional, and may be "
+"omitted. Adds an additional layer of symmetric-key cryptography to be mixed "
+"into the already existing public-key cryptography, for post-quantum "
+"resistance."
+msgstr ""
+
+#: src/connection-editor/ce-page-wireguard.ui:280
+msgid ""
+"How often to send an authenticated empty packet to the peer for the purpose "
+"of keeping a stateful firewall or NAT mapping valid. This is optional and "
+"not recommended outside of specific setups."
+msgstr ""
+
+#: src/connection-editor/ce-page-wireguard.ui:297
+msgid "seconds"
+msgstr ""
+
+#: src/connection-editor/ce-page-wireguard.ui:313
+#, fuzzy
+msgid "Sho_w preshared key"
+msgstr "A_fficher la clé"
+
+#: src/connection-editor/ce-page-wireguard.ui:386
+msgid "The name of the wireguard interface to create."
+msgstr ""
+
+#: src/connection-editor/ce-page-wireguard.ui:400
+#, fuzzy
+msgid "Private _key"
+msgstr "_Clé privée %s"
+
+#: src/connection-editor/ce-page-wireguard.ui:413
+msgid "The 256 bit private key in base64 encoding"
+msgstr ""
+
+#: src/connection-editor/ce-page-wireguard.ui:429
+#, fuzzy
+msgid "_Listen port"
+msgstr "Ports _minimums"
+
+#: src/connection-editor/ce-page-wireguard.ui:442
+msgid ""
+"A port to listen on. If set to 'automatic', the port will be chosen randomly "
+"when the interface comes up."
+msgstr ""
+
+#: src/connection-editor/ce-page-wireguard.ui:459
+msgid "_Fwmark"
+msgstr ""
+
+#: src/connection-editor/ce-page-wireguard.ui:489
+msgid "Add peer _routes"
+msgstr ""
+
+#: src/connection-editor/ce-page-wireguard.ui:503
+msgid ""
+"Whether to automatically add routes for the AllowedIPs ranges of the peers"
+msgstr ""
+
+#: src/connection-editor/ce-page-wireguard.ui:543
+msgid ""
+"A 32-bit fwmark for outgoing packets. Leave it to 'off' to disable fwmark."
+msgstr ""
+
+#: src/connection-editor/ce-page-wireguard.ui:554
+#, fuzzy
+msgid "_Show private key"
+msgstr "_Clé privée %s"
+
+#: src/connection-editor/ce-page-wireguard.ui:641
+msgid "<b>_Peers</b>"
+msgstr ""
+
+#: src/connection-editor/ce-page.c:105
 msgid "automatic"
 msgstr "automatique"
 
-#: src/connection-editor/ce-page.c:175
+#: src/connection-editor/ce-page.c:117
+msgid "off"
+msgstr ""
+
+#: src/connection-editor/ce-page.c:163
 msgid "unspecified error"
 msgstr "erreur inconnue"
 
-#: src/connection-editor/ce-page.c:280
+#: src/connection-editor/ce-page.c:268
 msgid "Preserve"
 msgstr "Conserver"
 
-#: src/connection-editor/ce-page.c:281
+#: src/connection-editor/ce-page.c:269
 msgid "Permanent"
 msgstr "Permanente"
 
-#: src/connection-editor/ce-page.c:282
+#: src/connection-editor/ce-page.c:270
 msgid "Random"
 msgstr "Aléatoire"
 
-#: src/connection-editor/ce-page.c:283
+#: src/connection-editor/ce-page.c:271
 msgid "Stable"
 msgstr "Stable"
 
-#: src/connection-editor/ce-page.c:287
+#: src/connection-editor/ce-page.c:275
 msgid ""
 "The MAC address entered here will be used as hardware address for the "
 "network device this connection is activated on. This feature is known as MAC "
@@ -2933,57 +3060,57 @@ msgstr ""
 "fonctionnalité est connue sous le nom de clonage ou usurpation MAC. "
 "Exemple : 00:11:22:33:44:55"
 
-#: src/connection-editor/ce-page.c:327
+#: src/connection-editor/ce-page.c:315
 msgid "MAC address"
 msgstr "Adresse MAC"
 
-#: src/connection-editor/ce-page.c:327
+#: src/connection-editor/ce-page.c:315
 msgid "HW address"
 msgstr "Adresse matérielle"
 
-#: src/connection-editor/ce-page.c:330
+#: src/connection-editor/ce-page.c:318
 #, c-format
 msgid "invalid %s for %s (%s)"
 msgstr "%s invalide pour %s (%s)"
 
-#: src/connection-editor/ce-page.c:334
+#: src/connection-editor/ce-page.c:322
 #, c-format
 msgid "invalid %s (%s)"
 msgstr "%s invalide (%s)"
 
-#: src/connection-editor/ce-page.c:374
+#: src/connection-editor/ce-page.c:362
 #, c-format
 msgid "invalid interface-name for %s (%s): "
 msgstr "nom d’interface invalide pour %s (%s) : "
 
-#: src/connection-editor/ce-page.c:378
+#: src/connection-editor/ce-page.c:366
 #, c-format
 msgid "invalid interface-name (%s): "
 msgstr "nom d’interface invalide (%s) : "
 
-#: src/connection-editor/ce-page.c:557
+#: src/connection-editor/ce-page.c:545
 msgid "can’t parse device name"
 msgstr "impossible d’analyser le nom de périphérique"
 
-#: src/connection-editor/ce-page.c:575
+#: src/connection-editor/ce-page.c:563
 msgid "invalid hardware address"
 msgstr "adresse matérielle non valide"
 
-#: src/connection-editor/ce-page.c:597
+#: src/connection-editor/ce-page.c:585
 #, c-format
 msgid "invalid %s (%s): "
 msgstr "%s invalide (%s) : "
 
-#: src/connection-editor/ce-page.c:598 src/connection-editor/ce-page.c:603
+#: src/connection-editor/ce-page.c:586 src/connection-editor/ce-page.c:591
 msgid "device"
 msgstr "périphérique"
 
-#: src/connection-editor/ce-page.c:602
+#: src/connection-editor/ce-page.c:590
 #, c-format
 msgid "invalid %s (%s) "
 msgstr "%s invalide (%s) "
 
-#: src/connection-editor/ce-page.h:95
+#: src/connection-editor/ce-page.h:94
 msgid ""
 "IP addresses identify your computer on the network. Click the “Add” button "
 "to add static IP address to be configured in addition to the automatic ones."
@@ -2992,7 +3119,7 @@ msgstr ""
 "bouton « Ajouter » pour ajouter une adresse IP statique en plus de celle "
 "assignée automatiquement."
 
-#: src/connection-editor/ce-page.h:100
+#: src/connection-editor/ce-page.h:99
 msgid ""
 "The IP address identify your computer on the network and determines the "
 "address range distributed to other computers. Click the “Add” button to add "
@@ -3004,15 +3131,15 @@ msgstr ""
 "« Ajouter » pour ajouter une adresse IP. Si aucune adresse n’est fournie, la "
 "plage sera déterminée automatiquement."
 
-#: src/connection-editor/ce-page.h:105
+#: src/connection-editor/ce-page.h:104
 msgid "Additional static addresses"
 msgstr "Adresse statique supplémentaire"
 
-#: src/connection-editor/ce-page.h:106
+#: src/connection-editor/ce-page.h:105
 msgid "Addresses"
 msgstr "Adresses"
 
-#: src/connection-editor/ce-page.h:107
+#: src/connection-editor/ce-page.h:106
 msgid "Address (optional)"
 msgstr "Adresse (optionnel)"
 
@@ -3074,94 +3201,100 @@ msgstr ""
 "charge toutes les méthodes d’authentification. Si la connexion échoue, "
 "essayez d’en désactiver certaines."
 
-#: src/connection-editor/connection-helpers.c:92
+#: src/connection-editor/connection-helpers.c:93
 #: src/connection-editor/page-wifi.c:423
 msgid "Wi-Fi"
 msgstr "Wi-Fi"
 
-#: src/connection-editor/connection-helpers.c:100
+#: src/connection-editor/connection-helpers.c:101
 #: src/connection-editor/page-bluetooth.c:106
 msgid "Bluetooth"
 msgstr "Bluetooth"
 
-#: src/connection-editor/connection-helpers.c:101
+#: src/connection-editor/connection-helpers.c:102
 #: src/connection-editor/page-dsl.c:203
 msgid "DSL/PPPoE"
 msgstr "DSL/PPPoE"
 
-#: src/connection-editor/connection-helpers.c:102
+#: src/connection-editor/connection-helpers.c:103
 #: src/connection-editor/page-infiniband.c:131
 msgid "InfiniBand"
 msgstr "InfiniBand"
 
-#: src/connection-editor/connection-helpers.c:103
+#: src/connection-editor/connection-helpers.c:104
 #: src/connection-editor/page-bond.c:429
 msgid "Bond"
 msgstr "Lien"
 
-#: src/connection-editor/connection-helpers.c:104
+#: src/connection-editor/connection-helpers.c:105
 #: src/connection-editor/page-team.c:1014
 msgid "Team"
 msgstr "En équipe"
 
-#: src/connection-editor/connection-helpers.c:105
+#: src/connection-editor/connection-helpers.c:106
 #: src/connection-editor/page-bridge.c:216
 msgid "Bridge"
 msgstr "Pont"
 
-#: src/connection-editor/connection-helpers.c:107
+#: src/connection-editor/connection-helpers.c:108
 #: src/connection-editor/page-ip-tunnel.c:159
 msgid "IP tunnel"
 msgstr "Tunnel IP"
 
-#: src/connection-editor/connection-helpers.c:108
+#: src/connection-editor/connection-helpers.c:109
 #: src/connection-editor/page-macsec.c:173
 msgid "MACsec"
 msgstr "MACsec"
 
 #: src/connection-editor/connection-helpers.c:110
-#: src/connection-editor/connection-helpers.c:372
+#: src/connection-editor/page-wireguard.c:510
+#, fuzzy
+msgid "WireGuard"
+msgstr "Filaire"
+
+#: src/connection-editor/connection-helpers.c:112
+#: src/connection-editor/connection-helpers.c:374
 #: src/connection-editor/page-vpn.c:86
 msgid "VPN"
 msgstr "VPN"
 
-#: src/connection-editor/connection-helpers.c:190
+#: src/connection-editor/connection-helpers.c:192
 msgid "No VPN service type."
 msgstr "Aucun type de service VPN."
 
-#: src/connection-editor/connection-helpers.c:195
+#: src/connection-editor/connection-helpers.c:197
 msgid "The VPN plugin failed to import the VPN connection correctly: "
 msgstr ""
 "Le greffon VPN n’a pas réussi à importer correctement la connexion VPN : "
 
-#: src/connection-editor/connection-helpers.c:279
+#: src/connection-editor/connection-helpers.c:281
 #: src/connection-editor/page-proxy.c:104
 #: src/connection-editor/page-team-port.c:189
 #: src/connection-editor/page-team.c:327
 msgid "Select file to import"
 msgstr "Sélectionnez le fichier à importer"
 
-#: src/connection-editor/connection-helpers.c:283
+#: src/connection-editor/connection-helpers.c:285
 #: src/connection-editor/page-proxy.c:108
 #: src/connection-editor/page-team-port.c:193
 #: src/connection-editor/page-team.c:331
 msgid "_Open"
 msgstr "_Ouvrir"
 
-#: src/connection-editor/connection-helpers.c:314
+#: src/connection-editor/connection-helpers.c:316
 msgid "Hardware"
 msgstr "Matériel"
 
-#: src/connection-editor/connection-helpers.c:341
+#: src/connection-editor/connection-helpers.c:343
 msgid "Virtual"
 msgstr "Virtuel"
 
-#: src/connection-editor/connection-helpers.c:490
 #: src/connection-editor/connection-helpers.c:492
+#: src/connection-editor/connection-helpers.c:494
 msgid "Import a saved VPN configuration…"
 msgstr "Importer une configuration VPN enregistrée…"
 
-#: src/connection-editor/connection-helpers.c:522
+#: src/connection-editor/connection-helpers.c:524
 msgid ""
 "The connection editor dialog could not be initialized due to an unknown "
 "error."
@@ -3169,15 +3302,15 @@ msgstr ""
 "La fenêtre d’édition de connexion n’a pas pu être initialisée en raison "
 "d’une erreur inconnue."
 
-#: src/connection-editor/connection-helpers.c:531
+#: src/connection-editor/connection-helpers.c:533
 msgid "Could not create new connection"
 msgstr "Impossible de créer une nouvelle connexion"
 
-#: src/connection-editor/connection-helpers.c:694
+#: src/connection-editor/connection-helpers.c:696
 msgid "Connection delete failed"
 msgstr "La suppression de la connexion a échoué"
 
-#: src/connection-editor/connection-helpers.c:742
+#: src/connection-editor/connection-helpers.c:744
 #, c-format
 msgid "Are you sure you wish to delete the connection %s?"
 msgstr "Voulez-vous vraiment supprimer la connexion %s ?"
@@ -3217,34 +3350,34 @@ msgstr "Métrique"
 msgid "Prefix"
 msgstr "Préfixe"
 
-#: src/connection-editor/nm-connection-editor.c:96
+#: src/connection-editor/nm-connection-editor.c:97
 #, c-format
 msgid "Editing %s"
 msgstr "Modification de %s"
 
-#: src/connection-editor/nm-connection-editor.c:100
+#: src/connection-editor/nm-connection-editor.c:101
 msgid "Editing un-named connection"
 msgstr "Modification de la connexion anonyme"
 
-#: src/connection-editor/nm-connection-editor.c:120
+#: src/connection-editor/nm-connection-editor.c:121
 msgid "Missing connection name"
 msgstr "Nom de la connexion manquant"
 
-#: src/connection-editor/nm-connection-editor.c:336
+#: src/connection-editor/nm-connection-editor.c:337
 msgid "Editor initializing…"
 msgstr "Initialisation de l’éditeur…"
 
-#: src/connection-editor/nm-connection-editor.c:343
+#: src/connection-editor/nm-connection-editor.c:344
 #: src/connection-editor/nm-connection-list.c:457
 msgid "Connection cannot be modified"
 msgstr "La connexion ne peut pas être modifiée"
 
-#: src/connection-editor/nm-connection-editor.c:358
+#: src/connection-editor/nm-connection-editor.c:359
 #, c-format
 msgid "Invalid setting %s: %s"
 msgstr "Paramètre %s invalide : %s"
 
-#: src/connection-editor/nm-connection-editor.c:434
+#: src/connection-editor/nm-connection-editor.c:435
 msgid ""
 "The connection editor could not find some required resources (the .ui file "
 "was not found)."
@@ -3252,35 +3385,35 @@ msgstr ""
 "L’éditeur de connexion n’a pas pu trouver les ressources requises (le "
 "fichier .ui n’a pas été trouvé)."
 
-#: src/connection-editor/nm-connection-editor.c:567
+#: src/connection-editor/nm-connection-editor.c:568
 #: src/connection-editor/vpn-helpers.c:199
 msgid "_Save"
 msgstr "_Enregistrer"
 
-#: src/connection-editor/nm-connection-editor.c:568
+#: src/connection-editor/nm-connection-editor.c:569
 msgid "Save any changes made to this connection."
 msgstr "Enregistrer toute modification apportée à cette connexion."
 
-#: src/connection-editor/nm-connection-editor.c:569
+#: src/connection-editor/nm-connection-editor.c:570
 msgid "Authenticate to save this connection for all users of this machine."
 msgstr ""
 "S’authentifier pour enregistrer cette connexion pour tous les utilisateurs "
 "de cet ordinateur."
 
-#: src/connection-editor/nm-connection-editor.c:585
+#: src/connection-editor/nm-connection-editor.c:586
 msgid "Could not create connection"
 msgstr "Impossible de créer une connexion"
 
-#: src/connection-editor/nm-connection-editor.c:585
+#: src/connection-editor/nm-connection-editor.c:586
 msgid "Could not edit connection"
 msgstr "Impossible de modifier la connexion"
 
-#: src/connection-editor/nm-connection-editor.c:587
+#: src/connection-editor/nm-connection-editor.c:588
 msgid "Unknown error creating connection editor dialog."
 msgstr ""
 "Erreur inconnue lors de la création de la fenêtre d’édition de connexion."
 
-#: src/connection-editor/nm-connection-editor.c:728
+#: src/connection-editor/nm-connection-editor.c:729
 msgid ""
 "Warning: the connection contains some properties not supported by the "
 "editor. They will be cleared upon save."
@@ -3288,11 +3421,11 @@ msgstr ""
 "Avertissement : la connexion contient des propriétés non prises en charge "
 "par l’éditeur. Elles seront supprimées au moment de l’enregistrement."
 
-#: src/connection-editor/nm-connection-editor.c:748
+#: src/connection-editor/nm-connection-editor.c:749
 msgid "Error initializing editor"
 msgstr "Erreur lors de l’initialisation de l’éditeur"
 
-#: src/connection-editor/nm-connection-editor.c:1155
+#: src/connection-editor/nm-connection-editor.c:1159
 msgid "Connection add failed"
 msgstr "L’ajout de la connexion a échoué"
 
@@ -3985,49 +4118,53 @@ msgstr ""
 "connexion. Si le type de connexion VPN n’apparaît pas dans la liste, il est "
 "possible que vous n’ayez pas le bon greffon VPN installé."
 
-#: src/connection-editor/page-wifi-security.c:346
+#: src/connection-editor/page-wifi-security.c:351
 msgid "WEP 40/128-bit Key (Hex or ASCII)"
 msgstr "Clé WEP 40/128-bit (Hex ou ASCII)"
 
-#: src/connection-editor/page-wifi-security.c:356
+#: src/connection-editor/page-wifi-security.c:361
 msgid "WEP 128-bit Passphrase"
 msgstr "WEP 128-bit à phrase secrète"
 
-#: src/connection-editor/page-wifi-security.c:382
+#: src/connection-editor/page-wifi-security.c:387
 msgid "Dynamic WEP (802.1X)"
 msgstr "WEP dynamique (802.1X)"
 
-#: src/connection-editor/page-wifi-security.c:395
+#: src/connection-editor/page-wifi-security.c:400
 msgid "WPA & WPA2 Personal"
 msgstr "WPA et WPA2 personnel"
 
-#: src/connection-editor/page-wifi-security.c:408
+#: src/connection-editor/page-wifi-security.c:413
 msgid "WPA & WPA2 Enterprise"
 msgstr "WPA et WPA2 entreprise"
 
-#: src/connection-editor/page-wifi-security.c:421
+#: src/connection-editor/page-wifi-security.c:426
 msgid "WPA3 Personal"
 msgstr "WPA3 personnel"
 
-#: src/connection-editor/page-wifi-security.c:464
+#: src/connection-editor/page-wifi-security.c:437
+msgid "Enhanced Open"
+msgstr ""
+
+#: src/connection-editor/page-wifi-security.c:483
 msgid "Could not load Wi-Fi security user interface; missing Wi-Fi setting."
 msgstr ""
 "Impossible de charger l’interface utilisateur de sécurité Wi-Fi ; paramètre "
 "Wi-Fi manquant."
 
-#: src/connection-editor/page-wifi-security.c:475
+#: src/connection-editor/page-wifi-security.c:494
 msgid "Wi-Fi Security"
 msgstr "Sécurité Wi-Fi"
 
-#: src/connection-editor/page-wifi-security.c:477
+#: src/connection-editor/page-wifi-security.c:496
 msgid "Could not load Wi-Fi security user interface."
 msgstr "Impossible de charger l’interface utilisateur de sécurité Wi-Fi."
 
-#: src/connection-editor/page-wifi-security.c:558
+#: src/connection-editor/page-wifi-security.c:577
 msgid "missing SSID"
 msgstr "SSID manquant"
 
-#: src/connection-editor/page-wifi-security.c:564
+#: src/connection-editor/page-wifi-security.c:583
 msgid "Security not compatible with Ad-Hoc mode"
 msgstr "Sécurité incompatible avec le mode Ad-Hoc"
 
@@ -4071,6 +4208,25 @@ msgstr "Périphérique Wi-Fi"
 #, c-format
 msgid "Wi-Fi connection %d"
 msgstr "Connexion Wi-Fi %d"
+
+#: src/connection-editor/page-wireguard.c:261
+msgid "Public key"
+msgstr ""
+
+#: src/connection-editor/page-wireguard.c:268
+#, fuzzy
+msgid "Allowed IPs"
+msgstr "Méthodes autorisées"
+
+#: src/connection-editor/page-wireguard.c:512
+#, fuzzy
+msgid "Could not load WireGuard user interface."
+msgstr "Impossible de charger l’interface utilisateur de connexion en équipe."
+
+#: src/connection-editor/page-wireguard.c:628
+#, fuzzy, c-format
+msgid "WireGuard connection %d"
+msgstr "Connexion en équipe %d"
 
 #: src/connection-editor/vpn-helpers.c:118
 #, c-format
@@ -4544,6 +4700,12 @@ msgstr ""
 "WPA-PSK invalide : impossible d’interpréter une clé de 64 octets en "
 "hexadécimal"
 
+#~ msgid "nm-device-wireless"
+#~ msgstr "nm-device-wireless"
+
+#~ msgid "preferences-system-network"
+#~ msgstr "preferences-system-network"
+
 #~ msgid "Disable connected notifications"
 #~ msgstr "Désactiver les notifications de connexion"
 
@@ -4639,10 +4801,6 @@ msgstr ""
 #, c-format
 #~ msgid "Choose a key for %s Certificate"
 #~ msgstr "Choisissez une clé pour le certificat %s"
-
-#, c-format
-#~ msgid "%s private _key"
-#~ msgstr "_Clé privée %s"
 
 #, c-format
 #~ msgid "%s key _password"
@@ -4934,9 +5092,6 @@ msgstr ""
 
 #~ msgid "Country or region"
 #~ msgstr "Pays ou région"
-
-#~ msgid "Wired"
-#~ msgstr "Filaire"
 
 #~ msgid "OLPC Mesh"
 #~ msgstr "Maillage OLPC"

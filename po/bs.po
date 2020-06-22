@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: NetworkManager.HEAD\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/network-manager-"
 "applet/\n"
-"POT-Creation-Date: 2020-03-07 16:57+0100\n"
+"POT-Creation-Date: 2020-06-22 17:23+0200\n"
 "PO-Revision-Date: 2015-02-27 10:25+0100\n"
 "Last-Translator: Samir Ribic <samir.ribic@etf.unsa.ba>\n"
 "Language-Team: Bosnian <lokal@linux.org.ba>\n"
@@ -23,10 +23,6 @@ msgstr "Mreža"
 #: nm-applet.desktop.in:4
 msgid "Manage your network connections"
 msgstr "Upravljajte svojim mrežnim vezama"
-
-#: nm-applet.desktop.in:5
-msgid "nm-device-wireless"
-msgstr ""
 
 #: nm-connection-editor.appdata.xml.in:7
 #, fuzzy
@@ -63,10 +59,6 @@ msgstr "Aktivne mrežne veze"
 #: nm-connection-editor.desktop.in:4
 msgid "Manage and change your network connection settings"
 msgstr "Upravljajte i izmijenite podešavanja vaših mrežnih veza"
-
-#: nm-connection-editor.desktop.in:5
-msgid "preferences-system-network"
-msgstr ""
 
 #: shared/nm-utils/nm-shared-utils.c:793
 #, c-format
@@ -111,9 +103,10 @@ msgstr "Potvrđivanje identiteta za 802.1X vezu"
 #: src/connection-editor/ce-new-connection.ui:50
 #: src/connection-editor/ce-page-dcb.ui:569
 #: src/connection-editor/ce-page-dcb.ui:1019
+#: src/connection-editor/ce-page-wireguard.ui:41
 #: src/connection-editor/ce-ppp-auth-methods.ui:28
-#: src/connection-editor/connection-helpers.c:282
-#: src/connection-editor/connection-helpers.c:745
+#: src/connection-editor/connection-helpers.c:284
+#: src/connection-editor/connection-helpers.c:747
 #: src/connection-editor/nm-connection-editor.ui:197
 #: src/connection-editor/page-bluetooth.c:293
 #: src/connection-editor/page-mobile.c:530
@@ -163,7 +156,7 @@ msgid "Mobile Broadband (%s)"
 msgstr "Mobilna širokopojasna (%s)"
 
 #: src/applet-device-broadband.c:727
-#: src/connection-editor/connection-helpers.c:94
+#: src/connection-editor/connection-helpers.c:95
 #: src/connection-editor/page-mobile.c:295
 msgid "Mobile Broadband"
 msgstr "Mobilna širokopojasna"
@@ -421,7 +414,7 @@ msgstr "Nepoznata greška"
 msgid "Error displaying connection information:"
 msgstr "Greška pri prikazivanju podataka o vezi:"
 
-#: src/applet-dialogs.c:60 src/connection-editor/page-wifi-security.c:369
+#: src/applet-dialogs.c:60 src/connection-editor/page-wifi-security.c:374
 #: src/wireless-security/wireless-security.c:435
 msgid "LEAP"
 msgstr "LEAP"
@@ -449,7 +442,7 @@ msgid "WPA3"
 msgstr ""
 
 #: src/applet-dialogs.c:234 src/applet-dialogs.c:243
-#: src/connection-editor/page-wifi-security.c:320
+#: src/connection-editor/page-wifi-security.c:325
 msgctxt "Wi-Fi/Ethernet security"
 msgid "None"
 msgstr "Ništa"
@@ -717,17 +710,17 @@ msgstr "Ponovo unesite novi PIN kod:"
 msgid "Show PIN/PUK codes"
 msgstr "Prikaži PIN/PUK kodove."
 
-#: src/applet-vpn-request.c:426
+#: src/applet-vpn-request.c:427
 #, fuzzy
 msgid "Connection had no VPN setting"
 msgstr "Podaci o vezi"
 
-#: src/applet-vpn-request.c:476
+#: src/applet-vpn-request.c:477
 #, fuzzy, c-format
 msgid "Failed to write connection to VPN UI: %s (%d)"
 msgstr "Nisam uspio da aktiviram vezu"
 
-#: src/applet-vpn-request.c:484
+#: src/applet-vpn-request.c:485
 msgid "Failed to write connection to VPN UI: incomplete write"
 msgstr ""
 
@@ -1028,7 +1021,7 @@ msgid "NetworkManager Applet"
 msgstr "Programče Upravnik mreže"
 
 #: src/connection-editor/ce-ip4-routes.ui:88
-#: src/connection-editor/ce-ip6-routes.ui:88 src/connection-editor/ce-page.h:98
+#: src/connection-editor/ce-ip6-routes.ui:88 src/connection-editor/ce-page.h:97
 #, fuzzy
 msgid ""
 "IP addresses identify your computer on the network. Click the “Add” button "
@@ -1044,6 +1037,7 @@ msgstr ""
 #: src/connection-editor/ce-page-ip4.ui:150
 #: src/connection-editor/ce-page-ip6.ui:181
 #: src/connection-editor/ce-page-team.ui:234
+#: src/connection-editor/ce-page-wireguard.ui:603
 #: src/connection-editor/nm-connection-list.ui:87
 msgid "_Add"
 msgstr ""
@@ -1055,7 +1049,8 @@ msgstr ""
 #: src/connection-editor/ce-page-ip4.ui:165
 #: src/connection-editor/ce-page-ip6.ui:196
 #: src/connection-editor/ce-page-team.ui:262
-#: src/connection-editor/connection-helpers.c:746
+#: src/connection-editor/ce-page-wireguard.ui:617
+#: src/connection-editor/connection-helpers.c:748
 #: src/connection-editor/nm-connection-list.ui:101
 msgid "_Delete"
 msgstr "_Obriši"
@@ -1179,6 +1174,7 @@ msgstr "ms"
 #: src/connection-editor/ce-page-bond.ui:291
 #: src/connection-editor/ce-page-bridge.ui:192
 #: src/connection-editor/ce-page-team.ui:293
+#: src/connection-editor/ce-page-wireguard.ui:373
 #, fuzzy
 msgid "_Interface name"
 msgstr "_Ime interfejsa:"
@@ -1230,6 +1226,7 @@ msgstr ""
 #: src/connection-editor/ce-page-team.ui:320
 #: src/connection-editor/ce-page-vlan.ui:87
 #: src/connection-editor/ce-page-wifi.ui:111
+#: src/connection-editor/ce-page-wireguard.ui:474
 #, fuzzy
 msgid "_MTU"
 msgstr "_MTU:"
@@ -1240,6 +1237,7 @@ msgstr "_MTU:"
 #: src/connection-editor/ce-page-team.ui:356
 #: src/connection-editor/ce-page-vlan.ui:122
 #: src/connection-editor/ce-page-wifi.ui:92
+#: src/connection-editor/ce-page-wireguard.ui:518
 msgid "bytes"
 msgstr "bajtova"
 
@@ -1400,9 +1398,9 @@ msgstr "Prioritetne grupe"
 
 #: src/connection-editor/ce-page-dcb.ui:419
 #: src/connection-editor/ce-page-dcb.ui:442
-#: src/connection-editor/ce-page-dcb.ui:465 src/connection-editor/ce-page.c:72
-#: src/connection-editor/ce-page.c:107 src/connection-editor/page-wifi.c:154
-#: src/connection-editor/page-wifi.c:158 src/connection-editor/page-wifi.c:179
+#: src/connection-editor/ce-page-dcb.ui:465 src/connection-editor/ce-page.c:111
+#: src/connection-editor/page-wifi.c:154 src/connection-editor/page-wifi.c:158
+#: src/connection-editor/page-wifi.c:179
 msgid "default"
 msgstr "podrazumijevano"
 
@@ -1433,6 +1431,10 @@ msgstr ""
 #: src/connection-editor/ce-page-dcb.ui:1822
 #: src/connection-editor/ce-page-dcb.ui:2154
 #: src/connection-editor/ce-page-dcb.ui:2486
+#: src/connection-editor/ce-page-wireguard.ui:282
+#: src/connection-editor/ce-page-wireguard.ui:444
+#: src/connection-editor/ce-page-wireguard.ui:530
+#: src/connection-editor/ce-page-wireguard.ui:544
 msgid "0"
 msgstr "0"
 
@@ -2610,13 +2612,13 @@ msgid "LACP"
 msgstr ""
 
 #: src/connection-editor/ce-page-team.ui:485
-#: src/connection-editor/connection-helpers.c:91
+#: src/connection-editor/connection-helpers.c:92
 #: src/connection-editor/page-ethernet.c:334
 msgid "Ethernet"
 msgstr "Ethernet"
 
 #: src/connection-editor/ce-page-team.ui:489
-#: src/connection-editor/connection-helpers.c:106
+#: src/connection-editor/connection-helpers.c:107
 #: src/connection-editor/page-vlan.c:575
 msgid "VLAN"
 msgstr "VLAN"
@@ -2882,32 +2884,156 @@ msgstr "_Opseg:"
 msgid "SS_ID"
 msgstr "SS_ID:"
 
-#: src/connection-editor/ce-page.c:64 src/connection-editor/ce-page.c:98
+#: src/connection-editor/ce-page-wireguard.ui:23
+msgid "Edit WireGuard peer"
+msgstr ""
+
+#: src/connection-editor/ce-page-wireguard.ui:55
+msgid "_Apply"
+msgstr ""
+
+#: src/connection-editor/ce-page-wireguard.ui:159
+msgid "_Public key"
+msgstr ""
+
+#: src/connection-editor/ce-page-wireguard.ui:173
+#, fuzzy
+msgid "Allowed _IPs"
+msgstr "Dozvoljeni načini:"
+
+#: src/connection-editor/ce-page-wireguard.ui:187
+msgid "_Endpoint"
+msgstr ""
+
+#: src/connection-editor/ce-page-wireguard.ui:201
+#, fuzzy
+msgid "Pre_shared key"
+msgstr "Dijeljeni ključ"
+
+#: src/connection-editor/ce-page-wireguard.ui:215
+msgid "Persistent _keepalive"
+msgstr ""
+
+#: src/connection-editor/ce-page-wireguard.ui:228
+msgid "A base64 public key calculated by 'wg pubkey' from a private key."
+msgstr ""
+
+#: src/connection-editor/ce-page-wireguard.ui:240
+msgid ""
+"Comma-separated list of IP (v4 or v6) addresses with CIDR masks from which "
+"incoming traffic for this peer is allowed and to which outgoing traffic for "
+"this peer is directed."
+msgstr ""
+
+#: src/connection-editor/ce-page-wireguard.ui:252
+msgid ""
+"An endpoint IP or hostname, followed by a colon, and then a port number."
+msgstr ""
+
+#: src/connection-editor/ce-page-wireguard.ui:264
+msgid ""
+"A base64 preshared key generated by 'wg genpsk'. Optional, and may be "
+"omitted. Adds an additional layer of symmetric-key cryptography to be mixed "
+"into the already existing public-key cryptography, for post-quantum "
+"resistance."
+msgstr ""
+
+#: src/connection-editor/ce-page-wireguard.ui:280
+msgid ""
+"How often to send an authenticated empty packet to the peer for the purpose "
+"of keeping a stateful firewall or NAT mapping valid. This is optional and "
+"not recommended outside of specific setups."
+msgstr ""
+
+#: src/connection-editor/ce-page-wireguard.ui:297
+msgid "seconds"
+msgstr ""
+
+#: src/connection-editor/ce-page-wireguard.ui:313
+#, fuzzy
+msgid "Sho_w preshared key"
+msgstr "P_rikaži ključ"
+
+#: src/connection-editor/ce-page-wireguard.ui:386
+msgid "The name of the wireguard interface to create."
+msgstr ""
+
+#: src/connection-editor/ce-page-wireguard.ui:400
+#, fuzzy
+msgid "Private _key"
+msgstr "Privatni _ključ:"
+
+#: src/connection-editor/ce-page-wireguard.ui:413
+msgid "The 256 bit private key in base64 encoding"
+msgstr ""
+
+#: src/connection-editor/ce-page-wireguard.ui:429
+msgid "_Listen port"
+msgstr ""
+
+#: src/connection-editor/ce-page-wireguard.ui:442
+msgid ""
+"A port to listen on. If set to 'automatic', the port will be chosen randomly "
+"when the interface comes up."
+msgstr ""
+
+#: src/connection-editor/ce-page-wireguard.ui:459
+msgid "_Fwmark"
+msgstr ""
+
+#: src/connection-editor/ce-page-wireguard.ui:489
+msgid "Add peer _routes"
+msgstr ""
+
+#: src/connection-editor/ce-page-wireguard.ui:503
+msgid ""
+"Whether to automatically add routes for the AllowedIPs ranges of the peers"
+msgstr ""
+
+#: src/connection-editor/ce-page-wireguard.ui:543
+msgid ""
+"A 32-bit fwmark for outgoing packets. Leave it to 'off' to disable fwmark."
+msgstr ""
+
+#: src/connection-editor/ce-page-wireguard.ui:554
+#, fuzzy
+msgid "_Show private key"
+msgstr "Privatni _ključ:"
+
+#: src/connection-editor/ce-page-wireguard.ui:641
+msgid "<b>_Peers</b>"
+msgstr ""
+
+#: src/connection-editor/ce-page.c:105
 msgid "automatic"
 msgstr "automatska"
 
-#: src/connection-editor/ce-page.c:175
+#: src/connection-editor/ce-page.c:117
+msgid "off"
+msgstr ""
+
+#: src/connection-editor/ce-page.c:163
 msgid "unspecified error"
 msgstr ""
 
-#: src/connection-editor/ce-page.c:280
+#: src/connection-editor/ce-page.c:268
 msgid "Preserve"
 msgstr ""
 
-#: src/connection-editor/ce-page.c:281
+#: src/connection-editor/ce-page.c:269
 msgid "Permanent"
 msgstr ""
 
-#: src/connection-editor/ce-page.c:282
+#: src/connection-editor/ce-page.c:270
 msgid "Random"
 msgstr ""
 
-#: src/connection-editor/ce-page.c:283
+#: src/connection-editor/ce-page.c:271
 #, fuzzy
 msgid "Stable"
 msgstr "Omogući"
 
-#: src/connection-editor/ce-page.c:287
+#: src/connection-editor/ce-page.c:275
 #, fuzzy
 msgid ""
 "The MAC address entered here will be used as hardware address for the "
@@ -2918,61 +3044,61 @@ msgstr ""
 "uređaja na kojem se ova konekcija uspostavlja. Ova osobina je poznata pod "
 "kao kloniranje MAC adrese. Primjer: 00:11:22:33:44:55"
 
-#: src/connection-editor/ce-page.c:327
+#: src/connection-editor/ce-page.c:315
 #, fuzzy
 msgid "MAC address"
 msgstr "Adresa"
 
-#: src/connection-editor/ce-page.c:327
+#: src/connection-editor/ce-page.c:315
 #, fuzzy
 msgid "HW address"
 msgstr "Adresa"
 
-#: src/connection-editor/ce-page.c:330
+#: src/connection-editor/ce-page.c:318
 #, c-format
 msgid "invalid %s for %s (%s)"
 msgstr ""
 
-#: src/connection-editor/ce-page.c:334
+#: src/connection-editor/ce-page.c:322
 #, c-format
 msgid "invalid %s (%s)"
 msgstr ""
 
-#: src/connection-editor/ce-page.c:374
+#: src/connection-editor/ce-page.c:362
 #, c-format
 msgid "invalid interface-name for %s (%s): "
 msgstr ""
 
-#: src/connection-editor/ce-page.c:378
+#: src/connection-editor/ce-page.c:366
 #, fuzzy, c-format
 msgid "invalid interface-name (%s): "
 msgstr "_Ime VLAN interfejsa:"
 
-#: src/connection-editor/ce-page.c:557
+#: src/connection-editor/ce-page.c:545
 msgid "can’t parse device name"
 msgstr ""
 
-#: src/connection-editor/ce-page.c:575
+#: src/connection-editor/ce-page.c:563
 #, fuzzy
 msgid "invalid hardware address"
 msgstr "Hardverska adresa:"
 
-#: src/connection-editor/ce-page.c:597
+#: src/connection-editor/ce-page.c:585
 #, c-format
 msgid "invalid %s (%s): "
 msgstr ""
 
-#: src/connection-editor/ce-page.c:598 src/connection-editor/ce-page.c:603
+#: src/connection-editor/ce-page.c:586 src/connection-editor/ce-page.c:591
 #, fuzzy
 msgid "device"
 msgstr "Bilo koji uređaj"
 
-#: src/connection-editor/ce-page.c:602
+#: src/connection-editor/ce-page.c:590
 #, c-format
 msgid "invalid %s (%s) "
 msgstr ""
 
-#: src/connection-editor/ce-page.h:95
+#: src/connection-editor/ce-page.h:94
 #, fuzzy
 msgid ""
 "IP addresses identify your computer on the network. Click the “Add” button "
@@ -2981,7 +3107,7 @@ msgstr ""
 "IP adrese identifikuju vaš računar na mreži.  Kliknite na dugme „Dodaj“ da "
 "biste dodali IP adresu."
 
-#: src/connection-editor/ce-page.h:100
+#: src/connection-editor/ce-page.h:99
 msgid ""
 "The IP address identify your computer on the network and determines the "
 "address range distributed to other computers. Click the “Add” button to add "
@@ -2989,16 +3115,16 @@ msgid ""
 "automatically."
 msgstr ""
 
-#: src/connection-editor/ce-page.h:105
+#: src/connection-editor/ce-page.h:104
 #, fuzzy
 msgid "Additional static addresses"
 msgstr "Automatski, samo adrese"
 
-#: src/connection-editor/ce-page.h:106
+#: src/connection-editor/ce-page.h:105
 msgid "Addresses"
 msgstr "Adrese"
 
-#: src/connection-editor/ce-page.h:107
+#: src/connection-editor/ce-page.h:106
 msgid "Address (optional)"
 msgstr ""
 
@@ -3061,62 +3187,68 @@ msgstr ""
 "autentifikacije. Ako veza ne uspije, pokušajte da isključite podršku za neke "
 "metode."
 
-#: src/connection-editor/connection-helpers.c:92
+#: src/connection-editor/connection-helpers.c:93
 #: src/connection-editor/page-wifi.c:423
 msgid "Wi-Fi"
 msgstr "Wi-Fi"
 
-#: src/connection-editor/connection-helpers.c:100
+#: src/connection-editor/connection-helpers.c:101
 #: src/connection-editor/page-bluetooth.c:106
 msgid "Bluetooth"
 msgstr "Bluetooth"
 
-#: src/connection-editor/connection-helpers.c:101
+#: src/connection-editor/connection-helpers.c:102
 #: src/connection-editor/page-dsl.c:203
 msgid "DSL/PPPoE"
 msgstr ""
 
-#: src/connection-editor/connection-helpers.c:102
+#: src/connection-editor/connection-helpers.c:103
 #: src/connection-editor/page-infiniband.c:131
 msgid "InfiniBand"
 msgstr "InfiniBand"
 
-#: src/connection-editor/connection-helpers.c:103
+#: src/connection-editor/connection-helpers.c:104
 #: src/connection-editor/page-bond.c:429
 msgid "Bond"
 msgstr "Povez"
 
-#: src/connection-editor/connection-helpers.c:104
+#: src/connection-editor/connection-helpers.c:105
 #: src/connection-editor/page-team.c:1014
 msgid "Team"
 msgstr "Tim"
 
-#: src/connection-editor/connection-helpers.c:105
+#: src/connection-editor/connection-helpers.c:106
 #: src/connection-editor/page-bridge.c:216
 msgid "Bridge"
 msgstr "Most"
 
-#: src/connection-editor/connection-helpers.c:107
+#: src/connection-editor/connection-helpers.c:108
 #: src/connection-editor/page-ip-tunnel.c:159
 msgid "IP tunnel"
 msgstr ""
 
-#: src/connection-editor/connection-helpers.c:108
+#: src/connection-editor/connection-helpers.c:109
 #: src/connection-editor/page-macsec.c:173
 msgid "MACsec"
 msgstr ""
 
 #: src/connection-editor/connection-helpers.c:110
-#: src/connection-editor/connection-helpers.c:372
+#: src/connection-editor/page-wireguard.c:510
+#, fuzzy
+msgid "WireGuard"
+msgstr "Žičana"
+
+#: src/connection-editor/connection-helpers.c:112
+#: src/connection-editor/connection-helpers.c:374
 #: src/connection-editor/page-vpn.c:86
 msgid "VPN"
 msgstr "VPN"
 
-#: src/connection-editor/connection-helpers.c:190
+#: src/connection-editor/connection-helpers.c:192
 msgid "No VPN service type."
 msgstr ""
 
-#: src/connection-editor/connection-helpers.c:195
+#: src/connection-editor/connection-helpers.c:197
 #, fuzzy
 msgid "The VPN plugin failed to import the VPN connection correctly: "
 msgstr ""
@@ -3124,49 +3256,49 @@ msgstr ""
 "\n"
 "Greška: nema vrste VPN servisa."
 
-#: src/connection-editor/connection-helpers.c:279
+#: src/connection-editor/connection-helpers.c:281
 #: src/connection-editor/page-proxy.c:104
 #: src/connection-editor/page-team-port.c:189
 #: src/connection-editor/page-team.c:327
 msgid "Select file to import"
 msgstr "Izaberite datoteku za uvoz"
 
-#: src/connection-editor/connection-helpers.c:283
+#: src/connection-editor/connection-helpers.c:285
 #: src/connection-editor/page-proxy.c:108
 #: src/connection-editor/page-team-port.c:193
 #: src/connection-editor/page-team.c:331
 msgid "_Open"
 msgstr ""
 
-#: src/connection-editor/connection-helpers.c:314
+#: src/connection-editor/connection-helpers.c:316
 msgid "Hardware"
 msgstr "Hardver"
 
-#: src/connection-editor/connection-helpers.c:341
+#: src/connection-editor/connection-helpers.c:343
 msgid "Virtual"
 msgstr "Virtuelno"
 
-#: src/connection-editor/connection-helpers.c:490
 #: src/connection-editor/connection-helpers.c:492
+#: src/connection-editor/connection-helpers.c:494
 #, fuzzy
 msgid "Import a saved VPN configuration…"
 msgstr "Uvezi spašenu VPN konfiguraciju..."
 
-#: src/connection-editor/connection-helpers.c:522
+#: src/connection-editor/connection-helpers.c:524
 msgid ""
 "The connection editor dialog could not be initialized due to an unknown "
 "error."
 msgstr "Ne mogu da pokrenem prozorče za izmjenu veze zbog nepoznate greške."
 
-#: src/connection-editor/connection-helpers.c:531
+#: src/connection-editor/connection-helpers.c:533
 msgid "Could not create new connection"
 msgstr "Ne mogu da napravim novu vezu"
 
-#: src/connection-editor/connection-helpers.c:694
+#: src/connection-editor/connection-helpers.c:696
 msgid "Connection delete failed"
 msgstr "Ne mogu da obrišem vezu"
 
-#: src/connection-editor/connection-helpers.c:742
+#: src/connection-editor/connection-helpers.c:744
 #, c-format
 msgid "Are you sure you wish to delete the connection %s?"
 msgstr "Jeste li sigurni da želite da obrišete vezu %s?"
@@ -3207,37 +3339,37 @@ msgstr "Metrički"
 msgid "Prefix"
 msgstr "Prefiks"
 
-#: src/connection-editor/nm-connection-editor.c:96
+#: src/connection-editor/nm-connection-editor.c:97
 #, c-format
 msgid "Editing %s"
 msgstr "Uređujem %s"
 
-#: src/connection-editor/nm-connection-editor.c:100
+#: src/connection-editor/nm-connection-editor.c:101
 msgid "Editing un-named connection"
 msgstr "Uređujem neimenovanu vezu"
 
-#: src/connection-editor/nm-connection-editor.c:120
+#: src/connection-editor/nm-connection-editor.c:121
 #, fuzzy
 msgid "Missing connection name"
 msgstr "Ime _veze:"
 
-#: src/connection-editor/nm-connection-editor.c:336
+#: src/connection-editor/nm-connection-editor.c:337
 #, fuzzy
 msgid "Editor initializing…"
 msgstr "Greška u pokretanju uređivača"
 
-#: src/connection-editor/nm-connection-editor.c:343
+#: src/connection-editor/nm-connection-editor.c:344
 #: src/connection-editor/nm-connection-list.c:457
 #, fuzzy
 msgid "Connection cannot be modified"
 msgstr "Nije uspjelo dodavanje veze"
 
-#: src/connection-editor/nm-connection-editor.c:358
+#: src/connection-editor/nm-connection-editor.c:359
 #, c-format
 msgid "Invalid setting %s: %s"
 msgstr ""
 
-#: src/connection-editor/nm-connection-editor.c:434
+#: src/connection-editor/nm-connection-editor.c:435
 msgid ""
 "The connection editor could not find some required resources (the .ui file "
 "was not found)."
@@ -3245,42 +3377,42 @@ msgstr ""
 "Uređivač veza nije mogao da pronađe neke potrebne resurse (.ui datoteka nije "
 "pronađena)."
 
-#: src/connection-editor/nm-connection-editor.c:567
+#: src/connection-editor/nm-connection-editor.c:568
 #: src/connection-editor/vpn-helpers.c:199
 msgid "_Save"
 msgstr "_Snimi"
 
-#: src/connection-editor/nm-connection-editor.c:568
+#: src/connection-editor/nm-connection-editor.c:569
 msgid "Save any changes made to this connection."
 msgstr "Sačuvaj sve promjene u ovoj vezi."
 
-#: src/connection-editor/nm-connection-editor.c:569
+#: src/connection-editor/nm-connection-editor.c:570
 msgid "Authenticate to save this connection for all users of this machine."
 msgstr "Autentifikujte se kako bi sačuvali ovu vezu za sve korisnike računara."
 
-#: src/connection-editor/nm-connection-editor.c:585
+#: src/connection-editor/nm-connection-editor.c:586
 msgid "Could not create connection"
 msgstr "Ne mogu stvoriti konekciju"
 
-#: src/connection-editor/nm-connection-editor.c:585
+#: src/connection-editor/nm-connection-editor.c:586
 msgid "Could not edit connection"
 msgstr "Ne mogu da uredim vezu"
 
-#: src/connection-editor/nm-connection-editor.c:587
+#: src/connection-editor/nm-connection-editor.c:588
 msgid "Unknown error creating connection editor dialog."
 msgstr "Nepoznata greška kreiranja prozora za uređivanje."
 
-#: src/connection-editor/nm-connection-editor.c:728
+#: src/connection-editor/nm-connection-editor.c:729
 msgid ""
 "Warning: the connection contains some properties not supported by the "
 "editor. They will be cleared upon save."
 msgstr ""
 
-#: src/connection-editor/nm-connection-editor.c:748
+#: src/connection-editor/nm-connection-editor.c:749
 msgid "Error initializing editor"
 msgstr "Greška u pokretanju uređivača"
 
-#: src/connection-editor/nm-connection-editor.c:1155
+#: src/connection-editor/nm-connection-editor.c:1159
 msgid "Connection add failed"
 msgstr "Nije uspjelo dodavanje veze"
 
@@ -3997,50 +4129,54 @@ msgstr ""
 "koju želite da kreirate ne pojavljuje na listi, možda nemate ispravan VPN "
 "dodatak instaliran."
 
-#: src/connection-editor/page-wifi-security.c:346
+#: src/connection-editor/page-wifi-security.c:351
 msgid "WEP 40/128-bit Key (Hex or ASCII)"
 msgstr "WEP 40/128-bitni ključ (Hex ili ASCII)"
 
-#: src/connection-editor/page-wifi-security.c:356
+#: src/connection-editor/page-wifi-security.c:361
 msgid "WEP 128-bit Passphrase"
 msgstr "WEP 128-bit lozinka"
 
-#: src/connection-editor/page-wifi-security.c:382
+#: src/connection-editor/page-wifi-security.c:387
 msgid "Dynamic WEP (802.1X)"
 msgstr "Dinamički WEP (802.1X)"
 
-#: src/connection-editor/page-wifi-security.c:395
+#: src/connection-editor/page-wifi-security.c:400
 msgid "WPA & WPA2 Personal"
 msgstr "Lični WPA & WPA2"
 
-#: src/connection-editor/page-wifi-security.c:408
+#: src/connection-editor/page-wifi-security.c:413
 msgid "WPA & WPA2 Enterprise"
 msgstr "Poslovni WPA & WPA2"
 
-#: src/connection-editor/page-wifi-security.c:421
+#: src/connection-editor/page-wifi-security.c:426
 #, fuzzy
 msgid "WPA3 Personal"
 msgstr "Lični WPA & WPA2"
 
-#: src/connection-editor/page-wifi-security.c:464
+#: src/connection-editor/page-wifi-security.c:437
+msgid "Enhanced Open"
+msgstr ""
+
+#: src/connection-editor/page-wifi-security.c:483
 msgid "Could not load Wi-Fi security user interface; missing Wi-Fi setting."
 msgstr ""
 "Nije moguće učitati Wi-Fi sigurnosni korisnički ulazni uređaj; nedostaje Wi-"
 "Fi podešavanje."
 
-#: src/connection-editor/page-wifi-security.c:475
+#: src/connection-editor/page-wifi-security.c:494
 msgid "Wi-Fi Security"
 msgstr "Wi-Fi Sigurnost"
 
-#: src/connection-editor/page-wifi-security.c:477
+#: src/connection-editor/page-wifi-security.c:496
 msgid "Could not load Wi-Fi security user interface."
 msgstr "Nije moguće učitati Wi-Fi sigurnosni korisnički ulazni uređaj."
 
-#: src/connection-editor/page-wifi-security.c:558
+#: src/connection-editor/page-wifi-security.c:577
 msgid "missing SSID"
 msgstr ""
 
-#: src/connection-editor/page-wifi-security.c:564
+#: src/connection-editor/page-wifi-security.c:583
 msgid "Security not compatible with Ad-Hoc mode"
 msgstr ""
 
@@ -4085,6 +4221,25 @@ msgstr "Bilo koji uređaj"
 #, c-format
 msgid "Wi-Fi connection %d"
 msgstr "Wi-Fi konekcija %d"
+
+#: src/connection-editor/page-wireguard.c:261
+msgid "Public key"
+msgstr ""
+
+#: src/connection-editor/page-wireguard.c:268
+#, fuzzy
+msgid "Allowed IPs"
+msgstr "Dozvoljeni načini:"
+
+#: src/connection-editor/page-wireguard.c:512
+#, fuzzy
+msgid "Could not load WireGuard user interface."
+msgstr "Ne mogu učitati grupni korisnički interfejs."
+
+#: src/connection-editor/page-wireguard.c:628
+#, fuzzy, c-format
+msgid "WireGuard connection %d"
+msgstr "Tim konekcija %d"
 
 #: src/connection-editor/vpn-helpers.c:118
 #, fuzzy, c-format
@@ -4654,10 +4809,6 @@ msgstr ""
 #~ msgstr "Izaberite vaš lični sertifikat..."
 
 #, fuzzy, c-format
-#~ msgid "%s private _key"
-#~ msgstr "Privatni _ključ:"
-
-#, fuzzy, c-format
 #~ msgid "%s key _password"
 #~ msgstr "L_ozinka privatnog ključa:"
 
@@ -4935,9 +5086,6 @@ msgstr ""
 
 #~ msgid "Country or region"
 #~ msgstr "Zemlja ili region"
-
-#~ msgid "Wired"
-#~ msgstr "Žičana"
 
 #~ msgid "OLPC Mesh"
 #~ msgstr "OLPC Mreža"

@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: mr\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/network-manager-"
 "applet/\n"
-"POT-Creation-Date: 2020-03-07 16:57+0100\n"
+"POT-Creation-Date: 2020-06-22 17:23+0200\n"
 "PO-Revision-Date: 2011-03-28 16:06+0530\n"
 "Last-Translator: Sandeep Shedmake <sshedmak@redhat.com>\n"
 "Language-Team: Marathi <fedora-trans-mr@redhat.com>\n"
@@ -27,10 +27,6 @@ msgstr "नेटवर्क"
 #: nm-applet.desktop.in:4
 msgid "Manage your network connections"
 msgstr "नेटवर्क जोडणी नियंत्रीत करा"
-
-#: nm-applet.desktop.in:5
-msgid "nm-device-wireless"
-msgstr ""
 
 #: nm-connection-editor.appdata.xml.in:7
 #, fuzzy
@@ -67,10 +63,6 @@ msgstr "सक्रीय नेटवर्क जोडणी"
 #: nm-connection-editor.desktop.in:4
 msgid "Manage and change your network connection settings"
 msgstr "नेटवर्क संयोजना व्यवस्थापीत करा व बदला"
-
-#: nm-connection-editor.desktop.in:5
-msgid "preferences-system-network"
-msgstr ""
 
 #: shared/nm-utils/nm-shared-utils.c:793
 #, c-format
@@ -116,9 +108,10 @@ msgstr "Wired 802.1X ओळख पटवा"
 #: src/connection-editor/ce-new-connection.ui:50
 #: src/connection-editor/ce-page-dcb.ui:569
 #: src/connection-editor/ce-page-dcb.ui:1019
+#: src/connection-editor/ce-page-wireguard.ui:41
 #: src/connection-editor/ce-ppp-auth-methods.ui:28
-#: src/connection-editor/connection-helpers.c:282
-#: src/connection-editor/connection-helpers.c:745
+#: src/connection-editor/connection-helpers.c:284
+#: src/connection-editor/connection-helpers.c:747
 #: src/connection-editor/nm-connection-editor.ui:197
 #: src/connection-editor/page-bluetooth.c:293
 #: src/connection-editor/page-mobile.c:530
@@ -168,7 +161,7 @@ msgid "Mobile Broadband (%s)"
 msgstr "मोबाइल ब्रॉडबँड (%s)"
 
 #: src/applet-device-broadband.c:727
-#: src/connection-editor/connection-helpers.c:94
+#: src/connection-editor/connection-helpers.c:95
 #: src/connection-editor/page-mobile.c:295
 msgid "Mobile Broadband"
 msgstr "मोबाइल ब्रॉडबँड"
@@ -437,7 +430,7 @@ msgstr "अपरिचीत"
 msgid "Error displaying connection information:"
 msgstr "जोडणी माहिती प्रदर्शित करतेवेळी त्रुटी आढळली:"
 
-#: src/applet-dialogs.c:60 src/connection-editor/page-wifi-security.c:369
+#: src/applet-dialogs.c:60 src/connection-editor/page-wifi-security.c:374
 #: src/wireless-security/wireless-security.c:435
 msgid "LEAP"
 msgstr "LEAP"
@@ -465,7 +458,7 @@ msgid "WPA3"
 msgstr ""
 
 #: src/applet-dialogs.c:234 src/applet-dialogs.c:243
-#: src/connection-editor/page-wifi-security.c:320
+#: src/connection-editor/page-wifi-security.c:325
 #, fuzzy
 msgctxt "Wi-Fi/Ethernet security"
 msgid "None"
@@ -737,17 +730,17 @@ msgstr "नवीन PIN कोड पुनः द्या:"
 msgid "Show PIN/PUK codes"
 msgstr "PIN/PUK कोड्स् दाखवा"
 
-#: src/applet-vpn-request.c:426
+#: src/applet-vpn-request.c:427
 #, fuzzy
 msgid "Connection had no VPN setting"
 msgstr "जोडणी माहिती"
 
-#: src/applet-vpn-request.c:476
+#: src/applet-vpn-request.c:477
 #, fuzzy, c-format
 msgid "Failed to write connection to VPN UI: %s (%d)"
 msgstr "DUN जोडणी निर्माण करणे अशक्य: %s"
 
-#: src/applet-vpn-request.c:484
+#: src/applet-vpn-request.c:485
 msgid "Failed to write connection to VPN UI: incomplete write"
 msgstr ""
 
@@ -1046,7 +1039,7 @@ msgid "NetworkManager Applet"
 msgstr "NetworkManager ॲप्लेट"
 
 #: src/connection-editor/ce-ip4-routes.ui:88
-#: src/connection-editor/ce-ip6-routes.ui:88 src/connection-editor/ce-page.h:98
+#: src/connection-editor/ce-ip6-routes.ui:88 src/connection-editor/ce-page.h:97
 #, fuzzy
 msgid ""
 "IP addresses identify your computer on the network. Click the “Add” button "
@@ -1062,6 +1055,7 @@ msgstr ""
 #: src/connection-editor/ce-page-ip4.ui:150
 #: src/connection-editor/ce-page-ip6.ui:181
 #: src/connection-editor/ce-page-team.ui:234
+#: src/connection-editor/ce-page-wireguard.ui:603
 #: src/connection-editor/nm-connection-list.ui:87
 msgid "_Add"
 msgstr ""
@@ -1073,7 +1067,8 @@ msgstr ""
 #: src/connection-editor/ce-page-ip4.ui:165
 #: src/connection-editor/ce-page-ip6.ui:196
 #: src/connection-editor/ce-page-team.ui:262
-#: src/connection-editor/connection-helpers.c:746
+#: src/connection-editor/ce-page-wireguard.ui:617
+#: src/connection-editor/connection-helpers.c:748
 #: src/connection-editor/nm-connection-list.ui:101
 msgid "_Delete"
 msgstr "नष्ट करा (_D)"
@@ -1198,6 +1193,7 @@ msgstr "ms"
 #: src/connection-editor/ce-page-bond.ui:291
 #: src/connection-editor/ce-page-bridge.ui:192
 #: src/connection-editor/ce-page-team.ui:293
+#: src/connection-editor/ce-page-wireguard.ui:373
 #, fuzzy
 msgid "_Interface name"
 msgstr "संवाद नाव (_I):"
@@ -1247,6 +1243,7 @@ msgstr ""
 #: src/connection-editor/ce-page-team.ui:320
 #: src/connection-editor/ce-page-vlan.ui:87
 #: src/connection-editor/ce-page-wifi.ui:111
+#: src/connection-editor/ce-page-wireguard.ui:474
 #, fuzzy
 msgid "_MTU"
 msgstr "MTU (_M):"
@@ -1257,6 +1254,7 @@ msgstr "MTU (_M):"
 #: src/connection-editor/ce-page-team.ui:356
 #: src/connection-editor/ce-page-vlan.ui:122
 #: src/connection-editor/ce-page-wifi.ui:92
+#: src/connection-editor/ce-page-wireguard.ui:518
 msgid "bytes"
 msgstr "बाइटस्"
 
@@ -1411,9 +1409,9 @@ msgstr ""
 
 #: src/connection-editor/ce-page-dcb.ui:419
 #: src/connection-editor/ce-page-dcb.ui:442
-#: src/connection-editor/ce-page-dcb.ui:465 src/connection-editor/ce-page.c:72
-#: src/connection-editor/ce-page.c:107 src/connection-editor/page-wifi.c:154
-#: src/connection-editor/page-wifi.c:158 src/connection-editor/page-wifi.c:179
+#: src/connection-editor/ce-page-dcb.ui:465 src/connection-editor/ce-page.c:111
+#: src/connection-editor/page-wifi.c:154 src/connection-editor/page-wifi.c:158
+#: src/connection-editor/page-wifi.c:179
 msgid "default"
 msgstr "पूर्वनिर्धारीत"
 
@@ -1442,6 +1440,10 @@ msgstr ""
 #: src/connection-editor/ce-page-dcb.ui:1822
 #: src/connection-editor/ce-page-dcb.ui:2154
 #: src/connection-editor/ce-page-dcb.ui:2486
+#: src/connection-editor/ce-page-wireguard.ui:282
+#: src/connection-editor/ce-page-wireguard.ui:444
+#: src/connection-editor/ce-page-wireguard.ui:530
+#: src/connection-editor/ce-page-wireguard.ui:544
 msgid "0"
 msgstr ""
 
@@ -2602,14 +2604,14 @@ msgid "LACP"
 msgstr ""
 
 #: src/connection-editor/ce-page-team.ui:485
-#: src/connection-editor/connection-helpers.c:91
+#: src/connection-editor/connection-helpers.c:92
 #: src/connection-editor/page-ethernet.c:334
 #, fuzzy
 msgid "Ethernet"
 msgstr "स्वयं Ethernet"
 
 #: src/connection-editor/ce-page-team.ui:489
-#: src/connection-editor/connection-helpers.c:106
+#: src/connection-editor/connection-helpers.c:107
 #: src/connection-editor/page-vlan.c:575
 msgid "VLAN"
 msgstr "VLAN"
@@ -2874,31 +2876,155 @@ msgstr "बॅन्ड (_d):"
 msgid "SS_ID"
 msgstr ""
 
-#: src/connection-editor/ce-page.c:64 src/connection-editor/ce-page.c:98
+#: src/connection-editor/ce-page-wireguard.ui:23
+msgid "Edit WireGuard peer"
+msgstr ""
+
+#: src/connection-editor/ce-page-wireguard.ui:55
+msgid "_Apply"
+msgstr ""
+
+#: src/connection-editor/ce-page-wireguard.ui:159
+msgid "_Public key"
+msgstr ""
+
+#: src/connection-editor/ce-page-wireguard.ui:173
+#, fuzzy
+msgid "Allowed _IPs"
+msgstr "स्वीकार्य पद्धती:"
+
+#: src/connection-editor/ce-page-wireguard.ui:187
+msgid "_Endpoint"
+msgstr ""
+
+#: src/connection-editor/ce-page-wireguard.ui:201
+#, fuzzy
+msgid "Pre_shared key"
+msgstr "शेअर्ड् कि"
+
+#: src/connection-editor/ce-page-wireguard.ui:215
+msgid "Persistent _keepalive"
+msgstr ""
+
+#: src/connection-editor/ce-page-wireguard.ui:228
+msgid "A base64 public key calculated by 'wg pubkey' from a private key."
+msgstr ""
+
+#: src/connection-editor/ce-page-wireguard.ui:240
+msgid ""
+"Comma-separated list of IP (v4 or v6) addresses with CIDR masks from which "
+"incoming traffic for this peer is allowed and to which outgoing traffic for "
+"this peer is directed."
+msgstr ""
+
+#: src/connection-editor/ce-page-wireguard.ui:252
+msgid ""
+"An endpoint IP or hostname, followed by a colon, and then a port number."
+msgstr ""
+
+#: src/connection-editor/ce-page-wireguard.ui:264
+msgid ""
+"A base64 preshared key generated by 'wg genpsk'. Optional, and may be "
+"omitted. Adds an additional layer of symmetric-key cryptography to be mixed "
+"into the already existing public-key cryptography, for post-quantum "
+"resistance."
+msgstr ""
+
+#: src/connection-editor/ce-page-wireguard.ui:280
+msgid ""
+"How often to send an authenticated empty packet to the peer for the purpose "
+"of keeping a stateful firewall or NAT mapping valid. This is optional and "
+"not recommended outside of specific setups."
+msgstr ""
+
+#: src/connection-editor/ce-page-wireguard.ui:297
+msgid "seconds"
+msgstr ""
+
+#: src/connection-editor/ce-page-wireguard.ui:313
+#, fuzzy
+msgid "Sho_w preshared key"
+msgstr "कि दाखवा (_w)"
+
+#: src/connection-editor/ce-page-wireguard.ui:386
+msgid "The name of the wireguard interface to create."
+msgstr ""
+
+#: src/connection-editor/ce-page-wireguard.ui:400
+#, fuzzy
+msgid "Private _key"
+msgstr "प्राइव्हेट कि (_k):"
+
+#: src/connection-editor/ce-page-wireguard.ui:413
+msgid "The 256 bit private key in base64 encoding"
+msgstr ""
+
+#: src/connection-editor/ce-page-wireguard.ui:429
+msgid "_Listen port"
+msgstr ""
+
+#: src/connection-editor/ce-page-wireguard.ui:442
+msgid ""
+"A port to listen on. If set to 'automatic', the port will be chosen randomly "
+"when the interface comes up."
+msgstr ""
+
+#: src/connection-editor/ce-page-wireguard.ui:459
+msgid "_Fwmark"
+msgstr ""
+
+#: src/connection-editor/ce-page-wireguard.ui:489
+msgid "Add peer _routes"
+msgstr ""
+
+#: src/connection-editor/ce-page-wireguard.ui:503
+msgid ""
+"Whether to automatically add routes for the AllowedIPs ranges of the peers"
+msgstr ""
+
+#: src/connection-editor/ce-page-wireguard.ui:543
+msgid ""
+"A 32-bit fwmark for outgoing packets. Leave it to 'off' to disable fwmark."
+msgstr ""
+
+#: src/connection-editor/ce-page-wireguard.ui:554
+#, fuzzy
+msgid "_Show private key"
+msgstr "प्राइव्हेट कि (_k):"
+
+#: src/connection-editor/ce-page-wireguard.ui:641
+msgid "<b>_Peers</b>"
+msgstr ""
+
+#: src/connection-editor/ce-page.c:105
 msgid "automatic"
 msgstr "स्वयं"
 
-#: src/connection-editor/ce-page.c:175
+#: src/connection-editor/ce-page.c:117
+msgid "off"
+msgstr ""
+
+#: src/connection-editor/ce-page.c:163
 msgid "unspecified error"
 msgstr ""
 
-#: src/connection-editor/ce-page.c:280
+#: src/connection-editor/ce-page.c:268
 msgid "Preserve"
 msgstr ""
 
-#: src/connection-editor/ce-page.c:281
+#: src/connection-editor/ce-page.c:269
 msgid "Permanent"
 msgstr ""
 
-#: src/connection-editor/ce-page.c:282
+#: src/connection-editor/ce-page.c:270
 msgid "Random"
 msgstr ""
 
-#: src/connection-editor/ce-page.c:283
+#: src/connection-editor/ce-page.c:271
 msgid "Stable"
 msgstr ""
 
-#: src/connection-editor/ce-page.c:287
+#: src/connection-editor/ce-page.c:275
 #, fuzzy
 msgid ""
 "The MAC address entered here will be used as hardware address for the "
@@ -2908,61 +3034,61 @@ msgstr ""
 "येथे दिलेले MAC पत्ता सक्रीय नेटवर्क साधणकरीता हार्डवेअर पत्ता म्हणून वापरले जाईल.  या "
 "गुणविशेषला MAC क्लोनिंग किंवा स्पूफिंग असे म्हटले जाते. उदाहरणार्थ: 00:11:22:33:44:55"
 
-#: src/connection-editor/ce-page.c:327
+#: src/connection-editor/ce-page.c:315
 #, fuzzy
 msgid "MAC address"
 msgstr "पत्ता"
 
-#: src/connection-editor/ce-page.c:327
+#: src/connection-editor/ce-page.c:315
 #, fuzzy
 msgid "HW address"
 msgstr "पत्ता"
 
-#: src/connection-editor/ce-page.c:330
+#: src/connection-editor/ce-page.c:318
 #, c-format
 msgid "invalid %s for %s (%s)"
 msgstr ""
 
-#: src/connection-editor/ce-page.c:334
+#: src/connection-editor/ce-page.c:322
 #, c-format
 msgid "invalid %s (%s)"
 msgstr ""
 
-#: src/connection-editor/ce-page.c:374
+#: src/connection-editor/ce-page.c:362
 #, c-format
 msgid "invalid interface-name for %s (%s): "
 msgstr ""
 
-#: src/connection-editor/ce-page.c:378
+#: src/connection-editor/ce-page.c:366
 #, c-format
 msgid "invalid interface-name (%s): "
 msgstr ""
 
-#: src/connection-editor/ce-page.c:557
+#: src/connection-editor/ce-page.c:545
 msgid "can’t parse device name"
 msgstr ""
 
-#: src/connection-editor/ce-page.c:575
+#: src/connection-editor/ce-page.c:563
 #, fuzzy
 msgid "invalid hardware address"
 msgstr "हार्डवेअर पत्ता:"
 
-#: src/connection-editor/ce-page.c:597
+#: src/connection-editor/ce-page.c:585
 #, c-format
 msgid "invalid %s (%s): "
 msgstr ""
 
-#: src/connection-editor/ce-page.c:598 src/connection-editor/ce-page.c:603
+#: src/connection-editor/ce-page.c:586 src/connection-editor/ce-page.c:591
 #, fuzzy
 msgid "device"
 msgstr "कुठलेही साधण"
 
-#: src/connection-editor/ce-page.c:602
+#: src/connection-editor/ce-page.c:590
 #, c-format
 msgid "invalid %s (%s) "
 msgstr ""
 
-#: src/connection-editor/ce-page.h:95
+#: src/connection-editor/ce-page.h:94
 #, fuzzy
 msgid ""
 "IP addresses identify your computer on the network. Click the “Add” button "
@@ -2971,7 +3097,7 @@ msgstr ""
 "IP पत्ते फक्त नेटवर्कवरील संगणक ओळखतात.  IP पत्ता समावेश करण्यासाठी \"Add\" बटणावर "
 "क्लिक करा."
 
-#: src/connection-editor/ce-page.h:100
+#: src/connection-editor/ce-page.h:99
 msgid ""
 "The IP address identify your computer on the network and determines the "
 "address range distributed to other computers. Click the “Add” button to add "
@@ -2979,16 +3105,16 @@ msgid ""
 "automatically."
 msgstr ""
 
-#: src/connection-editor/ce-page.h:105
+#: src/connection-editor/ce-page.h:104
 #, fuzzy
 msgid "Additional static addresses"
 msgstr "स्वयं, फत्त पत्ते"
 
-#: src/connection-editor/ce-page.h:106
+#: src/connection-editor/ce-page.h:105
 msgid "Addresses"
 msgstr "पत्ते"
 
-#: src/connection-editor/ce-page.h:107
+#: src/connection-editor/ce-page.h:106
 msgid "Address (optional)"
 msgstr ""
 
@@ -3050,62 +3176,68 @@ msgstr ""
 "बहुतांश उदाहरणांत, PPP सर्वर सर्व ओळख पटवण्याचे पद्धती करीता समर्थन पुरवितो.  जोडणी "
 "अपयशी ठरल्यास, काहिक पद्धतीकरीता समर्थन अकार्यान्वीत करण्याचा प्रयत्न करा."
 
-#: src/connection-editor/connection-helpers.c:92
+#: src/connection-editor/connection-helpers.c:93
 #: src/connection-editor/page-wifi.c:423
 msgid "Wi-Fi"
 msgstr ""
 
-#: src/connection-editor/connection-helpers.c:100
+#: src/connection-editor/connection-helpers.c:101
 #: src/connection-editor/page-bluetooth.c:106
 msgid "Bluetooth"
 msgstr ""
 
-#: src/connection-editor/connection-helpers.c:101
+#: src/connection-editor/connection-helpers.c:102
 #: src/connection-editor/page-dsl.c:203
 msgid "DSL/PPPoE"
 msgstr ""
 
-#: src/connection-editor/connection-helpers.c:102
+#: src/connection-editor/connection-helpers.c:103
 #: src/connection-editor/page-infiniband.c:131
 msgid "InfiniBand"
 msgstr "इंफिनिबँड"
 
-#: src/connection-editor/connection-helpers.c:103
+#: src/connection-editor/connection-helpers.c:104
 #: src/connection-editor/page-bond.c:429
 msgid "Bond"
 msgstr "बाँड"
 
-#: src/connection-editor/connection-helpers.c:104
+#: src/connection-editor/connection-helpers.c:105
 #: src/connection-editor/page-team.c:1014
 msgid "Team"
 msgstr ""
 
-#: src/connection-editor/connection-helpers.c:105
+#: src/connection-editor/connection-helpers.c:106
 #: src/connection-editor/page-bridge.c:216
 msgid "Bridge"
 msgstr "ब्रिज"
 
-#: src/connection-editor/connection-helpers.c:107
+#: src/connection-editor/connection-helpers.c:108
 #: src/connection-editor/page-ip-tunnel.c:159
 msgid "IP tunnel"
 msgstr ""
 
-#: src/connection-editor/connection-helpers.c:108
+#: src/connection-editor/connection-helpers.c:109
 #: src/connection-editor/page-macsec.c:173
 msgid "MACsec"
 msgstr ""
 
 #: src/connection-editor/connection-helpers.c:110
-#: src/connection-editor/connection-helpers.c:372
+#: src/connection-editor/page-wireguard.c:510
+#, fuzzy
+msgid "WireGuard"
+msgstr "वार्यर्ड"
+
+#: src/connection-editor/connection-helpers.c:112
+#: src/connection-editor/connection-helpers.c:374
 #: src/connection-editor/page-vpn.c:86
 msgid "VPN"
 msgstr "VPN"
 
-#: src/connection-editor/connection-helpers.c:190
+#: src/connection-editor/connection-helpers.c:192
 msgid "No VPN service type."
 msgstr ""
 
-#: src/connection-editor/connection-helpers.c:195
+#: src/connection-editor/connection-helpers.c:197
 #, fuzzy
 msgid "The VPN plugin failed to import the VPN connection correctly: "
 msgstr ""
@@ -3113,49 +3245,49 @@ msgstr ""
 "\n"
 "त्रुटी: VPN सेवा प्रकार आढळले नाही."
 
-#: src/connection-editor/connection-helpers.c:279
+#: src/connection-editor/connection-helpers.c:281
 #: src/connection-editor/page-proxy.c:104
 #: src/connection-editor/page-team-port.c:189
 #: src/connection-editor/page-team.c:327
 msgid "Select file to import"
 msgstr "आयात करण्याजोगी फाइल नीवडा"
 
-#: src/connection-editor/connection-helpers.c:283
+#: src/connection-editor/connection-helpers.c:285
 #: src/connection-editor/page-proxy.c:108
 #: src/connection-editor/page-team-port.c:193
 #: src/connection-editor/page-team.c:331
 msgid "_Open"
 msgstr ""
 
-#: src/connection-editor/connection-helpers.c:314
+#: src/connection-editor/connection-helpers.c:316
 msgid "Hardware"
 msgstr "हार्डवेअर"
 
-#: src/connection-editor/connection-helpers.c:341
+#: src/connection-editor/connection-helpers.c:343
 msgid "Virtual"
 msgstr "वर्च्युअल"
 
-#: src/connection-editor/connection-helpers.c:490
 #: src/connection-editor/connection-helpers.c:492
+#: src/connection-editor/connection-helpers.c:494
 #, fuzzy
 msgid "Import a saved VPN configuration…"
 msgstr "साठविलेली VPN संरचना आयात करा..."
 
-#: src/connection-editor/connection-helpers.c:522
+#: src/connection-editor/connection-helpers.c:524
 msgid ""
 "The connection editor dialog could not be initialized due to an unknown "
 "error."
 msgstr "अपरिचीत त्रुटीमुळे जोडणी संपादक संवाद प्रारंभ करणे अशक्य."
 
-#: src/connection-editor/connection-helpers.c:531
+#: src/connection-editor/connection-helpers.c:533
 msgid "Could not create new connection"
 msgstr "नवीन जोडणी निर्माण करणे अशक्य"
 
-#: src/connection-editor/connection-helpers.c:694
+#: src/connection-editor/connection-helpers.c:696
 msgid "Connection delete failed"
 msgstr "जोडणी नष्ट करणे अपयशी"
 
-#: src/connection-editor/connection-helpers.c:742
+#: src/connection-editor/connection-helpers.c:744
 #, c-format
 msgid "Are you sure you wish to delete the connection %s?"
 msgstr "तुम्हाला नक्की जोडणी %s नष्ट करायची?"
@@ -3196,78 +3328,78 @@ msgstr "मेट्रीक"
 msgid "Prefix"
 msgstr "प्रिफीक्स्"
 
-#: src/connection-editor/nm-connection-editor.c:96
+#: src/connection-editor/nm-connection-editor.c:97
 #, c-format
 msgid "Editing %s"
 msgstr "%s संपादीत करत आहे"
 
-#: src/connection-editor/nm-connection-editor.c:100
+#: src/connection-editor/nm-connection-editor.c:101
 msgid "Editing un-named connection"
 msgstr "विनावी जोडणी संपादीत करत आहे"
 
-#: src/connection-editor/nm-connection-editor.c:120
+#: src/connection-editor/nm-connection-editor.c:121
 #, fuzzy
 msgid "Missing connection name"
 msgstr "जोडणी नाव (_n):"
 
-#: src/connection-editor/nm-connection-editor.c:336
+#: src/connection-editor/nm-connection-editor.c:337
 #, fuzzy
 msgid "Editor initializing…"
 msgstr "संपादक प्रारंभ करतेवेळी त्रुटी"
 
-#: src/connection-editor/nm-connection-editor.c:343
+#: src/connection-editor/nm-connection-editor.c:344
 #: src/connection-editor/nm-connection-list.c:457
 #, fuzzy
 msgid "Connection cannot be modified"
 msgstr "जोडणी समावेश करणे अपयशी"
 
-#: src/connection-editor/nm-connection-editor.c:358
+#: src/connection-editor/nm-connection-editor.c:359
 #, c-format
 msgid "Invalid setting %s: %s"
 msgstr ""
 
-#: src/connection-editor/nm-connection-editor.c:434
+#: src/connection-editor/nm-connection-editor.c:435
 msgid ""
 "The connection editor could not find some required resources (the .ui file "
 "was not found)."
 msgstr "जोडणी संपादकाला काहिक आवश्यक स्त्रोत आढळले नाही (.ui फाइल आढळले नाही)."
 
-#: src/connection-editor/nm-connection-editor.c:567
+#: src/connection-editor/nm-connection-editor.c:568
 #: src/connection-editor/vpn-helpers.c:199
 msgid "_Save"
 msgstr "साठवा (_S)"
 
-#: src/connection-editor/nm-connection-editor.c:568
+#: src/connection-editor/nm-connection-editor.c:569
 msgid "Save any changes made to this connection."
 msgstr "या जोडणीकरीता कार्यान्वीत केलेले कुठलेही बदल साठवा."
 
-#: src/connection-editor/nm-connection-editor.c:569
+#: src/connection-editor/nm-connection-editor.c:570
 msgid "Authenticate to save this connection for all users of this machine."
 msgstr "या मशीन वरील सर्व वापरकर्त्यांकरीता ही जोडणी साठवण्यासाठी ओळख पटवा."
 
-#: src/connection-editor/nm-connection-editor.c:585
+#: src/connection-editor/nm-connection-editor.c:586
 msgid "Could not create connection"
 msgstr "जोडणी निर्माण करणे अशक्य"
 
-#: src/connection-editor/nm-connection-editor.c:585
+#: src/connection-editor/nm-connection-editor.c:586
 msgid "Could not edit connection"
 msgstr "जोडणी संपादीत करणे अशक्य"
 
-#: src/connection-editor/nm-connection-editor.c:587
+#: src/connection-editor/nm-connection-editor.c:588
 msgid "Unknown error creating connection editor dialog."
 msgstr "जोडणी संपादक संवाद निर्माण करतेवेळी त्रुटी आढळली."
 
-#: src/connection-editor/nm-connection-editor.c:728
+#: src/connection-editor/nm-connection-editor.c:729
 msgid ""
 "Warning: the connection contains some properties not supported by the "
 "editor. They will be cleared upon save."
 msgstr ""
 
-#: src/connection-editor/nm-connection-editor.c:748
+#: src/connection-editor/nm-connection-editor.c:749
 msgid "Error initializing editor"
 msgstr "संपादक प्रारंभ करतेवेळी त्रुटी"
 
-#: src/connection-editor/nm-connection-editor.c:1155
+#: src/connection-editor/nm-connection-editor.c:1159
 msgid "Connection add failed"
 msgstr "जोडणी समावेश करणे अपयशी"
 
@@ -3983,51 +4115,55 @@ msgstr ""
 "नवीन जोडणी करीता वापरण्याजोगी VPN चे प्रकार नीवडा.  पसंतीचे  VPN जोडणी यादीत न "
 "आढळल्यास, तुमच्याकडे योग्य VPN प्लगइन प्रतिष्ठापीत नसावे."
 
-#: src/connection-editor/page-wifi-security.c:346
+#: src/connection-editor/page-wifi-security.c:351
 msgid "WEP 40/128-bit Key (Hex or ASCII)"
 msgstr "WEP 40/128-बीट कि (Hex किंवा ASCII)"
 
-#: src/connection-editor/page-wifi-security.c:356
+#: src/connection-editor/page-wifi-security.c:361
 msgid "WEP 128-bit Passphrase"
 msgstr "WEP 128-bit गोपनीयता"
 
-#: src/connection-editor/page-wifi-security.c:382
+#: src/connection-editor/page-wifi-security.c:387
 msgid "Dynamic WEP (802.1X)"
 msgstr "गतिक WEP (802.1X)"
 
-#: src/connection-editor/page-wifi-security.c:395
+#: src/connection-editor/page-wifi-security.c:400
 msgid "WPA & WPA2 Personal"
 msgstr "WPA & WPA2 खाजगी"
 
-#: src/connection-editor/page-wifi-security.c:408
+#: src/connection-editor/page-wifi-security.c:413
 msgid "WPA & WPA2 Enterprise"
 msgstr "WPA & WPA2 एन्टरप्राइज"
 
-#: src/connection-editor/page-wifi-security.c:421
+#: src/connection-editor/page-wifi-security.c:426
 #, fuzzy
 msgid "WPA3 Personal"
 msgstr "WPA & WPA2 खाजगी"
 
-#: src/connection-editor/page-wifi-security.c:464
+#: src/connection-editor/page-wifi-security.c:437
+msgid "Enhanced Open"
+msgstr ""
+
+#: src/connection-editor/page-wifi-security.c:483
 #, fuzzy
 msgid "Could not load Wi-Fi security user interface; missing Wi-Fi setting."
 msgstr "Wi-Fi सुरक्षा वापरकर्ता संवाद लोड करणे अशक्य; Wi-Fi संयोजना आढळली नाही."
 
-#: src/connection-editor/page-wifi-security.c:475
+#: src/connection-editor/page-wifi-security.c:494
 #, fuzzy
 msgid "Wi-Fi Security"
 msgstr "वायरलेस सुरक्षा"
 
-#: src/connection-editor/page-wifi-security.c:477
+#: src/connection-editor/page-wifi-security.c:496
 #, fuzzy
 msgid "Could not load Wi-Fi security user interface."
 msgstr "Wi-Fi सुरक्षा वापरकर्ता संवाद लोड करणे अशक्य."
 
-#: src/connection-editor/page-wifi-security.c:558
+#: src/connection-editor/page-wifi-security.c:577
 msgid "missing SSID"
 msgstr ""
 
-#: src/connection-editor/page-wifi-security.c:564
+#: src/connection-editor/page-wifi-security.c:583
 msgid "Security not compatible with Ad-Hoc mode"
 msgstr ""
 
@@ -4073,6 +4209,25 @@ msgstr "कुठलेही साधण"
 #, fuzzy, c-format
 msgid "Wi-Fi connection %d"
 msgstr "वायर्ड जोडणी %d"
+
+#: src/connection-editor/page-wireguard.c:261
+msgid "Public key"
+msgstr ""
+
+#: src/connection-editor/page-wireguard.c:268
+#, fuzzy
+msgid "Allowed IPs"
+msgstr "स्वीकार्य पद्धती:"
+
+#: src/connection-editor/page-wireguard.c:512
+#, fuzzy
+msgid "Could not load WireGuard user interface."
+msgstr "वायर्ड वापरकर्ता संवाद लोड करणे अशक्य."
+
+#: src/connection-editor/page-wireguard.c:628
+#, fuzzy, c-format
+msgid "WireGuard connection %d"
+msgstr "वायरलेस जोडणी %d"
 
 #: src/connection-editor/vpn-helpers.c:118
 #, fuzzy, c-format
@@ -4621,10 +4776,6 @@ msgstr ""
 #~ msgstr "तुमचे खाजगी प्रमापत्र नीवडा..."
 
 #, fuzzy, c-format
-#~ msgid "%s private _key"
-#~ msgstr "प्राइव्हेट कि (_k):"
-
-#, fuzzy, c-format
 #~ msgid "%s key _password"
 #~ msgstr "प्राइव्हेट कि पासवर्ड (_P):"
 
@@ -4899,9 +5050,6 @@ msgstr ""
 #~ msgid "Country or region"
 #~ msgstr "देश किंवा प्रांत"
 
-#~ msgid "Wired"
-#~ msgstr "वार्यर्ड"
-
 #, fuzzy
 #~ msgid "Wi-Fi _security:"
 #~ msgstr "वायरलेस सुरक्षा (_W):"
@@ -5166,9 +5314,6 @@ msgstr ""
 
 #~ msgid "Wireless"
 #~ msgstr "वायरलेस"
-
-#~ msgid "Wireless connection %d"
-#~ msgstr "वायरलेस जोडणी %d"
 
 #~ msgid "_Save..."
 #~ msgstr "साठवा (_S)..."

@@ -226,6 +226,7 @@ am__objects_4 = src/connection-editor/nm_connection_editor-nm-connection-editor.
 	src/connection-editor/nm_connection_editor-page-bridge-port.$(OBJEXT) \
 	src/connection-editor/nm_connection_editor-page-vlan.$(OBJEXT) \
 	src/connection-editor/nm_connection_editor-page-dcb.$(OBJEXT) \
+	src/connection-editor/nm_connection_editor-page-wireguard.$(OBJEXT) \
 	src/connection-editor/nm_connection_editor-vpn-helpers.$(OBJEXT) \
 	src/connection-editor/nm_connection_editor-ip4-routes-dialog.$(OBJEXT) \
 	src/connection-editor/nm_connection_editor-ip6-routes-dialog.$(OBJEXT) \
@@ -364,6 +365,7 @@ am__depfiles_remade =  \
 	src/connection-editor/$(DEPDIR)/nm_connection_editor-page-vpn.Po \
 	src/connection-editor/$(DEPDIR)/nm_connection_editor-page-wifi-security.Po \
 	src/connection-editor/$(DEPDIR)/nm_connection_editor-page-wifi.Po \
+	src/connection-editor/$(DEPDIR)/nm_connection_editor-page-wireguard.Po \
 	src/connection-editor/$(DEPDIR)/nm_connection_editor-ppp-auth-methods-dialog.Po \
 	src/connection-editor/$(DEPDIR)/nm_connection_editor-vpn-helpers.Po \
 	src/utils/$(DEPDIR)/libutils_libnm_la-utils.Plo \
@@ -913,6 +915,7 @@ EXTRA_DIST = $(icon16_DATA) $(icon22_DATA) $(icon32_DATA) \
 	src/connection-editor/ce-page-vlan.ui \
 	src/connection-editor/ce-page-wifi-security.ui \
 	src/connection-editor/ce-page-wifi.ui \
+	src/connection-editor/ce-page-wireguard.ui \
 	src/connection-editor/ce-ppp-auth-methods.ui \
 	src/connection-editor/gtk/menus.ui \
 	src/connection-editor/nm-connection-editor.ui \
@@ -931,9 +934,8 @@ EXTRA_DIST = $(icon16_DATA) $(icon22_DATA) $(icon32_DATA) \
 	shared/meson.build $(NULL) man/meson.build \
 	linker-script-binary.ver CONTRIBUTING Makefile.glib autogen.sh \
 	meson.build meson_options.txt meson_post_install.py \
-	config.h.meson gtkdocentities.ent.in po/meson.build \
-	$(convert_DATA) $(appdata_in_files) $(autostart_in_files) \
-	$(desktop_in_files)
+	config.h.meson po/meson.build $(convert_DATA) \
+	$(appdata_in_files) $(autostart_in_files) $(desktop_in_files)
 CLEANFILES = $(wireless_security_h_gen) $(wireless_security_c_gen) \
 	$(connection_editor_h_gen) $(connection_editor_c_gen) \
 	$(nm_applet_h_gen) $(nm_applet_c_gen) $(typelib_DATA) \
@@ -1209,6 +1211,8 @@ connection_editor_hc_real = \
 	src/connection-editor/page-vlan.c \
 	src/connection-editor/page-dcb.c \
 	src/connection-editor/page-dcb.h \
+	src/connection-editor/page-wireguard.h \
+	src/connection-editor/page-wireguard.c \
 	src/connection-editor/vpn-helpers.h \
 	src/connection-editor/vpn-helpers.c \
 	src/connection-editor/ip4-routes-dialog.h \
@@ -1670,6 +1674,9 @@ src/connection-editor/nm_connection_editor-page-vlan.$(OBJEXT):  \
 src/connection-editor/nm_connection_editor-page-dcb.$(OBJEXT):  \
 	src/connection-editor/$(am__dirstamp) \
 	src/connection-editor/$(DEPDIR)/$(am__dirstamp)
+src/connection-editor/nm_connection_editor-page-wireguard.$(OBJEXT):  \
+	src/connection-editor/$(am__dirstamp) \
+	src/connection-editor/$(DEPDIR)/$(am__dirstamp)
 src/connection-editor/nm_connection_editor-vpn-helpers.$(OBJEXT):  \
 	src/connection-editor/$(am__dirstamp) \
 	src/connection-editor/$(DEPDIR)/$(am__dirstamp)
@@ -1822,6 +1829,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@src/connection-editor/$(DEPDIR)/nm_connection_editor-page-vpn.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/connection-editor/$(DEPDIR)/nm_connection_editor-page-wifi-security.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/connection-editor/$(DEPDIR)/nm_connection_editor-page-wifi.Po@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@src/connection-editor/$(DEPDIR)/nm_connection_editor-page-wireguard.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/connection-editor/$(DEPDIR)/nm_connection_editor-ppp-auth-methods-dialog.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/connection-editor/$(DEPDIR)/nm_connection_editor-vpn-helpers.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/utils/$(DEPDIR)/libutils_libnm_la-utils.Plo@am__quote@ # am--include-marker
@@ -2390,6 +2398,20 @@ src/connection-editor/nm_connection_editor-page-dcb.obj: src/connection-editor/p
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='src/connection-editor/page-dcb.c' object='src/connection-editor/nm_connection_editor-page-dcb.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(src_connection_editor_nm_connection_editor_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o src/connection-editor/nm_connection_editor-page-dcb.obj `if test -f 'src/connection-editor/page-dcb.c'; then $(CYGPATH_W) 'src/connection-editor/page-dcb.c'; else $(CYGPATH_W) '$(srcdir)/src/connection-editor/page-dcb.c'; fi`
+
+src/connection-editor/nm_connection_editor-page-wireguard.o: src/connection-editor/page-wireguard.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(src_connection_editor_nm_connection_editor_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT src/connection-editor/nm_connection_editor-page-wireguard.o -MD -MP -MF src/connection-editor/$(DEPDIR)/nm_connection_editor-page-wireguard.Tpo -c -o src/connection-editor/nm_connection_editor-page-wireguard.o `test -f 'src/connection-editor/page-wireguard.c' || echo '$(srcdir)/'`src/connection-editor/page-wireguard.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) src/connection-editor/$(DEPDIR)/nm_connection_editor-page-wireguard.Tpo src/connection-editor/$(DEPDIR)/nm_connection_editor-page-wireguard.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='src/connection-editor/page-wireguard.c' object='src/connection-editor/nm_connection_editor-page-wireguard.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(src_connection_editor_nm_connection_editor_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o src/connection-editor/nm_connection_editor-page-wireguard.o `test -f 'src/connection-editor/page-wireguard.c' || echo '$(srcdir)/'`src/connection-editor/page-wireguard.c
+
+src/connection-editor/nm_connection_editor-page-wireguard.obj: src/connection-editor/page-wireguard.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(src_connection_editor_nm_connection_editor_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT src/connection-editor/nm_connection_editor-page-wireguard.obj -MD -MP -MF src/connection-editor/$(DEPDIR)/nm_connection_editor-page-wireguard.Tpo -c -o src/connection-editor/nm_connection_editor-page-wireguard.obj `if test -f 'src/connection-editor/page-wireguard.c'; then $(CYGPATH_W) 'src/connection-editor/page-wireguard.c'; else $(CYGPATH_W) '$(srcdir)/src/connection-editor/page-wireguard.c'; fi`
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) src/connection-editor/$(DEPDIR)/nm_connection_editor-page-wireguard.Tpo src/connection-editor/$(DEPDIR)/nm_connection_editor-page-wireguard.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='src/connection-editor/page-wireguard.c' object='src/connection-editor/nm_connection_editor-page-wireguard.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(src_connection_editor_nm_connection_editor_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o src/connection-editor/nm_connection_editor-page-wireguard.obj `if test -f 'src/connection-editor/page-wireguard.c'; then $(CYGPATH_W) 'src/connection-editor/page-wireguard.c'; else $(CYGPATH_W) '$(srcdir)/src/connection-editor/page-wireguard.c'; fi`
 
 src/connection-editor/nm_connection_editor-vpn-helpers.o: src/connection-editor/vpn-helpers.c
 @am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(src_connection_editor_nm_connection_editor_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT src/connection-editor/nm_connection_editor-vpn-helpers.o -MD -MP -MF src/connection-editor/$(DEPDIR)/nm_connection_editor-vpn-helpers.Tpo -c -o src/connection-editor/nm_connection_editor-vpn-helpers.o `test -f 'src/connection-editor/vpn-helpers.c' || echo '$(srcdir)/'`src/connection-editor/vpn-helpers.c
@@ -3610,6 +3632,7 @@ distclean: distclean-recursive
 	-rm -f src/connection-editor/$(DEPDIR)/nm_connection_editor-page-vpn.Po
 	-rm -f src/connection-editor/$(DEPDIR)/nm_connection_editor-page-wifi-security.Po
 	-rm -f src/connection-editor/$(DEPDIR)/nm_connection_editor-page-wifi.Po
+	-rm -f src/connection-editor/$(DEPDIR)/nm_connection_editor-page-wireguard.Po
 	-rm -f src/connection-editor/$(DEPDIR)/nm_connection_editor-ppp-auth-methods-dialog.Po
 	-rm -f src/connection-editor/$(DEPDIR)/nm_connection_editor-vpn-helpers.Po
 	-rm -f src/utils/$(DEPDIR)/libutils_libnm_la-utils.Plo
@@ -3732,6 +3755,7 @@ maintainer-clean: maintainer-clean-recursive
 	-rm -f src/connection-editor/$(DEPDIR)/nm_connection_editor-page-vpn.Po
 	-rm -f src/connection-editor/$(DEPDIR)/nm_connection_editor-page-wifi-security.Po
 	-rm -f src/connection-editor/$(DEPDIR)/nm_connection_editor-page-wifi.Po
+	-rm -f src/connection-editor/$(DEPDIR)/nm_connection_editor-page-wireguard.Po
 	-rm -f src/connection-editor/$(DEPDIR)/nm_connection_editor-ppp-auth-methods-dialog.Po
 	-rm -f src/connection-editor/$(DEPDIR)/nm_connection_editor-vpn-helpers.Po
 	-rm -f src/utils/$(DEPDIR)/libutils_libnm_la-utils.Plo
