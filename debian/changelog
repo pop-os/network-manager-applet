@@ -1,3 +1,11 @@
+network-manager-applet (1.18.0-1) UNRELEASED; urgency=medium
+
+  * Remove -Wl,--as-needed from linker flags
+  * Remove unused architecture.mk include
+  * New upstream version 1.18.0
+
+ -- Michael Biebl <biebl@debian.org>  Mon, 22 Jun 2020 18:05:15 +0200
+
 network-manager-applet (1.16.0-1) unstable; urgency=medium
 
   * New upstream version 1.16.0
