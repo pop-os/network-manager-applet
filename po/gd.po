@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: eog\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/network-manager-"
 "applet/\n"
-"POT-Creation-Date: 2020-06-22 17:23+0200\n"
+"POT-Creation-Date: 2021-02-03 09:54+0100\n"
 "PO-Revision-Date: 2017-03-09 15:27+0100\n"
 "Last-Translator: GunChleoc <fios@foramnagaidhlig.net>\n"
 "Language-Team: Fòram na Gàidhlig\n"
@@ -22,7 +22,7 @@ msgstr ""
 "X-Launchpad-Export-Date: 2013-09-15 06:24+0000\n"
 "X-Project-Style: gnome\n"
 
-#: nm-applet.desktop.in:3 src/applet-dialogs.c:724 src/applet.c:3179
+#: nm-applet.desktop.in:3 src/applet-dialogs.c:724 src/applet.c:3223
 msgid "Network"
 msgstr "Lìonra"
 
@@ -101,11 +101,11 @@ msgid ""
 "type '%s'"
 msgstr ""
 
-#: src/8021x.ui:11 src/ethernet-dialog.c:85
+#: src/8021x.ui:11 src/ethernet-dialog.c:87
 msgid "802.1X authentication"
 msgstr "Dearbhadh 802.1X"
 
-#: src/8021x.ui:31 src/applet-device-ethernet.c:335 src/applet-dialogs.c:1179
+#: src/8021x.ui:31 src/applet-device-ethernet.c:341 src/applet-dialogs.c:1179
 #: src/connection-editor/ce-ip4-routes.ui:30
 #: src/connection-editor/ce-ip6-routes.ui:30
 #: src/connection-editor/ce-new-connection.ui:50
@@ -135,11 +135,11 @@ msgstr "C_eangail"
 msgid "_Network name"
 msgstr "Ainm an _lìonraidh:"
 
-#: src/ap-menu-item.c:70
+#: src/ap-menu-item.c:67
 msgid "ad-hoc"
 msgstr "ad-hoc"
 
-#: src/ap-menu-item.c:75
+#: src/ap-menu-item.c:72
 msgid "secure."
 msgstr "tèarainte."
 
@@ -168,7 +168,7 @@ msgid "Mobile Broadband"
 msgstr "Bann-leathann mobile"
 
 #: src/applet-device-broadband.c:780 src/applet-device-bt.c:61
-#: src/applet-device-ethernet.c:103 src/applet-device-wifi.c:890
+#: src/applet-device-ethernet.c:107 src/applet-device-wifi.c:890
 msgid "Available"
 msgstr "Ri làimh"
 
@@ -177,52 +177,52 @@ msgstr "Ri làimh"
 msgid "New Mobile Broadband connection…"
 msgstr "Ceangal bann-leathainn mobile ùr..."
 
-#: src/applet-device-broadband.c:807 src/applet-device-bt.c:73
-#: src/applet-device-ethernet.c:118 src/applet-device-wifi.c:1292
+#: src/applet-device-broadband.c:809 src/applet-device-bt.c:75
+#: src/applet-device-ethernet.c:124 src/applet-device-wifi.c:1293
 msgid "Connection Established"
 msgstr "Chaidh ceangal a dhèanamh"
 
-#: src/applet-device-broadband.c:808
+#: src/applet-device-broadband.c:810
 msgid "You are now connected to the Mobile Broadband network."
 msgstr "Tha thu air ceangal a dhèanamh ris an lìonra bann-leathainn mobile."
 
-#: src/applet-device-broadband.c:948 src/applet-device-broadband.c:954
+#: src/applet-device-broadband.c:950 src/applet-device-broadband.c:956
 msgid "Mobile Broadband network."
 msgstr "Lìonra bann-leathainn mobile."
 
-#: src/applet-device-broadband.c:949
+#: src/applet-device-broadband.c:951
 msgid "You are now registered on the home network."
 msgstr "Tha thu a-nis clàraichte air an lìonra dachaigh."
 
-#: src/applet-device-broadband.c:955
+#: src/applet-device-broadband.c:957
 msgid "You are now registered on a roaming network."
 msgstr "Tha thu a-nis clàraichte air lìonra air fàrsan."
 
-#: src/applet-device-bt.c:74
+#: src/applet-device-bt.c:76
 msgid "You are now connected to the mobile broadband network."
 msgstr "Tha thu air ceangal a dhèanamh ris an lìonra bann-leathainn mobile."
 
-#: src/applet-device-bt.c:102 src/mobile-helpers.c:584
+#: src/applet-device-bt.c:104 src/mobile-helpers.c:584
 #, c-format
 msgid "Preparing mobile broadband connection “%s”…"
 msgstr "Ag ullachadh a' cheangail bhann-leathainn mobile \"%s\"..."
 
-#: src/applet-device-bt.c:105 src/mobile-helpers.c:587
+#: src/applet-device-bt.c:107 src/mobile-helpers.c:587
 #, c-format
 msgid "Configuring mobile broadband connection “%s”…"
 msgstr "A' rèiteachadh a' cheangail bhann-leathainn mobile \"%s\"..."
 
-#: src/applet-device-bt.c:108 src/mobile-helpers.c:590
+#: src/applet-device-bt.c:110 src/mobile-helpers.c:590
 #, c-format
 msgid "User authentication required for mobile broadband connection “%s”…"
 msgstr "Feumaidh an ceangal bann-leathann mobile \"%s\" dearbhadh..."
 
-#: src/applet-device-bt.c:111 src/applet.c:2535 src/mobile-helpers.c:593
+#: src/applet-device-bt.c:113 src/applet.c:2579 src/mobile-helpers.c:593
 #, c-format
 msgid "Requesting a network address for “%s”…"
 msgstr "Ag iarraidh seòladh lìonraidh airson \"%s\"..."
 
-#: src/applet-device-bt.c:115 src/mobile-helpers.c:612
+#: src/applet-device-bt.c:117 src/mobile-helpers.c:612
 #, c-format
 msgid "Mobile broadband connection “%s” active"
 msgstr "Tha an ceangal bann-leathann mobile \"%s\" gnìomhach"
@@ -231,65 +231,65 @@ msgstr "Tha an ceangal bann-leathann mobile \"%s\" gnìomhach"
 msgid "Auto Ethernet"
 msgstr "Ethernet fèin-obrachail"
 
-#: src/applet-device-ethernet.c:68
+#: src/applet-device-ethernet.c:72
 #, c-format
 msgid "Ethernet Networks (%s)"
 msgstr "Lìonraidhean Ethernet (%s)"
 
-#: src/applet-device-ethernet.c:70
+#: src/applet-device-ethernet.c:74
 #, c-format
 msgid "Ethernet Network (%s)"
 msgstr "Lìonra Ethernet (%s)"
 
-#: src/applet-device-ethernet.c:73
+#: src/applet-device-ethernet.c:77
 msgid "Ethernet Networks"
 msgstr "Lìonraidhean Ethernet"
 
-#: src/applet-device-ethernet.c:75
+#: src/applet-device-ethernet.c:79
 msgid "Ethernet Network"
 msgstr "Lìonra Ethernet"
 
 #. Notify user of unmanaged or unavailable device
-#: src/applet-device-ethernet.c:95 src/applet.c:1288
+#: src/applet-device-ethernet.c:99 src/applet.c:1328
 msgid "disconnected"
 msgstr "chan eil ceangal ann tuilleadh"
 
-#: src/applet-device-ethernet.c:119
+#: src/applet-device-ethernet.c:125
 msgid "You are now connected to the ethernet network."
 msgstr "Tha thu air ceangal a dhèanamh ris an lìonra ethernet."
 
-#: src/applet-device-ethernet.c:147
+#: src/applet-device-ethernet.c:153
 #, c-format
 msgid "Preparing ethernet network connection “%s”…"
 msgstr "Ag ullachadh ceangail lìonra Ethernet \"%s\"..."
 
-#: src/applet-device-ethernet.c:150
+#: src/applet-device-ethernet.c:156
 #, c-format
 msgid "Configuring ethernet network connection “%s”…"
 msgstr "A' rèiteachadh ceangail lìonra Ethernet \"%s\"..."
 
-#: src/applet-device-ethernet.c:153
+#: src/applet-device-ethernet.c:159
 #, c-format
 msgid "User authentication required for ethernet network connection “%s”…"
 msgstr ""
 "Tha feum air dearbhadh a' chleachdaiche mus gabh ceangal a dhèanamh ris an "
 "lìonra Ethernet \"%s\"..."
 
-#: src/applet-device-ethernet.c:156
+#: src/applet-device-ethernet.c:162
 #, c-format
 msgid "Requesting an ethernet network address for “%s”…"
 msgstr "Ag iarraidh seòladh lìonra Ethernet airson \"%s\"..."
 
-#: src/applet-device-ethernet.c:160
+#: src/applet-device-ethernet.c:166
 #, c-format
 msgid "Ethernet network connection “%s” active"
 msgstr "Tha an ceangal lìonra Ethernet \"%s\" gnìomhach"
 
-#: src/applet-device-ethernet.c:332
+#: src/applet-device-ethernet.c:338
 msgid "DSL authentication"
 msgstr "Dearbhadh  DSL"
 
-#: src/applet-device-ethernet.c:336 src/applet-dialogs.c:1180
+#: src/applet-device-ethernet.c:342 src/applet-dialogs.c:1180
 #: src/connection-editor/ce-ip4-routes.ui:44
 #: src/connection-editor/ce-ip6-routes.ui:44
 #: src/connection-editor/ce-page-dcb.ui:583
@@ -312,7 +312,7 @@ msgstr "Cruthaich lìonra Wi-Fi ù_r..."
 msgid "(none)"
 msgstr "(chan eil gin)"
 
-#: src/applet-device-wifi.c:519 src/applet-device-wifi.c:1392
+#: src/applet-device-wifi.c:519 src/applet-device-wifi.c:1393
 msgid "Failed to add new connection"
 msgstr "Cha b' urrainn dhuinn ceangal ùr a chur ris"
 
@@ -320,8 +320,8 @@ msgstr "Cha b' urrainn dhuinn ceangal ùr a chur ris"
 msgid "Insufficient privileges."
 msgstr ""
 
-#: src/applet-device-wifi.c:522 src/applet-device-wifi.c:1374
-#: src/applet-device-wifi.c:1397 src/applet.c:377 src/applet.c:466
+#: src/applet-device-wifi.c:522 src/applet-device-wifi.c:1375
+#: src/applet-device-wifi.c:1398 src/applet.c:417 src/applet.c:506
 msgid "Connection failure"
 msgstr "Dh'fhàillig an ceangal"
 
@@ -355,62 +355,62 @@ msgstr "Chaidh am Wi-Fi a chur à comas le suidse chruaidh"
 msgid "More networks"
 msgstr "Barrachd lìonraidhean"
 
-#: src/applet-device-wifi.c:1106
+#: src/applet-device-wifi.c:1107
 msgid "Wi-Fi Networks Available"
 msgstr "Lìonraidhean Wi-Fi a tha ri làimh"
 
-#: src/applet-device-wifi.c:1107
+#: src/applet-device-wifi.c:1108
 msgid "Use the network menu to connect to a Wi-Fi network"
 msgstr ""
 "Cleachd clàr-taice nan lìonraidhean gus ceangal a dhèanamh ri lìonra Wi-Fi"
 
-#: src/applet-device-wifi.c:1110 src/applet.c:788
+#: src/applet-device-wifi.c:1111 src/applet.c:828
 msgid "Don’t show this message again"
 msgstr "Na seall an teachdaireachd seo a-rithist"
 
-#: src/applet-device-wifi.c:1291
+#: src/applet-device-wifi.c:1292
 #, c-format
 msgid "You are now connected to the Wi-Fi network “%s”."
 msgstr "Tha thu air ceangal a dhèanamh ris an lìonra Wi-Fi \"%s\"."
 
-#: src/applet-device-wifi.c:1326
+#: src/applet-device-wifi.c:1327
 #, c-format
 msgid "Preparing Wi-Fi network connection “%s”…"
 msgstr "Ag ullachadh ceangal lìonraidh Wi-Fi \"%s\"..."
 
-#: src/applet-device-wifi.c:1329
+#: src/applet-device-wifi.c:1330
 #, c-format
 msgid "Configuring Wi-Fi network connection “%s”…"
 msgstr "A' rèiteachadh ceangail lìonra Wi-Fi \"%s\"..."
 
-#: src/applet-device-wifi.c:1332
+#: src/applet-device-wifi.c:1333
 #, c-format
 msgid "User authentication required for Wi-Fi network “%s”…"
 msgstr ""
 "Tha feum air dearbhadh a' chleachdaiche mus gabh ceangal a dhèanamh ris an "
 "lìonra Wi-Fi \"%s\"..."
 
-#: src/applet-device-wifi.c:1335
+#: src/applet-device-wifi.c:1336
 #, c-format
 msgid "Requesting a Wi-Fi network address for “%s”…"
 msgstr "Ag iarraidh seòladh lìonra Wi-Fi airson \"%s\"..."
 
-#: src/applet-device-wifi.c:1346
+#: src/applet-device-wifi.c:1347
 #, c-format
 msgid "Wi-Fi network connection “%s” active: %s (%d%%)"
 msgstr "Tha an ceangal lìonra Wi-Fi \"%s\" gnìomhach: %s (%d%%)"
 
-#: src/applet-device-wifi.c:1350
+#: src/applet-device-wifi.c:1351
 #, c-format
 msgid "Wi-Fi network connection “%s” active"
 msgstr "Tha an ceangal lìonra Wi-Fi \"%s\" gnìomhach"
 
-#: src/applet-device-wifi.c:1369
+#: src/applet-device-wifi.c:1370
 msgid "Failed to activate connection"
 msgstr "Dh'fhàillig gnìomhachadh a' cheangail"
 
-#: src/applet-device-wifi.c:1371 src/applet-device-wifi.c:1394 src/applet.c:374
-#: src/applet.c:428 src/applet.c:463
+#: src/applet-device-wifi.c:1372 src/applet-device-wifi.c:1395 src/applet.c:414
+#: src/applet.c:468 src/applet.c:503
 msgid "Unknown error"
 msgstr "Mearachd neo-aithnichte"
 
@@ -418,8 +418,7 @@ msgstr "Mearachd neo-aithnichte"
 msgid "Error displaying connection information:"
 msgstr "Mearachd a' taisbeanadh fiosrachadh a' cheangal:"
 
-#: src/applet-dialogs.c:60 src/connection-editor/page-wifi-security.c:374
-#: src/wireless-security/wireless-security.c:435
+#: src/applet-dialogs.c:60 src/connection-editor/page-wifi-security.c:369
 msgid "LEAP"
 msgstr "LEAP"
 
@@ -445,7 +444,7 @@ msgid "WPA3"
 msgstr ""
 
 #: src/applet-dialogs.c:234 src/applet-dialogs.c:243
-#: src/connection-editor/page-wifi-security.c:325
+#: src/connection-editor/page-wifi-security.c:320
 msgctxt "Wi-Fi/Ethernet security"
 msgid "None"
 msgstr "Chan eil gin"
@@ -523,7 +522,7 @@ msgstr "CDMA (%s)"
 #: src/applet-dialogs.c:527 src/applet-dialogs.c:861
 #: src/connection-editor/ce-page-team-port.ui:394
 #: src/connection-editor/ce-page-team.ui:776
-#: src/connection-editor/page-general.c:355
+#: src/connection-editor/page-general.c:368
 msgid "General"
 msgstr "Coitcheann"
 
@@ -593,7 +592,7 @@ msgstr "Bratach VPN"
 msgid "Base Connection"
 msgstr "Ceangal bunasach"
 
-#: src/applet-dialogs.c:883 src/wireless-security/wireless-security.c:495
+#: src/applet-dialogs.c:883
 msgid "Unknown"
 msgstr "Neo-aithnichte"
 
@@ -733,23 +732,23 @@ msgstr "Dh'fhàillig cruthachadh a' cheangail DUN: %s"
 msgid "Failed to write connection to VPN UI: incomplete write"
 msgstr ""
 
-#: src/applet.c:372
+#: src/applet.c:412
 msgid "Failed to add/activate connection"
 msgstr "Cha b' urrainn dhuinn an ceangal a chur ris/a chur an gnìomh"
 
-#: src/applet.c:426
+#: src/applet.c:466
 msgid "Device disconnect failed"
 msgstr "Cha b' urrainn dhuinn an ceangal ris an uidheam a bhriseadh"
 
-#: src/applet.c:431
+#: src/applet.c:471
 msgid "Disconnect failure"
 msgstr "Cha b' urrainn dhuinn an ceangal a bhriseadh"
 
-#: src/applet.c:461
+#: src/applet.c:501
 msgid "Connection activation failed"
 msgstr "Dh'fhàillig gnìomhachadh a' cheangail"
 
-#: src/applet.c:878
+#: src/applet.c:918
 #, c-format
 msgid ""
 "\n"
@@ -760,7 +759,7 @@ msgstr ""
 "Bhris an ceangal VPN \"%s\" a chionn 's gun do bhris rudeigin a-steach air "
 "a' cheangal ris an lìonra."
 
-#: src/applet.c:880
+#: src/applet.c:920
 #, c-format
 msgid ""
 "\n"
@@ -771,7 +770,7 @@ msgstr ""
 "Dh'fhàillig an ceangal VPN \"%s\" a chionn 's gun do bhris rudeigin a-steach "
 "air a' cheangal ris an lìonra."
 
-#: src/applet.c:882
+#: src/applet.c:922
 #, c-format
 msgid ""
 "\n"
@@ -781,7 +780,7 @@ msgstr ""
 "Dh'fhàillig an ceangal VPN \"%s\" a chionn 's gun do stad an t-seirbheis VPN "
 "gu h-obann."
 
-#: src/applet.c:884
+#: src/applet.c:924
 #, c-format
 msgid ""
 "\n"
@@ -792,7 +791,7 @@ msgstr ""
 "Dh'fhàillig an ceangal VPN \"%s\" a chionn 's gun do thill an t-seirbheis "
 "VPN rèiteachadh mì-dhligheach."
 
-#: src/applet.c:886
+#: src/applet.c:926
 #, c-format
 msgid ""
 "\n"
@@ -802,7 +801,7 @@ msgstr ""
 "Dh'fhàillig an ceangal VPN \"%s\" a chionn 's gun do dh'fhalbh an ùine air "
 "an oidhirp cheangail."
 
-#: src/applet.c:888
+#: src/applet.c:928
 #, c-format
 msgid ""
 "\n"
@@ -812,7 +811,7 @@ msgstr ""
 "Dh'fhàillig an ceangal VPN \"%s\" a chionn 's nach do thòisich an t-"
 "seirbheis VPN ri tìde."
 
-#: src/applet.c:890
+#: src/applet.c:930
 #, c-format
 msgid ""
 "\n"
@@ -822,7 +821,7 @@ msgstr ""
 "Dh'fhàillig an ceangal VPN \"%s\" a chionn 's nach do thòisich an t-"
 "seirbheis VPN."
 
-#: src/applet.c:892
+#: src/applet.c:932
 #, c-format
 msgid ""
 "\n"
@@ -832,7 +831,7 @@ msgstr ""
 "Dh'fhàillig an ceangal VPN \"%s\" a chionn 's nach robh rùintean VPN "
 "dligheach ann."
 
-#: src/applet.c:894
+#: src/applet.c:934
 #, c-format
 msgid ""
 "\n"
@@ -842,7 +841,7 @@ msgstr ""
 "Dh'fhàillig an ceangal VPN \"%s\" a chionn 's gun robh na rùintean VPN mì-"
 "dhligheach."
 
-#: src/applet.c:899
+#: src/applet.c:939
 #, c-format
 msgid ""
 "\n"
@@ -851,7 +850,7 @@ msgstr ""
 "\n"
 "Dh'fhàillig an ceangal VPN \"%s\"."
 
-#: src/applet.c:926
+#: src/applet.c:966
 #, c-format
 msgid ""
 "VPN connection has been successfully established.\n"
@@ -862,19 +861,19 @@ msgstr ""
 "\n"
 "%s\n"
 
-#: src/applet.c:928
+#: src/applet.c:968
 msgid "VPN connection has been successfully established.\n"
 msgstr "Chaidh an ceangal VPN a stèidheachadh.\n"
 
-#: src/applet.c:930
+#: src/applet.c:970
 msgid "VPN Login Message"
 msgstr "Teachdaireachd clàradh a-steach VPN"
 
-#: src/applet.c:938 src/applet.c:978
+#: src/applet.c:978 src/applet.c:1018
 msgid "VPN Connection Failed"
 msgstr "Dh'fhàillig an ceangal VPN"
 
-#: src/applet.c:982
+#: src/applet.c:1022
 #, c-format
 msgid ""
 "\n"
@@ -888,7 +887,7 @@ msgstr ""
 "\n"
 "%s"
 
-#: src/applet.c:985
+#: src/applet.c:1025
 #, c-format
 msgid ""
 "\n"
@@ -901,136 +900,136 @@ msgstr ""
 "\n"
 "%s"
 
-#: src/applet.c:1276
+#: src/applet.c:1316
 msgid "device not ready (firmware missing)"
 msgstr "chan eil an t-uidheam deiseil (bathar-an-sàs a dhìth)"
 
-#: src/applet.c:1278
+#: src/applet.c:1318
 msgid "device not ready"
 msgstr "chan eil an t-uidheam deiseil"
 
-#: src/applet.c:1304
+#: src/applet.c:1344
 msgid "Disconnect"
 msgstr "Cuir crìoch air a' cheangal"
 
-#: src/applet.c:1318
+#: src/applet.c:1358
 msgid "device not managed"
 msgstr "chan eil an t-uidheam fo stiùireadh"
 
-#: src/applet.c:1391
+#: src/applet.c:1432
 msgid "No network devices available"
 msgstr "Chan eil uidheaman lìonraidh ri làimh"
 
-#: src/applet.c:1443
+#: src/applet.c:1484
 msgid "_VPN Connections"
 msgstr "_Ceanglaicheann VPN"
 
-#: src/applet.c:1487
+#: src/applet.c:1528
 msgid "_Configure VPN…"
 msgstr "_Rèitich VPN..."
 
-#: src/applet.c:1490
+#: src/applet.c:1531
 msgid "_Add a VPN connection…"
 msgstr "Cuir ris ce_angal VPN..."
 
-#: src/applet.c:1596
+#: src/applet.c:1637
 msgid "NetworkManager is not running…"
 msgstr "Chan eil Manaidsear lìonraidh 'na ruith..."
 
-#: src/applet.c:1601 src/applet.c:2666
+#: src/applet.c:1642 src/applet.c:2710
 msgid "Networking disabled"
 msgstr "Chaidh lìonraidhean a chur à comas"
 
 #. 'Enable Networking' item
-#: src/applet.c:1811
+#: src/applet.c:1852
 msgid "Enable _Networking"
 msgstr "Cuir lìonraidhean a_n comas"
 
 #. 'Enable Wi-Fi' item
-#: src/applet.c:1820
+#: src/applet.c:1861
 msgid "Enable _Wi-Fi"
 msgstr "Cuir an comas _Wi-Fi"
 
 #. 'Enable Mobile Broadband' item
-#: src/applet.c:1829
+#: src/applet.c:1870
 msgid "Enable _Mobile Broadband"
 msgstr "Cuir an comas bann-leathann _mobile"
 
 #. Toggle notifications item
-#: src/applet.c:1841
+#: src/applet.c:1882
 msgid "Enable N_otifications"
 msgstr "Cuir an comas na _brathan"
 
 #. 'Connection Information' item
-#: src/applet.c:1853
+#: src/applet.c:1894
 msgid "Connection _Information"
 msgstr "_Fiosrachadh mun cheangal"
 
 #. 'Edit Connections...' item
-#: src/applet.c:1861
+#: src/applet.c:1902
 msgid "Edit Connections…"
 msgstr "Deasaich na ceanglaichean..."
 
-#: src/applet.c:1875
+#: src/applet.c:1916
 msgid "_About"
 msgstr "_Mu dhèidhinn"
 
-#: src/applet.c:2186
+#: src/applet.c:2230
 #, c-format
 msgid "You are now connected to “%s”."
 msgstr "Tha thu air ceangal a dhèanamh ri \"%s\"."
 
-#: src/applet.c:2226
+#: src/applet.c:2270
 msgid "Disconnected"
 msgstr "Chan eil ceangal ann tuilleadh"
 
-#: src/applet.c:2227
+#: src/applet.c:2271
 msgid "The network connection has been disconnected."
 msgstr "Bhris an ceangal lìonraidh."
 
-#: src/applet.c:2529
+#: src/applet.c:2573
 #, c-format
 msgid "Preparing network connection “%s”…"
 msgstr "Ag ullachadh a' cheangail lìonraidh \"%s\"..."
 
-#: src/applet.c:2532
+#: src/applet.c:2576
 #, c-format
 msgid "User authentication required for network connection “%s”…"
 msgstr ""
 "Tha feum air dearbhadh a' chleachdaiche mus gabh ceangal a dhèanamh ri \"%s"
 "\"..."
 
-#: src/applet.c:2538
+#: src/applet.c:2582
 #, c-format
 msgid "Network connection “%s” active"
 msgstr "Tha an ceangal lìonraidh \"%s\" beò"
 
-#: src/applet.c:2611
+#: src/applet.c:2655
 #, c-format
 msgid "Starting VPN connection “%s”…"
 msgstr "A' tòiseachadh a' cheangail VPN \"%s\"..."
 
-#: src/applet.c:2614
+#: src/applet.c:2658
 #, c-format
 msgid "User authentication required for VPN connection “%s”…"
 msgstr ""
 "Tha feum air dearbhadh a' chleachdaiche mus gabh ceangal a dhèanamh ris a' "
 "VPN \"%s\"..."
 
-#: src/applet.c:2617
+#: src/applet.c:2661
 #, c-format
 msgid "Requesting a VPN address for “%s”…"
 msgstr "Ag iarraidh seòladh VPN airson \"%s\"..."
 
-#: src/applet.c:2620
+#: src/applet.c:2664
 msgid "VPN connection active"
 msgstr "Tha an ceangal VPN gnìomhach"
 
-#: src/applet.c:2670
+#: src/applet.c:2714
 msgid "No network connection"
 msgstr "Chan eil ceangal ris an lìonra"
 
-#: src/applet.c:3280
+#: src/applet.c:3324
 msgid "NetworkManager Applet"
 msgstr "Aplaid Manaidsear lìonraidh"
 
@@ -1048,7 +1047,7 @@ msgstr ""
 #: src/connection-editor/ce-page-bond.ui:180
 #: src/connection-editor/ce-page-bridge.ui:120
 #: src/connection-editor/ce-page-ip4.ui:150
-#: src/connection-editor/ce-page-ip6.ui:181
+#: src/connection-editor/ce-page-ip6.ui:184
 #: src/connection-editor/ce-page-team.ui:234
 #: src/connection-editor/ce-page-wireguard.ui:603
 #: src/connection-editor/nm-connection-list.ui:87
@@ -1060,7 +1059,7 @@ msgstr "_Cuir ris"
 #: src/connection-editor/ce-page-bond.ui:208
 #: src/connection-editor/ce-page-bridge.ui:148
 #: src/connection-editor/ce-page-ip4.ui:165
-#: src/connection-editor/ce-page-ip6.ui:196
+#: src/connection-editor/ce-page-ip6.ui:199
 #: src/connection-editor/ce-page-team.ui:262
 #: src/connection-editor/ce-page-wireguard.ui:617
 #: src/connection-editor/connection-helpers.c:748
@@ -1412,8 +1411,8 @@ msgstr "Buidhnean prìomhachais"
 #: src/connection-editor/ce-page-dcb.ui:419
 #: src/connection-editor/ce-page-dcb.ui:442
 #: src/connection-editor/ce-page-dcb.ui:465 src/connection-editor/ce-page.c:111
-#: src/connection-editor/page-wifi.c:154 src/connection-editor/page-wifi.c:158
-#: src/connection-editor/page-wifi.c:179
+#: src/connection-editor/page-wifi.c:144 src/connection-editor/page-wifi.c:148
+#: src/connection-editor/page-wifi.c:169
 msgid "default"
 msgstr "bun-roghainn"
 
@@ -1573,9 +1572,6 @@ msgstr "Cuir a-steach an clas trafaige airson gach prìomhachas cleachdaiche."
 
 #: src/connection-editor/ce-page-dsl.ui:19
 #: src/connection-editor/ce-page-mobile.ui:62
-#: src/wireless-security/eap-method-leap.ui:21
-#: src/wireless-security/eap-method-simple.ui:21
-#: src/wireless-security/ws-leap.ui:21
 #, fuzzy
 msgid "_Username"
 msgstr "_Ainm-cleachdaiche:"
@@ -1596,10 +1592,6 @@ msgid "_Service"
 msgstr "_Seirbheis:"
 
 #: src/connection-editor/ce-page-dsl.ui:71
-#: src/wireless-security/eap-method-leap.ui:60
-#: src/wireless-security/eap-method-simple.ui:77
-#: src/wireless-security/ws-leap.ui:60 src/wireless-security/ws-sae.ui:60
-#: src/wireless-security/ws-wpa-psk.ui:60
 msgid "Sho_w password"
 msgstr "Sea_ll am facal-faire"
 
@@ -1609,10 +1601,6 @@ msgstr ""
 
 #: src/connection-editor/ce-page-dsl.ui:102
 #: src/connection-editor/ce-page-mobile.ui:76
-#: src/wireless-security/eap-method-leap.ui:35
-#: src/wireless-security/eap-method-simple.ui:35
-#: src/wireless-security/ws-leap.ui:35 src/wireless-security/ws-sae.ui:20
-#: src/wireless-security/ws-wpa-psk.ui:20
 #, fuzzy
 msgid "_Password"
 msgstr "_Facal-faire:"
@@ -1655,8 +1643,7 @@ msgstr ""
 #: src/connection-editor/ce-page-ip6.ui:12
 #: src/connection-editor/ce-page-proxy.ui:24
 #: src/connection-editor/ce-page-wifi.ui:32
-#: src/connection-editor/page-ip4.c:118 src/connection-editor/page-ip6.c:135
-#: src/wireless-security/eap-method-peap.ui:23
+#: src/connection-editor/page-ip4.c:118 src/connection-editor/page-ip6.c:136
 msgid "Automatic"
 msgstr "Gu fèin-obrachail"
 
@@ -1701,14 +1688,14 @@ msgid "Full"
 msgstr ""
 
 #: src/connection-editor/ce-page-ethernet.ui:74
-#: src/connection-editor/page-ip6.c:148
+#: src/connection-editor/page-ip6.c:149
 msgid "Ignore"
 msgstr "Leig seachad"
 
 #: src/connection-editor/ce-page-ethernet.ui:80
 #: src/connection-editor/ce-page-ip4.ui:18
 #: src/connection-editor/ce-page-ip6.ui:18 src/connection-editor/page-ip4.c:155
-#: src/connection-editor/page-ip6.c:184
+#: src/connection-editor/page-ip6.c:185
 msgid "Manual"
 msgstr "A làimh"
 
@@ -1949,12 +1936,12 @@ msgstr "Link-Local"
 
 #: src/connection-editor/ce-page-ip4.ui:24
 #: src/connection-editor/ce-page-ip6.ui:24 src/connection-editor/page-ip4.c:175
-#: src/connection-editor/page-ip6.c:204
+#: src/connection-editor/page-ip6.c:205
 msgid "Shared to other computers"
 msgstr "Co-roinnte ri coimpiutairean eile"
 
 #: src/connection-editor/ce-page-ip4.ui:47
-#: src/connection-editor/ce-page-ip6.ui:78
+#: src/connection-editor/ce-page-ip6.ui:81
 #, fuzzy
 msgid "_Method"
 msgstr "_Dòigh:"
@@ -1970,7 +1957,7 @@ msgstr ""
 "a chleachdadh, cuir a-steach an-seo e."
 
 #: src/connection-editor/ce-page-ip4.ui:215
-#: src/connection-editor/ce-page-ip6.ui:233
+#: src/connection-editor/ce-page-ip6.ui:236
 msgid ""
 "Domains used when resolving host names. Use commas to separate multiple "
 "domains."
@@ -1984,15 +1971,15 @@ msgid "D_HCP client ID"
 msgstr "ID cliant D_HCP:"
 
 #: src/connection-editor/ce-page-ip4.ui:242
-#: src/connection-editor/ce-page-ip6.ui:246
-#: src/connection-editor/page-ip4.c:359 src/connection-editor/page-ip6.c:347
+#: src/connection-editor/ce-page-ip6.ui:249
+#: src/connection-editor/page-ip4.c:359 src/connection-editor/page-ip6.c:348
 #, fuzzy
 msgid "S_earch domains"
 msgstr "Lorg air na _h-àrainnean-lìn:"
 
 #: src/connection-editor/ce-page-ip4.ui:256
-#: src/connection-editor/ce-page-ip6.ui:260
-#: src/connection-editor/page-ip4.c:350 src/connection-editor/page-ip6.c:338
+#: src/connection-editor/ce-page-ip6.ui:263
+#: src/connection-editor/page-ip4.c:350 src/connection-editor/page-ip6.c:339
 #, fuzzy
 msgid "DNS ser_vers"
 msgstr "Fri_thealaichean DNS:"
@@ -2020,34 +2007,40 @@ msgstr ""
 "leis an rèiteachadh IPv6."
 
 #: src/connection-editor/ce-page-ip4.ui:333
-#: src/connection-editor/ce-page-ip6.ui:401
+#: src/connection-editor/ce-page-ip6.ui:405
 msgid "_Routes…"
 msgstr "_ Rùtaichean..."
 
+#. TRANSLATORS: Default zone set for firewall, when no zone is selected
 #: src/connection-editor/ce-page-ip6.ui:35
+#: src/connection-editor/page-general.c:41
+msgid "Default"
+msgstr "Bun-roghainn"
+
+#: src/connection-editor/ce-page-ip6.ui:38
 #: src/connection-editor/ce-page-macsec.ui:32
-#: src/connection-editor/page-ip4.c:185 src/connection-editor/page-ip6.c:212
+#: src/connection-editor/page-ip4.c:185 src/connection-editor/page-ip6.c:213
 msgid "Disabled"
 msgstr "À comas"
 
-#: src/connection-editor/ce-page-ip6.ui:38
+#: src/connection-editor/ce-page-ip6.ui:41
 msgid "Enabled (prefer public address)"
 msgstr "An comas ('s fhearr leis seòladh poblach)"
 
-#: src/connection-editor/ce-page-ip6.ui:41
+#: src/connection-editor/ce-page-ip6.ui:44
 msgid "Enabled (prefer temporary address)"
 msgstr "An comas ('s fhearr leis seòladh sealach)"
 
-#: src/connection-editor/ce-page-ip6.ui:52
+#: src/connection-editor/ce-page-ip6.ui:55
 msgid "EUI64"
 msgstr ""
 
-#: src/connection-editor/ce-page-ip6.ui:55
+#: src/connection-editor/ce-page-ip6.ui:58
 #, fuzzy
 msgid "Stable privacy"
 msgstr "Seasmhach"
 
-#: src/connection-editor/ce-page-ip6.ui:274
+#: src/connection-editor/ce-page-ip6.ui:277
 msgid ""
 "IP addresses of domain name servers used to resolve host names. Use commas "
 "to separate multiple domain name server addresses. Link-local addresses will "
@@ -2057,20 +2050,30 @@ msgstr ""
 "thathar a' fuasgladh ainmean òstairean. 'S e an eadar-aghaidh a cheanglas a "
 "bhios san sgòp aig seòlaidhean ionadail a' cheangail gu fèin-obrachail."
 
-#: src/connection-editor/ce-page-ip6.ui:287
+#: src/connection-editor/ce-page-ip6.ui:290
 #, fuzzy
 msgid "IPv6 _privacy extensions"
 msgstr "Leudachain _prìobhaideachd IPv6:"
 
-#: src/connection-editor/ce-page-ip6.ui:319
+#: src/connection-editor/ce-page-ip6.ui:304
+msgid ""
+"If enabled, it makes the kernel generate a temporary IPv6 address in "
+"addition to the public one generated from MAC address. This enhances "
+"privacy, but could cause problems in some applications. If set to \"Default"
+"\", the value from NetworkManager global configuration is used. If that is "
+"also unset, use the kernel default value read from file \"/proc/sys/net/ipv6/"
+"conf/default/use_tempaddr\""
+msgstr ""
+
+#: src/connection-editor/ce-page-ip6.ui:323
 msgid "IPv6 address _generation mode"
 msgstr ""
 
-#: src/connection-editor/ce-page-ip6.ui:356
+#: src/connection-editor/ce-page-ip6.ui:360
 msgid "Require IPv_6 addressing for this connection to complete"
 msgstr "Iarr seòladh IPv_6 mus gabh an ceangal seo a choileanadh"
 
-#: src/connection-editor/ce-page-ip6.ui:360
+#: src/connection-editor/ce-page-ip6.ui:364
 msgid ""
 "When connecting to IPv4-capable networks, allows the connection to complete "
 "if IPv6 configuration fails but IPv4 configuration succeeds."
@@ -3182,7 +3185,7 @@ msgstr ""
 "comas cuid dhe na dòighean."
 
 #: src/connection-editor/connection-helpers.c:93
-#: src/connection-editor/page-wifi.c:423
+#: src/connection-editor/page-wifi.c:389
 msgid "Wi-Fi"
 msgstr "Wi-Fi"
 
@@ -3310,7 +3313,7 @@ msgstr ""
 
 #: src/connection-editor/ip4-routes-dialog.c:683
 #: src/connection-editor/ip6-routes-dialog.c:704
-#: src/connection-editor/page-ip4.c:1119 src/connection-editor/page-ip6.c:1117
+#: src/connection-editor/page-ip4.c:1119 src/connection-editor/page-ip6.c:1121
 msgid "Address"
 msgstr "Seòladh"
 
@@ -3321,7 +3324,7 @@ msgstr "Masg-lìn"
 
 #: src/connection-editor/ip4-routes-dialog.c:721
 #: src/connection-editor/ip6-routes-dialog.c:742
-#: src/connection-editor/page-ip4.c:1157 src/connection-editor/page-ip6.c:1155
+#: src/connection-editor/page-ip4.c:1157 src/connection-editor/page-ip6.c:1159
 msgid "Gateway"
 msgstr "Bealach"
 
@@ -3331,7 +3334,7 @@ msgid "Metric"
 msgstr "Meatraig"
 
 #: src/connection-editor/ip6-routes-dialog.c:723
-#: src/connection-editor/page-ip6.c:1136
+#: src/connection-editor/page-ip6.c:1140
 msgid "Prefix"
 msgstr "Ro-leasachan"
 
@@ -3605,17 +3608,17 @@ msgstr "Ceanglaichean ri lìonraidhean"
 msgid "Add a new connection"
 msgstr "Cuir ris ce_angal VPN..."
 
-#: src/connection-editor/page-8021x-security.c:99
+#: src/connection-editor/page-8021x-security.c:96
 msgid "802.1X Security"
 msgstr "Tèarainteachd 802.1X"
 
-#: src/connection-editor/page-8021x-security.c:101
+#: src/connection-editor/page-8021x-security.c:98
 msgid "Could not load 802.1X Security user interface."
 msgstr ""
 "Cha b' urrainn dhuinn eadar-aghaidh cleachdaiche tèarainteachd 802.1X a "
 "luchdadh."
 
-#: src/connection-editor/page-8021x-security.c:115
+#: src/connection-editor/page-8021x-security.c:112
 msgid "Use 802.1_X security for this connection"
 msgstr "Cleachd tèarainteachd 802.1_X airson a' cheangail seo."
 
@@ -3741,7 +3744,7 @@ msgid "Ethernet device"
 msgstr "Uidheam Ethernet"
 
 #: src/connection-editor/page-ethernet.c:502
-#: src/connection-editor/page-vlan.c:723 src/connection-editor/page-wifi.c:557
+#: src/connection-editor/page-vlan.c:723 src/connection-editor/page-wifi.c:521
 msgid "cloned MAC"
 msgstr "MAC clònaichte"
 
@@ -3754,11 +3757,6 @@ msgstr "Facal-faire aig dùsgadh an lìonraidh"
 msgid "Ethernet connection %d"
 msgstr "Ceangal Ethernet %d"
 
-#. TRANSLATORS: Default zone set for firewall, when no zone is selected
-#: src/connection-editor/page-general.c:41
-msgid "Default"
-msgstr "Bun-roghainn"
-
 #: src/connection-editor/page-general.c:42
 msgid ""
 "The zone defines the trust level of the connection. Default is not a regular "
@@ -3770,7 +3768,7 @@ msgstr ""
 "a chleachdadh a chaidh a shuidheachadh sa chachaileith-theine. Cha ghabh a "
 "chleachdadh ach ma tha a' chachaileith-theine gnìomhach."
 
-#: src/connection-editor/page-general.c:358
+#: src/connection-editor/page-general.c:371
 msgid "Could not load General user interface."
 msgstr ""
 "Cha b' urrainn dhuinn an eadar-aghaidh cleachdaiche choitcheann a luchdadh."
@@ -3811,23 +3809,23 @@ msgstr ""
 msgid "IP tunnel connection %d"
 msgstr ""
 
-#: src/connection-editor/page-ip4.c:114 src/connection-editor/page-ip6.c:129
+#: src/connection-editor/page-ip4.c:114 src/connection-editor/page-ip6.c:130
 msgid "Automatic (VPN)"
 msgstr "Fèin-obrachail (VPN)"
 
-#: src/connection-editor/page-ip4.c:115 src/connection-editor/page-ip6.c:130
+#: src/connection-editor/page-ip4.c:115 src/connection-editor/page-ip6.c:131
 msgid "Automatic (VPN) addresses only"
 msgstr "Seòlaidhean (VPN) fèin-obrachail a-mhàin"
 
-#: src/connection-editor/page-ip4.c:119 src/connection-editor/page-ip6.c:136
+#: src/connection-editor/page-ip4.c:119 src/connection-editor/page-ip6.c:137
 msgid "Automatic, addresses only"
 msgstr "Gu fèin-obrachail, seòlaidhean a-mhàin"
 
-#: src/connection-editor/page-ip4.c:121 src/connection-editor/page-ip6.c:132
+#: src/connection-editor/page-ip4.c:121 src/connection-editor/page-ip6.c:133
 msgid "Automatic (PPPoE)"
 msgstr "Fèin-obrachail (PPPoE)"
 
-#: src/connection-editor/page-ip4.c:122 src/connection-editor/page-ip6.c:133
+#: src/connection-editor/page-ip4.c:122 src/connection-editor/page-ip6.c:134
 msgid "Automatic (PPPoE) addresses only"
 msgstr "Seòlaidhean (PPPoE) fèin-obrachail a-mhàin"
 
@@ -3839,16 +3837,16 @@ msgstr "Fèin-obrachail (DHCP)"
 msgid "Automatic (DHCP) addresses only"
 msgstr "Seòlaidhean (DHCP) fèin-obrachail a-mhàin"
 
-#: src/connection-editor/page-ip4.c:168 src/connection-editor/page-ip6.c:197
+#: src/connection-editor/page-ip4.c:168 src/connection-editor/page-ip6.c:198
 msgid "Link-Local Only"
 msgstr "Link-Local a-mhàin"
 
-#: src/connection-editor/page-ip4.c:348 src/connection-editor/page-ip6.c:336
+#: src/connection-editor/page-ip4.c:348 src/connection-editor/page-ip6.c:337
 #, fuzzy
 msgid "Additional DNS ser_vers"
 msgstr "Fri_thealaichean DNS a bharrachd:"
 
-#: src/connection-editor/page-ip4.c:357 src/connection-editor/page-ip6.c:345
+#: src/connection-editor/page-ip4.c:357 src/connection-editor/page-ip6.c:346
 #, fuzzy
 msgid "Additional s_earch domains"
 msgstr "Àrainnean-lìn l_uirg a bharrachd:"
@@ -3886,39 +3884,39 @@ msgstr "Chan eil am bealach IPv4 \"%s\" dligheach"
 msgid "IPv4 DNS server “%s” invalid"
 msgstr "Chan eil am frithealaiche DNS IPv4 \"%s\" dligheach"
 
-#: src/connection-editor/page-ip6.c:172
+#: src/connection-editor/page-ip6.c:173
 msgid "Automatic, DHCP only"
 msgstr "Gu fèin-obrachail, DHCP a-mhàin"
 
-#: src/connection-editor/page-ip6.c:1018
+#: src/connection-editor/page-ip6.c:1022
 #, c-format
 msgid "Editing IPv6 routes for %s"
 msgstr "A' deasachadh rùtaichean IPv6 airson %s"
 
-#: src/connection-editor/page-ip6.c:1207
+#: src/connection-editor/page-ip6.c:1211
 msgid "IPv6 Settings"
 msgstr "Roghainnean IPv6"
 
-#: src/connection-editor/page-ip6.c:1209
+#: src/connection-editor/page-ip6.c:1213
 msgid "Could not load IPv6 user interface."
 msgstr "Cha b' urrainn duinn eadar-aghaidh cleachdaiche IPv6 a luchdadh."
 
-#: src/connection-editor/page-ip6.c:1304
+#: src/connection-editor/page-ip6.c:1308
 #, c-format
 msgid "IPv6 address “%s” invalid"
 msgstr "Chan eil an seòladh IPv6 \"%s\" dligheach"
 
-#: src/connection-editor/page-ip6.c:1312
+#: src/connection-editor/page-ip6.c:1316
 #, c-format
 msgid "IPv6 prefix “%s” invalid"
 msgstr "Chan eil an ro-leasachan IPv6 \"%s\" dligheach"
 
-#: src/connection-editor/page-ip6.c:1321
+#: src/connection-editor/page-ip6.c:1325
 #, c-format
 msgid "IPv6 gateway “%s” invalid"
 msgstr "Chan eil am bealach IPv6 \"%s\" dligheach"
 
-#: src/connection-editor/page-ip6.c:1363
+#: src/connection-editor/page-ip6.c:1367
 #, c-format
 msgid "IPv6 DNS server “%s” invalid"
 msgstr "Chan eil am frithealaiche DNS IPv6 \"%s\" dligheach"
@@ -4005,24 +4003,18 @@ msgid "GSM"
 msgstr "GSM"
 
 #: src/connection-editor/page-ppp.c:116
-#: src/wireless-security/eap-method-ttls.c:267
 msgid "PAP"
 msgstr "PAP"
 
 #: src/connection-editor/page-ppp.c:117
-#: src/wireless-security/eap-method-ttls.c:333
 msgid "CHAP"
 msgstr "CHAP"
 
 #: src/connection-editor/page-ppp.c:118
-#: src/wireless-security/eap-method-fast.c:271
-#: src/wireless-security/eap-method-peap.c:279
-#: src/wireless-security/eap-method-ttls.c:299
 msgid "MSCHAPv2"
 msgstr "MSCHAPv2"
 
 #: src/connection-editor/page-ppp.c:119
-#: src/wireless-security/eap-method-ttls.c:283
 msgid "MSCHAP"
 msgstr "MSCHAP"
 
@@ -4142,60 +4134,60 @@ msgstr ""
 "Mur eil seòrsa a' cheangail VPN a tha thu airson cruthachadh san liosta, 's "
 "mathaid nach eil am plugan VPN ceart stàlaichte agad."
 
-#: src/connection-editor/page-wifi-security.c:351
+#: src/connection-editor/page-wifi-security.c:346
 msgid "WEP 40/128-bit Key (Hex or ASCII)"
 msgstr "Iuchair WEP 40/128-bit (Hex no ASCII)"
 
-#: src/connection-editor/page-wifi-security.c:361
+#: src/connection-editor/page-wifi-security.c:356
 msgid "WEP 128-bit Passphrase"
 msgstr "Abairt-fhaire WEP 128-bit"
 
-#: src/connection-editor/page-wifi-security.c:387
+#: src/connection-editor/page-wifi-security.c:382
 msgid "Dynamic WEP (802.1X)"
 msgstr "Dynamic WEP (802.1X)"
 
-#: src/connection-editor/page-wifi-security.c:400
+#: src/connection-editor/page-wifi-security.c:395
 msgid "WPA & WPA2 Personal"
 msgstr "WPA ⁊ WPA2 pearsanta"
 
-#: src/connection-editor/page-wifi-security.c:413
+#: src/connection-editor/page-wifi-security.c:408
 msgid "WPA & WPA2 Enterprise"
 msgstr "WPA & WPA2 Enterprise"
 
-#: src/connection-editor/page-wifi-security.c:426
+#: src/connection-editor/page-wifi-security.c:421
 #, fuzzy
 msgid "WPA3 Personal"
 msgstr "WPA ⁊ WPA2 pearsanta"
 
-#: src/connection-editor/page-wifi-security.c:437
+#: src/connection-editor/page-wifi-security.c:431
 msgid "Enhanced Open"
 msgstr ""
 
-#: src/connection-editor/page-wifi-security.c:483
+#: src/connection-editor/page-wifi-security.c:476
 msgid "Could not load Wi-Fi security user interface; missing Wi-Fi setting."
 msgstr ""
 "Cha b' urrainn an eadar-aghaidh cleachdaiche airson tèarainteachd Wi-Fi a "
 "luchdadh; tha roghainn Wi-Fi a dhith."
 
-#: src/connection-editor/page-wifi-security.c:494
+#: src/connection-editor/page-wifi-security.c:487
 msgid "Wi-Fi Security"
 msgstr "Tèarainteachd Wi-Fi"
 
-#: src/connection-editor/page-wifi-security.c:496
+#: src/connection-editor/page-wifi-security.c:489
 msgid "Could not load Wi-Fi security user interface."
 msgstr ""
 "Cha b' urrainn dhuinn an eadar-aghaidh cleachdaiche airson tèarainteachd Wi-"
 "Fi a luchdadh."
 
-#: src/connection-editor/page-wifi-security.c:577
+#: src/connection-editor/page-wifi-security.c:570
 msgid "missing SSID"
 msgstr "tha SSID a dhìth"
 
-#: src/connection-editor/page-wifi-security.c:583
+#: src/connection-editor/page-wifi-security.c:576
 msgid "Security not compatible with Ad-Hoc mode"
 msgstr "Chan eil an tèarainteachd co-chòrdail le modh Ad-Hoc"
 
-#: src/connection-editor/page-wifi.c:63
+#: src/connection-editor/page-wifi.c:61
 msgid ""
 "This option locks this connection to the Wi-Fi access point (AP) specified "
 "by the BSSID entered here. Example: 00:11:22:33:44:55"
@@ -4204,7 +4196,7 @@ msgstr ""
 "Fi (AP) a tha 'ga shònrachadh leis a' BSSID a chaidh a chur a-steach an-seo. "
 "Ball-eisimpleir: 00:11:22:33:44:55"
 
-#: src/connection-editor/page-wifi.c:74
+#: src/connection-editor/page-wifi.c:72
 msgid ""
 "This option locks this connection to the network device specified either by "
 "its interface name or permanent MAC or both. Examples: “wlan0”, "
@@ -4215,24 +4207,24 @@ msgstr ""
 "dhiubh. Mar eisimpleir: \"wlan0\", \"3C:97:0E:42:1A:19\", \"wlan0 "
 "(3C:97:0E:42:1A:19)\""
 
-#: src/connection-editor/page-wifi.c:183
+#: src/connection-editor/page-wifi.c:173
 #, c-format
 msgid "%u (%u MHz)"
 msgstr "%u (%u MHz)"
 
-#: src/connection-editor/page-wifi.c:425
+#: src/connection-editor/page-wifi.c:391
 msgid "Could not load Wi-Fi user interface."
 msgstr "Cha b' urrainn dhuinn eadar-aghaidh cleachdaiche Wi-Fi a luchdadh."
 
-#: src/connection-editor/page-wifi.c:547
+#: src/connection-editor/page-wifi.c:511
 msgid "bssid"
 msgstr "bssid"
 
-#: src/connection-editor/page-wifi.c:553
+#: src/connection-editor/page-wifi.c:517
 msgid "Wi-Fi device"
 msgstr "Uidheam Wi-Fi"
 
-#: src/connection-editor/page-wifi.c:600
+#: src/connection-editor/page-wifi.c:564
 #, c-format
 msgid "Wi-Fi connection %d"
 msgstr "Ceangal Wi-Fi %d"
@@ -4446,306 +4438,204 @@ msgid "DER, PEM, or PKCS#12 private keys (*.der, *.pem, *.p12, *.key)"
 msgstr ""
 "Iuchraichean prìobhaideach DER, PEM no PKCS#12 (*.der, *.pem, *.p12, *.key)"
 
-#: src/wireless-security/eap-method-fast.c:58
-msgid "missing EAP-FAST PAC file"
-msgstr "tha faidhle EAP-FAST PAC a dhìth"
+#~ msgid "missing EAP-FAST PAC file"
+#~ msgstr "tha faidhle EAP-FAST PAC a dhìth"
 
-#: src/wireless-security/eap-method-fast.c:255
-#: src/wireless-security/eap-method-peap.c:311
-#: src/wireless-security/eap-method-ttls.c:365
-msgid "GTC"
-msgstr "GTC"
+#~ msgid "GTC"
+#~ msgstr "GTC"
 
-#: src/wireless-security/eap-method-fast.c:394
-msgid "Choose a PAC file"
-msgstr "Tagh faidhle PAC"
+#~ msgid "Choose a PAC file"
+#~ msgstr "Tagh faidhle PAC"
 
-#: src/wireless-security/eap-method-fast.c:401
-msgid "PAC files (*.pac)"
-msgstr "Faidhlichean PAC  (*.pac)"
+#~ msgid "PAC files (*.pac)"
+#~ msgstr "Faidhlichean PAC  (*.pac)"
 
-#: src/wireless-security/eap-method-fast.c:405
-msgid "All files"
-msgstr "A h-uile faidhle"
+#~ msgid "All files"
+#~ msgstr "A h-uile faidhle"
 
-#: src/wireless-security/eap-method-fast.ui:23
-msgid "Anonymous"
-msgstr "Gun urra"
+#~ msgid "Anonymous"
+#~ msgstr "Gun urra"
 
-#: src/wireless-security/eap-method-fast.ui:26
-msgid "Authenticated"
-msgstr "Dearbhaichte"
+#~ msgid "Authenticated"
+#~ msgstr "Dearbhaichte"
 
-#: src/wireless-security/eap-method-fast.ui:29
-msgid "Both"
-msgstr "An dà chuid"
+#~ msgid "Both"
+#~ msgstr "An dà chuid"
 
-#: src/wireless-security/eap-method-fast.ui:48
-#: src/wireless-security/eap-method-peap.ui:48
-#: src/wireless-security/eap-method-ttls.ui:119
 #, fuzzy
-msgid "Anony_mous identity"
-msgstr "Dearbh-aithne gun _urra"
+#~ msgid "Anony_mous identity"
+#~ msgstr "Dearbh-aithne gun _urra"
 
-#: src/wireless-security/eap-method-fast.ui:74
 #, fuzzy
-msgid "PAC _file"
-msgstr "_Faidhle PAC:"
+#~ msgid "PAC _file"
+#~ msgstr "_Faidhle PAC:"
 
-#: src/wireless-security/eap-method-fast.ui:113
-#: src/wireless-security/eap-method-peap.ui:121
-#: src/wireless-security/eap-method-ttls.ui:77
 #, fuzzy
-msgid "_Inner authentication"
-msgstr "_Inner Authentication:"
+#~ msgid "_Inner authentication"
+#~ msgstr "_Inner Authentication:"
 
-#: src/wireless-security/eap-method-fast.ui:142
-msgid "Allow automatic PAC pro_visioning"
-msgstr "Ceadaich PAC _Provisioning fèin-obrachail"
+#~ msgid "Allow automatic PAC pro_visioning"
+#~ msgstr "Ceadaich PAC _Provisioning fèin-obrachail"
 
-#: src/wireless-security/eap-method-leap.c:52
-msgid "missing EAP-LEAP username"
-msgstr "tha ainm-cleachdaiche EAP-LEAP a dhìth"
+#~ msgid "missing EAP-LEAP username"
+#~ msgstr "tha ainm-cleachdaiche EAP-LEAP a dhìth"
 
-#: src/wireless-security/eap-method-leap.c:61
-msgid "missing EAP-LEAP password"
-msgstr "tha facal-faire EAP-LEAP a dhìth"
+#~ msgid "missing EAP-LEAP password"
+#~ msgstr "tha facal-faire EAP-LEAP a dhìth"
 
-#: src/wireless-security/eap-method-peap.c:295
-#: src/wireless-security/eap-method-ttls.c:349
-#: src/wireless-security/wireless-security.c:411
-msgid "MD5"
-msgstr "MD5"
+#~ msgid "MD5"
+#~ msgstr "MD5"
 
-#: src/wireless-security/eap-method-peap.ui:26
-msgid "Version 0"
-msgstr "Tionndadh 0"
+#~ msgid "Version 0"
+#~ msgstr "Tionndadh 0"
 
-#: src/wireless-security/eap-method-peap.ui:29
-msgid "Version 1"
-msgstr "Tionndadh 1"
+#~ msgid "Version 1"
+#~ msgstr "Tionndadh 1"
 
-#: src/wireless-security/eap-method-peap.ui:72
-#: src/wireless-security/eap-method-tls.ui:44
-#: src/wireless-security/eap-method-ttls.ui:89
-msgid "No CA certificate is _required"
-msgstr "Chan eil teisteanas CA _riatanach"
+#~ msgid "No CA certificate is _required"
+#~ msgstr "Chan eil teisteanas CA _riatanach"
 
-#: src/wireless-security/eap-method-peap.ui:89
 #, fuzzy
-msgid "PEAP _version"
-msgstr "_Tionndadh PEAP:"
+#~ msgid "PEAP _version"
+#~ msgstr "_Tionndadh PEAP:"
 
-#: src/wireless-security/eap-method-peap.ui:168
-#: src/wireless-security/eap-method-tls.ui:62
-#: src/wireless-security/eap-method-ttls.ui:133
-msgid "Suffix of the server certificate name."
-msgstr ""
+#~ msgid "missing EAP username"
+#~ msgstr "tha ainm-cleachdaiche EAP a dhìth"
 
-#: src/wireless-security/eap-method-peap.ui:169
-#: src/wireless-security/eap-method-tls.ui:63
-#: src/wireless-security/eap-method-ttls.ui:134
-msgid "_Domain"
-msgstr ""
+#~ msgid "missing EAP password"
+#~ msgstr "tha facal-faire EAP a dhìth"
 
-#: src/wireless-security/eap-method-simple.c:76
-msgid "missing EAP username"
-msgstr "tha ainm-cleachdaiche EAP a dhìth"
-
-#: src/wireless-security/eap-method-simple.c:92
-msgid "missing EAP password"
-msgstr "tha facal-faire EAP a dhìth"
-
-#: src/wireless-security/eap-method-simple.c:106
-msgid "missing EAP client Private Key passphrase"
-msgstr ""
-
-#: src/wireless-security/eap-method-simple.ui:103
 #, fuzzy
-msgid "P_rivate Key Passphrase"
-msgstr "Abairt-fhaire WEP 128-bit"
+#~ msgid "P_rivate Key Passphrase"
+#~ msgstr "Abairt-fhaire WEP 128-bit"
 
-#: src/wireless-security/eap-method-simple.ui:128
 #, fuzzy
-msgid "Sh_ow passphrase"
-msgstr "Sea_ll na faclan-faire"
+#~ msgid "Sh_ow passphrase"
+#~ msgstr "Sea_ll na faclan-faire"
 
-#: src/wireless-security/eap-method-tls.c:47
-msgid "missing EAP-TLS identity"
-msgstr "tha dearbh-aithne EAP-TLS a dhìth"
+#~ msgid "missing EAP-TLS identity"
+#~ msgstr "tha dearbh-aithne EAP-TLS a dhìth"
 
-#: src/wireless-security/eap-method-tls.c:234
 #, fuzzy
-msgid "no user certificate selected"
-msgstr "cha deach faidhle a thaghadh"
+#~ msgid "no user certificate selected"
+#~ msgstr "cha deach faidhle a thaghadh"
 
-#: src/wireless-security/eap-method-tls.c:239
-msgid "selected user certificate file does not exist"
-msgstr ""
-
-#: src/wireless-security/eap-method-tls.c:259
 #, fuzzy
-msgid "no key selected"
-msgstr "cha deach faidhle a thaghadh"
+#~ msgid "no key selected"
+#~ msgstr "cha deach faidhle a thaghadh"
 
-#: src/wireless-security/eap-method-tls.c:264
-msgid "selected key file does not exist"
-msgstr ""
-
-#: src/wireless-security/eap-method-tls.ui:20
 #, fuzzy
-msgid "I_dentity"
-msgstr "D_earbh-aithne:"
+#~ msgid "I_dentity"
+#~ msgstr "D_earbh-aithne:"
 
-#: src/wireless-security/eap-method-ttls.c:316
-msgid "MSCHAPv2 (no EAP)"
-msgstr "MSCHAPv2 (gun EAP)"
+#~ msgid "MSCHAPv2 (no EAP)"
+#~ msgstr "MSCHAPv2 (gun EAP)"
 
-#: src/wireless-security/eap-method.c:43
-msgid "undefined error in 802.1X security (wpa-eap)"
-msgstr "mearachd gun sònrachadh san tèarainteachd 802.1X (wpa-eap)"
+#~ msgid "undefined error in 802.1X security (wpa-eap)"
+#~ msgstr "mearachd gun sònrachadh san tèarainteachd 802.1X (wpa-eap)"
 
-#: src/wireless-security/eap-method.c:351
 #, fuzzy
-msgid "no CA certificate selected"
-msgstr "Chan eil teisteanas CA _riatanach"
+#~ msgid "no CA certificate selected"
+#~ msgstr "Chan eil teisteanas CA _riatanach"
 
-#: src/wireless-security/eap-method.c:356
-msgid "selected CA certificate file does not exist"
-msgstr ""
+#~ msgid "Unknown error validating 802.1X security"
+#~ msgstr "Mearachd nach aithne dhuinn le dearbhadh na tèarainteachd 802.1X"
 
-#: src/wireless-security/wireless-security.c:58
-msgid "Unknown error validating 802.1X security"
-msgstr "Mearachd nach aithne dhuinn le dearbhadh na tèarainteachd 802.1X"
+#~ msgid "TLS"
+#~ msgstr "TLS"
 
-#: src/wireless-security/wireless-security.c:423
-msgid "TLS"
-msgstr "TLS"
+#~ msgid "PWD"
+#~ msgstr "PWD"
 
-#: src/wireless-security/wireless-security.c:447
-msgid "PWD"
-msgstr "PWD"
+#~ msgid "FAST"
+#~ msgstr "FAST"
 
-#: src/wireless-security/wireless-security.c:458
-msgid "FAST"
-msgstr "FAST"
+#~ msgid "Tunneled TLS"
+#~ msgstr "Tunneled TLS"
 
-#: src/wireless-security/wireless-security.c:469
-msgid "Tunneled TLS"
-msgstr "Tunneled TLS"
+#~ msgid "Protected EAP (PEAP)"
+#~ msgstr "Protected EAP (PEAP)"
 
-#: src/wireless-security/wireless-security.c:480
-msgid "Protected EAP (PEAP)"
-msgstr "Protected EAP (PEAP)"
-
-#: src/wireless-security/wireless-security.c:509
-msgid "Externally configured"
-msgstr ""
-
-#: src/wireless-security/ws-dynamic-wep.ui:31
-#: src/wireless-security/ws-wep-key.ui:97
-#: src/wireless-security/ws-wpa-eap.ui:31
 #, fuzzy
-msgid "Au_thentication"
-msgstr "De_arbhadh:"
+#~ msgid "Au_thentication"
+#~ msgstr "De_arbhadh:"
 
-#: src/wireless-security/ws-leap.c:50
-msgid "missing leap-username"
-msgstr "tha ainm-cleachdaiche leap a dhìth"
+#~ msgid "missing leap-username"
+#~ msgstr "tha ainm-cleachdaiche leap a dhìth"
 
-#: src/wireless-security/ws-leap.c:68
-msgid "missing leap-password"
-msgstr "tha facal-faire leap a dhìth"
+#~ msgid "missing leap-password"
+#~ msgstr "tha facal-faire leap a dhìth"
 
-#: src/wireless-security/ws-sae.c:56
 #, fuzzy
-msgid "missing password"
-msgstr "tha facal-faire EAP a dhìth"
+#~ msgid "missing password"
+#~ msgstr "tha facal-faire EAP a dhìth"
 
-#: src/wireless-security/ws-sae.ui:48 src/wireless-security/ws-wpa-psk.ui:48
 #, fuzzy
-msgid "_Type"
-msgstr "_Seòrsa:"
+#~ msgid "_Type"
+#~ msgstr "_Seòrsa:"
 
-#: src/wireless-security/ws-wep-key.c:99
-msgid "missing wep-key"
-msgstr "tha iuchair wep a dhìth"
+#~ msgid "missing wep-key"
+#~ msgstr "tha iuchair wep a dhìth"
 
-#: src/wireless-security/ws-wep-key.c:106
 #, c-format
-msgid "invalid wep-key: key with a length of %zu must contain only hex-digits"
-msgstr ""
-"tha an iuchair wep mì-dhligheach: chan fhaod ach figearan sia-dheicheach a "
-"bhith am broinn iuchair a tha %zu a dh'fhaid"
+#~ msgid ""
+#~ "invalid wep-key: key with a length of %zu must contain only hex-digits"
+#~ msgstr ""
+#~ "tha an iuchair wep mì-dhligheach: chan fhaod ach figearan sia-dheicheach "
+#~ "a bhith am broinn iuchair a tha %zu a dh'fhaid"
 
-#: src/wireless-security/ws-wep-key.c:114
 #, c-format
-msgid ""
-"invalid wep-key: key with a length of %zu must contain only ascii characters"
-msgstr ""
-"tha an iuchair wep mì-dhligheach: chan fhaod ach caractaran ASCII a bhith am "
-"broinn iuchair a tha %zu a dh'fhaid"
+#~ msgid ""
+#~ "invalid wep-key: key with a length of %zu must contain only ascii "
+#~ "characters"
+#~ msgstr ""
+#~ "tha an iuchair wep mì-dhligheach: chan fhaod ach caractaran ASCII a bhith "
+#~ "am broinn iuchair a tha %zu a dh'fhaid"
 
-#: src/wireless-security/ws-wep-key.c:120
 #, c-format
-msgid ""
-"invalid wep-key: wrong key length %zu. A key must be either of length 5/13 "
-"(ascii) or 10/26 (hex)"
-msgstr ""
-"tha an iuchair wep mì-dhligheach: tha faide na iuchrach %zu cearr. Feumaidh "
-"iuchair a bith 5/13 (ascii) no 10/26 (sia-dheicheach) a dh'fhaid"
+#~ msgid ""
+#~ "invalid wep-key: wrong key length %zu. A key must be either of length "
+#~ "5/13 (ascii) or 10/26 (hex)"
+#~ msgstr ""
+#~ "tha an iuchair wep mì-dhligheach: tha faide na iuchrach %zu cearr. "
+#~ "Feumaidh iuchair a bith 5/13 (ascii) no 10/26 (sia-dheicheach) a dh'fhaid"
 
-#: src/wireless-security/ws-wep-key.c:127
-msgid "invalid wep-key: passphrase must be non-empty"
-msgstr ""
-"tha an iuchair wep mì-dhligheach: chan fhaod an abairt-fhaire a bhith falamh"
+#~ msgid "invalid wep-key: passphrase must be non-empty"
+#~ msgstr ""
+#~ "tha an iuchair wep mì-dhligheach: chan fhaod an abairt-fhaire a bhith "
+#~ "falamh"
 
-#: src/wireless-security/ws-wep-key.c:129
-msgid "invalid wep-key: passphrase must be shorter than 64 characters"
-msgstr ""
-"tha an iuchair wep mì-dhligheach: chan fhaod an abairt-fhaire a bhith nas "
-"giorra na 64 caractar"
+#~ msgid "invalid wep-key: passphrase must be shorter than 64 characters"
+#~ msgstr ""
+#~ "tha an iuchair wep mì-dhligheach: chan fhaod an abairt-fhaire a bhith nas "
+#~ "giorra na 64 caractar"
 
-#: src/wireless-security/ws-wep-key.ui:12
-msgid "Open System"
-msgstr "Siostam fosgailte"
+#~ msgid "Open System"
+#~ msgstr "Siostam fosgailte"
 
-#: src/wireless-security/ws-wep-key.ui:15
-msgid "Shared Key"
-msgstr "Iuchair cho-roinnte"
+#~ msgid "1 (Default)"
+#~ msgstr "1 (Bun-roghainn)"
 
-#: src/wireless-security/ws-wep-key.ui:26
-msgid "1 (Default)"
-msgstr "1 (Bun-roghainn)"
-
-#: src/wireless-security/ws-wep-key.ui:54
 #, fuzzy
-msgid "_Key"
-msgstr "_Iuchair:"
+#~ msgid "_Key"
+#~ msgstr "_Iuchair:"
 
-#: src/wireless-security/ws-wep-key.ui:80
-msgid "Sho_w key"
-msgstr "Se_all an iuchair"
-
-#: src/wireless-security/ws-wep-key.ui:129
 #, fuzzy
-msgid "WEP inde_x"
-msgstr "Clàr-a_mais WEP:"
+#~ msgid "WEP inde_x"
+#~ msgstr "Clàr-a_mais WEP:"
 
-#: src/wireless-security/ws-wpa-psk.c:62
 #, c-format
-msgid ""
-"invalid wpa-psk: invalid key-length %zu. Must be [8,63] bytes or 64 hex "
-"digits"
-msgstr ""
-"wpa-psk mì-dhligheach: tha faide na h-iuchrach %zu mì-dhligheach. Feumaidh i "
-"bhith [8,63] baidht no 64 figear sia-dheicheach"
+#~ msgid ""
+#~ "invalid wpa-psk: invalid key-length %zu. Must be [8,63] bytes or 64 hex "
+#~ "digits"
+#~ msgstr ""
+#~ "wpa-psk mì-dhligheach: tha faide na h-iuchrach %zu mì-dhligheach. "
+#~ "Feumaidh i bhith [8,63] baidht no 64 figear sia-dheicheach"
 
-#: src/wireless-security/ws-wpa-psk.c:69
-msgid "invalid wpa-psk: cannot interpret key with 64 bytes as hex"
-msgstr ""
-"wpa-psk mì-dhligheach: cha ghabh an iuchair tuigsinn mar àireamh shia-"
-"dheicheach a tha 43 baidht a dh'fhaid"
+#~ msgid "invalid wpa-psk: cannot interpret key with 64 bytes as hex"
+#~ msgstr ""
+#~ "wpa-psk mì-dhligheach: cha ghabh an iuchair tuigsinn mar àireamh shia-"
+#~ "dheicheach a tha 43 baidht a dh'fhaid"
 
 #~ msgid "Disable connected notifications"
 #~ msgstr "Cur à comas brathan a dh'innseas gun deach ceangal a dhèanamh"

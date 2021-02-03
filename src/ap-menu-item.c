@@ -18,9 +18,6 @@
 #include "nm-access-point.h"
 #include "mobile-helpers.h"
 
-/* Only to get the NMU_SEC_SAE compat constant. */
-#include "wireless-security.h"
-
 G_DEFINE_TYPE (NMNetworkMenuItem, nm_network_menu_item, GTK_TYPE_MENU_ITEM);
 
 #define NM_NETWORK_MENU_ITEM_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), NM_TYPE_NETWORK_MENU_ITEM, NMNetworkMenuItemPrivate))
@@ -294,12 +291,9 @@ nm_network_menu_item_new (NMAccessPoint *ap,
 	    && !nm_utils_security_valid (NMU_SEC_WPA2_PSK, dev_caps, TRUE, priv->is_adhoc, ap_flags, ap_wpa, ap_rsn)
 	    && !nm_utils_security_valid (NMU_SEC_WPA_ENTERPRISE, dev_caps, TRUE, priv->is_adhoc, ap_flags, ap_wpa, ap_rsn)
 	    && !nm_utils_security_valid (NMU_SEC_WPA2_ENTERPRISE, dev_caps, TRUE, priv->is_adhoc, ap_flags, ap_wpa, ap_rsn)
-#if NM_CHECK_VERSION(1,24,0)
 	    && !nm_utils_security_valid (NMU_SEC_OWE, dev_caps, TRUE, priv->is_adhoc, ap_flags, ap_wpa, ap_rsn)
-#endif
-	    && !nm_utils_security_valid (NMU_SEC_SAE, dev_caps, TRUE, priv->is_adhoc, ap_flags, ap_wpa, ap_rsn)) {
+	    && !nm_utils_security_valid (NMU_SEC_SAE, dev_caps, TRUE, priv->is_adhoc, ap_flags, ap_wpa, ap_rsn))
 		gtk_widget_set_sensitive (GTK_WIDGET (item), FALSE);
-	}
 
 	update_label (item, FALSE);
 	update_icon (item, applet);

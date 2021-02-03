@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: network-manager-applet master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/network-manager-"
 "applet/\n"
-"POT-Creation-Date: 2020-06-22 17:23+0200\n"
+"POT-Creation-Date: 2021-02-03 09:54+0100\n"
 "PO-Revision-Date: 2014-11-28 15:54+0700\n"
 "Last-Translator: Trần Ngọc Quân <vnwildman@gmail.com>\n"
 "Language-Team: Vietnamese <gnome-vi-list@gnome.org>\n"
@@ -21,7 +21,7 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Poedit 1.5.5\n"
 
-#: nm-applet.desktop.in:3 src/applet-dialogs.c:724 src/applet.c:3179
+#: nm-applet.desktop.in:3 src/applet-dialogs.c:724 src/applet.c:3223
 msgid "Network"
 msgstr "Mạng"
 
@@ -98,11 +98,11 @@ msgid ""
 "type '%s'"
 msgstr ""
 
-#: src/8021x.ui:11 src/ethernet-dialog.c:85
+#: src/8021x.ui:11 src/ethernet-dialog.c:87
 msgid "802.1X authentication"
 msgstr "Xác thực 802.1X"
 
-#: src/8021x.ui:31 src/applet-device-ethernet.c:335 src/applet-dialogs.c:1179
+#: src/8021x.ui:31 src/applet-device-ethernet.c:341 src/applet-dialogs.c:1179
 #: src/connection-editor/ce-ip4-routes.ui:30
 #: src/connection-editor/ce-ip6-routes.ui:30
 #: src/connection-editor/ce-new-connection.ui:50
@@ -132,12 +132,12 @@ msgstr "Kết nố_i"
 msgid "_Network name"
 msgstr "Tê_n mạng:"
 
-#: src/ap-menu-item.c:70
+#: src/ap-menu-item.c:67
 #, fuzzy
 msgid "ad-hoc"
 msgstr "Ad-hoc"
 
-#: src/ap-menu-item.c:75
+#: src/ap-menu-item.c:72
 msgid "secure."
 msgstr ""
 
@@ -167,7 +167,7 @@ msgid "Mobile Broadband"
 msgstr "Di động băng thông rộng"
 
 #: src/applet-device-broadband.c:780 src/applet-device-bt.c:61
-#: src/applet-device-ethernet.c:103 src/applet-device-wifi.c:890
+#: src/applet-device-ethernet.c:107 src/applet-device-wifi.c:890
 msgid "Available"
 msgstr "Dùng được"
 
@@ -177,52 +177,52 @@ msgstr "Dùng được"
 msgid "New Mobile Broadband connection…"
 msgstr "Kết nối băng thông rộng di động mới"
 
-#: src/applet-device-broadband.c:807 src/applet-device-bt.c:73
-#: src/applet-device-ethernet.c:118 src/applet-device-wifi.c:1292
+#: src/applet-device-broadband.c:809 src/applet-device-bt.c:75
+#: src/applet-device-ethernet.c:124 src/applet-device-wifi.c:1293
 msgid "Connection Established"
 msgstr "Kết nối được thiết lập"
 
-#: src/applet-device-broadband.c:808
+#: src/applet-device-broadband.c:810
 msgid "You are now connected to the Mobile Broadband network."
 msgstr "Bạn đã kết nối đến mạng di động băng thông rộng."
 
-#: src/applet-device-broadband.c:948 src/applet-device-broadband.c:954
+#: src/applet-device-broadband.c:950 src/applet-device-broadband.c:956
 msgid "Mobile Broadband network."
 msgstr "Mạng di động băng thông rộng."
 
-#: src/applet-device-broadband.c:949
+#: src/applet-device-broadband.c:951
 msgid "You are now registered on the home network."
 msgstr "Bạn đã đăng ký mạng nhà."
 
-#: src/applet-device-broadband.c:955
+#: src/applet-device-broadband.c:957
 msgid "You are now registered on a roaming network."
 msgstr "Bạn đã đăng ký mạng chuyển vùng."
 
-#: src/applet-device-bt.c:74
+#: src/applet-device-bt.c:76
 msgid "You are now connected to the mobile broadband network."
 msgstr "Bạn đã kết nối đến mạng di động băng thông rộng."
 
-#: src/applet-device-bt.c:102 src/mobile-helpers.c:584
+#: src/applet-device-bt.c:104 src/mobile-helpers.c:584
 #, fuzzy, c-format
 msgid "Preparing mobile broadband connection “%s”…"
 msgstr "Đang chuẩn bị kết nối di động băng thông rộng “%s”…"
 
-#: src/applet-device-bt.c:105 src/mobile-helpers.c:587
+#: src/applet-device-bt.c:107 src/mobile-helpers.c:587
 #, fuzzy, c-format
 msgid "Configuring mobile broadband connection “%s”…"
 msgstr "Đang cấu hình kết nối di động băng thông rộng “%s”…"
 
-#: src/applet-device-bt.c:108 src/mobile-helpers.c:590
+#: src/applet-device-bt.c:110 src/mobile-helpers.c:590
 #, fuzzy, c-format
 msgid "User authentication required for mobile broadband connection “%s”…"
 msgstr "Cần xác thực cho kết nối di động băng thông rộng “%s”…"
 
-#: src/applet-device-bt.c:111 src/applet.c:2535 src/mobile-helpers.c:593
+#: src/applet-device-bt.c:113 src/applet.c:2579 src/mobile-helpers.c:593
 #, fuzzy, c-format
 msgid "Requesting a network address for “%s”…"
 msgstr "Đang lấy địa chỉ mạng cho “%s”…"
 
-#: src/applet-device-bt.c:115 src/mobile-helpers.c:612
+#: src/applet-device-bt.c:117 src/mobile-helpers.c:612
 #, fuzzy, c-format
 msgid "Mobile broadband connection “%s” active"
 msgstr "Kết nối di động băng thông rộng “%s” đã hoạt động"
@@ -231,63 +231,63 @@ msgstr "Kết nối di động băng thông rộng “%s” đã hoạt động"
 msgid "Auto Ethernet"
 msgstr "Ethernet tự động"
 
-#: src/applet-device-ethernet.c:68
+#: src/applet-device-ethernet.c:72
 #, c-format
 msgid "Ethernet Networks (%s)"
 msgstr "Mạng Ethernet (%s)"
 
-#: src/applet-device-ethernet.c:70
+#: src/applet-device-ethernet.c:74
 #, c-format
 msgid "Ethernet Network (%s)"
 msgstr "Mạng Ethernet (%s)"
 
-#: src/applet-device-ethernet.c:73
+#: src/applet-device-ethernet.c:77
 msgid "Ethernet Networks"
 msgstr "Mạng Ethernet"
 
-#: src/applet-device-ethernet.c:75
+#: src/applet-device-ethernet.c:79
 msgid "Ethernet Network"
 msgstr "Mạng Ethernet"
 
 #. Notify user of unmanaged or unavailable device
-#: src/applet-device-ethernet.c:95 src/applet.c:1288
+#: src/applet-device-ethernet.c:99 src/applet.c:1328
 msgid "disconnected"
 msgstr "đã ngắt kết nối"
 
-#: src/applet-device-ethernet.c:119
+#: src/applet-device-ethernet.c:125
 msgid "You are now connected to the ethernet network."
 msgstr "Bạn đã kết nối đến mạng ethernet."
 
-#: src/applet-device-ethernet.c:147
+#: src/applet-device-ethernet.c:153
 #, fuzzy, c-format
 msgid "Preparing ethernet network connection “%s”…"
 msgstr "Đang chuẩn bị kết nối mạng ethernet “%s”…"
 
-#: src/applet-device-ethernet.c:150
+#: src/applet-device-ethernet.c:156
 #, fuzzy, c-format
 msgid "Configuring ethernet network connection “%s”…"
 msgstr "Đang cấu hình kết nối mạng ethernet “%s”…"
 
-#: src/applet-device-ethernet.c:153
+#: src/applet-device-ethernet.c:159
 #, fuzzy, c-format
 msgid "User authentication required for ethernet network connection “%s”…"
 msgstr "Cần xác thực cho kết nối mạng ethernet “%s”…"
 
-#: src/applet-device-ethernet.c:156
+#: src/applet-device-ethernet.c:162
 #, fuzzy, c-format
 msgid "Requesting an ethernet network address for “%s”…"
 msgstr "Đang lấy địa chỉ cho mạng ethernet “%s”…"
 
-#: src/applet-device-ethernet.c:160
+#: src/applet-device-ethernet.c:166
 #, fuzzy, c-format
 msgid "Ethernet network connection “%s” active"
 msgstr "Kết nối mạng ethernet “%s” đã hoạt động"
 
-#: src/applet-device-ethernet.c:332
+#: src/applet-device-ethernet.c:338
 msgid "DSL authentication"
 msgstr "Xác thực DSL"
 
-#: src/applet-device-ethernet.c:336 src/applet-dialogs.c:1180
+#: src/applet-device-ethernet.c:342 src/applet-dialogs.c:1180
 #: src/connection-editor/ce-ip4-routes.ui:44
 #: src/connection-editor/ce-ip6-routes.ui:44
 #: src/connection-editor/ce-page-dcb.ui:583
@@ -312,7 +312,7 @@ msgstr "Tạo mạng Wi-Fi mới"
 msgid "(none)"
 msgstr "(không)"
 
-#: src/applet-device-wifi.c:519 src/applet-device-wifi.c:1392
+#: src/applet-device-wifi.c:519 src/applet-device-wifi.c:1393
 msgid "Failed to add new connection"
 msgstr "Lỗi thêm kết nối mới"
 
@@ -320,8 +320,8 @@ msgstr "Lỗi thêm kết nối mới"
 msgid "Insufficient privileges."
 msgstr ""
 
-#: src/applet-device-wifi.c:522 src/applet-device-wifi.c:1374
-#: src/applet-device-wifi.c:1397 src/applet.c:377 src/applet.c:466
+#: src/applet-device-wifi.c:522 src/applet-device-wifi.c:1375
+#: src/applet-device-wifi.c:1398 src/applet.c:417 src/applet.c:506
 msgid "Connection failure"
 msgstr "Gặp lỗi kết nối"
 
@@ -352,60 +352,60 @@ msgstr "Wi-Fi bị tắt từ phần cứng"
 msgid "More networks"
 msgstr "Thêm mạng"
 
-#: src/applet-device-wifi.c:1106
+#: src/applet-device-wifi.c:1107
 msgid "Wi-Fi Networks Available"
 msgstr "Mạng Wi-Fi có thể dùng"
 
-#: src/applet-device-wifi.c:1107
+#: src/applet-device-wifi.c:1108
 msgid "Use the network menu to connect to a Wi-Fi network"
 msgstr "Dùng trình đơn mạng để kết nối mạng Wi-Fi"
 
-#: src/applet-device-wifi.c:1110 src/applet.c:788
+#: src/applet-device-wifi.c:1111 src/applet.c:828
 #, fuzzy
 msgid "Don’t show this message again"
 msgstr "Đừng nhắc nữa"
 
-#: src/applet-device-wifi.c:1291
+#: src/applet-device-wifi.c:1292
 #, fuzzy, c-format
 msgid "You are now connected to the Wi-Fi network “%s”."
 msgstr "Bạn đã kết nối đến mạng Wi-Fi “%s”."
 
-#: src/applet-device-wifi.c:1326
+#: src/applet-device-wifi.c:1327
 #, fuzzy, c-format
 msgid "Preparing Wi-Fi network connection “%s”…"
 msgstr "Đang chuẩn bị kết nối mạng Wi-Fi “%s”…"
 
-#: src/applet-device-wifi.c:1329
+#: src/applet-device-wifi.c:1330
 #, fuzzy, c-format
 msgid "Configuring Wi-Fi network connection “%s”…"
 msgstr "Đang cấu hình kết nối mạng Wi-Fi “%s”…"
 
-#: src/applet-device-wifi.c:1332
+#: src/applet-device-wifi.c:1333
 #, fuzzy, c-format
 msgid "User authentication required for Wi-Fi network “%s”…"
 msgstr "Cần xác thực người dùng cho kết nối mạng Wi-Fi “%s”…"
 
-#: src/applet-device-wifi.c:1335
+#: src/applet-device-wifi.c:1336
 #, fuzzy, c-format
 msgid "Requesting a Wi-Fi network address for “%s”…"
 msgstr "Đang lấy địa chỉ mạng Wi-Fi “%s”…"
 
-#: src/applet-device-wifi.c:1346
+#: src/applet-device-wifi.c:1347
 #, fuzzy, c-format
 msgid "Wi-Fi network connection “%s” active: %s (%d%%)"
 msgstr "Kết nối mạng Wi-Fi “%s” đã hoạt động: %s (%d%%)"
 
-#: src/applet-device-wifi.c:1350
+#: src/applet-device-wifi.c:1351
 #, fuzzy, c-format
 msgid "Wi-Fi network connection “%s” active"
 msgstr "Kết nối mạng Wi-Fi “%s” đã hoạt động"
 
-#: src/applet-device-wifi.c:1369
+#: src/applet-device-wifi.c:1370
 msgid "Failed to activate connection"
 msgstr "Lỗi kích hoạt kết nối"
 
-#: src/applet-device-wifi.c:1371 src/applet-device-wifi.c:1394 src/applet.c:374
-#: src/applet.c:428 src/applet.c:463
+#: src/applet-device-wifi.c:1372 src/applet-device-wifi.c:1395 src/applet.c:414
+#: src/applet.c:468 src/applet.c:503
 msgid "Unknown error"
 msgstr "Lỗi lạ"
 
@@ -413,8 +413,7 @@ msgstr "Lỗi lạ"
 msgid "Error displaying connection information:"
 msgstr "Gặp lỗi khi hiển thị thông tin kết nối:"
 
-#: src/applet-dialogs.c:60 src/connection-editor/page-wifi-security.c:374
-#: src/wireless-security/wireless-security.c:435
+#: src/applet-dialogs.c:60 src/connection-editor/page-wifi-security.c:369
 msgid "LEAP"
 msgstr "LEAP"
 
@@ -441,7 +440,7 @@ msgid "WPA3"
 msgstr ""
 
 #: src/applet-dialogs.c:234 src/applet-dialogs.c:243
-#: src/connection-editor/page-wifi-security.c:325
+#: src/connection-editor/page-wifi-security.c:320
 msgctxt "Wi-Fi/Ethernet security"
 msgid "None"
 msgstr "Không"
@@ -519,7 +518,7 @@ msgstr "CDMA (%s)"
 #: src/applet-dialogs.c:527 src/applet-dialogs.c:861
 #: src/connection-editor/ce-page-team-port.ui:394
 #: src/connection-editor/ce-page-team.ui:776
-#: src/connection-editor/page-general.c:355
+#: src/connection-editor/page-general.c:368
 msgid "General"
 msgstr "Chung"
 
@@ -589,7 +588,7 @@ msgstr "Khẩu hiện VPN"
 msgid "Base Connection"
 msgstr "Kết nối cơ sở"
 
-#: src/applet-dialogs.c:883 src/wireless-security/wireless-security.c:495
+#: src/applet-dialogs.c:883
 msgid "Unknown"
 msgstr "Không rõ"
 
@@ -725,23 +724,23 @@ msgstr "Gặp lỗi khi tạo kết nối DUN: %s"
 msgid "Failed to write connection to VPN UI: incomplete write"
 msgstr ""
 
-#: src/applet.c:372
+#: src/applet.c:412
 msgid "Failed to add/activate connection"
 msgstr "Lỗi thêm/kích hoạt kết nối"
 
-#: src/applet.c:426
+#: src/applet.c:466
 msgid "Device disconnect failed"
 msgstr "Gặp lỗi khi ngắt kết nối thiết bị"
 
-#: src/applet.c:431
+#: src/applet.c:471
 msgid "Disconnect failure"
 msgstr "Lỗi ngắt kết nối"
 
-#: src/applet.c:461
+#: src/applet.c:501
 msgid "Connection activation failed"
 msgstr "Lỗi kích hoạt kết nối"
 
-#: src/applet.c:878
+#: src/applet.c:918
 #, fuzzy, c-format
 msgid ""
 "\n"
@@ -751,7 +750,7 @@ msgstr ""
 "\n"
 "Kết nối VPN “%s” bị ngắt vì kết nối mạng bị ngắt."
 
-#: src/applet.c:880
+#: src/applet.c:920
 #, fuzzy, c-format
 msgid ""
 "\n"
@@ -761,7 +760,7 @@ msgstr ""
 "\n"
 "Kết nối VPN “%s” lỗi vì kết nối mạng bị ngắt."
 
-#: src/applet.c:882
+#: src/applet.c:922
 #, fuzzy, c-format
 msgid ""
 "\n"
@@ -770,7 +769,7 @@ msgstr ""
 "\n"
 "Kết nối VPN “%s” lỗi vì dịch vụ VPN dừng đột ngột."
 
-#: src/applet.c:884
+#: src/applet.c:924
 #, fuzzy, c-format
 msgid ""
 "\n"
@@ -780,7 +779,7 @@ msgstr ""
 "\n"
 "Kết nối VPN “%s” lỗi vì dịch vụ VPN trả về cấu hình không hợp lệ."
 
-#: src/applet.c:886
+#: src/applet.c:926
 #, fuzzy, c-format
 msgid ""
 "\n"
@@ -789,7 +788,7 @@ msgstr ""
 "\n"
 "Kết nối VPN “%s” lỗi vì hết hạn kết nối."
 
-#: src/applet.c:888
+#: src/applet.c:928
 #, fuzzy, c-format
 msgid ""
 "\n"
@@ -798,7 +797,7 @@ msgstr ""
 "\n"
 "Kết nối VPN “%s” lỗi vì dịch vụ VPN không khởi động kịp."
 
-#: src/applet.c:890
+#: src/applet.c:930
 #, fuzzy, c-format
 msgid ""
 "\n"
@@ -807,7 +806,7 @@ msgstr ""
 "\n"
 "Kết nối VPN “%s” lỗi vì dịch vụ VPN không khởi động được."
 
-#: src/applet.c:892
+#: src/applet.c:932
 #, fuzzy, c-format
 msgid ""
 "\n"
@@ -816,7 +815,7 @@ msgstr ""
 "\n"
 "Kết nối VPN “%s” lỗi vì không có khóa bí mật VPN hợp lệ."
 
-#: src/applet.c:894
+#: src/applet.c:934
 #, fuzzy, c-format
 msgid ""
 "\n"
@@ -825,7 +824,7 @@ msgstr ""
 "\n"
 "Kết nối VPN “%s” lỗi vì khóa bí mật VPN không hợp lệ."
 
-#: src/applet.c:899
+#: src/applet.c:939
 #, fuzzy, c-format
 msgid ""
 "\n"
@@ -834,7 +833,7 @@ msgstr ""
 "\n"
 "Kết nối VPN “%s” lỗi."
 
-#: src/applet.c:926
+#: src/applet.c:966
 #, c-format
 msgid ""
 "VPN connection has been successfully established.\n"
@@ -845,19 +844,19 @@ msgstr ""
 "\n"
 "%s\n"
 
-#: src/applet.c:928
+#: src/applet.c:968
 msgid "VPN connection has been successfully established.\n"
 msgstr "Đã thiết lập thành công kết nối VPN.\n"
 
-#: src/applet.c:930
+#: src/applet.c:970
 msgid "VPN Login Message"
 msgstr "Thông điệp đăng nhập VPN"
 
-#: src/applet.c:938 src/applet.c:978
+#: src/applet.c:978 src/applet.c:1018
 msgid "VPN Connection Failed"
 msgstr "Lỗi kết nối VPN"
 
-#: src/applet.c:982
+#: src/applet.c:1022
 #, fuzzy, c-format
 msgid ""
 "\n"
@@ -870,7 +869,7 @@ msgstr ""
 "\n"
 "%s"
 
-#: src/applet.c:985
+#: src/applet.c:1025
 #, fuzzy, c-format
 msgid ""
 "\n"
@@ -883,137 +882,137 @@ msgstr ""
 "\n"
 "%s"
 
-#: src/applet.c:1276
+#: src/applet.c:1316
 msgid "device not ready (firmware missing)"
 msgstr "thiết bị chưa sẵn sàng (thiếu firmware)"
 
-#: src/applet.c:1278
+#: src/applet.c:1318
 msgid "device not ready"
 msgstr "thiết bị chưa sẵn sàng"
 
-#: src/applet.c:1304
+#: src/applet.c:1344
 msgid "Disconnect"
 msgstr "Ngắt kết nối"
 
-#: src/applet.c:1318
+#: src/applet.c:1358
 msgid "device not managed"
 msgstr "thiết bị không được quản lý"
 
-#: src/applet.c:1391
+#: src/applet.c:1432
 msgid "No network devices available"
 msgstr "Không tìm thấy thiết bị mạng dùng được"
 
-#: src/applet.c:1443
+#: src/applet.c:1484
 msgid "_VPN Connections"
 msgstr "Kết nối _VPN"
 
-#: src/applet.c:1487
+#: src/applet.c:1528
 #, fuzzy
 msgid "_Configure VPN…"
 msgstr "_Cấu hình VPN…"
 
-#: src/applet.c:1490
+#: src/applet.c:1531
 #, fuzzy
 msgid "_Add a VPN connection…"
 msgstr "Kết nối _VPN"
 
-#: src/applet.c:1596
+#: src/applet.c:1637
 #, fuzzy
 msgid "NetworkManager is not running…"
 msgstr "Trình Quản lí Mạng đang không chạy…"
 
-#: src/applet.c:1601 src/applet.c:2666
+#: src/applet.c:1642 src/applet.c:2710
 msgid "Networking disabled"
 msgstr "Kết nối mạng tắt"
 
 #. 'Enable Networking' item
-#: src/applet.c:1811
+#: src/applet.c:1852
 msgid "Enable _Networking"
 msgstr "Bật _mạng"
 
 #. 'Enable Wi-Fi' item
-#: src/applet.c:1820
+#: src/applet.c:1861
 msgid "Enable _Wi-Fi"
 msgstr "Bật _Wi-Fi"
 
 #. 'Enable Mobile Broadband' item
-#: src/applet.c:1829
+#: src/applet.c:1870
 msgid "Enable _Mobile Broadband"
 msgstr "Bật _di động băng thông rộng"
 
 #. Toggle notifications item
-#: src/applet.c:1841
+#: src/applet.c:1882
 msgid "Enable N_otifications"
 msgstr "Bật _thông báo"
 
 #. 'Connection Information' item
-#: src/applet.c:1853
+#: src/applet.c:1894
 msgid "Connection _Information"
 msgstr "Thông t_in kết nối"
 
 #. 'Edit Connections...' item
-#: src/applet.c:1861
+#: src/applet.c:1902
 #, fuzzy
 msgid "Edit Connections…"
 msgstr "Sửa kết nối…"
 
-#: src/applet.c:1875
+#: src/applet.c:1916
 msgid "_About"
 msgstr "_Giới thiệu"
 
-#: src/applet.c:2186
+#: src/applet.c:2230
 #, fuzzy, c-format
 msgid "You are now connected to “%s”."
 msgstr "Bạn đã kết nối đến mạng “%s”."
 
-#: src/applet.c:2226
+#: src/applet.c:2270
 msgid "Disconnected"
 msgstr "Đã ngắt kết nối"
 
-#: src/applet.c:2227
+#: src/applet.c:2271
 msgid "The network connection has been disconnected."
 msgstr "Kết nối mạng đã bị ngắt."
 
-#: src/applet.c:2529
+#: src/applet.c:2573
 #, fuzzy, c-format
 msgid "Preparing network connection “%s”…"
 msgstr "Đang chuẩn bị kết nối “%s”…"
 
-#: src/applet.c:2532
+#: src/applet.c:2576
 #, fuzzy, c-format
 msgid "User authentication required for network connection “%s”…"
 msgstr "Cần xác thực cho kết nối “%s”…"
 
-#: src/applet.c:2538
+#: src/applet.c:2582
 #, fuzzy, c-format
 msgid "Network connection “%s” active"
 msgstr "Kết nối “%s” đã hoạt động"
 
-#: src/applet.c:2611
+#: src/applet.c:2655
 #, fuzzy, c-format
 msgid "Starting VPN connection “%s”…"
 msgstr "Đang bắt đầu kết nối VPN “%s”…"
 
-#: src/applet.c:2614
+#: src/applet.c:2658
 #, fuzzy, c-format
 msgid "User authentication required for VPN connection “%s”…"
 msgstr "Cần xác thực cho kết nối VPN “%s”…"
 
-#: src/applet.c:2617
+#: src/applet.c:2661
 #, fuzzy, c-format
 msgid "Requesting a VPN address for “%s”…"
 msgstr "Đang lấy địa chỉ VPN cho “%s”…"
 
-#: src/applet.c:2620
+#: src/applet.c:2664
 #, fuzzy
 msgid "VPN connection active"
 msgstr "Kết nối VPN “%s” đã hoạt động"
 
-#: src/applet.c:2670
+#: src/applet.c:2714
 msgid "No network connection"
 msgstr "Không có kết nối mạng"
 
-#: src/applet.c:3280
+#: src/applet.c:3324
 msgid "NetworkManager Applet"
 msgstr "Quản lý mạng"
 
@@ -1032,7 +1031,7 @@ msgstr ""
 #: src/connection-editor/ce-page-bond.ui:180
 #: src/connection-editor/ce-page-bridge.ui:120
 #: src/connection-editor/ce-page-ip4.ui:150
-#: src/connection-editor/ce-page-ip6.ui:181
+#: src/connection-editor/ce-page-ip6.ui:184
 #: src/connection-editor/ce-page-team.ui:234
 #: src/connection-editor/ce-page-wireguard.ui:603
 #: src/connection-editor/nm-connection-list.ui:87
@@ -1044,7 +1043,7 @@ msgstr ""
 #: src/connection-editor/ce-page-bond.ui:208
 #: src/connection-editor/ce-page-bridge.ui:148
 #: src/connection-editor/ce-page-ip4.ui:165
-#: src/connection-editor/ce-page-ip6.ui:196
+#: src/connection-editor/ce-page-ip6.ui:199
 #: src/connection-editor/ce-page-team.ui:262
 #: src/connection-editor/ce-page-wireguard.ui:617
 #: src/connection-editor/connection-helpers.c:748
@@ -1394,8 +1393,8 @@ msgstr "Nhóm ưu tiên"
 #: src/connection-editor/ce-page-dcb.ui:419
 #: src/connection-editor/ce-page-dcb.ui:442
 #: src/connection-editor/ce-page-dcb.ui:465 src/connection-editor/ce-page.c:111
-#: src/connection-editor/page-wifi.c:154 src/connection-editor/page-wifi.c:158
-#: src/connection-editor/page-wifi.c:179
+#: src/connection-editor/page-wifi.c:144 src/connection-editor/page-wifi.c:148
+#: src/connection-editor/page-wifi.c:169
 msgid "default"
 msgstr "mặc định"
 
@@ -1548,9 +1547,6 @@ msgstr "Nhập vào lớp giao thông cho từng mức ưu tiên người dùng.
 
 #: src/connection-editor/ce-page-dsl.ui:19
 #: src/connection-editor/ce-page-mobile.ui:62
-#: src/wireless-security/eap-method-leap.ui:21
-#: src/wireless-security/eap-method-simple.ui:21
-#: src/wireless-security/ws-leap.ui:21
 #, fuzzy
 msgid "_Username"
 msgstr "_Tên người dùng:"
@@ -1571,10 +1567,6 @@ msgid "_Service"
 msgstr "_Dịch vụ:"
 
 #: src/connection-editor/ce-page-dsl.ui:71
-#: src/wireless-security/eap-method-leap.ui:60
-#: src/wireless-security/eap-method-simple.ui:77
-#: src/wireless-security/ws-leap.ui:60 src/wireless-security/ws-sae.ui:60
-#: src/wireless-security/ws-wpa-psk.ui:60
 msgid "Sho_w password"
 msgstr "_Hiện mật khẩu"
 
@@ -1584,10 +1576,6 @@ msgstr ""
 
 #: src/connection-editor/ce-page-dsl.ui:102
 #: src/connection-editor/ce-page-mobile.ui:76
-#: src/wireless-security/eap-method-leap.ui:35
-#: src/wireless-security/eap-method-simple.ui:35
-#: src/wireless-security/ws-leap.ui:35 src/wireless-security/ws-sae.ui:20
-#: src/wireless-security/ws-wpa-psk.ui:20
 #, fuzzy
 msgid "_Password"
 msgstr "_Mật khẩu:"
@@ -1630,8 +1618,7 @@ msgstr ""
 #: src/connection-editor/ce-page-ip6.ui:12
 #: src/connection-editor/ce-page-proxy.ui:24
 #: src/connection-editor/ce-page-wifi.ui:32
-#: src/connection-editor/page-ip4.c:118 src/connection-editor/page-ip6.c:135
-#: src/wireless-security/eap-method-peap.ui:23
+#: src/connection-editor/page-ip4.c:118 src/connection-editor/page-ip6.c:136
 msgid "Automatic"
 msgstr "Tự động"
 
@@ -1676,14 +1663,14 @@ msgid "Full"
 msgstr ""
 
 #: src/connection-editor/ce-page-ethernet.ui:74
-#: src/connection-editor/page-ip6.c:148
+#: src/connection-editor/page-ip6.c:149
 msgid "Ignore"
 msgstr "Bỏ qua"
 
 #: src/connection-editor/ce-page-ethernet.ui:80
 #: src/connection-editor/ce-page-ip4.ui:18
 #: src/connection-editor/ce-page-ip6.ui:18 src/connection-editor/page-ip4.c:155
-#: src/connection-editor/page-ip6.c:184
+#: src/connection-editor/page-ip6.c:185
 msgid "Manual"
 msgstr "Thủ công"
 
@@ -1929,12 +1916,12 @@ msgstr "Link-Local"
 
 #: src/connection-editor/ce-page-ip4.ui:24
 #: src/connection-editor/ce-page-ip6.ui:24 src/connection-editor/page-ip4.c:175
-#: src/connection-editor/page-ip6.c:204
+#: src/connection-editor/page-ip6.c:205
 msgid "Shared to other computers"
 msgstr "Chia sẻ với máy khác"
 
 #: src/connection-editor/ce-page-ip4.ui:47
-#: src/connection-editor/ce-page-ip6.ui:78
+#: src/connection-editor/ce-page-ip6.ui:81
 #, fuzzy
 msgid "_Method"
 msgstr "_Phương pháp:"
@@ -1950,7 +1937,7 @@ msgstr ""
 "Nếu bạn muốn dùng định danh DHCP khác, nhập ở đây."
 
 #: src/connection-editor/ce-page-ip4.ui:215
-#: src/connection-editor/ce-page-ip6.ui:233
+#: src/connection-editor/ce-page-ip6.ui:236
 msgid ""
 "Domains used when resolving host names. Use commas to separate multiple "
 "domains."
@@ -1962,15 +1949,15 @@ msgid "D_HCP client ID"
 msgstr "ID D_HCP khách:"
 
 #: src/connection-editor/ce-page-ip4.ui:242
-#: src/connection-editor/ce-page-ip6.ui:246
-#: src/connection-editor/page-ip4.c:359 src/connection-editor/page-ip6.c:347
+#: src/connection-editor/ce-page-ip6.ui:249
+#: src/connection-editor/page-ip4.c:359 src/connection-editor/page-ip6.c:348
 #, fuzzy
 msgid "S_earch domains"
 msgstr "Miền _tìm kiếm:"
 
 #: src/connection-editor/ce-page-ip4.ui:256
-#: src/connection-editor/ce-page-ip6.ui:260
-#: src/connection-editor/page-ip4.c:350 src/connection-editor/page-ip6.c:338
+#: src/connection-editor/ce-page-ip6.ui:263
+#: src/connection-editor/page-ip4.c:350 src/connection-editor/page-ip6.c:339
 #, fuzzy
 msgid "DNS ser_vers"
 msgstr "Máy chủ _DNS:"
@@ -1996,34 +1983,40 @@ msgstr ""
 "nhưng IPv6 thành công."
 
 #: src/connection-editor/ce-page-ip4.ui:333
-#: src/connection-editor/ce-page-ip6.ui:401
+#: src/connection-editor/ce-page-ip6.ui:405
 msgid "_Routes…"
 msgstr "Đị_nh tuyến…"
 
+#. TRANSLATORS: Default zone set for firewall, when no zone is selected
 #: src/connection-editor/ce-page-ip6.ui:35
+#: src/connection-editor/page-general.c:41
+msgid "Default"
+msgstr "Mặc định"
+
+#: src/connection-editor/ce-page-ip6.ui:38
 #: src/connection-editor/ce-page-macsec.ui:32
-#: src/connection-editor/page-ip4.c:185 src/connection-editor/page-ip6.c:212
+#: src/connection-editor/page-ip4.c:185 src/connection-editor/page-ip6.c:213
 msgid "Disabled"
 msgstr "Tắt"
 
-#: src/connection-editor/ce-page-ip6.ui:38
+#: src/connection-editor/ce-page-ip6.ui:41
 msgid "Enabled (prefer public address)"
 msgstr "Bật (đưa ra địa chỉ công)"
 
-#: src/connection-editor/ce-page-ip6.ui:41
+#: src/connection-editor/ce-page-ip6.ui:44
 msgid "Enabled (prefer temporary address)"
 msgstr "Bật (đưa ra địa chỉ tạm thời)"
 
-#: src/connection-editor/ce-page-ip6.ui:52
+#: src/connection-editor/ce-page-ip6.ui:55
 msgid "EUI64"
 msgstr ""
 
-#: src/connection-editor/ce-page-ip6.ui:55
+#: src/connection-editor/ce-page-ip6.ui:58
 #, fuzzy
 msgid "Stable privacy"
 msgstr "Bật"
 
-#: src/connection-editor/ce-page-ip6.ui:274
+#: src/connection-editor/ce-page-ip6.ui:277
 msgid ""
 "IP addresses of domain name servers used to resolve host names. Use commas "
 "to separate multiple domain name server addresses. Link-local addresses will "
@@ -2033,20 +2026,30 @@ msgstr ""
 "phân cách địa chỉ nhiều máy chủ tên miền. Địa chỉ link-local sẽ tự động phạm "
 "vi đến giao diện kết nối."
 
-#: src/connection-editor/ce-page-ip6.ui:287
+#: src/connection-editor/ce-page-ip6.ui:290
 #, fuzzy
 msgid "IPv6 _privacy extensions"
 msgstr "Mở rộng IPv6 _riêng:"
 
-#: src/connection-editor/ce-page-ip6.ui:319
+#: src/connection-editor/ce-page-ip6.ui:304
+msgid ""
+"If enabled, it makes the kernel generate a temporary IPv6 address in "
+"addition to the public one generated from MAC address. This enhances "
+"privacy, but could cause problems in some applications. If set to \"Default"
+"\", the value from NetworkManager global configuration is used. If that is "
+"also unset, use the kernel default value read from file \"/proc/sys/net/ipv6/"
+"conf/default/use_tempaddr\""
+msgstr ""
+
+#: src/connection-editor/ce-page-ip6.ui:323
 msgid "IPv6 address _generation mode"
 msgstr ""
 
-#: src/connection-editor/ce-page-ip6.ui:356
+#: src/connection-editor/ce-page-ip6.ui:360
 msgid "Require IPv_6 addressing for this connection to complete"
 msgstr "Cần gán địa chỉ IPv_6 để hoàn tất kết nối"
 
-#: src/connection-editor/ce-page-ip6.ui:360
+#: src/connection-editor/ce-page-ip6.ui:364
 msgid ""
 "When connecting to IPv4-capable networks, allows the connection to complete "
 "if IPv6 configuration fails but IPv4 configuration succeeds."
@@ -3177,7 +3180,7 @@ msgstr ""
 "thực. Nếu kết nối không thành công, thử tắt một vài cách."
 
 #: src/connection-editor/connection-helpers.c:93
-#: src/connection-editor/page-wifi.c:423
+#: src/connection-editor/page-wifi.c:389
 msgid "Wi-Fi"
 msgstr "Wi-Fi"
 
@@ -3305,7 +3308,7 @@ msgstr ""
 
 #: src/connection-editor/ip4-routes-dialog.c:683
 #: src/connection-editor/ip6-routes-dialog.c:704
-#: src/connection-editor/page-ip4.c:1119 src/connection-editor/page-ip6.c:1117
+#: src/connection-editor/page-ip4.c:1119 src/connection-editor/page-ip6.c:1121
 msgid "Address"
 msgstr "Địa chỉ"
 
@@ -3316,7 +3319,7 @@ msgstr "Mặt nạ mạng"
 
 #: src/connection-editor/ip4-routes-dialog.c:721
 #: src/connection-editor/ip6-routes-dialog.c:742
-#: src/connection-editor/page-ip4.c:1157 src/connection-editor/page-ip6.c:1155
+#: src/connection-editor/page-ip4.c:1157 src/connection-editor/page-ip6.c:1159
 msgid "Gateway"
 msgstr "Cổng ra"
 
@@ -3326,7 +3329,7 @@ msgid "Metric"
 msgstr "Thước đo"
 
 #: src/connection-editor/ip6-routes-dialog.c:723
-#: src/connection-editor/page-ip6.c:1136
+#: src/connection-editor/page-ip6.c:1140
 msgid "Prefix"
 msgstr "Tiền tố"
 
@@ -3582,15 +3585,15 @@ msgstr "Kết nối mạng"
 msgid "Add a new connection"
 msgstr "Kết nối _VPN"
 
-#: src/connection-editor/page-8021x-security.c:99
+#: src/connection-editor/page-8021x-security.c:96
 msgid "802.1X Security"
 msgstr "An ninh 802.1X"
 
-#: src/connection-editor/page-8021x-security.c:101
+#: src/connection-editor/page-8021x-security.c:98
 msgid "Could not load 802.1X Security user interface."
 msgstr "Không thể nạp giao diện an ninh 802.1X."
 
-#: src/connection-editor/page-8021x-security.c:115
+#: src/connection-editor/page-8021x-security.c:112
 msgid "Use 802.1_X security for this connection"
 msgstr "Dùng an ninh 802.1_X cho kết nối này"
 
@@ -3712,7 +3715,7 @@ msgid "Ethernet device"
 msgstr "Ethernet"
 
 #: src/connection-editor/page-ethernet.c:502
-#: src/connection-editor/page-vlan.c:723 src/connection-editor/page-wifi.c:557
+#: src/connection-editor/page-vlan.c:723 src/connection-editor/page-wifi.c:521
 #, fuzzy
 msgid "cloned MAC"
 msgstr "Địa chỉ MAC _sao:"
@@ -3726,11 +3729,6 @@ msgstr ""
 msgid "Ethernet connection %d"
 msgstr "Kết nối Ethernet %d"
 
-#. TRANSLATORS: Default zone set for firewall, when no zone is selected
-#: src/connection-editor/page-general.c:41
-msgid "Default"
-msgstr "Mặc định"
-
 #: src/connection-editor/page-general.c:42
 msgid ""
 "The zone defines the trust level of the connection. Default is not a regular "
@@ -3741,7 +3739,7 @@ msgstr ""
 "nó có tác quả của tập hợp vùng trong tường lửa. Chỉ hữu ích khi tường lửa "
 "được kích hoạt."
 
-#: src/connection-editor/page-general.c:358
+#: src/connection-editor/page-general.c:371
 msgid "Could not load General user interface."
 msgstr "Không thể nạp giao diện chung."
 
@@ -3779,23 +3777,23 @@ msgstr "Không thể nạp giao diện người dùng IPv4."
 msgid "IP tunnel connection %d"
 msgstr "Kết nối Ethernet %d"
 
-#: src/connection-editor/page-ip4.c:114 src/connection-editor/page-ip6.c:129
+#: src/connection-editor/page-ip4.c:114 src/connection-editor/page-ip6.c:130
 msgid "Automatic (VPN)"
 msgstr "Tự động (VPN)"
 
-#: src/connection-editor/page-ip4.c:115 src/connection-editor/page-ip6.c:130
+#: src/connection-editor/page-ip4.c:115 src/connection-editor/page-ip6.c:131
 msgid "Automatic (VPN) addresses only"
 msgstr "Tự động (VPN) chỉ địa chỉ"
 
-#: src/connection-editor/page-ip4.c:119 src/connection-editor/page-ip6.c:136
+#: src/connection-editor/page-ip4.c:119 src/connection-editor/page-ip6.c:137
 msgid "Automatic, addresses only"
 msgstr "Tự động, chỉ địa chỉ"
 
-#: src/connection-editor/page-ip4.c:121 src/connection-editor/page-ip6.c:132
+#: src/connection-editor/page-ip4.c:121 src/connection-editor/page-ip6.c:133
 msgid "Automatic (PPPoE)"
 msgstr "Tự động (PPPoE)"
 
-#: src/connection-editor/page-ip4.c:122 src/connection-editor/page-ip6.c:133
+#: src/connection-editor/page-ip4.c:122 src/connection-editor/page-ip6.c:134
 msgid "Automatic (PPPoE) addresses only"
 msgstr "Tự động (PPPoE) chỉ địa chỉ"
 
@@ -3807,16 +3805,16 @@ msgstr "Tự động (DHCP)"
 msgid "Automatic (DHCP) addresses only"
 msgstr "Tự động (DHCP) chỉ địa chỉ"
 
-#: src/connection-editor/page-ip4.c:168 src/connection-editor/page-ip6.c:197
+#: src/connection-editor/page-ip4.c:168 src/connection-editor/page-ip6.c:198
 msgid "Link-Local Only"
 msgstr "Chỉ Link-Local"
 
-#: src/connection-editor/page-ip4.c:348 src/connection-editor/page-ip6.c:336
+#: src/connection-editor/page-ip4.c:348 src/connection-editor/page-ip6.c:337
 #, fuzzy
 msgid "Additional DNS ser_vers"
 msgstr "Máy chủ _DNS bổ sung:"
 
-#: src/connection-editor/page-ip4.c:357 src/connection-editor/page-ip6.c:345
+#: src/connection-editor/page-ip4.c:357 src/connection-editor/page-ip6.c:346
 #, fuzzy
 msgid "Additional s_earch domains"
 msgstr "Miền _tìm kiếm bổ sung:"
@@ -3854,39 +3852,39 @@ msgstr ""
 msgid "IPv4 DNS server “%s” invalid"
 msgstr ""
 
-#: src/connection-editor/page-ip6.c:172
+#: src/connection-editor/page-ip6.c:173
 msgid "Automatic, DHCP only"
 msgstr "Tự động, chỉ DHCP"
 
-#: src/connection-editor/page-ip6.c:1018
+#: src/connection-editor/page-ip6.c:1022
 #, c-format
 msgid "Editing IPv6 routes for %s"
 msgstr "Sửa định tuyến IPv6 cho %s"
 
-#: src/connection-editor/page-ip6.c:1207
+#: src/connection-editor/page-ip6.c:1211
 msgid "IPv6 Settings"
 msgstr "Thiết lập IPv6"
 
-#: src/connection-editor/page-ip6.c:1209
+#: src/connection-editor/page-ip6.c:1213
 msgid "Could not load IPv6 user interface."
 msgstr "Không thể nạp giao diện người dùng IPv6."
 
-#: src/connection-editor/page-ip6.c:1304
+#: src/connection-editor/page-ip6.c:1308
 #, c-format
 msgid "IPv6 address “%s” invalid"
 msgstr ""
 
-#: src/connection-editor/page-ip6.c:1312
+#: src/connection-editor/page-ip6.c:1316
 #, c-format
 msgid "IPv6 prefix “%s” invalid"
 msgstr ""
 
-#: src/connection-editor/page-ip6.c:1321
+#: src/connection-editor/page-ip6.c:1325
 #, c-format
 msgid "IPv6 gateway “%s” invalid"
 msgstr ""
 
-#: src/connection-editor/page-ip6.c:1363
+#: src/connection-editor/page-ip6.c:1367
 #, c-format
 msgid "IPv6 DNS server “%s” invalid"
 msgstr ""
@@ -3968,24 +3966,18 @@ msgid "GSM"
 msgstr "GSM"
 
 #: src/connection-editor/page-ppp.c:116
-#: src/wireless-security/eap-method-ttls.c:267
 msgid "PAP"
 msgstr "PAP"
 
 #: src/connection-editor/page-ppp.c:117
-#: src/wireless-security/eap-method-ttls.c:333
 msgid "CHAP"
 msgstr "CHAP"
 
 #: src/connection-editor/page-ppp.c:118
-#: src/wireless-security/eap-method-fast.c:271
-#: src/wireless-security/eap-method-peap.c:279
-#: src/wireless-security/eap-method-ttls.c:299
 msgid "MSCHAPv2"
 msgstr "MSCHAPv2"
 
 #: src/connection-editor/page-ppp.c:119
-#: src/wireless-security/eap-method-ttls.c:283
 msgid "MSCHAP"
 msgstr "MSCHAP"
 
@@ -4107,57 +4099,57 @@ msgstr ""
 "sách, bạn có lẽ chưa cài phần bổ sung VPN cần thiết."
 
 # Name: don't translate / Tên: đừng dịch
-#: src/connection-editor/page-wifi-security.c:351
+#: src/connection-editor/page-wifi-security.c:346
 msgid "WEP 40/128-bit Key (Hex or ASCII)"
 msgstr "Khoá WEP 40/128-bit (Thập lục phân hoặc ASCII)"
 
-#: src/connection-editor/page-wifi-security.c:361
+#: src/connection-editor/page-wifi-security.c:356
 msgid "WEP 128-bit Passphrase"
 msgstr "Mật khẩu WEP 128-bit"
 
-#: src/connection-editor/page-wifi-security.c:387
+#: src/connection-editor/page-wifi-security.c:382
 msgid "Dynamic WEP (802.1X)"
 msgstr "WEP động (802.1X)"
 
-#: src/connection-editor/page-wifi-security.c:400
+#: src/connection-editor/page-wifi-security.c:395
 msgid "WPA & WPA2 Personal"
 msgstr "WPA & WPA2 Cá nhân"
 
 # Name: don't translate / Tên: đừng dịch
-#: src/connection-editor/page-wifi-security.c:413
+#: src/connection-editor/page-wifi-security.c:408
 msgid "WPA & WPA2 Enterprise"
 msgstr "WPA & WPA2 Kinh doanh"
 
-#: src/connection-editor/page-wifi-security.c:426
+#: src/connection-editor/page-wifi-security.c:421
 #, fuzzy
 msgid "WPA3 Personal"
 msgstr "WPA & WPA2 Cá nhân"
 
-#: src/connection-editor/page-wifi-security.c:437
+#: src/connection-editor/page-wifi-security.c:431
 msgid "Enhanced Open"
 msgstr ""
 
-#: src/connection-editor/page-wifi-security.c:483
+#: src/connection-editor/page-wifi-security.c:476
 msgid "Could not load Wi-Fi security user interface; missing Wi-Fi setting."
 msgstr "Không thể nạp giao diện an ninh Wi-Fi; bỏ qua thiết lập Wi-Fi."
 
-#: src/connection-editor/page-wifi-security.c:494
+#: src/connection-editor/page-wifi-security.c:487
 msgid "Wi-Fi Security"
 msgstr "An ninh Wi-Fi"
 
-#: src/connection-editor/page-wifi-security.c:496
+#: src/connection-editor/page-wifi-security.c:489
 msgid "Could not load Wi-Fi security user interface."
 msgstr "Không thể nạp giao diện an ninh Wi-Fi"
 
-#: src/connection-editor/page-wifi-security.c:577
+#: src/connection-editor/page-wifi-security.c:570
 msgid "missing SSID"
 msgstr ""
 
-#: src/connection-editor/page-wifi-security.c:583
+#: src/connection-editor/page-wifi-security.c:576
 msgid "Security not compatible with Ad-Hoc mode"
 msgstr ""
 
-#: src/connection-editor/page-wifi.c:63
+#: src/connection-editor/page-wifi.c:61
 #, fuzzy
 msgid ""
 "This option locks this connection to the Wi-Fi access point (AP) specified "
@@ -4166,7 +4158,7 @@ msgstr ""
 "Tuỳ chọn này khoá kết nối này vào điểm truy cập Wi-Fi (AP) xác định bởi "
 "BSSID nhập ở đây. Ví dụ: 00:11:22:33:44:55"
 
-#: src/connection-editor/page-wifi.c:74
+#: src/connection-editor/page-wifi.c:72
 #, fuzzy
 msgid ""
 "This option locks this connection to the network device specified either by "
@@ -4176,25 +4168,25 @@ msgstr ""
 "Tuỳ chọn này khoá kết nối này vào thiết bị xác định bởi địa chỉ MAC nhập ở "
 "đây. Ví dụ: 00:11:22:33:44:55"
 
-#: src/connection-editor/page-wifi.c:183
+#: src/connection-editor/page-wifi.c:173
 #, c-format
 msgid "%u (%u MHz)"
 msgstr "%u (%u MHz)"
 
-#: src/connection-editor/page-wifi.c:425
+#: src/connection-editor/page-wifi.c:391
 msgid "Could not load Wi-Fi user interface."
 msgstr "Không thể nạp giao diện Wi-Fi."
 
-#: src/connection-editor/page-wifi.c:547
+#: src/connection-editor/page-wifi.c:511
 msgid "bssid"
 msgstr ""
 
-#: src/connection-editor/page-wifi.c:553
+#: src/connection-editor/page-wifi.c:517
 #, fuzzy
 msgid "Wi-Fi device"
 msgstr "Bất kỳ thiết bị nào"
 
-#: src/connection-editor/page-wifi.c:600
+#: src/connection-editor/page-wifi.c:564
 #, c-format
 msgid "Wi-Fi connection %d"
 msgstr "Kết nối Wi-Fi %d"
@@ -4405,294 +4397,123 @@ msgstr "Chứng nhậng DER hoặc PEM (*.der, *.pem, *.crt, *.cer)"
 msgid "DER, PEM, or PKCS#12 private keys (*.der, *.pem, *.p12, *.key)"
 msgstr "Khoá riêng DER, PEM, hoặc PKCS#12 (*.der, *.pem, *.p12, *.key)"
 
-#: src/wireless-security/eap-method-fast.c:58
-msgid "missing EAP-FAST PAC file"
-msgstr ""
+#~ msgid "GTC"
+#~ msgstr "GTC"
 
-#: src/wireless-security/eap-method-fast.c:255
-#: src/wireless-security/eap-method-peap.c:311
-#: src/wireless-security/eap-method-ttls.c:365
-msgid "GTC"
-msgstr "GTC"
-
-#: src/wireless-security/eap-method-fast.c:394
 #, fuzzy
-msgid "Choose a PAC file"
-msgstr "Chọn tập tin PAC…"
+#~ msgid "Choose a PAC file"
+#~ msgstr "Chọn tập tin PAC…"
 
-#: src/wireless-security/eap-method-fast.c:401
-msgid "PAC files (*.pac)"
-msgstr "Tập tin PAC (*.pac)"
+#~ msgid "PAC files (*.pac)"
+#~ msgstr "Tập tin PAC (*.pac)"
 
-#: src/wireless-security/eap-method-fast.c:405
-msgid "All files"
-msgstr "Mọi tập tin"
+#~ msgid "All files"
+#~ msgstr "Mọi tập tin"
 
-#: src/wireless-security/eap-method-fast.ui:23
-msgid "Anonymous"
-msgstr "Vô danh"
+#~ msgid "Anonymous"
+#~ msgstr "Vô danh"
 
-#: src/wireless-security/eap-method-fast.ui:26
-msgid "Authenticated"
-msgstr "Xác thực"
+#~ msgid "Authenticated"
+#~ msgstr "Xác thực"
 
-#: src/wireless-security/eap-method-fast.ui:29
-msgid "Both"
-msgstr "Cả hai"
+#~ msgid "Both"
+#~ msgstr "Cả hai"
 
-#: src/wireless-security/eap-method-fast.ui:48
-#: src/wireless-security/eap-method-peap.ui:48
-#: src/wireless-security/eap-method-ttls.ui:119
 #, fuzzy
-msgid "Anony_mous identity"
-msgstr "Định danh _vô danh:"
+#~ msgid "Anony_mous identity"
+#~ msgstr "Định danh _vô danh:"
 
-#: src/wireless-security/eap-method-fast.ui:74
 #, fuzzy
-msgid "PAC _file"
-msgstr "Tập tin _PAC:"
+#~ msgid "PAC _file"
+#~ msgstr "Tập tin _PAC:"
 
-#: src/wireless-security/eap-method-fast.ui:113
-#: src/wireless-security/eap-method-peap.ui:121
-#: src/wireless-security/eap-method-ttls.ui:77
 #, fuzzy
-msgid "_Inner authentication"
-msgstr "Xác thực _trong:"
+#~ msgid "_Inner authentication"
+#~ msgstr "Xác thực _trong:"
 
-#: src/wireless-security/eap-method-fast.ui:142
-msgid "Allow automatic PAC pro_visioning"
-msgstr "Cho phép tự động dự liệ_u PAC"
+#~ msgid "Allow automatic PAC pro_visioning"
+#~ msgstr "Cho phép tự động dự liệ_u PAC"
 
-#: src/wireless-security/eap-method-leap.c:52
-msgid "missing EAP-LEAP username"
-msgstr ""
+#~ msgid "MD5"
+#~ msgstr "MD5"
 
-#: src/wireless-security/eap-method-leap.c:61
-msgid "missing EAP-LEAP password"
-msgstr ""
+#~ msgid "Version 0"
+#~ msgstr "Phiên bản 0"
 
-#: src/wireless-security/eap-method-peap.c:295
-#: src/wireless-security/eap-method-ttls.c:349
-#: src/wireless-security/wireless-security.c:411
-msgid "MD5"
-msgstr "MD5"
+#~ msgid "Version 1"
+#~ msgstr "Phiên bản 1"
 
-#: src/wireless-security/eap-method-peap.ui:26
-msgid "Version 0"
-msgstr "Phiên bản 0"
+#~ msgid "No CA certificate is _required"
+#~ msgstr "Không có chứng nhận CA như _yêu cầu"
 
-#: src/wireless-security/eap-method-peap.ui:29
-msgid "Version 1"
-msgstr "Phiên bản 1"
-
-#: src/wireless-security/eap-method-peap.ui:72
-#: src/wireless-security/eap-method-tls.ui:44
-#: src/wireless-security/eap-method-ttls.ui:89
-msgid "No CA certificate is _required"
-msgstr "Không có chứng nhận CA như _yêu cầu"
-
-#: src/wireless-security/eap-method-peap.ui:89
 #, fuzzy
-msgid "PEAP _version"
-msgstr "Phiên bản _PEAP:"
+#~ msgid "PEAP _version"
+#~ msgstr "Phiên bản _PEAP:"
 
-#: src/wireless-security/eap-method-peap.ui:168
-#: src/wireless-security/eap-method-tls.ui:62
-#: src/wireless-security/eap-method-ttls.ui:133
-msgid "Suffix of the server certificate name."
-msgstr ""
-
-#: src/wireless-security/eap-method-peap.ui:169
-#: src/wireless-security/eap-method-tls.ui:63
-#: src/wireless-security/eap-method-ttls.ui:134
-msgid "_Domain"
-msgstr ""
-
-#: src/wireless-security/eap-method-simple.c:76
-msgid "missing EAP username"
-msgstr ""
-
-#: src/wireless-security/eap-method-simple.c:92
-msgid "missing EAP password"
-msgstr ""
-
-#: src/wireless-security/eap-method-simple.c:106
-msgid "missing EAP client Private Key passphrase"
-msgstr ""
-
-#: src/wireless-security/eap-method-simple.ui:103
 #, fuzzy
-msgid "P_rivate Key Passphrase"
-msgstr "Mật khẩu WEP 128-bit"
+#~ msgid "P_rivate Key Passphrase"
+#~ msgstr "Mật khẩu WEP 128-bit"
 
-#: src/wireless-security/eap-method-simple.ui:128
 #, fuzzy
-msgid "Sh_ow passphrase"
-msgstr "_Hiện mật khẩu"
+#~ msgid "Sh_ow passphrase"
+#~ msgstr "_Hiện mật khẩu"
 
-#: src/wireless-security/eap-method-tls.c:47
-msgid "missing EAP-TLS identity"
-msgstr ""
-
-#: src/wireless-security/eap-method-tls.c:234
 #, fuzzy
-msgid "no user certificate selected"
-msgstr "Không có chứng nhận CA như _yêu cầu"
+#~ msgid "no user certificate selected"
+#~ msgstr "Không có chứng nhận CA như _yêu cầu"
 
-#: src/wireless-security/eap-method-tls.c:239
-msgid "selected user certificate file does not exist"
-msgstr ""
-
-#: src/wireless-security/eap-method-tls.c:259
-msgid "no key selected"
-msgstr ""
-
-#: src/wireless-security/eap-method-tls.c:264
-msgid "selected key file does not exist"
-msgstr ""
-
-#: src/wireless-security/eap-method-tls.ui:20
 #, fuzzy
-msgid "I_dentity"
-msgstr "Đị_nh danh:"
+#~ msgid "I_dentity"
+#~ msgstr "Đị_nh danh:"
 
-#: src/wireless-security/eap-method-ttls.c:316
 #, fuzzy
-msgid "MSCHAPv2 (no EAP)"
-msgstr "MSCHAPv2"
+#~ msgid "MSCHAPv2 (no EAP)"
+#~ msgstr "MSCHAPv2"
 
-#: src/wireless-security/eap-method.c:43
-msgid "undefined error in 802.1X security (wpa-eap)"
-msgstr ""
-
-#: src/wireless-security/eap-method.c:351
 #, fuzzy
-msgid "no CA certificate selected"
-msgstr "Không có chứng nhận CA như _yêu cầu"
+#~ msgid "no CA certificate selected"
+#~ msgstr "Không có chứng nhận CA như _yêu cầu"
 
-#: src/wireless-security/eap-method.c:356
-msgid "selected CA certificate file does not exist"
-msgstr ""
+#~ msgid "TLS"
+#~ msgstr "TLS"
 
-#: src/wireless-security/wireless-security.c:58
-msgid "Unknown error validating 802.1X security"
-msgstr ""
+#~ msgid "PWD"
+#~ msgstr "PWD"
 
-#: src/wireless-security/wireless-security.c:423
-msgid "TLS"
-msgstr "TLS"
+#~ msgid "FAST"
+#~ msgstr "FAST"
 
-#: src/wireless-security/wireless-security.c:447
-msgid "PWD"
-msgstr "PWD"
+#~ msgid "Tunneled TLS"
+#~ msgstr "Đường hầm TLS"
 
-#: src/wireless-security/wireless-security.c:458
-msgid "FAST"
-msgstr "FAST"
+#~ msgid "Protected EAP (PEAP)"
+#~ msgstr "EAP Bảo vệ (PEAP)"
 
-#: src/wireless-security/wireless-security.c:469
-msgid "Tunneled TLS"
-msgstr "Đường hầm TLS"
-
-#: src/wireless-security/wireless-security.c:480
-msgid "Protected EAP (PEAP)"
-msgstr "EAP Bảo vệ (PEAP)"
-
-#: src/wireless-security/wireless-security.c:509
-msgid "Externally configured"
-msgstr ""
-
-#: src/wireless-security/ws-dynamic-wep.ui:31
-#: src/wireless-security/ws-wep-key.ui:97
-#: src/wireless-security/ws-wpa-eap.ui:31
 #, fuzzy
-msgid "Au_thentication"
-msgstr "_Xác thực:"
+#~ msgid "Au_thentication"
+#~ msgstr "_Xác thực:"
 
-#: src/wireless-security/ws-leap.c:50
-msgid "missing leap-username"
-msgstr ""
-
-#: src/wireless-security/ws-leap.c:68
-msgid "missing leap-password"
-msgstr ""
-
-#: src/wireless-security/ws-sae.c:56
 #, fuzzy
-msgid "missing password"
-msgstr "_Mật khẩu khoá riêng:"
+#~ msgid "missing password"
+#~ msgstr "_Mật khẩu khoá riêng:"
 
-#: src/wireless-security/ws-sae.ui:48 src/wireless-security/ws-wpa-psk.ui:48
 #, fuzzy
-msgid "_Type"
-msgstr "_Kiểu:"
+#~ msgid "_Type"
+#~ msgstr "_Kiểu:"
 
-#: src/wireless-security/ws-wep-key.c:99
-msgid "missing wep-key"
-msgstr ""
+#~ msgid "Open System"
+#~ msgstr "Hệ thống mở"
 
-#: src/wireless-security/ws-wep-key.c:106
-#, c-format
-msgid "invalid wep-key: key with a length of %zu must contain only hex-digits"
-msgstr ""
+#~ msgid "1 (Default)"
+#~ msgstr "1 (Mặc định)"
 
-#: src/wireless-security/ws-wep-key.c:114
-#, c-format
-msgid ""
-"invalid wep-key: key with a length of %zu must contain only ascii characters"
-msgstr ""
-
-#: src/wireless-security/ws-wep-key.c:120
-#, c-format
-msgid ""
-"invalid wep-key: wrong key length %zu. A key must be either of length 5/13 "
-"(ascii) or 10/26 (hex)"
-msgstr ""
-
-#: src/wireless-security/ws-wep-key.c:127
-msgid "invalid wep-key: passphrase must be non-empty"
-msgstr ""
-
-#: src/wireless-security/ws-wep-key.c:129
-msgid "invalid wep-key: passphrase must be shorter than 64 characters"
-msgstr ""
-
-#: src/wireless-security/ws-wep-key.ui:12
-msgid "Open System"
-msgstr "Hệ thống mở"
-
-#: src/wireless-security/ws-wep-key.ui:15
-msgid "Shared Key"
-msgstr "Khóa dùng chung"
-
-#: src/wireless-security/ws-wep-key.ui:26
-msgid "1 (Default)"
-msgstr "1 (Mặc định)"
-
-#: src/wireless-security/ws-wep-key.ui:54
 #, fuzzy
-msgid "_Key"
-msgstr "_Khóa:"
+#~ msgid "_Key"
+#~ msgstr "_Khóa:"
 
-#: src/wireless-security/ws-wep-key.ui:80
-msgid "Sho_w key"
-msgstr "_Hiện khoá"
-
-#: src/wireless-security/ws-wep-key.ui:129
 #, fuzzy
-msgid "WEP inde_x"
-msgstr "_Chỉ mục WEP:"
-
-#: src/wireless-security/ws-wpa-psk.c:62
-#, c-format
-msgid ""
-"invalid wpa-psk: invalid key-length %zu. Must be [8,63] bytes or 64 hex "
-"digits"
-msgstr ""
-
-#: src/wireless-security/ws-wpa-psk.c:69
-msgid "invalid wpa-psk: cannot interpret key with 64 bytes as hex"
-msgstr ""
+#~ msgid "WEP inde_x"
+#~ msgstr "_Chỉ mục WEP:"
 
 #~ msgid "Disable connected notifications"
 #~ msgstr "Tắt thông báo kết nối"

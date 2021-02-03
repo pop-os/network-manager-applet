@@ -55,28 +55,29 @@ icon16dir = $(datadir)/icons/hicolor/16x16/apps
 icon16_DATA = \
 	icons/16/nm-device-wired.png \
 	icons/16/nm-no-connection.png \
-	icons/16/nm-vpn-standalone-lock.png
+	icons/16/nm-vpn-standalone-lock.png \
+	$(NULL)
 EXTRA_DIST += $(icon16_DATA)
 
 icon22dir = $(datadir)/icons/hicolor/22x22/apps
 icon22_DATA = \
 	icons/22/nm-adhoc.png \
-	icons/22/nm-device-wired.png \
 	icons/22/nm-device-wired-secure.png \
+	icons/22/nm-device-wired.png \
 	icons/22/nm-device-wwan.png \
 	icons/22/nm-mb-roam.png \
 	icons/22/nm-no-connection.png \
 	icons/22/nm-secure-lock.png \
-	icons/22/nm-signal-00.png \
 	icons/22/nm-signal-00-secure.png \
-	icons/22/nm-signal-100.png \
+	icons/22/nm-signal-00.png \
 	icons/22/nm-signal-100-secure.png \
-	icons/22/nm-signal-25.png \
+	icons/22/nm-signal-100.png \
 	icons/22/nm-signal-25-secure.png \
-	icons/22/nm-signal-50.png \
+	icons/22/nm-signal-25.png \
 	icons/22/nm-signal-50-secure.png \
-	icons/22/nm-signal-75.png \
+	icons/22/nm-signal-50.png \
 	icons/22/nm-signal-75-secure.png \
+	icons/22/nm-signal-75.png \
 	icons/22/nm-stage01-connecting01.png \
 	icons/22/nm-stage01-connecting02.png \
 	icons/22/nm-stage01-connecting03.png \
@@ -133,24 +134,58 @@ icon22_DATA = \
 	icons/22/nm-vpn-connecting12.png \
 	icons/22/nm-vpn-connecting13.png \
 	icons/22/nm-vpn-connecting14.png \
-	icons/22/nm-wwan-tower.png
+	icons/22/nm-wwan-tower.png \
+	$(NULL)
 EXTRA_DIST += $(icon22_DATA)
 
 icon32dir = $(datadir)/icons/hicolor/32x32/apps
 icon32_DATA = \
 	icons/32/nm-device-wired.png \
-	icons/32/nm-no-connection.png
+	icons/32/nm-no-connection.png \
+	$(NULL)
 EXTRA_DIST += $(icon32_DATA)
 
 icon48dir = $(datadir)/icons/hicolor/48x48/apps
 icon48_DATA = \
-	icons/48/nm-device-wireless.png
+	icons/48/nm-device-wireless.png \
+	$(NULL)
 EXTRA_DIST += $(icon48_DATA)
 
 iconscalabledir=$(datadir)/icons/hicolor/scalable/apps
 iconscalable_DATA = \
+	icons/scalable/nm-device-wired-secure-symbolic.svg \
+	icons/scalable/nm-device-wired-symbolic.svg \
 	icons/scalable/nm-device-wired.svg \
-	icons/scalable/nm-no-connection.svg
+	icons/scalable/nm-device-wwan-symbolic.svg \
+	icons/scalable/nm-no-connection-symbolic.svg \
+	icons/scalable/nm-no-connection.svg \
+	icons/scalable/nm-signal-00-secure-symbolic.svg \
+	icons/scalable/nm-signal-00-symbolic.svg \
+	icons/scalable/nm-signal-100-secure-symbolic.svg \
+	icons/scalable/nm-signal-100-symbolic.svg \
+	icons/scalable/nm-signal-25-secure-symbolic.svg \
+	icons/scalable/nm-signal-25-symbolic.svg \
+	icons/scalable/nm-signal-50-secure-symbolic.svg \
+	icons/scalable/nm-signal-50-symbolic.svg \
+	icons/scalable/nm-signal-75-secure-symbolic.svg \
+	icons/scalable/nm-signal-75-symbolic.svg \
+	icons/scalable/nm-vpn-active-lock-symbolic.svg \
+	icons/scalable/nm-vpn-connecting01-symbolic.svg \
+	icons/scalable/nm-vpn-connecting02-symbolic.svg \
+	icons/scalable/nm-vpn-connecting03-symbolic.svg \
+	icons/scalable/nm-vpn-connecting04-symbolic.svg \
+	icons/scalable/nm-vpn-connecting05-symbolic.svg \
+	icons/scalable/nm-vpn-connecting06-symbolic.svg \
+	icons/scalable/nm-vpn-connecting07-symbolic.svg \
+	icons/scalable/nm-vpn-connecting08-symbolic.svg \
+	icons/scalable/nm-vpn-connecting09-symbolic.svg \
+	icons/scalable/nm-vpn-connecting10-symbolic.svg \
+	icons/scalable/nm-vpn-connecting11-symbolic.svg \
+	icons/scalable/nm-vpn-connecting12-symbolic.svg \
+	icons/scalable/nm-vpn-connecting13-symbolic.svg \
+	icons/scalable/nm-vpn-connecting14-symbolic.svg \
+	icons/scalable/nm-vpn-standalone-lock-symbolic.svg \
+	$(NULL)
 EXTRA_DIST += $(iconscalable_DATA)
 
 EXTRA_DIST += icons/meson.build
@@ -199,69 +234,19 @@ EXTRA_DIST += src/utils/meson.build
 
 ###############################################################################
 
-src/wireless-security/ws-resources.h: src/wireless-security/ws.gresource.xml
-	$(AM_V_GEN) $(GLIB_COMPILE_RESOURCES) $< --target=$@ --sourcedir=$(srcdir)/src/wireless-security --generate-header --internal
-
-src/wireless-security/ws-resources.c: src/wireless-security/ws.gresource.xml $(shell $(GLIB_COMPILE_RESOURCES) --sourcedir=$(srcdir)/src/wireless-security --generate-dependencies $(srcdir)/src/wireless-security/ws.gresource.xml)
-	$(AM_V_GEN) $(GLIB_COMPILE_RESOURCES) $< --target=$@ --sourcedir=$(srcdir)/src/wireless-security --generate-source --internal
-
-CLEANFILES += \
-	$(wireless_security_h_gen) \
-	$(wireless_security_c_gen)
-
-wireless_security_h_gen = \
-	src/wireless-security/ws-resources.h
-
-wireless_security_c_gen = \
-	src/wireless-security/ws-resources.c
-
 wireless_security_c_real = \
-	src/wireless-security/wireless-security.h \
-	src/wireless-security/wireless-security.c \
-	src/wireless-security/ws-sae.h \
-	src/wireless-security/ws-sae.c \
-	src/wireless-security/ws-wep-key.h \
-	src/wireless-security/ws-wep-key.c \
-	src/wireless-security/ws-wpa-psk.h \
-	src/wireless-security/ws-wpa-psk.c \
-	src/wireless-security/ws-leap.h \
-	src/wireless-security/ws-leap.c \
-	src/wireless-security/ws-wpa-eap.h \
-	src/wireless-security/ws-wpa-eap.c \
-	src/wireless-security/ws-dynamic-wep.h \
-	src/wireless-security/ws-dynamic-wep.c \
 	src/wireless-security/eap-method.h \
-	src/wireless-security/eap-method.c \
-	src/wireless-security/eap-method-tls.h \
-	src/wireless-security/eap-method-tls.c \
-	src/wireless-security/eap-method-leap.h \
-	src/wireless-security/eap-method-leap.c \
-	src/wireless-security/eap-method-fast.h \
-	src/wireless-security/eap-method-fast.c \
-	src/wireless-security/eap-method-ttls.h \
-	src/wireless-security/eap-method-ttls.c \
-	src/wireless-security/eap-method-peap.h \
-	src/wireless-security/eap-method-peap.c \
-	src/wireless-security/eap-method-simple.h \
-	src/wireless-security/eap-method-simple.c \
-	src/wireless-security/helpers.h \
-	src/wireless-security/helpers.c
-
+	src/wireless-security/eap-method.c
 
 noinst_LTLIBRARIES += src/wireless-security/libwireless-security-libnm.la
 
 src_wireless_security_libwireless_security_libnm_la_SOURCES = \
 	$(wireless_security_c_real)
 
-nodist_src_wireless_security_libwireless_security_libnm_la_SOURCES = \
-	$(wireless_security_c_gen)
-
 src_wireless_security_libwireless_security_libnm_la_CPPFLAGS = \
 	$(dflt_cppflags) \
 	"-I$(srcdir)/shared" \
-	"-I$(srcdir)/src/utils" \
 	$(GTK3_CFLAGS) \
-	$(LIBNMA_CFLAGS) \
 	$(LIBNM_CFLAGS)
 
 src_wireless_security_libwireless_security_libnm_la_LIBADD = \
@@ -269,22 +254,7 @@ src_wireless_security_libwireless_security_libnm_la_LIBADD = \
 	$(GTK3_LIBS) \
 	$(LIBNM_LIBS)
 
-$(src_wireless_security_libwireless_security_libnm_la_OBJECTS): $(wireless_security_h_gen)
-
 EXTRA_DIST += \
-	src/wireless-security/eap-method-fast.ui \
-	src/wireless-security/eap-method-leap.ui \
-	src/wireless-security/eap-method-peap.ui \
-	src/wireless-security/eap-method-simple.ui \
-	src/wireless-security/eap-method-tls.ui \
-	src/wireless-security/eap-method-ttls.ui \
-	src/wireless-security/ws-dynamic-wep.ui \
-	src/wireless-security/ws-leap.ui \
-	src/wireless-security/ws-sae.ui \
-	src/wireless-security/ws-wep-key.ui \
-	src/wireless-security/ws-wpa-eap.ui \
-	src/wireless-security/ws-wpa-psk.ui \
-	src/wireless-security/ws.gresource.xml \
 	src/wireless-security/meson.build
 
 ###############################################################################

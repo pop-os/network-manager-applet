@@ -115,6 +115,7 @@ typedef struct {
 	/* Direct UI elements */
 #ifdef WITH_APPINDICATOR
 	AppIndicator *  app_indicator;
+	bool            app_indicator_show_signal_received;
 #endif
 	guint           update_menu_id;
 
@@ -185,7 +186,7 @@ struct NMADeviceClass {
 	                                        AppletNewAutoConnectionCallback callback,
 	                                        gpointer callback_data);
 
-	void           (*add_menu_item)        (NMDevice *device,
+	gboolean       (*add_menu_item)        (NMDevice *device,
 	                                        gboolean multiple_devices,
 	                                        const GPtrArray *connections,
 	                                        NMConnection *active,
