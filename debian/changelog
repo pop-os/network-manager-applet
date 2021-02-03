@@ -1,8 +1,12 @@
-network-manager-applet (1.20.0-1) UNRELEASED; urgency=medium
+network-manager-applet (1.20.0-1) unstable; urgency=medium
 
   * New upstream version 1.20.0
+  * Rebase patches
+  * Bump Standards-Version to 4.5.1
+  * Set upstream metadata fields: Bug-Submit, Bug-Database, Repository,
+    Repository-Browse
 
- -- Michael Biebl <biebl@debian.org>  Wed, 03 Feb 2021 15:27:39 +0100
+ -- Michael Biebl <biebl@debian.org>  Wed, 03 Feb 2021 15:59:07 +0100
 
 network-manager-applet (1.18.0-1) unstable; urgency=medium
 
