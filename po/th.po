@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: NetworkManager\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/network-manager-"
 "applet/\n"
-"POT-Creation-Date: 2020-06-22 17:23+0200\n"
+"POT-Creation-Date: 2021-02-03 09:54+0100\n"
 "PO-Revision-Date: 2012-09-12 15:27+0700\n"
 "Last-Translator: Theppitak Karoonboonyanan <thep@linux.thai.net>\n"
 "Language-Team: Thai <thai-l10n@googlegroups.com>\n"
@@ -20,7 +20,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: nm-applet.desktop.in:3 src/applet-dialogs.c:724 src/applet.c:3179
+#: nm-applet.desktop.in:3 src/applet-dialogs.c:724 src/applet.c:3223
 msgid "Network"
 msgstr "เครือข่าย"
 
@@ -97,12 +97,12 @@ msgid ""
 "type '%s'"
 msgstr ""
 
-#: src/8021x.ui:11 src/ethernet-dialog.c:85
+#: src/8021x.ui:11 src/ethernet-dialog.c:87
 #, fuzzy
 msgid "802.1X authentication"
 msgstr "การยืนยันตัวบุคคลกับเครือข่ายโยงสาย 802.1X"
 
-#: src/8021x.ui:31 src/applet-device-ethernet.c:335 src/applet-dialogs.c:1179
+#: src/8021x.ui:31 src/applet-device-ethernet.c:341 src/applet-dialogs.c:1179
 #: src/connection-editor/ce-ip4-routes.ui:30
 #: src/connection-editor/ce-ip6-routes.ui:30
 #: src/connection-editor/ce-new-connection.ui:50
@@ -132,12 +132,12 @@ msgstr "เ_ชื่อมต่อ"
 msgid "_Network name"
 msgstr "_ชื่อเครือข่าย:"
 
-#: src/ap-menu-item.c:70
+#: src/ap-menu-item.c:67
 #, fuzzy
 msgid "ad-hoc"
 msgstr "เฉพาะกิจ"
 
-#: src/ap-menu-item.c:75
+#: src/ap-menu-item.c:72
 msgid "secure."
 msgstr ""
 
@@ -167,7 +167,7 @@ msgid "Mobile Broadband"
 msgstr "เครือข่ายบรอดแบนด์มือถือ"
 
 #: src/applet-device-broadband.c:780 src/applet-device-bt.c:61
-#: src/applet-device-ethernet.c:103 src/applet-device-wifi.c:890
+#: src/applet-device-ethernet.c:107 src/applet-device-wifi.c:890
 msgid "Available"
 msgstr "เครือข่ายที่มี"
 
@@ -177,54 +177,54 @@ msgstr "เครือข่ายที่มี"
 msgid "New Mobile Broadband connection…"
 msgstr "การเชื่อมต่อบรอดแบนด์มือถือรายการใหม่"
 
-#: src/applet-device-broadband.c:807 src/applet-device-bt.c:73
-#: src/applet-device-ethernet.c:118 src/applet-device-wifi.c:1292
+#: src/applet-device-broadband.c:809 src/applet-device-bt.c:75
+#: src/applet-device-ethernet.c:124 src/applet-device-wifi.c:1293
 msgid "Connection Established"
 msgstr "เชื่อมต่อเครือข่ายแล้ว"
 
-#: src/applet-device-broadband.c:808
+#: src/applet-device-broadband.c:810
 #, fuzzy
 msgid "You are now connected to the Mobile Broadband network."
 msgstr "คุณเชื่อมต่อกับเครือข่ายบรอดแบนด์มือถือแล้ว"
 
-#: src/applet-device-broadband.c:948 src/applet-device-broadband.c:954
+#: src/applet-device-broadband.c:950 src/applet-device-broadband.c:956
 #, fuzzy
 msgid "Mobile Broadband network."
 msgstr "รหัสผ่านเครือข่ายบรอดแบนด์มือถือ"
 
-#: src/applet-device-broadband.c:949
+#: src/applet-device-broadband.c:951
 msgid "You are now registered on the home network."
 msgstr "ขณะนี้คุณลงทะเบียนกับเครือข่ายเหย้าแล้ว"
 
-#: src/applet-device-broadband.c:955
+#: src/applet-device-broadband.c:957
 msgid "You are now registered on a roaming network."
 msgstr "ขณะนี้คุณลงทะเบียนกับเครือข่ายบริการข้ามเขตแล้ว"
 
-#: src/applet-device-bt.c:74
+#: src/applet-device-bt.c:76
 msgid "You are now connected to the mobile broadband network."
 msgstr "คุณเชื่อมต่อกับเครือข่ายบรอดแบนด์มือถือแล้ว"
 
-#: src/applet-device-bt.c:102 src/mobile-helpers.c:584
+#: src/applet-device-bt.c:104 src/mobile-helpers.c:584
 #, fuzzy, c-format
 msgid "Preparing mobile broadband connection “%s”…"
 msgstr "กำลังเตรียมการเชื่อมต่อเครือข่ายบรอดแบนด์มือถือ '%s'..."
 
-#: src/applet-device-bt.c:105 src/mobile-helpers.c:587
+#: src/applet-device-bt.c:107 src/mobile-helpers.c:587
 #, fuzzy, c-format
 msgid "Configuring mobile broadband connection “%s”…"
 msgstr "กำลังตั้งค่าการเชื่อมต่อเครือข่ายบรอดแบนด์มือถือ '%s'..."
 
-#: src/applet-device-bt.c:108 src/mobile-helpers.c:590
+#: src/applet-device-bt.c:110 src/mobile-helpers.c:590
 #, fuzzy, c-format
 msgid "User authentication required for mobile broadband connection “%s”…"
 msgstr "ต้องยืนยันตัวบุคคลสำหรับการเชื่อมต่อเครือข่ายบรอดแบนด์มือถือ '%s'..."
 
-#: src/applet-device-bt.c:111 src/applet.c:2535 src/mobile-helpers.c:593
+#: src/applet-device-bt.c:113 src/applet.c:2579 src/mobile-helpers.c:593
 #, fuzzy, c-format
 msgid "Requesting a network address for “%s”…"
 msgstr "กำลังขอที่อยู่สำหรับเครือข่าย '%s'..."
 
-#: src/applet-device-bt.c:115 src/mobile-helpers.c:612
+#: src/applet-device-bt.c:117 src/mobile-helpers.c:612
 #, fuzzy, c-format
 msgid "Mobile broadband connection “%s” active"
 msgstr "เครือข่ายบรอดแบนด์มือถือ '%s' ทำงานอยู่"
@@ -233,66 +233,66 @@ msgstr "เครือข่ายบรอดแบนด์มือถือ
 msgid "Auto Ethernet"
 msgstr "อีเทอร์เน็ตอัตโนมัติ"
 
-#: src/applet-device-ethernet.c:68
+#: src/applet-device-ethernet.c:72
 #, fuzzy, c-format
 msgid "Ethernet Networks (%s)"
 msgstr "เครือข่ายโยงสาย (%s)"
 
-#: src/applet-device-ethernet.c:70
+#: src/applet-device-ethernet.c:74
 #, fuzzy, c-format
 msgid "Ethernet Network (%s)"
 msgstr "เครือข่ายโยงสาย (%s)"
 
-#: src/applet-device-ethernet.c:73
+#: src/applet-device-ethernet.c:77
 #, fuzzy
 msgid "Ethernet Networks"
 msgstr "เครือข่ายโยงสาย"
 
-#: src/applet-device-ethernet.c:75
+#: src/applet-device-ethernet.c:79
 #, fuzzy
 msgid "Ethernet Network"
 msgstr "เครือข่ายโยงสาย"
 
 #. Notify user of unmanaged or unavailable device
-#: src/applet-device-ethernet.c:95 src/applet.c:1288
+#: src/applet-device-ethernet.c:99 src/applet.c:1328
 msgid "disconnected"
 msgstr "ตัดการเชื่อมต่อแล้ว"
 
-#: src/applet-device-ethernet.c:119
+#: src/applet-device-ethernet.c:125
 #, fuzzy
 msgid "You are now connected to the ethernet network."
 msgstr "คุณเชื่อมต่อกับเครือข่ายโยงสายแล้ว"
 
-#: src/applet-device-ethernet.c:147
+#: src/applet-device-ethernet.c:153
 #, fuzzy, c-format
 msgid "Preparing ethernet network connection “%s”…"
 msgstr "กำลังเตรียมเชื่อมต่อเครือข่ายโยงสาย '%s'..."
 
-#: src/applet-device-ethernet.c:150
+#: src/applet-device-ethernet.c:156
 #, fuzzy, c-format
 msgid "Configuring ethernet network connection “%s”…"
 msgstr "กำลังตั้งค่าการเชื่อมต่อเครือข่ายโยงสาย '%s'..."
 
-#: src/applet-device-ethernet.c:153
+#: src/applet-device-ethernet.c:159
 #, fuzzy, c-format
 msgid "User authentication required for ethernet network connection “%s”…"
 msgstr "ต้องยืนยันตัวบุคคลสำหรับการเชื่อมต่อเครือข่ายโยงสาย '%s'..."
 
-#: src/applet-device-ethernet.c:156
+#: src/applet-device-ethernet.c:162
 #, fuzzy, c-format
 msgid "Requesting an ethernet network address for “%s”…"
 msgstr "กำลังขอที่อยู่จากเครือข่ายโยงสาย '%s'..."
 
-#: src/applet-device-ethernet.c:160
+#: src/applet-device-ethernet.c:166
 #, fuzzy, c-format
 msgid "Ethernet network connection “%s” active"
 msgstr "เครือข่ายโยงสาย '%s' ทำงานอยู่"
 
-#: src/applet-device-ethernet.c:332
+#: src/applet-device-ethernet.c:338
 msgid "DSL authentication"
 msgstr "การยืนยันตัวบุคคลกับ DSL"
 
-#: src/applet-device-ethernet.c:336 src/applet-dialogs.c:1180
+#: src/applet-device-ethernet.c:342 src/applet-dialogs.c:1180
 #: src/connection-editor/ce-ip4-routes.ui:44
 #: src/connection-editor/ce-ip6-routes.ui:44
 #: src/connection-editor/ce-page-dcb.ui:583
@@ -317,7 +317,7 @@ msgstr "สร้างเครือข่ายไร้สายใหม่
 msgid "(none)"
 msgstr "(ไม่มี)"
 
-#: src/applet-device-wifi.c:519 src/applet-device-wifi.c:1392
+#: src/applet-device-wifi.c:519 src/applet-device-wifi.c:1393
 msgid "Failed to add new connection"
 msgstr "เพิ่มการเชื่อมต่อรายการใหม่ไม่สำเร็จ"
 
@@ -325,8 +325,8 @@ msgstr "เพิ่มการเชื่อมต่อรายการใ
 msgid "Insufficient privileges."
 msgstr ""
 
-#: src/applet-device-wifi.c:522 src/applet-device-wifi.c:1374
-#: src/applet-device-wifi.c:1397 src/applet.c:377 src/applet.c:466
+#: src/applet-device-wifi.c:522 src/applet-device-wifi.c:1375
+#: src/applet-device-wifi.c:1398 src/applet.c:417 src/applet.c:506
 msgid "Connection failure"
 msgstr "เชื่อมต่อไม่สำเร็จ"
 
@@ -360,62 +360,62 @@ msgstr "WiMAX ถูกปิดไว้ด้วยสวิตช์ฮาร
 msgid "More networks"
 msgstr "เครือข่ายเพิ่มเติม"
 
-#: src/applet-device-wifi.c:1106
+#: src/applet-device-wifi.c:1107
 #, fuzzy
 msgid "Wi-Fi Networks Available"
 msgstr "มีเครือข่ายไร้สายบริเวณนี้"
 
-#: src/applet-device-wifi.c:1107
+#: src/applet-device-wifi.c:1108
 #, fuzzy
 msgid "Use the network menu to connect to a Wi-Fi network"
 msgstr "ใช้เมนูเครือข่ายเพื่อเชื่อมต่อกับเครือข่ายไร้สาย"
 
-#: src/applet-device-wifi.c:1110 src/applet.c:788
+#: src/applet-device-wifi.c:1111 src/applet.c:828
 #, fuzzy
 msgid "Don’t show this message again"
 msgstr "ไม่ต้องแสดงข้อความนี้อีก"
 
-#: src/applet-device-wifi.c:1291
+#: src/applet-device-wifi.c:1292
 #, fuzzy, c-format
 msgid "You are now connected to the Wi-Fi network “%s”."
 msgstr "คุณเชื่อมต่อกับเครือข่ายไร้สาย '%s' แล้ว"
 
-#: src/applet-device-wifi.c:1326
+#: src/applet-device-wifi.c:1327
 #, fuzzy, c-format
 msgid "Preparing Wi-Fi network connection “%s”…"
 msgstr "กำลังเตรียมเชื่อมต่อเครือข่าย '%s'..."
 
-#: src/applet-device-wifi.c:1329
+#: src/applet-device-wifi.c:1330
 #, fuzzy, c-format
 msgid "Configuring Wi-Fi network connection “%s”…"
 msgstr "กำลังตั้งค่าการเชื่อมต่อเครือข่ายโยงสาย '%s'..."
 
-#: src/applet-device-wifi.c:1332
+#: src/applet-device-wifi.c:1333
 #, fuzzy, c-format
 msgid "User authentication required for Wi-Fi network “%s”…"
 msgstr "ต้องยืนยันตัวบุคคลสำหรับการเชื่อมต่อเครือข่ายไร้สาย '%s'..."
 
-#: src/applet-device-wifi.c:1335
+#: src/applet-device-wifi.c:1336
 #, fuzzy, c-format
 msgid "Requesting a Wi-Fi network address for “%s”…"
 msgstr "กำลังขอที่อยู่สำหรับเครือข่าย '%s'..."
 
-#: src/applet-device-wifi.c:1346
+#: src/applet-device-wifi.c:1347
 #, fuzzy, c-format
 msgid "Wi-Fi network connection “%s” active: %s (%d%%)"
 msgstr "เครือข่ายไร้สาย '%s' ทำงานอยู่: %s (%d%%)"
 
-#: src/applet-device-wifi.c:1350
+#: src/applet-device-wifi.c:1351
 #, fuzzy, c-format
 msgid "Wi-Fi network connection “%s” active"
 msgstr "เครือข่ายโยงสาย '%s' ทำงานอยู่"
 
-#: src/applet-device-wifi.c:1369
+#: src/applet-device-wifi.c:1370
 msgid "Failed to activate connection"
 msgstr "เปิดใช้ช่องเชื่อมต่อไม่สำเร็จ"
 
-#: src/applet-device-wifi.c:1371 src/applet-device-wifi.c:1394 src/applet.c:374
-#: src/applet.c:428 src/applet.c:463
+#: src/applet-device-wifi.c:1372 src/applet-device-wifi.c:1395 src/applet.c:414
+#: src/applet.c:468 src/applet.c:503
 msgid "Unknown error"
 msgstr "ข้อผิดพลาดไม่ทราบสาเหตุ"
 
@@ -423,8 +423,7 @@ msgstr "ข้อผิดพลาดไม่ทราบสาเหตุ"
 msgid "Error displaying connection information:"
 msgstr "เกิดข้อผิดพลาดในการแสดงข้อมูลการเชื่อมต่อ:"
 
-#: src/applet-dialogs.c:60 src/connection-editor/page-wifi-security.c:374
-#: src/wireless-security/wireless-security.c:435
+#: src/applet-dialogs.c:60 src/connection-editor/page-wifi-security.c:369
 msgid "LEAP"
 msgstr "LEAP"
 
@@ -451,7 +450,7 @@ msgid "WPA3"
 msgstr ""
 
 #: src/applet-dialogs.c:234 src/applet-dialogs.c:243
-#: src/connection-editor/page-wifi-security.c:325
+#: src/connection-editor/page-wifi-security.c:320
 #, fuzzy
 msgctxt "Wi-Fi/Ethernet security"
 msgid "None"
@@ -530,7 +529,7 @@ msgstr "CDMA (%s)"
 #: src/applet-dialogs.c:527 src/applet-dialogs.c:861
 #: src/connection-editor/ce-page-team-port.ui:394
 #: src/connection-editor/ce-page-team.ui:776
-#: src/connection-editor/page-general.c:355
+#: src/connection-editor/page-general.c:368
 msgid "General"
 msgstr "ทั่วไป"
 
@@ -600,7 +599,7 @@ msgstr "ข้อความต้อนรับของ VPN"
 msgid "Base Connection"
 msgstr "การเชื่อมต่อฐาน"
 
-#: src/applet-dialogs.c:883 src/wireless-security/wireless-security.c:495
+#: src/applet-dialogs.c:883
 msgid "Unknown"
 msgstr "ไม่ทราบ"
 
@@ -734,23 +733,23 @@ msgstr "สร้างการเชื่อมต่อ DUN ไม่สำ�
 msgid "Failed to write connection to VPN UI: incomplete write"
 msgstr ""
 
-#: src/applet.c:372
+#: src/applet.c:412
 msgid "Failed to add/activate connection"
 msgstr "สร้าง/เปิดใช้การเชื่อมต่อไม่สำเร็จ"
 
-#: src/applet.c:426
+#: src/applet.c:466
 msgid "Device disconnect failed"
 msgstr "ตัดการเชื่อมต่อกับอุปกรณ์ไม่สำเร็จ"
 
-#: src/applet.c:431
+#: src/applet.c:471
 msgid "Disconnect failure"
 msgstr "ตัดการเชื่อมต่อไม่สำเร็จ"
 
-#: src/applet.c:461
+#: src/applet.c:501
 msgid "Connection activation failed"
 msgstr "เปิดใช้การเชื่อมต่อไม่สำเร็จ"
 
-#: src/applet.c:878
+#: src/applet.c:918
 #, fuzzy, c-format
 msgid ""
 "\n"
@@ -760,7 +759,7 @@ msgstr ""
 "\n"
 "การเชื่อมต่อ VPN '%s' ถูกตัดเพราะการเชื่อมต่อเครือข่ายถูกขัดจังหวะ"
 
-#: src/applet.c:880
+#: src/applet.c:920
 #, fuzzy, c-format
 msgid ""
 "\n"
@@ -770,7 +769,7 @@ msgstr ""
 "\n"
 "เชื่อมต่อเครือข่าย VPN '%s' ไม่สำเร็จเพราะการเชื่อมต่อถูกขัดจังหวะ"
 
-#: src/applet.c:882
+#: src/applet.c:922
 #, fuzzy, c-format
 msgid ""
 "\n"
@@ -779,7 +778,7 @@ msgstr ""
 "\n"
 "เชื่อมต่อเครือข่าย VPN '%s' ไม่สำเร็จเพราะบริการ VPN หยุดทำงานกะทันหัน"
 
-#: src/applet.c:884
+#: src/applet.c:924
 #, fuzzy, c-format
 msgid ""
 "\n"
@@ -789,7 +788,7 @@ msgstr ""
 "\n"
 "เชื่อมต่อเครือข่าย VPN '%s' ไม่สำเร็จเพราะบริการ VPN คืนค่าตั้งที่ไม่ถูกต้องกลับมา"
 
-#: src/applet.c:886
+#: src/applet.c:926
 #, fuzzy, c-format
 msgid ""
 "\n"
@@ -798,7 +797,7 @@ msgstr ""
 "\n"
 "เชื่อมต่อเครือข่าย VPN '%s' ไม่สำเร็จเพราะหมดเวลารอเชื่อมต่อ"
 
-#: src/applet.c:888
+#: src/applet.c:928
 #, fuzzy, c-format
 msgid ""
 "\n"
@@ -807,7 +806,7 @@ msgstr ""
 "\n"
 "เชื่อมต่อเครือข่าย VPN '%s' ไม่สำเร็จเพราะบริการ VPN ไม่เริ่มทำงานในเวลาที่กำหนด"
 
-#: src/applet.c:890
+#: src/applet.c:930
 #, fuzzy, c-format
 msgid ""
 "\n"
@@ -816,7 +815,7 @@ msgstr ""
 "\n"
 "เชื่อมต่อเครือข่าย VPN '%s' ไม่สำเร็จเพราะบริการ VPN เริ่มทำงานไม่สำเร็จ"
 
-#: src/applet.c:892
+#: src/applet.c:932
 #, fuzzy, c-format
 msgid ""
 "\n"
@@ -825,7 +824,7 @@ msgstr ""
 "\n"
 "เชื่อมต่อเครือข่าย VPN '%s' ไม่สำเร็จเพราะไม่มีข้อมูลลับ VPN ที่จะใช้เข้าระบบ"
 
-#: src/applet.c:894
+#: src/applet.c:934
 #, fuzzy, c-format
 msgid ""
 "\n"
@@ -834,7 +833,7 @@ msgstr ""
 "\n"
 "เชื่อมต่อเครือข่าย VPN '%s' ไม่สำเร็จเพราะข้อมูลลับ VPN ไม่ถูกต้อง"
 
-#: src/applet.c:899
+#: src/applet.c:939
 #, fuzzy, c-format
 msgid ""
 "\n"
@@ -843,7 +842,7 @@ msgstr ""
 "\n"
 "เชื่อมต่อเครือข่าย VPN '%s' ไม่สำเร็จ"
 
-#: src/applet.c:926
+#: src/applet.c:966
 #, c-format
 msgid ""
 "VPN connection has been successfully established.\n"
@@ -854,19 +853,19 @@ msgstr ""
 "\n"
 "%s\n"
 
-#: src/applet.c:928
+#: src/applet.c:968
 msgid "VPN connection has been successfully established.\n"
 msgstr "การเชื่อมต่อ VPN เชื่อมต่อสำเร็จแล้ว\n"
 
-#: src/applet.c:930
+#: src/applet.c:970
 msgid "VPN Login Message"
 msgstr "ข้อความเข้าระบบ VPN"
 
-#: src/applet.c:938 src/applet.c:978
+#: src/applet.c:978 src/applet.c:1018
 msgid "VPN Connection Failed"
 msgstr "เชื่อมต่อ VPN ไม่สำเร็จ"
 
-#: src/applet.c:982
+#: src/applet.c:1022
 #, fuzzy, c-format
 msgid ""
 "\n"
@@ -879,7 +878,7 @@ msgstr ""
 "\n"
 "%s"
 
-#: src/applet.c:985
+#: src/applet.c:1025
 #, fuzzy, c-format
 msgid ""
 "\n"
@@ -892,138 +891,138 @@ msgstr ""
 "\n"
 "%s"
 
-#: src/applet.c:1276
+#: src/applet.c:1316
 msgid "device not ready (firmware missing)"
 msgstr "อุปกรณ์ไม่พร้อม (ขาดเฟิร์มแวร์)"
 
-#: src/applet.c:1278
+#: src/applet.c:1318
 msgid "device not ready"
 msgstr "อุปกรณ์ไม่พร้อม"
 
-#: src/applet.c:1304
+#: src/applet.c:1344
 msgid "Disconnect"
 msgstr "ตัดการเชื่อมต่อ"
 
-#: src/applet.c:1318
+#: src/applet.c:1358
 msgid "device not managed"
 msgstr "อุปกรณ์ไม่มีการจัดการ"
 
-#: src/applet.c:1391
+#: src/applet.c:1432
 msgid "No network devices available"
 msgstr "ไม่มีอุปกรณ์เครือข่ายในระบบ"
 
-#: src/applet.c:1443
+#: src/applet.c:1484
 msgid "_VPN Connections"
 msgstr "_การเชื่อมต่อ VPN"
 
-#: src/applet.c:1487
+#: src/applet.c:1528
 #, fuzzy
 msgid "_Configure VPN…"
 msgstr "_ตั้งค่า VPN..."
 
-#: src/applet.c:1490
+#: src/applet.c:1531
 #, fuzzy
 msgid "_Add a VPN connection…"
 msgstr "เพิ่มการเชื่อมต่อ VPN ใหม่"
 
-#: src/applet.c:1596
+#: src/applet.c:1637
 #, fuzzy
 msgid "NetworkManager is not running…"
 msgstr "NetworkManager ไม่ได้ทำงานอยู่"
 
-#: src/applet.c:1601 src/applet.c:2666
+#: src/applet.c:1642 src/applet.c:2710
 msgid "Networking disabled"
 msgstr "ปิดการใช้งานเครือข่ายอยู่"
 
 #. 'Enable Networking' item
-#: src/applet.c:1811
+#: src/applet.c:1852
 msgid "Enable _Networking"
 msgstr "เปิดใช้เ_ครือข่าย"
 
 #. 'Enable Wi-Fi' item
-#: src/applet.c:1820
+#: src/applet.c:1861
 #, fuzzy
 msgid "Enable _Wi-Fi"
 msgstr "เปิดใช้ไ_ร้สาย"
 
 #. 'Enable Mobile Broadband' item
-#: src/applet.c:1829
+#: src/applet.c:1870
 msgid "Enable _Mobile Broadband"
 msgstr "เปิดใช้บรอดแบนด์_มือถือ"
 
 #. Toggle notifications item
-#: src/applet.c:1841
+#: src/applet.c:1882
 msgid "Enable N_otifications"
 msgstr "เปิดใช้การแ_จ้งเหตุ"
 
 #. 'Connection Information' item
-#: src/applet.c:1853
+#: src/applet.c:1894
 msgid "Connection _Information"
 msgstr "_ข้อมูลการเชื่อมต่อ"
 
 #. 'Edit Connections...' item
-#: src/applet.c:1861
+#: src/applet.c:1902
 #, fuzzy
 msgid "Edit Connections…"
 msgstr "แก้ไขการเชื่อมต่อ..."
 
-#: src/applet.c:1875
+#: src/applet.c:1916
 msgid "_About"
 msgstr "เ_กี่ยวกับ"
 
-#: src/applet.c:2186
+#: src/applet.c:2230
 #, fuzzy, c-format
 msgid "You are now connected to “%s”."
 msgstr "คุณเชื่อมต่อกับ '%s' แล้ว"
 
-#: src/applet.c:2226
+#: src/applet.c:2270
 msgid "Disconnected"
 msgstr "ตัดการเชื่อมต่อแล้ว"
 
-#: src/applet.c:2227
+#: src/applet.c:2271
 msgid "The network connection has been disconnected."
 msgstr "การเชื่อมต่อเครือข่ายถูกตัดแล้ว"
 
-#: src/applet.c:2529
+#: src/applet.c:2573
 #, fuzzy, c-format
 msgid "Preparing network connection “%s”…"
 msgstr "กำลังเตรียมเชื่อมต่อเครือข่าย '%s'..."
 
-#: src/applet.c:2532
+#: src/applet.c:2576
 #, fuzzy, c-format
 msgid "User authentication required for network connection “%s”…"
 msgstr "ต้องยืนยันตัวบุคคลสำหรับการเชื่อมต่อเครือข่าย '%s'..."
 
-#: src/applet.c:2538
+#: src/applet.c:2582
 #, fuzzy, c-format
 msgid "Network connection “%s” active"
 msgstr "การเชื่อมต่อเครือข่าย '%s' เปิดทำงานแล้ว"
 
-#: src/applet.c:2611
+#: src/applet.c:2655
 #, fuzzy, c-format
 msgid "Starting VPN connection “%s”…"
 msgstr "กำลังเปิดการเชื่อมต่อ VPN '%s'..."
 
-#: src/applet.c:2614
+#: src/applet.c:2658
 #, fuzzy, c-format
 msgid "User authentication required for VPN connection “%s”…"
 msgstr "ต้องยืนยันตัวบุคคลสำหรับการเชื่อมต่อเครือข่าย VPN '%s'..."
 
-#: src/applet.c:2617
+#: src/applet.c:2661
 #, fuzzy, c-format
 msgid "Requesting a VPN address for “%s”…"
 msgstr "กำลังขอที่อยู่ VPN สำหรับ '%s'..."
 
-#: src/applet.c:2620
+#: src/applet.c:2664
 #, fuzzy
 msgid "VPN connection active"
 msgstr "การเชื่อมต่อ VPN '%s' เปิดทำงานแล้ว"
 
-#: src/applet.c:2670
+#: src/applet.c:2714
 msgid "No network connection"
 msgstr "ไม่ได้เชื่อมกับเครือข่าย"
 
-#: src/applet.c:3280
+#: src/applet.c:3324
 msgid "NetworkManager Applet"
 msgstr "แอพเพล็ต NetworkManager"
 
@@ -1042,7 +1041,7 @@ msgstr ""
 #: src/connection-editor/ce-page-bond.ui:180
 #: src/connection-editor/ce-page-bridge.ui:120
 #: src/connection-editor/ce-page-ip4.ui:150
-#: src/connection-editor/ce-page-ip6.ui:181
+#: src/connection-editor/ce-page-ip6.ui:184
 #: src/connection-editor/ce-page-team.ui:234
 #: src/connection-editor/ce-page-wireguard.ui:603
 #: src/connection-editor/nm-connection-list.ui:87
@@ -1054,7 +1053,7 @@ msgstr ""
 #: src/connection-editor/ce-page-bond.ui:208
 #: src/connection-editor/ce-page-bridge.ui:148
 #: src/connection-editor/ce-page-ip4.ui:165
-#: src/connection-editor/ce-page-ip6.ui:196
+#: src/connection-editor/ce-page-ip6.ui:199
 #: src/connection-editor/ce-page-team.ui:262
 #: src/connection-editor/ce-page-wireguard.ui:617
 #: src/connection-editor/connection-helpers.c:748
@@ -1390,8 +1389,8 @@ msgstr ""
 #: src/connection-editor/ce-page-dcb.ui:419
 #: src/connection-editor/ce-page-dcb.ui:442
 #: src/connection-editor/ce-page-dcb.ui:465 src/connection-editor/ce-page.c:111
-#: src/connection-editor/page-wifi.c:154 src/connection-editor/page-wifi.c:158
-#: src/connection-editor/page-wifi.c:179
+#: src/connection-editor/page-wifi.c:144 src/connection-editor/page-wifi.c:148
+#: src/connection-editor/page-wifi.c:169
 msgid "default"
 msgstr "ปริยาย"
 
@@ -1535,9 +1534,6 @@ msgstr ""
 
 #: src/connection-editor/ce-page-dsl.ui:19
 #: src/connection-editor/ce-page-mobile.ui:62
-#: src/wireless-security/eap-method-leap.ui:21
-#: src/wireless-security/eap-method-simple.ui:21
-#: src/wireless-security/ws-leap.ui:21
 #, fuzzy
 msgid "_Username"
 msgstr "_ชื่อผู้ใช้:"
@@ -1558,10 +1554,6 @@ msgid "_Service"
 msgstr "_บริการ:"
 
 #: src/connection-editor/ce-page-dsl.ui:71
-#: src/wireless-security/eap-method-leap.ui:60
-#: src/wireless-security/eap-method-simple.ui:77
-#: src/wireless-security/ws-leap.ui:60 src/wireless-security/ws-sae.ui:60
-#: src/wireless-security/ws-wpa-psk.ui:60
 msgid "Sho_w password"
 msgstr "แ_สดงรหัสผ่าน"
 
@@ -1571,10 +1563,6 @@ msgstr ""
 
 #: src/connection-editor/ce-page-dsl.ui:102
 #: src/connection-editor/ce-page-mobile.ui:76
-#: src/wireless-security/eap-method-leap.ui:35
-#: src/wireless-security/eap-method-simple.ui:35
-#: src/wireless-security/ws-leap.ui:35 src/wireless-security/ws-sae.ui:20
-#: src/wireless-security/ws-wpa-psk.ui:20
 #, fuzzy
 msgid "_Password"
 msgstr "_รหัสผ่าน:"
@@ -1617,8 +1605,7 @@ msgstr ""
 #: src/connection-editor/ce-page-ip6.ui:12
 #: src/connection-editor/ce-page-proxy.ui:24
 #: src/connection-editor/ce-page-wifi.ui:32
-#: src/connection-editor/page-ip4.c:118 src/connection-editor/page-ip6.c:135
-#: src/wireless-security/eap-method-peap.ui:23
+#: src/connection-editor/page-ip4.c:118 src/connection-editor/page-ip6.c:136
 msgid "Automatic"
 msgstr "อัตโนมัติ"
 
@@ -1663,14 +1650,14 @@ msgid "Full"
 msgstr ""
 
 #: src/connection-editor/ce-page-ethernet.ui:74
-#: src/connection-editor/page-ip6.c:148
+#: src/connection-editor/page-ip6.c:149
 msgid "Ignore"
 msgstr "ไม่ใช้"
 
 #: src/connection-editor/ce-page-ethernet.ui:80
 #: src/connection-editor/ce-page-ip4.ui:18
 #: src/connection-editor/ce-page-ip6.ui:18 src/connection-editor/page-ip4.c:155
-#: src/connection-editor/page-ip6.c:184
+#: src/connection-editor/page-ip6.c:185
 msgid "Manual"
 msgstr "กำหนดเอง"
 
@@ -1916,12 +1903,12 @@ msgstr "เชื่อมภายใน"
 
 #: src/connection-editor/ce-page-ip4.ui:24
 #: src/connection-editor/ce-page-ip6.ui:24 src/connection-editor/page-ip4.c:175
-#: src/connection-editor/page-ip6.c:204
+#: src/connection-editor/page-ip6.c:205
 msgid "Shared to other computers"
 msgstr "แบ่งปันให้เครื่องอื่น"
 
 #: src/connection-editor/ce-page-ip4.ui:47
-#: src/connection-editor/ce-page-ip6.ui:78
+#: src/connection-editor/ce-page-ip6.ui:81
 #, fuzzy
 msgid "_Method"
 msgstr "_วิธีการ:"
@@ -1937,7 +1924,7 @@ msgstr ""
 "ถ้าคุณต้องการใช้ชื่อลูกข่าย DHCP ก็ป้อนได้ที่นี่"
 
 #: src/connection-editor/ce-page-ip4.ui:215
-#: src/connection-editor/ce-page-ip6.ui:233
+#: src/connection-editor/ce-page-ip6.ui:236
 msgid ""
 "Domains used when resolving host names. Use commas to separate multiple "
 "domains."
@@ -1949,15 +1936,15 @@ msgid "D_HCP client ID"
 msgstr "ชื่อลูกข่าย D_HCP:"
 
 #: src/connection-editor/ce-page-ip4.ui:242
-#: src/connection-editor/ce-page-ip6.ui:246
-#: src/connection-editor/page-ip4.c:359 src/connection-editor/page-ip6.c:347
+#: src/connection-editor/ce-page-ip6.ui:249
+#: src/connection-editor/page-ip4.c:359 src/connection-editor/page-ip6.c:348
 #, fuzzy
 msgid "S_earch domains"
 msgstr "โดเมนที่_ค้นหา:"
 
 #: src/connection-editor/ce-page-ip4.ui:256
-#: src/connection-editor/ce-page-ip6.ui:260
-#: src/connection-editor/page-ip4.c:350 src/connection-editor/page-ip6.c:338
+#: src/connection-editor/ce-page-ip6.ui:263
+#: src/connection-editor/page-ip4.c:350 src/connection-editor/page-ip6.c:339
 #, fuzzy
 msgid "DNS ser_vers"
 msgstr "เซิร์ฟเวอร์ _DNS:"
@@ -1982,33 +1969,39 @@ msgstr ""
 "เมื่อเชื่อมต่อกับเครือข่ายที่รองรับ IPv6 จะยอมเชื่อมต่อถ้าตั้งค่า IPv4 ไม่ผ่านแต่ตั้งค่า IPv6 ได้สำเร็จ"
 
 #: src/connection-editor/ce-page-ip4.ui:333
-#: src/connection-editor/ce-page-ip6.ui:401
+#: src/connection-editor/ce-page-ip6.ui:405
 msgid "_Routes…"
 msgstr "เ_ส้นทาง…"
 
+#. TRANSLATORS: Default zone set for firewall, when no zone is selected
 #: src/connection-editor/ce-page-ip6.ui:35
+#: src/connection-editor/page-general.c:41
+msgid "Default"
+msgstr "ปริยาย"
+
+#: src/connection-editor/ce-page-ip6.ui:38
 #: src/connection-editor/ce-page-macsec.ui:32
-#: src/connection-editor/page-ip4.c:185 src/connection-editor/page-ip6.c:212
+#: src/connection-editor/page-ip4.c:185 src/connection-editor/page-ip6.c:213
 msgid "Disabled"
 msgstr "ปิดใช้งาน"
 
-#: src/connection-editor/ce-page-ip6.ui:38
+#: src/connection-editor/ce-page-ip6.ui:41
 msgid "Enabled (prefer public address)"
 msgstr ""
 
-#: src/connection-editor/ce-page-ip6.ui:41
+#: src/connection-editor/ce-page-ip6.ui:44
 msgid "Enabled (prefer temporary address)"
 msgstr ""
 
-#: src/connection-editor/ce-page-ip6.ui:52
+#: src/connection-editor/ce-page-ip6.ui:55
 msgid "EUI64"
 msgstr ""
 
-#: src/connection-editor/ce-page-ip6.ui:55
+#: src/connection-editor/ce-page-ip6.ui:58
 msgid "Stable privacy"
 msgstr ""
 
-#: src/connection-editor/ce-page-ip6.ui:274
+#: src/connection-editor/ce-page-ip6.ui:277
 #, fuzzy
 msgid ""
 "IP addresses of domain name servers used to resolve host names. Use commas "
@@ -2018,19 +2011,29 @@ msgstr ""
 "รายชื่อที่อยู่ไอพีของเซิร์ฟเวอร์โดเมนเนมที่จะใช้เปิดหาที่อยู่ของชื่อโฮสต์ "
 "ใช้จุลภาคคั่นระหว่างที่อยู่ของเซิร์ฟเวอร์ต่างๆ"
 
-#: src/connection-editor/ce-page-ip6.ui:287
+#: src/connection-editor/ce-page-ip6.ui:290
 msgid "IPv6 _privacy extensions"
 msgstr ""
 
-#: src/connection-editor/ce-page-ip6.ui:319
+#: src/connection-editor/ce-page-ip6.ui:304
+msgid ""
+"If enabled, it makes the kernel generate a temporary IPv6 address in "
+"addition to the public one generated from MAC address. This enhances "
+"privacy, but could cause problems in some applications. If set to \"Default"
+"\", the value from NetworkManager global configuration is used. If that is "
+"also unset, use the kernel default value read from file \"/proc/sys/net/ipv6/"
+"conf/default/use_tempaddr\""
+msgstr ""
+
+#: src/connection-editor/ce-page-ip6.ui:323
 msgid "IPv6 address _generation mode"
 msgstr ""
 
-#: src/connection-editor/ce-page-ip6.ui:356
+#: src/connection-editor/ce-page-ip6.ui:360
 msgid "Require IPv_6 addressing for this connection to complete"
 msgstr "บังคับใช้ที่อยู่ IPv_6 สำหรับการเชื่อมต่อนี้"
 
-#: src/connection-editor/ce-page-ip6.ui:360
+#: src/connection-editor/ce-page-ip6.ui:364
 msgid ""
 "When connecting to IPv4-capable networks, allows the connection to complete "
 "if IPv6 configuration fails but IPv4 configuration succeeds."
@@ -3151,7 +3154,7 @@ msgstr ""
 "แต่ถ้าการเชื่อมต่อไม่สำเร็จ ก็ลองปิดการรองรับบางวิธีดู"
 
 #: src/connection-editor/connection-helpers.c:93
-#: src/connection-editor/page-wifi.c:423
+#: src/connection-editor/page-wifi.c:389
 msgid "Wi-Fi"
 msgstr ""
 
@@ -3278,7 +3281,7 @@ msgstr ""
 
 #: src/connection-editor/ip4-routes-dialog.c:683
 #: src/connection-editor/ip6-routes-dialog.c:704
-#: src/connection-editor/page-ip4.c:1119 src/connection-editor/page-ip6.c:1117
+#: src/connection-editor/page-ip4.c:1119 src/connection-editor/page-ip6.c:1121
 msgid "Address"
 msgstr "ที่อยู่"
 
@@ -3289,7 +3292,7 @@ msgstr "เน็ตแมสก์"
 
 #: src/connection-editor/ip4-routes-dialog.c:721
 #: src/connection-editor/ip6-routes-dialog.c:742
-#: src/connection-editor/page-ip4.c:1157 src/connection-editor/page-ip6.c:1155
+#: src/connection-editor/page-ip4.c:1157 src/connection-editor/page-ip6.c:1159
 msgid "Gateway"
 msgstr "เกตเวย์"
 
@@ -3299,7 +3302,7 @@ msgid "Metric"
 msgstr "Metric"
 
 #: src/connection-editor/ip6-routes-dialog.c:723
-#: src/connection-editor/page-ip6.c:1136
+#: src/connection-editor/page-ip6.c:1140
 msgid "Prefix"
 msgstr "Prefix"
 
@@ -3555,16 +3558,16 @@ msgstr "การเชื่อมต่อเครือข่าย"
 msgid "Add a new connection"
 msgstr "เพิ่มการเชื่อมต่อ VPN ใหม่"
 
-#: src/connection-editor/page-8021x-security.c:99
+#: src/connection-editor/page-8021x-security.c:96
 msgid "802.1X Security"
 msgstr "การรักษาความปลอดภัย 802.1X"
 
-#: src/connection-editor/page-8021x-security.c:101
+#: src/connection-editor/page-8021x-security.c:98
 #, fuzzy
 msgid "Could not load 802.1X Security user interface."
 msgstr "ไม่สามารถโหลดส่วนติดต่อผู้ใช้สำหรับการรักษาความปลอดภัย Wi-Fi"
 
-#: src/connection-editor/page-8021x-security.c:115
+#: src/connection-editor/page-8021x-security.c:112
 msgid "Use 802.1_X security for this connection"
 msgstr "ใช้การรักษาความปลอดภัย 802.1_X สำหรับการเชื่อมต่อนี้"
 
@@ -3691,7 +3694,7 @@ msgid "Ethernet device"
 msgstr "อีเทอร์เน็ต (%s)"
 
 #: src/connection-editor/page-ethernet.c:502
-#: src/connection-editor/page-vlan.c:723 src/connection-editor/page-wifi.c:557
+#: src/connection-editor/page-vlan.c:723 src/connection-editor/page-wifi.c:521
 #, fuzzy
 msgid "cloned MAC"
 msgstr "หมายเลข MAC ฉบับ_จำลอง:"
@@ -3705,11 +3708,6 @@ msgstr ""
 msgid "Ethernet connection %d"
 msgstr "การเชื่อมต่อโยงสาย %d"
 
-#. TRANSLATORS: Default zone set for firewall, when no zone is selected
-#: src/connection-editor/page-general.c:41
-msgid "Default"
-msgstr "ปริยาย"
-
 #: src/connection-editor/page-general.c:42
 msgid ""
 "The zone defines the trust level of the connection. Default is not a regular "
@@ -3717,7 +3715,7 @@ msgid ""
 "firewall. Only usable if firewalld is active."
 msgstr ""
 
-#: src/connection-editor/page-general.c:358
+#: src/connection-editor/page-general.c:371
 #, fuzzy
 msgid "Could not load General user interface."
 msgstr "ไม่สามารถโหลดส่วนติดต่อผู้ใช้สำหรับเครือข่ายโยงสาย"
@@ -3757,23 +3755,23 @@ msgstr "ไม่สามารถโหลดส่วนติดต่อผ
 msgid "IP tunnel connection %d"
 msgstr "การเชื่อมต่อโยงสาย %d"
 
-#: src/connection-editor/page-ip4.c:114 src/connection-editor/page-ip6.c:129
+#: src/connection-editor/page-ip4.c:114 src/connection-editor/page-ip6.c:130
 msgid "Automatic (VPN)"
 msgstr "อัตโนมัติ (VPN)"
 
-#: src/connection-editor/page-ip4.c:115 src/connection-editor/page-ip6.c:130
+#: src/connection-editor/page-ip4.c:115 src/connection-editor/page-ip6.c:131
 msgid "Automatic (VPN) addresses only"
 msgstr "อัตโนมัติ (VPN) เฉพาะที่อยู่"
 
-#: src/connection-editor/page-ip4.c:119 src/connection-editor/page-ip6.c:136
+#: src/connection-editor/page-ip4.c:119 src/connection-editor/page-ip6.c:137
 msgid "Automatic, addresses only"
 msgstr "อัตโนมัติ เฉพาะที่อยู่"
 
-#: src/connection-editor/page-ip4.c:121 src/connection-editor/page-ip6.c:132
+#: src/connection-editor/page-ip4.c:121 src/connection-editor/page-ip6.c:133
 msgid "Automatic (PPPoE)"
 msgstr "อัตโนมัติ (PPPoE)"
 
-#: src/connection-editor/page-ip4.c:122 src/connection-editor/page-ip6.c:133
+#: src/connection-editor/page-ip4.c:122 src/connection-editor/page-ip6.c:134
 msgid "Automatic (PPPoE) addresses only"
 msgstr "อัตโนมัติ (PPPoE) เฉพาะที่อยู่"
 
@@ -3785,16 +3783,16 @@ msgstr "อัตโนมัติ (DHCP)"
 msgid "Automatic (DHCP) addresses only"
 msgstr "อัตโนมัติ (DHCP) เฉพาะที่อยู่"
 
-#: src/connection-editor/page-ip4.c:168 src/connection-editor/page-ip6.c:197
+#: src/connection-editor/page-ip4.c:168 src/connection-editor/page-ip6.c:198
 msgid "Link-Local Only"
 msgstr "เชื่อมภายในเท่านั้น"
 
-#: src/connection-editor/page-ip4.c:348 src/connection-editor/page-ip6.c:336
+#: src/connection-editor/page-ip4.c:348 src/connection-editor/page-ip6.c:337
 #, fuzzy
 msgid "Additional DNS ser_vers"
 msgstr "เซิร์ฟเวอร์ _DNS เพิ่มเติม:"
 
-#: src/connection-editor/page-ip4.c:357 src/connection-editor/page-ip6.c:345
+#: src/connection-editor/page-ip4.c:357 src/connection-editor/page-ip6.c:346
 #, fuzzy
 msgid "Additional s_earch domains"
 msgstr "โดเมน_ค้นหาเพิ่มเติม:"
@@ -3832,39 +3830,39 @@ msgstr ""
 msgid "IPv4 DNS server “%s” invalid"
 msgstr ""
 
-#: src/connection-editor/page-ip6.c:172
+#: src/connection-editor/page-ip6.c:173
 msgid "Automatic, DHCP only"
 msgstr "อัตโนมัติ ใช้ DHCP เท่านั้น"
 
-#: src/connection-editor/page-ip6.c:1018
+#: src/connection-editor/page-ip6.c:1022
 #, c-format
 msgid "Editing IPv6 routes for %s"
 msgstr "แก้ไขเส้นทาง IPv6 สำหรับ %s"
 
-#: src/connection-editor/page-ip6.c:1207
+#: src/connection-editor/page-ip6.c:1211
 msgid "IPv6 Settings"
 msgstr "ตั้งค่า IPv6"
 
-#: src/connection-editor/page-ip6.c:1209
+#: src/connection-editor/page-ip6.c:1213
 msgid "Could not load IPv6 user interface."
 msgstr "ไม่สามารถโหลดส่วนติดต่อผู้ใช้สำหรับ IPv6"
 
-#: src/connection-editor/page-ip6.c:1304
+#: src/connection-editor/page-ip6.c:1308
 #, c-format
 msgid "IPv6 address “%s” invalid"
 msgstr ""
 
-#: src/connection-editor/page-ip6.c:1312
+#: src/connection-editor/page-ip6.c:1316
 #, c-format
 msgid "IPv6 prefix “%s” invalid"
 msgstr ""
 
-#: src/connection-editor/page-ip6.c:1321
+#: src/connection-editor/page-ip6.c:1325
 #, c-format
 msgid "IPv6 gateway “%s” invalid"
 msgstr ""
 
-#: src/connection-editor/page-ip6.c:1363
+#: src/connection-editor/page-ip6.c:1367
 #, c-format
 msgid "IPv6 DNS server “%s” invalid"
 msgstr ""
@@ -3943,24 +3941,18 @@ msgid "GSM"
 msgstr "GSM"
 
 #: src/connection-editor/page-ppp.c:116
-#: src/wireless-security/eap-method-ttls.c:267
 msgid "PAP"
 msgstr "PAP"
 
 #: src/connection-editor/page-ppp.c:117
-#: src/wireless-security/eap-method-ttls.c:333
 msgid "CHAP"
 msgstr "CHAP"
 
 #: src/connection-editor/page-ppp.c:118
-#: src/wireless-security/eap-method-fast.c:271
-#: src/wireless-security/eap-method-peap.c:279
-#: src/wireless-security/eap-method-ttls.c:299
 msgid "MSCHAPv2"
 msgstr "MSCHAPv2"
 
 #: src/connection-editor/page-ppp.c:119
-#: src/wireless-security/eap-method-ttls.c:283
 msgid "MSCHAP"
 msgstr "MSCHAP"
 
@@ -4083,59 +4075,59 @@ msgstr ""
 "เลือกชนิดของ VPN ที่คุณต้องการใช้สำหรับการเชื่อมต่อใหม่นี้ ถ้าชนิดของการเชื่อมต่อ VPN "
 "ที่คุณต้องการสร้างไม่มีอยู่ในรายชื่อนี้ ก็แปลว่าคุณอาจไม่ได้ติดตั้งปลั๊กอิน VPN ที่ถูกต้องไว้"
 
-#: src/connection-editor/page-wifi-security.c:351
+#: src/connection-editor/page-wifi-security.c:346
 msgid "WEP 40/128-bit Key (Hex or ASCII)"
 msgstr "WEP กุญแจ 40/128 บิต (ฐานสิบหก หรือ ASCII)"
 
-#: src/connection-editor/page-wifi-security.c:361
+#: src/connection-editor/page-wifi-security.c:356
 msgid "WEP 128-bit Passphrase"
 msgstr "WEP 128 บิต แบบวลีรหัสผ่าน"
 
-#: src/connection-editor/page-wifi-security.c:387
+#: src/connection-editor/page-wifi-security.c:382
 msgid "Dynamic WEP (802.1X)"
 msgstr "WEP แบบผันแปร (802.1X)"
 
-#: src/connection-editor/page-wifi-security.c:400
+#: src/connection-editor/page-wifi-security.c:395
 msgid "WPA & WPA2 Personal"
 msgstr "WPA & WPA2 ส่วนบุคคล"
 
-#: src/connection-editor/page-wifi-security.c:413
+#: src/connection-editor/page-wifi-security.c:408
 msgid "WPA & WPA2 Enterprise"
 msgstr "WPA & WPA2 เอนเทอร์ไพรส์"
 
-#: src/connection-editor/page-wifi-security.c:426
+#: src/connection-editor/page-wifi-security.c:421
 #, fuzzy
 msgid "WPA3 Personal"
 msgstr "WPA & WPA2 ส่วนบุคคล"
 
-#: src/connection-editor/page-wifi-security.c:437
+#: src/connection-editor/page-wifi-security.c:431
 msgid "Enhanced Open"
 msgstr ""
 
-#: src/connection-editor/page-wifi-security.c:483
+#: src/connection-editor/page-wifi-security.c:476
 #, fuzzy
 msgid "Could not load Wi-Fi security user interface; missing Wi-Fi setting."
 msgstr "ไม่สามารถโหลดส่วนติดต่อผู้ใช้สำหรับการรักษาความปลอดภัย Wi-Fi; ไม่ได้ตั้งค่า Wi-Fi ไว้"
 
-#: src/connection-editor/page-wifi-security.c:494
+#: src/connection-editor/page-wifi-security.c:487
 #, fuzzy
 msgid "Wi-Fi Security"
 msgstr "การรักษาความปลอดภัยเครือข่ายไร้สาย"
 
-#: src/connection-editor/page-wifi-security.c:496
+#: src/connection-editor/page-wifi-security.c:489
 #, fuzzy
 msgid "Could not load Wi-Fi security user interface."
 msgstr "ไม่สามารถโหลดส่วนติดต่อผู้ใช้สำหรับการรักษาความปลอดภัย Wi-Fi"
 
-#: src/connection-editor/page-wifi-security.c:577
+#: src/connection-editor/page-wifi-security.c:570
 msgid "missing SSID"
 msgstr ""
 
-#: src/connection-editor/page-wifi-security.c:583
+#: src/connection-editor/page-wifi-security.c:576
 msgid "Security not compatible with Ad-Hoc mode"
 msgstr ""
 
-#: src/connection-editor/page-wifi.c:63
+#: src/connection-editor/page-wifi.c:61
 #, fuzzy
 msgid ""
 "This option locks this connection to the Wi-Fi access point (AP) specified "
@@ -4144,7 +4136,7 @@ msgstr ""
 "ตัวเลือกนี้จะล็อคการเชื่อมต่อนี้เข้ากับ access point (AP) ที่ระบุโดย BSSID ที่ป้อนนี้ ตัวอย่าง: "
 "00:11:22:33:44:55"
 
-#: src/connection-editor/page-wifi.c:74
+#: src/connection-editor/page-wifi.c:72
 #, fuzzy
 msgid ""
 "This option locks this connection to the network device specified either by "
@@ -4154,26 +4146,26 @@ msgstr ""
 "ตัวเลือกนี้จะล็อคการเชื่อมต่อไว้กับอุปกรณ์เครือข่ายที่ระบุโดยหมายเลข MAC นี้ ตัวอย่าง: "
 "00:11:22:33:44:55"
 
-#: src/connection-editor/page-wifi.c:183
+#: src/connection-editor/page-wifi.c:173
 #, c-format
 msgid "%u (%u MHz)"
 msgstr "%u (%u MHz)"
 
-#: src/connection-editor/page-wifi.c:425
+#: src/connection-editor/page-wifi.c:391
 #, fuzzy
 msgid "Could not load Wi-Fi user interface."
 msgstr "ไม่สามารถโหลดส่วนติดต่อผู้ใช้สำหรับ Wi-Fi"
 
-#: src/connection-editor/page-wifi.c:547
+#: src/connection-editor/page-wifi.c:511
 msgid "bssid"
 msgstr ""
 
-#: src/connection-editor/page-wifi.c:553
+#: src/connection-editor/page-wifi.c:517
 #, fuzzy
 msgid "Wi-Fi device"
 msgstr "อุปกรณ์ใดๆ"
 
-#: src/connection-editor/page-wifi.c:600
+#: src/connection-editor/page-wifi.c:564
 #, fuzzy, c-format
 msgid "Wi-Fi connection %d"
 msgstr "การเชื่อมต่อโยงสาย %d"
@@ -4384,296 +4376,125 @@ msgstr "ใบรับรองแบบ DER หรือ PEM (*.der, *.pem, *.
 msgid "DER, PEM, or PKCS#12 private keys (*.der, *.pem, *.p12, *.key)"
 msgstr "กุญแจส่วนตัวแบบ DER, PEM, หรือ PKCS#12 (*.der, *.pem, *.p12)"
 
-#: src/wireless-security/eap-method-fast.c:58
-msgid "missing EAP-FAST PAC file"
-msgstr ""
+#~ msgid "GTC"
+#~ msgstr "GTC"
 
-#: src/wireless-security/eap-method-fast.c:255
-#: src/wireless-security/eap-method-peap.c:311
-#: src/wireless-security/eap-method-ttls.c:365
-msgid "GTC"
-msgstr "GTC"
-
-#: src/wireless-security/eap-method-fast.c:394
 #, fuzzy
-msgid "Choose a PAC file"
-msgstr "เลือกแฟ้ม PAC..."
+#~ msgid "Choose a PAC file"
+#~ msgstr "เลือกแฟ้ม PAC..."
 
-#: src/wireless-security/eap-method-fast.c:401
-msgid "PAC files (*.pac)"
-msgstr "แฟ้ม PAC (*.pac)"
+#~ msgid "PAC files (*.pac)"
+#~ msgstr "แฟ้ม PAC (*.pac)"
 
-#: src/wireless-security/eap-method-fast.c:405
-msgid "All files"
-msgstr "ทุกแฟ้ม"
+#~ msgid "All files"
+#~ msgstr "ทุกแฟ้ม"
 
-#: src/wireless-security/eap-method-fast.ui:23
-msgid "Anonymous"
-msgstr "นิรนาม"
+#~ msgid "Anonymous"
+#~ msgstr "นิรนาม"
 
-#: src/wireless-security/eap-method-fast.ui:26
-msgid "Authenticated"
-msgstr "ยืนยันตัวบุคคล"
+#~ msgid "Authenticated"
+#~ msgstr "ยืนยันตัวบุคคล"
 
-#: src/wireless-security/eap-method-fast.ui:29
-msgid "Both"
-msgstr "ทั้งสองอย่าง"
+#~ msgid "Both"
+#~ msgstr "ทั้งสองอย่าง"
 
-#: src/wireless-security/eap-method-fast.ui:48
-#: src/wireless-security/eap-method-peap.ui:48
-#: src/wireless-security/eap-method-ttls.ui:119
 #, fuzzy
-msgid "Anony_mous identity"
-msgstr "ชื่อในระบบแบบนิ_รนาม:"
+#~ msgid "Anony_mous identity"
+#~ msgstr "ชื่อในระบบแบบนิ_รนาม:"
 
-#: src/wireless-security/eap-method-fast.ui:74
 #, fuzzy
-msgid "PAC _file"
-msgstr "แ_ฟ้ม PAC:"
+#~ msgid "PAC _file"
+#~ msgstr "แ_ฟ้ม PAC:"
 
-#: src/wireless-security/eap-method-fast.ui:113
-#: src/wireless-security/eap-method-peap.ui:121
-#: src/wireless-security/eap-method-ttls.ui:77
 #, fuzzy
-msgid "_Inner authentication"
-msgstr "การยืนยันตัวบุคคลชั้นใ_น:"
+#~ msgid "_Inner authentication"
+#~ msgstr "การยืนยันตัวบุคคลชั้นใ_น:"
 
-#: src/wireless-security/eap-method-fast.ui:142
-msgid "Allow automatic PAC pro_visioning"
-msgstr "เปิดรับการใช้ PAC อัตโนมัติ"
+#~ msgid "Allow automatic PAC pro_visioning"
+#~ msgstr "เปิดรับการใช้ PAC อัตโนมัติ"
 
-#: src/wireless-security/eap-method-leap.c:52
-msgid "missing EAP-LEAP username"
-msgstr ""
+#~ msgid "MD5"
+#~ msgstr "MD5"
 
-#: src/wireless-security/eap-method-leap.c:61
-msgid "missing EAP-LEAP password"
-msgstr ""
+#~ msgid "Version 0"
+#~ msgstr "รุ่น 0"
 
-#: src/wireless-security/eap-method-peap.c:295
-#: src/wireless-security/eap-method-ttls.c:349
-#: src/wireless-security/wireless-security.c:411
-msgid "MD5"
-msgstr "MD5"
+#~ msgid "Version 1"
+#~ msgstr "รุ่น 1"
 
-#: src/wireless-security/eap-method-peap.ui:26
-msgid "Version 0"
-msgstr "รุ่น 0"
-
-#: src/wireless-security/eap-method-peap.ui:29
-msgid "Version 1"
-msgstr "รุ่น 1"
-
-#: src/wireless-security/eap-method-peap.ui:72
-#: src/wireless-security/eap-method-tls.ui:44
-#: src/wireless-security/eap-method-ttls.ui:89
 #, fuzzy
-msgid "No CA certificate is _required"
-msgstr "ปิดคำเตือนใบรับรอง CA"
+#~ msgid "No CA certificate is _required"
+#~ msgstr "ปิดคำเตือนใบรับรอง CA"
 
-#: src/wireless-security/eap-method-peap.ui:89
 #, fuzzy
-msgid "PEAP _version"
-msgstr "รุ่_นของ PEAP:"
+#~ msgid "PEAP _version"
+#~ msgstr "รุ่_นของ PEAP:"
 
-#: src/wireless-security/eap-method-peap.ui:168
-#: src/wireless-security/eap-method-tls.ui:62
-#: src/wireless-security/eap-method-ttls.ui:133
-msgid "Suffix of the server certificate name."
-msgstr ""
-
-#: src/wireless-security/eap-method-peap.ui:169
-#: src/wireless-security/eap-method-tls.ui:63
-#: src/wireless-security/eap-method-ttls.ui:134
-msgid "_Domain"
-msgstr ""
-
-#: src/wireless-security/eap-method-simple.c:76
-msgid "missing EAP username"
-msgstr ""
-
-#: src/wireless-security/eap-method-simple.c:92
-msgid "missing EAP password"
-msgstr ""
-
-#: src/wireless-security/eap-method-simple.c:106
-msgid "missing EAP client Private Key passphrase"
-msgstr ""
-
-#: src/wireless-security/eap-method-simple.ui:103
 #, fuzzy
-msgid "P_rivate Key Passphrase"
-msgstr "WEP 128 บิต แบบวลีรหัสผ่าน"
+#~ msgid "P_rivate Key Passphrase"
+#~ msgstr "WEP 128 บิต แบบวลีรหัสผ่าน"
 
-#: src/wireless-security/eap-method-simple.ui:128
 #, fuzzy
-msgid "Sh_ow passphrase"
-msgstr "แสดงวลีรหัสผ่าน"
+#~ msgid "Sh_ow passphrase"
+#~ msgstr "แสดงวลีรหัสผ่าน"
 
-#: src/wireless-security/eap-method-tls.c:47
-msgid "missing EAP-TLS identity"
-msgstr ""
-
-#: src/wireless-security/eap-method-tls.c:234
 #, fuzzy
-msgid "no user certificate selected"
-msgstr "ปิดคำเตือนใบรับรอง CA"
+#~ msgid "no user certificate selected"
+#~ msgstr "ปิดคำเตือนใบรับรอง CA"
 
-#: src/wireless-security/eap-method-tls.c:239
-msgid "selected user certificate file does not exist"
-msgstr ""
-
-#: src/wireless-security/eap-method-tls.c:259
-msgid "no key selected"
-msgstr ""
-
-#: src/wireless-security/eap-method-tls.c:264
-msgid "selected key file does not exist"
-msgstr ""
-
-#: src/wireless-security/eap-method-tls.ui:20
 #, fuzzy
-msgid "I_dentity"
-msgstr "_ชื่อในระบบ:"
+#~ msgid "I_dentity"
+#~ msgstr "_ชื่อในระบบ:"
 
-#: src/wireless-security/eap-method-ttls.c:316
 #, fuzzy
-msgid "MSCHAPv2 (no EAP)"
-msgstr "MSCHAPv2"
+#~ msgid "MSCHAPv2 (no EAP)"
+#~ msgstr "MSCHAPv2"
 
-#: src/wireless-security/eap-method.c:43
-msgid "undefined error in 802.1X security (wpa-eap)"
-msgstr ""
-
-#: src/wireless-security/eap-method.c:351
 #, fuzzy
-msgid "no CA certificate selected"
-msgstr "ปิดคำเตือนใบรับรอง CA"
+#~ msgid "no CA certificate selected"
+#~ msgstr "ปิดคำเตือนใบรับรอง CA"
 
-#: src/wireless-security/eap-method.c:356
 #, fuzzy
-msgid "selected CA certificate file does not exist"
-msgstr "เลือกแฟ้มใบรับรอง CA"
+#~ msgid "selected CA certificate file does not exist"
+#~ msgstr "เลือกแฟ้มใบรับรอง CA"
 
-#: src/wireless-security/wireless-security.c:58
-msgid "Unknown error validating 802.1X security"
-msgstr ""
+#~ msgid "TLS"
+#~ msgstr "TLS"
 
-#: src/wireless-security/wireless-security.c:423
-msgid "TLS"
-msgstr "TLS"
+#~ msgid "FAST"
+#~ msgstr "FAST"
 
-#: src/wireless-security/wireless-security.c:447
-msgid "PWD"
-msgstr ""
+#~ msgid "Tunneled TLS"
+#~ msgstr "TLS ผ่านทันเนล"
 
-#: src/wireless-security/wireless-security.c:458
-msgid "FAST"
-msgstr "FAST"
+#~ msgid "Protected EAP (PEAP)"
+#~ msgstr "EAP ที่มีการปกป้อง (PEAP)"
 
-#: src/wireless-security/wireless-security.c:469
-msgid "Tunneled TLS"
-msgstr "TLS ผ่านทันเนล"
-
-#: src/wireless-security/wireless-security.c:480
-msgid "Protected EAP (PEAP)"
-msgstr "EAP ที่มีการปกป้อง (PEAP)"
-
-#: src/wireless-security/wireless-security.c:509
-msgid "Externally configured"
-msgstr ""
-
-#: src/wireless-security/ws-dynamic-wep.ui:31
-#: src/wireless-security/ws-wep-key.ui:97
-#: src/wireless-security/ws-wpa-eap.ui:31
 #, fuzzy
-msgid "Au_thentication"
-msgstr "การ_ยืนยันตัวบุคคล:"
+#~ msgid "Au_thentication"
+#~ msgstr "การ_ยืนยันตัวบุคคล:"
 
-#: src/wireless-security/ws-leap.c:50
-msgid "missing leap-username"
-msgstr ""
-
-#: src/wireless-security/ws-leap.c:68
-msgid "missing leap-password"
-msgstr ""
-
-#: src/wireless-security/ws-sae.c:56
 #, fuzzy
-msgid "missing password"
-msgstr "_รหัสผ่านกุญแจส่วนตัว:"
+#~ msgid "missing password"
+#~ msgstr "_รหัสผ่านกุญแจส่วนตัว:"
 
-#: src/wireless-security/ws-sae.ui:48 src/wireless-security/ws-wpa-psk.ui:48
 #, fuzzy
-msgid "_Type"
-msgstr "ช_นิด:"
+#~ msgid "_Type"
+#~ msgstr "ช_นิด:"
 
-#: src/wireless-security/ws-wep-key.c:99
-msgid "missing wep-key"
-msgstr ""
+#~ msgid "Open System"
+#~ msgstr "ระบบเปิด"
 
-#: src/wireless-security/ws-wep-key.c:106
-#, c-format
-msgid "invalid wep-key: key with a length of %zu must contain only hex-digits"
-msgstr ""
+#~ msgid "1 (Default)"
+#~ msgstr "1 (ปริยาย)"
 
-#: src/wireless-security/ws-wep-key.c:114
-#, c-format
-msgid ""
-"invalid wep-key: key with a length of %zu must contain only ascii characters"
-msgstr ""
-
-#: src/wireless-security/ws-wep-key.c:120
-#, c-format
-msgid ""
-"invalid wep-key: wrong key length %zu. A key must be either of length 5/13 "
-"(ascii) or 10/26 (hex)"
-msgstr ""
-
-#: src/wireless-security/ws-wep-key.c:127
-msgid "invalid wep-key: passphrase must be non-empty"
-msgstr ""
-
-#: src/wireless-security/ws-wep-key.c:129
-msgid "invalid wep-key: passphrase must be shorter than 64 characters"
-msgstr ""
-
-#: src/wireless-security/ws-wep-key.ui:12
-msgid "Open System"
-msgstr "ระบบเปิด"
-
-#: src/wireless-security/ws-wep-key.ui:15
-msgid "Shared Key"
-msgstr "ใช้กุญแจร่วมกัน"
-
-#: src/wireless-security/ws-wep-key.ui:26
-msgid "1 (Default)"
-msgstr "1 (ปริยาย)"
-
-#: src/wireless-security/ws-wep-key.ui:54
 #, fuzzy
-msgid "_Key"
-msgstr "กุญแ_จ:"
+#~ msgid "_Key"
+#~ msgstr "กุญแ_จ:"
 
-#: src/wireless-security/ws-wep-key.ui:80
-msgid "Sho_w key"
-msgstr "แ_สดงกุญแจ"
-
-#: src/wireless-security/ws-wep-key.ui:129
 #, fuzzy
-msgid "WEP inde_x"
-msgstr "_ดัชนี WEP:"
-
-#: src/wireless-security/ws-wpa-psk.c:62
-#, c-format
-msgid ""
-"invalid wpa-psk: invalid key-length %zu. Must be [8,63] bytes or 64 hex "
-"digits"
-msgstr ""
-
-#: src/wireless-security/ws-wpa-psk.c:69
-msgid "invalid wpa-psk: cannot interpret key with 64 bytes as hex"
-msgstr ""
+#~ msgid "WEP inde_x"
+#~ msgstr "_ดัชนี WEP:"
 
 #~ msgid "Disable connected notifications"
 #~ msgstr "ปิดการแจ้งเหตุการเชื่อมต่อ"
