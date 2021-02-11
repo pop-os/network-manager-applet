@@ -1,3 +1,9 @@
+network-manager-applet (1.20.0-2) unstable; urgency=medium
+
+  * Show wired icon only if we are in CONNECTED_GLOBAL state
+
+ -- Michael Biebl <biebl@debian.org>  Thu, 11 Feb 2021 21:21:42 +0100
+
 network-manager-applet (1.20.0-1) unstable; urgency=medium
 
   * New upstream version 1.20.0
