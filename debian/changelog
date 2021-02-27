@@ -1,3 +1,10 @@
+network-manager-applet (1.20.0-3) unstable; urgency=medium
+
+  * applet: support activating WireGuard connections as VPNs (Closes: #983641)
+  * editor: fix crash when evaluating secondaries
+
+ -- Michael Biebl <biebl@debian.org>  Sat, 27 Feb 2021 20:11:20 +0100
+
 network-manager-applet (1.20.0-2) unstable; urgency=medium
 
   * Show wired icon only if we are in CONNECTED_GLOBAL state
