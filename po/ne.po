@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: network-manager-applet.network-manager-applet-0-6.ne\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/network-manager-"
 "applet/\n"
-"POT-Creation-Date: 2021-02-03 09:54+0100\n"
+"POT-Creation-Date: 2021-05-10 15:50+0200\n"
 "PO-Revision-Date: 2007-11-13 20:36+0545\n"
 "Last-Translator: Shyam Krishna Bal <shyamkrishna_bal@yahoo.com>\n"
 "Language-Team: Nepali <info@mpp.org.np>\n"
@@ -20,7 +20,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n !=1\n"
 "X-Generator: KBabel 1.11.4\n"
 
-#: nm-applet.desktop.in:3 src/applet-dialogs.c:724 src/applet.c:3223
+#: nm-applet.desktop.in:3 src/applet-dialogs.c:724 src/applet.c:3248
 #, fuzzy
 msgid "Network"
 msgstr "सञ्जाल नाम:"
@@ -221,7 +221,7 @@ msgstr "तारसहित सञ्जाल जडान"
 msgid "User authentication required for mobile broadband connection “%s”…"
 msgstr ""
 
-#: src/applet-device-bt.c:113 src/applet.c:2579 src/mobile-helpers.c:593
+#: src/applet-device-bt.c:113 src/applet.c:2604 src/mobile-helpers.c:593
 #, fuzzy, c-format
 msgid "Requesting a network address for “%s”…"
 msgstr "ताररहित सञ्जाल '%s' बाट सञ्जाल ठेगाना अनुरोध गर्दैछ..."
@@ -256,7 +256,7 @@ msgid "Ethernet Network"
 msgstr "तार भएको सञ्जाल"
 
 #. Notify user of unmanaged or unavailable device
-#: src/applet-device-ethernet.c:99 src/applet.c:1328
+#: src/applet-device-ethernet.c:99 src/applet.c:1359
 #, fuzzy
 msgid "disconnected"
 msgstr "जडान विच्छेदन भयो"
@@ -761,7 +761,7 @@ msgstr "जडान विच्छेदन भयो"
 msgid "Connection activation failed"
 msgstr "तार भएको सञ्जालमा जडान असफल भयो ।"
 
-#: src/applet.c:918
+#: src/applet.c:925
 #, fuzzy, c-format
 msgid ""
 "\n"
@@ -769,7 +769,7 @@ msgid ""
 "interrupted."
 msgstr "भीपीएन जडान '%s' सही तरीकाले कन्फिगर गरिएको थिएन ।"
 
-#: src/applet.c:920
+#: src/applet.c:927
 #, fuzzy, c-format
 msgid ""
 "\n"
@@ -777,14 +777,14 @@ msgid ""
 "interrupted."
 msgstr "भीपीएन जडान '%s' सही तरीकाले कन्फिगर गरिएको थिएन ।"
 
-#: src/applet.c:922
+#: src/applet.c:929
 #, fuzzy, c-format
 msgid ""
 "\n"
 "The VPN connection “%s” failed because the VPN service stopped unexpectedly."
 msgstr "भीपीएन जडान '%s' सही तरीकाले कन्फिगर गरिएको थिएन ।"
 
-#: src/applet.c:924
+#: src/applet.c:931
 #, fuzzy, c-format
 msgid ""
 "\n"
@@ -794,14 +794,14 @@ msgstr ""
 "भीपीएन जडान '%s' सुरु गर्न सकेन किनभने भीपीएन सर्भरले एउटा उपयुक्त सञ्जाल कन्फिगरेसन "
 "फर्काउन सकेन ।"
 
-#: src/applet.c:926
+#: src/applet.c:933
 #, fuzzy, c-format
 msgid ""
 "\n"
 "The VPN connection “%s” failed because the connection attempt timed out."
 msgstr "भीपीएन जडान '%s' सही तरीकाले कन्फिगर गरिएको थिएन ।"
 
-#: src/applet.c:928
+#: src/applet.c:935
 #, fuzzy, c-format
 msgid ""
 "\n"
@@ -810,7 +810,7 @@ msgstr ""
 "भीपीएन जडान '%s' सुरु गर्न सकेन किनभने भीपीएन सर्भरले एउटा उपयुक्त सञ्जाल कन्फिगरेसन "
 "फर्काउन सकेन ।"
 
-#: src/applet.c:930
+#: src/applet.c:937
 #, fuzzy, c-format
 msgid ""
 "\n"
@@ -819,28 +819,28 @@ msgstr ""
 "भीपीएन जडान '%s' सुरु गर्न सकेन किनभने भीपीएन सर्भरले एउटा उपयुक्त सञ्जाल कन्फिगरेसन "
 "फर्काउन सकेन ।"
 
-#: src/applet.c:932
+#: src/applet.c:939
 #, fuzzy, c-format
 msgid ""
 "\n"
 "The VPN connection “%s” failed because there were no valid VPN secrets."
 msgstr "भीपीएन जडान '%s' सही तरीकाले कन्फिगर गरिएको थिएन ।"
 
-#: src/applet.c:934
+#: src/applet.c:941
 #, fuzzy, c-format
 msgid ""
 "\n"
 "The VPN connection “%s” failed because of invalid VPN secrets."
 msgstr "भीपीएन जडान '%s' सही तरीकाले कन्फिगर गरिएको थिएन ।"
 
-#: src/applet.c:939
+#: src/applet.c:946
 #, fuzzy, c-format
 msgid ""
 "\n"
 "The VPN connection “%s” failed."
 msgstr "'%s' लाई भीपीएन जडान"
 
-#: src/applet.c:966
+#: src/applet.c:973
 #, c-format
 msgid ""
 "VPN connection has been successfully established.\n"
@@ -848,20 +848,20 @@ msgid ""
 "%s\n"
 msgstr ""
 
-#: src/applet.c:968
+#: src/applet.c:975
 msgid "VPN connection has been successfully established.\n"
 msgstr ""
 
-#: src/applet.c:970
+#: src/applet.c:977
 msgid "VPN Login Message"
 msgstr "भीपीएन लगइन सन्देश"
 
-#: src/applet.c:978 src/applet.c:1018
+#: src/applet.c:985 src/applet.c:1025
 #, fuzzy
 msgid "VPN Connection Failed"
 msgstr "भीपीएन जडान असफलता"
 
-#: src/applet.c:1022
+#: src/applet.c:1029
 #, fuzzy, c-format
 msgid ""
 "\n"
@@ -872,7 +872,7 @@ msgstr ""
 "भीपीएन जडान '%s' सुरु गर्न सकेन किनभने भीपीएन सर्भरले एउटा उपयुक्त सञ्जाल कन्फिगरेसन "
 "फर्काउन सकेन ।"
 
-#: src/applet.c:1025
+#: src/applet.c:1032
 #, fuzzy, c-format
 msgid ""
 "\n"
@@ -881,140 +881,140 @@ msgid ""
 "%s"
 msgstr "भीपीएन जडान '%s' सही तरीकाले कन्फिगर गरिएको थिएन ।"
 
-#: src/applet.c:1316
+#: src/applet.c:1347
 msgid "device not ready (firmware missing)"
 msgstr ""
 
-#: src/applet.c:1318
+#: src/applet.c:1349
 msgid "device not ready"
 msgstr ""
 
-#: src/applet.c:1344
+#: src/applet.c:1375
 #, fuzzy
 msgid "Disconnect"
 msgstr "जडान विच्छेदन भयो"
 
-#: src/applet.c:1358
+#: src/applet.c:1389
 msgid "device not managed"
 msgstr ""
 
-#: src/applet.c:1432
+#: src/applet.c:1463
 #, fuzzy
 msgid "No network devices available"
 msgstr "सञ्जाल यन्त्र फेला परेन"
 
-#: src/applet.c:1484
+#: src/applet.c:1509
 msgid "_VPN Connections"
 msgstr "भीपीएन जडान"
 
-#: src/applet.c:1528
+#: src/applet.c:1553
 #, fuzzy
 msgid "_Configure VPN…"
 msgstr "भीपीएन कन्फिगर गर्नुहोस्..."
 
-#: src/applet.c:1531
+#: src/applet.c:1556
 #, fuzzy
 msgid "_Add a VPN connection…"
 msgstr "भीपीएन जडान"
 
-#: src/applet.c:1637
+#: src/applet.c:1662
 #, fuzzy
 msgid "NetworkManager is not running…"
 msgstr "सञ्जालप्रबन्धक संचालन भइरहेको छैन ।"
 
-#: src/applet.c:1642 src/applet.c:2710
+#: src/applet.c:1667 src/applet.c:2735
 msgid "Networking disabled"
 msgstr "सञ्जालीकरण अक्षम गरियो"
 
 #. 'Enable Networking' item
-#: src/applet.c:1852
+#: src/applet.c:1877
 msgid "Enable _Networking"
 msgstr "सञ्जालीकरण सक्षम पार्नुहोस्"
 
 #. 'Enable Wi-Fi' item
-#: src/applet.c:1861
+#: src/applet.c:1886
 #, fuzzy
 msgid "Enable _Wi-Fi"
 msgstr "ताररहित सक्षम पार्नुहोस्"
 
 #. 'Enable Mobile Broadband' item
-#: src/applet.c:1870
+#: src/applet.c:1895
 msgid "Enable _Mobile Broadband"
 msgstr ""
 
 #. Toggle notifications item
-#: src/applet.c:1882
+#: src/applet.c:1907
 msgid "Enable N_otifications"
 msgstr ""
 
 #. 'Connection Information' item
-#: src/applet.c:1894
+#: src/applet.c:1919
 msgid "Connection _Information"
 msgstr "जडान जानकारी"
 
 #. 'Edit Connections...' item
-#: src/applet.c:1902
+#: src/applet.c:1927
 #, fuzzy
 msgid "Edit Connections…"
 msgstr "भीपीएन जडान"
 
-#: src/applet.c:1916
+#: src/applet.c:1941
 msgid "_About"
 msgstr "बारेमा"
 
-#: src/applet.c:2230
+#: src/applet.c:2255
 #, fuzzy, c-format
 msgid "You are now connected to “%s”."
 msgstr "तपाईँ हाल अहिले ताररहित सञ्जाल '%s' मा जडान हुनुभयो ।"
 
-#: src/applet.c:2270
+#: src/applet.c:2295
 msgid "Disconnected"
 msgstr "जडान विच्छेदन भयो"
 
-#: src/applet.c:2271
+#: src/applet.c:2296
 msgid "The network connection has been disconnected."
 msgstr "सञ्जाल जडान विच्छेदन भयो ।"
 
-#: src/applet.c:2573
+#: src/applet.c:2598
 #, fuzzy, c-format
 msgid "Preparing network connection “%s”…"
 msgstr "तारसहित सञ्जाल जडान"
 
-#: src/applet.c:2576
+#: src/applet.c:2601
 #, c-format
 msgid "User authentication required for network connection “%s”…"
 msgstr ""
 
-#: src/applet.c:2582
+#: src/applet.c:2607
 #, fuzzy, c-format
 msgid "Network connection “%s” active"
 msgstr "सञ्जाल जडान छैन"
 
-#: src/applet.c:2655
+#: src/applet.c:2680
 #, fuzzy, c-format
 msgid "Starting VPN connection “%s”…"
 msgstr "भीपीएन जडान '%s' सुरुआत गर्न सक्दैन"
 
-#: src/applet.c:2658
+#: src/applet.c:2683
 #, c-format
 msgid "User authentication required for VPN connection “%s”…"
 msgstr ""
 
-#: src/applet.c:2661
+#: src/applet.c:2686
 #, fuzzy, c-format
 msgid "Requesting a VPN address for “%s”…"
 msgstr "ताररहित सञ्जाल '%s' बाट सञ्जाल ठेगाना अनुरोध गर्दैछ..."
 
-#: src/applet.c:2664
+#: src/applet.c:2689
 #, fuzzy
 msgid "VPN connection active"
 msgstr "'%s' लाई भीपीएन जडान"
 
-#: src/applet.c:2714
+#: src/applet.c:2739
 msgid "No network connection"
 msgstr "सञ्जाल जडान छैन"
 
-#: src/applet.c:3324
+#: src/applet.c:3349
 msgid "NetworkManager Applet"
 msgstr "सञ्जालप्रबन्धक एप्लेट"
 
@@ -3500,15 +3500,15 @@ msgstr "सञ्जाल जडान छैन"
 msgid "Add a new connection"
 msgstr "भीपीएन जडान"
 
-#: src/connection-editor/page-8021x-security.c:96
+#: src/connection-editor/page-8021x-security.c:97
 msgid "802.1X Security"
 msgstr ""
 
-#: src/connection-editor/page-8021x-security.c:98
+#: src/connection-editor/page-8021x-security.c:99
 msgid "Could not load 802.1X Security user interface."
 msgstr ""
 
-#: src/connection-editor/page-8021x-security.c:112
+#: src/connection-editor/page-8021x-security.c:113
 msgid "Use 802.1_X security for this connection"
 msgstr ""
 

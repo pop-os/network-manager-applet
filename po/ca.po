@@ -15,7 +15,7 @@ msgstr ""
 "Project-Id-Version: NetworkManager\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/network-manager-"
 "applet/\n"
-"POT-Creation-Date: 2021-02-03 09:54+0100\n"
+"POT-Creation-Date: 2021-05-10 15:50+0200\n"
 "PO-Revision-Date: 2018-06-24 20:41+0100\n"
 "Last-Translator: Carles Ferrando Garcia <carles.ferrando@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -26,7 +26,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Lokalize 2.0\n"
 
-#: nm-applet.desktop.in:3 src/applet-dialogs.c:724 src/applet.c:3223
+#: nm-applet.desktop.in:3 src/applet-dialogs.c:724 src/applet.c:3248
 msgid "Network"
 msgstr "Xarxa"
 
@@ -226,7 +226,7 @@ msgid "User authentication required for mobile broadband connection “%s”…"
 msgstr ""
 "Cal l'autenticació d'usuari per a la connexió de banda ampla mòbil «%s»…"
 
-#: src/applet-device-bt.c:113 src/applet.c:2579 src/mobile-helpers.c:593
+#: src/applet-device-bt.c:113 src/applet.c:2604 src/mobile-helpers.c:593
 #, c-format
 msgid "Requesting a network address for “%s”…"
 msgstr "S'està sol·licitant una adreça de xarxa per a «%s»…"
@@ -259,7 +259,7 @@ msgid "Ethernet Network"
 msgstr "Xarxa amb fil"
 
 #. Notify user of unmanaged or unavailable device
-#: src/applet-device-ethernet.c:99 src/applet.c:1328
+#: src/applet-device-ethernet.c:99 src/applet.c:1359
 msgid "disconnected"
 msgstr "desconnectat"
 
@@ -743,7 +743,7 @@ msgstr "Ha fallat la desconnexió"
 msgid "Connection activation failed"
 msgstr "Ha fallat l'activació de la connexió"
 
-#: src/applet.c:918
+#: src/applet.c:925
 #, c-format
 msgid ""
 "\n"
@@ -754,7 +754,7 @@ msgstr ""
 "S'ha desconnectat la connexió VPN «%s» perquè s'ha interromput la connexió "
 "de xarxa."
 
-#: src/applet.c:920
+#: src/applet.c:927
 #, c-format
 msgid ""
 "\n"
@@ -765,7 +765,7 @@ msgstr ""
 "No s'ha pogut establir la connexió VPN «%s» perquè s'ha interromput la "
 "connexió de xarxa."
 
-#: src/applet.c:922
+#: src/applet.c:929
 #, c-format
 msgid ""
 "\n"
@@ -775,7 +775,7 @@ msgstr ""
 "No s'ha pogut establir la connexió VPN «%s» perquè el servei VPN s'ha aturat "
 "de manera inesperada."
 
-#: src/applet.c:924
+#: src/applet.c:931
 #, c-format
 msgid ""
 "\n"
@@ -786,7 +786,7 @@ msgstr ""
 "No s'ha pogut establir la connexió VPN «%s» perquè el servei VPN ha retornat "
 "una configuració no vàlida."
 
-#: src/applet.c:926
+#: src/applet.c:933
 #, c-format
 msgid ""
 "\n"
@@ -796,7 +796,7 @@ msgstr ""
 "No s'ha pogut establir la connexió VPN «%s» perquè s'ha acabat el temps "
 "d'espera de l'intent de connexió."
 
-#: src/applet.c:928
+#: src/applet.c:935
 #, c-format
 msgid ""
 "\n"
@@ -806,7 +806,7 @@ msgstr ""
 "No s'ha pogut establir la connexió VPN «%s» perquè el servei VPN no s'ha "
 "iniciat en el temps establert."
 
-#: src/applet.c:930
+#: src/applet.c:937
 #, c-format
 msgid ""
 "\n"
@@ -816,7 +816,7 @@ msgstr ""
 "No s'ha pogut establir la connexió VPN «%s» perquè no s'ha pogut iniciar el "
 "servei VPN."
 
-#: src/applet.c:932
+#: src/applet.c:939
 #, c-format
 msgid ""
 "\n"
@@ -826,7 +826,7 @@ msgstr ""
 "No s'ha pogut establir la connexió VPN «%s» perquè no s'ha trobat cap secret "
 "VPN vàlid."
 
-#: src/applet.c:934
+#: src/applet.c:941
 #, c-format
 msgid ""
 "\n"
@@ -836,7 +836,7 @@ msgstr ""
 "No s'ha pogut establir la connexió VPN «%s» perquè els secrets VPN no són "
 "vàlids."
 
-#: src/applet.c:939
+#: src/applet.c:946
 #, c-format
 msgid ""
 "\n"
@@ -845,7 +845,7 @@ msgstr ""
 "\n"
 "No s'ha pogut establir la connexió VPN «%s»."
 
-#: src/applet.c:966
+#: src/applet.c:973
 #, c-format
 msgid ""
 "VPN connection has been successfully established.\n"
@@ -856,19 +856,19 @@ msgstr ""
 "\n"
 "%s\n"
 
-#: src/applet.c:968
+#: src/applet.c:975
 msgid "VPN connection has been successfully established.\n"
 msgstr "S'ha establert correctament la connexió VPN.\n"
 
-#: src/applet.c:970
+#: src/applet.c:977
 msgid "VPN Login Message"
 msgstr "Missatge d'entrada de la VPN"
 
-#: src/applet.c:978 src/applet.c:1018
+#: src/applet.c:985 src/applet.c:1025
 msgid "VPN Connection Failed"
 msgstr "No s'ha pogut establir la connexió VPN"
 
-#: src/applet.c:1022
+#: src/applet.c:1029
 #, c-format
 msgid ""
 "\n"
@@ -882,7 +882,7 @@ msgstr ""
 "\n"
 "%s"
 
-#: src/applet.c:1025
+#: src/applet.c:1032
 #, c-format
 msgid ""
 "\n"
@@ -895,132 +895,132 @@ msgstr ""
 "\n"
 "%s"
 
-#: src/applet.c:1316
+#: src/applet.c:1347
 msgid "device not ready (firmware missing)"
 msgstr "el dispositiu no està preparat (manca el microprogramari)"
 
-#: src/applet.c:1318
+#: src/applet.c:1349
 msgid "device not ready"
 msgstr "el dispositiu no està preparat"
 
-#: src/applet.c:1344
+#: src/applet.c:1375
 msgid "Disconnect"
 msgstr "Desconnecta"
 
-#: src/applet.c:1358
+#: src/applet.c:1389
 msgid "device not managed"
 msgstr "no es gestiona el dispositiu"
 
-#: src/applet.c:1432
+#: src/applet.c:1463
 msgid "No network devices available"
 msgstr "No hi ha cap dispositiu de xarxa disponible"
 
-#: src/applet.c:1484
+#: src/applet.c:1509
 msgid "_VPN Connections"
 msgstr "Connexions _VPN"
 
-#: src/applet.c:1528
+#: src/applet.c:1553
 msgid "_Configure VPN…"
 msgstr "_Configura la VPN…"
 
-#: src/applet.c:1531
+#: src/applet.c:1556
 msgid "_Add a VPN connection…"
 msgstr "_Afegeix una connexió VPN…"
 
-#: src/applet.c:1637
+#: src/applet.c:1662
 msgid "NetworkManager is not running…"
 msgstr "No s'està executant el NetworkManager…"
 
-#: src/applet.c:1642 src/applet.c:2710
+#: src/applet.c:1667 src/applet.c:2735
 msgid "Networking disabled"
 msgstr "S'ha inhabilitat la gestió de xarxes"
 
 #. 'Enable Networking' item
-#: src/applet.c:1852
+#: src/applet.c:1877
 msgid "Enable _Networking"
 msgstr "Habilita la gestió de _xarxes"
 
 #. 'Enable Wi-Fi' item
-#: src/applet.c:1861
+#: src/applet.c:1886
 msgid "Enable _Wi-Fi"
 msgstr "Habilita el _sense fil"
 
 #. 'Enable Mobile Broadband' item
-#: src/applet.c:1870
+#: src/applet.c:1895
 msgid "Enable _Mobile Broadband"
 msgstr "Habilita la banda ampla _mòbil"
 
 #. Toggle notifications item
-#: src/applet.c:1882
+#: src/applet.c:1907
 msgid "Enable N_otifications"
 msgstr "Habilita les n_otificacions"
 
 #. 'Connection Information' item
-#: src/applet.c:1894
+#: src/applet.c:1919
 msgid "Connection _Information"
 msgstr "_Informació de la connexió"
 
 #. 'Edit Connections...' item
-#: src/applet.c:1902
+#: src/applet.c:1927
 msgid "Edit Connections…"
 msgstr "Edita les connexions…"
 
-#: src/applet.c:1916
+#: src/applet.c:1941
 msgid "_About"
 msgstr "_Quant a"
 
-#: src/applet.c:2230
+#: src/applet.c:2255
 #, c-format
 msgid "You are now connected to “%s”."
 msgstr "Esteu connectat a «%s»."
 
-#: src/applet.c:2270
+#: src/applet.c:2295
 msgid "Disconnected"
 msgstr "Desconnectat"
 
-#: src/applet.c:2271
+#: src/applet.c:2296
 msgid "The network connection has been disconnected."
 msgstr "S'ha desconnectat la connexió de xarxa."
 
-#: src/applet.c:2573
+#: src/applet.c:2598
 #, c-format
 msgid "Preparing network connection “%s”…"
 msgstr "S'està preparant la connexió de xarxa «%s»…"
 
-#: src/applet.c:2576
+#: src/applet.c:2601
 #, c-format
 msgid "User authentication required for network connection “%s”…"
 msgstr "Cal l'autenticació d'usuari per a la connexió de xarxa «%s»…"
 
-#: src/applet.c:2582
+#: src/applet.c:2607
 #, c-format
 msgid "Network connection “%s” active"
 msgstr "La connexió de xarxa «%s» és activa"
 
-#: src/applet.c:2655
+#: src/applet.c:2680
 #, c-format
 msgid "Starting VPN connection “%s”…"
 msgstr "S'està iniciant la connexió VPN «%s»…"
 
-#: src/applet.c:2658
+#: src/applet.c:2683
 #, c-format
 msgid "User authentication required for VPN connection “%s”…"
 msgstr "Cal l'autenticació d'usuari per a la connexió VPN «%s»…"
 
-#: src/applet.c:2661
+#: src/applet.c:2686
 #, c-format
 msgid "Requesting a VPN address for “%s”…"
 msgstr "S'està sol·licitant una adreça de xarxa per a la xarxa VPN «%s»…"
 
-#: src/applet.c:2664
+#: src/applet.c:2689
 msgid "VPN connection active"
 msgstr "La connexió VPN és activa"
 
-#: src/applet.c:2714
+#: src/applet.c:2739
 msgid "No network connection"
 msgstr "No hi ha cap connexió de xarxa"
 
-#: src/applet.c:3324
+#: src/applet.c:3349
 msgid "NetworkManager Applet"
 msgstr "Miniaplicació NetworkManager"
 
@@ -1323,7 +1323,7 @@ msgstr "El temps d'envelliment de l'adreça MAC ethernet, en segons"
 
 #: src/connection-editor/ce-page-bridge.ui:490
 msgid "Group _forward mask"
-msgstr "Mascara de grup _endavant"
+msgstr "_Màscara reenviament de grup"
 
 #: src/connection-editor/ce-page-bridge.ui:504
 msgid ""
@@ -3594,16 +3594,16 @@ msgstr "Connexions de xarxa"
 msgid "Add a new connection"
 msgstr "Afegeix una connexió nova"
 
-#: src/connection-editor/page-8021x-security.c:96
+#: src/connection-editor/page-8021x-security.c:97
 msgid "802.1X Security"
 msgstr "Seguretat 802.1X"
 
-#: src/connection-editor/page-8021x-security.c:98
+#: src/connection-editor/page-8021x-security.c:99
 msgid "Could not load 802.1X Security user interface."
 msgstr ""
 "No s'ha pogut carregar la interfície d'usuari per a la seguretat de 802.1X."
 
-#: src/connection-editor/page-8021x-security.c:112
+#: src/connection-editor/page-8021x-security.c:113
 msgid "Use 802.1_X security for this connection"
 msgstr "Utilitza la seguretat 802.1_X per a aquesta connexió"
 

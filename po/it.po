@@ -1,6 +1,6 @@
 # Italian translation for network-manager-Applet
 # Copyright (C) 2004-2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017 the NetworkManager-Applet Copyright Holder
-# Copyright (C) 2018, 2019, 2020 the NetworkManager-Applet Copyright Holder
+# Copyright (C) 2018, 2019, 2020, 2021 the NetworkManager-Applet Copyright Holder
 # This file is distributed under the same license as the NetworkManager-Applet package.
 #
 # Note:
@@ -11,15 +11,15 @@
 #
 # Francesco Marletta <francesco.marletta@tiscali.it>, 2004, 2005, 2006, 2007, 2008, 2009, 2010.
 # Gianvito Cavasoli <gianvito@gmx.it>, 2011.
-# Milo Casagrande <milo@milo.name>, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020.
+# Milo Casagrande <milo@milo.name>, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021.
 # lrintel <lrintel@redhat.com>, 2017. #zanata
 msgid ""
 msgstr ""
 "Project-Id-Version: network-manager-applet master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/network-manager-"
 "applet/\n"
-"POT-Creation-Date: 2021-02-03 09:54+0100\n"
-"PO-Revision-Date: 2020-09-04 18:36+0200\n"
+"POT-Creation-Date: 2021-05-10 15:50+0200\n"
+"PO-Revision-Date: 2021-03-15 17:49+0100\n"
 "Last-Translator: Milo Casagrande <milo@milo.name>\n"
 "Language-Team: Italian <tp@lists.linux.it>\n"
 "Language: it\n"
@@ -28,9 +28,9 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n!=1);\n"
 "X-Launchpad-Export-Date: 2012-03-09 08:20+0000\n"
-"X-Generator: Poedit 2.4.1\n"
+"X-Generator: Poedit 2.4.2\n"
 
-#: nm-applet.desktop.in:3 src/applet-dialogs.c:724 src/applet.c:3223
+#: nm-applet.desktop.in:3 src/applet-dialogs.c:724 src/applet.c:3248
 msgid "Network"
 msgstr "Rete"
 
@@ -230,7 +230,7 @@ msgid "User authentication required for mobile broadband connection “%s”…"
 msgstr ""
 "Richiesta autenticazione utente per la connessione a banda larga mobile «%s»…"
 
-#: src/applet-device-bt.c:113 src/applet.c:2579 src/mobile-helpers.c:593
+#: src/applet-device-bt.c:113 src/applet.c:2604 src/mobile-helpers.c:593
 #, c-format
 msgid "Requesting a network address for “%s”…"
 msgstr "Richiesta di un indirizzo di rete per «%s»…"
@@ -263,7 +263,7 @@ msgid "Ethernet Network"
 msgstr "Rete Ethernet"
 
 #. Notify user of unmanaged or unavailable device
-#: src/applet-device-ethernet.c:99 src/applet.c:1328
+#: src/applet-device-ethernet.c:99 src/applet.c:1359
 msgid "disconnected"
 msgstr "disconnessi"
 
@@ -750,7 +750,7 @@ msgstr "Disconnessione non riuscita"
 msgid "Connection activation failed"
 msgstr "Attivazione della connessione non riuscita"
 
-#: src/applet.c:918
+#: src/applet.c:925
 #, c-format
 msgid ""
 "\n"
@@ -761,7 +761,7 @@ msgstr ""
 "La connessione VPN «%s» si è chiusa perché il collegamento di rete è stato "
 "interrotto."
 
-#: src/applet.c:920
+#: src/applet.c:927
 #, c-format
 msgid ""
 "\n"
@@ -772,7 +772,7 @@ msgstr ""
 "La connessione VPN «%s» non è riuscita perché la connessione di rete è stata "
 "interrotta."
 
-#: src/applet.c:922
+#: src/applet.c:929
 #, c-format
 msgid ""
 "\n"
@@ -782,7 +782,7 @@ msgstr ""
 "La connessione VPN «%s» non è riuscita perché il servizio VPN è stato "
 "fermato improvvisamente."
 
-#: src/applet.c:924
+#: src/applet.c:931
 #, c-format
 msgid ""
 "\n"
@@ -793,7 +793,7 @@ msgstr ""
 "La connessione VPN «%s» non è riuscita perché il servizio VPN ha fornito una "
 "configurazione non valida."
 
-#: src/applet.c:926
+#: src/applet.c:933
 #, c-format
 msgid ""
 "\n"
@@ -803,7 +803,7 @@ msgstr ""
 "La connessione VPN «%s» non è riuscita perché il tentativo di connessione ha "
 "esaurito il tempo a disposizione."
 
-#: src/applet.c:928
+#: src/applet.c:935
 #, c-format
 msgid ""
 "\n"
@@ -813,7 +813,7 @@ msgstr ""
 "La connessione VPN «%s» non è riuscita perché il servizio VPN non è partito "
 "in tempo."
 
-#: src/applet.c:930
+#: src/applet.c:937
 #, c-format
 msgid ""
 "\n"
@@ -822,7 +822,7 @@ msgstr ""
 "\n"
 "La connessione VPN «%s» non è riuscita perché il servizio VPN non è partito."
 
-#: src/applet.c:932
+#: src/applet.c:939
 #, c-format
 msgid ""
 "\n"
@@ -832,7 +832,7 @@ msgstr ""
 "La connessione VPN «%s» non è riuscita perché non ci sono informazioni "
 "segrete VPN valide."
 
-#: src/applet.c:934
+#: src/applet.c:941
 #, c-format
 msgid ""
 "\n"
@@ -842,7 +842,7 @@ msgstr ""
 "La connessione VPN «%s» non è riuscita perché le informazioni segrete VPN "
 "non sono valide."
 
-#: src/applet.c:939
+#: src/applet.c:946
 #, c-format
 msgid ""
 "\n"
@@ -851,7 +851,7 @@ msgstr ""
 "\n"
 "La connessione VPN «%s» non è riuscita."
 
-#: src/applet.c:966
+#: src/applet.c:973
 #, c-format
 msgid ""
 "VPN connection has been successfully established.\n"
@@ -862,19 +862,19 @@ msgstr ""
 "\n"
 "%s\n"
 
-#: src/applet.c:968
+#: src/applet.c:975
 msgid "VPN connection has been successfully established.\n"
 msgstr "Connessione VPN stabilita con successo.\n"
 
-#: src/applet.c:970
+#: src/applet.c:977
 msgid "VPN Login Message"
 msgstr "Messaggio di accesso VPN"
 
-#: src/applet.c:978 src/applet.c:1018
+#: src/applet.c:985 src/applet.c:1025
 msgid "VPN Connection Failed"
 msgstr "Connessione VPN non riuscita"
 
-#: src/applet.c:1022
+#: src/applet.c:1029
 #, c-format
 msgid ""
 "\n"
@@ -888,7 +888,7 @@ msgstr ""
 "\n"
 "%s"
 
-#: src/applet.c:1025
+#: src/applet.c:1032
 #, c-format
 msgid ""
 "\n"
@@ -901,133 +901,133 @@ msgstr ""
 "\n"
 "%s"
 
-#: src/applet.c:1316
+#: src/applet.c:1347
 msgid "device not ready (firmware missing)"
 msgstr "dispositivo non pronto (manca il firmware)"
 
-#: src/applet.c:1318
+#: src/applet.c:1349
 msgid "device not ready"
 msgstr "dispositivo non pronto"
 
-#: src/applet.c:1344
+#: src/applet.c:1375
 msgid "Disconnect"
 msgstr "Disconnetti"
 
-#: src/applet.c:1358
+#: src/applet.c:1389
 msgid "device not managed"
 msgstr "dispositivo non gestito"
 
 # [NdT] qui ho tradotto appositamente device con dispositivo
-#: src/applet.c:1432
+#: src/applet.c:1463
 msgid "No network devices available"
 msgstr "Nessun dispositivo di rete disponibile"
 
-#: src/applet.c:1484
+#: src/applet.c:1509
 msgid "_VPN Connections"
 msgstr "Connessioni _VPN"
 
-#: src/applet.c:1528
+#: src/applet.c:1553
 msgid "_Configure VPN…"
 msgstr "_Configura VPN…"
 
-#: src/applet.c:1531
+#: src/applet.c:1556
 msgid "_Add a VPN connection…"
 msgstr "A_ggiungi connessione VPN…"
 
-#: src/applet.c:1637
+#: src/applet.c:1662
 msgid "NetworkManager is not running…"
 msgstr "NetworkManager non è in esecuzione…"
 
-#: src/applet.c:1642 src/applet.c:2710
+#: src/applet.c:1667 src/applet.c:2735
 msgid "Networking disabled"
 msgstr "Funzionalità di rete disabilitate"
 
 #. 'Enable Networking' item
-#: src/applet.c:1852
+#: src/applet.c:1877
 msgid "Enable _Networking"
 msgstr "Abilita funzionalità di _rete"
 
 #. 'Enable Wi-Fi' item
-#: src/applet.c:1861
+#: src/applet.c:1886
 msgid "Enable _Wi-Fi"
 msgstr "Abilita _Wi-Fi"
 
 #. 'Enable Mobile Broadband' item
-#: src/applet.c:1870
+#: src/applet.c:1895
 msgid "Enable _Mobile Broadband"
 msgstr "Abilita rete a banda larga _mobile"
 
 #. Toggle notifications item
-#: src/applet.c:1882
+#: src/applet.c:1907
 msgid "Enable N_otifications"
 msgstr "Abilita n_otifiche"
 
 #. 'Connection Information' item
-#: src/applet.c:1894
+#: src/applet.c:1919
 msgid "Connection _Information"
 msgstr "Informazioni _connessione"
 
 #. 'Edit Connections...' item
-#: src/applet.c:1902
+#: src/applet.c:1927
 msgid "Edit Connections…"
 msgstr "Modifica connessioni…"
 
-#: src/applet.c:1916
+#: src/applet.c:1941
 msgid "_About"
 msgstr "I_nformazioni"
 
-#: src/applet.c:2230
+#: src/applet.c:2255
 #, c-format
 msgid "You are now connected to “%s”."
 msgstr "Attualmente connessi a «%s»."
 
-#: src/applet.c:2270
+#: src/applet.c:2295
 msgid "Disconnected"
 msgstr "Disconnessi"
 
-#: src/applet.c:2271
+#: src/applet.c:2296
 msgid "The network connection has been disconnected."
 msgstr "La connessione di rete è stata terminata."
 
-#: src/applet.c:2573
+#: src/applet.c:2598
 #, c-format
 msgid "Preparing network connection “%s”…"
 msgstr "Preparazione della connessione di rete «%s»…"
 
-#: src/applet.c:2576
+#: src/applet.c:2601
 #, c-format
 msgid "User authentication required for network connection “%s”…"
 msgstr "Richiesta autenticazione utente per la connessione di rete «%s»…"
 
-#: src/applet.c:2582
+#: src/applet.c:2607
 #, c-format
 msgid "Network connection “%s” active"
 msgstr "Connessione di rete «%s» attiva"
 
-#: src/applet.c:2655
+#: src/applet.c:2680
 #, c-format
 msgid "Starting VPN connection “%s”…"
 msgstr "Avvio della connessione VPN «%s»…"
 
-#: src/applet.c:2658
+#: src/applet.c:2683
 #, c-format
 msgid "User authentication required for VPN connection “%s”…"
 msgstr "Richiesta autenticazione utente per la connessione VPN «%s»…"
 
-#: src/applet.c:2661
+#: src/applet.c:2686
 #, c-format
 msgid "Requesting a VPN address for “%s”…"
 msgstr "Richiesta di un indirizzo VPN per «%s»…"
 
-#: src/applet.c:2664
+#: src/applet.c:2689
 msgid "VPN connection active"
 msgstr "Connessione VPN attiva"
 
-#: src/applet.c:2714
+#: src/applet.c:2739
 msgid "No network connection"
 msgstr "Nessuna connessione di rete"
 
-#: src/applet.c:3324
+#: src/applet.c:3349
 msgid "NetworkManager Applet"
 msgstr "Applet NetworkManager"
 
@@ -2043,6 +2043,13 @@ msgid ""
 "also unset, use the kernel default value read from file \"/proc/sys/net/ipv6/"
 "conf/default/use_tempaddr\""
 msgstr ""
+"Se abilitato, fa sì che il kernel generi un indirizzo IPv6 temporaneo oltre "
+"a quello pubblico generato a partire dall'indirizzo MAC. Ciò migliora la "
+"privacy, ma potrebbe causare problemi in alcune applicazioni. Se impostato "
+"su \"Default\", viene utilizzato il valore della configurazione globale di "
+"NetworkManager. Se anche questo non è impostato, utilizzare il valore "
+"predefinito del kernel letto dal file \"/proc/sys/net/ipv6/conf/default/"
+"use_tempaddr\""
 
 #: src/connection-editor/ce-page-ip6.ui:323
 msgid "IPv6 address _generation mode"
@@ -3606,15 +3613,15 @@ msgstr "Connessioni di rete"
 msgid "Add a new connection"
 msgstr "Aggiunge una nuova connessione"
 
-#: src/connection-editor/page-8021x-security.c:96
+#: src/connection-editor/page-8021x-security.c:97
 msgid "802.1X Security"
 msgstr "Sicurezza 802.1X"
 
-#: src/connection-editor/page-8021x-security.c:98
+#: src/connection-editor/page-8021x-security.c:99
 msgid "Could not load 802.1X Security user interface."
 msgstr "Impossibile caricare l'interfaccia utente per la sicurezza 802.1X."
 
-#: src/connection-editor/page-8021x-security.c:112
+#: src/connection-editor/page-8021x-security.c:113
 msgid "Use 802.1_X security for this connection"
 msgstr "Usare la sicurezza 802.1_X per questa connessione"
 
@@ -4414,213 +4421,3 @@ msgstr "Chiavi private DER, PEM o PKCS#12 (*.der, *.pem, *.p12, *.key)"
 
 #~ msgid "preferences-system-network"
 #~ msgstr "preferences-system-network"
-
-#~ msgid "missing EAP-FAST PAC file"
-#~ msgstr "manca il file PAC EAP-FAST"
-
-#~ msgid "GTC"
-#~ msgstr "GTC"
-
-# (ndt) titolo finestra
-#~ msgid "Choose a PAC file"
-#~ msgstr "Scelta file PAC"
-
-#~ msgid "PAC files (*.pac)"
-#~ msgstr "File PAC (*.pac)"
-
-#~ msgid "All files"
-#~ msgstr "Tutti i file"
-
-#~ msgid "Anonymous"
-#~ msgstr "Anonimo"
-
-#~ msgid "Authenticated"
-#~ msgstr "Autenticato"
-
-#~ msgid "Both"
-#~ msgstr "Entrambi"
-
-#~ msgid "Anony_mous identity"
-#~ msgstr "Identità anoni_ma"
-
-#~ msgid "PAC _file"
-#~ msgstr "File _PAC"
-
-#~ msgid "_Inner authentication"
-#~ msgstr "Autenticazione i_nterna"
-
-#~ msgid "Allow automatic PAC pro_visioning"
-#~ msgstr "Fornire a_utomaticamente PAC"
-
-#~ msgid "missing EAP-LEAP username"
-#~ msgstr "manca il nome utente EAP-LEAP"
-
-#~ msgid "missing EAP-LEAP password"
-#~ msgstr "manca la password EAP-LEAP"
-
-#~ msgid "MD5"
-#~ msgstr "MD5"
-
-#~ msgid "Version 0"
-#~ msgstr "Versione 0"
-
-#~ msgid "Version 1"
-#~ msgstr "Versione 1"
-
-#~ msgid "No CA certificate is _required"
-#~ msgstr "Nessun certificato CA _richiesto"
-
-#~ msgid "PEAP _version"
-#~ msgstr "Versione _PEAP"
-
-#~ msgid "Suffix of the server certificate name."
-#~ msgstr "Suffisso del nome del certificato del server"
-
-#~ msgid "_Domain"
-#~ msgstr "_Dominio"
-
-#~ msgid "missing EAP username"
-#~ msgstr "manca il nome utente EAP"
-
-#~ msgid "missing EAP password"
-#~ msgstr "manca la password EAP"
-
-#~ msgid "missing EAP client Private Key passphrase"
-#~ msgstr "manca la frase d'accesso della chiave privata EAP"
-
-#~ msgid "P_rivate Key Passphrase"
-#~ msgstr "F_rase d'accesso chiave privata"
-
-#~ msgid "Sh_ow passphrase"
-#~ msgstr "Mo_stra frase d'accesso"
-
-#~ msgid "missing EAP-TLS identity"
-#~ msgstr "manca l'identità EAP-TLS"
-
-#~ msgid "no user certificate selected"
-#~ msgstr "nessun certificato utente selezionato"
-
-#~ msgid "selected user certificate file does not exist"
-#~ msgstr "il file del certificato utente selezionato non esiste"
-
-#~ msgid "no key selected"
-#~ msgstr "nessuna chiave selezionata"
-
-#~ msgid "selected key file does not exist"
-#~ msgstr "il file chiave selezionato non esiste"
-
-#~ msgid "I_dentity"
-#~ msgstr "I_dentità"
-
-#~ msgid "MSCHAPv2 (no EAP)"
-#~ msgstr "MSCHAPv2 (no EAP)"
-
-#~ msgid "undefined error in 802.1X security (wpa-eap)"
-#~ msgstr "errore non definito nella sicurezza 802.1X (wpa-eap)"
-
-#~ msgid "no CA certificate selected"
-#~ msgstr "nessun certificato CA selezionato"
-
-#~ msgid "selected CA certificate file does not exist"
-#~ msgstr "il file di certificato CA selezionato non esiste"
-
-#~ msgid "Unknown error validating 802.1X security"
-#~ msgstr "Errore sconosciuto nel validare la sicurezza 802.1X"
-
-#~ msgid "TLS"
-#~ msgstr "TLS"
-
-#~ msgid "PWD"
-#~ msgstr "PWD"
-
-#~ msgid "FAST"
-#~ msgstr "FAST"
-
-#~ msgid "Tunneled TLS"
-#~ msgstr "TLS via tunnel"
-
-#~ msgid "Protected EAP (PEAP)"
-#~ msgstr "EAP Protetto (PEAP)"
-
-#~ msgid "Externally configured"
-#~ msgstr "Configurato esternamente"
-
-#~ msgid "Au_thentication"
-#~ msgstr "_Autenticazione"
-
-#~ msgid "missing leap-username"
-#~ msgstr "manca leap-username"
-
-#~ msgid "missing leap-password"
-#~ msgstr "manca leap-password"
-
-#~ msgid "missing password"
-#~ msgstr "manca la password"
-
-#~ msgid "_Type"
-#~ msgstr "_Tipo"
-
-#~ msgid "missing wep-key"
-#~ msgstr "manca wep-key"
-
-#, c-format
-#~ msgid ""
-#~ "invalid wep-key: key with a length of %zu must contain only hex-digits"
-#~ msgstr ""
-#~ "wpa-key non valida: una chiave di lunghezza %zu deve contenere solo cifre "
-#~ "esadecimali"
-
-#, c-format
-#~ msgid ""
-#~ "invalid wep-key: key with a length of %zu must contain only ascii "
-#~ "characters"
-#~ msgstr ""
-#~ "wpa-key non valida: una chiave di lunghezza %zu deve contenere solo "
-#~ "caratteri ascii"
-
-#, c-format
-#~ msgid ""
-#~ "invalid wep-key: wrong key length %zu. A key must be either of length "
-#~ "5/13 (ascii) or 10/26 (hex)"
-#~ msgstr ""
-#~ "wpa-key non valida: lunghezza chiave %zu non valida. Una chiave deve "
-#~ "essere di lunghezza 5/13 (ascii) o 10/26 (esadecimale)"
-
-#~ msgid "invalid wep-key: passphrase must be non-empty"
-#~ msgstr "wpa-key non valida: la frase d'accesso non può essere vuota"
-
-#~ msgid "invalid wep-key: passphrase must be shorter than 64 characters"
-#~ msgstr ""
-#~ "wpa-key non valida: la frase d'accesso deve essere più corta di 64 "
-#~ "caratteri"
-
-#~ msgid "Open System"
-#~ msgstr "Sistema aperto"
-
-#~ msgid "Shared Key"
-#~ msgstr "Chiave condivisa"
-
-#~ msgid "1 (Default)"
-#~ msgstr "1 (predefinito)"
-
-#~ msgid "_Key"
-#~ msgstr "_Chiave"
-
-#~ msgid "Sho_w key"
-#~ msgstr "Mo_stra la chiave"
-
-#~ msgid "WEP inde_x"
-#~ msgstr "Indic_e WEP"
-
-#, c-format
-#~ msgid ""
-#~ "invalid wpa-psk: invalid key-length %zu. Must be [8,63] bytes or 64 hex "
-#~ "digits"
-#~ msgstr ""
-#~ "wpa-psk non valida: lunghezza chiave %zu non valida. Deve essere [8,63] "
-#~ "byte o 64 cifre esadecimali"
-
-#~ msgid "invalid wpa-psk: cannot interpret key with 64 bytes as hex"
-#~ msgstr ""
-#~ "wpa-psk non valida: impossibile interpretare chiave con 64 byte come "
-#~ "esadecimali"

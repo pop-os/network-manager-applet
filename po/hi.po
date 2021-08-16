@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: network-manager-applet.master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/network-manager-"
 "applet/\n"
-"POT-Creation-Date: 2021-02-03 09:54+0100\n"
+"POT-Creation-Date: 2021-05-10 15:50+0200\n"
 "PO-Revision-Date: 2013-03-24 13:57+0000\n"
 "Last-Translator: chandankumar <chandankumar.093047@gmail.com>\n"
 "Language-Team: Hindi <kde-i18n-doc@kde.org>\n"
@@ -29,7 +29,7 @@ msgstr ""
 "\n"
 "X-Generator: Lokalize 1.5\n"
 
-#: nm-applet.desktop.in:3 src/applet-dialogs.c:724 src/applet.c:3223
+#: nm-applet.desktop.in:3 src/applet-dialogs.c:724 src/applet.c:3248
 msgid "Network"
 msgstr "संजाल"
 
@@ -225,7 +225,7 @@ msgstr "मोबाइल ब्रॉडबैंड कनेक्शन '%s
 msgid "User authentication required for mobile broadband connection “%s”…"
 msgstr "मोबाइल ब्रॉडबैंड कनेक्शन '%s' के लिए उपयोक्ता सत्यापन जरूरी...."
 
-#: src/applet-device-bt.c:113 src/applet.c:2579 src/mobile-helpers.c:593
+#: src/applet-device-bt.c:113 src/applet.c:2604 src/mobile-helpers.c:593
 #, fuzzy, c-format
 msgid "Requesting a network address for “%s”…"
 msgstr "'%s' के लिए संजाल पता आग्रह कर रहा है..."
@@ -258,7 +258,7 @@ msgid "Ethernet Network"
 msgstr "इथरनेट संजाल"
 
 #. Notify user of unmanaged or unavailable device
-#: src/applet-device-ethernet.c:99 src/applet.c:1328
+#: src/applet-device-ethernet.c:99 src/applet.c:1359
 msgid "disconnected"
 msgstr "डिसकनेक्टेड"
 
@@ -749,7 +749,7 @@ msgstr "डिस्कनेक्ट विफलता"
 msgid "Connection activation failed"
 msgstr "कनेक्शन सक्रिय किया जाना विफ"
 
-#: src/applet.c:918
+#: src/applet.c:925
 #, fuzzy, c-format
 msgid ""
 "\n"
@@ -759,7 +759,7 @@ msgstr ""
 "\n"
 "VPN कनेक्शन '%s' टूट गया क्योंकि संजाल कनेक्शन में बाधा आई."
 
-#: src/applet.c:920
+#: src/applet.c:927
 #, fuzzy, c-format
 msgid ""
 "\n"
@@ -769,7 +769,7 @@ msgstr ""
 "\n"
 "VPN कनेक्शन '%s' विफल रहा क्योंकि संजाल कनेक्शन में बाधा आई थी."
 
-#: src/applet.c:922
+#: src/applet.c:929
 #, fuzzy, c-format
 msgid ""
 "\n"
@@ -778,7 +778,7 @@ msgstr ""
 "\n"
 "VPN कनेक्शन '%s' विफल रहा क्योंकि VPN सेवा अप्रत्याशित रूप से रूक गया."
 
-#: src/applet.c:924
+#: src/applet.c:931
 #, fuzzy, c-format
 msgid ""
 "\n"
@@ -788,7 +788,7 @@ msgstr ""
 "\n"
 "VPN कनेक्शन '%s' विफल रहा क्योंकि VPN सेवा ने इसे अवैध विन्यास वापस दिया."
 
-#: src/applet.c:926
+#: src/applet.c:933
 #, fuzzy, c-format
 msgid ""
 "\n"
@@ -797,7 +797,7 @@ msgstr ""
 "\n"
 "VPN कनेक्शन '%s' विफल रहा क्योंकि कनेक्शन प्रयास का समय समाप्त हो गया."
 
-#: src/applet.c:928
+#: src/applet.c:935
 #, fuzzy, c-format
 msgid ""
 "\n"
@@ -806,7 +806,7 @@ msgstr ""
 "\n"
 "VPN कनेक्शन '%s' विफल रहा क्योंकि VPN सेवा समय पर शुरू नहीं हो पाई."
 
-#: src/applet.c:930
+#: src/applet.c:937
 #, fuzzy, c-format
 msgid ""
 "\n"
@@ -815,7 +815,7 @@ msgstr ""
 "\n"
 "VPN कनेक्शन '%s' विफल रहा क्योंकि VPN सेवा आरंभ होने में विफल रही."
 
-#: src/applet.c:932
+#: src/applet.c:939
 #, fuzzy, c-format
 msgid ""
 "\n"
@@ -824,7 +824,7 @@ msgstr ""
 "\n"
 "VPN कनेक्शन '%s' विफल रहा क्योंकि कोई वैध VPN गुप्त नहीं था."
 
-#: src/applet.c:934
+#: src/applet.c:941
 #, fuzzy, c-format
 msgid ""
 "\n"
@@ -833,7 +833,7 @@ msgstr ""
 "\n"
 "VPN कनेक्शन '%s' विफल रहा क्योंकि अवैध VPN गुप्तता थी."
 
-#: src/applet.c:939
+#: src/applet.c:946
 #, fuzzy, c-format
 msgid ""
 "\n"
@@ -842,7 +842,7 @@ msgstr ""
 "\n"
 "VPN कनेक्शन '%s' विफल रहा."
 
-#: src/applet.c:966
+#: src/applet.c:973
 #, c-format
 msgid ""
 "VPN connection has been successfully established.\n"
@@ -853,19 +853,19 @@ msgstr ""
 "\n"
 "%s\n"
 
-#: src/applet.c:968
+#: src/applet.c:975
 msgid "VPN connection has been successfully established.\n"
 msgstr "VPN कनेक्शन को सफलतापूर्वक स्थापित किया गया है.\n"
 
-#: src/applet.c:970
+#: src/applet.c:977
 msgid "VPN Login Message"
 msgstr "VPN लॉगिन संदेश"
 
-#: src/applet.c:978 src/applet.c:1018
+#: src/applet.c:985 src/applet.c:1025
 msgid "VPN Connection Failed"
 msgstr "VPN कनेक्शन असफल"
 
-#: src/applet.c:1022
+#: src/applet.c:1029
 #, fuzzy, c-format
 msgid ""
 "\n"
@@ -877,7 +877,7 @@ msgstr ""
 "VPN कनेक्शन '%s' विफल रहा VPN सेवा आरंभ होने में विफल रही.\n"
 "%s"
 
-#: src/applet.c:1025
+#: src/applet.c:1032
 #, fuzzy, c-format
 msgid ""
 "\n"
@@ -890,137 +890,137 @@ msgstr ""
 "\n"
 "%s"
 
-#: src/applet.c:1316
+#: src/applet.c:1347
 msgid "device not ready (firmware missing)"
 msgstr "युक्तियां तैयार नहीं (फर्मवेयर गुम)"
 
-#: src/applet.c:1318
+#: src/applet.c:1349
 msgid "device not ready"
 msgstr "युक्तियां तैयार नहीं"
 
-#: src/applet.c:1344
+#: src/applet.c:1375
 msgid "Disconnect"
 msgstr "डिस्कनेक्ट"
 
-#: src/applet.c:1358
+#: src/applet.c:1389
 msgid "device not managed"
 msgstr "युक्तियां प्रबंधित नहीं"
 
-#: src/applet.c:1432
+#: src/applet.c:1463
 msgid "No network devices available"
 msgstr "कोई संजाल युक्तियां उपलब्ध नहीं"
 
-#: src/applet.c:1484
+#: src/applet.c:1509
 msgid "_VPN Connections"
 msgstr "_VPN कनेक्शन"
 
-#: src/applet.c:1528
+#: src/applet.c:1553
 #, fuzzy
 msgid "_Configure VPN…"
 msgstr "VPN विन्यस्त करें (_C)..."
 
-#: src/applet.c:1531
+#: src/applet.c:1556
 #, fuzzy
 msgid "_Add a VPN connection…"
 msgstr "_VPN कनेक्शन"
 
-#: src/applet.c:1637
+#: src/applet.c:1662
 #, fuzzy
 msgid "NetworkManager is not running…"
 msgstr "नेटवर्कप्रबंधक कार्यशील नहीं है..."
 
-#: src/applet.c:1642 src/applet.c:2710
+#: src/applet.c:1667 src/applet.c:2735
 msgid "Networking disabled"
 msgstr "संजालन निष्क्रिय"
 
 #. 'Enable Networking' item
-#: src/applet.c:1852
+#: src/applet.c:1877
 msgid "Enable _Networking"
 msgstr "संजालन सक्रिय करें (_N)"
 
 #. 'Enable Wi-Fi' item
-#: src/applet.c:1861
+#: src/applet.c:1886
 msgid "Enable _Wi-Fi"
 msgstr "बेतार सक्रिय करें (_W) "
 
 #. 'Enable Mobile Broadband' item
-#: src/applet.c:1870
+#: src/applet.c:1895
 msgid "Enable _Mobile Broadband"
 msgstr "मोबाइल ब्रॉडबैंड सक्रिय करें (_M)"
 
 #. Toggle notifications item
-#: src/applet.c:1882
+#: src/applet.c:1907
 msgid "Enable N_otifications"
 msgstr "सूचना सक्रिय करें (_o)"
 
 #. 'Connection Information' item
-#: src/applet.c:1894
+#: src/applet.c:1919
 msgid "Connection _Information"
 msgstr "कनेक्शन जानकारी (_I)"
 
 #. 'Edit Connections...' item
-#: src/applet.c:1902
+#: src/applet.c:1927
 #, fuzzy
 msgid "Edit Connections…"
 msgstr "कनेक्शन्स संपादित करें..."
 
-#: src/applet.c:1916
+#: src/applet.c:1941
 msgid "_About"
 msgstr "के बारे में (_A)"
 
-#: src/applet.c:2230
+#: src/applet.c:2255
 #, fuzzy, c-format
 msgid "You are now connected to “%s”."
 msgstr "आप अब '%s' को कनेक्टेड हैं."
 
-#: src/applet.c:2270
+#: src/applet.c:2295
 msgid "Disconnected"
 msgstr "डिस्कनेक्टेड"
 
-#: src/applet.c:2271
+#: src/applet.c:2296
 msgid "The network connection has been disconnected."
 msgstr "संजाल संबंधन को डिसकनेक्ट किया गया है."
 
-#: src/applet.c:2573
+#: src/applet.c:2598
 #, fuzzy, c-format
 msgid "Preparing network connection “%s”…"
 msgstr "संजाल संबंधन '%s' तैयार किया जा रहा है..."
 
-#: src/applet.c:2576
+#: src/applet.c:2601
 #, fuzzy, c-format
 msgid "User authentication required for network connection “%s”…"
 msgstr "उपयोक्ता सत्यापन संजाल संबंधन '%s' के लिए जरूरी है..."
 
-#: src/applet.c:2582
+#: src/applet.c:2607
 #, fuzzy, c-format
 msgid "Network connection “%s” active"
 msgstr "संजाल कनेक्शन '%s' सक्रिय है"
 
-#: src/applet.c:2655
+#: src/applet.c:2680
 #, fuzzy, c-format
 msgid "Starting VPN connection “%s”…"
 msgstr "VPN कनेक्शन '%s' आरंभ कर रहा है..."
 
-#: src/applet.c:2658
+#: src/applet.c:2683
 #, fuzzy, c-format
 msgid "User authentication required for VPN connection “%s”…"
 msgstr "उपयोक्ता सत्यापन VPN संबंधन '%s' के लिए जरूरी है..."
 
-#: src/applet.c:2661
+#: src/applet.c:2686
 #, fuzzy, c-format
 msgid "Requesting a VPN address for “%s”…"
 msgstr "कोई VPN पता को '%s' के लिए आग्रह कर रहा है..."
 
-#: src/applet.c:2664
+#: src/applet.c:2689
 #, fuzzy
 msgid "VPN connection active"
 msgstr "VPN कनेक्शन '%s' सक्रिय है"
 
-#: src/applet.c:2714
+#: src/applet.c:2739
 msgid "No network connection"
 msgstr "कोई संजाल संबंधन नहीं"
 
-#: src/applet.c:3324
+#: src/applet.c:3349
 msgid "NetworkManager Applet"
 msgstr "नेटवर्कप्रबंधक एप्लेट"
 
@@ -3595,15 +3595,15 @@ msgstr "संजाल कनेक्शन"
 msgid "Add a new connection"
 msgstr "_VPN कनेक्शन"
 
-#: src/connection-editor/page-8021x-security.c:96
+#: src/connection-editor/page-8021x-security.c:97
 msgid "802.1X Security"
 msgstr "802.1X सुरक्षा"
 
-#: src/connection-editor/page-8021x-security.c:98
+#: src/connection-editor/page-8021x-security.c:99
 msgid "Could not load 802.1X Security user interface."
 msgstr " 802.1X  सुरक्षा उपयोक्ता अंतरफलक लोड नहीं कर सका."
 
-#: src/connection-editor/page-8021x-security.c:112
+#: src/connection-editor/page-8021x-security.c:113
 msgid "Use 802.1_X security for this connection"
 msgstr "802.1X सुरक्षा का इस कनेक्शन के लिए उपयोग करें"
 

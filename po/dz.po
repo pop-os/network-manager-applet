@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: network-manager-applet.network-manager-applet-0-6.pot\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/network-manager-"
 "applet/\n"
-"POT-Creation-Date: 2021-02-03 09:54+0100\n"
+"POT-Creation-Date: 2021-05-10 15:50+0200\n"
 "PO-Revision-Date: 2007-03-16 09:28+0530\n"
 "Last-Translator: sonam pelden <sonaa_peldn@yahoo.com>\n"
 "Language-Team: Dzongkha <pgeyleg@dit.gov.bt>\n"
@@ -21,7 +21,7 @@ msgstr ""
 "X-Poedit-Country: Bhutan\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
-#: nm-applet.desktop.in:3 src/applet-dialogs.c:724 src/applet.c:3223
+#: nm-applet.desktop.in:3 src/applet-dialogs.c:724 src/applet.c:3248
 #, fuzzy
 msgid "Network"
 msgstr "ཡོངས་འབྲེལ་མིང་: (_N)"
@@ -222,7 +222,7 @@ msgstr "ཝའིརཌི་ཡོངས་འབྲེལ་མཐུད་ལ
 msgid "User authentication required for mobile broadband connection “%s”…"
 msgstr ""
 
-#: src/applet-device-bt.c:113 src/applet.c:2579 src/mobile-helpers.c:593
+#: src/applet-device-bt.c:113 src/applet.c:2604 src/mobile-helpers.c:593
 #, fuzzy, c-format
 msgid "Requesting a network address for “%s”…"
 msgstr "རླུང་འཕྲིན་ཡོངས་འབྲེལ་'%s'ལས་ཡོངས་འབྲེལ་ཁ་བྱང་གཅིག་ཞུ་བ་འབད་དོ..."
@@ -257,7 +257,7 @@ msgid "Ethernet Network"
 msgstr "ཡོངས་འབྲེལ་ཝའིརཌི། (_W)"
 
 #. Notify user of unmanaged or unavailable device
-#: src/applet-device-ethernet.c:99 src/applet.c:1328
+#: src/applet-device-ethernet.c:99 src/applet.c:1359
 #, fuzzy
 msgid "disconnected"
 msgstr "མཐུད་ལམ་བཏོག་ཡོདཔ་"
@@ -765,7 +765,7 @@ msgstr "མཐུད་ལམ་བཏོག་ཡོདཔ་"
 msgid "Connection activation failed"
 msgstr "ཝའིརཌི་ཡོངས་འབྲེལ་ལུ་མཐུད་མ་ཚུགས།"
 
-#: src/applet.c:918
+#: src/applet.c:925
 #, fuzzy, c-format
 msgid ""
 "\n"
@@ -773,7 +773,7 @@ msgid ""
 "interrupted."
 msgstr "ཝི་པི་ཨེན་མཐུད་ལམ་ '%s'འདི་ལེགས་ཤོམ་སྦེ་རིམ་སྒྲིག་མ་འབད་བས།"
 
-#: src/applet.c:920
+#: src/applet.c:927
 #, fuzzy, c-format
 msgid ""
 "\n"
@@ -781,14 +781,14 @@ msgid ""
 "interrupted."
 msgstr "ཝི་པི་ཨེན་མཐུད་ལམ་ '%s'འདི་ལེགས་ཤོམ་སྦེ་རིམ་སྒྲིག་མ་འབད་བས།"
 
-#: src/applet.c:922
+#: src/applet.c:929
 #, fuzzy, c-format
 msgid ""
 "\n"
 "The VPN connection “%s” failed because the VPN service stopped unexpectedly."
 msgstr "ཝི་པི་ཨེན་མཐུད་ལམ་ '%s'འདི་ལེགས་ཤོམ་སྦེ་རིམ་སྒྲིག་མ་འབད་བས།"
 
-#: src/applet.c:924
+#: src/applet.c:931
 #, fuzzy, c-format
 msgid ""
 "\n"
@@ -798,14 +798,14 @@ msgstr ""
 "ཝི་པི་ཨེན་མཐུད་ལམ་ '%s'འགོ་བཙུགས་མ་ཚུག་  ག་ཅི་སྦེ་ཟེར་བ་ཅིན་ཝི་པི་ཨེན་སར་བར་དེ་གིས་དགོས་མཁོ་ལྡན་"
 "པའི་ཡོངས་འབྲེལ་རིམ་སྒྲིག་སླར་ལོག་འབདཝ་ལས་ཨིན།"
 
-#: src/applet.c:926
+#: src/applet.c:933
 #, fuzzy, c-format
 msgid ""
 "\n"
 "The VPN connection “%s” failed because the connection attempt timed out."
 msgstr "ཝི་པི་ཨེན་མཐུད་ལམ་ '%s'འདི་ལེགས་ཤོམ་སྦེ་རིམ་སྒྲིག་མ་འབད་བས།"
 
-#: src/applet.c:928
+#: src/applet.c:935
 #, fuzzy, c-format
 msgid ""
 "\n"
@@ -814,7 +814,7 @@ msgstr ""
 "ཝི་པི་ཨེན་མཐུད་ལམ་ '%s'འགོ་བཙུགས་མ་ཚུག་  ག་ཅི་སྦེ་ཟེར་བ་ཅིན་ཝི་པི་ཨེན་སར་བར་དེ་གིས་དགོས་མཁོ་ལྡན་"
 "པའི་ཡོངས་འབྲེལ་རིམ་སྒྲིག་སླར་ལོག་འབདཝ་ལས་ཨིན།"
 
-#: src/applet.c:930
+#: src/applet.c:937
 #, fuzzy, c-format
 msgid ""
 "\n"
@@ -823,28 +823,28 @@ msgstr ""
 "ཝི་པི་ཨེན་མཐུད་ལམ་ '%s'འགོ་བཙུགས་མ་ཚུག་  ག་ཅི་སྦེ་ཟེར་བ་ཅིན་ཝི་པི་ཨེན་སར་བར་དེ་གིས་དགོས་མཁོ་ལྡན་"
 "པའི་ཡོངས་འབྲེལ་རིམ་སྒྲིག་སླར་ལོག་འབདཝ་ལས་ཨིན།"
 
-#: src/applet.c:932
+#: src/applet.c:939
 #, fuzzy, c-format
 msgid ""
 "\n"
 "The VPN connection “%s” failed because there were no valid VPN secrets."
 msgstr "ཝི་པི་ཨེན་མཐུད་ལམ་ '%s'འདི་ལེགས་ཤོམ་སྦེ་རིམ་སྒྲིག་མ་འབད་བས།"
 
-#: src/applet.c:934
+#: src/applet.c:941
 #, fuzzy, c-format
 msgid ""
 "\n"
 "The VPN connection “%s” failed because of invalid VPN secrets."
 msgstr "ཝི་པི་ཨེན་མཐུད་ལམ་ '%s'འདི་ལེགས་ཤོམ་སྦེ་རིམ་སྒྲིག་མ་འབད་བས།"
 
-#: src/applet.c:939
+#: src/applet.c:946
 #, fuzzy, c-format
 msgid ""
 "\n"
 "The VPN connection “%s” failed."
 msgstr "'%s'ལུ་ཝི་པི་ཨེན་མཐུད་ལམ་"
 
-#: src/applet.c:966
+#: src/applet.c:973
 #, c-format
 msgid ""
 "VPN connection has been successfully established.\n"
@@ -852,20 +852,20 @@ msgid ""
 "%s\n"
 msgstr ""
 
-#: src/applet.c:968
+#: src/applet.c:975
 msgid "VPN connection has been successfully established.\n"
 msgstr ""
 
-#: src/applet.c:970
+#: src/applet.c:977
 msgid "VPN Login Message"
 msgstr "ཝི་པི་ཨེན་ནང་བསྐྱོད་འཕྲིན་དོན་"
 
-#: src/applet.c:978 src/applet.c:1018
+#: src/applet.c:985 src/applet.c:1025
 #, fuzzy
 msgid "VPN Connection Failed"
 msgstr "ཝི་པི་ཨེན་མཐུད་ལམ་འཐུས་ཤོར་"
 
-#: src/applet.c:1022
+#: src/applet.c:1029
 #, fuzzy, c-format
 msgid ""
 "\n"
@@ -876,7 +876,7 @@ msgstr ""
 "ཝི་པི་ཨེན་མཐུད་ལམ་ '%s'འགོ་བཙུགས་མ་ཚུག་  ག་ཅི་སྦེ་ཟེར་བ་ཅིན་ཝི་པི་ཨེན་སར་བར་དེ་གིས་དགོས་མཁོ་ལྡན་"
 "པའི་ཡོངས་འབྲེལ་རིམ་སྒྲིག་སླར་ལོག་འབདཝ་ལས་ཨིན།"
 
-#: src/applet.c:1025
+#: src/applet.c:1032
 #, fuzzy, c-format
 msgid ""
 "\n"
@@ -885,140 +885,140 @@ msgid ""
 "%s"
 msgstr "ཝི་པི་ཨེན་མཐུད་ལམ་ '%s'འདི་ལེགས་ཤོམ་སྦེ་རིམ་སྒྲིག་མ་འབད་བས།"
 
-#: src/applet.c:1316
+#: src/applet.c:1347
 msgid "device not ready (firmware missing)"
 msgstr ""
 
-#: src/applet.c:1318
+#: src/applet.c:1349
 msgid "device not ready"
 msgstr ""
 
-#: src/applet.c:1344
+#: src/applet.c:1375
 #, fuzzy
 msgid "Disconnect"
 msgstr "མཐུད་ལམ་བཏོག་ཡོདཔ་"
 
-#: src/applet.c:1358
+#: src/applet.c:1389
 msgid "device not managed"
 msgstr ""
 
-#: src/applet.c:1432
+#: src/applet.c:1463
 #, fuzzy
 msgid "No network devices available"
 msgstr "ཡོངས་འབྲེལ་ཐབས་འཕྲུལ་ཐོབ་མ་ཚུགས་"
 
-#: src/applet.c:1484
+#: src/applet.c:1509
 msgid "_VPN Connections"
 msgstr "ཝི་པི་ཨེན་མཐུད་ལམ་ཚུ། (_V)"
 
-#: src/applet.c:1528
+#: src/applet.c:1553
 #, fuzzy
 msgid "_Configure VPN…"
 msgstr "ཝི་པི་ཨེན་རིམ་སྒྲིག་འབད... (_C)"
 
-#: src/applet.c:1531
+#: src/applet.c:1556
 #, fuzzy
 msgid "_Add a VPN connection…"
 msgstr "ཝི་པི་ཨེན་མཐུད་ལམ་ཚུ། (_V)"
 
-#: src/applet.c:1637
+#: src/applet.c:1662
 #, fuzzy
 msgid "NetworkManager is not running…"
 msgstr "ཡོངས་འབྲེལ་འཛིན་སྐྱོང་འདི་ལཱ་མི་འབད་བས་"
 
-#: src/applet.c:1642 src/applet.c:2710
+#: src/applet.c:1667 src/applet.c:2735
 msgid "Networking disabled"
 msgstr "ཡོངས་འབྲེལ་བཟོ་བ་ལྕོགས་མེད་བཟོ་ཡོདཔ་"
 
 #. 'Enable Networking' item
-#: src/applet.c:1852
+#: src/applet.c:1877
 msgid "Enable _Networking"
 msgstr "ཡོངས་འབྲེལ་བཟོ་བ་ལྕོགས་ཅན་བཟོ། (_N)"
 
 #. 'Enable Wi-Fi' item
-#: src/applet.c:1861
+#: src/applet.c:1886
 #, fuzzy
 msgid "Enable _Wi-Fi"
 msgstr "རླུང་འཕྲིན་ལྕོགས་ཅན་བཟོ། (_W)"
 
 #. 'Enable Mobile Broadband' item
-#: src/applet.c:1870
+#: src/applet.c:1895
 msgid "Enable _Mobile Broadband"
 msgstr ""
 
 #. Toggle notifications item
-#: src/applet.c:1882
+#: src/applet.c:1907
 msgid "Enable N_otifications"
 msgstr ""
 
 #. 'Connection Information' item
-#: src/applet.c:1894
+#: src/applet.c:1919
 msgid "Connection _Information"
 msgstr "མཐུད་ལམ་བརྡ་དོན། (_I)"
 
 #. 'Edit Connections...' item
-#: src/applet.c:1902
+#: src/applet.c:1927
 #, fuzzy
 msgid "Edit Connections…"
 msgstr "ཝི་པི་ཨེན་མཐུད་ལམ་ཚུ། (_V)"
 
-#: src/applet.c:1916
+#: src/applet.c:1941
 msgid "_About"
 msgstr "སྐོར་ལས། (_A)"
 
-#: src/applet.c:2230
+#: src/applet.c:2255
 #, fuzzy, c-format
 msgid "You are now connected to “%s”."
 msgstr "ཁྱོད་རླུང་འཕྲིན་ཡོངས་འབྲེལ་ '%s'ལུ་མཐུད་དེ་ཡོདཔ་ཨིན།"
 
-#: src/applet.c:2270
+#: src/applet.c:2295
 msgid "Disconnected"
 msgstr "མཐུད་ལམ་བཏོག་ཡོདཔ་"
 
-#: src/applet.c:2271
+#: src/applet.c:2296
 msgid "The network connection has been disconnected."
 msgstr "ཡོངས་འབྲེལ་མཐུན་ལམ་འདི་ མཐུད་ལམ་བཏོག་ཡོདཔ།"
 
-#: src/applet.c:2573
+#: src/applet.c:2598
 #, fuzzy, c-format
 msgid "Preparing network connection “%s”…"
 msgstr "ཝའིརཌི་ཡོངས་འབྲེལ་མཐུད་ལམ་"
 
-#: src/applet.c:2576
+#: src/applet.c:2601
 #, c-format
 msgid "User authentication required for network connection “%s”…"
 msgstr ""
 
-#: src/applet.c:2582
+#: src/applet.c:2607
 #, fuzzy, c-format
 msgid "Network connection “%s” active"
 msgstr "ཡོངས་འབྲེལ་མཐུད་ལམ་མེད་"
 
-#: src/applet.c:2655
+#: src/applet.c:2680
 #, fuzzy, c-format
 msgid "Starting VPN connection “%s”…"
 msgstr "ཝི་པི་ཨེན་མཐུད་ལམ་ '%s'འགོ་བཙུགས་མ་ཚུགས་"
 
-#: src/applet.c:2658
+#: src/applet.c:2683
 #, c-format
 msgid "User authentication required for VPN connection “%s”…"
 msgstr ""
 
-#: src/applet.c:2661
+#: src/applet.c:2686
 #, fuzzy, c-format
 msgid "Requesting a VPN address for “%s”…"
 msgstr "རླུང་འཕྲིན་ཡོངས་འབྲེལ་'%s'ལས་ཡོངས་འབྲེལ་ཁ་བྱང་གཅིག་ཞུ་བ་འབད་དོ..."
 
-#: src/applet.c:2664
+#: src/applet.c:2689
 #, fuzzy
 msgid "VPN connection active"
 msgstr "'%s'ལུ་ཝི་པི་ཨེན་མཐུད་ལམ་"
 
-#: src/applet.c:2714
+#: src/applet.c:2739
 msgid "No network connection"
 msgstr "ཡོངས་འབྲེལ་མཐུད་ལམ་མེད་"
 
-#: src/applet.c:3324
+#: src/applet.c:3349
 msgid "NetworkManager Applet"
 msgstr "ཡོངས་འབྲེལ་འཛིན་སྐྱོང་པའི་ཨེཔ་ལེཊི་"
 
@@ -3505,15 +3505,15 @@ msgstr "ཡོངས་འབྲེལ་མཐུད་ལམ་མེད་"
 msgid "Add a new connection"
 msgstr "ཝི་པི་ཨེན་མཐུད་ལམ་ཚུ། (_V)"
 
-#: src/connection-editor/page-8021x-security.c:96
+#: src/connection-editor/page-8021x-security.c:97
 msgid "802.1X Security"
 msgstr ""
 
-#: src/connection-editor/page-8021x-security.c:98
+#: src/connection-editor/page-8021x-security.c:99
 msgid "Could not load 802.1X Security user interface."
 msgstr ""
 
-#: src/connection-editor/page-8021x-security.c:112
+#: src/connection-editor/page-8021x-security.c:113
 msgid "Use 802.1_X security for this connection"
 msgstr ""
 
