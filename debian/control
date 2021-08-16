@@ -54,4 +54,3 @@ Description: network management framework (GNOME frontend)
  It displays the available networks and allows users to easily switch between
  them. For encrypted networks it will prompt the user for the key/passphrase
  and it can optionally store them in the gnome-keyring.
-

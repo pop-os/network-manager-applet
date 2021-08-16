@@ -1086,7 +1086,7 @@ network-manager-applet (0.7.0-1) experimental; urgency=low
     - The nm-editor tool has been replaced by nm-connection-editor.
       (Closes: #494148, #482107, #485651)
     - Show the correct configuration for WPA Enterprise setups in
-      nm-connection-editor (Closes: #480039)  
+      nm-connection-editor (Closes: #480039)
 
   [ Sjoerd Simons ]
   * debian/patches/02-nm-api-update.patch:
@@ -1176,9 +1176,9 @@ network-manager-applet (0.6.6-1) unstable; urgency=low
     - Better handling of VPN and WPA Enterprise security. (Closes: #444977)
   * debian/control
     - The Vcs-* fields are now officially supported, so remove the XS- prefix.
-    - Bump Standards-Version to 3.7.3. No further changes required. 
+    - Bump Standards-Version to 3.7.3. No further changes required.
     - Fix Xfce spelling error in the package description.
-    - Bump Build-Depends on libnm-util-dev and network-manager-dev to 
+    - Bump Build-Depends on libnm-util-dev and network-manager-dev to
       (>= 0.6.6).
   * Removed patches
     - debian/patches/10-po_fr.patch (merged upstream)
@@ -1209,7 +1209,7 @@ network-manager-applet (0.6.5-3) unstable; urgency=low
 network-manager-applet (0.6.5-2) unstable; urgency=low
 
   * debian/patches/30-connection_info_hide_on_delete_event.patch
-    - Patch from Ubuntu. Hide connection info dialog on delete-event. 
+    - Patch from Ubuntu. Hide connection info dialog on delete-event.
       (Closes: #406073)
 
  -- Michael Biebl <biebl@debian.org>  Wed, 19 Sep 2007 22:34:18 +0200
