@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: network-manager-applet\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/network-manager-"
 "applet/\n"
-"POT-Creation-Date: 2021-02-03 09:54+0100\n"
+"POT-Creation-Date: 2021-05-10 15:50+0200\n"
 "PO-Revision-Date: 2009-02-14 12:38+0200\n"
 "Last-Translator: Ihar Hrachyshka <ihar.hrachyshka@gmail.com>\n"
 "Language-Team: Belarusian Latin <i18n@mova.org>\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
 
-#: nm-applet.desktop.in:3 src/applet-dialogs.c:724 src/applet.c:3223
+#: nm-applet.desktop.in:3 src/applet-dialogs.c:724 src/applet.c:3248
 #, fuzzy
 msgid "Network"
 msgstr "Sietka:"
@@ -221,7 +221,7 @@ msgstr "Kanfihuravańnie spałučeńnia „Mobile Broadband” z „%s”..."
 msgid "User authentication required for mobile broadband connection “%s”…"
 msgstr "Dla spałučeńnia „Mobile Broadband” z „%s” patrebnaja aŭtaryzacyja..."
 
-#: src/applet-device-bt.c:113 src/applet.c:2579 src/mobile-helpers.c:593
+#: src/applet-device-bt.c:113 src/applet.c:2604 src/mobile-helpers.c:593
 #, fuzzy, c-format
 msgid "Requesting a network address for “%s”…"
 msgstr "Zapyt sietkavaha adrasu dla \"%s\"..."
@@ -256,7 +256,7 @@ msgid "Ethernet Network"
 msgstr "Dracianaja sietka"
 
 #. Notify user of unmanaged or unavailable device
-#: src/applet-device-ethernet.c:99 src/applet.c:1328
+#: src/applet-device-ethernet.c:99 src/applet.c:1359
 msgid "disconnected"
 msgstr "adłučana"
 
@@ -777,7 +777,7 @@ msgstr "Adłučany"
 msgid "Connection activation failed"
 msgstr "Niaŭdałaje spałučeńnie VPN"
 
-#: src/applet.c:918
+#: src/applet.c:925
 #, fuzzy, c-format
 msgid ""
 "\n"
@@ -787,7 +787,7 @@ msgstr ""
 "\n"
 "Spałučeńnie VPN \"%s\" vyklučyłasia, bo sietka była abarvanaja."
 
-#: src/applet.c:920
+#: src/applet.c:927
 #, fuzzy, c-format
 msgid ""
 "\n"
@@ -797,7 +797,7 @@ msgstr ""
 "\n"
 "Nie ŭdałosia ŭklučyć spałučeńnie VPN \"%s\", bo sietka była pierarvanaja."
 
-#: src/applet.c:922
+#: src/applet.c:929
 #, fuzzy, c-format
 msgid ""
 "\n"
@@ -807,7 +807,7 @@ msgstr ""
 "Nie ŭdałosia ŭklučyć spałučeńnie VPN \"%s\", bo pasłuha VPN niečakana "
 "pierapyniła rabotu."
 
-#: src/applet.c:924
+#: src/applet.c:931
 #, fuzzy, c-format
 msgid ""
 "\n"
@@ -818,7 +818,7 @@ msgstr ""
 "Nie ŭdałosia ŭklučyć spałučeńnie VPN \"%s\", bo pasłuha VPN viarnuła "
 "nieprydatnuju kanfihuracyju."
 
-#: src/applet.c:926
+#: src/applet.c:933
 #, fuzzy, c-format
 msgid ""
 "\n"
@@ -828,7 +828,7 @@ msgstr ""
 "Nie ŭdałosia ŭklučyć spałučeńnie VPN \"%s\", bo skončyŭsia termin tryvańnia "
 "spałučeńnia."
 
-#: src/applet.c:928
+#: src/applet.c:935
 #, fuzzy, c-format
 msgid ""
 "\n"
@@ -838,7 +838,7 @@ msgstr ""
 "Nie ŭdałosia ŭklučyć spałučeńnie VPN \"%s\", bo pasłuha VPN nie ŭklučyłasia "
 "ŭ čas."
 
-#: src/applet.c:930
+#: src/applet.c:937
 #, fuzzy, c-format
 msgid ""
 "\n"
@@ -848,7 +848,7 @@ msgstr ""
 "Nie ŭdałosia ŭklučyć spałučeńnie VPN \"%s\", bo nie ŭdałosia ŭklučyć pasłuhu "
 "VPN."
 
-#: src/applet.c:932
+#: src/applet.c:939
 #, fuzzy, c-format
 msgid ""
 "\n"
@@ -858,7 +858,7 @@ msgstr ""
 "Nie ŭdałosia ŭklučyć spałučeńnie VPN \"%s\", bo nie staje prydatnych "
 "sakretaŭ VPN."
 
-#: src/applet.c:934
+#: src/applet.c:941
 #, fuzzy, c-format
 msgid ""
 "\n"
@@ -868,7 +868,7 @@ msgstr ""
 "Nie ŭdałosia ŭklučyć spałučeńnie VPN „%s”, bo padadzienyja niapravilnyja "
 "sakrety VPN."
 
-#: src/applet.c:939
+#: src/applet.c:946
 #, fuzzy, c-format
 msgid ""
 "\n"
@@ -877,7 +877,7 @@ msgstr ""
 "\n"
 "Nie ŭdałosia ŭklučyć spałučeńnie VPN \"%s\"."
 
-#: src/applet.c:966
+#: src/applet.c:973
 #, c-format
 msgid ""
 "VPN connection has been successfully established.\n"
@@ -885,19 +885,19 @@ msgid ""
 "%s\n"
 msgstr ""
 
-#: src/applet.c:968
+#: src/applet.c:975
 msgid "VPN connection has been successfully established.\n"
 msgstr ""
 
-#: src/applet.c:970
+#: src/applet.c:977
 msgid "VPN Login Message"
 msgstr "Paviedamleńnie aŭtaryzacyi VPN"
 
-#: src/applet.c:978 src/applet.c:1018
+#: src/applet.c:985 src/applet.c:1025
 msgid "VPN Connection Failed"
 msgstr "Niaŭdałaje spałučeńnie VPN"
 
-#: src/applet.c:1022
+#: src/applet.c:1029
 #, fuzzy, c-format
 msgid ""
 "\n"
@@ -910,7 +910,7 @@ msgstr ""
 "VPN.\n"
 "%s"
 
-#: src/applet.c:1025
+#: src/applet.c:1032
 #, fuzzy, c-format
 msgid ""
 "\n"
@@ -922,140 +922,140 @@ msgstr ""
 "Nie ŭdałosia ŭklučyć spałučeńnie VPN \"%s\".\n"
 "%s"
 
-#: src/applet.c:1316
+#: src/applet.c:1347
 #, fuzzy
 msgid "device not ready (firmware missing)"
 msgstr "pryłada nie padrychtavanaja"
 
-#: src/applet.c:1318
+#: src/applet.c:1349
 msgid "device not ready"
 msgstr "pryłada nie padrychtavanaja"
 
-#: src/applet.c:1344
+#: src/applet.c:1375
 msgid "Disconnect"
 msgstr "Adłučy"
 
-#: src/applet.c:1358
+#: src/applet.c:1389
 msgid "device not managed"
 msgstr "pryłada nie absłuhoŭvajecca"
 
-#: src/applet.c:1432
+#: src/applet.c:1463
 msgid "No network devices available"
 msgstr "Niama sietkavych pryładaŭ"
 
-#: src/applet.c:1484
+#: src/applet.c:1509
 msgid "_VPN Connections"
 msgstr "Spałučeńni _VPN"
 
-#: src/applet.c:1528
+#: src/applet.c:1553
 #, fuzzy
 msgid "_Configure VPN…"
 msgstr "_Kanfihuruj VPN..."
 
-#: src/applet.c:1531
+#: src/applet.c:1556
 #, fuzzy
 msgid "_Add a VPN connection…"
 msgstr "Spałučeńni _VPN"
 
-#: src/applet.c:1637
+#: src/applet.c:1662
 #, fuzzy
 msgid "NetworkManager is not running…"
 msgstr "NetworkManager nie ŭruchomleny..."
 
-#: src/applet.c:1642 src/applet.c:2710
+#: src/applet.c:1667 src/applet.c:2735
 msgid "Networking disabled"
 msgstr "Sietkavyja pasłuhi vyklučanyja"
 
 #. 'Enable Networking' item
-#: src/applet.c:1852
+#: src/applet.c:1877
 msgid "Enable _Networking"
 msgstr "Uklučy _sietkavyja pasłuhi"
 
 #. 'Enable Wi-Fi' item
-#: src/applet.c:1861
+#: src/applet.c:1886
 #, fuzzy
 msgid "Enable _Wi-Fi"
 msgstr "Uklučy _biazdrotavuju sietku"
 
 #. 'Enable Mobile Broadband' item
-#: src/applet.c:1870
+#: src/applet.c:1895
 #, fuzzy
 msgid "Enable _Mobile Broadband"
 msgstr "Mabilny Broadband"
 
 #. Toggle notifications item
-#: src/applet.c:1882
+#: src/applet.c:1907
 msgid "Enable N_otifications"
 msgstr ""
 
 #. 'Connection Information' item
-#: src/applet.c:1894
+#: src/applet.c:1919
 msgid "Connection _Information"
 msgstr "_Źviestki ab spałučeńni"
 
 #. 'Edit Connections...' item
-#: src/applet.c:1902
+#: src/applet.c:1927
 #, fuzzy
 msgid "Edit Connections…"
 msgstr "Redahuj spałučeńni..."
 
-#: src/applet.c:1916
+#: src/applet.c:1941
 msgid "_About"
 msgstr "_Ab"
 
-#: src/applet.c:2230
+#: src/applet.c:2255
 #, fuzzy, c-format
 msgid "You are now connected to “%s”."
 msgstr "Ciapier ty spałučany z „%s”."
 
-#: src/applet.c:2270
+#: src/applet.c:2295
 msgid "Disconnected"
 msgstr "Adłučany"
 
-#: src/applet.c:2271
+#: src/applet.c:2296
 msgid "The network connection has been disconnected."
 msgstr "Sietkavaje spałučeńnie adłučanaje."
 
-#: src/applet.c:2573
+#: src/applet.c:2598
 #, fuzzy, c-format
 msgid "Preparing network connection “%s”…"
 msgstr "Padrychtoŭka sietkavaha spałučeńnia \"%s\"..."
 
-#: src/applet.c:2576
+#: src/applet.c:2601
 #, fuzzy, c-format
 msgid "User authentication required for network connection “%s”…"
 msgstr "Dla sietkavaha spałučeńnia \"%s\" patrebnaja aŭtaryzacyja..."
 
-#: src/applet.c:2582
+#: src/applet.c:2607
 #, fuzzy, c-format
 msgid "Network connection “%s” active"
 msgstr "Sietkavaje spałučeńnie \"%s\" dziejničaje"
 
-#: src/applet.c:2655
+#: src/applet.c:2680
 #, fuzzy, c-format
 msgid "Starting VPN connection “%s”…"
 msgstr "Uruchomleńnie spałučeńnia VPN \"%s\"..."
 
-#: src/applet.c:2658
+#: src/applet.c:2683
 #, fuzzy, c-format
 msgid "User authentication required for VPN connection “%s”…"
 msgstr "Dla spałučeńnia VPN „%s” patrebnaja aŭtaryzacyja..."
 
-#: src/applet.c:2661
+#: src/applet.c:2686
 #, fuzzy, c-format
 msgid "Requesting a VPN address for “%s”…"
 msgstr "Zapyt adrasu VPN dla spałučeńnia \"%s\"..."
 
-#: src/applet.c:2664
+#: src/applet.c:2689
 #, fuzzy
 msgid "VPN connection active"
 msgstr "Spałučeńnie VPN \"%s\" dziejničaje"
 
-#: src/applet.c:2714
+#: src/applet.c:2739
 msgid "No network connection"
 msgstr "Niama sietkavaha spałučeńnia"
 
-#: src/applet.c:3324
+#: src/applet.c:3349
 msgid "NetworkManager Applet"
 msgstr "Aplet NetworkManager"
 
@@ -3622,15 +3622,15 @@ msgstr "Sietkavyja spałučeńni"
 msgid "Add a new connection"
 msgstr "Spałučeńni _VPN"
 
-#: src/connection-editor/page-8021x-security.c:96
+#: src/connection-editor/page-8021x-security.c:97
 msgid "802.1X Security"
 msgstr "Biaśpieka 802.1X"
 
-#: src/connection-editor/page-8021x-security.c:98
+#: src/connection-editor/page-8021x-security.c:99
 msgid "Could not load 802.1X Security user interface."
 msgstr ""
 
-#: src/connection-editor/page-8021x-security.c:112
+#: src/connection-editor/page-8021x-security.c:113
 #, fuzzy
 msgid "Use 802.1_X security for this connection"
 msgstr "Užyj biaśpieku dla hetaha spałučeńnia 802.1X"

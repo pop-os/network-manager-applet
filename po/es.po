@@ -16,7 +16,7 @@ msgstr ""
 "Project-Id-Version: networkmanager-applet.master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/network-manager-"
 "applet/\n"
-"POT-Creation-Date: 2021-02-03 09:54+0100\n"
+"POT-Creation-Date: 2021-05-10 15:50+0200\n"
 "PO-Revision-Date: 2020-05-14 17:16+0200\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: Spanish - Spain <gnome-es-list@gnome.org>\n"
@@ -27,7 +27,7 @@ msgstr ""
 "X-Generator: Gtranslator 3.36.0\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: nm-applet.desktop.in:3 src/applet-dialogs.c:724 src/applet.c:3223
+#: nm-applet.desktop.in:3 src/applet-dialogs.c:724 src/applet.c:3248
 msgid "Network"
 msgstr "Red"
 
@@ -228,7 +228,7 @@ msgstr ""
 "Se necesita autenticación de usuario para la conexión de banda ancha móvil "
 "«%s»…"
 
-#: src/applet-device-bt.c:113 src/applet.c:2579 src/mobile-helpers.c:593
+#: src/applet-device-bt.c:113 src/applet.c:2604 src/mobile-helpers.c:593
 #, c-format
 msgid "Requesting a network address for “%s”…"
 msgstr "Solicitando una dirección de red para «%s»…"
@@ -261,7 +261,7 @@ msgid "Ethernet Network"
 msgstr "Red cableada"
 
 #. Notify user of unmanaged or unavailable device
-#: src/applet-device-ethernet.c:99 src/applet.c:1328
+#: src/applet-device-ethernet.c:99 src/applet.c:1359
 msgid "disconnected"
 msgstr "desconectado"
 
@@ -749,7 +749,7 @@ msgstr "Falló al desconectar"
 msgid "Connection activation failed"
 msgstr "Falló al activar la conexión"
 
-#: src/applet.c:918
+#: src/applet.c:925
 #, c-format
 msgid ""
 "\n"
@@ -759,7 +759,7 @@ msgstr ""
 "\n"
 "La conexión VPN «%s» se desconectó porque se interrumpió la conexión de red."
 
-#: src/applet.c:920
+#: src/applet.c:927
 #, c-format
 msgid ""
 "\n"
@@ -769,7 +769,7 @@ msgstr ""
 "\n"
 "La conexión VPN «%s» ha fallado porque se interrumpió la conexión de red."
 
-#: src/applet.c:922
+#: src/applet.c:929
 #, c-format
 msgid ""
 "\n"
@@ -779,7 +779,7 @@ msgstr ""
 "La conexión de red «%s» ha fallado porque el servicio VPN se interrumpió "
 "inesperadamente."
 
-#: src/applet.c:924
+#: src/applet.c:931
 #, c-format
 msgid ""
 "\n"
@@ -790,7 +790,7 @@ msgstr ""
 "La conexión VPN «%s» ha fallado porque el servicio VPN devolvió una "
 "configuración no válida."
 
-#: src/applet.c:926
+#: src/applet.c:933
 #, c-format
 msgid ""
 "\n"
@@ -799,7 +799,7 @@ msgstr ""
 "\n"
 "La conexión VPN «%s» ha fallado porque expiró el tiempo de conexión."
 
-#: src/applet.c:928
+#: src/applet.c:935
 #, c-format
 msgid ""
 "\n"
@@ -808,7 +808,7 @@ msgstr ""
 "\n"
 "La conexión VPN «%s» ha fallado porque el servicio VPN no se inició a tiempo."
 
-#: src/applet.c:930
+#: src/applet.c:937
 #, c-format
 msgid ""
 "\n"
@@ -817,7 +817,7 @@ msgstr ""
 "\n"
 "La conexión VPN «%s» ha fallado porque el servicio VPN no pudo iniciarse."
 
-#: src/applet.c:932
+#: src/applet.c:939
 #, c-format
 msgid ""
 "\n"
@@ -826,7 +826,7 @@ msgstr ""
 "\n"
 "La conexión VPN «%s» falló porque no había secretos VPN válidos."
 
-#: src/applet.c:934
+#: src/applet.c:941
 #, c-format
 msgid ""
 "\n"
@@ -835,7 +835,7 @@ msgstr ""
 "\n"
 "La conexión VPN «%s» falló porque los secretos VPN no eran válidos."
 
-#: src/applet.c:939
+#: src/applet.c:946
 #, c-format
 msgid ""
 "\n"
@@ -844,7 +844,7 @@ msgstr ""
 "\n"
 "La conexión VPN «%s» ha fallado."
 
-#: src/applet.c:966
+#: src/applet.c:973
 #, c-format
 msgid ""
 "VPN connection has been successfully established.\n"
@@ -855,19 +855,19 @@ msgstr ""
 "\n"
 "%s\n"
 
-#: src/applet.c:968
+#: src/applet.c:975
 msgid "VPN connection has been successfully established.\n"
 msgstr "La conexión VPN se ha establecido con éxito.\n"
 
-#: src/applet.c:970
+#: src/applet.c:977
 msgid "VPN Login Message"
 msgstr "Mensaje de acceso VPN"
 
-#: src/applet.c:978 src/applet.c:1018
+#: src/applet.c:985 src/applet.c:1025
 msgid "VPN Connection Failed"
 msgstr "Falló la conexión VPN"
 
-#: src/applet.c:1022
+#: src/applet.c:1029
 #, c-format
 msgid ""
 "\n"
@@ -880,7 +880,7 @@ msgstr ""
 "\n"
 "%s"
 
-#: src/applet.c:1025
+#: src/applet.c:1032
 #, c-format
 msgid ""
 "\n"
@@ -893,132 +893,132 @@ msgstr ""
 "\n"
 "%s"
 
-#: src/applet.c:1316
+#: src/applet.c:1347
 msgid "device not ready (firmware missing)"
 msgstr "el dispositivo no está listo (falta el firmware)"
 
-#: src/applet.c:1318
+#: src/applet.c:1349
 msgid "device not ready"
 msgstr "el dispositivo no está listo"
 
-#: src/applet.c:1344
+#: src/applet.c:1375
 msgid "Disconnect"
 msgstr "Desconectar"
 
-#: src/applet.c:1358
+#: src/applet.c:1389
 msgid "device not managed"
 msgstr "el dispositivo no está gestionado"
 
-#: src/applet.c:1432
+#: src/applet.c:1463
 msgid "No network devices available"
 msgstr "No hay dispositivos de red disponibles"
 
-#: src/applet.c:1484
+#: src/applet.c:1509
 msgid "_VPN Connections"
 msgstr "Conexiones _VPN"
 
-#: src/applet.c:1528
+#: src/applet.c:1553
 msgid "_Configure VPN…"
 msgstr "_Configurar VPN…"
 
-#: src/applet.c:1531
+#: src/applet.c:1556
 msgid "_Add a VPN connection…"
 msgstr "_Añadir una conexión VPN…"
 
-#: src/applet.c:1637
+#: src/applet.c:1662
 msgid "NetworkManager is not running…"
 msgstr "El Gestor de la red no se está ejecutando…"
 
-#: src/applet.c:1642 src/applet.c:2710
+#: src/applet.c:1667 src/applet.c:2735
 msgid "Networking disabled"
 msgstr "Red desactivada"
 
 #. 'Enable Networking' item
-#: src/applet.c:1852
+#: src/applet.c:1877
 msgid "Enable _Networking"
 msgstr "Activar _red"
 
 #. 'Enable Wi-Fi' item
-#: src/applet.c:1861
+#: src/applet.c:1886
 msgid "Enable _Wi-Fi"
 msgstr "Activar _inalámbrica"
 
 #. 'Enable Mobile Broadband' item
-#: src/applet.c:1870
+#: src/applet.c:1895
 msgid "Enable _Mobile Broadband"
 msgstr "Activar la banda ancha _móvil"
 
 #. Toggle notifications item
-#: src/applet.c:1882
+#: src/applet.c:1907
 msgid "Enable N_otifications"
 msgstr "Activar n_otificaciones"
 
 #. 'Connection Information' item
-#: src/applet.c:1894
+#: src/applet.c:1919
 msgid "Connection _Information"
 msgstr "_Información de la conexión"
 
 #. 'Edit Connections...' item
-#: src/applet.c:1902
+#: src/applet.c:1927
 msgid "Edit Connections…"
 msgstr "Editar las conexiones…"
 
-#: src/applet.c:1916
+#: src/applet.c:1941
 msgid "_About"
 msgstr "_Acerca de"
 
-#: src/applet.c:2230
+#: src/applet.c:2255
 #, c-format
 msgid "You are now connected to “%s”."
 msgstr "Ahora está conectado a «%s»."
 
-#: src/applet.c:2270
+#: src/applet.c:2295
 msgid "Disconnected"
 msgstr "Desconectado"
 
-#: src/applet.c:2271
+#: src/applet.c:2296
 msgid "The network connection has been disconnected."
 msgstr "La conexión de red se ha desconectado."
 
-#: src/applet.c:2573
+#: src/applet.c:2598
 #, c-format
 msgid "Preparing network connection “%s”…"
 msgstr "Preparando la conexión de red «%s»…"
 
-#: src/applet.c:2576
+#: src/applet.c:2601
 #, c-format
 msgid "User authentication required for network connection “%s”…"
 msgstr "Se necesita autenticación de usuario para la conexión de red «%s»…"
 
-#: src/applet.c:2582
+#: src/applet.c:2607
 #, c-format
 msgid "Network connection “%s” active"
 msgstr "Conexión de red «%s» activa"
 
-#: src/applet.c:2655
+#: src/applet.c:2680
 #, c-format
 msgid "Starting VPN connection “%s”…"
 msgstr "Iniciando conexión VPN «%s»…"
 
-#: src/applet.c:2658
+#: src/applet.c:2683
 #, c-format
 msgid "User authentication required for VPN connection “%s”…"
 msgstr "Se necesita autenticación de usuario para la conexión VPN «%s»…"
 
-#: src/applet.c:2661
+#: src/applet.c:2686
 #, c-format
 msgid "Requesting a VPN address for “%s”…"
 msgstr "Solicitando una dirección VPN para «%s»…"
 
-#: src/applet.c:2664
+#: src/applet.c:2689
 msgid "VPN connection active"
 msgstr "Conexión VPN activa"
 
-#: src/applet.c:2714
+#: src/applet.c:2739
 msgid "No network connection"
 msgstr "Sin conexión de red"
 
-#: src/applet.c:3324
+#: src/applet.c:3349
 msgid "NetworkManager Applet"
 msgstr "Miniaplicación Gestor de la red"
 
@@ -3577,15 +3577,15 @@ msgstr "Conexiones de red"
 msgid "Add a new connection"
 msgstr "_Añadir una conexión nueva"
 
-#: src/connection-editor/page-8021x-security.c:96
+#: src/connection-editor/page-8021x-security.c:97
 msgid "802.1X Security"
 msgstr "Seguridad 802.1x"
 
-#: src/connection-editor/page-8021x-security.c:98
+#: src/connection-editor/page-8021x-security.c:99
 msgid "Could not load 802.1X Security user interface."
 msgstr "No se pudo cargar la interfaz de seguridad de usuario 802.1x."
 
-#: src/connection-editor/page-8021x-security.c:112
+#: src/connection-editor/page-8021x-security.c:113
 msgid "Use 802.1_X security for this connection"
 msgstr "Usar seguridad 802.1_X para esta conexión"
 

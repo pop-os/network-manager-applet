@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: te\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/network-manager-"
 "applet/\n"
-"POT-Creation-Date: 2021-02-03 09:54+0100\n"
+"POT-Creation-Date: 2021-05-10 15:50+0200\n"
 "PO-Revision-Date: 2012-06-27 15:21+0530\n"
 "Last-Translator: Sasi Bhushan Boddepalli <sasi@swecha.net>\n"
 "Language-Team: Telugu <indlinux-telugu@lists.sourceforge.net>\n"
@@ -25,7 +25,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n!=1);\n"
 "X-Generator: KBabel 1.11.4\n"
 
-#: nm-applet.desktop.in:3 src/applet-dialogs.c:724 src/applet.c:3223
+#: nm-applet.desktop.in:3 src/applet-dialogs.c:724 src/applet.c:3248
 msgid "Network"
 msgstr "నెట్‌వర్క్"
 
@@ -224,7 +224,7 @@ msgstr "మొబైల్ బ్రాడ్‌బాండ్ అనుసం�
 msgid "User authentication required for mobile broadband connection “%s”…"
 msgstr "మొబైల్ బ్రాడ్‌బాండ్ అనుసంధానము '%s' కొరకు వినియోగదారి దృవీకరణము అవసరమైంది..."
 
-#: src/applet-device-bt.c:113 src/applet.c:2579 src/mobile-helpers.c:593
+#: src/applet-device-bt.c:113 src/applet.c:2604 src/mobile-helpers.c:593
 #, fuzzy, c-format
 msgid "Requesting a network address for “%s”…"
 msgstr "'%s' కొరకు నెట్వర్కు చిరునామాను అభ్యర్ధిస్తోంది..."
@@ -259,7 +259,7 @@ msgid "Ethernet Network"
 msgstr "వైర్‌తో నెట్వర్కు"
 
 #. Notify user of unmanaged or unavailable device
-#: src/applet-device-ethernet.c:99 src/applet.c:1328
+#: src/applet-device-ethernet.c:99 src/applet.c:1359
 msgid "disconnected"
 msgstr "అననుసంధానించబడింది"
 
@@ -752,7 +752,7 @@ msgstr "అననుసంధానమురద్దు విఫలము"
 msgid "Connection activation failed"
 msgstr "అనుసంధానం క్రియాత్మకంలో విఫలమైంది"
 
-#: src/applet.c:918
+#: src/applet.c:925
 #, fuzzy, c-format
 msgid ""
 "\n"
@@ -762,7 +762,7 @@ msgstr ""
 "\n"
 "VPN అనుసంధానము '%s' అననుసంధానించబడింది యెంచేతంటే నెట్వర్కు అనుసంధానము ఆటంకపరచబడింది."
 
-#: src/applet.c:920
+#: src/applet.c:927
 #, fuzzy, c-format
 msgid ""
 "\n"
@@ -772,7 +772,7 @@ msgstr ""
 "\n"
 "VPN అనుసంధానము '%s' విఫలమైంది యెంచేతంటే నెట్వర్కు అనుసంధానము ఆటంకపరచబడింది."
 
-#: src/applet.c:922
+#: src/applet.c:929
 #, fuzzy, c-format
 msgid ""
 "\n"
@@ -781,7 +781,7 @@ msgstr ""
 "\n"
 "VPN అనుసంధానము '%s' విఫలమైంది యెంచేతంటే VPN సేవ అనుకోకుండా ఆపివేయబడింది."
 
-#: src/applet.c:924
+#: src/applet.c:931
 #, fuzzy, c-format
 msgid ""
 "\n"
@@ -791,7 +791,7 @@ msgstr ""
 "\n"
 "VPN అనుసంధానము '%s' విఫలమైంది యెంచేతంటే VPN సేవ చెల్లని ఆకృతీకరణను తిప్పియిచ్చింది."
 
-#: src/applet.c:926
+#: src/applet.c:933
 #, fuzzy, c-format
 msgid ""
 "\n"
@@ -800,7 +800,7 @@ msgstr ""
 "\n"
 "VPN అనుసంధానము '%s' విఫలమైంది యెంచేతంటే అనుసంధానపు ప్రయత్నం సమయం ముగిసింది."
 
-#: src/applet.c:928
+#: src/applet.c:935
 #, fuzzy, c-format
 msgid ""
 "\n"
@@ -809,7 +809,7 @@ msgstr ""
 "\n"
 "VPN అనుసంధానము '%s' విఫలమైంది యెంచేతంటే VPN సేవ సమయం లోపల ప్రారంభంకాలేదు."
 
-#: src/applet.c:930
+#: src/applet.c:937
 #, fuzzy, c-format
 msgid ""
 "\n"
@@ -818,7 +818,7 @@ msgstr ""
 "\n"
 "VPN అనుసంధానము '%s' విఫలమైంది యెంచేతంటే VPN సేవ ప్రారంభమవుటలో విఫలమైంది."
 
-#: src/applet.c:932
+#: src/applet.c:939
 #, fuzzy, c-format
 msgid ""
 "\n"
@@ -827,7 +827,7 @@ msgstr ""
 "\n"
 "VPN అనుసంధానము '%s' విఫలమైంది యెంచేతంటే అక్కడ చెల్లునటువంటి VPN రహస్యాలు లేవు."
 
-#: src/applet.c:934
+#: src/applet.c:941
 #, fuzzy, c-format
 msgid ""
 "\n"
@@ -836,7 +836,7 @@ msgstr ""
 "\n"
 "VPN అనుసంధానము '%s' విఫలమైంది యెంచేతంటే చెల్లని VPN రహస్యాలు."
 
-#: src/applet.c:939
+#: src/applet.c:946
 #, fuzzy, c-format
 msgid ""
 "\n"
@@ -845,7 +845,7 @@ msgstr ""
 "\n"
 "VPN అనుసంధానము '%s' విఫలమైంది."
 
-#: src/applet.c:966
+#: src/applet.c:973
 #, c-format
 msgid ""
 "VPN connection has been successfully established.\n"
@@ -856,19 +856,19 @@ msgstr ""
 "\n"
 "%s\n"
 
-#: src/applet.c:968
+#: src/applet.c:975
 msgid "VPN connection has been successfully established.\n"
 msgstr "VPN కనెక్షన్ విజయవంతంగా స్థాపించబడింది.\n"
 
-#: src/applet.c:970
+#: src/applet.c:977
 msgid "VPN Login Message"
 msgstr "VPN లాగిన్ సందేశము"
 
-#: src/applet.c:978 src/applet.c:1018
+#: src/applet.c:985 src/applet.c:1025
 msgid "VPN Connection Failed"
 msgstr "VPN అనుసంధానము విఫలమైంది"
 
-#: src/applet.c:1022
+#: src/applet.c:1029
 #, fuzzy, c-format
 msgid ""
 "\n"
@@ -881,7 +881,7 @@ msgstr ""
 "\n"
 "%s"
 
-#: src/applet.c:1025
+#: src/applet.c:1032
 #, fuzzy, c-format
 msgid ""
 "\n"
@@ -894,138 +894,138 @@ msgstr ""
 "\n"
 "%s"
 
-#: src/applet.c:1316
+#: src/applet.c:1347
 msgid "device not ready (firmware missing)"
 msgstr "పరికరము సిద్దముకాలేదు (ఫర్మువేర్ తప్పిపోయినది)"
 
-#: src/applet.c:1318
+#: src/applet.c:1349
 msgid "device not ready"
 msgstr "పరికరము సిద్దముకాలేదు"
 
-#: src/applet.c:1344
+#: src/applet.c:1375
 msgid "Disconnect"
 msgstr "అననుసంధానించుము"
 
-#: src/applet.c:1358
+#: src/applet.c:1389
 msgid "device not managed"
 msgstr "పరికరము నిర్వహించబడలేదు"
 
-#: src/applet.c:1432
+#: src/applet.c:1463
 msgid "No network devices available"
 msgstr "ఎటువంటి నెట్వర్కు పరికరములు అందుబాటులోలేవు"
 
-#: src/applet.c:1484
+#: src/applet.c:1509
 msgid "_VPN Connections"
 msgstr "_VPN అనుసంధానములు"
 
-#: src/applet.c:1528
+#: src/applet.c:1553
 #, fuzzy
 msgid "_Configure VPN…"
 msgstr "VPN ఆకృతీకరించుము... (_C)"
 
-#: src/applet.c:1531
+#: src/applet.c:1556
 #, fuzzy
 msgid "_Add a VPN connection…"
 msgstr "_VPN అనుసంధానములు"
 
-#: src/applet.c:1637
+#: src/applet.c:1662
 #, fuzzy
 msgid "NetworkManager is not running…"
 msgstr "నెట్‌వర్క్ మ్యానేజర్ నడుచుటలేదు..."
 
-#: src/applet.c:1642 src/applet.c:2710
+#: src/applet.c:1667 src/applet.c:2735
 msgid "Networking disabled"
 msgstr "నెట్వర్కింగ్ అచేతనమైంది"
 
 #. 'Enable Networking' item
-#: src/applet.c:1852
+#: src/applet.c:1877
 msgid "Enable _Networking"
 msgstr "నెట్వర్కింగ్ చేతనముచేయుము (_N)"
 
 #. 'Enable Wi-Fi' item
-#: src/applet.c:1861
+#: src/applet.c:1886
 #, fuzzy
 msgid "Enable _Wi-Fi"
 msgstr "వైర్‌లేని విధం చేతనముచేయుము (_W)"
 
 #. 'Enable Mobile Broadband' item
-#: src/applet.c:1870
+#: src/applet.c:1895
 msgid "Enable _Mobile Broadband"
 msgstr "మొబైల్ బ్రాడ్‌బాండ్‌ను చేతనముచేయుము (_M)"
 
 #. Toggle notifications item
-#: src/applet.c:1882
+#: src/applet.c:1907
 msgid "Enable N_otifications"
 msgstr "సూచన ప్రకటనలను చేతనముచేయుము (_o)"
 
 #. 'Connection Information' item
-#: src/applet.c:1894
+#: src/applet.c:1919
 msgid "Connection _Information"
 msgstr "అనుసంధానము సమాచారము (_I)"
 
 #. 'Edit Connections...' item
-#: src/applet.c:1902
+#: src/applet.c:1927
 #, fuzzy
 msgid "Edit Connections…"
 msgstr "అనుసంధానములను సవరించు..."
 
-#: src/applet.c:1916
+#: src/applet.c:1941
 msgid "_About"
 msgstr "గురించి (_A)"
 
-#: src/applet.c:2230
+#: src/applet.c:2255
 #, fuzzy, c-format
 msgid "You are now connected to “%s”."
 msgstr "మీరు '%s'కు అనుసంధానించబడినారు."
 
-#: src/applet.c:2270
+#: src/applet.c:2295
 msgid "Disconnected"
 msgstr "అననుసంధానించబడింది"
 
-#: src/applet.c:2271
+#: src/applet.c:2296
 msgid "The network connection has been disconnected."
 msgstr "నెట్వర్కు అనుసంధానము అననుసంధానించబడింది."
 
-#: src/applet.c:2573
+#: src/applet.c:2598
 #, fuzzy, c-format
 msgid "Preparing network connection “%s”…"
 msgstr "నెట్వర్కు అనుసంధానము '%s' సిద్దముచేయుచున్నది..."
 
-#: src/applet.c:2576
+#: src/applet.c:2601
 #, fuzzy, c-format
 msgid "User authentication required for network connection “%s”…"
 msgstr "నెట్వర్కు అనుసంధానము '%s' కొరకు వినియోగదారి దృవీకరణము అవసరము..."
 
-#: src/applet.c:2582
+#: src/applet.c:2607
 #, fuzzy, c-format
 msgid "Network connection “%s” active"
 msgstr "నెట్వర్కు అనుసంధానము '%s' క్రియాశీలము"
 
-#: src/applet.c:2655
+#: src/applet.c:2680
 #, fuzzy, c-format
 msgid "Starting VPN connection “%s”…"
 msgstr "VPN అనుసంధానము '%s'ను ప్రారంభించుచున్నది..."
 
-#: src/applet.c:2658
+#: src/applet.c:2683
 #, fuzzy, c-format
 msgid "User authentication required for VPN connection “%s”…"
 msgstr "VPN అనుసంధానము '%s' కొరకు వినియోగదారి దృవీకరణము అవసరమైంది..."
 
-#: src/applet.c:2661
+#: src/applet.c:2686
 #, fuzzy, c-format
 msgid "Requesting a VPN address for “%s”…"
 msgstr "'%s' కొరకు VPN చిరునామాను అభ్యర్దించుచున్నది..."
 
-#: src/applet.c:2664
+#: src/applet.c:2689
 #, fuzzy
 msgid "VPN connection active"
 msgstr "VPN అనుసంధానము '%s' క్రియాశీలం"
 
-#: src/applet.c:2714
+#: src/applet.c:2739
 msgid "No network connection"
 msgstr "నెట్వర్కు అనుసంధానము లేదు"
 
-#: src/applet.c:3324
+#: src/applet.c:3349
 msgid "NetworkManager Applet"
 msgstr "నెట్‌వర్క్ మ్యానేజర్ ఆప్లెట్"
 
@@ -3582,16 +3582,16 @@ msgstr "నెట్వర్కు అనుసంధానములు"
 msgid "Add a new connection"
 msgstr "_VPN అనుసంధానములు"
 
-#: src/connection-editor/page-8021x-security.c:96
+#: src/connection-editor/page-8021x-security.c:97
 msgid "802.1X Security"
 msgstr "802.1X రక్షణ"
 
-#: src/connection-editor/page-8021x-security.c:98
+#: src/connection-editor/page-8021x-security.c:99
 #, fuzzy
 msgid "Could not load 802.1X Security user interface."
 msgstr "Wi-Fi రక్షణ వినియోగదారి యింటర్ఫేస్‌ను లోడుచేయలేకపోయింది."
 
-#: src/connection-editor/page-8021x-security.c:112
+#: src/connection-editor/page-8021x-security.c:113
 msgid "Use 802.1_X security for this connection"
 msgstr "ఈ అనుసంధానము కొరకు 802.1_X రక్షణ వుపయోగించుము"
 

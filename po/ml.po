@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: network-manager-applet.master.ml\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/network-manager-"
 "applet/\n"
-"POT-Creation-Date: 2021-02-03 09:54+0100\n"
+"POT-Creation-Date: 2021-05-10 15:50+0200\n"
 "PO-Revision-Date: 2013-04-21 23:43+0530\n"
 "Last-Translator: Balasankar C <c.balasankar@gmail.com>\n"
 "Language-Team: Swatantra Malayalam Computing\n"
@@ -22,7 +22,7 @@ msgstr ""
 "X-Generator: Virtaal 0.7.1\n"
 "X-Project-Style: gnome\n"
 
-#: nm-applet.desktop.in:3 src/applet-dialogs.c:724 src/applet.c:3223
+#: nm-applet.desktop.in:3 src/applet-dialogs.c:724 src/applet.c:3248
 msgid "Network"
 msgstr "ശൃംഖല"
 
@@ -220,7 +220,7 @@ msgstr ""
 "മൊബൈല്‍ ബ്രോഡ്ബാന്‍ഡ് ബന്ധം '%s' ഉപയോക്താവിനോടു് ആധികാരികത ഉറപ്പാക്കുന്നതിനായി "
 "ആവശ്യപ്പെട്ടിരിക്കുന്നു..."
 
-#: src/applet-device-bt.c:113 src/applet.c:2579 src/mobile-helpers.c:593
+#: src/applet-device-bt.c:113 src/applet.c:2604 src/mobile-helpers.c:593
 #, fuzzy, c-format
 msgid "Requesting a network address for “%s”…"
 msgstr "'%s'-നു് ഒരു ശൃംഖല വിലാസത്തിനായി ആവശ്യപ്പെടുന്നു..."
@@ -253,7 +253,7 @@ msgid "Ethernet Network"
 msgstr "എതര്‍നെറ്റ് ശൃംഖല"
 
 #. Notify user of unmanaged or unavailable device
-#: src/applet-device-ethernet.c:99 src/applet.c:1328
+#: src/applet-device-ethernet.c:99 src/applet.c:1359
 msgid "disconnected"
 msgstr "ബന്ധം വിഛേദിച്ചിരിയ്ക്കുന്നു"
 
@@ -743,7 +743,7 @@ msgstr "വേര്‍പ്പെടുത്താന്‍ സാധിച�
 msgid "Connection activation failed"
 msgstr "ബന്ധം സജീവമാക്കാന്‍ സാധിച്ചില്ല"
 
-#: src/applet.c:918
+#: src/applet.c:925
 #, fuzzy, c-format
 msgid ""
 "\n"
@@ -753,7 +753,7 @@ msgstr ""
 "\n"
 "വിപിഎന്‍ കണക്ഷനില്‍ തടസ്സം നേരിട്ടതിനാല്‍ വിപിഎന്‍ ബന്ധം '%s' വിഛേദിക്കപ്പെട്ടു."
 
-#: src/applet.c:920
+#: src/applet.c:927
 #, fuzzy, c-format
 msgid ""
 "\n"
@@ -763,7 +763,7 @@ msgstr ""
 "\n"
 "ശൃംഖല കണക്ഷനില്‍ തടസ്സം നേരിട്ടതിനാല്‍ വിപിഎന്‍ ബന്ധം '%s' പരാജയപ്പെട്ടു."
 
-#: src/applet.c:922
+#: src/applet.c:929
 #, fuzzy, c-format
 msgid ""
 "\n"
@@ -772,7 +772,7 @@ msgstr ""
 "\n"
 "വിപിഎന്‍ സര്‍വീസ് അപ്രതീക്ഷിതമായി നിലച്ചതിനാല്‍ വിപിഎന്‍ ബന്ധം '%s' പരാജയപ്പെട്ടു."
 
-#: src/applet.c:924
+#: src/applet.c:931
 #, fuzzy, c-format
 msgid ""
 "\n"
@@ -782,7 +782,7 @@ msgstr ""
 "\n"
 "വിപിഎന്‍ സേവനം തെറ്റായ ക്രമീകരമാണെന്നറിയിച്ചതിനാല്‍ വിപിഎന്‍ ബന്ധം '%s' പരാജയപ്പെട്ടു."
 
-#: src/applet.c:926
+#: src/applet.c:933
 #, fuzzy, c-format
 msgid ""
 "\n"
@@ -791,7 +791,7 @@ msgstr ""
 "\n"
 "ബന്ധപ്പെടാനനുവദിച്ച സമയം കഴിഞ്ഞുപോയതിനാല്‍ വിപിഎന്‍ ബന്ധം '%s' പരാജയപ്പെട്ടു."
 
-#: src/applet.c:928
+#: src/applet.c:935
 #, fuzzy, c-format
 msgid ""
 "\n"
@@ -801,7 +801,7 @@ msgstr ""
 "വിപിഎന്‍ സേവനം ശരിയായ സമയത്തു് ആരംഭിക്കുവാന്‍ സാധ്യമാകാത്തതിനാല്‍ വിപിഎന്‍ ബന്ധം '%s' "
 "പരാജയപ്പെട്ടു."
 
-#: src/applet.c:930
+#: src/applet.c:937
 #, fuzzy, c-format
 msgid ""
 "\n"
@@ -810,7 +810,7 @@ msgstr ""
 "\n"
 "വിപിഎന്‍ സേവനം ആരംഭിക്കുന്നതിലുള്ള തടസ്സം കാരണം വിപിഎന്‍ ബന്ധം '%s' പരാജയപ്പെട്ടു."
 
-#: src/applet.c:932
+#: src/applet.c:939
 #, fuzzy, c-format
 msgid ""
 "\n"
@@ -819,7 +819,7 @@ msgstr ""
 "\n"
 "സാധുവായ വിപിഎന്‍ രഹസ്യങ്ങള്‍ ലഭ്യമല്ലാത്തതിനാല്‍ വിപിഎന്‍ ബന്ധം '%s' പരാജയപ്പെട്ടു."
 
-#: src/applet.c:934
+#: src/applet.c:941
 #, fuzzy, c-format
 msgid ""
 "\n"
@@ -828,7 +828,7 @@ msgstr ""
 "\n"
 "അസാധുവായ വിപിഎന്‍ രഹസ്യങ്ങള്‍ കാരണം വിപിഎന്‍ ബന്ധം '%s' പരാജയപ്പെട്ടു."
 
-#: src/applet.c:939
+#: src/applet.c:946
 #, fuzzy, c-format
 msgid ""
 "\n"
@@ -837,7 +837,7 @@ msgstr ""
 "\n"
 "വിപിഎന്‍ ബന്ധം '%s' പരാജയപ്പെട്ടു."
 
-#: src/applet.c:966
+#: src/applet.c:973
 #, c-format
 msgid ""
 "VPN connection has been successfully established.\n"
@@ -848,19 +848,19 @@ msgstr ""
 "\n"
 "%s\n"
 
-#: src/applet.c:968
+#: src/applet.c:975
 msgid "VPN connection has been successfully established.\n"
 msgstr "വിപിഎന്‍ കണക്ഷന്‍ വിജയകരമായി സ്ഥാപിച്ചിരിയ്ക്കുന്നു.\n"
 
-#: src/applet.c:970
+#: src/applet.c:977
 msgid "VPN Login Message"
 msgstr "വിപിഎന്‍ ലോഗിന്‍ സന്ദേശം"
 
-#: src/applet.c:978 src/applet.c:1018
+#: src/applet.c:985 src/applet.c:1025
 msgid "VPN Connection Failed"
 msgstr "വിപിഎന്‍ ബന്ധം പരാജയപ്പെട്ടു"
 
-#: src/applet.c:1022
+#: src/applet.c:1029
 #, fuzzy, c-format
 msgid ""
 "\n"
@@ -873,7 +873,7 @@ msgstr ""
 "\n"
 "%s"
 
-#: src/applet.c:1025
+#: src/applet.c:1032
 #, fuzzy, c-format
 msgid ""
 "\n"
@@ -886,139 +886,139 @@ msgstr ""
 "\n"
 "%s"
 
-#: src/applet.c:1316
+#: src/applet.c:1347
 msgid "device not ready (firmware missing)"
 msgstr "ഉപകരണം തയ്യാറല്ല (ഫേംവെയര്‍ ഇല്ല)"
 
-#: src/applet.c:1318
+#: src/applet.c:1349
 msgid "device not ready"
 msgstr "ഉപകരണം തയ്യാറല്ല"
 
-#: src/applet.c:1344
+#: src/applet.c:1375
 msgid "Disconnect"
 msgstr "ബന്ധം വിഛേദിക്കുക"
 
-#: src/applet.c:1358
+#: src/applet.c:1389
 msgid "device not managed"
 msgstr "ഉപകരണം കൈകാര്യം ചെയ്യാത്തതാണു്"
 
-#: src/applet.c:1432
+#: src/applet.c:1463
 msgid "No network devices available"
 msgstr "ശൃംഖല ഉപകരണങ്ങളൊന്നും ലഭ്യമല്ല"
 
-#: src/applet.c:1484
+#: src/applet.c:1509
 msgid "_VPN Connections"
 msgstr "_വിപിഎന്‍ ബന്ധങ്ങള്‍"
 
-#: src/applet.c:1528
+#: src/applet.c:1553
 #, fuzzy
 msgid "_Configure VPN…"
 msgstr "വിപി_എന്‍ ക്രമീകരിക്കുക..."
 
-#: src/applet.c:1531
+#: src/applet.c:1556
 #, fuzzy
 msgid "_Add a VPN connection…"
 msgstr "_വിപിഎന്‍ ബന്ധങ്ങള്‍"
 
-#: src/applet.c:1637
+#: src/applet.c:1662
 #, fuzzy
 msgid "NetworkManager is not running…"
 msgstr "NetworkManager പ്രവര്‍ത്തനത്തിലില്ല..."
 
-#: src/applet.c:1642 src/applet.c:2710
+#: src/applet.c:1667 src/applet.c:2735
 msgid "Networking disabled"
 msgstr "ശൃംഖല ബന്ധം പ്രവര്‍ത്ത രഹിതമാക്കിയിരിക്കുന്നു"
 
 #. 'Enable Networking' item
-#: src/applet.c:1852
+#: src/applet.c:1877
 msgid "Enable _Networking"
 msgstr "_ശൃംഖല ബന്ധം സജ്ജമാക്കുക"
 
 #. 'Enable Wi-Fi' item
-#: src/applet.c:1861
+#: src/applet.c:1886
 msgid "Enable _Wi-Fi"
 msgstr "_വയര്‍ലെസ് സജ്ജമാക്കുക"
 
 #. 'Enable Mobile Broadband' item
-#: src/applet.c:1870
+#: src/applet.c:1895
 msgid "Enable _Mobile Broadband"
 msgstr "_മൊബൈല്‍ ബ്രോഡ്ബാന്‍ഡ് സജ്ജമാക്കുക"
 
 #. Toggle notifications item
-#: src/applet.c:1882
+#: src/applet.c:1907
 msgid "Enable N_otifications"
 msgstr "അറിയിപ്പു_കള്‍ പ്രവര്‍ത്തന സജ്ജമാക്കുക"
 
 #. 'Connection Information' item
-#: src/applet.c:1894
+#: src/applet.c:1919
 msgid "Connection _Information"
 msgstr "ബന്ധ _വിവരം"
 
 #. 'Edit Connections...' item
-#: src/applet.c:1902
+#: src/applet.c:1927
 #, fuzzy
 msgid "Edit Connections…"
 msgstr "ബന്ധങ്ങള്‍ ചിട്ടപ്പെടുത്തുക..."
 
-#: src/applet.c:1916
+#: src/applet.c:1941
 msgid "_About"
 msgstr "_അണിയറ വിശേഷം"
 
-#: src/applet.c:2230
+#: src/applet.c:2255
 #, fuzzy, c-format
 msgid "You are now connected to “%s”."
 msgstr "നിങ്ങള്‍ ഇപ്പോള്‍ '%s'-മായി ബന്ധപ്പെട്ടിരിക്കുന്നു."
 
-#: src/applet.c:2270
+#: src/applet.c:2295
 msgid "Disconnected"
 msgstr "ബന്ധംവിഛേദിച്ചിരിക്കുന്നു"
 
-#: src/applet.c:2271
+#: src/applet.c:2296
 msgid "The network connection has been disconnected."
 msgstr "ശൃംഖല ബന്ധം വിഛേദിച്ചിരിക്കുന്നു."
 
-#: src/applet.c:2573
+#: src/applet.c:2598
 #, fuzzy, c-format
 msgid "Preparing network connection “%s”…"
 msgstr "ശൃംഖല ബന്ധം '%s'-നായി തയ്യാറെടുക്കുന്നു..."
 
-#: src/applet.c:2576
+#: src/applet.c:2601
 #, fuzzy, c-format
 msgid "User authentication required for network connection “%s”…"
 msgstr ""
 "ശൃംഖല ബന്ധം '%s' ഉപയോക്താവിനോടു് ആധികാരികത ഉറപ്പാക്കുന്നതിനായി ആവശ്യപ്പെട്ടിരിക്കുന്നു..."
 
-#: src/applet.c:2582
+#: src/applet.c:2607
 #, fuzzy, c-format
 msgid "Network connection “%s” active"
 msgstr "ശൃംഖല ബന്ധം '%s' സജീവമാണു്"
 
-#: src/applet.c:2655
+#: src/applet.c:2680
 #, fuzzy, c-format
 msgid "Starting VPN connection “%s”…"
 msgstr "വിപിഎന്‍ ബന്ധം '%s' ആരംഭിക്കുന്നു..."
 
-#: src/applet.c:2658
+#: src/applet.c:2683
 #, fuzzy, c-format
 msgid "User authentication required for VPN connection “%s”…"
 msgstr ""
 "വിപിഎന്‍ ബന്ധം '%s' ഉപയോക്താവിനോടു് ആധികാരികത ഉറപ്പാക്കുന്നതിനായി ആവശ്യപ്പെട്ടിരിക്കുന്നു..."
 
-#: src/applet.c:2661
+#: src/applet.c:2686
 #, fuzzy, c-format
 msgid "Requesting a VPN address for “%s”…"
 msgstr "'%s'-നായി ഒരു വിപിഎന്‍ വിലാസം ആവശ്യപ്പെടുന്നു..."
 
-#: src/applet.c:2664
+#: src/applet.c:2689
 #, fuzzy
 msgid "VPN connection active"
 msgstr "വിപിഎന്‍ ബന്ധം '%s' സജീവമാണു്"
 
-#: src/applet.c:2714
+#: src/applet.c:2739
 msgid "No network connection"
 msgstr "ശൃംഖല ബന്ധം ലഭ്യമല്ല"
 
-#: src/applet.c:3324
+#: src/applet.c:3349
 msgid "NetworkManager Applet"
 msgstr "NetworkManager ലഘുപ്രയോഗം"
 
@@ -3591,15 +3591,15 @@ msgstr "ശൃംഖല ബന്ധങ്ങള്‍"
 msgid "Add a new connection"
 msgstr "_വിപിഎന്‍ ബന്ധങ്ങള്‍"
 
-#: src/connection-editor/page-8021x-security.c:96
+#: src/connection-editor/page-8021x-security.c:97
 msgid "802.1X Security"
 msgstr "802.1X സുരക്ഷ"
 
-#: src/connection-editor/page-8021x-security.c:98
+#: src/connection-editor/page-8021x-security.c:99
 msgid "Could not load 802.1X Security user interface."
 msgstr "802.1X സെക്യൂരിറ്റി യൂസര്‍ ഇന്റര്‍ഫെയിസ് ലഭ്യമാക്കുവാന്‍ സാധ്യമായില്ല."
 
-#: src/connection-editor/page-8021x-security.c:112
+#: src/connection-editor/page-8021x-security.c:113
 msgid "Use 802.1_X security for this connection"
 msgstr "ഈ കണക്ഷനുവേണ്ടി 802.1_X സുരക്ഷ ഉപയോഗിക്കുക"
 

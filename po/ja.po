@@ -19,7 +19,7 @@ msgstr ""
 "Project-Id-Version: network-manager-applet 1.8.22\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/network-manager-"
 "applet/\n"
-"POT-Creation-Date: 2021-02-03 09:54+0100\n"
+"POT-Creation-Date: 2021-05-10 15:50+0200\n"
 "PO-Revision-Date: 2020-05-07 21:00+0000\n"
 "Last-Translator: sicklylife <translation@sicklylife.jp>\n"
 "Language-Team: Japanese <gnome-translation@gnome.gr.jp>\n"
@@ -29,7 +29,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: nm-applet.desktop.in:3 src/applet-dialogs.c:724 src/applet.c:3223
+#: nm-applet.desktop.in:3 src/applet-dialogs.c:724 src/applet.c:3248
 msgid "Network"
 msgstr "ネットワーク"
 
@@ -229,7 +229,7 @@ msgstr "モバイルブロードバンド接続 '%s' を設定中です..."
 msgid "User authentication required for mobile broadband connection “%s”…"
 msgstr "モバイルブロードバンド接続 '%s' にはユーザー認証が必要です..."
 
-#: src/applet-device-bt.c:113 src/applet.c:2579 src/mobile-helpers.c:593
+#: src/applet-device-bt.c:113 src/applet.c:2604 src/mobile-helpers.c:593
 #, c-format
 msgid "Requesting a network address for “%s”…"
 msgstr "'%s' のネットワークアドレスを要求しています..."
@@ -262,7 +262,7 @@ msgid "Ethernet Network"
 msgstr "Ethernet ネットワーク"
 
 #. Notify user of unmanaged or unavailable device
-#: src/applet-device-ethernet.c:99 src/applet.c:1328
+#: src/applet-device-ethernet.c:99 src/applet.c:1359
 msgid "disconnected"
 msgstr "切断されています"
 
@@ -741,7 +741,7 @@ msgstr "切断失敗"
 msgid "Connection activation failed"
 msgstr "接続のアクティベートに失敗しました"
 
-#: src/applet.c:918
+#: src/applet.c:925
 #, c-format
 msgid ""
 "\n"
@@ -751,7 +751,7 @@ msgstr ""
 "\n"
 "ネットワーク接続が中断されたため、VPN 接続 '%s' は切断されました。"
 
-#: src/applet.c:920
+#: src/applet.c:927
 #, c-format
 msgid ""
 "\n"
@@ -761,7 +761,7 @@ msgstr ""
 "\n"
 "ネットワーク接続が中断されたため、VPN 接続 '%s' は失敗しました。"
 
-#: src/applet.c:922
+#: src/applet.c:929
 #, c-format
 msgid ""
 "\n"
@@ -770,7 +770,7 @@ msgstr ""
 "\n"
 "VPN サービスが予期せずに停止したため、VPN 接続 '%s' は失敗しました。"
 
-#: src/applet.c:924
+#: src/applet.c:931
 #, c-format
 msgid ""
 "\n"
@@ -780,7 +780,7 @@ msgstr ""
 "\n"
 "VPN サービスが無効な設定を返したため、VPN 接続 '%s'は失敗しました。"
 
-#: src/applet.c:926
+#: src/applet.c:933
 #, c-format
 msgid ""
 "\n"
@@ -789,7 +789,7 @@ msgstr ""
 "\n"
 "接続試行がタイムアウトしたため、VPN 接続 '%s' は失敗しました。"
 
-#: src/applet.c:928
+#: src/applet.c:935
 #, c-format
 msgid ""
 "\n"
@@ -798,7 +798,7 @@ msgstr ""
 "\n"
 "VPN サービスが時間内に開始しなかったため、VPN 接続 '%s' は失敗しました。"
 
-#: src/applet.c:930
+#: src/applet.c:937
 #, c-format
 msgid ""
 "\n"
@@ -807,7 +807,7 @@ msgstr ""
 "\n"
 "VPN サービスが開始に失敗したため、VPN 接続 '%s' は失敗しました。"
 
-#: src/applet.c:932
+#: src/applet.c:939
 #, c-format
 msgid ""
 "\n"
@@ -816,7 +816,7 @@ msgstr ""
 "\n"
 "有効な VPN シークレットがないため、VPN 接続 '%s' は失敗しました。"
 
-#: src/applet.c:934
+#: src/applet.c:941
 #, c-format
 msgid ""
 "\n"
@@ -825,7 +825,7 @@ msgstr ""
 "\n"
 "VPN シークレットが無効なため、VPN 接続 '%s' は失敗しました。"
 
-#: src/applet.c:939
+#: src/applet.c:946
 #, c-format
 msgid ""
 "\n"
@@ -834,7 +834,7 @@ msgstr ""
 "\n"
 "VPN 接続 '%s' は失敗しました。"
 
-#: src/applet.c:966
+#: src/applet.c:973
 #, c-format
 msgid ""
 "VPN connection has been successfully established.\n"
@@ -845,19 +845,19 @@ msgstr ""
 "\n"
 "%s\n"
 
-#: src/applet.c:968
+#: src/applet.c:975
 msgid "VPN connection has been successfully established.\n"
 msgstr "VPN 接続の確立に成功しました。\n"
 
-#: src/applet.c:970
+#: src/applet.c:977
 msgid "VPN Login Message"
 msgstr "VPN ログインメッセージ"
 
-#: src/applet.c:978 src/applet.c:1018
+#: src/applet.c:985 src/applet.c:1025
 msgid "VPN Connection Failed"
 msgstr "VPN 接続は失敗しました"
 
-#: src/applet.c:1022
+#: src/applet.c:1029
 #, c-format
 msgid ""
 "\n"
@@ -870,7 +870,7 @@ msgstr ""
 "\n"
 "%s"
 
-#: src/applet.c:1025
+#: src/applet.c:1032
 #, c-format
 msgid ""
 "\n"
@@ -883,132 +883,132 @@ msgstr ""
 "\n"
 "%s"
 
-#: src/applet.c:1316
+#: src/applet.c:1347
 msgid "device not ready (firmware missing)"
 msgstr "デバイスの準備ができていません (ファームウェア未検出)"
 
-#: src/applet.c:1318
+#: src/applet.c:1349
 msgid "device not ready"
 msgstr "デバイスの準備ができていません"
 
-#: src/applet.c:1344
+#: src/applet.c:1375
 msgid "Disconnect"
 msgstr "切断する"
 
-#: src/applet.c:1358
+#: src/applet.c:1389
 msgid "device not managed"
 msgstr "デバイスは管理されていません"
 
-#: src/applet.c:1432
+#: src/applet.c:1463
 msgid "No network devices available"
 msgstr "ネットワークデバイスがありません"
 
-#: src/applet.c:1484
+#: src/applet.c:1509
 msgid "_VPN Connections"
 msgstr "VPN 接続(_V)"
 
-#: src/applet.c:1528
+#: src/applet.c:1553
 msgid "_Configure VPN…"
 msgstr "VPN を設定(_C)..."
 
-#: src/applet.c:1531
+#: src/applet.c:1556
 msgid "_Add a VPN connection…"
 msgstr "VPN 接続を追加(_A)"
 
-#: src/applet.c:1637
+#: src/applet.c:1662
 msgid "NetworkManager is not running…"
 msgstr "NetworkManager は実行されていません..."
 
-#: src/applet.c:1642 src/applet.c:2710
+#: src/applet.c:1667 src/applet.c:2735
 msgid "Networking disabled"
 msgstr "ネットワークは無効になっています"
 
 #. 'Enable Networking' item
-#: src/applet.c:1852
+#: src/applet.c:1877
 msgid "Enable _Networking"
 msgstr "ネットワークを有効にする(_N)"
 
 #. 'Enable Wi-Fi' item
-#: src/applet.c:1861
+#: src/applet.c:1886
 msgid "Enable _Wi-Fi"
 msgstr "Wi-Fi を有効にする(_W)"
 
 #. 'Enable Mobile Broadband' item
-#: src/applet.c:1870
+#: src/applet.c:1895
 msgid "Enable _Mobile Broadband"
 msgstr "モバイルブロードバンドを有効にする(_M)"
 
 #. Toggle notifications item
-#: src/applet.c:1882
+#: src/applet.c:1907
 msgid "Enable N_otifications"
 msgstr "通知を有効にする(_O)"
 
 #. 'Connection Information' item
-#: src/applet.c:1894
+#: src/applet.c:1919
 msgid "Connection _Information"
 msgstr "接続情報(_I)"
 
 #. 'Edit Connections...' item
-#: src/applet.c:1902
+#: src/applet.c:1927
 msgid "Edit Connections…"
 msgstr "接続を編集する..."
 
-#: src/applet.c:1916
+#: src/applet.c:1941
 msgid "_About"
 msgstr "このアプリケーションについて(_A)"
 
-#: src/applet.c:2230
+#: src/applet.c:2255
 #, c-format
 msgid "You are now connected to “%s”."
 msgstr "現在'%s' に接続しています。"
 
-#: src/applet.c:2270
+#: src/applet.c:2295
 msgid "Disconnected"
 msgstr "切断されました"
 
-#: src/applet.c:2271
+#: src/applet.c:2296
 msgid "The network connection has been disconnected."
 msgstr "ネットワーク接続が切断されました。"
 
-#: src/applet.c:2573
+#: src/applet.c:2598
 #, c-format
 msgid "Preparing network connection “%s”…"
 msgstr "ネットワーク接続 '%s' を準備中..."
 
-#: src/applet.c:2576
+#: src/applet.c:2601
 #, c-format
 msgid "User authentication required for network connection “%s”…"
 msgstr "ネットワーク接続 '%s' にはユーザー認証が必要です..."
 
-#: src/applet.c:2582
+#: src/applet.c:2607
 #, c-format
 msgid "Network connection “%s” active"
 msgstr "ネットワーク接続 '%s' はアクティブです。"
 
-#: src/applet.c:2655
+#: src/applet.c:2680
 #, c-format
 msgid "Starting VPN connection “%s”…"
 msgstr "VPN 接続 '%s' を開始しています..."
 
-#: src/applet.c:2658
+#: src/applet.c:2683
 #, c-format
 msgid "User authentication required for VPN connection “%s”…"
 msgstr "VPN 接続 '%s' にはユーザー認証が必要です..."
 
-#: src/applet.c:2661
+#: src/applet.c:2686
 #, c-format
 msgid "Requesting a VPN address for “%s”…"
 msgstr "'%s' の VPN アドレスを要求しています..."
 
-#: src/applet.c:2664
+#: src/applet.c:2689
 msgid "VPN connection active"
 msgstr "VPN 接続はアクティブです"
 
-#: src/applet.c:2714
+#: src/applet.c:2739
 msgid "No network connection"
 msgstr "ネットワーク接続がありません"
 
-#: src/applet.c:3324
+#: src/applet.c:3349
 msgid "NetworkManager Applet"
 msgstr "NetworkManager アプレット"
 
@@ -3544,15 +3544,15 @@ msgstr "ネットワーク接続"
 msgid "Add a new connection"
 msgstr "新規接続を追加"
 
-#: src/connection-editor/page-8021x-security.c:96
+#: src/connection-editor/page-8021x-security.c:97
 msgid "802.1X Security"
 msgstr "802.1X セキュリティー"
 
-#: src/connection-editor/page-8021x-security.c:98
+#: src/connection-editor/page-8021x-security.c:99
 msgid "Could not load 802.1X Security user interface."
 msgstr "802.1X セキュリティーユーザーインターフェースを読み込めません。"
 
-#: src/connection-editor/page-8021x-security.c:112
+#: src/connection-editor/page-8021x-security.c:113
 msgid "Use 802.1_X security for this connection"
 msgstr "この接続に 802.1X セキュリティーを使用する(_X)"
 

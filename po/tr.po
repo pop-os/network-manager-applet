@@ -6,29 +6,29 @@
 # Ozan Çağlayan <ozan@pardus.org.tr>, 2010.
 # İlker Dağlı <ilker@ilkerdagli.info>, 2011.
 # Simge Sezgin <simgesezgin88@gmail.com>, 2015.
-# Muhammet Kara <muhammetk@gmail.com>, 2011, 2014, 2016.
 # Yunusemre Şentürk <yunusemre.senturk@pardus.org.tr>, 2018.
 # Serdar Sağlam <teknomobil@yandex.com>, 2019.
 # Emin Tufan Çetin <etcetin@gmail.com>, 2018, 2019, 2020.
+# Muhammet Kara <muhammetk@gmail.com>, 2011-2021.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: network-manager-applet master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/network-manager-"
 "applet/\n"
-"POT-Creation-Date: 2021-02-03 09:54+0100\n"
-"PO-Revision-Date: 2020-09-20 19:38+0300\n"
-"Last-Translator: Emin Tufan Çetin <etcetin@gmail.com>\n"
-"Language-Team: Türkçe <gnome-turk@gnome.org>\n"
+"POT-Creation-Date: 2021-05-10 15:50+0200\n"
+"PO-Revision-Date: 2021-03-09 02:52+0300\n"
+"Last-Translator: Muhammet Kara <muhammetk@gmail.com>\n"
+"Language-Team: Turkish <gnometurk@gnome.org>\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 2.2.3\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"X-Generator: Gtranslator 3.38.0\n"
 "X-POOTLE-MTIME: 1434872144.000000\n"
 
-#: nm-applet.desktop.in:3 src/applet-dialogs.c:724 src/applet.c:3223
+#: nm-applet.desktop.in:3 src/applet-dialogs.c:724 src/applet.c:3248
 msgid "Network"
 msgstr "Ağ"
 
@@ -225,7 +225,7 @@ msgstr "“%s” mobil geniş bant bağlantısı yapılandırılıyor…"
 msgid "User authentication required for mobile broadband connection “%s”…"
 msgstr "“%s” mobil geniş bant bağlantısı için kimlik doğrulama gerekiyor…"
 
-#: src/applet-device-bt.c:113 src/applet.c:2579 src/mobile-helpers.c:593
+#: src/applet-device-bt.c:113 src/applet.c:2604 src/mobile-helpers.c:593
 #, c-format
 msgid "Requesting a network address for “%s”…"
 msgstr "“%s” için bir ağ adresi isteniyor…"
@@ -258,7 +258,7 @@ msgid "Ethernet Network"
 msgstr "Ethernet Ağı"
 
 #. Notify user of unmanaged or unavailable device
-#: src/applet-device-ethernet.c:99 src/applet.c:1328
+#: src/applet-device-ethernet.c:99 src/applet.c:1359
 msgid "disconnected"
 msgstr "bağlantı kesildi"
 
@@ -738,7 +738,7 @@ msgstr "Bağlantı kesilemedi"
 msgid "Connection activation failed"
 msgstr "Bağlantı etkinleştirilemedi"
 
-#: src/applet.c:918
+#: src/applet.c:925
 #, c-format
 msgid ""
 "\n"
@@ -748,7 +748,7 @@ msgstr ""
 "\n"
 "“%s” VPN bağlantısı kesildi çünkü ağ bağlantısı kesildi."
 
-#: src/applet.c:920
+#: src/applet.c:927
 #, c-format
 msgid ""
 "\n"
@@ -758,7 +758,7 @@ msgstr ""
 "\n"
 "“%s” VPN bağlantısı başarısız oldu çünkü ağ bağlantısı kesildi."
 
-#: src/applet.c:922
+#: src/applet.c:929
 #, c-format
 msgid ""
 "\n"
@@ -768,7 +768,7 @@ msgstr ""
 "“%s” VPN bağlantısı başarısız oldu çünkü VPN hizmeti beklenmedik biçimde "
 "durdu."
 
-#: src/applet.c:924
+#: src/applet.c:931
 #, c-format
 msgid ""
 "\n"
@@ -779,7 +779,7 @@ msgstr ""
 "“%s” VPN bağlantısı başarısız oldu çünkü VPN hizmeti geçersiz yapılandırma "
 "hatası bildirdi."
 
-#: src/applet.c:926
+#: src/applet.c:933
 #, c-format
 msgid ""
 "\n"
@@ -789,7 +789,7 @@ msgstr ""
 "“%s” VPN bağlantısı başarısız oldu çünkü bağlantı girişimi zaman aşımına "
 "uğradı."
 
-#: src/applet.c:928
+#: src/applet.c:935
 #, c-format
 msgid ""
 "\n"
@@ -798,7 +798,7 @@ msgstr ""
 "\n"
 "“%s” VPN bağlantısı başarısız oldu çünkü VPN hizmeti zamanında başlamadı."
 
-#: src/applet.c:930
+#: src/applet.c:937
 #, c-format
 msgid ""
 "\n"
@@ -807,7 +807,7 @@ msgstr ""
 "\n"
 "“%s” VPN bağlantısı başarısız oldu çünkü VPN hizmeti başlatılamadı."
 
-#: src/applet.c:932
+#: src/applet.c:939
 #, c-format
 msgid ""
 "\n"
@@ -816,7 +816,7 @@ msgstr ""
 "\n"
 "“%s” VPN bağlantısı başarısız oldu çünkü geçerli VPN gizi yok."
 
-#: src/applet.c:934
+#: src/applet.c:941
 #, c-format
 msgid ""
 "\n"
@@ -825,7 +825,7 @@ msgstr ""
 "\n"
 "“%s” VPN bağlantısı başarısız oldu çünkü VPN gizleri geçersiz."
 
-#: src/applet.c:939
+#: src/applet.c:946
 #, c-format
 msgid ""
 "\n"
@@ -834,7 +834,7 @@ msgstr ""
 "\n"
 "“%s” VPN bağlantısı başarısız oldu."
 
-#: src/applet.c:966
+#: src/applet.c:973
 #, c-format
 msgid ""
 "VPN connection has been successfully established.\n"
@@ -845,19 +845,19 @@ msgstr ""
 "\n"
 "%s\n"
 
-#: src/applet.c:968
+#: src/applet.c:975
 msgid "VPN connection has been successfully established.\n"
 msgstr "VPN bağlantısı başarıyla kuruldu.\n"
 
-#: src/applet.c:970
+#: src/applet.c:977
 msgid "VPN Login Message"
 msgstr "VPN Giriş İletisi"
 
-#: src/applet.c:978 src/applet.c:1018
+#: src/applet.c:985 src/applet.c:1025
 msgid "VPN Connection Failed"
 msgstr "VPN Bağlantısı Başarısız"
 
-#: src/applet.c:1022
+#: src/applet.c:1029
 #, c-format
 msgid ""
 "\n"
@@ -870,7 +870,7 @@ msgstr ""
 "\n"
 "%s"
 
-#: src/applet.c:1025
+#: src/applet.c:1032
 #, c-format
 msgid ""
 "\n"
@@ -883,132 +883,132 @@ msgstr ""
 "\n"
 "%s"
 
-#: src/applet.c:1316
+#: src/applet.c:1347
 msgid "device not ready (firmware missing)"
 msgstr "aygıt hazır değil (ürün bilgisi eksik)"
 
-#: src/applet.c:1318
+#: src/applet.c:1349
 msgid "device not ready"
 msgstr "aygıt hazır değil"
 
-#: src/applet.c:1344
+#: src/applet.c:1375
 msgid "Disconnect"
 msgstr "Bağlantıyı Kes"
 
-#: src/applet.c:1358
+#: src/applet.c:1389
 msgid "device not managed"
 msgstr "aygıt yönetilmiyor"
 
-#: src/applet.c:1432
+#: src/applet.c:1463
 msgid "No network devices available"
 msgstr "Ağ aygıtı bulunamadı"
 
-#: src/applet.c:1484
+#: src/applet.c:1509
 msgid "_VPN Connections"
 msgstr "_VPN Bağlantıları"
 
-#: src/applet.c:1528
+#: src/applet.c:1553
 msgid "_Configure VPN…"
 msgstr "VPNʼyi _Yapılandır…"
 
-#: src/applet.c:1531
+#: src/applet.c:1556
 msgid "_Add a VPN connection…"
 msgstr "VPN bağlantısı _ekle…"
 
-#: src/applet.c:1637
+#: src/applet.c:1662
 msgid "NetworkManager is not running…"
 msgstr "Ağ Yöneticisi çalışmıyor…"
 
-#: src/applet.c:1642 src/applet.c:2710
+#: src/applet.c:1667 src/applet.c:2735
 msgid "Networking disabled"
 msgstr "Ağ yönetimi etkin değil"
 
 #. 'Enable Networking' item
-#: src/applet.c:1852
+#: src/applet.c:1877
 msgid "Enable _Networking"
 msgstr "_Ağ Yönetimini Etkinleştir"
 
 #. 'Enable Wi-Fi' item
-#: src/applet.c:1861
+#: src/applet.c:1886
 msgid "Enable _Wi-Fi"
 msgstr "_Kablosuz Bağlantıyı Etkinleştir"
 
 #. 'Enable Mobile Broadband' item
-#: src/applet.c:1870
+#: src/applet.c:1895
 msgid "Enable _Mobile Broadband"
 msgstr "_Mobil Geniş Bant Ağları Etkinleştir"
 
 #. Toggle notifications item
-#: src/applet.c:1882
+#: src/applet.c:1907
 msgid "Enable N_otifications"
 msgstr "_Bildirimleri Etkinleştir"
 
 #. 'Connection Information' item
-#: src/applet.c:1894
+#: src/applet.c:1919
 msgid "Connection _Information"
 msgstr "Bağlantı _Bilgileri"
 
 #. 'Edit Connections...' item
-#: src/applet.c:1902
+#: src/applet.c:1927
 msgid "Edit Connections…"
 msgstr "Bağlantıları Düzenle…"
 
-#: src/applet.c:1916
+#: src/applet.c:1941
 msgid "_About"
 msgstr "_Hakkında"
 
-#: src/applet.c:2230
+#: src/applet.c:2255
 #, c-format
 msgid "You are now connected to “%s”."
 msgstr "Şimdi “%s” bağlantısına bağlandınız."
 
-#: src/applet.c:2270
+#: src/applet.c:2295
 msgid "Disconnected"
 msgstr "Bağlı değil"
 
-#: src/applet.c:2271
+#: src/applet.c:2296
 msgid "The network connection has been disconnected."
 msgstr "Ağ bağlantısı kesildi."
 
-#: src/applet.c:2573
+#: src/applet.c:2598
 #, c-format
 msgid "Preparing network connection “%s”…"
 msgstr "“%s” ağ bağlantısı hazırlanıyor…"
 
-#: src/applet.c:2576
+#: src/applet.c:2601
 #, c-format
 msgid "User authentication required for network connection “%s”…"
 msgstr "“%s” ağ bağlantısı için kimlik doğrulama gerekiyor…"
 
-#: src/applet.c:2582
+#: src/applet.c:2607
 #, c-format
 msgid "Network connection “%s” active"
 msgstr "“%s” ağ bağlantısı etkin"
 
-#: src/applet.c:2655
+#: src/applet.c:2680
 #, c-format
 msgid "Starting VPN connection “%s”…"
 msgstr "“%s” VPN bağlantısı başlatılıyor…"
 
-#: src/applet.c:2658
+#: src/applet.c:2683
 #, c-format
 msgid "User authentication required for VPN connection “%s”…"
 msgstr "“%s” VPN bağlantısı için kimlik doğrulama gerekiyor…"
 
-#: src/applet.c:2661
+#: src/applet.c:2686
 #, c-format
 msgid "Requesting a VPN address for “%s”…"
 msgstr "“%s” için VPN adresi isteniyor…"
 
-#: src/applet.c:2664
+#: src/applet.c:2689
 msgid "VPN connection active"
 msgstr "VPN bağlantısı etkin"
 
-#: src/applet.c:2714
+#: src/applet.c:2739
 msgid "No network connection"
 msgstr "Ağ bağlantısı yok"
 
-#: src/applet.c:3324
+#: src/applet.c:3349
 msgid "NetworkManager Applet"
 msgstr "NetworkManager Programcığı"
 
@@ -2905,6 +2905,9 @@ msgid ""
 "incoming traffic for this peer is allowed and to which outgoing traffic for "
 "this peer is directed."
 msgstr ""
+"Bu eş için gelen trafiğe izin verilen ve bu eş için giden trafiğin "
+"yönlendirildiği IP (v4 ya da v6) adreslerinin CIDR maskeleri ile birlikte, "
+"virgülle ayrılmış listesi."
 
 #: src/connection-editor/ce-page-wireguard.ui:252
 msgid ""
@@ -3567,15 +3570,15 @@ msgstr "Ağ Bağlantıları"
 msgid "Add a new connection"
 msgstr "Yeni bağlantı ekle"
 
-#: src/connection-editor/page-8021x-security.c:96
+#: src/connection-editor/page-8021x-security.c:97
 msgid "802.1X Security"
 msgstr "802.1X Güvenliği"
 
-#: src/connection-editor/page-8021x-security.c:98
+#: src/connection-editor/page-8021x-security.c:99
 msgid "Could not load 802.1X Security user interface."
 msgstr "802.1X Güvenlik kullanıcı arayüzü yüklenemedi."
 
-#: src/connection-editor/page-8021x-security.c:112
+#: src/connection-editor/page-8021x-security.c:113
 msgid "Use 802.1_X security for this connection"
 msgstr "Bu bağlantı için 802.1_X güvenliği kullan"
 
@@ -4510,14 +4513,12 @@ msgstr "DER, PEM, veya PKCS#12 özel anahtarları (*.der, *.pem, *.p12, *.key)"
 #~ msgid "missing wep-key"
 #~ msgstr "wep-anahtarı eksik"
 
-#, c-format
 #~ msgid ""
 #~ "invalid wep-key: key with a length of %zu must contain only hex-digits"
 #~ msgstr ""
 #~ "geçersiz wep-anahtarı: %zu uzunluğundaki bir anahtar yalnızca onaltılı "
 #~ "(hex) rakamlardan oluşmalı"
 
-#, c-format
 #~ msgid ""
 #~ "invalid wep-key: key with a length of %zu must contain only ascii "
 #~ "characters"
@@ -4525,7 +4526,6 @@ msgstr "DER, PEM, veya PKCS#12 özel anahtarları (*.der, *.pem, *.p12, *.key)"
 #~ "geçersiz wep-anahtarı: %zu uzunluğundaki bir anahtar yalnızca ascii "
 #~ "karakterler içermelidir"
 
-#, c-format
 #~ msgid ""
 #~ "invalid wep-key: wrong key length %zu. A key must be either of length "
 #~ "5/13 (ascii) or 10/26 (hex)"
@@ -4557,7 +4557,6 @@ msgstr "DER, PEM, veya PKCS#12 özel anahtarları (*.der, *.pem, *.p12, *.key)"
 #~ msgid "WEP inde_x"
 #~ msgstr "WEP indek_si"
 
-#, c-format
 #~ msgid ""
 #~ "invalid wpa-psk: invalid key-length %zu. Must be [8,63] bytes or 64 hex "
 #~ "digits"
