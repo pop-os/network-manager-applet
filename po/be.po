@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: 98e6872775a91bf27122ff608b6db605\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/network-manager-"
 "applet/\n"
-"POT-Creation-Date: 2021-05-10 15:50+0200\n"
+"POT-Creation-Date: 2021-08-17 10:12+0200\n"
 "PO-Revision-Date: 2020-12-21 15:05\n"
 "Last-Translator: Bruce Cowan <bruce@bcowan.me.uk>\n"
 "Language-Team: Belarusian\n"
@@ -26,7 +26,7 @@ msgstr ""
 "X-Crowdin-File: /Addition apps/network-manager-applet.master.be.po\n"
 "X-Crowdin-File-ID: 2172\n"
 
-#: nm-applet.desktop.in:3 src/applet-dialogs.c:724 src/applet.c:3248
+#: nm-applet.desktop.in:3 src/applet-dialogs.c:724 src/applet.c:3258
 msgid "Network"
 msgstr "Сетка"
 
@@ -177,7 +177,7 @@ msgid "Mobile Broadband"
 msgstr "Мабільная сувязь"
 
 #: src/applet-device-broadband.c:780 src/applet-device-bt.c:61
-#: src/applet-device-ethernet.c:107 src/applet-device-wifi.c:890
+#: src/applet-device-ethernet.c:107 src/applet-device-wifi.c:894
 msgid "Available"
 msgstr "Даступна"
 
@@ -187,7 +187,7 @@ msgid "New Mobile Broadband connection…"
 msgstr "Новае мабільнае злучэнне…"
 
 #: src/applet-device-broadband.c:809 src/applet-device-bt.c:75
-#: src/applet-device-ethernet.c:124 src/applet-device-wifi.c:1293
+#: src/applet-device-ethernet.c:124 src/applet-device-wifi.c:1297
 msgid "Connection Established"
 msgstr "Злучэнне наладжана"
 
@@ -320,30 +320,30 @@ msgstr "Стварыць _новую сетку Wi-Fi…"
 msgid "(none)"
 msgstr "(няма)"
 
-#: src/applet-device-wifi.c:519 src/applet-device-wifi.c:1393
+#: src/applet-device-wifi.c:523 src/applet-device-wifi.c:1397
 msgid "Failed to add new connection"
 msgstr "Не атрымалася дадаць новае злучэнне"
 
-#: src/applet-device-wifi.c:520
+#: src/applet-device-wifi.c:524
 msgid "Insufficient privileges."
 msgstr "Не стае правоў."
 
-#: src/applet-device-wifi.c:522 src/applet-device-wifi.c:1375
-#: src/applet-device-wifi.c:1398 src/applet.c:417 src/applet.c:506
+#: src/applet-device-wifi.c:526 src/applet-device-wifi.c:1379
+#: src/applet-device-wifi.c:1402 src/applet.c:417 src/applet.c:506
 msgid "Connection failure"
 msgstr "Не атрымалася падлучыцца"
 
-#: src/applet-device-wifi.c:822
+#: src/applet-device-wifi.c:826
 #, c-format
 msgid "Wi-Fi Networks (%s)"
 msgstr "Сеткі Wi-Fi (%s)"
 
-#: src/applet-device-wifi.c:824
+#: src/applet-device-wifi.c:828
 #, c-format
 msgid "Wi-Fi Network (%s)"
 msgstr "Сетка Wi-Fi (%s)"
 
-#: src/applet-device-wifi.c:826
+#: src/applet-device-wifi.c:830
 msgid "Wi-Fi Network"
 msgid_plural "Wi-Fi Networks"
 msgstr[0] "Сетка Wi-Fi"
@@ -351,70 +351,70 @@ msgstr[1] "Сеткі Wi-Fi"
 msgstr[2] "Сеткі Wi-Fi"
 msgstr[3] "Сеткі Wi-Fi"
 
-#: src/applet-device-wifi.c:855
+#: src/applet-device-wifi.c:859
 msgid "Wi-Fi is disabled"
 msgstr "Wi-Fi выключаны"
 
-#: src/applet-device-wifi.c:856
+#: src/applet-device-wifi.c:860
 msgid "Wi-Fi is disabled by hardware switch"
 msgstr "Wi-Fi выключаны апаратным пераключальнікам"
 
-#: src/applet-device-wifi.c:917
+#: src/applet-device-wifi.c:921
 msgid "More networks"
 msgstr "Яшчэ сеткі"
 
-#: src/applet-device-wifi.c:1107
+#: src/applet-device-wifi.c:1111
 msgid "Wi-Fi Networks Available"
 msgstr "Даступныя сеткі Wi-Fi"
 
-#: src/applet-device-wifi.c:1108
+#: src/applet-device-wifi.c:1112
 msgid "Use the network menu to connect to a Wi-Fi network"
 msgstr "Выкарыстоўвайце меню са спісам сетак, каб падлучыцца да сеткі Wi-Fi"
 
-#: src/applet-device-wifi.c:1111 src/applet.c:828
+#: src/applet-device-wifi.c:1115 src/applet.c:828
 msgid "Don’t show this message again"
 msgstr "Больш не паказваць гэтае паведамленне"
 
-#: src/applet-device-wifi.c:1292
+#: src/applet-device-wifi.c:1296
 #, c-format
 msgid "You are now connected to the Wi-Fi network “%s”."
 msgstr "Вы падлучаныя да сеткі Wi-Fi \"%s\"."
 
-#: src/applet-device-wifi.c:1327
+#: src/applet-device-wifi.c:1331
 #, c-format
 msgid "Preparing Wi-Fi network connection “%s”…"
 msgstr "Падрыхтоўка сеткавага злучэння Wi-Fi \"%s\"…"
 
-#: src/applet-device-wifi.c:1330
+#: src/applet-device-wifi.c:1334
 #, c-format
 msgid "Configuring Wi-Fi network connection “%s”…"
 msgstr "Наладка сеткавага злучэння Wi-Fi \"%s\"…"
 
-#: src/applet-device-wifi.c:1333
+#: src/applet-device-wifi.c:1337
 #, c-format
 msgid "User authentication required for Wi-Fi network “%s”…"
 msgstr "Для сеткавага злучэння Wi-Fi \"%s\" патрабуецца аўтэнтыфікацыя…"
 
-#: src/applet-device-wifi.c:1336
+#: src/applet-device-wifi.c:1340
 #, c-format
 msgid "Requesting a Wi-Fi network address for “%s”…"
 msgstr "Запыт сеткавага адраса для сеткі Wi-Fi \"%s\"…"
 
-#: src/applet-device-wifi.c:1347
+#: src/applet-device-wifi.c:1351
 #, c-format
 msgid "Wi-Fi network connection “%s” active: %s (%d%%)"
 msgstr "Сеткавае злучэнне Wi-Fi \"%s\" актыўна: %s (%d%%)"
 
-#: src/applet-device-wifi.c:1351
+#: src/applet-device-wifi.c:1355
 #, c-format
 msgid "Wi-Fi network connection “%s” active"
 msgstr "Сеткавае злучэнне Wi-Fi \"%s\" актыўна"
 
-#: src/applet-device-wifi.c:1370
+#: src/applet-device-wifi.c:1374
 msgid "Failed to activate connection"
 msgstr "Не атрымалася актываваць злучэнне"
 
-#: src/applet-device-wifi.c:1372 src/applet-device-wifi.c:1395 src/applet.c:414
+#: src/applet-device-wifi.c:1376 src/applet-device-wifi.c:1399 src/applet.c:414
 #: src/applet.c:468 src/applet.c:503
 msgid "Unknown error"
 msgstr "Невядомая памылка"
@@ -1010,7 +1010,7 @@ msgstr "VPN-злучэнне актыўна"
 msgid "No network connection"
 msgstr "Не падлучана да сеткі"
 
-#: src/applet.c:3349
+#: src/applet.c:3359
 msgid "NetworkManager Applet"
 msgstr "Аплет NetworkManager"
 
@@ -1193,9 +1193,10 @@ msgid "_Primary"
 msgstr "_Першасны"
 
 #: src/connection-editor/ce-page-bond.ui:495
+#, fuzzy
 msgid ""
 "The interface name of the primary device. If set, this device will always be "
-"the active slave when it is available."
+"the active port when it is available."
 msgstr ""
 "Назва інтэрфейсу першаснай прылады. Калі вызначана, прылада будзе заўсёды "
 "падначаленай, калі гэта магчыма."
@@ -2117,7 +2118,8 @@ msgid "C_KN"
 msgstr "C_KN"
 
 #: src/connection-editor/ce-page-macsec.ui:206
-msgid " The pre-shared Connectivity-association Key Name"
+#, fuzzy
+msgid "The pre-shared Connectivity-association Key Name"
 msgstr " Назва папярэдне вызначанага ключа сувязі"
 
 #: src/connection-editor/ce-page-macsec.ui:217
@@ -3891,18 +3893,19 @@ msgstr "Злучэнне MACsec %d"
 
 #: src/connection-editor/page-master.c:221
 #: src/connection-editor/page-master.c:232
-msgid "Duplicate slaves"
+#, fuzzy
+msgid "Duplicate ports"
 msgstr "Паўторныя падначаленыя"
 
 #: src/connection-editor/page-master.c:222
-#, c-format
-msgid "Slaves “%s” and “%s” both apply to device “%s”"
+#, fuzzy, c-format
+msgid "Ports “%s” and “%s” both apply to device “%s”"
 msgstr "Падначаленыя \"%s\" і \"%s\" адносяцца да прылады \"%s\""
 
 #: src/connection-editor/page-master.c:233
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Slaves “%s” and “%s” apply to different virtual ports (“%s” and “%s”) of the "
+"Ports “%s” and “%s” apply to different virtual ports (“%s” and “%s”) of the "
 "same physical device."
 msgstr ""
 "Падначаленыя \"%s\" і \"%s\" адносяцца да розных віртуальных партоў (\"%s\" "
@@ -3910,8 +3913,8 @@ msgstr ""
 
 #: src/connection-editor/page-master.c:357
 #, c-format
-msgid "%s slave %d"
-msgstr "%s падначалены %d"
+msgid "%s port %d"
+msgstr ""
 
 #: src/connection-editor/page-mobile.c:297
 msgid "Could not load mobile broadband user interface."
@@ -4248,9 +4251,9 @@ msgid "Usage:"
 msgstr "Выкарыстанне:"
 
 #: src/main.c:30
+#, fuzzy
 msgid ""
-"This program is a component of NetworkManager (https://wiki.gnome.org/"
-"Projects/NetworkManager/)."
+"This program is a component of NetworkManager (https://networkmanager.dev)."
 msgstr ""
 "Гэтая праграма з'яўляецца часткай NetworkManager (https://wiki.gnome.org/"
 "Projects/NetworkManager/)."

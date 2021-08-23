@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: NetworkManager master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/network-manager-"
 "applet/\n"
-"POT-Creation-Date: 2021-05-10 15:50+0200\n"
+"POT-Creation-Date: 2021-08-17 10:12+0200\n"
 "PO-Revision-Date: 2010-04-06 22:47+0500\n"
 "Last-Translator: Muhammad Ali Makki <makkiabufaris@aol.com>\n"
 "Language-Team: urducoder.com <makkiabufaris@aol.com>\n"
@@ -20,7 +20,7 @@ msgstr ""
 "X-Poedit-Country: PAKISTAN\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
-#: nm-applet.desktop.in:3 src/applet-dialogs.c:724 src/applet.c:3248
+#: nm-applet.desktop.in:3 src/applet-dialogs.c:724 src/applet.c:3258
 #, fuzzy
 msgid "Network"
 msgstr "ن_یٹ ورک:"
@@ -167,7 +167,7 @@ msgid "Mobile Broadband"
 msgstr "موبائل براڈ بینڈ"
 
 #: src/applet-device-broadband.c:780 src/applet-device-bt.c:61
-#: src/applet-device-ethernet.c:107 src/applet-device-wifi.c:890
+#: src/applet-device-ethernet.c:107 src/applet-device-wifi.c:894
 msgid "Available"
 msgstr "دستیاب"
 
@@ -178,7 +178,7 @@ msgid "New Mobile Broadband connection…"
 msgstr "نیا موبائل براڈ بینڈ اتصال"
 
 #: src/applet-device-broadband.c:809 src/applet-device-bt.c:75
-#: src/applet-device-ethernet.c:124 src/applet-device-wifi.c:1293
+#: src/applet-device-ethernet.c:124 src/applet-device-wifi.c:1297
 msgid "Connection Established"
 msgstr "اتصال قائم ہوگیا"
 
@@ -319,108 +319,108 @@ msgstr "نیا وائیرلیس نیٹ ورک بنائیں"
 msgid "(none)"
 msgstr "(کچھ نہیں)"
 
-#: src/applet-device-wifi.c:519 src/applet-device-wifi.c:1393
+#: src/applet-device-wifi.c:523 src/applet-device-wifi.c:1397
 #, fuzzy
 msgid "Failed to add new connection"
 msgstr "نیا اتصال مدون نہیں ہوسکتا"
 
-#: src/applet-device-wifi.c:520
+#: src/applet-device-wifi.c:524
 msgid "Insufficient privileges."
 msgstr ""
 
 #
-#: src/applet-device-wifi.c:522 src/applet-device-wifi.c:1375
-#: src/applet-device-wifi.c:1398 src/applet.c:417 src/applet.c:506
+#: src/applet-device-wifi.c:526 src/applet-device-wifi.c:1379
+#: src/applet-device-wifi.c:1402 src/applet.c:417 src/applet.c:506
 #, fuzzy
 msgid "Connection failure"
 msgstr "اتصال کا اضافہ ناکام ہوگیا"
 
-#: src/applet-device-wifi.c:822
+#: src/applet-device-wifi.c:826
 #, fuzzy, c-format
 msgid "Wi-Fi Networks (%s)"
 msgstr "وائیرڈ نیٹ ورکس (%s)"
 
-#: src/applet-device-wifi.c:824
+#: src/applet-device-wifi.c:828
 #, fuzzy, c-format
 msgid "Wi-Fi Network (%s)"
 msgstr "وائیرڈ نیٹ ورک (%s)"
 
-#: src/applet-device-wifi.c:826
+#: src/applet-device-wifi.c:830
 #, fuzzy
 msgid "Wi-Fi Network"
 msgid_plural "Wi-Fi Networks"
 msgstr[0] "وائیرڈ نیٹ ورک"
 msgstr[1] "وائیرڈ نیٹ ورک"
 
-#: src/applet-device-wifi.c:855
+#: src/applet-device-wifi.c:859
 #, fuzzy
 msgid "Wi-Fi is disabled"
 msgstr "وائیرلیس معطل ہے"
 
-#: src/applet-device-wifi.c:856
+#: src/applet-device-wifi.c:860
 msgid "Wi-Fi is disabled by hardware switch"
 msgstr ""
 
-#: src/applet-device-wifi.c:917
+#: src/applet-device-wifi.c:921
 msgid "More networks"
 msgstr "مزید نیٹ ورک"
 
-#: src/applet-device-wifi.c:1107
+#: src/applet-device-wifi.c:1111
 #, fuzzy
 msgid "Wi-Fi Networks Available"
 msgstr "وائیرلیس نیٹ ورک دستیاب ہیں"
 
-#: src/applet-device-wifi.c:1108
+#: src/applet-device-wifi.c:1112
 #, fuzzy
 msgid "Use the network menu to connect to a Wi-Fi network"
 msgstr "وائیرلیس نیٹ ورک سے متصل ہونے کے لیے اس آئکن پر کلک کریں"
 
-#: src/applet-device-wifi.c:1111 src/applet.c:828
+#: src/applet-device-wifi.c:1115 src/applet.c:828
 #, fuzzy
 msgid "Don’t show this message again"
 msgstr "یہ پیغام دوبارہ مت دکھائیں"
 
-#: src/applet-device-wifi.c:1292
+#: src/applet-device-wifi.c:1296
 #, fuzzy, c-format
 msgid "You are now connected to the Wi-Fi network “%s”."
 msgstr "اب آپ وائیرلیس نیٹ ورک '%s' سے متصل ہیں."
 
-#: src/applet-device-wifi.c:1327
+#: src/applet-device-wifi.c:1331
 #, fuzzy, c-format
 msgid "Preparing Wi-Fi network connection “%s”…"
 msgstr "نیٹ ورک اتصال '%s' تیار کیا جارہا ہے..."
 
-#: src/applet-device-wifi.c:1330
+#: src/applet-device-wifi.c:1334
 #, fuzzy, c-format
 msgid "Configuring Wi-Fi network connection “%s”…"
 msgstr "وائیرڈ نیٹ ورک اتصال '%s' وضع کیا جارہا ہے..."
 
-#: src/applet-device-wifi.c:1333
+#: src/applet-device-wifi.c:1337
 #, fuzzy, c-format
 msgid "User authentication required for Wi-Fi network “%s”…"
 msgstr "وائیرلیس نیٹ ورک '%s' کے لیے صارف کی توثیق درکار ہے..."
 
-#: src/applet-device-wifi.c:1336
+#: src/applet-device-wifi.c:1340
 #, fuzzy, c-format
 msgid "Requesting a Wi-Fi network address for “%s”…"
 msgstr "درخواست برائے نیٹ ورک '%s' بھیجی جارہی ہے..."
 
-#: src/applet-device-wifi.c:1347
+#: src/applet-device-wifi.c:1351
 #, fuzzy, c-format
 msgid "Wi-Fi network connection “%s” active: %s (%d%%)"
 msgstr "وائیرلیس نیٹ ورک اتصال '%s' فعال ہے: %s (%d%%)"
 
-#: src/applet-device-wifi.c:1351
+#: src/applet-device-wifi.c:1355
 #, fuzzy, c-format
 msgid "Wi-Fi network connection “%s” active"
 msgstr "وائیرڈ نیٹ ورک اتصال '%s' فعال ہے"
 
-#: src/applet-device-wifi.c:1370
+#: src/applet-device-wifi.c:1374
 #, fuzzy
 msgid "Failed to activate connection"
 msgstr "Verbindung konnte nicht aktualisiert werden"
 
-#: src/applet-device-wifi.c:1372 src/applet-device-wifi.c:1395 src/applet.c:414
+#: src/applet-device-wifi.c:1376 src/applet-device-wifi.c:1399 src/applet.c:414
 #: src/applet.c:468 src/applet.c:503
 #, fuzzy
 msgid "Unknown error"
@@ -1053,7 +1053,7 @@ msgstr "وی پی این اتصال '%s' فعال ہے"
 msgid "No network connection"
 msgstr "کوئی نیٹ ورک اتصال نہیں"
 
-#: src/applet.c:3349
+#: src/applet.c:3359
 msgid "NetworkManager Applet"
 msgstr "نیٹ ورک منیجر ایپلیٹ"
 
@@ -1254,7 +1254,7 @@ msgstr "ابتدائی DNS:"
 #: src/connection-editor/ce-page-bond.ui:495
 msgid ""
 "The interface name of the primary device. If set, this device will always be "
-"the active slave when it is available."
+"the active port when it is available."
 msgstr ""
 
 #: src/connection-editor/ce-page-bond.ui:507
@@ -2153,7 +2153,7 @@ msgid "C_KN"
 msgstr ""
 
 #: src/connection-editor/ce-page-macsec.ui:206
-msgid " The pre-shared Connectivity-association Key Name"
+msgid "The pre-shared Connectivity-association Key Name"
 msgstr ""
 
 #: src/connection-editor/ce-page-macsec.ui:217
@@ -3930,24 +3930,24 @@ msgstr "UTMS-Verbindung %d"
 
 #: src/connection-editor/page-master.c:221
 #: src/connection-editor/page-master.c:232
-msgid "Duplicate slaves"
+msgid "Duplicate ports"
 msgstr ""
 
 #: src/connection-editor/page-master.c:222
 #, c-format
-msgid "Slaves “%s” and “%s” both apply to device “%s”"
+msgid "Ports “%s” and “%s” both apply to device “%s”"
 msgstr ""
 
 #: src/connection-editor/page-master.c:233
 #, c-format
 msgid ""
-"Slaves “%s” and “%s” apply to different virtual ports (“%s” and “%s”) of the "
+"Ports “%s” and “%s” apply to different virtual ports (“%s” and “%s”) of the "
 "same physical device."
 msgstr ""
 
 #: src/connection-editor/page-master.c:357
 #, c-format
-msgid "%s slave %d"
+msgid "%s port %d"
 msgstr ""
 
 #: src/connection-editor/page-mobile.c:297
@@ -4305,9 +4305,9 @@ msgid "Usage:"
 msgstr "استعمال:"
 
 #: src/main.c:30
+#, fuzzy
 msgid ""
-"This program is a component of NetworkManager (https://wiki.gnome.org/"
-"Projects/NetworkManager/)."
+"This program is a component of NetworkManager (https://networkmanager.dev)."
 msgstr ""
 "یہ اطلاقیہ نیٹ ورک منیجر کا ایک جُز ہے (https://wiki.gnome.org/Projects/"
 "NetworkManager/)."

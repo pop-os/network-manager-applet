@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: network-manager-applet.network-manager-applet-0-6.ar\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/network-manager-"
 "applet/\n"
-"POT-Creation-Date: 2021-05-10 15:50+0200\n"
+"POT-Creation-Date: 2021-08-17 10:12+0200\n"
 "PO-Revision-Date: 2011-09-17 16:16+0300\n"
 "Last-Translator: Abdalrahim G. Fakhouri <abdilra7eem@yahoo.com>\n"
 "Language-Team: Arabic <doc@arabeyes.org>\n"
@@ -26,7 +26,7 @@ msgstr ""
 "X-Poedit-Language: Arabic\n"
 "X-Project-Style: gnome\n"
 
-#: nm-applet.desktop.in:3 src/applet-dialogs.c:724 src/applet.c:3248
+#: nm-applet.desktop.in:3 src/applet-dialogs.c:724 src/applet.c:3258
 msgid "Network"
 msgstr "شبكة"
 
@@ -173,7 +173,7 @@ msgid "Mobile Broadband"
 msgstr "شبكة هاتف محمول"
 
 #: src/applet-device-broadband.c:780 src/applet-device-bt.c:61
-#: src/applet-device-ethernet.c:107 src/applet-device-wifi.c:890
+#: src/applet-device-ethernet.c:107 src/applet-device-wifi.c:894
 msgid "Available"
 msgstr "متاح"
 
@@ -184,7 +184,7 @@ msgid "New Mobile Broadband connection…"
 msgstr "اتصال شبكة هاتف محمول جديد..."
 
 #: src/applet-device-broadband.c:809 src/applet-device-bt.c:75
-#: src/applet-device-ethernet.c:124 src/applet-device-wifi.c:1293
+#: src/applet-device-ethernet.c:124 src/applet-device-wifi.c:1297
 msgid "Connection Established"
 msgstr "تم الاتصال"
 
@@ -324,32 +324,32 @@ msgstr "أنشئ شبكة لاسلكيّة جديدة"
 msgid "(none)"
 msgstr "(لا شيء)"
 
-#: src/applet-device-wifi.c:519 src/applet-device-wifi.c:1393
+#: src/applet-device-wifi.c:523 src/applet-device-wifi.c:1397
 #, fuzzy
 msgid "Failed to add new connection"
 msgstr "تعذّر تعديل الاتصال الجديد"
 
-#: src/applet-device-wifi.c:520
+#: src/applet-device-wifi.c:524
 msgid "Insufficient privileges."
 msgstr ""
 
-#: src/applet-device-wifi.c:522 src/applet-device-wifi.c:1375
-#: src/applet-device-wifi.c:1398 src/applet.c:417 src/applet.c:506
+#: src/applet-device-wifi.c:526 src/applet-device-wifi.c:1379
+#: src/applet-device-wifi.c:1402 src/applet.c:417 src/applet.c:506
 #, fuzzy
 msgid "Connection failure"
 msgstr "فشل اضافة اتصال "
 
-#: src/applet-device-wifi.c:822
+#: src/applet-device-wifi.c:826
 #, fuzzy, c-format
 msgid "Wi-Fi Networks (%s)"
 msgstr "شبكات سلكية (%s)"
 
-#: src/applet-device-wifi.c:824
+#: src/applet-device-wifi.c:828
 #, fuzzy, c-format
 msgid "Wi-Fi Network (%s)"
 msgstr "شبكة سلكية (%s)"
 
-#: src/applet-device-wifi.c:826
+#: src/applet-device-wifi.c:830
 #, fuzzy
 msgid "Wi-Fi Network"
 msgid_plural "Wi-Fi Networks"
@@ -360,76 +360,76 @@ msgstr[3] "شبكة سلكية"
 msgstr[4] "شبكة سلكية"
 msgstr[5] "شبكة سلكية"
 
-#: src/applet-device-wifi.c:855
+#: src/applet-device-wifi.c:859
 #, fuzzy
 msgid "Wi-Fi is disabled"
 msgstr "شبكة WiMAX معطلة"
 
-#: src/applet-device-wifi.c:856
+#: src/applet-device-wifi.c:860
 #, fuzzy
 msgid "Wi-Fi is disabled by hardware switch"
 msgstr "شبكة WiMAX مغلقة بمفتاح في العتاد"
 
-#: src/applet-device-wifi.c:917
+#: src/applet-device-wifi.c:921
 msgid "More networks"
 msgstr "المزيد من الشبكات"
 
-#: src/applet-device-wifi.c:1107
+#: src/applet-device-wifi.c:1111
 #, fuzzy
 msgid "Wi-Fi Networks Available"
 msgstr "الشبكات اللاسلكية المتاحة"
 
-#: src/applet-device-wifi.c:1108
+#: src/applet-device-wifi.c:1112
 #, fuzzy
 msgid "Use the network menu to connect to a Wi-Fi network"
 msgstr "استخدم قائمة الشبكة للاتصال بشبكة لاسلكية"
 
-#: src/applet-device-wifi.c:1111 src/applet.c:828
+#: src/applet-device-wifi.c:1115 src/applet.c:828
 #, fuzzy
 msgid "Don’t show this message again"
 msgstr "لا تظهر هذه الرسالة مرة أخرى"
 
-#: src/applet-device-wifi.c:1292
+#: src/applet-device-wifi.c:1296
 #, fuzzy, c-format
 msgid "You are now connected to the Wi-Fi network “%s”."
 msgstr "أنت متصل الآن بالشبكة اللاسلكية '%s'."
 
-#: src/applet-device-wifi.c:1327
+#: src/applet-device-wifi.c:1331
 #, fuzzy, c-format
 msgid "Preparing Wi-Fi network connection “%s”…"
 msgstr "يجهز الاتصال الشبكي '%s'..."
 
-#: src/applet-device-wifi.c:1330
+#: src/applet-device-wifi.c:1334
 #, fuzzy, c-format
 msgid "Configuring Wi-Fi network connection “%s”…"
 msgstr "يعِدّ اتصال الشبكة السلكية '%s'..."
 
-#: src/applet-device-wifi.c:1333
+#: src/applet-device-wifi.c:1337
 #, fuzzy, c-format
 msgid "User authentication required for Wi-Fi network “%s”…"
 msgstr "الاستيثاق من المستخدم مطلوب للاتصال بالشبكة اللاسلكية '%s'..."
 
-#: src/applet-device-wifi.c:1336
+#: src/applet-device-wifi.c:1340
 #, fuzzy, c-format
 msgid "Requesting a Wi-Fi network address for “%s”…"
 msgstr "يطلب عنوان شبكي ل‍ '%s'..."
 
-#: src/applet-device-wifi.c:1347
+#: src/applet-device-wifi.c:1351
 #, fuzzy, c-format
 msgid "Wi-Fi network connection “%s” active: %s (%d%%)"
 msgstr "الاتصال الشبكي اللاسلكي '%s' يعمل: %s‏ (%d%%)"
 
-#: src/applet-device-wifi.c:1351
+#: src/applet-device-wifi.c:1355
 #, fuzzy, c-format
 msgid "Wi-Fi network connection “%s” active"
 msgstr "الاتصال الشبكي السلكي '%s' يعمل"
 
-#: src/applet-device-wifi.c:1370
+#: src/applet-device-wifi.c:1374
 #, fuzzy
 msgid "Failed to activate connection"
 msgstr "لا توجد اتصالات نشطة!"
 
-#: src/applet-device-wifi.c:1372 src/applet-device-wifi.c:1395 src/applet.c:414
+#: src/applet-device-wifi.c:1376 src/applet-device-wifi.c:1399 src/applet.c:414
 #: src/applet.c:468 src/applet.c:503
 #, fuzzy
 msgid "Unknown error"
@@ -1046,7 +1046,7 @@ msgstr "الاتصال الشبكي VPN‏ '%s' يعمل"
 msgid "No network connection"
 msgstr "لا يوجد اتصال شبكي"
 
-#: src/applet.c:3349
+#: src/applet.c:3359
 msgid "NetworkManager Applet"
 msgstr "بريمج مدير الشبكة"
 
@@ -1238,7 +1238,7 @@ msgstr "‏DNS الأوّلي:"
 #: src/connection-editor/ce-page-bond.ui:495
 msgid ""
 "The interface name of the primary device. If set, this device will always be "
-"the active slave when it is available."
+"the active port when it is available."
 msgstr ""
 
 #: src/connection-editor/ce-page-bond.ui:507
@@ -2129,7 +2129,7 @@ msgid "C_KN"
 msgstr ""
 
 #: src/connection-editor/ce-page-macsec.ui:206
-msgid " The pre-shared Connectivity-association Key Name"
+msgid "The pre-shared Connectivity-association Key Name"
 msgstr ""
 
 #: src/connection-editor/ce-page-macsec.ui:217
@@ -3905,24 +3905,24 @@ msgstr "الإتّصال بالـ VPN '%s'"
 
 #: src/connection-editor/page-master.c:221
 #: src/connection-editor/page-master.c:232
-msgid "Duplicate slaves"
+msgid "Duplicate ports"
 msgstr ""
 
 #: src/connection-editor/page-master.c:222
 #, c-format
-msgid "Slaves “%s” and “%s” both apply to device “%s”"
+msgid "Ports “%s” and “%s” both apply to device “%s”"
 msgstr ""
 
 #: src/connection-editor/page-master.c:233
 #, c-format
 msgid ""
-"Slaves “%s” and “%s” apply to different virtual ports (“%s” and “%s”) of the "
+"Ports “%s” and “%s” apply to different virtual ports (“%s” and “%s”) of the "
 "same physical device."
 msgstr ""
 
 #: src/connection-editor/page-master.c:357
 #, c-format
-msgid "%s slave %d"
+msgid "%s port %d"
 msgstr ""
 
 #: src/connection-editor/page-mobile.c:297
@@ -4266,9 +4266,9 @@ msgid "Usage:"
 msgstr "الاستخدام:"
 
 #: src/main.c:30
+#, fuzzy
 msgid ""
-"This program is a component of NetworkManager (https://wiki.gnome.org/"
-"Projects/NetworkManager/)."
+"This program is a component of NetworkManager (https://networkmanager.dev)."
 msgstr ""
 "هذا البرنامج احد مكونات مدير الشبكة (https://wiki.gnome.org/Projects/"
 "NetworkManager/)."

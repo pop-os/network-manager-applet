@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: 3.8\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/network-manager-"
 "applet/\n"
-"POT-Creation-Date: 2021-05-10 15:50+0200\n"
+"POT-Creation-Date: 2021-08-17 10:12+0200\n"
 "PO-Revision-Date: 2015-12-19 08:19+0000\n"
 "Last-Translator: Pedro Albuquerque <palbuquerque73@gmail.com>\n"
 "Language-Team: Português <palbuquerque73@gmail.com>\n"
@@ -21,7 +21,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\\n\n"
 "X-Generator: Gtranslator 2.91.6\n"
 
-#: nm-applet.desktop.in:3 src/applet-dialogs.c:724 src/applet.c:3248
+#: nm-applet.desktop.in:3 src/applet-dialogs.c:724 src/applet.c:3258
 msgid "Network"
 msgstr "Rede"
 
@@ -169,7 +169,7 @@ msgid "Mobile Broadband"
 msgstr "Banda larga móvel"
 
 #: src/applet-device-broadband.c:780 src/applet-device-bt.c:61
-#: src/applet-device-ethernet.c:107 src/applet-device-wifi.c:890
+#: src/applet-device-ethernet.c:107 src/applet-device-wifi.c:894
 msgid "Available"
 msgstr "Disponível"
 
@@ -180,7 +180,7 @@ msgid "New Mobile Broadband connection…"
 msgstr "Nova ligação de banda larga móvel"
 
 #: src/applet-device-broadband.c:809 src/applet-device-bt.c:75
-#: src/applet-device-ethernet.c:124 src/applet-device-wifi.c:1293
+#: src/applet-device-ethernet.c:124 src/applet-device-wifi.c:1297
 msgid "Connection Established"
 msgstr "Ligação estabelecida"
 
@@ -316,100 +316,100 @@ msgstr "Criar uma nova rede Wi-Fi"
 msgid "(none)"
 msgstr "(nenhum)"
 
-#: src/applet-device-wifi.c:519 src/applet-device-wifi.c:1393
+#: src/applet-device-wifi.c:523 src/applet-device-wifi.c:1397
 msgid "Failed to add new connection"
 msgstr "Falha ao adicionar uma nova ligação"
 
-#: src/applet-device-wifi.c:520
+#: src/applet-device-wifi.c:524
 msgid "Insufficient privileges."
 msgstr ""
 
-#: src/applet-device-wifi.c:522 src/applet-device-wifi.c:1375
-#: src/applet-device-wifi.c:1398 src/applet.c:417 src/applet.c:506
+#: src/applet-device-wifi.c:526 src/applet-device-wifi.c:1379
+#: src/applet-device-wifi.c:1402 src/applet.c:417 src/applet.c:506
 msgid "Connection failure"
 msgstr "Ligação falhou"
 
-#: src/applet-device-wifi.c:822
+#: src/applet-device-wifi.c:826
 #, c-format
 msgid "Wi-Fi Networks (%s)"
 msgstr "Redes Wi-Fi (%s)"
 
-#: src/applet-device-wifi.c:824
+#: src/applet-device-wifi.c:828
 #, c-format
 msgid "Wi-Fi Network (%s)"
 msgstr "Rede Wi-Fi (%s)"
 
-#: src/applet-device-wifi.c:826
+#: src/applet-device-wifi.c:830
 msgid "Wi-Fi Network"
 msgid_plural "Wi-Fi Networks"
 msgstr[0] "Rede Wi-Fi"
 msgstr[1] "Redes Wi-Fi"
 
-#: src/applet-device-wifi.c:855
+#: src/applet-device-wifi.c:859
 msgid "Wi-Fi is disabled"
 msgstr "Wi-Fi está desativada"
 
-#: src/applet-device-wifi.c:856
+#: src/applet-device-wifi.c:860
 msgid "Wi-Fi is disabled by hardware switch"
 msgstr "Wi-Fi está desativada por interruptor físico"
 
-#: src/applet-device-wifi.c:917
+#: src/applet-device-wifi.c:921
 msgid "More networks"
 msgstr "Mais redes"
 
-#: src/applet-device-wifi.c:1107
+#: src/applet-device-wifi.c:1111
 msgid "Wi-Fi Networks Available"
 msgstr "Redes Wi-Fi disponíveis"
 
-#: src/applet-device-wifi.c:1108
+#: src/applet-device-wifi.c:1112
 msgid "Use the network menu to connect to a Wi-Fi network"
 msgstr "Use o menu de rede para ligar a uma rede Wi-Fi"
 
-#: src/applet-device-wifi.c:1111 src/applet.c:828
+#: src/applet-device-wifi.c:1115 src/applet.c:828
 #, fuzzy
 msgid "Don’t show this message again"
 msgstr "Não mostrar esta mensagem novamente"
 
-#: src/applet-device-wifi.c:1292
+#: src/applet-device-wifi.c:1296
 #, fuzzy, c-format
 msgid "You are now connected to the Wi-Fi network “%s”."
 msgstr "Encontra-se agora ligado à rede Wi-Fi \"%s\"."
 
-#: src/applet-device-wifi.c:1327
+#: src/applet-device-wifi.c:1331
 #, fuzzy, c-format
 msgid "Preparing Wi-Fi network connection “%s”…"
 msgstr "A preparar a ligação de rede Wi-Fi \"%s\"..."
 
-#: src/applet-device-wifi.c:1330
+#: src/applet-device-wifi.c:1334
 #, fuzzy, c-format
 msgid "Configuring Wi-Fi network connection “%s”…"
 msgstr "A configurar a ligação de rede Wi-Fi \"%s\"..."
 
-#: src/applet-device-wifi.c:1333
+#: src/applet-device-wifi.c:1337
 #, fuzzy, c-format
 msgid "User authentication required for Wi-Fi network “%s”…"
 msgstr "Autenticação de usador necessária para a rede Wi-Fi \"%s\"..."
 
-#: src/applet-device-wifi.c:1336
+#: src/applet-device-wifi.c:1340
 #, fuzzy, c-format
 msgid "Requesting a Wi-Fi network address for “%s”…"
 msgstr "A pedir um endereço de rede Wi-Fi para \"%s\"..."
 
-#: src/applet-device-wifi.c:1347
+#: src/applet-device-wifi.c:1351
 #, fuzzy, c-format
 msgid "Wi-Fi network connection “%s” active: %s (%d%%)"
 msgstr "Ligação de rede Wi-Fi \"%s\" ativa: %s (%d%%)"
 
-#: src/applet-device-wifi.c:1351
+#: src/applet-device-wifi.c:1355
 #, fuzzy, c-format
 msgid "Wi-Fi network connection “%s” active"
 msgstr "Ligação de rede Wi-Fi \"%s\" ativa"
 
-#: src/applet-device-wifi.c:1370
+#: src/applet-device-wifi.c:1374
 msgid "Failed to activate connection"
 msgstr "Falha ao ativar a ligação"
 
-#: src/applet-device-wifi.c:1372 src/applet-device-wifi.c:1395 src/applet.c:414
+#: src/applet-device-wifi.c:1376 src/applet-device-wifi.c:1399 src/applet.c:414
 #: src/applet.c:468 src/applet.c:503
 msgid "Unknown error"
 msgstr "Erro desconhecido"
@@ -1023,7 +1023,7 @@ msgstr "Ligação VPN \"%s\" ativa"
 msgid "No network connection"
 msgstr "Sem ligação à rede"
 
-#: src/applet.c:3349
+#: src/applet.c:3359
 msgid "NetworkManager Applet"
 msgstr "Aplicação Gestor de redes"
 
@@ -1219,9 +1219,10 @@ msgid "_Primary"
 msgstr "DNS primário:"
 
 #: src/connection-editor/ce-page-bond.ui:495
+#, fuzzy
 msgid ""
 "The interface name of the primary device. If set, this device will always be "
-"the active slave when it is available."
+"the active port when it is available."
 msgstr ""
 "O nome do ambiente do dispositivo primário. Se definido, este dispositivo "
 "será sempre o escravo ativo quando estiver disponível."
@@ -2150,7 +2151,7 @@ msgid "C_KN"
 msgstr ""
 
 #: src/connection-editor/ce-page-macsec.ui:206
-msgid " The pre-shared Connectivity-association Key Name"
+msgid "The pre-shared Connectivity-association Key Name"
 msgstr ""
 
 #: src/connection-editor/ce-page-macsec.ui:217
@@ -3929,18 +3930,19 @@ msgstr "Ligação WiMAX %d"
 
 #: src/connection-editor/page-master.c:221
 #: src/connection-editor/page-master.c:232
-msgid "Duplicate slaves"
+#, fuzzy
+msgid "Duplicate ports"
 msgstr "Escravos duplicados"
 
 #: src/connection-editor/page-master.c:222
 #, fuzzy, c-format
-msgid "Slaves “%s” and “%s” both apply to device “%s”"
+msgid "Ports “%s” and “%s” both apply to device “%s”"
 msgstr "Ambos os escravos \"%s\" e \"%s\" se aplicam ao dispositivo \"%s\""
 
 #: src/connection-editor/page-master.c:233
 #, fuzzy, c-format
 msgid ""
-"Slaves “%s” and “%s” apply to different virtual ports (“%s” and “%s”) of the "
+"Ports “%s” and “%s” apply to different virtual ports (“%s” and “%s”) of the "
 "same physical device."
 msgstr ""
 "Os escravos \"%s\" e \"%s\" aplicam-se a diferentes portas virtuais (\"%s\" "
@@ -3948,8 +3950,8 @@ msgstr ""
 
 #: src/connection-editor/page-master.c:357
 #, c-format
-msgid "%s slave %d"
-msgstr "%s escrava %d"
+msgid "%s port %d"
+msgstr ""
 
 #: src/connection-editor/page-mobile.c:297
 msgid "Could not load mobile broadband user interface."
@@ -4296,9 +4298,9 @@ msgid "Usage:"
 msgstr "Uso:"
 
 #: src/main.c:30
+#, fuzzy
 msgid ""
-"This program is a component of NetworkManager (https://wiki.gnome.org/"
-"Projects/NetworkManager/)."
+"This program is a component of NetworkManager (https://networkmanager.dev)."
 msgstr ""
 "Este programa é um componente do Gestor de redes (https://wiki.gnome.org/"
 "Projects/NetworkManager/)."

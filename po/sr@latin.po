@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: NetworkManager\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/network-manager-"
 "applet/\n"
-"POT-Creation-Date: 2021-05-10 15:50+0200\n"
+"POT-Creation-Date: 2021-08-17 10:12+0200\n"
 "PO-Revision-Date: 2018-02-24 19:43+0200\n"
 "Last-Translator: Miroslav Nikolić <miroslavnikolic@rocketmail.com>\n"
 "Language-Team: srpski <gnome-sr@googlegroups.org>\n"
@@ -24,7 +24,7 @@ msgstr ""
 "%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 "X-Project-Style: gnome\n"
 
-#: nm-applet.desktop.in:3 src/applet-dialogs.c:724 src/applet.c:3248
+#: nm-applet.desktop.in:3 src/applet-dialogs.c:724 src/applet.c:3258
 msgid "Network"
 msgstr "Mreža"
 
@@ -171,7 +171,7 @@ msgid "Mobile Broadband"
 msgstr "Mobilna"
 
 #: src/applet-device-broadband.c:780 src/applet-device-bt.c:61
-#: src/applet-device-ethernet.c:107 src/applet-device-wifi.c:890
+#: src/applet-device-ethernet.c:107 src/applet-device-wifi.c:894
 msgid "Available"
 msgstr "Dostupno"
 
@@ -181,7 +181,7 @@ msgid "New Mobile Broadband connection…"
 msgstr "Nova mobilna, širokopojasna veza…"
 
 #: src/applet-device-broadband.c:809 src/applet-device-bt.c:75
-#: src/applet-device-ethernet.c:124 src/applet-device-wifi.c:1293
+#: src/applet-device-ethernet.c:124 src/applet-device-wifi.c:1297
 msgid "Connection Established"
 msgstr "Veza uspostavljena"
 
@@ -313,30 +313,30 @@ msgstr "Napravi _novu bežičnu mrežu…"
 msgid "(none)"
 msgstr "(ništa)"
 
-#: src/applet-device-wifi.c:519 src/applet-device-wifi.c:1393
+#: src/applet-device-wifi.c:523 src/applet-device-wifi.c:1397
 msgid "Failed to add new connection"
 msgstr "Nisam uspeo da dodam novu vezu"
 
-#: src/applet-device-wifi.c:520
+#: src/applet-device-wifi.c:524
 msgid "Insufficient privileges."
 msgstr "Nedovoljna ovlašćenja."
 
-#: src/applet-device-wifi.c:522 src/applet-device-wifi.c:1375
-#: src/applet-device-wifi.c:1398 src/applet.c:417 src/applet.c:506
+#: src/applet-device-wifi.c:526 src/applet-device-wifi.c:1379
+#: src/applet-device-wifi.c:1402 src/applet.c:417 src/applet.c:506
 msgid "Connection failure"
 msgstr "Neuspelo povezivanje"
 
-#: src/applet-device-wifi.c:822
+#: src/applet-device-wifi.c:826
 #, c-format
 msgid "Wi-Fi Networks (%s)"
 msgstr "Bežične mreže (%s)"
 
-#: src/applet-device-wifi.c:824
+#: src/applet-device-wifi.c:828
 #, c-format
 msgid "Wi-Fi Network (%s)"
 msgstr "Bežična mreža (%s)"
 
-#: src/applet-device-wifi.c:826
+#: src/applet-device-wifi.c:830
 msgid "Wi-Fi Network"
 msgid_plural "Wi-Fi Networks"
 msgstr[0] "Bežična mreža"
@@ -344,71 +344,71 @@ msgstr[1] "Bežične mreže"
 msgstr[2] "Bežične mreže"
 msgstr[3] "Bežična mreža"
 
-#: src/applet-device-wifi.c:855
+#: src/applet-device-wifi.c:859
 msgid "Wi-Fi is disabled"
 msgstr "Bežična mreža je isključena"
 
-#: src/applet-device-wifi.c:856
+#: src/applet-device-wifi.c:860
 msgid "Wi-Fi is disabled by hardware switch"
 msgstr "Bežična mreža je isključena fizičkim prekidačem"
 
-#: src/applet-device-wifi.c:917
+#: src/applet-device-wifi.c:921
 msgid "More networks"
 msgstr "Još mreža"
 
 # bug: no plural forms
-#: src/applet-device-wifi.c:1107
+#: src/applet-device-wifi.c:1111
 msgid "Wi-Fi Networks Available"
 msgstr "Dostupne su bežične mreže"
 
-#: src/applet-device-wifi.c:1108
+#: src/applet-device-wifi.c:1112
 msgid "Use the network menu to connect to a Wi-Fi network"
 msgstr "Koristite izbornik mreže da se povežete na bežičnu mrežu"
 
-#: src/applet-device-wifi.c:1111 src/applet.c:828
+#: src/applet-device-wifi.c:1115 src/applet.c:828
 msgid "Don’t show this message again"
 msgstr "Ne prikazuj više ovu poruku"
 
-#: src/applet-device-wifi.c:1292
+#: src/applet-device-wifi.c:1296
 #, c-format
 msgid "You are now connected to the Wi-Fi network “%s”."
 msgstr "Povezani ste na bežičnu mrežu „%s“."
 
-#: src/applet-device-wifi.c:1327
+#: src/applet-device-wifi.c:1331
 #, c-format
 msgid "Preparing Wi-Fi network connection “%s”…"
 msgstr "Pripremam bežičnu mrežnu vezu „%s“…"
 
-#: src/applet-device-wifi.c:1330
+#: src/applet-device-wifi.c:1334
 #, c-format
 msgid "Configuring Wi-Fi network connection “%s”…"
 msgstr "Podešavam vezu preko bežične mreže „%s“…"
 
-#: src/applet-device-wifi.c:1333
+#: src/applet-device-wifi.c:1337
 #, c-format
 msgid "User authentication required for Wi-Fi network “%s”…"
 msgstr "Potrebna je prijava korisnika za uspostavljanje bežične veze „%s“…"
 
-#: src/applet-device-wifi.c:1336
+#: src/applet-device-wifi.c:1340
 #, c-format
 msgid "Requesting a Wi-Fi network address for “%s”…"
 msgstr "Zahtevam adresu bežične mreže za „%s“…"
 
-#: src/applet-device-wifi.c:1347
+#: src/applet-device-wifi.c:1351
 #, c-format
 msgid "Wi-Fi network connection “%s” active: %s (%d%%)"
 msgstr "Povezani ste preko bežične veze „%s“ : %s (%d%%)"
 
-#: src/applet-device-wifi.c:1351
+#: src/applet-device-wifi.c:1355
 #, c-format
 msgid "Wi-Fi network connection “%s” active"
 msgstr "Povezani ste preko bežične veze „%s“"
 
-#: src/applet-device-wifi.c:1370
+#: src/applet-device-wifi.c:1374
 msgid "Failed to activate connection"
 msgstr "Nisam uspeo da aktiviram vezu"
 
-#: src/applet-device-wifi.c:1372 src/applet-device-wifi.c:1395 src/applet.c:414
+#: src/applet-device-wifi.c:1376 src/applet-device-wifi.c:1399 src/applet.c:414
 #: src/applet.c:468 src/applet.c:503
 msgid "Unknown error"
 msgstr "Nepoznata greška"
@@ -1017,7 +1017,7 @@ msgstr "Povezani ste preko VPN veze"
 msgid "No network connection"
 msgstr "Nema mrežne veze"
 
-#: src/applet.c:3349
+#: src/applet.c:3359
 msgid "NetworkManager Applet"
 msgstr "Programče upravnika mreže"
 
@@ -1212,9 +1212,10 @@ msgid "_Primary"
 msgstr "_Primarni:"
 
 #: src/connection-editor/ce-page-bond.ui:495
+#, fuzzy
 msgid ""
 "The interface name of the primary device. If set, this device will always be "
-"the active slave when it is available."
+"the active port when it is available."
 msgstr ""
 "Naziv sučelja primarnog uređaja. Ako je postavljeno, ovaj uređaj će uvek "
 "biti aktivan sporedni kada je dostupan."
@@ -2168,7 +2169,8 @@ msgid "C_KN"
 msgstr ""
 
 #: src/connection-editor/ce-page-macsec.ui:206
-msgid " The pre-shared Connectivity-association Key Name"
+#, fuzzy
+msgid "The pre-shared Connectivity-association Key Name"
 msgstr " Pred-deljeni naziv ključa pridruživanja povezivosti"
 
 #: src/connection-editor/ce-page-macsec.ui:217
@@ -3985,18 +3987,19 @@ msgstr "MAKSEC veza %d"
 
 #: src/connection-editor/page-master.c:221
 #: src/connection-editor/page-master.c:232
-msgid "Duplicate slaves"
+#, fuzzy
+msgid "Duplicate ports"
 msgstr "Umnoži podređene"
 
 #: src/connection-editor/page-master.c:222
-#, c-format
-msgid "Slaves “%s” and “%s” both apply to device “%s”"
+#, fuzzy, c-format
+msgid "Ports “%s” and “%s” both apply to device “%s”"
 msgstr "Oba podređena „%s“ i „%s“ se primenjuju na uređaj „%s“"
 
 #: src/connection-editor/page-master.c:233
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Slaves “%s” and “%s” apply to different virtual ports (“%s” and “%s”) of the "
+"Ports “%s” and “%s” apply to different virtual ports (“%s” and “%s”) of the "
 "same physical device."
 msgstr ""
 "Podređeni „%s“ i „%s“ se primenjuju na različite virtuelne priključnike "
@@ -4004,8 +4007,8 @@ msgstr ""
 
 #: src/connection-editor/page-master.c:357
 #, c-format
-msgid "%s slave %d"
-msgstr "%s podređuje %d"
+msgid "%s port %d"
+msgstr ""
 
 #: src/connection-editor/page-mobile.c:297
 msgid "Could not load mobile broadband user interface."
@@ -4341,9 +4344,9 @@ msgid "Usage:"
 msgstr "Upotreba:"
 
 #: src/main.c:30
+#, fuzzy
 msgid ""
-"This program is a component of NetworkManager (https://wiki.gnome.org/"
-"Projects/NetworkManager/)."
+"This program is a component of NetworkManager (https://networkmanager.dev)."
 msgstr ""
 "Ovaj program je deo Upravnika mreže (https://wiki.gnome.org/Projects/"
 "NetworkManager/)."

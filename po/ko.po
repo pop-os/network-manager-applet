@@ -23,7 +23,7 @@ msgstr ""
 "Project-Id-Version: network-manager-applet\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/network-manager-"
 "applet/\n"
-"POT-Creation-Date: 2021-05-10 15:50+0200\n"
+"POT-Creation-Date: 2021-08-17 10:12+0200\n"
 "PO-Revision-Date: 2020-03-02 16:09+0900\n"
 "Last-Translator: Changwoo Ryu <cwryu@debian.org>\n"
 "Language-Team: GNOME Korea <gnome-kr@googlegroups.com>\n"
@@ -33,7 +33,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: nm-applet.desktop.in:3 src/applet-dialogs.c:724 src/applet.c:3248
+#: nm-applet.desktop.in:3 src/applet-dialogs.c:724 src/applet.c:3258
 msgid "Network"
 msgstr "네트워크"
 
@@ -180,7 +180,7 @@ msgid "Mobile Broadband"
 msgstr "모바일 광대역"
 
 #: src/applet-device-broadband.c:780 src/applet-device-bt.c:61
-#: src/applet-device-ethernet.c:107 src/applet-device-wifi.c:890
+#: src/applet-device-ethernet.c:107 src/applet-device-wifi.c:894
 msgid "Available"
 msgstr "사용 가능"
 
@@ -191,7 +191,7 @@ msgid "New Mobile Broadband connection…"
 msgstr "새 모바일 광대역 연결"
 
 #: src/applet-device-broadband.c:809 src/applet-device-bt.c:75
-#: src/applet-device-ethernet.c:124 src/applet-device-wifi.c:1293
+#: src/applet-device-ethernet.c:124 src/applet-device-wifi.c:1297
 msgid "Connection Established"
 msgstr "연결됨"
 
@@ -325,99 +325,99 @@ msgstr "새 와이파이 네트워크 만들기"
 msgid "(none)"
 msgstr "(없음)"
 
-#: src/applet-device-wifi.c:519 src/applet-device-wifi.c:1393
+#: src/applet-device-wifi.c:523 src/applet-device-wifi.c:1397
 msgid "Failed to add new connection"
 msgstr "새로운 연결을 추가하는데 실패"
 
-#: src/applet-device-wifi.c:520
+#: src/applet-device-wifi.c:524
 msgid "Insufficient privileges."
 msgstr ""
 
-#: src/applet-device-wifi.c:522 src/applet-device-wifi.c:1375
-#: src/applet-device-wifi.c:1398 src/applet.c:417 src/applet.c:506
+#: src/applet-device-wifi.c:526 src/applet-device-wifi.c:1379
+#: src/applet-device-wifi.c:1402 src/applet.c:417 src/applet.c:506
 msgid "Connection failure"
 msgstr "연결에 실패"
 
-#: src/applet-device-wifi.c:822
+#: src/applet-device-wifi.c:826
 #, c-format
 msgid "Wi-Fi Networks (%s)"
 msgstr "와이파이 네트워크(%s)"
 
-#: src/applet-device-wifi.c:824
+#: src/applet-device-wifi.c:828
 #, c-format
 msgid "Wi-Fi Network (%s)"
 msgstr "와이파이 네트워크(%s)"
 
-#: src/applet-device-wifi.c:826
+#: src/applet-device-wifi.c:830
 msgid "Wi-Fi Network"
 msgid_plural "Wi-Fi Networks"
 msgstr[0] "와이파이 네트워크"
 
-#: src/applet-device-wifi.c:855
+#: src/applet-device-wifi.c:859
 msgid "Wi-Fi is disabled"
 msgstr "와이파이를 사용하지 않습니다"
 
-#: src/applet-device-wifi.c:856
+#: src/applet-device-wifi.c:860
 msgid "Wi-Fi is disabled by hardware switch"
 msgstr "와이파이가 하드웨어 스위치를 통해 사용하지 않습니다"
 
-#: src/applet-device-wifi.c:917
+#: src/applet-device-wifi.c:921
 msgid "More networks"
 msgstr "다른 네트워크"
 
-#: src/applet-device-wifi.c:1107
+#: src/applet-device-wifi.c:1111
 msgid "Wi-Fi Networks Available"
 msgstr "와이파이 네트워크가 사용 가능합니다"
 
-#: src/applet-device-wifi.c:1108
+#: src/applet-device-wifi.c:1112
 msgid "Use the network menu to connect to a Wi-Fi network"
 msgstr "네트워크 메뉴에서 와이파이 네트워크에 연결할 수 있습니다"
 
-#: src/applet-device-wifi.c:1111 src/applet.c:828
+#: src/applet-device-wifi.c:1115 src/applet.c:828
 #, fuzzy
 msgid "Don’t show this message again"
 msgstr "다시 보지 않기"
 
-#: src/applet-device-wifi.c:1292
+#: src/applet-device-wifi.c:1296
 #, fuzzy, c-format
 msgid "You are now connected to the Wi-Fi network “%s”."
 msgstr "와이파이 네트워크 '%s'에 연결되었습니다."
 
-#: src/applet-device-wifi.c:1327
+#: src/applet-device-wifi.c:1331
 #, fuzzy, c-format
 msgid "Preparing Wi-Fi network connection “%s”…"
 msgstr "와이파이 네트워크 '%s' 연결 준비 중..."
 
-#: src/applet-device-wifi.c:1330
+#: src/applet-device-wifi.c:1334
 #, fuzzy, c-format
 msgid "Configuring Wi-Fi network connection “%s”…"
 msgstr "와이파이 네트워크 '%s' 연결 설정 중..."
 
-#: src/applet-device-wifi.c:1333
+#: src/applet-device-wifi.c:1337
 #, fuzzy, c-format
 msgid "User authentication required for Wi-Fi network “%s”…"
 msgstr "와이파이 네트워크 연결 '%s'에 사용자 인증이 필요합니다..."
 
-#: src/applet-device-wifi.c:1336
+#: src/applet-device-wifi.c:1340
 #, fuzzy, c-format
 msgid "Requesting a Wi-Fi network address for “%s”…"
 msgstr "'%s'에 대한 와이파이 네트워크 주소 요청 중..."
 
-#: src/applet-device-wifi.c:1347
+#: src/applet-device-wifi.c:1351
 #, fuzzy, c-format
 msgid "Wi-Fi network connection “%s” active: %s (%d%%)"
 msgstr "와이파이 네트워크 연결 '%s' 사용 중: %s (%d%%)"
 
-#: src/applet-device-wifi.c:1351
+#: src/applet-device-wifi.c:1355
 #, fuzzy, c-format
 msgid "Wi-Fi network connection “%s” active"
 msgstr "와이파이 네트워크 연결 '%s' 사용 중"
 
-#: src/applet-device-wifi.c:1370
+#: src/applet-device-wifi.c:1374
 msgid "Failed to activate connection"
 msgstr "연결 활성화하는 데 실패"
 
-#: src/applet-device-wifi.c:1372 src/applet-device-wifi.c:1395 src/applet.c:414
+#: src/applet-device-wifi.c:1376 src/applet-device-wifi.c:1399 src/applet.c:414
 #: src/applet.c:468 src/applet.c:503
 msgid "Unknown error"
 msgstr "알 수 없는 오류"
@@ -1041,7 +1041,7 @@ msgstr "가상 사설망 연결 '%s' 사용 중"
 msgid "No network connection"
 msgstr "네트워크 연결 없음"
 
-#: src/applet.c:3349
+#: src/applet.c:3359
 msgid "NetworkManager Applet"
 msgstr "네트워크 관리 애플릿"
 
@@ -1234,9 +1234,10 @@ msgid "_Primary"
 msgstr "기본(_P):"
 
 #: src/connection-editor/ce-page-bond.ui:495
+#, fuzzy
 msgid ""
 "The interface name of the primary device. If set, this device will always be "
-"the active slave when it is available."
+"the active port when it is available."
 msgstr ""
 "주요 장치로 사용할 인터페이스 이름. 설정하면 이 장치가 있으면 항상 액티브 슬"
 "레이브 상태로 만듭니다."
@@ -2155,7 +2156,7 @@ msgid "C_KN"
 msgstr ""
 
 #: src/connection-editor/ce-page-macsec.ui:206
-msgid " The pre-shared Connectivity-association Key Name"
+msgid "The pre-shared Connectivity-association Key Name"
 msgstr ""
 
 #: src/connection-editor/ce-page-macsec.ui:217
@@ -3916,18 +3917,19 @@ msgstr "와이맥스 연결 %d"
 
 #: src/connection-editor/page-master.c:221
 #: src/connection-editor/page-master.c:232
-msgid "Duplicate slaves"
+#, fuzzy
+msgid "Duplicate ports"
 msgstr "슬레이브 중복"
 
 #: src/connection-editor/page-master.c:222
 #, fuzzy, c-format
-msgid "Slaves “%s” and “%s” both apply to device “%s”"
+msgid "Ports “%s” and “%s” both apply to device “%s”"
 msgstr "'%s' 및 '%s' 슬레이브가 모두 '%s' 장치에 적용됩니다"
 
 #: src/connection-editor/page-master.c:233
 #, fuzzy, c-format
 msgid ""
-"Slaves “%s” and “%s” apply to different virtual ports (“%s” and “%s”) of the "
+"Ports “%s” and “%s” apply to different virtual ports (“%s” and “%s”) of the "
 "same physical device."
 msgstr ""
 "'%s' 및 '%s' 슬레이브가 같은 물리적 장치의 다른 가상 포트('%s' 및 '%s')에 적"
@@ -3935,8 +3937,8 @@ msgstr ""
 
 #: src/connection-editor/page-master.c:357
 #, c-format
-msgid "%s slave %d"
-msgstr "%s 슬레이브 %d"
+msgid "%s port %d"
+msgstr ""
 
 #: src/connection-editor/page-mobile.c:297
 msgid "Could not load mobile broadband user interface."
@@ -4282,9 +4284,9 @@ msgid "Usage:"
 msgstr "사용법:"
 
 #: src/main.c:30
+#, fuzzy
 msgid ""
-"This program is a component of NetworkManager (https://wiki.gnome.org/"
-"Projects/NetworkManager/)."
+"This program is a component of NetworkManager (https://networkmanager.dev)."
 msgstr ""
 "이 프로그램은 네트워크 관리(https://wiki.gnome.org/Projects/NetworkManager/)"
 "의 일부분입니다."

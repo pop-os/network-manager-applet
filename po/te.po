@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: te\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/network-manager-"
 "applet/\n"
-"POT-Creation-Date: 2021-05-10 15:50+0200\n"
+"POT-Creation-Date: 2021-08-17 10:12+0200\n"
 "PO-Revision-Date: 2012-06-27 15:21+0530\n"
 "Last-Translator: Sasi Bhushan Boddepalli <sasi@swecha.net>\n"
 "Language-Team: Telugu <indlinux-telugu@lists.sourceforge.net>\n"
@@ -25,7 +25,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n!=1);\n"
 "X-Generator: KBabel 1.11.4\n"
 
-#: nm-applet.desktop.in:3 src/applet-dialogs.c:724 src/applet.c:3248
+#: nm-applet.desktop.in:3 src/applet-dialogs.c:724 src/applet.c:3258
 msgid "Network"
 msgstr "నెట్‌వర్క్"
 
@@ -172,7 +172,7 @@ msgid "Mobile Broadband"
 msgstr "మొబైల్ బ్రాడ్‌బాండ్"
 
 #: src/applet-device-broadband.c:780 src/applet-device-bt.c:61
-#: src/applet-device-ethernet.c:107 src/applet-device-wifi.c:890
+#: src/applet-device-ethernet.c:107 src/applet-device-wifi.c:894
 msgid "Available"
 msgstr "అందుబాటులోవుంది"
 
@@ -183,7 +183,7 @@ msgid "New Mobile Broadband connection…"
 msgstr "కొత్త మొబైల్ బ్రాడ్‌బాండ్ అనుసంధానము"
 
 #: src/applet-device-broadband.c:809 src/applet-device-bt.c:75
-#: src/applet-device-ethernet.c:124 src/applet-device-wifi.c:1293
+#: src/applet-device-ethernet.c:124 src/applet-device-wifi.c:1297
 msgid "Connection Established"
 msgstr "అనుసంధానము యేర్పరచబడింది"
 
@@ -322,105 +322,105 @@ msgstr "కొత్త వైరులేని నెట్వర్కు స
 msgid "(none)"
 msgstr "(ఏదీకాదు)"
 
-#: src/applet-device-wifi.c:519 src/applet-device-wifi.c:1393
+#: src/applet-device-wifi.c:523 src/applet-device-wifi.c:1397
 msgid "Failed to add new connection"
 msgstr "కొత్త అనుసంధానమును జతచేయుటలో విఫలము"
 
-#: src/applet-device-wifi.c:520
+#: src/applet-device-wifi.c:524
 msgid "Insufficient privileges."
 msgstr ""
 
-#: src/applet-device-wifi.c:522 src/applet-device-wifi.c:1375
-#: src/applet-device-wifi.c:1398 src/applet.c:417 src/applet.c:506
+#: src/applet-device-wifi.c:526 src/applet-device-wifi.c:1379
+#: src/applet-device-wifi.c:1402 src/applet.c:417 src/applet.c:506
 msgid "Connection failure"
 msgstr "అనుసంధానమగుట విఫలం"
 
-#: src/applet-device-wifi.c:822
+#: src/applet-device-wifi.c:826
 #, fuzzy, c-format
 msgid "Wi-Fi Networks (%s)"
 msgstr "వైర్‌తో నెట్వర్క్సు (%s)"
 
-#: src/applet-device-wifi.c:824
+#: src/applet-device-wifi.c:828
 #, fuzzy, c-format
 msgid "Wi-Fi Network (%s)"
 msgstr "వైర్‌తో నెట్వర్కు (%s)"
 
-#: src/applet-device-wifi.c:826
+#: src/applet-device-wifi.c:830
 #, fuzzy
 msgid "Wi-Fi Network"
 msgid_plural "Wi-Fi Networks"
 msgstr[0] "వైర్‌తో నెట్వర్కు"
 msgstr[1] "వైర్‌తో నెట్వర్కు"
 
-#: src/applet-device-wifi.c:855
+#: src/applet-device-wifi.c:859
 #, fuzzy
 msgid "Wi-Fi is disabled"
 msgstr "WiMAX అచేతనమైంది"
 
-#: src/applet-device-wifi.c:856
+#: src/applet-device-wifi.c:860
 #, fuzzy
 msgid "Wi-Fi is disabled by hardware switch"
 msgstr "WIMAX హార్డ్వేరు స్విచ్ వల్ల నిరుపయోగమైబడినది"
 
-#: src/applet-device-wifi.c:917
+#: src/applet-device-wifi.c:921
 msgid "More networks"
 msgstr "మరిన్ని నెట్వర్కులు"
 
-#: src/applet-device-wifi.c:1107
+#: src/applet-device-wifi.c:1111
 #, fuzzy
 msgid "Wi-Fi Networks Available"
 msgstr "వైర్‌లెస్ నెట్వర్కులు అందుబాటులోవున్నాయి"
 
-#: src/applet-device-wifi.c:1108
+#: src/applet-device-wifi.c:1112
 #, fuzzy
 msgid "Use the network menu to connect to a Wi-Fi network"
 msgstr "వైర్‌లెస్ నెట్వర్కునకు అనుసంధానమగుటకు నెట్వర్క్ మెనూని ఉపయోగించుము"
 
-#: src/applet-device-wifi.c:1111 src/applet.c:828
+#: src/applet-device-wifi.c:1115 src/applet.c:828
 #, fuzzy
 msgid "Don’t show this message again"
 msgstr "ఈ సందేశమును మరలా చూపవద్దు"
 
-#: src/applet-device-wifi.c:1292
+#: src/applet-device-wifi.c:1296
 #, fuzzy, c-format
 msgid "You are now connected to the Wi-Fi network “%s”."
 msgstr "మీరు యిప్పుడు వై-ఫై నెట్వర్కు '%s'కు అనుసంధానించబడినారు."
 
-#: src/applet-device-wifi.c:1327
+#: src/applet-device-wifi.c:1331
 #, fuzzy, c-format
 msgid "Preparing Wi-Fi network connection “%s”…"
 msgstr "నెట్వర్కు అనుసంధానము '%s' సిద్దముచేయుచున్నది..."
 
-#: src/applet-device-wifi.c:1330
+#: src/applet-device-wifi.c:1334
 #, fuzzy, c-format
 msgid "Configuring Wi-Fi network connection “%s”…"
 msgstr "వైర్ నెట్వర్కు అనుసంధానము '%s'ను ఆకృతీకరిస్తోంది..."
 
-#: src/applet-device-wifi.c:1333
+#: src/applet-device-wifi.c:1337
 #, fuzzy, c-format
 msgid "User authentication required for Wi-Fi network “%s”…"
 msgstr "వైర్‌లేని నెట్వర్కు '%s' కొరకు వినియోగదారి దృవీకరణము అవసరమైంది..."
 
-#: src/applet-device-wifi.c:1336
+#: src/applet-device-wifi.c:1340
 #, fuzzy, c-format
 msgid "Requesting a Wi-Fi network address for “%s”…"
 msgstr "'%s' కొరకు నెట్వర్కు చిరునామాను అభ్యర్ధిస్తోంది..."
 
-#: src/applet-device-wifi.c:1347
+#: src/applet-device-wifi.c:1351
 #, fuzzy, c-format
 msgid "Wi-Fi network connection “%s” active: %s (%d%%)"
 msgstr "వైర్‌లేని నెట్వర్కు అనుసంధానము '%s' క్రియాశీలము: %s (%d%%)"
 
-#: src/applet-device-wifi.c:1351
+#: src/applet-device-wifi.c:1355
 #, fuzzy, c-format
 msgid "Wi-Fi network connection “%s” active"
 msgstr "వైర్ నెట్వర్కు అనుసంధానము '%s' క్రియాశీలం"
 
-#: src/applet-device-wifi.c:1370
+#: src/applet-device-wifi.c:1374
 msgid "Failed to activate connection"
 msgstr "అనుసంధానమును క్రియాత్మకం చేయుటలో విఫలం"
 
-#: src/applet-device-wifi.c:1372 src/applet-device-wifi.c:1395 src/applet.c:414
+#: src/applet-device-wifi.c:1376 src/applet-device-wifi.c:1399 src/applet.c:414
 #: src/applet.c:468 src/applet.c:503
 msgid "Unknown error"
 msgstr "తెలియని దోషము"
@@ -1025,7 +1025,7 @@ msgstr "VPN అనుసంధానము '%s' క్రియాశీలం"
 msgid "No network connection"
 msgstr "నెట్వర్కు అనుసంధానము లేదు"
 
-#: src/applet.c:3349
+#: src/applet.c:3359
 msgid "NetworkManager Applet"
 msgstr "నెట్‌వర్క్ మ్యానేజర్ ఆప్లెట్"
 
@@ -1223,7 +1223,7 @@ msgstr "ప్రాధమిక DNS:"
 #: src/connection-editor/ce-page-bond.ui:495
 msgid ""
 "The interface name of the primary device. If set, this device will always be "
-"the active slave when it is available."
+"the active port when it is available."
 msgstr ""
 
 #: src/connection-editor/ce-page-bond.ui:507
@@ -2126,7 +2126,7 @@ msgid "C_KN"
 msgstr ""
 
 #: src/connection-editor/ce-page-macsec.ui:206
-msgid " The pre-shared Connectivity-association Key Name"
+msgid "The pre-shared Connectivity-association Key Name"
 msgstr ""
 
 #: src/connection-editor/ce-page-macsec.ui:217
@@ -3901,25 +3901,25 @@ msgstr "DSL అనుసంధానము %d"
 
 #: src/connection-editor/page-master.c:221
 #: src/connection-editor/page-master.c:232
-msgid "Duplicate slaves"
+msgid "Duplicate ports"
 msgstr ""
 
 #: src/connection-editor/page-master.c:222
 #, c-format
-msgid "Slaves “%s” and “%s” both apply to device “%s”"
+msgid "Ports “%s” and “%s” both apply to device “%s”"
 msgstr ""
 
 #: src/connection-editor/page-master.c:233
 #, c-format
 msgid ""
-"Slaves “%s” and “%s” apply to different virtual ports (“%s” and “%s”) of the "
+"Ports “%s” and “%s” apply to different virtual ports (“%s” and “%s”) of the "
 "same physical device."
 msgstr ""
 
 #: src/connection-editor/page-master.c:357
 #, c-format
-msgid "%s slave %d"
-msgstr "%s స్లేవ్ %d"
+msgid "%s port %d"
+msgstr ""
 
 #: src/connection-editor/page-mobile.c:297
 msgid "Could not load mobile broadband user interface."
@@ -4268,9 +4268,9 @@ msgid "Usage:"
 msgstr "వినియోగము:"
 
 #: src/main.c:30
+#, fuzzy
 msgid ""
-"This program is a component of NetworkManager (https://wiki.gnome.org/"
-"Projects/NetworkManager/)."
+"This program is a component of NetworkManager (https://networkmanager.dev)."
 msgstr ""
 "ఈ ప్రోగ్రామ్ నెట్‌వర్క్ మ్యానేజర్ యొక్క అంతర్భాగము (https://wiki.gnome.org/Projects/"
 "NetworkManager/)."

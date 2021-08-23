@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: po_nm-applet-km\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/network-manager-"
 "applet/\n"
-"POT-Creation-Date: 2021-05-10 15:50+0200\n"
+"POT-Creation-Date: 2021-08-17 10:12+0200\n"
 "PO-Revision-Date: 2014-04-23 15:44+0700\n"
 "Last-Translator: Sophea Sok <sophea@open.org.kh>\n"
 "Language-Team: Khmer <>\n"
@@ -22,7 +22,7 @@ msgstr ""
 "X-Generator: WordForge 0.8 RC1\n"
 "X-Language: km-KH\n"
 
-#: nm-applet.desktop.in:3 src/applet-dialogs.c:724 src/applet.c:3248
+#: nm-applet.desktop.in:3 src/applet-dialogs.c:724 src/applet.c:3258
 msgid "Network"
 msgstr "បណ្ដាញ"
 
@@ -168,7 +168,7 @@ msgid "Mobile Broadband"
 msgstr "រលកអាកាស​ចល័ត"
 
 #: src/applet-device-broadband.c:780 src/applet-device-bt.c:61
-#: src/applet-device-ethernet.c:107 src/applet-device-wifi.c:890
+#: src/applet-device-ethernet.c:107 src/applet-device-wifi.c:894
 msgid "Available"
 msgstr "មាន"
 
@@ -179,7 +179,7 @@ msgid "New Mobile Broadband connection…"
 msgstr "ការ​តភ្ជាប់​រលកអាកាស​ចល័ត​ថ្មី"
 
 #: src/applet-device-broadband.c:809 src/applet-device-bt.c:75
-#: src/applet-device-ethernet.c:124 src/applet-device-wifi.c:1293
+#: src/applet-device-ethernet.c:124 src/applet-device-wifi.c:1297
 msgid "Connection Established"
 msgstr "បាន​បង្កើត​ការ​តភ្ជាប់"
 
@@ -313,99 +313,99 @@ msgstr "បង្កើត​បណ្ដាញ​វ៉ាយហ្វាយ​
 msgid "(none)"
 msgstr "(គ្មាន)"
 
-#: src/applet-device-wifi.c:519 src/applet-device-wifi.c:1393
+#: src/applet-device-wifi.c:523 src/applet-device-wifi.c:1397
 msgid "Failed to add new connection"
 msgstr "បាន​បរាជ័យ​ក្នុង​ការ​បន្ថែម​ការ​តភ្ជាប់​ថ្មី"
 
-#: src/applet-device-wifi.c:520
+#: src/applet-device-wifi.c:524
 msgid "Insufficient privileges."
 msgstr ""
 
-#: src/applet-device-wifi.c:522 src/applet-device-wifi.c:1375
-#: src/applet-device-wifi.c:1398 src/applet.c:417 src/applet.c:506
+#: src/applet-device-wifi.c:526 src/applet-device-wifi.c:1379
+#: src/applet-device-wifi.c:1402 src/applet.c:417 src/applet.c:506
 msgid "Connection failure"
 msgstr "ការ​តភ្ជាប់​បាន​បរាជ័យ"
 
-#: src/applet-device-wifi.c:822
+#: src/applet-device-wifi.c:826
 #, c-format
 msgid "Wi-Fi Networks (%s)"
 msgstr "បណ្ដាញ​វ៉ាយហ្វាយ (%s)"
 
-#: src/applet-device-wifi.c:824
+#: src/applet-device-wifi.c:828
 #, c-format
 msgid "Wi-Fi Network (%s)"
 msgstr "បណ្ដាញ​វ៉ាយហ្វាយ (%s)"
 
-#: src/applet-device-wifi.c:826
+#: src/applet-device-wifi.c:830
 msgid "Wi-Fi Network"
 msgid_plural "Wi-Fi Networks"
 msgstr[0] "បណ្ដាញ​វ៉ាយហ្វាយ"
 
-#: src/applet-device-wifi.c:855
+#: src/applet-device-wifi.c:859
 msgid "Wi-Fi is disabled"
 msgstr "បាន​បិទ​វ៉ាយហ្វាយ"
 
-#: src/applet-device-wifi.c:856
+#: src/applet-device-wifi.c:860
 msgid "Wi-Fi is disabled by hardware switch"
 msgstr "វ៉ាយហ្វាយត្រូវ​បាន​បិទ​ដោយ​កុងតាក់​ផ្នែក​រឹង"
 
-#: src/applet-device-wifi.c:917
+#: src/applet-device-wifi.c:921
 msgid "More networks"
 msgstr "បណ្ដាញ​ជាច្រើនទៀត"
 
-#: src/applet-device-wifi.c:1107
+#: src/applet-device-wifi.c:1111
 msgid "Wi-Fi Networks Available"
 msgstr "មាន​បណ្ដាញ​វ៉ាយហ្វាយ"
 
-#: src/applet-device-wifi.c:1108
+#: src/applet-device-wifi.c:1112
 msgid "Use the network menu to connect to a Wi-Fi network"
 msgstr "ប្រើ​ម៉ឺនុយ​បណ្ដាញ​ដើម្បី​តភ្ជាប់​ទៅ​បណ្ដាញ​វ៉ាយហ្វាយ"
 
-#: src/applet-device-wifi.c:1111 src/applet.c:828
+#: src/applet-device-wifi.c:1115 src/applet.c:828
 #, fuzzy
 msgid "Don’t show this message again"
 msgstr "កុំ​បង្ហាញ​សារ​នេះ​ម្ដងទៀត"
 
-#: src/applet-device-wifi.c:1292
+#: src/applet-device-wifi.c:1296
 #, fuzzy, c-format
 msgid "You are now connected to the Wi-Fi network “%s”."
 msgstr "ឥឡូវ​អ្នក​បាន​តភ្ជាប់​ទៅកាន់​បណ្ដាញ​វ៉ាយហ្វាយ '%s' ។"
 
-#: src/applet-device-wifi.c:1327
+#: src/applet-device-wifi.c:1331
 #, fuzzy, c-format
 msgid "Preparing Wi-Fi network connection “%s”…"
 msgstr "កំពុង​រៀបចំ​ការ​តភ្ជាប់​បណ្ដាញ​វ៉ាយហ្វាយ '%s'..."
 
-#: src/applet-device-wifi.c:1330
+#: src/applet-device-wifi.c:1334
 #, fuzzy, c-format
 msgid "Configuring Wi-Fi network connection “%s”…"
 msgstr "កំពុង​កំណត់​រចនាសម្ព័ន្ធ​ការ​តភ្ជាប់​បណ្ដាញ​វ៉ាយហ្វាយ '%s'..."
 
-#: src/applet-device-wifi.c:1333
+#: src/applet-device-wifi.c:1337
 #, fuzzy, c-format
 msgid "User authentication required for Wi-Fi network “%s”…"
 msgstr "បាន​ទាមទារ​ការ​ផ្ទៀងផ្ទាត់​ភាព​ពី​អ្នកប្រើ​សម្រាប់​បណ្ដាញ​វ៉ាយហ្វាយ '%s'..."
 
-#: src/applet-device-wifi.c:1336
+#: src/applet-device-wifi.c:1340
 #, fuzzy, c-format
 msgid "Requesting a Wi-Fi network address for “%s”…"
 msgstr "កំពុង​ស្នើ​សុំ​អាសយដ្ឋាន​បណ្ដាញ​សម្រាប់​សម្រាប់ '%s'..."
 
-#: src/applet-device-wifi.c:1347
+#: src/applet-device-wifi.c:1351
 #, fuzzy, c-format
 msgid "Wi-Fi network connection “%s” active: %s (%d%%)"
 msgstr "ការ​តភ្ជាប់​បណ្ដាញ​វ៉ាយហ្វាយ%s' សកម្ម ៖ %s (%d%%)"
 
-#: src/applet-device-wifi.c:1351
+#: src/applet-device-wifi.c:1355
 #, fuzzy, c-format
 msgid "Wi-Fi network connection “%s” active"
 msgstr "ការ​តភ្ជាប់​បណ្ដាញ​វ៉ាយហ្វាយ '%s' សកម្ម"
 
-#: src/applet-device-wifi.c:1370
+#: src/applet-device-wifi.c:1374
 msgid "Failed to activate connection"
 msgstr "បាន​បរាជ័យ​ក្នុង​ការ​ធ្វើឲ្យ​ការ​តភ្ជាប់​សកម្ម"
 
-#: src/applet-device-wifi.c:1372 src/applet-device-wifi.c:1395 src/applet.c:414
+#: src/applet-device-wifi.c:1376 src/applet-device-wifi.c:1399 src/applet.c:414
 #: src/applet.c:468 src/applet.c:503
 msgid "Unknown error"
 msgstr "មិន​ស្គាល់​កំហុស"
@@ -1011,7 +1011,7 @@ msgstr "ការ​តភ្ជាប់ VPN '%s' សកម្ម"
 msgid "No network connection"
 msgstr "មិនមាន​ការ​តភ្ជាប់​បណ្ដាញ"
 
-#: src/applet.c:3349
+#: src/applet.c:3359
 msgid "NetworkManager Applet"
 msgstr "អាប់ភ្លេត NetworkManager"
 
@@ -1205,9 +1205,10 @@ msgid "_Primary"
 msgstr "ចម្បង៖"
 
 #: src/connection-editor/ce-page-bond.ui:495
+#, fuzzy
 msgid ""
 "The interface name of the primary device. If set, this device will always be "
-"the active slave when it is available."
+"the active port when it is available."
 msgstr "ឈ្មោះ​ចំណុច​ប្រទាក់​របស់​ឧបករណ៍​ច្បង។ បើ​បាន​កំណត់ ឧបករណ៍​នេះ​នឹង​ជា​កូនចៅ​សកម្ម​ជានិច្ច​ពេល​វា​មាន។"
 
 #: src/connection-editor/ce-page-bond.ui:507
@@ -2124,7 +2125,7 @@ msgid "C_KN"
 msgstr ""
 
 #: src/connection-editor/ce-page-macsec.ui:206
-msgid " The pre-shared Connectivity-association Key Name"
+msgid "The pre-shared Connectivity-association Key Name"
 msgstr ""
 
 #: src/connection-editor/ce-page-macsec.ui:217
@@ -3891,26 +3892,27 @@ msgstr "ការ​តភ្ជាប់ WiMAX %d"
 
 #: src/connection-editor/page-master.c:221
 #: src/connection-editor/page-master.c:232
-msgid "Duplicate slaves"
+#, fuzzy
+msgid "Duplicate ports"
 msgstr "កូន​ចៅ​ស្ទួន"
 
 #: src/connection-editor/page-master.c:222
 #, fuzzy, c-format
-msgid "Slaves “%s” and “%s” both apply to device “%s”"
+msgid "Ports “%s” and “%s” both apply to device “%s”"
 msgstr "កូន​ចៅ '%s' និង '%s' ទាំង​ពីរ​គឺ​បាន​អនុវត្ត​ទៅកាន់​ឧបករណ៍ '%s'"
 
 #: src/connection-editor/page-master.c:233
 #, fuzzy, c-format
 msgid ""
-"Slaves “%s” and “%s” apply to different virtual ports (“%s” and “%s”) of the "
+"Ports “%s” and “%s” apply to different virtual ports (“%s” and “%s”) of the "
 "same physical device."
 msgstr ""
 "កូនចៅ '%s' និង '%s' អនុវត្ត​ទៅកាន់​ច្រក​និម្មិត​ផ្សេងគ្នា ('%s' និង '%s') របស់​ឧបករណ៍​ដូចគ្នា។"
 
 #: src/connection-editor/page-master.c:357
 #, c-format
-msgid "%s slave %d"
-msgstr "%s កូន​ចៅ %d"
+msgid "%s port %d"
+msgstr ""
 
 #: src/connection-editor/page-mobile.c:297
 msgid "Could not load mobile broadband user interface."
@@ -4251,9 +4253,9 @@ msgid "Usage:"
 msgstr "ការ​ប្រើប្រាស់៖"
 
 #: src/main.c:30
+#, fuzzy
 msgid ""
-"This program is a component of NetworkManager (https://wiki.gnome.org/"
-"Projects/NetworkManager/)."
+"This program is a component of NetworkManager (https://networkmanager.dev)."
 msgstr ""
 "កម្មវិធី​នេះ គឺជា​សមាសភាគ​នៃ NetworkManager (https://wiki.gnome.org/Projects/"
 "NetworkManager/) ។"

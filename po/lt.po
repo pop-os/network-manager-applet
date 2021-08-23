@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: NetworkManager HEAD\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/network-manager-"
 "applet/\n"
-"POT-Creation-Date: 2021-05-10 15:50+0200\n"
+"POT-Creation-Date: 2021-08-17 10:12+0200\n"
 "PO-Revision-Date: 2021-01-05 12:42+0200\n"
 "Last-Translator: Aurimas Černius <aurisc4@gmail.com>\n"
 "Language-Team: Lietuvių <gnome-lt@lists.akl.lt>\n"
@@ -25,7 +25,7 @@ msgstr ""
 "X-Generator: Gtranslator 3.38.0\n"
 "X-Project-Style: gnome\n"
 
-#: nm-applet.desktop.in:3 src/applet-dialogs.c:724 src/applet.c:3248
+#: nm-applet.desktop.in:3 src/applet-dialogs.c:724 src/applet.c:3258
 msgid "Network"
 msgstr "Tinklas"
 
@@ -174,7 +174,7 @@ msgid "Mobile Broadband"
 msgstr "Mobilusis plačiajuostis ryšys"
 
 #: src/applet-device-broadband.c:780 src/applet-device-bt.c:61
-#: src/applet-device-ethernet.c:107 src/applet-device-wifi.c:890
+#: src/applet-device-ethernet.c:107 src/applet-device-wifi.c:894
 msgid "Available"
 msgstr "Prieinama"
 
@@ -184,7 +184,7 @@ msgid "New Mobile Broadband connection…"
 msgstr "Naujas mobilusis plačiajuostis ryšys…"
 
 #: src/applet-device-broadband.c:809 src/applet-device-bt.c:75
-#: src/applet-device-ethernet.c:124 src/applet-device-wifi.c:1293
+#: src/applet-device-ethernet.c:124 src/applet-device-wifi.c:1297
 msgid "Connection Established"
 msgstr "Prisijungta"
 
@@ -316,101 +316,101 @@ msgstr "Sukurti _naują belaidį tinklą…"
 msgid "(none)"
 msgstr "(nėra)"
 
-#: src/applet-device-wifi.c:519 src/applet-device-wifi.c:1393
+#: src/applet-device-wifi.c:523 src/applet-device-wifi.c:1397
 msgid "Failed to add new connection"
 msgstr "Nepavyko pridėti naujo ryšio"
 
-#: src/applet-device-wifi.c:520
+#: src/applet-device-wifi.c:524
 msgid "Insufficient privileges."
 msgstr "Nepakanka teisių."
 
-#: src/applet-device-wifi.c:522 src/applet-device-wifi.c:1375
-#: src/applet-device-wifi.c:1398 src/applet.c:417 src/applet.c:506
+#: src/applet-device-wifi.c:526 src/applet-device-wifi.c:1379
+#: src/applet-device-wifi.c:1402 src/applet.c:417 src/applet.c:506
 msgid "Connection failure"
 msgstr "Ryšio problema"
 
-#: src/applet-device-wifi.c:822
+#: src/applet-device-wifi.c:826
 #, c-format
 msgid "Wi-Fi Networks (%s)"
 msgstr "Belaidžiai tinklai (%s)"
 
-#: src/applet-device-wifi.c:824
+#: src/applet-device-wifi.c:828
 #, c-format
 msgid "Wi-Fi Network (%s)"
 msgstr "Belaidis tinklas (%s)"
 
-#: src/applet-device-wifi.c:826
+#: src/applet-device-wifi.c:830
 msgid "Wi-Fi Network"
 msgid_plural "Wi-Fi Networks"
 msgstr[0] "Belaidis tinklas"
 msgstr[1] "Belaidžiai tinklai"
 msgstr[2] "Belaidžiai tinklai"
 
-#: src/applet-device-wifi.c:855
+#: src/applet-device-wifi.c:859
 msgid "Wi-Fi is disabled"
 msgstr "Belaidis tinklas išjungtas"
 
-#: src/applet-device-wifi.c:856
+#: src/applet-device-wifi.c:860
 msgid "Wi-Fi is disabled by hardware switch"
 msgstr "Belaidis tinklas išjungtas aparatiškai"
 
-#: src/applet-device-wifi.c:917
+#: src/applet-device-wifi.c:921
 msgid "More networks"
 msgstr "Daugiau tinklų"
 
-#: src/applet-device-wifi.c:1107
+#: src/applet-device-wifi.c:1111
 msgid "Wi-Fi Networks Available"
 msgstr "Yra belaidžių tinklų"
 
-#: src/applet-device-wifi.c:1108
+#: src/applet-device-wifi.c:1112
 msgid "Use the network menu to connect to a Wi-Fi network"
 msgstr ""
 "Norėdami prisijungti prie belaidžio tinklo, naudokite belaidžio tinklo meniu"
 
-#: src/applet-device-wifi.c:1111 src/applet.c:828
+#: src/applet-device-wifi.c:1115 src/applet.c:828
 msgid "Don’t show this message again"
 msgstr "Daugiau neberodyti šio pranešimo"
 
-#: src/applet-device-wifi.c:1292
+#: src/applet-device-wifi.c:1296
 #, c-format
 msgid "You are now connected to the Wi-Fi network “%s”."
 msgstr "Esate prisijungę prie belaidžio tinklo „%s“."
 
-#: src/applet-device-wifi.c:1327
+#: src/applet-device-wifi.c:1331
 #, c-format
 msgid "Preparing Wi-Fi network connection “%s”…"
 msgstr "Ruošiamas belaidis tinklo ryšys „%s“…"
 
-#: src/applet-device-wifi.c:1330
+#: src/applet-device-wifi.c:1334
 #, c-format
 msgid "Configuring Wi-Fi network connection “%s”…"
 msgstr "Konfigūruojamas belaidis tinklo ryšys „%s“…"
 
-#: src/applet-device-wifi.c:1333
+#: src/applet-device-wifi.c:1337
 #, c-format
 msgid "User authentication required for Wi-Fi network “%s”…"
 msgstr "Belaidis tinklas „%s“ reikalauja nustatyti jūsų tapatybę…"
 
-#: src/applet-device-wifi.c:1336
+#: src/applet-device-wifi.c:1340
 #, c-format
 msgid "Requesting a Wi-Fi network address for “%s”…"
 msgstr "Užklausiamas belaidžio tinklo adresas, skirtas „%s“…"
 
-#: src/applet-device-wifi.c:1347
+#: src/applet-device-wifi.c:1351
 #, c-format
 msgid "Wi-Fi network connection “%s” active: %s (%d%%)"
 msgstr "Belaidžio tinklo ryšys „%s“ aktyvus: %s (%d%%)"
 
-#: src/applet-device-wifi.c:1351
+#: src/applet-device-wifi.c:1355
 #, c-format
 msgid "Wi-Fi network connection “%s” active"
 msgstr "Belaidis tinklo ryšys „%s“ aktyvus"
 
-#: src/applet-device-wifi.c:1370
+#: src/applet-device-wifi.c:1374
 msgid "Failed to activate connection"
 msgstr "Nepavyko suaktyvinti ryšio"
 
-#: src/applet-device-wifi.c:1372 src/applet-device-wifi.c:1395 src/applet.c:414
+#: src/applet-device-wifi.c:1376 src/applet-device-wifi.c:1399 src/applet.c:414
 #: src/applet.c:468 src/applet.c:503
 msgid "Unknown error"
 msgstr "Nežinoma klaida"
@@ -1010,7 +1010,7 @@ msgstr "VPN ryšys aktyvus"
 msgid "No network connection"
 msgstr "Nėra tinklo ryšio"
 
-#: src/applet.c:3349
+#: src/applet.c:3359
 msgid "NetworkManager Applet"
 msgstr "NetworkManager įtaisas"
 
@@ -1195,9 +1195,10 @@ msgid "_Primary"
 msgstr "_Pirminis"
 
 #: src/connection-editor/ce-page-bond.ui:495
+#, fuzzy
 msgid ""
 "The interface name of the primary device. If set, this device will always be "
-"the active slave when it is available."
+"the active port when it is available."
 msgstr ""
 "Pirminio įrenginio sąsajos pavadinimas. Jei nustatyta, šis įrenginys bus "
 "visada aktyvus pavaldusis, kai prieinamas."
@@ -2119,7 +2120,8 @@ msgid "C_KN"
 msgstr "C_KN"
 
 #: src/connection-editor/ce-page-macsec.ui:206
-msgid " The pre-shared Connectivity-association Key Name"
+#, fuzzy
+msgid "The pre-shared Connectivity-association Key Name"
 msgstr " Iš anksto bendrinamo „Connectivity-association Key“ rakto pavadinimas"
 
 #: src/connection-editor/ce-page-macsec.ui:217
@@ -3879,18 +3881,19 @@ msgstr "MACSEC ryšys %d"
 
 #: src/connection-editor/page-master.c:221
 #: src/connection-editor/page-master.c:232
-msgid "Duplicate slaves"
+#, fuzzy
+msgid "Duplicate ports"
 msgstr "Dubliuoti pavaldieji"
 
 #: src/connection-editor/page-master.c:222
-#, c-format
-msgid "Slaves “%s” and “%s” both apply to device “%s”"
+#, fuzzy, c-format
+msgid "Ports “%s” and “%s” both apply to device “%s”"
 msgstr "Pavaldieji „%s“ ir „%s“ abu yra taikomi įrenginiui „%s“"
 
 #: src/connection-editor/page-master.c:233
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Slaves “%s” and “%s” apply to different virtual ports (“%s” and “%s”) of the "
+"Ports “%s” and “%s” apply to different virtual ports (“%s” and “%s”) of the "
 "same physical device."
 msgstr ""
 "Pavaldieji „%s“ ir „%s“ yra taikomi skirtingiems virtualiems prievadams "
@@ -3898,8 +3901,8 @@ msgstr ""
 
 #: src/connection-editor/page-master.c:357
 #, c-format
-msgid "%s slave %d"
-msgstr "%s pavaldusis %d"
+msgid "%s port %d"
+msgstr ""
 
 #: src/connection-editor/page-mobile.c:297
 msgid "Could not load mobile broadband user interface."
@@ -4231,9 +4234,9 @@ msgid "Usage:"
 msgstr "Naudojimas:"
 
 #: src/main.c:30
+#, fuzzy
 msgid ""
-"This program is a component of NetworkManager (https://wiki.gnome.org/"
-"Projects/NetworkManager/)."
+"This program is a component of NetworkManager (https://networkmanager.dev)."
 msgstr ""
 "Ši programa yra NetworkManager (https://wiki.gnome.org/Projects/"
 "NetworkManager/) dalis."

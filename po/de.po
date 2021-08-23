@@ -24,7 +24,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/network-manager-"
 "applet/\n"
-"POT-Creation-Date: 2021-05-10 15:50+0200\n"
+"POT-Creation-Date: 2021-08-17 10:12+0200\n"
 "PO-Revision-Date: 2018-08-25 23:06+0200\n"
 "Last-Translator: Mario Blättermann <mario.blaettermann@gmail.com>\n"
 "Language-Team: Deutsch <gnome-de@gnome.org>\n"
@@ -35,7 +35,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 2.1.1\n"
 
-#: nm-applet.desktop.in:3 src/applet-dialogs.c:724 src/applet.c:3248
+#: nm-applet.desktop.in:3 src/applet-dialogs.c:724 src/applet.c:3258
 msgid "Network"
 msgstr "Netzwerk"
 
@@ -185,7 +185,7 @@ msgid "Mobile Broadband"
 msgstr "Mobiles Breitband"
 
 #: src/applet-device-broadband.c:780 src/applet-device-bt.c:61
-#: src/applet-device-ethernet.c:107 src/applet-device-wifi.c:890
+#: src/applet-device-ethernet.c:107 src/applet-device-wifi.c:894
 msgid "Available"
 msgstr "Verfügbar"
 
@@ -195,7 +195,7 @@ msgid "New Mobile Broadband connection…"
 msgstr "Neue mobile Breitbandverbindung …"
 
 #: src/applet-device-broadband.c:809 src/applet-device-bt.c:75
-#: src/applet-device-ethernet.c:124 src/applet-device-wifi.c:1293
+#: src/applet-device-ethernet.c:124 src/applet-device-wifi.c:1297
 msgid "Connection Established"
 msgstr "Verbindung hergestellt"
 
@@ -329,100 +329,100 @@ msgstr "Neues _Funknetzwerk erstellen …"
 msgid "(none)"
 msgstr "(keine)"
 
-#: src/applet-device-wifi.c:519 src/applet-device-wifi.c:1393
+#: src/applet-device-wifi.c:523 src/applet-device-wifi.c:1397
 msgid "Failed to add new connection"
 msgstr "Hinzufügen einer neuen Verbindung schlug fehl"
 
-#: src/applet-device-wifi.c:520
+#: src/applet-device-wifi.c:524
 msgid "Insufficient privileges."
 msgstr "Unzureichende Berechtigungen."
 
-#: src/applet-device-wifi.c:522 src/applet-device-wifi.c:1375
-#: src/applet-device-wifi.c:1398 src/applet.c:417 src/applet.c:506
+#: src/applet-device-wifi.c:526 src/applet-device-wifi.c:1379
+#: src/applet-device-wifi.c:1402 src/applet.c:417 src/applet.c:506
 msgid "Connection failure"
 msgstr "Verbindung fehlgeschlagen"
 
-#: src/applet-device-wifi.c:822
+#: src/applet-device-wifi.c:826
 #, c-format
 msgid "Wi-Fi Networks (%s)"
 msgstr "Funknetzwerke (%s)"
 
-#: src/applet-device-wifi.c:824
+#: src/applet-device-wifi.c:828
 #, c-format
 msgid "Wi-Fi Network (%s)"
 msgstr "Funknetzwerk (%s)"
 
-#: src/applet-device-wifi.c:826
+#: src/applet-device-wifi.c:830
 msgid "Wi-Fi Network"
 msgid_plural "Wi-Fi Networks"
 msgstr[0] "Funknetzwerk"
 msgstr[1] "Funknetzwerke"
 
-#: src/applet-device-wifi.c:855
+#: src/applet-device-wifi.c:859
 msgid "Wi-Fi is disabled"
 msgstr "Funknetzwerk ist deaktiviert"
 
-#: src/applet-device-wifi.c:856
+#: src/applet-device-wifi.c:860
 msgid "Wi-Fi is disabled by hardware switch"
 msgstr "Funknetzwerk wurde durch Schalter deaktiviert"
 
-#: src/applet-device-wifi.c:917
+#: src/applet-device-wifi.c:921
 msgid "More networks"
 msgstr "Weitere Netzwerke"
 
-#: src/applet-device-wifi.c:1107
+#: src/applet-device-wifi.c:1111
 msgid "Wi-Fi Networks Available"
 msgstr "Funknetzwerke sind verfügbar"
 
-#: src/applet-device-wifi.c:1108
+#: src/applet-device-wifi.c:1112
 msgid "Use the network menu to connect to a Wi-Fi network"
 msgstr ""
 "Verwenden Sie das Netzwerkmenü, um sich mit einem Funknetzwerk zu verbinden"
 
-#: src/applet-device-wifi.c:1111 src/applet.c:828
+#: src/applet-device-wifi.c:1115 src/applet.c:828
 msgid "Don’t show this message again"
 msgstr "Diesen Hinweis nicht mehr anzeigen"
 
-#: src/applet-device-wifi.c:1292
+#: src/applet-device-wifi.c:1296
 #, c-format
 msgid "You are now connected to the Wi-Fi network “%s”."
 msgstr "Sie sind nun mit dem Funknetzwerk »%s« verbunden."
 
-#: src/applet-device-wifi.c:1327
+#: src/applet-device-wifi.c:1331
 #, c-format
 msgid "Preparing Wi-Fi network connection “%s”…"
 msgstr "Funknetzwerkverbindung »%s« wird vorbereitet …"
 
-#: src/applet-device-wifi.c:1330
+#: src/applet-device-wifi.c:1334
 #, c-format
 msgid "Configuring Wi-Fi network connection “%s”…"
 msgstr "Funknetzwerkverbindung »%s« wird konfiguriert …"
 
-#: src/applet-device-wifi.c:1333
+#: src/applet-device-wifi.c:1337
 #, c-format
 msgid "User authentication required for Wi-Fi network “%s”…"
 msgstr "Benutzerlegitimierung ist erforderlich für Funknetzwerk »%s« …"
 
-#: src/applet-device-wifi.c:1336
+#: src/applet-device-wifi.c:1340
 #, c-format
 msgid "Requesting a Wi-Fi network address for “%s”…"
 msgstr "Funknetzwerkadresse für »%s« wird angefordert …"
 
-#: src/applet-device-wifi.c:1347
+#: src/applet-device-wifi.c:1351
 #, c-format
 msgid "Wi-Fi network connection “%s” active: %s (%d%%)"
 msgstr "Funknetzwerkverbindung mit »%s« ist aktiv: %s (%d%%)"
 
-#: src/applet-device-wifi.c:1351
+#: src/applet-device-wifi.c:1355
 #, c-format
 msgid "Wi-Fi network connection “%s” active"
 msgstr "Funknetzwerkverbindung »%s« ist aktiv"
 
-#: src/applet-device-wifi.c:1370
+#: src/applet-device-wifi.c:1374
 msgid "Failed to activate connection"
 msgstr "Aktivierung der Verbindung schlug fehl"
 
-#: src/applet-device-wifi.c:1372 src/applet-device-wifi.c:1395 src/applet.c:414
+#: src/applet-device-wifi.c:1376 src/applet-device-wifi.c:1399 src/applet.c:414
 #: src/applet.c:468 src/applet.c:503
 msgid "Unknown error"
 msgstr "Unbekannter Fehler"
@@ -1033,7 +1033,7 @@ msgstr "VPN-Verbindung ist aktiv"
 msgid "No network connection"
 msgstr "Keine Netzwerkverbindung"
 
-#: src/applet.c:3349
+#: src/applet.c:3359
 msgid "NetworkManager Applet"
 msgstr "Netzwerk-Manager-Applet"
 
@@ -1220,10 +1220,10 @@ msgstr "_Primär"
 #: src/connection-editor/ce-page-bond.ui:495
 msgid ""
 "The interface name of the primary device. If set, this device will always be "
-"the active slave when it is available."
+"the active port when it is available."
 msgstr ""
 "Der Schnittstellenname des Primärgerätes. Falls gesetzt, wird dieses Gerät "
-"bei Verfügbarkeit immer der aktive Sklave sein."
+"bei Verfügbarkeit immer der aktive Port sein."
 
 #: src/connection-editor/ce-page-bond.ui:507
 #: src/connection-editor/ce-page-ethernet.ui:188
@@ -1261,7 +1261,7 @@ msgstr "_Hairpin-Modus"
 
 #: src/connection-editor/ce-page-bridge.ui:62
 msgid "Bridged _connections"
-msgstr "_Verbindungen über Brücke"
+msgstr "Bridge-_Verbindungen"
 
 #: src/connection-editor/ce-page-bridge.ui:218
 msgid "_Forward delay"
@@ -1301,7 +1301,7 @@ msgid ""
 "snooping was automatically disabled due to hash collisions, the system may "
 "refuse to enable the feature until the collisions are resolved."
 msgstr ""
-"Legt fest, ob »IGMP snooping« für diese Brücke aktiviert wird. Beachten Sie, "
+"Legt fest, ob »IGMP snooping« für diese Bridge aktiviert wird. Beachten Sie, "
 "dass das System diese Funktion automatisch verweigern kann, solange eine "
 "Hash-Kollision erkannt wird."
 
@@ -1321,8 +1321,8 @@ msgid ""
 "STP priority for this bridge. Lower values are “better”; the lowest priority "
 "bridge will be elected the root bridge."
 msgstr ""
-"STP-Priorität für diese Brücke. Niedrigere Werte sind »besser«. Die Brücke "
-"mit der niedrigsten Priorität wird zur »root-Brücke« gewählt."
+"STP-Priorität für diese Bridge. Niedrigere Werte sind »besser«. Die Bridge "
+"mit der niedrigsten Priorität wird zur »root-Bridge« gewählt."
 
 #: src/connection-editor/ce-page-bridge.ui:378
 msgid "_Max age"
@@ -2098,7 +2098,6 @@ msgid "Strict"
 msgstr "Streng"
 
 #: src/connection-editor/ce-page-macsec.ui:58
-#, fuzzy
 msgid "_Device name"
 msgstr "Gerätename"
 
@@ -2107,7 +2106,6 @@ msgid "The name of the MACsec device."
 msgstr "Der Name des MACsec-Geräts."
 
 #: src/connection-editor/ce-page-macsec.ui:85
-#, fuzzy
 msgid "_Parent device"
 msgstr "Übergeordnetes Gerät"
 
@@ -2134,9 +2132,8 @@ msgid "Keys"
 msgstr "Schlüssel"
 
 #: src/connection-editor/ce-page-macsec.ui:135
-#, fuzzy
 msgid "_Mode"
-msgstr "Modus"
+msgstr "_Modus"
 
 #: src/connection-editor/ce-page-macsec.ui:148
 msgid ""
@@ -2161,7 +2158,8 @@ msgid "C_KN"
 msgstr ""
 
 #: src/connection-editor/ce-page-macsec.ui:206
-msgid " The pre-shared Connectivity-association Key Name"
+#, fuzzy
+msgid "The pre-shared Connectivity-association Key Name"
 msgstr " Der vorinstallierte Schlüsselname der Connectivity-Zuordnung"
 
 #: src/connection-editor/ce-page-macsec.ui:217
@@ -2169,17 +2167,14 @@ msgid "Parameters"
 msgstr "Parameter"
 
 #: src/connection-editor/ce-page-macsec.ui:234
-#, fuzzy
 msgid "_Validation"
 msgstr "Überprüfung"
 
-# Gemeint sind Ethernet-Rahmen
 #: src/connection-editor/ce-page-macsec.ui:247
 msgid "Specifies the validation mode for incoming frames"
-msgstr "Legt den Prüfmodus für eingehende Rahmen fest"
+msgstr "Legt den Prüfmodus für eingehende Ethernet-Frames fest"
 
 #: src/connection-editor/ce-page-macsec.ui:266
-#, fuzzy
 msgid "_SCI port"
 msgstr "SCI-Port"
 
@@ -2188,9 +2183,8 @@ msgid "The port component of the SCI (Secure Channel Identifier)"
 msgstr "Die Port-Komponente des SCI (Secure Channel Identifier)"
 
 #: src/connection-editor/ce-page-macsec.ui:291
-#, fuzzy
 msgid "_Encrypt"
-msgstr "Verschlüsseln"
+msgstr "_Verschlüsseln"
 
 #: src/connection-editor/ce-page-macsec.ui:296
 msgid "Whether the transmitted traffic must be encrypted"
@@ -2930,16 +2924,14 @@ msgid "_Public key"
 msgstr ""
 
 #: src/connection-editor/ce-page-wireguard.ui:173
-#, fuzzy
 msgid "Allowed _IPs"
-msgstr "Zulässige Methoden"
+msgstr "Zulässige _IP-Adressen"
 
 #: src/connection-editor/ce-page-wireguard.ui:187
 msgid "_Endpoint"
 msgstr ""
 
 #: src/connection-editor/ce-page-wireguard.ui:201
-#, fuzzy
 msgid "Pre_shared key"
 msgstr "Gemeinsamer Schlüssel"
 
@@ -2983,27 +2975,24 @@ msgid "seconds"
 msgstr ""
 
 #: src/connection-editor/ce-page-wireguard.ui:313
-#, fuzzy
 msgid "Sho_w preshared key"
-msgstr "Schlüssel an_zeigen"
+msgstr "Gemeinsame Schlüssel an_zeigen"
 
 #: src/connection-editor/ce-page-wireguard.ui:386
 msgid "The name of the wireguard interface to create."
 msgstr ""
 
 #: src/connection-editor/ce-page-wireguard.ui:400
-#, fuzzy
 msgid "Private _key"
-msgstr "Geheimer %s-_Schlüssel"
+msgstr "Geheimer _Schlüssel"
 
 #: src/connection-editor/ce-page-wireguard.ui:413
 msgid "The 256 bit private key in base64 encoding"
 msgstr ""
 
 #: src/connection-editor/ce-page-wireguard.ui:429
-#, fuzzy
 msgid "_Listen port"
-msgstr "_Minimale Ports"
+msgstr "Horchender Port"
 
 #: src/connection-editor/ce-page-wireguard.ui:442
 msgid ""
@@ -3030,9 +3019,8 @@ msgid ""
 msgstr ""
 
 #: src/connection-editor/ce-page-wireguard.ui:554
-#, fuzzy
 msgid "_Show private key"
-msgstr "Geheimer %s-_Schlüssel"
+msgstr "Geheimen _Schlüssel zeigen"
 
 #: src/connection-editor/ce-page-wireguard.ui:641
 msgid "<b>_Peers</b>"
@@ -3251,7 +3239,7 @@ msgstr "Team"
 #: src/connection-editor/connection-helpers.c:106
 #: src/connection-editor/page-bridge.c:216
 msgid "Bridge"
-msgstr "Brücke"
+msgstr "Bridge"
 
 #: src/connection-editor/connection-helpers.c:108
 #: src/connection-editor/page-ip-tunnel.c:159
@@ -3265,9 +3253,8 @@ msgstr "MACsec"
 
 #: src/connection-editor/connection-helpers.c:110
 #: src/connection-editor/page-wireguard.c:510
-#, fuzzy
 msgid "WireGuard"
-msgstr "Kabelgebunden"
+msgstr "WireGuard"
 
 #: src/connection-editor/connection-helpers.c:112
 #: src/connection-editor/connection-helpers.c:374
@@ -3673,7 +3660,7 @@ msgstr "_Einwahlverbindung"
 
 #: src/connection-editor/page-bond.c:432
 msgid "Could not load bond user interface."
-msgstr "Bündel-Benutzerschnittstelle konnte nicht geladen werden."
+msgstr "Benutzerschnittstelle für Bonds konnte nicht geladen werden."
 
 #: src/connection-editor/page-bond.c:551
 msgid "primary"
@@ -3682,27 +3669,27 @@ msgstr "Primär"
 #: src/connection-editor/page-bond.c:606
 #, c-format
 msgid "Bond connection %d"
-msgstr "Bündel-Verbindung %d"
+msgstr "Bond-Verbindung %d"
 
 #. Translators: a "Bridge Port" is a network
 #. * device that is part of a bridge.
 #.
 #: src/connection-editor/page-bridge-port.c:91
 msgid "Bridge Port"
-msgstr "Port einer Brücke"
+msgstr "Port einer Bridge"
 
 #: src/connection-editor/page-bridge-port.c:93
 msgid "Could not load bridge port user interface."
-msgstr "Brücken-Port-Benutzerschnittstelle konnte nicht geladen werden."
+msgstr "Benutzerschnittstelle für Bride-Ports konnte nicht geladen werden."
 
 #: src/connection-editor/page-bridge.c:219
 msgid "Could not load bridge user interface."
-msgstr "Bündel-Benutzerschnittstelle konnte nicht geladen werden."
+msgstr "Benutzerschnittstelle für Bridges konnte nicht geladen werden."
 
 #: src/connection-editor/page-bridge.c:335
 #, c-format
 msgid "Bridge connection %d"
-msgstr "Brückenverbindung %d"
+msgstr "Bridge-Verbindung %d"
 
 #: src/connection-editor/page-dcb.c:610
 msgid "DCB"
@@ -3932,27 +3919,27 @@ msgstr "MACSEC-Verbindung %d"
 
 #: src/connection-editor/page-master.c:221
 #: src/connection-editor/page-master.c:232
-msgid "Duplicate slaves"
-msgstr "Doppelte Sklaven"
+msgid "Duplicate ports"
+msgstr "Doppelte Ports"
 
 #: src/connection-editor/page-master.c:222
 #, c-format
-msgid "Slaves “%s” and “%s” both apply to device “%s”"
-msgstr "Sklaven »%s« und »%s« bewerben dasselbe Gerät »%s«"
+msgid "Ports “%s” and “%s” both apply to device “%s”"
+msgstr "Ports »%s« und »%s« passen auf dasselbe Gerät »%s«"
 
 #: src/connection-editor/page-master.c:233
 #, c-format
 msgid ""
-"Slaves “%s” and “%s” apply to different virtual ports (“%s” and “%s”) of the "
+"Ports “%s” and “%s” apply to different virtual ports (“%s” and “%s”) of the "
 "same physical device."
 msgstr ""
-"Sklaven »%s« und »%s« bewerben verschiedene virtuelle Ports (»%s« und »%s«) "
+"Ports »%s« und »%s« passen auf verschiedene virtuelle Ports (»%s« und »%s«) "
 "auf demselben physikalischen Gerät."
 
 #: src/connection-editor/page-master.c:357
 #, c-format
-msgid "%s slave %d"
-msgstr "%s Sklave %d"
+msgid "%s port %d"
+msgstr "%s Port %d"
 
 #: src/connection-editor/page-mobile.c:297
 msgid "Could not load mobile broadband user interface."
@@ -4067,7 +4054,7 @@ msgstr "Benutzerschnittstelle für Netzwerk-Team konnte nicht geladen werden."
 #: src/connection-editor/page-team.c:1114
 #, c-format
 msgid "Team connection %d"
-msgstr "Netzwerk-Team %d"
+msgstr "Team-Verbindung %d"
 
 #. Translators: the first %s is a device name (eg, "em1"), the
 #. * second is a connection name (eg, "Auto Ethernet").
@@ -4230,19 +4217,17 @@ msgid "Public key"
 msgstr ""
 
 #: src/connection-editor/page-wireguard.c:268
-#, fuzzy
 msgid "Allowed IPs"
-msgstr "Zulässige Methoden"
+msgstr "Zulässige IP-Addressen"
 
 #: src/connection-editor/page-wireguard.c:512
-#, fuzzy
 msgid "Could not load WireGuard user interface."
-msgstr "Benutzerschnittstelle für Netzwerk-Team konnte nicht geladen werden."
+msgstr "Benutzerschnittstelle für Wireguard konnte nicht geladen werden."
 
 #: src/connection-editor/page-wireguard.c:628
-#, fuzzy, c-format
+#, c-format
 msgid "WireGuard connection %d"
-msgstr "Netzwerk-Team %d"
+msgstr "WireGuard-Verbindung %d"
 
 #: src/connection-editor/vpn-helpers.c:118
 #, c-format
@@ -4299,9 +4284,9 @@ msgid "Usage:"
 msgstr "Aufruf:"
 
 #: src/main.c:30
+#, fuzzy
 msgid ""
-"This program is a component of NetworkManager (https://wiki.gnome.org/"
-"Projects/NetworkManager/)."
+"This program is a component of NetworkManager (https://networkmanager.dev)."
 msgstr ""
 "Dieses Programm ist eine Komponente von NetworkManager (https://wiki.gnome."
 "org/Projects/NetworkManager/)."
@@ -4430,6 +4415,7 @@ msgstr "PEM-Zertifikate (*.pem, *.crt, *.cer)"
 msgid "DER, PEM, or PKCS#12 private keys (*.der, *.pem, *.p12, *.key)"
 msgstr "DER-, PEM-, oder PKCS#12-Privatschlüssel (*.der, *.pem, *.p12, *.key)"
 
+#, c-format
 #~ msgid "missing EAP-FAST PAC file"
 #~ msgstr "EAP-FAST PAC-Datei fehlt"
 
@@ -4499,14 +4485,6 @@ msgstr "DER-, PEM-, oder PKCS#12-Privatschlüssel (*.der, *.pem, *.p12, *.key)"
 #~ msgid "missing EAP password"
 #~ msgstr "EAP-Passwort fehlt"
 
-#, fuzzy
-#~ msgid "P_rivate Key Passphrase"
-#~ msgstr "WEP 128-bit-Passphrase"
-
-#, fuzzy
-#~ msgid "Sh_ow passphrase"
-#~ msgstr "Passwörter _zeigen"
-
 #~ msgid "missing EAP-TLS identity"
 #~ msgstr "EAP-TLS-Identität fehlt"
 
@@ -4564,10 +4542,6 @@ msgstr "DER-, PEM-, oder PKCS#12-Privatschlüssel (*.der, *.pem, *.p12, *.key)"
 #~ msgid "missing leap-password"
 #~ msgstr "LEAP-Passwort fehlt"
 
-#, fuzzy
-#~ msgid "missing password"
-#~ msgstr "EAP-Passwort fehlt"
-
 #~ msgid "_Type"
 #~ msgstr "_Typ"
 
@@ -4603,9 +4577,6 @@ msgstr "DER-, PEM-, oder PKCS#12-Privatschlüssel (*.der, *.pem, *.p12, *.key)"
 
 #~ msgid "Open System"
 #~ msgstr "Offenes System"
-
-#~ msgid "Shared Key"
-#~ msgstr "Gemeinsamer Schlüssel"
 
 #~ msgid "1 (Default)"
 #~ msgstr "1 (Vorgabe)"
@@ -4679,10 +4650,6 @@ msgstr "DER-, PEM-, oder PKCS#12-Privatschlüssel (*.der, *.pem, *.p12, *.key)"
 #~ msgstr ""
 #~ "Legt fest, ob die Einstellungen in eine neue Version übernommen werden "
 #~ "sollen."
-
-#, fuzzy
-#~ msgid "Disable WiFi Create"
-#~ msgstr "Das Erstellen von Wi-Fi-Netzen ausschalten"
 
 #~ msgid ""
 #~ "Set to true to disable creation of adhoc networks when using the applet."
@@ -4784,22 +4751,11 @@ msgstr "DER-, PEM-, oder PKCS#12-Privatschlüssel (*.der, *.pem, *.p12, *.key)"
 #~ msgid "Set up a Mobile Broadband Connection"
 #~ msgstr "Eine mobile Breitbandverbindung einrichten"
 
-#, fuzzy
-#~ msgid "Country or region:"
-#~ msgstr "Land oder Region"
-
 #~ msgid "Choose your Provider’s Country or Region"
 #~ msgstr "Land oder Region des Dienstanbieters auswählen"
 
 #~ msgid "Select your provider from a _list:"
 #~ msgstr "Dienstanbieter aus einer _Liste auswählen:"
-
-#, fuzzy
-#~ msgid ""
-#~ "I can’t find my provider and I wish to set up the connection _manually:"
-#~ msgstr ""
-#~ "Ich kann meinen Dienstanbieter nicht finden und möchte ihn _manuell "
-#~ "eingeben:"
 
 #~ msgid "My provider uses GSM technology (GPRS, EDGE, UMTS, HSPA)"
 #~ msgstr ""

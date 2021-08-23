@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/network-manager-"
 "applet/\n"
-"POT-Creation-Date: 2021-05-10 15:50+0200\n"
+"POT-Creation-Date: 2021-08-17 10:12+0200\n"
 "PO-Revision-Date: 2014-12-02 05:10-0500\n"
 "Last-Translator: Shankar <svenkate@redhat.com>\n"
 "Language-Team: kn_IN <kde-i18n-doc@kde.org>\n"
@@ -21,7 +21,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Zanata 3.5.1\n"
 
-#: nm-applet.desktop.in:3 src/applet-dialogs.c:724 src/applet.c:3248
+#: nm-applet.desktop.in:3 src/applet-dialogs.c:724 src/applet.c:3258
 #, fuzzy
 msgid "Network"
 msgstr "%s ಜಾಲಬಂಧ"
@@ -170,7 +170,7 @@ msgid "Mobile Broadband"
 msgstr "ಮೊಬೈಲ್ ಬ್ರಾಡ್‌ಬ್ಯಾಂಡ್"
 
 #: src/applet-device-broadband.c:780 src/applet-device-bt.c:61
-#: src/applet-device-ethernet.c:107 src/applet-device-wifi.c:890
+#: src/applet-device-ethernet.c:107 src/applet-device-wifi.c:894
 msgid "Available"
 msgstr "ಲಭ್ಯ"
 
@@ -181,7 +181,7 @@ msgid "New Mobile Broadband connection…"
 msgstr "ಹೊಸ ಮೊಬೈಲ್ ಬ್ರಾಡ್‌ಬ್ಯಾಂಡ್ ಸಂಪರ್ಕ"
 
 #: src/applet-device-broadband.c:809 src/applet-device-bt.c:75
-#: src/applet-device-ethernet.c:124 src/applet-device-wifi.c:1293
+#: src/applet-device-ethernet.c:124 src/applet-device-wifi.c:1297
 msgid "Connection Established"
 msgstr "ಸಂಪರ್ಕವನ್ನು ಸಾಧಿಸಲಾಗಿದೆ"
 
@@ -322,107 +322,107 @@ msgstr "ಹೊಸ ವೈರ್ಲೆಸ್ ಜಾಲಬಂಧವನ್ನು ರ
 msgid "(none)"
 msgstr "(ಯಾವುದೂ ಇಲ್ಲ)"
 
-#: src/applet-device-wifi.c:519 src/applet-device-wifi.c:1393
+#: src/applet-device-wifi.c:523 src/applet-device-wifi.c:1397
 #, fuzzy
 msgid "Failed to add new connection"
 msgstr "ಹೊಸ ಸಂಪರ್ಕವನ್ನು ರಚಿಸಲು ಸಾಧ್ಯವಾಗಿಲ್ಲ"
 
-#: src/applet-device-wifi.c:520
+#: src/applet-device-wifi.c:524
 msgid "Insufficient privileges."
 msgstr ""
 
-#: src/applet-device-wifi.c:522 src/applet-device-wifi.c:1375
-#: src/applet-device-wifi.c:1398 src/applet.c:417 src/applet.c:506
+#: src/applet-device-wifi.c:526 src/applet-device-wifi.c:1379
+#: src/applet-device-wifi.c:1402 src/applet.c:417 src/applet.c:506
 #, fuzzy
 msgid "Connection failure"
 msgstr "ಸಂಪರ್ಕವು ವಿಫಲಗೊಂಡಿದೆ"
 
-#: src/applet-device-wifi.c:822
+#: src/applet-device-wifi.c:826
 #, fuzzy, c-format
 msgid "Wi-Fi Networks (%s)"
 msgstr "ತಂತಿಯುಕ್ತ ಜಾಲಬಂಧಗಳು (%s)"
 
-#: src/applet-device-wifi.c:824
+#: src/applet-device-wifi.c:828
 #, fuzzy, c-format
 msgid "Wi-Fi Network (%s)"
 msgstr "ತಂತಿಯುಕ್ತ ಜಾಲಬಂಧ (%s)"
 
-#: src/applet-device-wifi.c:826
+#: src/applet-device-wifi.c:830
 #, fuzzy
 msgid "Wi-Fi Network"
 msgid_plural "Wi-Fi Networks"
 msgstr[0] "ತಂತಿಯುಕ್ತ ಜಾಲಬಂಧ"
 msgstr[1] "ತಂತಿಯುಕ್ತ ಜಾಲಬಂಧ"
 
-#: src/applet-device-wifi.c:855
+#: src/applet-device-wifi.c:859
 #, fuzzy
 msgid "Wi-Fi is disabled"
 msgstr "ವೈರ್ಲೆಸ್ ಅಶಕ್ತಗೊಂಡಿದೆ"
 
-#: src/applet-device-wifi.c:856
+#: src/applet-device-wifi.c:860
 msgid "Wi-Fi is disabled by hardware switch"
 msgstr ""
 
-#: src/applet-device-wifi.c:917
+#: src/applet-device-wifi.c:921
 msgid "More networks"
 msgstr "ಹೆಚ್ಚಿನ ಜಾಲಬಂಧಗಳು"
 
-#: src/applet-device-wifi.c:1107
+#: src/applet-device-wifi.c:1111
 #, fuzzy
 msgid "Wi-Fi Networks Available"
 msgstr "ವೈರ್ಲೆಸ್ ಜಾಲಬಂಧಗಳು ಲಭ್ಯವಿವೆ"
 
-#: src/applet-device-wifi.c:1108
+#: src/applet-device-wifi.c:1112
 #, fuzzy
 msgid "Use the network menu to connect to a Wi-Fi network"
 msgstr "ವೈರ್ಲೆಸ್ ಜಾಲಬಂಧಕ್ಕೆ ಸಂಪರ್ಕ ಸಾಧಿಸಲು ಈ ಚಿಹ್ನೆಯ ಮೇಲೆ ಕ್ಲಿಕ್ಕಿಸಿ"
 
-#: src/applet-device-wifi.c:1111 src/applet.c:828
+#: src/applet-device-wifi.c:1115 src/applet.c:828
 #, fuzzy
 msgid "Don’t show this message again"
 msgstr "ಈ ಸಂದೇಶವನ್ನು ಇನ್ನೊಮ್ಮೆ ತೋರಿಸಬೇಡ"
 
-#: src/applet-device-wifi.c:1292
+#: src/applet-device-wifi.c:1296
 #, fuzzy, c-format
 msgid "You are now connected to the Wi-Fi network “%s”."
 msgstr "ನೀವು ಈಗ ವೈ-ಫೈ ಜಾಲಬಂಧ '%s' ನೊಂದಿಗೆ ಈಗ ಸಂಪರ್ಕಿತಗೊಂಡಿದ್ದೀರಿ."
 
-#: src/applet-device-wifi.c:1327
+#: src/applet-device-wifi.c:1331
 #, fuzzy, c-format
 msgid "Preparing Wi-Fi network connection “%s”…"
 msgstr "ಜಾಲಬಂಧ ಸಂಪರ್ಕ '%s' ಅನ್ನು ಸಿದ್ಧಗೊಳಿಸಲಾಗುತ್ತಿದೆ..."
 
-#: src/applet-device-wifi.c:1330
+#: src/applet-device-wifi.c:1334
 #, fuzzy, c-format
 msgid "Configuring Wi-Fi network connection “%s”…"
 msgstr "ತಂತಿಯುಕ್ತ ಜಾಲಬಂಧ ಸಂಪರ್ಕ '%s' ಅನ್ನು ಸಂರಚಿಸಲಾಗುತ್ತಿದೆ..."
 
-#: src/applet-device-wifi.c:1333
+#: src/applet-device-wifi.c:1337
 #, fuzzy, c-format
 msgid "User authentication required for Wi-Fi network “%s”…"
 msgstr "ವೈರ್ಲೆಸ್ ಜಾಲಬಂಧ ಸಂಪರ್ಕ '%s' ಗಾಗಿ ಅಗತ್ಯವಿರುವ ಬಳಕೆದಾರರ ದೃಢೀಕರಣ..."
 
-#: src/applet-device-wifi.c:1336
+#: src/applet-device-wifi.c:1340
 #, fuzzy, c-format
 msgid "Requesting a Wi-Fi network address for “%s”…"
 msgstr "'%s' ಗಾಗಿನ ಜಾಲಬಂಧ ವಿಳಾಸಕ್ಕಾಗಿ ಮನವಿ ಸಲ್ಲಿಸಲಾಗುತ್ತಿದೆ..."
 
-#: src/applet-device-wifi.c:1347
+#: src/applet-device-wifi.c:1351
 #, fuzzy, c-format
 msgid "Wi-Fi network connection “%s” active: %s (%d%%)"
 msgstr "ವೈರ್ಲೆಸ್ ಜಾಲಬಂಧ ಸಂಪರ್ಕ '%s' ಸಕ್ರಿಯವಾಗಿದೆ: %s (%d%%)"
 
-#: src/applet-device-wifi.c:1351
+#: src/applet-device-wifi.c:1355
 #, fuzzy, c-format
 msgid "Wi-Fi network connection “%s” active"
 msgstr "ತಂತಿಯುಕ್ತ ಜಾಲಬಂಧ ಸಂಪರ್ಕ '%s' ಸಕ್ರಿಯವಾಗಿದೆ"
 
-#: src/applet-device-wifi.c:1370
+#: src/applet-device-wifi.c:1374
 #, fuzzy
 msgid "Failed to activate connection"
 msgstr "ಸಂಪರ್ಕವನ್ನು ರಚಿಸಲು ಸಾಧ್ಯವಾಗಿಲ್ಲ"
 
-#: src/applet-device-wifi.c:1372 src/applet-device-wifi.c:1395 src/applet.c:414
+#: src/applet-device-wifi.c:1376 src/applet-device-wifi.c:1399 src/applet.c:414
 #: src/applet.c:468 src/applet.c:503
 #, fuzzy
 msgid "Unknown error"
@@ -1049,7 +1049,7 @@ msgstr "VPN ಸಂಪರ್ಕ '%s' ಸಕ್ರಿಯವಾಗಿದೆ"
 msgid "No network connection"
 msgstr "ಯಾವುದೆ ಜಾಲಬಂಧ ಸಂಪರ್ಕವಿಲ್ಲ"
 
-#: src/applet.c:3349
+#: src/applet.c:3359
 msgid "NetworkManager Applet"
 msgstr "NetworkManager ಆಪ್ಲೆಟ್"
 
@@ -1245,7 +1245,7 @@ msgstr "ಪ್ರಾಥಮಿಕ DNS:"
 #: src/connection-editor/ce-page-bond.ui:495
 msgid ""
 "The interface name of the primary device. If set, this device will always be "
-"the active slave when it is available."
+"the active port when it is available."
 msgstr ""
 
 #: src/connection-editor/ce-page-bond.ui:507
@@ -2154,7 +2154,7 @@ msgid "C_KN"
 msgstr ""
 
 #: src/connection-editor/ce-page-macsec.ui:206
-msgid " The pre-shared Connectivity-association Key Name"
+msgid "The pre-shared Connectivity-association Key Name"
 msgstr ""
 
 #: src/connection-editor/ce-page-macsec.ui:217
@@ -3944,25 +3944,25 @@ msgstr "DSL ಸಂಪರ್ಕ %d"
 
 #: src/connection-editor/page-master.c:221
 #: src/connection-editor/page-master.c:232
-msgid "Duplicate slaves"
+msgid "Duplicate ports"
 msgstr ""
 
 #: src/connection-editor/page-master.c:222
 #, c-format
-msgid "Slaves “%s” and “%s” both apply to device “%s”"
+msgid "Ports “%s” and “%s” both apply to device “%s”"
 msgstr ""
 
 #: src/connection-editor/page-master.c:233
 #, c-format
 msgid ""
-"Slaves “%s” and “%s” apply to different virtual ports (“%s” and “%s”) of the "
+"Ports “%s” and “%s” apply to different virtual ports (“%s” and “%s”) of the "
 "same physical device."
 msgstr ""
 
 #: src/connection-editor/page-master.c:357
 #, c-format
-msgid "%s slave %d"
-msgstr "%s ಸ್ಲೇವ್ %d"
+msgid "%s port %d"
+msgstr ""
 
 #: src/connection-editor/page-mobile.c:297
 msgid "Could not load mobile broadband user interface."
@@ -4317,8 +4317,7 @@ msgstr "ಬಳಕೆ:"
 #: src/main.c:30
 #, fuzzy
 msgid ""
-"This program is a component of NetworkManager (https://wiki.gnome.org/"
-"Projects/NetworkManager/)."
+"This program is a component of NetworkManager (https://networkmanager.dev)."
 msgstr ""
 "ಈ ಪ್ರೊಗ್ರಾಮ್ NetworkManager ನ ಒಂದು ಘಟಕವಾಗಿರುತ್ತದೆ (http://projects.gnome.org/"
 "NetworkManager)."
@@ -5257,11 +5256,6 @@ msgstr "DER, PEM, ಅಥವ PKCS#12 ಖಾಸಗಿ ಕೀಲಿಗಳು (*.der
 
 #~ msgid "Wireless"
 #~ msgstr "ವೈರ್ಲೆಸ್"
-
-#~ msgid ""
-#~ "Select the type of connection that will be used for the slaves of this "
-#~ "bond."
-#~ msgstr "ಈ ಬಾಂಡ್‌ನ ಸ್ಲೇವ್‌ಗಳಲ್ಲಿ ಬಳಸಲಾಗುವ ಸಂಪರ್ಕದ ಬಗೆಯನ್ನು ಆಯ್ಕೆ ಮಾಡಿ."
 
 #~ msgid "Automatic (PPP)"
 #~ msgstr "ಸ್ವಯಂಚಾಲಿತ (PPP)"

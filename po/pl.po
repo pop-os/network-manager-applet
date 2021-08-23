@@ -1,19 +1,19 @@
 # Polish translation for network-manager-applet.
-# Copyright © 2006-2020 the network-manager-applet authors.
+# Copyright © 2006-2021 the network-manager-applet authors.
 # This file is distributed under the same license as the network-manager-applet package.
 # Wadim Dziedzic <wdziedzic@aviary.pl>, 2006-2008.
 # Tomasz Dominikowski <dominikowski@gmail.com>, 2007-2009.
 # Piotr Zaryk <pzaryk@aviary.pl>, 2008.
-# Piotr Drąg <piotrdrag@gmail.com>, 2009-2020.
-# Aviary.pl <community-poland@mozilla.org>, 2006-2020.
+# Piotr Drąg <piotrdrag@gmail.com>, 2009-2021.
+# Aviary.pl <community-poland@mozilla.org>, 2006-2021.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: network-manager-applet\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/network-manager-"
 "applet/\n"
-"POT-Creation-Date: 2021-05-10 15:50+0200\n"
-"PO-Revision-Date: 2020-09-20 10:10+0200\n"
+"POT-Creation-Date: 2021-08-17 10:12+0200\n"
+"PO-Revision-Date: 2021-07-11 12:50+0200\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Polish <community-poland@mozilla.org>\n"
 "Language: pl\n"
@@ -23,7 +23,7 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
 
-#: nm-applet.desktop.in:3 src/applet-dialogs.c:724 src/applet.c:3248
+#: nm-applet.desktop.in:3 src/applet-dialogs.c:724 src/applet.c:3258
 msgid "Network"
 msgstr "Sieć"
 
@@ -172,7 +172,7 @@ msgid "Mobile Broadband"
 msgstr "Komórkowe"
 
 #: src/applet-device-broadband.c:780 src/applet-device-bt.c:61
-#: src/applet-device-ethernet.c:107 src/applet-device-wifi.c:890
+#: src/applet-device-ethernet.c:107 src/applet-device-wifi.c:894
 msgid "Available"
 msgstr "Dostępne"
 
@@ -182,7 +182,7 @@ msgid "New Mobile Broadband connection…"
 msgstr "Nowe połączenie komórkowe…"
 
 #: src/applet-device-broadband.c:809 src/applet-device-bt.c:75
-#: src/applet-device-ethernet.c:124 src/applet-device-wifi.c:1293
+#: src/applet-device-ethernet.c:124 src/applet-device-wifi.c:1297
 msgid "Connection Established"
 msgstr "Ustanowiono połączenie"
 
@@ -315,100 +315,100 @@ msgstr "Utwórz _nową sieć Wi-Fi…"
 msgid "(none)"
 msgstr "(brak)"
 
-#: src/applet-device-wifi.c:519 src/applet-device-wifi.c:1393
+#: src/applet-device-wifi.c:523 src/applet-device-wifi.c:1397
 msgid "Failed to add new connection"
 msgstr "Dodanie nowego połączenia się nie powiodło"
 
-#: src/applet-device-wifi.c:520
+#: src/applet-device-wifi.c:524
 msgid "Insufficient privileges."
 msgstr "Niewystarczające uprawnienia."
 
-#: src/applet-device-wifi.c:522 src/applet-device-wifi.c:1375
-#: src/applet-device-wifi.c:1398 src/applet.c:417 src/applet.c:506
+#: src/applet-device-wifi.c:526 src/applet-device-wifi.c:1379
+#: src/applet-device-wifi.c:1402 src/applet.c:417 src/applet.c:506
 msgid "Connection failure"
 msgstr "Niepowodzenie połączenia"
 
-#: src/applet-device-wifi.c:822
+#: src/applet-device-wifi.c:826
 #, c-format
 msgid "Wi-Fi Networks (%s)"
 msgstr "Sieci Wi-Fi (%s)"
 
-#: src/applet-device-wifi.c:824
+#: src/applet-device-wifi.c:828
 #, c-format
 msgid "Wi-Fi Network (%s)"
 msgstr "Sieć Wi-Fi (%s)"
 
-#: src/applet-device-wifi.c:826
+#: src/applet-device-wifi.c:830
 msgid "Wi-Fi Network"
 msgid_plural "Wi-Fi Networks"
 msgstr[0] "Sieć Wi-Fi"
 msgstr[1] "Sieci Wi-Fi"
 msgstr[2] "Sieci Wi-Fi"
 
-#: src/applet-device-wifi.c:855
+#: src/applet-device-wifi.c:859
 msgid "Wi-Fi is disabled"
 msgstr "Wi-Fi jest wyłączone"
 
-#: src/applet-device-wifi.c:856
+#: src/applet-device-wifi.c:860
 msgid "Wi-Fi is disabled by hardware switch"
 msgstr "Wi-Fi jest wyłączone przez przełącznik sprzętowy"
 
-#: src/applet-device-wifi.c:917
+#: src/applet-device-wifi.c:921
 msgid "More networks"
 msgstr "Więcej sieci"
 
-#: src/applet-device-wifi.c:1107
+#: src/applet-device-wifi.c:1111
 msgid "Wi-Fi Networks Available"
 msgstr "Dostępne sieci Wi-Fi"
 
-#: src/applet-device-wifi.c:1108
+#: src/applet-device-wifi.c:1112
 msgid "Use the network menu to connect to a Wi-Fi network"
 msgstr "Należy użyć menu sieci, aby połączyć z siecią Wi-Fi"
 
-#: src/applet-device-wifi.c:1111 src/applet.c:828
+#: src/applet-device-wifi.c:1115 src/applet.c:828
 msgid "Don’t show this message again"
 msgstr "Bez wyświetlania tego komunikatu ponownie"
 
-#: src/applet-device-wifi.c:1292
+#: src/applet-device-wifi.c:1296
 #, c-format
 msgid "You are now connected to the Wi-Fi network “%s”."
 msgstr "Połączono z siecią Wi-Fi „%s”."
 
-#: src/applet-device-wifi.c:1327
+#: src/applet-device-wifi.c:1331
 #, c-format
 msgid "Preparing Wi-Fi network connection “%s”…"
 msgstr "Przygotowywanie połączenia sieciowego Wi-Fi „%s”…"
 
-#: src/applet-device-wifi.c:1330
+#: src/applet-device-wifi.c:1334
 #, c-format
 msgid "Configuring Wi-Fi network connection “%s”…"
 msgstr "Konfigurowanie połączenia sieciowego Wi-Fi „%s”…"
 
-#: src/applet-device-wifi.c:1333
+#: src/applet-device-wifi.c:1337
 #, c-format
 msgid "User authentication required for Wi-Fi network “%s”…"
 msgstr "Wymagane uwierzytelnienie dla sieci Wi-Fi „%s”…"
 
-#: src/applet-device-wifi.c:1336
+#: src/applet-device-wifi.c:1340
 #, c-format
 msgid "Requesting a Wi-Fi network address for “%s”…"
 msgstr "Żądanie adresu sieciowego Wi-Fi dla „%s”…"
 
-#: src/applet-device-wifi.c:1347
+#: src/applet-device-wifi.c:1351
 #, c-format
 msgid "Wi-Fi network connection “%s” active: %s (%d%%)"
 msgstr "Nawiązano bezprzewodowe połączenie sieciowe Wi-Fi „%s”: %s (%d%%)"
 
-#: src/applet-device-wifi.c:1351
+#: src/applet-device-wifi.c:1355
 #, c-format
 msgid "Wi-Fi network connection “%s” active"
 msgstr "Nawiązano połączenie sieciowe Wi-Fi „%s”"
 
-#: src/applet-device-wifi.c:1370
+#: src/applet-device-wifi.c:1374
 msgid "Failed to activate connection"
 msgstr "Aktywowanie połączenia się nie powiodło"
 
-#: src/applet-device-wifi.c:1372 src/applet-device-wifi.c:1395 src/applet.c:414
+#: src/applet-device-wifi.c:1376 src/applet-device-wifi.c:1399 src/applet.c:414
 #: src/applet.c:468 src/applet.c:503
 msgid "Unknown error"
 msgstr "Nieznany błąd"
@@ -622,8 +622,8 @@ msgstr ""
 "Wadim Dziedzic <wdziedzic@aviary.pl>, 2006-2008\n"
 "Tomasz Dominikowski <dominikowski@gmail.com>, 2007-2009\n"
 "Piotr Zaryk <pzaryk@aviary.pl>, 2008\n"
-"Piotr Drąg <piotrdrag@gmail.com>, 2009-2020\n"
-"Aviary.pl <community-poland@mozilla.org>, 2006-2020"
+"Piotr Drąg <piotrdrag@gmail.com>, 2009-2021\n"
+"Aviary.pl <community-poland@mozilla.org>, 2006-2021"
 
 #: src/applet-dialogs.c:1147
 msgid ""
@@ -1019,7 +1019,7 @@ msgstr "Nawiązano połączenie VPN"
 msgid "No network connection"
 msgstr "Brak połączenia sieciowego"
 
-#: src/applet.c:3349
+#: src/applet.c:3359
 msgid "NetworkManager Applet"
 msgstr "Aplet NetworkManager"
 
@@ -1207,10 +1207,10 @@ msgstr "_Główne"
 #: src/connection-editor/ce-page-bond.ui:495
 msgid ""
 "The interface name of the primary device. If set, this device will always be "
-"the active slave when it is available."
+"the active port when it is available."
 msgstr ""
 "Nazwa interfejsu głównego urządzenia. Jeśli jest ustawione, to urządzenie "
-"będzie aktywnym urządzeniem podrzędnym zawsze, kiedy jest dostępne."
+"będzie aktywnym portem zawsze, kiedy jest dostępne."
 
 #: src/connection-editor/ce-page-bond.ui:507
 #: src/connection-editor/ce-page-ethernet.ui:188
@@ -2136,8 +2136,8 @@ msgid "C_KN"
 msgstr "C_KN"
 
 #: src/connection-editor/ce-page-macsec.ui:206
-msgid " The pre-shared Connectivity-association Key Name"
-msgstr " Nazwa uprzednio udostępnionego CAK"
+msgid "The pre-shared Connectivity-association Key Name"
+msgstr "Nazwa uprzednio udostępnionego CAK"
 
 #: src/connection-editor/ce-page-macsec.ui:217
 msgid "Parameters"
@@ -3902,27 +3902,27 @@ msgstr "Połączenie MACsec %d"
 
 #: src/connection-editor/page-master.c:221
 #: src/connection-editor/page-master.c:232
-msgid "Duplicate slaves"
-msgstr "Podwójne podrzędne"
+msgid "Duplicate ports"
+msgstr "Podwójne porty"
 
 #: src/connection-editor/page-master.c:222
 #, c-format
-msgid "Slaves “%s” and “%s” both apply to device “%s”"
-msgstr "Podrzędne „%s” i „%s” stosują się do urządzenia „%s”"
+msgid "Ports “%s” and “%s” both apply to device “%s”"
+msgstr "Porty „%s” i „%s” stosują się do urządzenia „%s”"
 
 #: src/connection-editor/page-master.c:233
 #, c-format
 msgid ""
-"Slaves “%s” and “%s” apply to different virtual ports (“%s” and “%s”) of the "
+"Ports “%s” and “%s” apply to different virtual ports (“%s” and “%s”) of the "
 "same physical device."
 msgstr ""
-"Podrzędne „%s” i „%s” stosują się do różnych wirtualnych portów („%s” "
-"i „%s”) tego samego fizycznego urządzenia."
+"Porty „%s” i „%s” stosują się do różnych wirtualnych portów („%s” i „%s”) "
+"tego samego fizycznego urządzenia."
 
 #: src/connection-editor/page-master.c:357
 #, c-format
-msgid "%s slave %d"
-msgstr "%s podrzędny %d"
+msgid "%s port %d"
+msgstr "%s port %d"
 
 #: src/connection-editor/page-mobile.c:297
 msgid "Could not load mobile broadband user interface."
@@ -4256,11 +4256,10 @@ msgstr "Użycie:"
 
 #: src/main.c:30
 msgid ""
-"This program is a component of NetworkManager (https://wiki.gnome.org/"
-"Projects/NetworkManager/)."
+"This program is a component of NetworkManager (https://networkmanager.dev)."
 msgstr ""
-"Ten program jest częścią projektu NetworkManager (https://wiki.gnome.org/"
-"Projects/NetworkManager/)."
+"Ten program jest częścią projektu NetworkManager (https://networkmanager."
+"dev)."
 
 #: src/main.c:31
 msgid ""
@@ -4392,211 +4391,3 @@ msgstr ""
 
 #~ msgid "preferences-system-network"
 #~ msgstr "preferences-system-network"
-
-#~ msgid "missing EAP-FAST PAC file"
-#~ msgstr "brak pliku PAC EAP-FAST"
-
-#~ msgid "GTC"
-#~ msgstr "GTC"
-
-#~ msgid "Choose a PAC file"
-#~ msgstr "Wybór pliku PAC"
-
-#~ msgid "PAC files (*.pac)"
-#~ msgstr "Pliki PAC (*.pac)"
-
-#~ msgid "All files"
-#~ msgstr "Wszystkie pliki"
-
-#~ msgid "Anonymous"
-#~ msgstr "Anonimowo"
-
-#~ msgid "Authenticated"
-#~ msgstr "Uwierzytelnienie"
-
-#~ msgid "Both"
-#~ msgstr "Oba"
-
-#~ msgid "Anony_mous identity"
-#~ msgstr "Anoni_mowa tożsamość"
-
-#~ msgid "PAC _file"
-#~ msgstr "_Plik PAC"
-
-#~ msgid "_Inner authentication"
-#~ msgstr "Wewnętrzne uw_ierzytelnianie"
-
-#~ msgid "Allow automatic PAC pro_visioning"
-#~ msgstr "Automatyczne za_bezpieczanie PAC"
-
-#~ msgid "missing EAP-LEAP username"
-#~ msgstr "brak nazwy użytkownika EAP-LEAP"
-
-#~ msgid "missing EAP-LEAP password"
-#~ msgstr "brak hasła EAP-LEAP"
-
-#~ msgid "MD5"
-#~ msgstr "MD5"
-
-#~ msgid "Version 0"
-#~ msgstr "Wersja 0"
-
-#~ msgid "Version 1"
-#~ msgstr "Wersja 1"
-
-#~ msgid "No CA certificate is _required"
-#~ msgstr "Certyfikat CA nie jest _wymagany"
-
-#~ msgid "PEAP _version"
-#~ msgstr "_Wersja PEAP"
-
-#~ msgid "Suffix of the server certificate name."
-#~ msgstr "Przyrostek nazwy certyfikatu serwera."
-
-#~ msgid "_Domain"
-#~ msgstr "_Domena"
-
-#~ msgid "missing EAP username"
-#~ msgstr "brak nazwy użytkownika EAP"
-
-#~ msgid "missing EAP password"
-#~ msgstr "brak hasła EAP"
-
-#~ msgid "missing EAP client Private Key passphrase"
-#~ msgstr "brak hasła klucza prywatnego klienta EAP"
-
-#~ msgid "P_rivate Key Passphrase"
-#~ msgstr "Hasło klucza p_rywatnego"
-
-#~ msgid "Sh_ow passphrase"
-#~ msgstr "_Wyświetlanie hasła"
-
-#~ msgid "missing EAP-TLS identity"
-#~ msgstr "brak tożsamości EAP-TLS"
-
-#~ msgid "no user certificate selected"
-#~ msgstr "nie wybrano certyfikatu użytkownika"
-
-#~ msgid "selected user certificate file does not exist"
-#~ msgstr "wybrany plik certyfikatu użytkownika nie istnieje"
-
-#~ msgid "no key selected"
-#~ msgstr "nie wybrano klucza"
-
-#~ msgid "selected key file does not exist"
-#~ msgstr "wybrany plik klucza nie istnieje"
-
-#~ msgid "I_dentity"
-#~ msgstr "_Tożsamość"
-
-#~ msgid "MSCHAPv2 (no EAP)"
-#~ msgstr "MSCHAPv2 (bez EAP)"
-
-#~ msgid "undefined error in 802.1X security (wpa-eap)"
-#~ msgstr "nieokreślony błąd w zabezpieczeniach 802.1X (WPA-EAP)"
-
-#~ msgid "no CA certificate selected"
-#~ msgstr "nie wybrano certyfikatu CA"
-
-#~ msgid "selected CA certificate file does not exist"
-#~ msgstr "wybrany plik certyfikatu CA nie istnieje"
-
-#~ msgid "Unknown error validating 802.1X security"
-#~ msgstr "Nieznany błąd podczas sprawdzania poprawności zabezpieczeń 802.1X"
-
-#~ msgid "TLS"
-#~ msgstr "TLS"
-
-#~ msgid "PWD"
-#~ msgstr "PWD"
-
-#~ msgid "FAST"
-#~ msgstr "FAST"
-
-#~ msgid "Tunneled TLS"
-#~ msgstr "Tunelowane TLS"
-
-#~ msgid "Protected EAP (PEAP)"
-#~ msgstr "Chronione EAP (PEAP)"
-
-#~ msgid "Externally configured"
-#~ msgstr "Skonfigurowane zewnętrznie"
-
-#~ msgid "Au_thentication"
-#~ msgstr "Uwierzy_telnianie"
-
-#~ msgid "missing leap-username"
-#~ msgstr "brak „leap-username”"
-
-#~ msgid "missing leap-password"
-#~ msgstr "brak „leap-password”"
-
-#~ msgid "missing password"
-#~ msgstr "brak hasła"
-
-#~ msgid "_Type"
-#~ msgstr "_Typ"
-
-#~ msgid "missing wep-key"
-#~ msgstr "brak „wep-key”"
-
-#, c-format
-#~ msgid ""
-#~ "invalid wep-key: key with a length of %zu must contain only hex-digits"
-#~ msgstr ""
-#~ "nieprawidłowe „wep-key”: klucz o długości %zu może zawierać tylko liczby "
-#~ "szesnastkowe"
-
-#, c-format
-#~ msgid ""
-#~ "invalid wep-key: key with a length of %zu must contain only ascii "
-#~ "characters"
-#~ msgstr ""
-#~ "nieprawidłowe „wep-key”: klucz o długości %zu może zawierać tylko znaki "
-#~ "ASCII"
-
-#, c-format
-#~ msgid ""
-#~ "invalid wep-key: wrong key length %zu. A key must be either of length "
-#~ "5/13 (ascii) or 10/26 (hex)"
-#~ msgstr ""
-#~ "nieprawidłowe „wep-key”: błędna długość klucza %zu. Klucz musi być "
-#~ "długości 5/13 (ASCII) lub 10/26 (szesnastkowy)"
-
-#~ msgid "invalid wep-key: passphrase must be non-empty"
-#~ msgstr "nieprawidłowe „wep-key”: hasło nie może być puste"
-
-#~ msgid "invalid wep-key: passphrase must be shorter than 64 characters"
-#~ msgstr "nieprawidłowe „wep-key”: hasło nie może być krótsze niż 64 znaki"
-
-#~ msgid "Open System"
-#~ msgstr "System otwarty"
-
-#~ msgid "Shared Key"
-#~ msgstr "Klucz współdzielony"
-
-#~ msgid "1 (Default)"
-#~ msgstr "1 (domyślnie)"
-
-#~ msgid "_Key"
-#~ msgstr "_Klucz"
-
-# checkbox
-#~ msgid "Sho_w key"
-#~ msgstr "_Wyświetlanie klucza"
-
-#~ msgid "WEP inde_x"
-#~ msgstr "Inde_ks WEP"
-
-#, c-format
-#~ msgid ""
-#~ "invalid wpa-psk: invalid key-length %zu. Must be [8,63] bytes or 64 hex "
-#~ "digits"
-#~ msgstr ""
-#~ "nieprawidłowe „wpa-psk”: nieprawidłowe „key-length” %zu. Musi wynosić "
-#~ "[8,63] bajty lub 64 cyfry szesnastkowe"
-
-#~ msgid "invalid wpa-psk: cannot interpret key with 64 bytes as hex"
-#~ msgstr ""
-#~ "nieprawidłowe „wpa-psk”: nie można zinterpretować klucza o 64 bajtach "
-#~ "jako szesnastkowy"
