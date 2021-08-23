@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: network-manager-applet.master.ml\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/network-manager-"
 "applet/\n"
-"POT-Creation-Date: 2021-05-10 15:50+0200\n"
+"POT-Creation-Date: 2021-08-17 10:12+0200\n"
 "PO-Revision-Date: 2013-04-21 23:43+0530\n"
 "Last-Translator: Balasankar C <c.balasankar@gmail.com>\n"
 "Language-Team: Swatantra Malayalam Computing\n"
@@ -22,7 +22,7 @@ msgstr ""
 "X-Generator: Virtaal 0.7.1\n"
 "X-Project-Style: gnome\n"
 
-#: nm-applet.desktop.in:3 src/applet-dialogs.c:724 src/applet.c:3248
+#: nm-applet.desktop.in:3 src/applet-dialogs.c:724 src/applet.c:3258
 msgid "Network"
 msgstr "ശൃംഖല"
 
@@ -168,7 +168,7 @@ msgid "Mobile Broadband"
 msgstr "മൊബൈല്‍ ബ്രോഡ്ബാന്‍ഡ്"
 
 #: src/applet-device-broadband.c:780 src/applet-device-bt.c:61
-#: src/applet-device-ethernet.c:107 src/applet-device-wifi.c:890
+#: src/applet-device-ethernet.c:107 src/applet-device-wifi.c:894
 msgid "Available"
 msgstr "ലഭ്യമായവ"
 
@@ -179,7 +179,7 @@ msgid "New Mobile Broadband connection…"
 msgstr "പുതിയ മൊബൈല്‍ ബ്രോഡ്ബാന്‍ഡ് കണക്ഷന്‍"
 
 #: src/applet-device-broadband.c:809 src/applet-device-bt.c:75
-#: src/applet-device-ethernet.c:124 src/applet-device-wifi.c:1293
+#: src/applet-device-ethernet.c:124 src/applet-device-wifi.c:1297
 msgid "Connection Established"
 msgstr "ബന്ധം സ്ഥാപിച്ചു"
 
@@ -316,101 +316,101 @@ msgstr "പുതിയ വയര്‍ലെസ് ശൃംഖല ഉണ്ട
 msgid "(none)"
 msgstr "(ഒന്നുമില്ല)"
 
-#: src/applet-device-wifi.c:519 src/applet-device-wifi.c:1393
+#: src/applet-device-wifi.c:523 src/applet-device-wifi.c:1397
 msgid "Failed to add new connection"
 msgstr "പുതിയ ബന്ധം ചേര്‍ക്കാനായില്ല"
 
-#: src/applet-device-wifi.c:520
+#: src/applet-device-wifi.c:524
 msgid "Insufficient privileges."
 msgstr ""
 
-#: src/applet-device-wifi.c:522 src/applet-device-wifi.c:1375
-#: src/applet-device-wifi.c:1398 src/applet.c:417 src/applet.c:506
+#: src/applet-device-wifi.c:526 src/applet-device-wifi.c:1379
+#: src/applet-device-wifi.c:1402 src/applet.c:417 src/applet.c:506
 msgid "Connection failure"
 msgstr "ബന്ധമായില്ല"
 
-#: src/applet-device-wifi.c:822
+#: src/applet-device-wifi.c:826
 #, c-format
 msgid "Wi-Fi Networks (%s)"
 msgstr "വയര്‍ലെസ് ശൃംഖലകള്‍ (%s)"
 
-#: src/applet-device-wifi.c:824
+#: src/applet-device-wifi.c:828
 #, c-format
 msgid "Wi-Fi Network (%s)"
 msgstr "വയര്‍ലെസ് ശൃംഖല (%s)"
 
-#: src/applet-device-wifi.c:826
+#: src/applet-device-wifi.c:830
 msgid "Wi-Fi Network"
 msgid_plural "Wi-Fi Networks"
 msgstr[0] "വയര്‍ലെസ് ശൃംഖല"
 msgstr[1] "വയര്‍ലെസ് ശൃംഖലകള്‍"
 
-#: src/applet-device-wifi.c:855
+#: src/applet-device-wifi.c:859
 msgid "Wi-Fi is disabled"
 msgstr "വയര്‍ലസ്സ് പ്രവര്‍ത്തനരഹിതമാക്കിയിരിയ്ക്കുന്നു"
 
-#: src/applet-device-wifi.c:856
+#: src/applet-device-wifi.c:860
 msgid "Wi-Fi is disabled by hardware switch"
 msgstr "ഹാര്‍ഡ്‌​വെയര്‍ സ്വിച്ച് ഉപയോഗിച്ച് വയര്‍ലെസ്സ് പ്രവര്‍ത്തന രഹിതമാക്കിയിരിക്കുന്നു"
 
-#: src/applet-device-wifi.c:917
+#: src/applet-device-wifi.c:921
 msgid "More networks"
 msgstr "കൂടുതല്‍ ശൃംഖലകള്‍"
 
-#: src/applet-device-wifi.c:1107
+#: src/applet-device-wifi.c:1111
 msgid "Wi-Fi Networks Available"
 msgstr "ലഭ്യമായ വയര്‍ലെസ് ശൃംഖലകള്‍"
 
-#: src/applet-device-wifi.c:1108
+#: src/applet-device-wifi.c:1112
 msgid "Use the network menu to connect to a Wi-Fi network"
 msgstr "ശൃംഖലകളുടെ പട്ടികയുപയോഗിച്ചു് ഒരു വയര്‍ലെസ് ശൃംഖലയുമായി ബന്ധപ്പെടുക"
 
-#: src/applet-device-wifi.c:1111 src/applet.c:828
+#: src/applet-device-wifi.c:1115 src/applet.c:828
 #, fuzzy
 msgid "Don’t show this message again"
 msgstr "ഈ സന്ദേശം ഇനി കാണിക്കരുതു്"
 
-#: src/applet-device-wifi.c:1292
+#: src/applet-device-wifi.c:1296
 #, fuzzy, c-format
 msgid "You are now connected to the Wi-Fi network “%s”."
 msgstr "നിങ്ങള്‍ ഇപ്പോള്‍ വയര്‍ലെസ് ശൃംഖല '%s'-മായി ബന്ധപ്പെട്ടിരിയ്ക്കുന്നു."
 
-#: src/applet-device-wifi.c:1327
+#: src/applet-device-wifi.c:1331
 #, fuzzy, c-format
 msgid "Preparing Wi-Fi network connection “%s”…"
 msgstr "വയര്‍ഡ് ശൃംഖല ബന്ധം '%s' തയ്യാറാകുന്നു..."
 
-#: src/applet-device-wifi.c:1330
+#: src/applet-device-wifi.c:1334
 #, fuzzy, c-format
 msgid "Configuring Wi-Fi network connection “%s”…"
 msgstr "വയര്‍ലെസ് ശൃംഖല ബന്ധം '%s' ക്രമീകരിക്കുന്നു..."
 
-#: src/applet-device-wifi.c:1333
+#: src/applet-device-wifi.c:1337
 #, fuzzy, c-format
 msgid "User authentication required for Wi-Fi network “%s”…"
 msgstr ""
 "വയര്‍ലെസ് ബന്ധം '%s' ഉപയോക്താവിനോടു് ആധികാരികത ഉറപ്പാക്കുന്നതിനായി ആവശ്യപ്പെട്ടിരിക്കുന്നു..."
 
-#: src/applet-device-wifi.c:1336
+#: src/applet-device-wifi.c:1340
 #, fuzzy, c-format
 msgid "Requesting a Wi-Fi network address for “%s”…"
 msgstr "'%s'-നുള്ള ഒരു വയര്‍ലെസ് ശൃംഖല വിലാസത്തിനായി ആവശ്യപ്പെടുന്നു..."
 
-#: src/applet-device-wifi.c:1347
+#: src/applet-device-wifi.c:1351
 #, fuzzy, c-format
 msgid "Wi-Fi network connection “%s” active: %s (%d%%)"
 msgstr "വയര്‍ലെസ് ശൃംഖല ബന്ധം '%s' സജീവമാണു്: %s (%d%%)"
 
-#: src/applet-device-wifi.c:1351
+#: src/applet-device-wifi.c:1355
 #, fuzzy, c-format
 msgid "Wi-Fi network connection “%s” active"
 msgstr "വയര്‍ലെസ് ശൃംഖല ബന്ധം '%s' സജീവമാണു്"
 
-#: src/applet-device-wifi.c:1370
+#: src/applet-device-wifi.c:1374
 msgid "Failed to activate connection"
 msgstr "ബന്ധം സജീവമാക്കുന്നതില്‍ പരാജയപ്പെട്ടു"
 
-#: src/applet-device-wifi.c:1372 src/applet-device-wifi.c:1395 src/applet.c:414
+#: src/applet-device-wifi.c:1376 src/applet-device-wifi.c:1399 src/applet.c:414
 #: src/applet.c:468 src/applet.c:503
 msgid "Unknown error"
 msgstr "അറിയാത്ത ഏതോ പ്രശ്നം"
@@ -1018,7 +1018,7 @@ msgstr "വിപിഎന്‍ ബന്ധം '%s' സജീവമാണു�
 msgid "No network connection"
 msgstr "ശൃംഖല ബന്ധം ലഭ്യമല്ല"
 
-#: src/applet.c:3349
+#: src/applet.c:3359
 msgid "NetworkManager Applet"
 msgstr "NetworkManager ലഘുപ്രയോഗം"
 
@@ -1214,7 +1214,7 @@ msgstr "പ്രാഥമിക ഡിഎന്‍എസ്:"
 #: src/connection-editor/ce-page-bond.ui:495
 msgid ""
 "The interface name of the primary device. If set, this device will always be "
-"the active slave when it is available."
+"the active port when it is available."
 msgstr ""
 
 #: src/connection-editor/ce-page-bond.ui:507
@@ -2131,7 +2131,7 @@ msgid "C_KN"
 msgstr ""
 
 #: src/connection-editor/ce-page-macsec.ui:206
-msgid " The pre-shared Connectivity-association Key Name"
+msgid "The pre-shared Connectivity-association Key Name"
 msgstr ""
 
 #: src/connection-editor/ce-page-macsec.ui:217
@@ -3908,25 +3908,25 @@ msgstr "വൈമാക്സ് ബന്ധം %d"
 
 #: src/connection-editor/page-master.c:221
 #: src/connection-editor/page-master.c:232
-msgid "Duplicate slaves"
+msgid "Duplicate ports"
 msgstr ""
 
 #: src/connection-editor/page-master.c:222
 #, c-format
-msgid "Slaves “%s” and “%s” both apply to device “%s”"
+msgid "Ports “%s” and “%s” both apply to device “%s”"
 msgstr ""
 
 #: src/connection-editor/page-master.c:233
 #, c-format
 msgid ""
-"Slaves “%s” and “%s” apply to different virtual ports (“%s” and “%s”) of the "
+"Ports “%s” and “%s” apply to different virtual ports (“%s” and “%s”) of the "
 "same physical device."
 msgstr ""
 
 #: src/connection-editor/page-master.c:357
 #, c-format
-msgid "%s slave %d"
-msgstr "%s അടിമ %d"
+msgid "%s port %d"
+msgstr ""
 
 #: src/connection-editor/page-mobile.c:297
 msgid "Could not load mobile broadband user interface."
@@ -4271,9 +4271,9 @@ msgid "Usage:"
 msgstr "ഉപയോഗം:"
 
 #: src/main.c:30
+#, fuzzy
 msgid ""
-"This program is a component of NetworkManager (https://wiki.gnome.org/"
-"Projects/NetworkManager/)."
+"This program is a component of NetworkManager (https://networkmanager.dev)."
 msgstr ""
 "ഈ പ്രോഗ്രാം ശൃംഖലമാനേജറിന്റെ ഒരു ഘടകമാണു് (https://wiki.gnome.org/Projects/"
 "NetworkManager/)."

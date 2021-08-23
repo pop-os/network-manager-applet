@@ -277,7 +277,7 @@ applet_get_default_active_connection (NMApplet *applet, NMDevice **device,
 		/* We have to return default connection/device even if they are of an
 		 * unknown class - otherwise we may end up returning non
 		 * default interface which has nothing to do with our default
-		 * route, e.g. we may return slave ethernet when we have
+		 * route, e.g. we may return an ethernet port when we have
 		 * defult route going through bond */
 
 		if (nm_active_connection_get_default (candidate)) {
@@ -315,7 +315,7 @@ applet_get_all_connections (NMApplet *applet)
 	all_connections = nm_client_get_connections (applet->nm_client);
 	connections = g_ptr_array_new_full (all_connections->len, g_object_unref);
 
-	/* Ignore slave connections unless they are wifi connections */
+	/* Ignore port connections unless they are wifi connections */
 	for (i = 0; i < all_connections->len; i++) {
 		connection = all_connections->pdata[i];
 
@@ -3173,8 +3173,18 @@ status_icon_size_changed_cb (GtkStatusIcon *icon,
 	/* icon_size may be 0 if for example the panel hasn't given us any space
 	 * yet.  We'll get resized later, but for now just load the 16x16 icons.
 	 */
-	if (size > 0)
-		applet->icon_size = size;
+	if (size > 0) {
+		if (size < 22)
+			applet->icon_size = 16;
+		else if (size < 24)
+			applet->icon_size = 22;
+		else if (size < 32)
+			applet->icon_size = 24;
+		else if (size < 48)
+			applet->icon_size = 32;
+		else
+			applet->icon_size = size;
+	}
 	else {
 		applet->icon_size = 16;
 		g_warn_if_fail (size == 0);

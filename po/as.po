@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: network-manager-applet master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/network-manager-"
 "applet/\n"
-"POT-Creation-Date: 2021-05-10 15:50+0200\n"
+"POT-Creation-Date: 2021-08-17 10:12+0200\n"
 "PO-Revision-Date: 2014-08-20 18:20+0530\n"
 "Last-Translator: Nilamdyuti Goswami <ngoswami@redhat.com>\n"
 "Language-Team: Assamese <kde-i18n-doc@kde.org>\n"
@@ -21,7 +21,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Lokalize 1.5\n"
 
-#: nm-applet.desktop.in:3 src/applet-dialogs.c:724 src/applet.c:3248
+#: nm-applet.desktop.in:3 src/applet-dialogs.c:724 src/applet.c:3258
 msgid "Network"
 msgstr "নেটৱৰ্ক"
 
@@ -167,7 +167,7 @@ msgid "Mobile Broadband"
 msgstr "ম'বাইল ব্ৰ'ডবেণ্ড"
 
 #: src/applet-device-broadband.c:780 src/applet-device-bt.c:61
-#: src/applet-device-ethernet.c:107 src/applet-device-wifi.c:890
+#: src/applet-device-ethernet.c:107 src/applet-device-wifi.c:894
 msgid "Available"
 msgstr "উপলব্ধ"
 
@@ -178,7 +178,7 @@ msgid "New Mobile Broadband connection…"
 msgstr "নতুন ম'বাইল ব্ৰডবেণ্ড সংযোগ"
 
 #: src/applet-device-broadband.c:809 src/applet-device-bt.c:75
-#: src/applet-device-ethernet.c:124 src/applet-device-wifi.c:1293
+#: src/applet-device-ethernet.c:124 src/applet-device-wifi.c:1297
 msgid "Connection Established"
 msgstr "সংযোগ স্থাপিত"
 
@@ -312,100 +312,100 @@ msgstr "নতুন Wi-Fi নেটৱৰ্ক সৃষ্টি কৰক"
 msgid "(none)"
 msgstr "(শূণ্য)"
 
-#: src/applet-device-wifi.c:519 src/applet-device-wifi.c:1393
+#: src/applet-device-wifi.c:523 src/applet-device-wifi.c:1397
 msgid "Failed to add new connection"
 msgstr "নতুন সংযোগ যোগ কৰিবলে ব্যৰ্থ"
 
-#: src/applet-device-wifi.c:520
+#: src/applet-device-wifi.c:524
 msgid "Insufficient privileges."
 msgstr ""
 
-#: src/applet-device-wifi.c:522 src/applet-device-wifi.c:1375
-#: src/applet-device-wifi.c:1398 src/applet.c:417 src/applet.c:506
+#: src/applet-device-wifi.c:526 src/applet-device-wifi.c:1379
+#: src/applet-device-wifi.c:1402 src/applet.c:417 src/applet.c:506
 msgid "Connection failure"
 msgstr "সংযোগ ব্যৰ্থতা"
 
-#: src/applet-device-wifi.c:822
+#: src/applet-device-wifi.c:826
 #, c-format
 msgid "Wi-Fi Networks (%s)"
 msgstr "Wi-Fi নেটৱৰ্কসমূহ (%s)"
 
-#: src/applet-device-wifi.c:824
+#: src/applet-device-wifi.c:828
 #, c-format
 msgid "Wi-Fi Network (%s)"
 msgstr "Wi-Fi নেটৱৰ্ক (%s)"
 
-#: src/applet-device-wifi.c:826
+#: src/applet-device-wifi.c:830
 msgid "Wi-Fi Network"
 msgid_plural "Wi-Fi Networks"
 msgstr[0] "Wi-Fi নেটৱৰ্ক"
 msgstr[1] "Wi-Fi নেটৱৰ্কসমূহ"
 
-#: src/applet-device-wifi.c:855
+#: src/applet-device-wifi.c:859
 msgid "Wi-Fi is disabled"
 msgstr "Wi-Fi অসামৰ্থবান আছে"
 
-#: src/applet-device-wifi.c:856
+#: src/applet-device-wifi.c:860
 msgid "Wi-Fi is disabled by hardware switch"
 msgstr "Wi-Fi হাৰ্ডৱেৰ চুইচ দ্বাৰা অসামৰ্থবান কৰা আছে"
 
-#: src/applet-device-wifi.c:917
+#: src/applet-device-wifi.c:921
 msgid "More networks"
 msgstr "অতিৰিক্ত নেটৱৰ্ক"
 
-#: src/applet-device-wifi.c:1107
+#: src/applet-device-wifi.c:1111
 msgid "Wi-Fi Networks Available"
 msgstr "Wi-Fi নেটৱৰ্ক উপলব্ধ"
 
-#: src/applet-device-wifi.c:1108
+#: src/applet-device-wifi.c:1112
 msgid "Use the network menu to connect to a Wi-Fi network"
 msgstr "এটা Wi-Fi নেটৱৰ্কলে সংযোগ কৰিবলে নেটৱৰ্ক মেনু ব্যৱহাৰ কৰক"
 
-#: src/applet-device-wifi.c:1111 src/applet.c:828
+#: src/applet-device-wifi.c:1115 src/applet.c:828
 #, fuzzy
 msgid "Don’t show this message again"
 msgstr "এই বাৰ্তা আকৌ নেদেখুৱাব"
 
-#: src/applet-device-wifi.c:1292
+#: src/applet-device-wifi.c:1296
 #, fuzzy, c-format
 msgid "You are now connected to the Wi-Fi network “%s”."
 msgstr "আপুনি এতিয়া Wi-Fi নেটৱৰ্ক '%s' ৰ সৈতে সংযুক্ত।"
 
-#: src/applet-device-wifi.c:1327
+#: src/applet-device-wifi.c:1331
 #, fuzzy, c-format
 msgid "Preparing Wi-Fi network connection “%s”…"
 msgstr "Wi-Fi নেটৱৰ্ক সংযোগ '%s' প্ৰস্তুত কৰা হৈছে..."
 
-#: src/applet-device-wifi.c:1330
+#: src/applet-device-wifi.c:1334
 #, fuzzy, c-format
 msgid "Configuring Wi-Fi network connection “%s”…"
 msgstr "Wi-Fi নেটৱৰ্ক সংযোগ '%s' সংৰূপণ কৰা হৈছে..."
 
-#: src/applet-device-wifi.c:1333
+#: src/applet-device-wifi.c:1337
 #, fuzzy, c-format
 msgid "User authentication required for Wi-Fi network “%s”…"
 msgstr "Wi-Fi নেটৱৰ্ক সংযোগ '%s' ৰ বাবে ব্যৱহাৰকাৰীৰ প্ৰমাণীকৰণৰ প্ৰয়োজন..."
 
-#: src/applet-device-wifi.c:1336
+#: src/applet-device-wifi.c:1340
 #, fuzzy, c-format
 msgid "Requesting a Wi-Fi network address for “%s”…"
 msgstr "'%s' ৰ কাৰণে এটা Wi-Fi নেটৱৰ্ক ঠিকনা অনুৰোধ কৰা হৈছে..."
 
-#: src/applet-device-wifi.c:1347
+#: src/applet-device-wifi.c:1351
 #, fuzzy, c-format
 msgid "Wi-Fi network connection “%s” active: %s (%d%%)"
 msgstr "Wi-Fi নেটৱৰ্ক সংযোগ '%s' সক্ৰিয়: %s (%d%%)"
 
-#: src/applet-device-wifi.c:1351
+#: src/applet-device-wifi.c:1355
 #, fuzzy, c-format
 msgid "Wi-Fi network connection “%s” active"
 msgstr "Wi-Fi নেটৱৰ্ক সংযোগ '%s' সক্ৰিয়"
 
-#: src/applet-device-wifi.c:1370
+#: src/applet-device-wifi.c:1374
 msgid "Failed to activate connection"
 msgstr "সংযোগ সক্ৰিয় কৰিবলে ব্যৰ্থ"
 
-#: src/applet-device-wifi.c:1372 src/applet-device-wifi.c:1395 src/applet.c:414
+#: src/applet-device-wifi.c:1376 src/applet-device-wifi.c:1399 src/applet.c:414
 #: src/applet.c:468 src/applet.c:503
 msgid "Unknown error"
 msgstr "অজ্ঞাত ত্ৰুটি"
@@ -1012,7 +1012,7 @@ msgstr "VPN সংযোগ '%s' সক্ৰিয়"
 msgid "No network connection"
 msgstr "কোনো নেটৱৰ্ক সংযোগ নাই"
 
-#: src/applet.c:3349
+#: src/applet.c:3359
 msgid "NetworkManager Applet"
 msgstr "NetworkManager এপ্লেট"
 
@@ -1208,9 +1208,10 @@ msgid "_Primary"
 msgstr "প্ৰাথমিক (_P):"
 
 #: src/connection-editor/ce-page-bond.ui:495
+#, fuzzy
 msgid ""
 "The interface name of the primary device. If set, this device will always be "
-"the active slave when it is available."
+"the active port when it is available."
 msgstr ""
 "প্ৰাথমিক ডিভাইচৰ আন্তঃপৃষ্ঠ নাম। যদি সংহত, এই ডিভাইচ উপলব্ধ অৱস্থাত সদায় সক্ৰিয় "
 "স্লেইভ হব।"
@@ -2139,7 +2140,7 @@ msgid "C_KN"
 msgstr ""
 
 #: src/connection-editor/ce-page-macsec.ui:206
-msgid " The pre-shared Connectivity-association Key Name"
+msgid "The pre-shared Connectivity-association Key Name"
 msgstr ""
 
 #: src/connection-editor/ce-page-macsec.ui:217
@@ -3918,18 +3919,19 @@ msgstr "WiMAX সংযোগ %d"
 
 #: src/connection-editor/page-master.c:221
 #: src/connection-editor/page-master.c:232
-msgid "Duplicate slaves"
+#, fuzzy
+msgid "Duplicate ports"
 msgstr "প্ৰতিলিপি স্লেইভসমূহ"
 
 #: src/connection-editor/page-master.c:222
 #, fuzzy, c-format
-msgid "Slaves “%s” and “%s” both apply to device “%s”"
+msgid "Ports “%s” and “%s” both apply to device “%s”"
 msgstr "স্লেইভ '%s' আৰু '%s' দুয়ো ডিভাইচ '%s' লৈ প্ৰযোজ্য নহয়"
 
 #: src/connection-editor/page-master.c:233
 #, fuzzy, c-format
 msgid ""
-"Slaves “%s” and “%s” apply to different virtual ports (“%s” and “%s”) of the "
+"Ports “%s” and “%s” apply to different virtual ports (“%s” and “%s”) of the "
 "same physical device."
 msgstr ""
 "স্লেইভ '%s' আৰু '%s' একেটা ভৌতিক ডিভাইচৰ বিভিন্ন ভাৰছুৱেল পৰ্ট ('%s' আৰু '%s') লৈ "
@@ -3937,8 +3939,8 @@ msgstr ""
 
 #: src/connection-editor/page-master.c:357
 #, c-format
-msgid "%s slave %d"
-msgstr "%s স্লেইভ %d"
+msgid "%s port %d"
+msgstr ""
 
 #: src/connection-editor/page-mobile.c:297
 msgid "Could not load mobile broadband user interface."
@@ -4285,9 +4287,9 @@ msgid "Usage:"
 msgstr "ব্যৱহাৰপদ্ধতি (_U):"
 
 #: src/main.c:30
+#, fuzzy
 msgid ""
-"This program is a component of NetworkManager (https://wiki.gnome.org/"
-"Projects/NetworkManager/)."
+"This program is a component of NetworkManager (https://networkmanager.dev)."
 msgstr ""
 "এই প্ৰগ্ৰাম NetworkManager ৰ এটা উপাদান (https://wiki.gnome.org/Projects/"
 "NetworkManager/)।"

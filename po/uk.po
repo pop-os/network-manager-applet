@@ -3,14 +3,14 @@
 # This file is distributed under the same license as the NetworkManager package.
 # Maxim Dziumanenko <dziumanenko@gmail.com>, 2005-2010.
 # Korostil Daniel <ted.korostiled@gmail.com>, 2011, 2012.
-# Yuri Chornoivan <yurchor@ukr.net>, 2020.
+# Yuri Chornoivan <yurchor@ukr.net>, 2020, 2021.
 msgid ""
 msgstr ""
 "Project-Id-Version: NetworkManager\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/network-manager-"
 "applet/\n"
-"POT-Creation-Date: 2021-05-10 15:50+0200\n"
-"PO-Revision-Date: 2020-09-17 14:11+0300\n"
+"POT-Creation-Date: 2021-08-17 10:12+0200\n"
+"PO-Revision-Date: 2021-07-11 16:14+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
 "Language: uk\n"
@@ -19,9 +19,9 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=n==1 ? 3 : n%10==1 && n%100!=11 ? 0 : n"
 "%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Lokalize 20.11.70\n"
+"X-Generator: Lokalize 20.12.0\n"
 
-#: nm-applet.desktop.in:3 src/applet-dialogs.c:724 src/applet.c:3248
+#: nm-applet.desktop.in:3 src/applet-dialogs.c:724 src/applet.c:3258
 msgid "Network"
 msgstr "Мережа"
 
@@ -169,7 +169,7 @@ msgid "Mobile Broadband"
 msgstr "Мобільні широкосмугові"
 
 #: src/applet-device-broadband.c:780 src/applet-device-bt.c:61
-#: src/applet-device-ethernet.c:107 src/applet-device-wifi.c:890
+#: src/applet-device-ethernet.c:107 src/applet-device-wifi.c:894
 msgid "Available"
 msgstr "Доступні"
 
@@ -179,7 +179,7 @@ msgid "New Mobile Broadband connection…"
 msgstr "Нове з’єднання з мобільною радіомережею…"
 
 #: src/applet-device-broadband.c:809 src/applet-device-bt.c:75
-#: src/applet-device-ethernet.c:124 src/applet-device-wifi.c:1293
+#: src/applet-device-ethernet.c:124 src/applet-device-wifi.c:1297
 msgid "Connection Established"
 msgstr "З'єднання встановлено"
 
@@ -312,30 +312,30 @@ msgstr "С_творити мережу Wi-Fi…"
 msgid "(none)"
 msgstr "(немає)"
 
-#: src/applet-device-wifi.c:519 src/applet-device-wifi.c:1393
+#: src/applet-device-wifi.c:523 src/applet-device-wifi.c:1397
 msgid "Failed to add new connection"
 msgstr "Не вдалося додати нове з'єднання"
 
-#: src/applet-device-wifi.c:520
+#: src/applet-device-wifi.c:524
 msgid "Insufficient privileges."
 msgstr "Недостатні права доступу."
 
-#: src/applet-device-wifi.c:522 src/applet-device-wifi.c:1375
-#: src/applet-device-wifi.c:1398 src/applet.c:417 src/applet.c:506
+#: src/applet-device-wifi.c:526 src/applet-device-wifi.c:1379
+#: src/applet-device-wifi.c:1402 src/applet.c:417 src/applet.c:506
 msgid "Connection failure"
 msgstr "Невдале з'єднання"
 
-#: src/applet-device-wifi.c:822
+#: src/applet-device-wifi.c:826
 #, c-format
 msgid "Wi-Fi Networks (%s)"
 msgstr "Мережі Wi-Fi (%s)"
 
-#: src/applet-device-wifi.c:824
+#: src/applet-device-wifi.c:828
 #, c-format
 msgid "Wi-Fi Network (%s)"
 msgstr "Мережа Wi-Fi (%s)"
 
-#: src/applet-device-wifi.c:826
+#: src/applet-device-wifi.c:830
 msgid "Wi-Fi Network"
 msgid_plural "Wi-Fi Networks"
 msgstr[0] "Мережі Wi-Fi"
@@ -343,70 +343,70 @@ msgstr[1] "Мережі Wi-Fi"
 msgstr[2] "Мережі Wi-Fi"
 msgstr[3] "Мережа Wi-Fi"
 
-#: src/applet-device-wifi.c:855
+#: src/applet-device-wifi.c:859
 msgid "Wi-Fi is disabled"
 msgstr "Wi-Fi вимкнено"
 
-#: src/applet-device-wifi.c:856
+#: src/applet-device-wifi.c:860
 msgid "Wi-Fi is disabled by hardware switch"
 msgstr "Wi-Fi вимкнено апаратним перемикачем"
 
-#: src/applet-device-wifi.c:917
+#: src/applet-device-wifi.c:921
 msgid "More networks"
 msgstr "Ще мережі"
 
-#: src/applet-device-wifi.c:1107
+#: src/applet-device-wifi.c:1111
 msgid "Wi-Fi Networks Available"
 msgstr "Доступні мережі Wi-Fi"
 
-#: src/applet-device-wifi.c:1108
+#: src/applet-device-wifi.c:1112
 msgid "Use the network menu to connect to a Wi-Fi network"
 msgstr "Використовувати меню мережі для з'єднання із мережею Wi-Fi"
 
-#: src/applet-device-wifi.c:1111 src/applet.c:828
+#: src/applet-device-wifi.c:1115 src/applet.c:828
 msgid "Don’t show this message again"
 msgstr "Більше не показувати це повідомлення"
 
-#: src/applet-device-wifi.c:1292
+#: src/applet-device-wifi.c:1296
 #, c-format
 msgid "You are now connected to the Wi-Fi network “%s”."
 msgstr "Зараз встановлено з'єднання із мережею Wi-Fi «%s»."
 
-#: src/applet-device-wifi.c:1327
+#: src/applet-device-wifi.c:1331
 #, c-format
 msgid "Preparing Wi-Fi network connection “%s”…"
 msgstr "Готуємо з'єднання мережі Wi-Fi «%s»…"
 
-#: src/applet-device-wifi.c:1330
+#: src/applet-device-wifi.c:1334
 #, c-format
 msgid "Configuring Wi-Fi network connection “%s”…"
 msgstr "Налаштовуємо з'єднання мережі Wi-Fi «%s»…"
 
-#: src/applet-device-wifi.c:1333
+#: src/applet-device-wifi.c:1337
 #, c-format
 msgid "User authentication required for Wi-Fi network “%s”…"
 msgstr "Для мережі Wi-Fi «%s» потрібне розпізнавання користувача…"
 
-#: src/applet-device-wifi.c:1336
+#: src/applet-device-wifi.c:1340
 #, c-format
 msgid "Requesting a Wi-Fi network address for “%s”…"
 msgstr "Надсилаємо запит щодо адреси мережі Wi-Fi для «%s»…"
 
-#: src/applet-device-wifi.c:1347
+#: src/applet-device-wifi.c:1351
 #, c-format
 msgid "Wi-Fi network connection “%s” active: %s (%d%%)"
 msgstr "Задіяно з'єднання із мережею Wi-Fi «%s»: %s (%d%%)"
 
-#: src/applet-device-wifi.c:1351
+#: src/applet-device-wifi.c:1355
 #, c-format
 msgid "Wi-Fi network connection “%s” active"
 msgstr "Задіяно з'єднання із мережею Wi-Fi «%s»"
 
-#: src/applet-device-wifi.c:1370
+#: src/applet-device-wifi.c:1374
 msgid "Failed to activate connection"
 msgstr "Не вдалося встановити з'єднання"
 
-#: src/applet-device-wifi.c:1372 src/applet-device-wifi.c:1395 src/applet.c:414
+#: src/applet-device-wifi.c:1376 src/applet-device-wifi.c:1399 src/applet.c:414
 #: src/applet.c:468 src/applet.c:503
 msgid "Unknown error"
 msgstr "Невідома помилка"
@@ -1012,7 +1012,7 @@ msgstr "Задіяно з'єднання VPN"
 msgid "No network connection"
 msgstr "Немає з'єднання з мережею"
 
-#: src/applet.c:3349
+#: src/applet.c:3359
 msgid "NetworkManager Applet"
 msgstr "Аплет NetworkManager"
 
@@ -1200,10 +1200,10 @@ msgstr "_Первинний"
 #: src/connection-editor/ce-page-bond.ui:495
 msgid ""
 "The interface name of the primary device. If set, this device will always be "
-"the active slave when it is available."
+"the active port when it is available."
 msgstr ""
 "Назва інтерфейсу первинного пристрою. Якщо встановлено, цей пристрій завжди "
-"буде активним підлеглим, якщо він є доступним."
+"буде активним портом, якщо він є доступним."
 
 #: src/connection-editor/ce-page-bond.ui:507
 #: src/connection-editor/ce-page-ethernet.ui:188
@@ -2131,9 +2131,9 @@ msgid "C_KN"
 msgstr "C_KN"
 
 #: src/connection-editor/ce-page-macsec.ui:206
-msgid " The pre-shared Connectivity-association Key Name"
+msgid "The pre-shared Connectivity-association Key Name"
 msgstr ""
-" Назва попередньо поширеного ключа прив'язки з'єднання (Connectivity "
+"Назва попередньо поширеного ключа прив'язки з'єднання (Connectivity "
 "Association Key)"
 
 #: src/connection-editor/ce-page-macsec.ui:217
@@ -3913,28 +3913,27 @@ msgstr "З'єднання MACSEC %d"
 
 #: src/connection-editor/page-master.c:221
 #: src/connection-editor/page-master.c:232
-msgid "Duplicate slaves"
-msgstr "Дублювання підлеглих"
+msgid "Duplicate ports"
+msgstr "Дублювання портів"
 
 #: src/connection-editor/page-master.c:222
 #, c-format
-msgid "Slaves “%s” and “%s” both apply to device “%s”"
-msgstr ""
-"Параметри підлеглих з'єднань «%s» і «%s» застосовуються до пристрою «%s»"
+msgid "Ports “%s” and “%s” both apply to device “%s”"
+msgstr "Порти «%s» і «%s» застосовуються одночасно до пристрою «%s»"
 
 #: src/connection-editor/page-master.c:233
 #, c-format
 msgid ""
-"Slaves “%s” and “%s” apply to different virtual ports (“%s” and “%s”) of the "
+"Ports “%s” and “%s” apply to different virtual ports (“%s” and “%s”) of the "
 "same physical device."
 msgstr ""
-"Параметри підлеглих з'єднань «%s» і «%s» застосовуються до різних "
-"віртуальних портів («%s» та «%s») одного фізичного пристрою."
+"Порти «%s» і «%s» застосовуються до різних віртуальних портів («%s» та «%s») "
+"одного фізичного пристрою."
 
 #: src/connection-editor/page-master.c:357
 #, c-format
-msgid "%s slave %d"
-msgstr "%s, підлеглий %d"
+msgid "%s port %d"
+msgstr "%s, порт %d"
 
 #: src/connection-editor/page-mobile.c:297
 msgid "Could not load mobile broadband user interface."
@@ -4273,11 +4272,8 @@ msgstr "Використання:"
 
 #: src/main.c:30
 msgid ""
-"This program is a component of NetworkManager (https://wiki.gnome.org/"
-"Projects/NetworkManager/)."
-msgstr ""
-"Ця програма є частиною NetworkManager (https://wiki.gnome.org/Projects/"
-"NetworkManager/)."
+"This program is a component of NetworkManager (https://networkmanager.dev)."
+msgstr "Ця програма є частиною NetworkManager (https://networkmanager.dev)."
 
 #: src/main.c:31
 msgid ""
@@ -4556,14 +4552,12 @@ msgstr "закриті ключів DER, PEM або PKCS#12 (*.der, *.pem, *.p12
 #~ msgid "missing wep-key"
 #~ msgstr "не вказано wep-key"
 
-#, c-format
 #~ msgid ""
 #~ "invalid wep-key: key with a length of %zu must contain only hex-digits"
 #~ msgstr ""
 #~ "некоректний ключ WEP: ключ довжини %zu має складатися лише із "
 #~ "шістнадцяткових цифр"
 
-#, c-format
 #~ msgid ""
 #~ "invalid wep-key: key with a length of %zu must contain only ascii "
 #~ "characters"
@@ -4571,7 +4565,6 @@ msgstr "закриті ключів DER, PEM або PKCS#12 (*.der, *.pem, *.p12
 #~ "некоректний ключ WEP: ключ довжини %zu має складатися лише із символів "
 #~ "ASCII"
 
-#, c-format
 #~ msgid ""
 #~ "invalid wep-key: wrong key length %zu. A key must be either of length "
 #~ "5/13 (ascii) or 10/26 (hex)"
@@ -4604,7 +4597,6 @@ msgstr "закриті ключів DER, PEM або PKCS#12 (*.der, *.pem, *.p12
 #~ msgid "WEP inde_x"
 #~ msgstr "_Індекс WEP"
 
-#, c-format
 #~ msgid ""
 #~ "invalid wpa-psk: invalid key-length %zu. Must be [8,63] bytes or 64 hex "
 #~ "digits"
