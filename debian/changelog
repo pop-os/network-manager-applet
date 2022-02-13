@@ -1,3 +1,14 @@
+network-manager-applet (1.24.0-2) unstable; urgency=medium
+
+  * meson.build: address meson 0.61 failures (Closes: #1005529)
+  * Add Recommends gnome-icon-theme for gnome-lockscreen icons
+    (Closes: #990252)
+  * Update debian/copyright
+  * Update debian/watch to version 4
+  * Enable all hardening build flags
+
+ -- Michael Biebl <biebl@debian.org>  Sun, 13 Feb 2022 12:58:56 +0100
+
 network-manager-applet (1.24.0-1) unstable; urgency=medium
 
   * New upstream version 1.24.0
