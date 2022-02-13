@@ -35,6 +35,7 @@ Depends: ${shlibs:Depends},
          default-dbus-session-bus | dbus-session-bus
 Recommends: notification-daemon,
             gnome-keyring,
+            gnome-icon-theme,
             mobile-broadband-provider-info,
             iso-codes
 Suggests: network-manager-openconnect-gnome,
