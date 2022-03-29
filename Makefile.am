@@ -65,6 +65,7 @@ icon22_DATA = \
 	icons/22/nm-device-wired-secure.png \
 	icons/22/nm-device-wired.png \
 	icons/22/nm-device-wwan.png \
+	icons/22/nm-insecure-warn.png \
 	icons/22/nm-mb-roam.png \
 	icons/22/nm-no-connection.png \
 	icons/22/nm-secure-lock.png \
@@ -231,6 +232,28 @@ src_utils_tests_test_utils_LDADD = \
 	$(LIBNM_LIBS)
 
 EXTRA_DIST += src/utils/meson.build
+
+###############################################################################
+
+check_PROGRAMS_norun += src/tests/ethernet-dialog
+
+src_tests_ethernet_dialog_SOURCES = \
+	src/applet-resources.h \
+	src/applet-resources.c \
+	src/applet-dialogs.c \
+	src/applet-dialogs.h \
+	src/ethernet-dialog.c \
+	src/ethernet-dialog.h \
+	src/tests/ethernet-dialog.c
+
+src_tests_ethernet_dialog_CPPFLAGS = \
+	"-I$(srcdir)/src/" \
+	$(src_nm_applet_CPPFLAGS)
+
+src_tests_ethernet_dialog_LDADD = \
+	$(src_nm_applet_LDADD)
+
+EXTRA_DIST += src/tests/meson.build
 
 ###############################################################################
 
