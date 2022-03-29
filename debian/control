@@ -30,7 +30,7 @@ Section: gnome
 Pre-Depends: ${misc:Pre-Depends}
 Depends: ${shlibs:Depends},
          ${misc:Depends},
-         network-manager (>= 1.8),
+         network-manager,
          policykit-1-gnome | polkit-1-auth-agent,
          default-dbus-session-bus | dbus-session-bus
 Recommends: notification-daemon,
