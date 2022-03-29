@@ -1,6 +1,6 @@
 project(
   'network-manager-applet', 'c',
-  version: '1.24.0',
+  version: '1.26.0',
   license: 'GPL2+',
   default_options: [
     'buildtype=debugoptimized',
@@ -145,7 +145,6 @@ cflags = [
   '-DNM_VERSION_MIN_REQUIRED=NM_VERSION_1_16',
   '-DNM_VERSION_MAX_ALLOWED=NM_VERSION_1_16',
   '-DNMA_VERSION_MIN_REQUIRED=NMA_VERSION_1_8_28',
-  '-DNMA_VERSION_MAX_ALLOWED=NMA_VERSION_1_8_28',
 ]
 
 libnm_dep = declare_dependency(
@@ -237,6 +236,7 @@ subdir('po')
 subdir('icons')
 subdir('shared')
 subdir('src')
+subdir('src/tests')
 subdir('man')
 
 i18n = import('i18n')
@@ -253,7 +253,6 @@ desktop_file_validate = find_program('desktop-file-validate', required: false)
 
 foreach desktop: desktop_files
   i18n.merge_file(
-    desktop + '-desktop',
     input: desktop + '.desktop.in',
     output: desktop + '.desktop',
     install: true,
@@ -274,7 +273,6 @@ endforeach
 appdata = 'nm-connection-editor.appdata.xml'
 
 i18n.merge_file(
-  'desktop',
   input: appdata + '.in',
   output: appdata,
   install: true,

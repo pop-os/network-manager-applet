@@ -130,7 +130,7 @@ am__installdirs = "$(DESTDIR)$(bindir)" "$(DESTDIR)$(libdir)" \
 	"$(DESTDIR)$(icon32dir)" "$(DESTDIR)$(icon48dir)" \
 	"$(DESTDIR)$(iconscalabledir)" "$(DESTDIR)$(pkgconfigdir)"
 am__EXEEXT_1 = src/utils/tests/test-utils$(EXEEXT)
-am__EXEEXT_2 =
+am__EXEEXT_2 = src/tests/ethernet-dialog$(EXEEXT)
 PROGRAMS = $(bin_PROGRAMS) $(noinst_PROGRAMS)
 am__vpath_adj_setup = srcdirstrip=`echo "$(srcdir)" | sed 's|.|.|g'`;
 am__vpath_adj = case $$p in \
@@ -274,6 +274,20 @@ src_nm_applet_DEPENDENCIES =  \
 src_nm_applet_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) \
 	$(LIBTOOLFLAGS) --mode=link $(CCLD) $(AM_CFLAGS) $(CFLAGS) \
 	$(src_nm_applet_LDFLAGS) $(LDFLAGS) -o $@
+am_src_tests_ethernet_dialog_OBJECTS =  \
+	src/tests_ethernet_dialog-applet-resources.$(OBJEXT) \
+	src/tests_ethernet_dialog-applet-dialogs.$(OBJEXT) \
+	src/tests_ethernet_dialog-ethernet-dialog.$(OBJEXT) \
+	src/tests/ethernet_dialog-ethernet-dialog.$(OBJEXT)
+src_tests_ethernet_dialog_OBJECTS =  \
+	$(am_src_tests_ethernet_dialog_OBJECTS)
+am__DEPENDENCIES_2 =  \
+	src/wireless-security/libwireless-security-libnm.la \
+	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
+	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
+	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
+	$(am__DEPENDENCIES_1)
+src_tests_ethernet_dialog_DEPENDENCIES = $(am__DEPENDENCIES_2)
 am_src_utils_tests_test_utils_OBJECTS =  \
 	src/utils/tests/test_utils-test-utils.$(OBJEXT)
 src_utils_tests_test_utils_OBJECTS =  \
@@ -312,6 +326,9 @@ am__depfiles_remade =  \
 	src/$(DEPDIR)/nm_applet-main.Po \
 	src/$(DEPDIR)/nm_applet-mb-menu-item.Po \
 	src/$(DEPDIR)/nm_applet-mobile-helpers.Po \
+	src/$(DEPDIR)/tests_ethernet_dialog-applet-dialogs.Po \
+	src/$(DEPDIR)/tests_ethernet_dialog-applet-resources.Po \
+	src/$(DEPDIR)/tests_ethernet_dialog-ethernet-dialog.Po \
 	src/connection-editor/$(DEPDIR)/nm_connection_editor-ce-page.Po \
 	src/connection-editor/$(DEPDIR)/nm_connection_editor-ce-polkit-button.Po \
 	src/connection-editor/$(DEPDIR)/nm_connection_editor-ce-polkit.Po \
@@ -350,6 +367,7 @@ am__depfiles_remade =  \
 	src/connection-editor/$(DEPDIR)/nm_connection_editor-page-wireguard.Po \
 	src/connection-editor/$(DEPDIR)/nm_connection_editor-ppp-auth-methods-dialog.Po \
 	src/connection-editor/$(DEPDIR)/nm_connection_editor-vpn-helpers.Po \
+	src/tests/$(DEPDIR)/ethernet_dialog-ethernet-dialog.Po \
 	src/utils/$(DEPDIR)/libutils_libnm_la-utils.Plo \
 	src/utils/tests/$(DEPDIR)/test_utils-test-utils.Po \
 	src/wireless-security/$(DEPDIR)/libwireless_security_libnm_la-eap-method.Plo
@@ -377,11 +395,13 @@ SOURCES = $(src_utils_libutils_libnm_la_SOURCES) \
 	$(src_connection_editor_nm_connection_editor_SOURCES) \
 	$(nodist_src_connection_editor_nm_connection_editor_SOURCES) \
 	$(src_nm_applet_SOURCES) $(nodist_src_nm_applet_SOURCES) \
+	$(src_tests_ethernet_dialog_SOURCES) \
 	$(src_utils_tests_test_utils_SOURCES)
 DIST_SOURCES = $(src_utils_libutils_libnm_la_SOURCES) \
 	$(src_wireless_security_libwireless_security_libnm_la_SOURCES) \
 	$(src_connection_editor_nm_connection_editor_SOURCES) \
 	$(am__src_nm_applet_SOURCES_DIST) \
+	$(src_tests_ethernet_dialog_SOURCES) \
 	$(src_utils_tests_test_utils_SOURCES)
 RECURSIVE_TARGETS = all-recursive check-recursive cscopelist-recursive \
 	ctags-recursive dvi-recursive html-recursive info-recursive \
@@ -837,14 +857,17 @@ BUILT_SOURCES =
 lib_LTLIBRARIES = 
 noinst_LTLIBRARIES = src/utils/libutils-libnm.la \
 	src/wireless-security/libwireless-security-libnm.la
-check_PROGRAMS_norun = 
+
+###############################################################################
+check_PROGRAMS_norun = src/tests/ethernet-dialog
 check_programs = src/utils/tests/test-utils
 check_local = 
 
 ###############################################################################
 EXTRA_DIST = $(icon16_DATA) $(icon22_DATA) $(icon32_DATA) \
 	$(icon48_DATA) $(iconscalable_DATA) icons/meson.build \
-	src/utils/meson.build src/wireless-security/meson.build \
+	src/utils/meson.build src/tests/meson.build \
+	src/wireless-security/meson.build \
 	src/connection-editor/ce-ip4-routes.ui \
 	src/connection-editor/ce-ip6-routes.ui \
 	src/connection-editor/ce-new-connection.ui \
@@ -926,6 +949,7 @@ icon22_DATA = \
 	icons/22/nm-device-wired-secure.png \
 	icons/22/nm-device-wired.png \
 	icons/22/nm-device-wwan.png \
+	icons/22/nm-insecure-warn.png \
 	icons/22/nm-mb-roam.png \
 	icons/22/nm-no-connection.png \
 	icons/22/nm-secure-lock.png \
@@ -1079,6 +1103,22 @@ src_utils_tests_test_utils_LDADD = \
 	src/utils/libutils-libnm.la \
 	$(GTK3_LIBS) \
 	$(LIBNM_LIBS)
+
+src_tests_ethernet_dialog_SOURCES = \
+	src/applet-resources.h \
+	src/applet-resources.c \
+	src/applet-dialogs.c \
+	src/applet-dialogs.h \
+	src/ethernet-dialog.c \
+	src/ethernet-dialog.h \
+	src/tests/ethernet-dialog.c
+
+src_tests_ethernet_dialog_CPPFLAGS = \
+	"-I$(srcdir)/src/" \
+	$(src_nm_applet_CPPFLAGS)
+
+src_tests_ethernet_dialog_LDADD = \
+	$(src_nm_applet_LDADD)
 
 
 ###############################################################################
@@ -1655,6 +1695,24 @@ src/nm_applet-applet-resources.$(OBJEXT): src/$(am__dirstamp) \
 src/nm-applet$(EXEEXT): $(src_nm_applet_OBJECTS) $(src_nm_applet_DEPENDENCIES) $(EXTRA_src_nm_applet_DEPENDENCIES) src/$(am__dirstamp)
 	@rm -f src/nm-applet$(EXEEXT)
 	$(AM_V_CCLD)$(src_nm_applet_LINK) $(src_nm_applet_OBJECTS) $(src_nm_applet_LDADD) $(LIBS)
+src/tests_ethernet_dialog-applet-resources.$(OBJEXT):  \
+	src/$(am__dirstamp) src/$(DEPDIR)/$(am__dirstamp)
+src/tests_ethernet_dialog-applet-dialogs.$(OBJEXT):  \
+	src/$(am__dirstamp) src/$(DEPDIR)/$(am__dirstamp)
+src/tests_ethernet_dialog-ethernet-dialog.$(OBJEXT):  \
+	src/$(am__dirstamp) src/$(DEPDIR)/$(am__dirstamp)
+src/tests/$(am__dirstamp):
+	@$(MKDIR_P) src/tests
+	@: > src/tests/$(am__dirstamp)
+src/tests/$(DEPDIR)/$(am__dirstamp):
+	@$(MKDIR_P) src/tests/$(DEPDIR)
+	@: > src/tests/$(DEPDIR)/$(am__dirstamp)
+src/tests/ethernet_dialog-ethernet-dialog.$(OBJEXT):  \
+	src/tests/$(am__dirstamp) src/tests/$(DEPDIR)/$(am__dirstamp)
+
+src/tests/ethernet-dialog$(EXEEXT): $(src_tests_ethernet_dialog_OBJECTS) $(src_tests_ethernet_dialog_DEPENDENCIES) $(EXTRA_src_tests_ethernet_dialog_DEPENDENCIES) src/tests/$(am__dirstamp)
+	@rm -f src/tests/ethernet-dialog$(EXEEXT)
+	$(AM_V_CCLD)$(LINK) $(src_tests_ethernet_dialog_OBJECTS) $(src_tests_ethernet_dialog_LDADD) $(LIBS)
 src/utils/tests/$(am__dirstamp):
 	@$(MKDIR_P) src/utils/tests
 	@: > src/utils/tests/$(am__dirstamp)
@@ -1675,6 +1733,7 @@ mostlyclean-compile:
 	-rm -f shared/nm-utils/*.lo
 	-rm -f src/*.$(OBJEXT)
 	-rm -f src/connection-editor/*.$(OBJEXT)
+	-rm -f src/tests/*.$(OBJEXT)
 	-rm -f src/utils/*.$(OBJEXT)
 	-rm -f src/utils/*.lo
 	-rm -f src/utils/tests/*.$(OBJEXT)
@@ -1700,6 +1759,9 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/nm_applet-main.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/nm_applet-mb-menu-item.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/nm_applet-mobile-helpers.Po@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/tests_ethernet_dialog-applet-dialogs.Po@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/tests_ethernet_dialog-applet-resources.Po@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/tests_ethernet_dialog-ethernet-dialog.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/connection-editor/$(DEPDIR)/nm_connection_editor-ce-page.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/connection-editor/$(DEPDIR)/nm_connection_editor-ce-polkit-button.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/connection-editor/$(DEPDIR)/nm_connection_editor-ce-polkit.Po@am__quote@ # am--include-marker
@@ -1738,6 +1800,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@src/connection-editor/$(DEPDIR)/nm_connection_editor-page-wireguard.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/connection-editor/$(DEPDIR)/nm_connection_editor-ppp-auth-methods-dialog.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/connection-editor/$(DEPDIR)/nm_connection_editor-vpn-helpers.Po@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@src/tests/$(DEPDIR)/ethernet_dialog-ethernet-dialog.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/utils/$(DEPDIR)/libutils_libnm_la-utils.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/utils/tests/$(DEPDIR)/test_utils-test-utils.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/wireless-security/$(DEPDIR)/libwireless_security_libnm_la-eap-method.Plo@am__quote@ # am--include-marker
@@ -2535,6 +2598,62 @@ src/nm_applet-applet-resources.obj: src/applet-resources.c
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(src_nm_applet_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o src/nm_applet-applet-resources.obj `if test -f 'src/applet-resources.c'; then $(CYGPATH_W) 'src/applet-resources.c'; else $(CYGPATH_W) '$(srcdir)/src/applet-resources.c'; fi`
 
+src/tests_ethernet_dialog-applet-resources.o: src/applet-resources.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(src_tests_ethernet_dialog_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT src/tests_ethernet_dialog-applet-resources.o -MD -MP -MF src/$(DEPDIR)/tests_ethernet_dialog-applet-resources.Tpo -c -o src/tests_ethernet_dialog-applet-resources.o `test -f 'src/applet-resources.c' || echo '$(srcdir)/'`src/applet-resources.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) src/$(DEPDIR)/tests_ethernet_dialog-applet-resources.Tpo src/$(DEPDIR)/tests_ethernet_dialog-applet-resources.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='src/applet-resources.c' object='src/tests_ethernet_dialog-applet-resources.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(src_tests_ethernet_dialog_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o src/tests_ethernet_dialog-applet-resources.o `test -f 'src/applet-resources.c' || echo '$(srcdir)/'`src/applet-resources.c
+
+src/tests_ethernet_dialog-applet-resources.obj: src/applet-resources.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(src_tests_ethernet_dialog_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT src/tests_ethernet_dialog-applet-resources.obj -MD -MP -MF src/$(DEPDIR)/tests_ethernet_dialog-applet-resources.Tpo -c -o src/tests_ethernet_dialog-applet-resources.obj `if test -f 'src/applet-resources.c'; then $(CYGPATH_W) 'src/applet-resources.c'; else $(CYGPATH_W) '$(srcdir)/src/applet-resources.c'; fi`
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) src/$(DEPDIR)/tests_ethernet_dialog-applet-resources.Tpo src/$(DEPDIR)/tests_ethernet_dialog-applet-resources.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='src/applet-resources.c' object='src/tests_ethernet_dialog-applet-resources.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(src_tests_ethernet_dialog_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o src/tests_ethernet_dialog-applet-resources.obj `if test -f 'src/applet-resources.c'; then $(CYGPATH_W) 'src/applet-resources.c'; else $(CYGPATH_W) '$(srcdir)/src/applet-resources.c'; fi`
+
+src/tests_ethernet_dialog-applet-dialogs.o: src/applet-dialogs.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(src_tests_ethernet_dialog_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT src/tests_ethernet_dialog-applet-dialogs.o -MD -MP -MF src/$(DEPDIR)/tests_ethernet_dialog-applet-dialogs.Tpo -c -o src/tests_ethernet_dialog-applet-dialogs.o `test -f 'src/applet-dialogs.c' || echo '$(srcdir)/'`src/applet-dialogs.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) src/$(DEPDIR)/tests_ethernet_dialog-applet-dialogs.Tpo src/$(DEPDIR)/tests_ethernet_dialog-applet-dialogs.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='src/applet-dialogs.c' object='src/tests_ethernet_dialog-applet-dialogs.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(src_tests_ethernet_dialog_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o src/tests_ethernet_dialog-applet-dialogs.o `test -f 'src/applet-dialogs.c' || echo '$(srcdir)/'`src/applet-dialogs.c
+
+src/tests_ethernet_dialog-applet-dialogs.obj: src/applet-dialogs.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(src_tests_ethernet_dialog_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT src/tests_ethernet_dialog-applet-dialogs.obj -MD -MP -MF src/$(DEPDIR)/tests_ethernet_dialog-applet-dialogs.Tpo -c -o src/tests_ethernet_dialog-applet-dialogs.obj `if test -f 'src/applet-dialogs.c'; then $(CYGPATH_W) 'src/applet-dialogs.c'; else $(CYGPATH_W) '$(srcdir)/src/applet-dialogs.c'; fi`
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) src/$(DEPDIR)/tests_ethernet_dialog-applet-dialogs.Tpo src/$(DEPDIR)/tests_ethernet_dialog-applet-dialogs.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='src/applet-dialogs.c' object='src/tests_ethernet_dialog-applet-dialogs.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(src_tests_ethernet_dialog_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o src/tests_ethernet_dialog-applet-dialogs.obj `if test -f 'src/applet-dialogs.c'; then $(CYGPATH_W) 'src/applet-dialogs.c'; else $(CYGPATH_W) '$(srcdir)/src/applet-dialogs.c'; fi`
+
+src/tests_ethernet_dialog-ethernet-dialog.o: src/ethernet-dialog.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(src_tests_ethernet_dialog_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT src/tests_ethernet_dialog-ethernet-dialog.o -MD -MP -MF src/$(DEPDIR)/tests_ethernet_dialog-ethernet-dialog.Tpo -c -o src/tests_ethernet_dialog-ethernet-dialog.o `test -f 'src/ethernet-dialog.c' || echo '$(srcdir)/'`src/ethernet-dialog.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) src/$(DEPDIR)/tests_ethernet_dialog-ethernet-dialog.Tpo src/$(DEPDIR)/tests_ethernet_dialog-ethernet-dialog.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='src/ethernet-dialog.c' object='src/tests_ethernet_dialog-ethernet-dialog.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(src_tests_ethernet_dialog_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o src/tests_ethernet_dialog-ethernet-dialog.o `test -f 'src/ethernet-dialog.c' || echo '$(srcdir)/'`src/ethernet-dialog.c
+
+src/tests_ethernet_dialog-ethernet-dialog.obj: src/ethernet-dialog.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(src_tests_ethernet_dialog_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT src/tests_ethernet_dialog-ethernet-dialog.obj -MD -MP -MF src/$(DEPDIR)/tests_ethernet_dialog-ethernet-dialog.Tpo -c -o src/tests_ethernet_dialog-ethernet-dialog.obj `if test -f 'src/ethernet-dialog.c'; then $(CYGPATH_W) 'src/ethernet-dialog.c'; else $(CYGPATH_W) '$(srcdir)/src/ethernet-dialog.c'; fi`
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) src/$(DEPDIR)/tests_ethernet_dialog-ethernet-dialog.Tpo src/$(DEPDIR)/tests_ethernet_dialog-ethernet-dialog.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='src/ethernet-dialog.c' object='src/tests_ethernet_dialog-ethernet-dialog.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(src_tests_ethernet_dialog_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o src/tests_ethernet_dialog-ethernet-dialog.obj `if test -f 'src/ethernet-dialog.c'; then $(CYGPATH_W) 'src/ethernet-dialog.c'; else $(CYGPATH_W) '$(srcdir)/src/ethernet-dialog.c'; fi`
+
+src/tests/ethernet_dialog-ethernet-dialog.o: src/tests/ethernet-dialog.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(src_tests_ethernet_dialog_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT src/tests/ethernet_dialog-ethernet-dialog.o -MD -MP -MF src/tests/$(DEPDIR)/ethernet_dialog-ethernet-dialog.Tpo -c -o src/tests/ethernet_dialog-ethernet-dialog.o `test -f 'src/tests/ethernet-dialog.c' || echo '$(srcdir)/'`src/tests/ethernet-dialog.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) src/tests/$(DEPDIR)/ethernet_dialog-ethernet-dialog.Tpo src/tests/$(DEPDIR)/ethernet_dialog-ethernet-dialog.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='src/tests/ethernet-dialog.c' object='src/tests/ethernet_dialog-ethernet-dialog.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(src_tests_ethernet_dialog_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o src/tests/ethernet_dialog-ethernet-dialog.o `test -f 'src/tests/ethernet-dialog.c' || echo '$(srcdir)/'`src/tests/ethernet-dialog.c
+
+src/tests/ethernet_dialog-ethernet-dialog.obj: src/tests/ethernet-dialog.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(src_tests_ethernet_dialog_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT src/tests/ethernet_dialog-ethernet-dialog.obj -MD -MP -MF src/tests/$(DEPDIR)/ethernet_dialog-ethernet-dialog.Tpo -c -o src/tests/ethernet_dialog-ethernet-dialog.obj `if test -f 'src/tests/ethernet-dialog.c'; then $(CYGPATH_W) 'src/tests/ethernet-dialog.c'; else $(CYGPATH_W) '$(srcdir)/src/tests/ethernet-dialog.c'; fi`
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) src/tests/$(DEPDIR)/ethernet_dialog-ethernet-dialog.Tpo src/tests/$(DEPDIR)/ethernet_dialog-ethernet-dialog.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='src/tests/ethernet-dialog.c' object='src/tests/ethernet_dialog-ethernet-dialog.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(src_tests_ethernet_dialog_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o src/tests/ethernet_dialog-ethernet-dialog.obj `if test -f 'src/tests/ethernet-dialog.c'; then $(CYGPATH_W) 'src/tests/ethernet-dialog.c'; else $(CYGPATH_W) '$(srcdir)/src/tests/ethernet-dialog.c'; fi`
+
 src/utils/tests/test_utils-test-utils.o: src/utils/tests/test-utils.c
 @am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(src_utils_tests_test_utils_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT src/utils/tests/test_utils-test-utils.o -MD -MP -MF src/utils/tests/$(DEPDIR)/test_utils-test-utils.Tpo -c -o src/utils/tests/test_utils-test-utils.o `test -f 'src/utils/tests/test-utils.c' || echo '$(srcdir)/'`src/utils/tests/test-utils.c
 @am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) src/utils/tests/$(DEPDIR)/test_utils-test-utils.Tpo src/utils/tests/$(DEPDIR)/test_utils-test-utils.Po
@@ -2557,6 +2676,7 @@ clean-libtool:
 	-rm -rf shared/nm-utils/.libs shared/nm-utils/_libs
 	-rm -rf src/.libs src/_libs
 	-rm -rf src/connection-editor/.libs src/connection-editor/_libs
+	-rm -rf src/tests/.libs src/tests/_libs
 	-rm -rf src/utils/.libs src/utils/_libs
 	-rm -rf src/utils/tests/.libs src/utils/tests/_libs
 	-rm -rf src/wireless-security/.libs src/wireless-security/_libs
@@ -3353,6 +3473,8 @@ distclean-generic:
 	-rm -f src/$(am__dirstamp)
 	-rm -f src/connection-editor/$(DEPDIR)/$(am__dirstamp)
 	-rm -f src/connection-editor/$(am__dirstamp)
+	-rm -f src/tests/$(DEPDIR)/$(am__dirstamp)
+	-rm -f src/tests/$(am__dirstamp)
 	-rm -f src/utils/$(DEPDIR)/$(am__dirstamp)
 	-rm -f src/utils/$(am__dirstamp)
 	-rm -f src/utils/tests/$(DEPDIR)/$(am__dirstamp)
@@ -3389,6 +3511,9 @@ distclean: distclean-recursive
 	-rm -f src/$(DEPDIR)/nm_applet-main.Po
 	-rm -f src/$(DEPDIR)/nm_applet-mb-menu-item.Po
 	-rm -f src/$(DEPDIR)/nm_applet-mobile-helpers.Po
+	-rm -f src/$(DEPDIR)/tests_ethernet_dialog-applet-dialogs.Po
+	-rm -f src/$(DEPDIR)/tests_ethernet_dialog-applet-resources.Po
+	-rm -f src/$(DEPDIR)/tests_ethernet_dialog-ethernet-dialog.Po
 	-rm -f src/connection-editor/$(DEPDIR)/nm_connection_editor-ce-page.Po
 	-rm -f src/connection-editor/$(DEPDIR)/nm_connection_editor-ce-polkit-button.Po
 	-rm -f src/connection-editor/$(DEPDIR)/nm_connection_editor-ce-polkit.Po
@@ -3427,6 +3552,7 @@ distclean: distclean-recursive
 	-rm -f src/connection-editor/$(DEPDIR)/nm_connection_editor-page-wireguard.Po
 	-rm -f src/connection-editor/$(DEPDIR)/nm_connection_editor-ppp-auth-methods-dialog.Po
 	-rm -f src/connection-editor/$(DEPDIR)/nm_connection_editor-vpn-helpers.Po
+	-rm -f src/tests/$(DEPDIR)/ethernet_dialog-ethernet-dialog.Po
 	-rm -f src/utils/$(DEPDIR)/libutils_libnm_la-utils.Plo
 	-rm -f src/utils/tests/$(DEPDIR)/test_utils-test-utils.Po
 	-rm -f src/wireless-security/$(DEPDIR)/libwireless_security_libnm_la-eap-method.Plo
@@ -3497,6 +3623,9 @@ maintainer-clean: maintainer-clean-recursive
 	-rm -f src/$(DEPDIR)/nm_applet-main.Po
 	-rm -f src/$(DEPDIR)/nm_applet-mb-menu-item.Po
 	-rm -f src/$(DEPDIR)/nm_applet-mobile-helpers.Po
+	-rm -f src/$(DEPDIR)/tests_ethernet_dialog-applet-dialogs.Po
+	-rm -f src/$(DEPDIR)/tests_ethernet_dialog-applet-resources.Po
+	-rm -f src/$(DEPDIR)/tests_ethernet_dialog-ethernet-dialog.Po
 	-rm -f src/connection-editor/$(DEPDIR)/nm_connection_editor-ce-page.Po
 	-rm -f src/connection-editor/$(DEPDIR)/nm_connection_editor-ce-polkit-button.Po
 	-rm -f src/connection-editor/$(DEPDIR)/nm_connection_editor-ce-polkit.Po
@@ -3535,6 +3664,7 @@ maintainer-clean: maintainer-clean-recursive
 	-rm -f src/connection-editor/$(DEPDIR)/nm_connection_editor-page-wireguard.Po
 	-rm -f src/connection-editor/$(DEPDIR)/nm_connection_editor-ppp-auth-methods-dialog.Po
 	-rm -f src/connection-editor/$(DEPDIR)/nm_connection_editor-vpn-helpers.Po
+	-rm -f src/tests/$(DEPDIR)/ethernet_dialog-ethernet-dialog.Po
 	-rm -f src/utils/$(DEPDIR)/libutils_libnm_la-utils.Plo
 	-rm -f src/utils/tests/$(DEPDIR)/test_utils-test-utils.Po
 	-rm -f src/wireless-security/$(DEPDIR)/libwireless_security_libnm_la-eap-method.Plo

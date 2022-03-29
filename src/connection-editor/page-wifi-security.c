@@ -282,6 +282,13 @@ security_valid (NMUtilsSecurityType sectype, NM80211Mode mode)
 	g_assert_not_reached ();
 }
 
+static gboolean
+allow_wep (void)
+{
+	/* Note to whoever uses this: this might go away! */
+	return !!getenv ("NM_ALLOW_INSECURE_WEP");
+}
+
 static void
 finish_setup (CEPageWifiSecurity *self, gpointer user_data)
 {
@@ -340,22 +347,29 @@ finish_setup (CEPageWifiSecurity *self, gpointer user_data)
 				wep_type = NM_WEP_KEY_TYPE_KEY;
 		}
 
-		ws_wep = nma_ws_wep_key_new (connection, NM_WEP_KEY_TYPE_KEY, FALSE, FALSE);
-		if (ws_wep) {
+
+		if ((active < 0) && (default_type == NMU_SEC_STATIC_WEP) && (wep_type == NM_WEP_KEY_TYPE_KEY))
+			active = item;
+		if (item == active || allow_wep()) {
+			/* If WEP is disabled, only add add the choice if the connection already uses it. */
+			ws_wep = nma_ws_wep_key_new (connection, NM_WEP_KEY_TYPE_KEY, FALSE, FALSE);
+			g_return_if_fail (ws_wep);
+
 			add_security_item (self, NMA_WS (ws_wep), sec_model,
 			                   &iter, _("WEP 40/128-bit Key (Hex or ASCII)"),
 			                   TRUE, TRUE);
-			if ((active < 0) && (default_type == NMU_SEC_STATIC_WEP) && (wep_type == NM_WEP_KEY_TYPE_KEY))
-				active = item;
 			item++;
 		}
 
-		ws_wep = nma_ws_wep_key_new (connection, NM_WEP_KEY_TYPE_PASSPHRASE, FALSE, FALSE);
-		if (ws_wep) {
+		if ((active < 0) && (default_type == NMU_SEC_STATIC_WEP) && (wep_type == NM_WEP_KEY_TYPE_PASSPHRASE))
+			active = item;
+		if (item == active || allow_wep()) {
+			/* If WEP is disabled, only add add the choice if the connection already uses it. */
+			ws_wep = nma_ws_wep_key_new (connection, NM_WEP_KEY_TYPE_PASSPHRASE, FALSE, FALSE);
+			g_return_if_fail (ws_wep);
+
 			add_security_item (self, NMA_WS (ws_wep), sec_model,
 			                   &iter, _("WEP 128-bit Passphrase"), TRUE, TRUE);
-			if ((active < 0) && (default_type == NMU_SEC_STATIC_WEP) && (wep_type == NM_WEP_KEY_TYPE_PASSPHRASE))
-				active = item;
 			item++;
 		}
 	}
@@ -364,68 +378,80 @@ finish_setup (CEPageWifiSecurity *self, gpointer user_data)
 		NMAWsLeap *ws_leap;
 
 		ws_leap = nma_ws_leap_new (connection, FALSE);
-		if (ws_leap) {
-			add_security_item (self, NMA_WS (ws_leap), sec_model,
-			                   &iter, _("LEAP"), FALSE, FALSE);
-			if ((active < 0) && (default_type == NMU_SEC_LEAP))
-				active = item;
-			item++;
-		}
+		g_return_if_fail (ws_leap);
+
+		add_security_item (self, NMA_WS (ws_leap), sec_model,
+		                   &iter, _("LEAP"), FALSE, FALSE);
+		if ((active < 0) && (default_type == NMU_SEC_LEAP))
+			active = item;
+		item++;
 	}
 
 	if (security_valid (NMU_SEC_DYNAMIC_WEP, mode)) {
 		NMAWsDynamicWep *ws_dynamic_wep;
 
 		ws_dynamic_wep = nma_ws_dynamic_wep_new (connection, TRUE, FALSE);
-		if (ws_dynamic_wep) {
-			add_security_item (self, NMA_WS (ws_dynamic_wep), sec_model,
-			                   &iter, _("Dynamic WEP (802.1X)"), FALSE, FALSE);
-			if ((active < 0) && (default_type == NMU_SEC_DYNAMIC_WEP))
-				active = item;
-			item++;
-		}
+		g_return_if_fail (ws_dynamic_wep);
+
+		add_security_item (self, NMA_WS (ws_dynamic_wep), sec_model,
+		                   &iter, _("Dynamic WEP (802.1X)"), FALSE, FALSE);
+		if ((active < 0) && (default_type == NMU_SEC_DYNAMIC_WEP))
+			active = item;
+		item++;
 	}
 
 	if (security_valid (NMU_SEC_WPA_PSK, mode) || security_valid (NMU_SEC_WPA2_PSK, mode)) {
 		NMAWsWpaPsk *ws_wpa_psk;
 
 		ws_wpa_psk = nma_ws_wpa_psk_new (connection, FALSE);
-		if (ws_wpa_psk) {
-			add_security_item (self, NMA_WS (ws_wpa_psk), sec_model,
-			                   &iter, _("WPA & WPA2 Personal"), TRUE, TRUE);
-			if ((active < 0) && ((default_type == NMU_SEC_WPA_PSK) || (default_type == NMU_SEC_WPA2_PSK)))
-				active = item;
-			item++;
-		}
+		g_return_if_fail (ws_wpa_psk);
+
+		add_security_item (self, NMA_WS (ws_wpa_psk), sec_model,
+		                   &iter, _("WPA & WPA2 Personal"), TRUE, TRUE);
+		if ((active < 0) && ((default_type == NMU_SEC_WPA_PSK) || (default_type == NMU_SEC_WPA2_PSK)))
+			active = item;
+		item++;
 	}
 
 	if (security_valid (NMU_SEC_WPA_ENTERPRISE, mode) || security_valid (NMU_SEC_WPA2_ENTERPRISE, mode)) {
 		NMAWsWpaEap *ws_wpa_eap;
 
 		ws_wpa_eap = nma_ws_wpa_eap_new (connection, TRUE, FALSE, NULL);
-		if (ws_wpa_eap) {
-			add_security_item (self, NMA_WS (ws_wpa_eap), sec_model,
-			                   &iter, _("WPA & WPA2 Enterprise"), FALSE, FALSE);
-			if ((active < 0) && ((default_type == NMU_SEC_WPA_ENTERPRISE) || (default_type == NMU_SEC_WPA2_ENTERPRISE)))
-				active = item;
-			item++;
-		}
+		g_return_if_fail (ws_wpa_eap);
+
+		add_security_item (self, NMA_WS (ws_wpa_eap), sec_model,
+		                   &iter, _("WPA & WPA2 Enterprise"), FALSE, FALSE);
+		if ((active < 0) && ((default_type == NMU_SEC_WPA_ENTERPRISE) || (default_type == NMU_SEC_WPA2_ENTERPRISE)))
+			active = item;
+		item++;
 	}
 
 	if (security_valid (NMU_SEC_SAE, mode)) {
 		NMAWsSae *ws_sae;
 
 		ws_sae = nma_ws_sae_new (connection, FALSE);
-		if (ws_sae) {
-			add_security_item (self, NMA_WS (ws_sae), sec_model,
-			                   &iter, _("WPA3 Personal"), TRUE, TRUE);
-			if ((active < 0) && ((default_type == NMU_SEC_SAE)))
-				active = item;
-			item++;
-		}
+		g_return_if_fail (ws_sae);
+
+		add_security_item (self, NMA_WS (ws_sae), sec_model,
+		                   &iter, _("WPA3 Personal"), TRUE, TRUE);
+		if ((active < 0) && ((default_type == NMU_SEC_SAE)))
+			active = item;
+		item++;
 	}
 
 	if (security_valid (NMU_SEC_OWE, mode)) {
+#if NMA_CHECK_VERSION(1,8,36)
+		NMAWsOwe *ws_owe;
+
+		ws_owe = nma_ws_owe_new (connection);
+		if (ws_owe) {
+			add_security_item (self, NMA_WS (ws_owe), sec_model,
+							   &iter, _("Enhanced Open"), FALSE, TRUE);
+			if ((active < 0) && ((default_type == NMU_SEC_OWE)))
+				active = item;
+			item++;
+		}
+#else
 		gtk_list_store_append (sec_model, &iter);
 		gtk_list_store_set (sec_model, &iter,
 		                    S_NAME_COLUMN, _("Enhanced Open"),
@@ -435,6 +461,7 @@ finish_setup (CEPageWifiSecurity *self, gpointer user_data)
 		if ((active < 0) && (default_type == NMU_SEC_OWE))
 			active = item;
 		item++;
+#endif
 	}
 
 	combo = GTK_COMBO_BOX (gtk_builder_get_object (parent->builder, "wifi_security_combo"));
@@ -580,10 +607,30 @@ ce_page_validate_v (CEPage *page, NMConnection *connection, GError **error)
 
 		g_object_unref (ws);
 	} else {
+#if NMA_CHECK_VERSION(1,8,36)
 		/* No security, unencrypted */
 		nm_connection_remove_setting (connection, NM_TYPE_SETTING_WIRELESS_SECURITY);
 		nm_connection_remove_setting (connection, NM_TYPE_SETTING_802_1X);
 		valid = TRUE;
+#else
+		if (gtk_combo_box_get_active (priv->security_combo) == 0) {
+			/* No security, unencrypted */
+			nm_connection_remove_setting (connection, NM_TYPE_SETTING_WIRELESS_SECURITY);
+			nm_connection_remove_setting (connection, NM_TYPE_SETTING_802_1X);
+			valid = TRUE;
+		} else {
+			/* owe case:
+			 * fill the connection manually until libnma implements OWE wireless security
+			 */
+			NMSetting *s_wireless_sec;
+
+			s_wireless_sec = nm_setting_wireless_security_new ();
+			g_object_set (s_wireless_sec, NM_SETTING_WIRELESS_SECURITY_KEY_MGMT, "owe", NULL);
+			nm_connection_add_setting (connection, s_wireless_sec);
+			nm_connection_remove_setting (connection, NM_TYPE_SETTING_802_1X);
+			valid = TRUE;
+		}
+#endif
 	}
 
 	return valid;

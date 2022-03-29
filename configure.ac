@@ -1,7 +1,7 @@
 AC_PREREQ([2.63])
 
 m4_define([nm_applet_major_version], [1])
-m4_define([nm_applet_minor_version], [24])
+m4_define([nm_applet_minor_version], [26])
 m4_define([nm_applet_micro_version], [0])
 m4_define([nm_applet_version],
           [nm_applet_major_version.nm_applet_minor_version.nm_applet_micro_version])
@@ -67,7 +67,6 @@ LIBNM_CFLAGS="$LIBNM_CFLAGS -DNM_VERSION_MAX_ALLOWED=NM_VERSION_1_16"
 
 PKG_CHECK_MODULES(LIBNMA, libnma >= 1.8.27)
 LIBNMA_CFLAGS="$LIBNMA_CFLAGS -DNMA_VERSION_MIN_REQUIRED=NMA_VERSION_1_8_28"
-LIBNMA_CFLAGS="$LIBNMA_CFLAGS -DNMA_VERSION_MAX_ALLOWED=NMA_VERSION_1_8_28"
 
 PKG_CHECK_MODULES(LIBSECRET, [libsecret-1 >= 0.18])
 
