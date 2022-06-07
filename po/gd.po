@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: eog\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/network-manager-"
 "applet/\n"
-"POT-Creation-Date: 2022-03-22 11:36+0100\n"
+"POT-Creation-Date: 2022-06-07 16:48+0200\n"
 "PO-Revision-Date: 2017-03-09 15:27+0100\n"
 "Last-Translator: GunChleoc <fios@foramnagaidhlig.net>\n"
 "Language-Team: Fòram na Gàidhlig\n"
@@ -1002,8 +1002,8 @@ msgstr "Ag ullachadh a' cheangail lìonraidh \"%s\"..."
 #, c-format
 msgid "User authentication required for network connection “%s”…"
 msgstr ""
-"Tha feum air dearbhadh a' chleachdaiche mus gabh ceangal a dhèanamh ri \"%s"
-"\"..."
+"Tha feum air dearbhadh a' chleachdaiche mus gabh ceangal a dhèanamh ri "
+"\"%s\"..."
 
 #: src/applet.c:2598
 #, c-format
@@ -2066,10 +2066,10 @@ msgstr "Leudachain _prìobhaideachd IPv6:"
 msgid ""
 "If enabled, it makes the kernel generate a temporary IPv6 address in "
 "addition to the public one generated from MAC address. This enhances "
-"privacy, but could cause problems in some applications. If set to \"Default"
-"\", the value from NetworkManager global configuration is used. If that is "
-"also unset, use the kernel default value read from file \"/proc/sys/net/ipv6/"
-"conf/default/use_tempaddr\""
+"privacy, but could cause problems in some applications. If set to "
+"\"Default\", the value from NetworkManager global configuration is used. If "
+"that is also unset, use the kernel default value read from file \"/proc/sys/"
+"net/ipv6/conf/default/use_tempaddr\""
 msgstr ""
 
 #: src/connection-editor/ce-page-ip6.ui:323
@@ -4271,8 +4271,8 @@ msgstr "_Cuir 'na àite"
 #, c-format
 msgid "Do you want to replace %s with the VPN connection you are saving?"
 msgstr ""
-"A bheil thu airson an ceangal VPN a tha thu a' sàbhaladh a chur an àite \"%s"
-"\"?"
+"A bheil thu airson an ceangal VPN a tha thu a' sàbhaladh a chur an àite "
+"\"%s\"?"
 
 #: src/connection-editor/vpn-helpers.c:158
 msgid "Cannot export VPN connection"
@@ -5359,8 +5359,8 @@ msgstr ""
 
 #~ msgid "User authentication required for team connection '%s'..."
 #~ msgstr ""
-#~ "Tha feum air dearbhadh a' chleachdaiche airson a' cheangail sgioba \"%s"
-#~ "\"..."
+#~ "Tha feum air dearbhadh a' chleachdaiche airson a' cheangail sgioba "
+#~ "\"%s\"..."
 
 #~ msgid "Team connection '%s' active"
 #~ msgstr "Tha an ceangal sgioba \"%s\" gnìomhach"

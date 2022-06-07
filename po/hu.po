@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: network-manager-applet master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/network-manager-"
 "applet/\n"
-"POT-Creation-Date: 2022-03-22 11:36+0100\n"
+"POT-Creation-Date: 2022-06-07 16:48+0200\n"
 "PO-Revision-Date: 2019-10-10 14:49+0200\n"
 "Last-Translator: Balázs Úr <ur.balazs at fsf dot hu>\n"
 "Language-Team: Hungarian <gnome-hu-list at gnome dot org>\n"
@@ -281,8 +281,8 @@ msgstr "Vezetékes hálózati kapcsolat („%s”) előkészítése…"
 #, c-format
 msgid "User authentication required for ethernet network connection “%s”…"
 msgstr ""
-"A felhasználó hitelesítése szükséges a vezetékes hálózati kapcsolathoz („%s”)"
-"…"
+"A felhasználó hitelesítése szükséges a vezetékes hálózati kapcsolathoz "
+"(„%s”)…"
 
 #: src/applet-device-ethernet.c:162
 #, c-format
@@ -359,9 +359,8 @@ msgid "Wi-Fi is disabled by hardware switch"
 msgstr "A Wi-Fi hardveres kapcsolóval kikapcsolva"
 
 #: src/applet-device-wifi.c:887
-#, fuzzy
 msgid "_Available networks"
-msgstr "Elérhető"
+msgstr "Elérhető hálózatok"
 
 #: src/applet-device-wifi.c:1083
 msgid "Wi-Fi Networks Available"
@@ -2028,10 +2027,10 @@ msgstr "IPv6 _adatvédelmi kiterjesztések"
 msgid ""
 "If enabled, it makes the kernel generate a temporary IPv6 address in "
 "addition to the public one generated from MAC address. This enhances "
-"privacy, but could cause problems in some applications. If set to \"Default"
-"\", the value from NetworkManager global configuration is used. If that is "
-"also unset, use the kernel default value read from file \"/proc/sys/net/ipv6/"
-"conf/default/use_tempaddr\""
+"privacy, but could cause problems in some applications. If set to "
+"\"Default\", the value from NetworkManager global configuration is used. If "
+"that is also unset, use the kernel default value read from file \"/proc/sys/"
+"net/ipv6/conf/default/use_tempaddr\""
 msgstr ""
 
 #: src/connection-editor/ce-page-ip6.ui:323

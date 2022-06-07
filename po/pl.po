@@ -1,19 +1,19 @@
 # Polish translation for network-manager-applet.
-# Copyright © 2006-2021 the network-manager-applet authors.
+# Copyright © 2006-2022 the network-manager-applet authors.
 # This file is distributed under the same license as the network-manager-applet package.
 # Wadim Dziedzic <wdziedzic@aviary.pl>, 2006-2008.
 # Tomasz Dominikowski <dominikowski@gmail.com>, 2007-2009.
 # Piotr Zaryk <pzaryk@aviary.pl>, 2008.
-# Piotr Drąg <piotrdrag@gmail.com>, 2009-2021.
-# Aviary.pl <community-poland@mozilla.org>, 2006-2021.
+# Piotr Drąg <piotrdrag@gmail.com>, 2009-2022.
+# Aviary.pl <community-poland@mozilla.org>, 2006-2022.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: network-manager-applet\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/network-manager-"
 "applet/\n"
-"POT-Creation-Date: 2022-03-22 11:36+0100\n"
-"PO-Revision-Date: 2021-11-07 13:44+0100\n"
+"POT-Creation-Date: 2022-06-07 16:48+0200\n"
+"PO-Revision-Date: 2022-03-27 14:55+0200\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Polish <community-poland@mozilla.org>\n"
 "Language: pl\n"
@@ -148,9 +148,8 @@ msgid "secure."
 msgstr "zabezpieczona."
 
 #: src/ap-menu-item.c:77
-#, fuzzy
 msgid "insecure."
-msgstr "zabezpieczona."
+msgstr "niezabezpieczona."
 
 #: src/applet-device-broadband.c:147
 msgid "Wrong PUK code; please contact your provider."
@@ -627,8 +626,8 @@ msgstr ""
 "Wadim Dziedzic <wdziedzic@aviary.pl>, 2006-2008\n"
 "Tomasz Dominikowski <dominikowski@gmail.com>, 2007-2009\n"
 "Piotr Zaryk <pzaryk@aviary.pl>, 2008\n"
-"Piotr Drąg <piotrdrag@gmail.com>, 2009-2021\n"
-"Aviary.pl <community-poland@mozilla.org>, 2006-2021"
+"Piotr Drąg <piotrdrag@gmail.com>, 2009-2022\n"
+"Aviary.pl <community-poland@mozilla.org>, 2006-2022"
 
 #: src/applet-dialogs.c:1147
 msgid ""
@@ -2037,10 +2036,10 @@ msgstr "_Rozszerzenia prywatności IPv6"
 msgid ""
 "If enabled, it makes the kernel generate a temporary IPv6 address in "
 "addition to the public one generated from MAC address. This enhances "
-"privacy, but could cause problems in some applications. If set to \"Default"
-"\", the value from NetworkManager global configuration is used. If that is "
-"also unset, use the kernel default value read from file \"/proc/sys/net/ipv6/"
-"conf/default/use_tempaddr\""
+"privacy, but could cause problems in some applications. If set to "
+"\"Default\", the value from NetworkManager global configuration is used. If "
+"that is also unset, use the kernel default value read from file \"/proc/sys/"
+"net/ipv6/conf/default/use_tempaddr\""
 msgstr ""
 "Po włączeniu jądro będzie tworzyło tymczasowy adres IPv6 obok publicznego, "
 "utworzonego z adresu MAC. Zwiększa to prywatność, ale może powodować "
