@@ -41,6 +41,8 @@ Suggests: network-manager-openconnect-gnome,
           network-manager-openvpn-gnome,
           network-manager-vpnc-gnome,
           network-manager-pptp-gnome
+Breaks: libnma-common (<< 1.10.4)
+Replaces: libnma-common (<< 1.10.4)
 Description: network management framework (GNOME frontend)
  NetworkManager is a system network service that manages your network devices
  and connections, attempting to keep active network connectivity when
