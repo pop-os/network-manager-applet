@@ -19,7 +19,7 @@ msgstr ""
 "Project-Id-Version: network-manager-applet 1.8.22\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/network-manager-"
 "applet/\n"
-"POT-Creation-Date: 2022-06-07 16:48+0200\n"
+"POT-Creation-Date: 2022-11-07 08:48+0100\n"
 "PO-Revision-Date: 2020-05-07 21:00+0000\n"
 "Last-Translator: sicklylife <translation@sicklylife.jp>\n"
 "Language-Team: Japanese <gnome-translation@gnome.gr.jp>\n"
@@ -29,13 +29,13 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: nm-applet.desktop.in:3 src/applet-dialogs.c:724 src/applet.c:3251
+#: nm-applet.desktop.in:3 src/applet-dialogs.c:724 src/applet.c:3166
 msgid "Network"
 msgstr "ネットワーク"
 
 #: nm-applet.desktop.in:4
 msgid "Manage your network connections"
-msgstr "ネットワーク接続を管理"
+msgstr "ネットワーク接続の管理"
 
 #: nm-connection-editor.appdata.xml.in:7
 msgid "NetworkManager"
@@ -72,6 +72,74 @@ msgstr "高度なネットワーク設定"
 #: nm-connection-editor.desktop.in:4
 msgid "Manage and change your network connection settings"
 msgstr "ネットワーク接続セッティングの管理と変更"
+
+#: org.gnome.nm-applet.gschema.xml.in:6
+msgid "Disable connected notifications"
+msgstr "接続通知を無効にする"
+
+#: org.gnome.nm-applet.gschema.xml.in:7
+msgid "Set this to true to disable notifications when connecting to a network."
+msgstr "これを true にすると、ネットワークへの接続中の通知を無効にします。"
+
+#: org.gnome.nm-applet.gschema.xml.in:11
+msgid "Disable disconnected notifications"
+msgstr "切断通知を無効にする"
+
+#: org.gnome.nm-applet.gschema.xml.in:12
+msgid ""
+"Set this to true to disable notifications when disconnecting from a network."
+msgstr "これを true にすると、ネットワークからの切断中の通知を無効にします。"
+
+#: org.gnome.nm-applet.gschema.xml.in:16
+msgid "Disable VPN notifications"
+msgstr "VPN 通知を無効にする"
+
+#: org.gnome.nm-applet.gschema.xml.in:17
+msgid ""
+"Set this to true to disable notifications when connecting to or "
+"disconnecting from a VPN."
+msgstr ""
+"これを true にすると、VPN への接続、あるいは VPN からの切断の際の通知を無効に"
+"します。"
+
+#: org.gnome.nm-applet.gschema.xml.in:21
+msgid "Suppress networks available notifications"
+msgstr "ネットワーク使用可能通知を抑制する"
+
+#: org.gnome.nm-applet.gschema.xml.in:22
+msgid ""
+"Set this to true to disable notifications when Wi-Fi networks are available."
+msgstr ""
+"これを true にすると、無線ネットワークが利用可能になった時の通知を無効にしま"
+"す。"
+
+#: org.gnome.nm-applet.gschema.xml.in:26
+msgid "Stamp"
+msgstr "スタンプ"
+
+#: org.gnome.nm-applet.gschema.xml.in:27
+msgid "Used to determine whether settings should be migrated to a new version."
+msgstr "設定を、新規バージョンに移行すべきかどうかの判定に使用されます。"
+
+#: org.gnome.nm-applet.gschema.xml.in:31
+msgid "Disable WiFi Create"
+msgstr "Wi-Fi の作成を無効にする"
+
+#: org.gnome.nm-applet.gschema.xml.in:32
+msgid ""
+"Set to true to disable creation of adhoc networks when using the applet."
+msgstr ""
+"これを true にすると、アプレットでのアドホックネットワークの作成を無効にしま"
+"す。"
+
+#: org.gnome.nm-applet.gschema.xml.in:36
+msgid "Show the applet in notification area"
+msgstr "通知領域にアプレットを表示する"
+
+#: org.gnome.nm-applet.gschema.xml.in:37
+msgid "Set to FALSE to disable displaying the applet in the notification area."
+msgstr ""
+"これを false にすると、通知領域にアプレットを表示するのを無効化します。"
 
 #: shared/nm-utils/nm-shared-utils.c:793
 #, c-format
@@ -153,12 +221,11 @@ msgstr "アドホック"
 
 #: src/ap-menu-item.c:73
 msgid "secure."
-msgstr "セキュア。"
+msgstr "セキュアです。"
 
 #: src/ap-menu-item.c:77
-#, fuzzy
 msgid "insecure."
-msgstr "セキュア。"
+msgstr "セキュアではありません。"
 
 #: src/applet-device-broadband.c:147
 msgid "Wrong PUK code; please contact your provider."
@@ -195,7 +262,7 @@ msgid "New Mobile Broadband connection…"
 msgstr "新規のモバイルブロードバンド接続…"
 
 #: src/applet-device-broadband.c:809 src/applet-device-bt.c:75
-#: src/applet-device-ethernet.c:124 src/applet-device-wifi.c:1269
+#: src/applet-device-ethernet.c:124 src/applet-device-wifi.c:1251
 msgid "Connection Established"
 msgstr "接続を確立しました"
 
@@ -234,7 +301,7 @@ msgstr "モバイルブロードバンド接続 '%s' を設定中です..."
 msgid "User authentication required for mobile broadband connection “%s”…"
 msgstr "モバイルブロードバンド接続 '%s' にはユーザー認証が必要です..."
 
-#: src/applet-device-bt.c:113 src/applet.c:2595 src/mobile-helpers.c:593
+#: src/applet-device-bt.c:113 src/applet.c:2510 src/mobile-helpers.c:593
 #, c-format
 msgid "Requesting a network address for “%s”…"
 msgstr "'%s' のネットワークアドレスを要求しています..."
@@ -267,7 +334,7 @@ msgid "Ethernet Network"
 msgstr "Ethernet ネットワーク"
 
 #. Notify user of unmanaged or unavailable device
-#: src/applet-device-ethernet.c:99 src/applet.c:1350
+#: src/applet-device-ethernet.c:99 src/applet.c:1265
 msgid "disconnected"
 msgstr "切断されています"
 
@@ -327,7 +394,7 @@ msgstr "新規 Wi-Fi ネットワークを作成(_N)"
 msgid "(none)"
 msgstr "(なし)"
 
-#: src/applet-device-wifi.c:523 src/applet-device-wifi.c:1366
+#: src/applet-device-wifi.c:523 src/applet-device-wifi.c:1349
 msgid "Failed to add new connection"
 msgstr "新規接続の追加に失敗しました"
 
@@ -335,8 +402,8 @@ msgstr "新規接続の追加に失敗しました"
 msgid "Insufficient privileges."
 msgstr "権限が不足しています。"
 
-#: src/applet-device-wifi.c:526 src/applet-device-wifi.c:1349
-#: src/applet-device-wifi.c:1369 src/applet.c:415 src/applet.c:498
+#: src/applet-device-wifi.c:526 src/applet-device-wifi.c:1332
+#: src/applet-device-wifi.c:1352 src/applet.c:414 src/applet.c:497
 msgid "Connection failure"
 msgstr "接続に失敗"
 
@@ -364,63 +431,58 @@ msgid "Wi-Fi is disabled by hardware switch"
 msgstr "Wi-Fi はハードウェアのスイッチで無効になっています"
 
 #: src/applet-device-wifi.c:887
-#, fuzzy
 msgid "_Available networks"
-msgstr "利用可能"
+msgstr "利用可能なネットワーク(_A)"
 
-#: src/applet-device-wifi.c:1083
+#: src/applet-device-wifi.c:1066
 msgid "Wi-Fi Networks Available"
 msgstr "Wi-Fi ネットワークは利用可能です"
 
-#: src/applet-device-wifi.c:1084
+#: src/applet-device-wifi.c:1067
 msgid "Use the network menu to connect to a Wi-Fi network"
 msgstr "Wi-Fi ネットワークに接続するにはネットワークメニューを使用します。"
 
-#: src/applet-device-wifi.c:1087 src/applet.c:819
-msgid "Don’t show this message again"
-msgstr "このメッセージを今後表示しない"
-
-#: src/applet-device-wifi.c:1268
+#: src/applet-device-wifi.c:1249
 #, c-format
 msgid "You are now connected to the Wi-Fi network “%s”."
 msgstr "Wi-Fi ネットワーク '%s' に接続しました。"
 
-#: src/applet-device-wifi.c:1303
+#: src/applet-device-wifi.c:1286
 #, c-format
 msgid "Preparing Wi-Fi network connection “%s”…"
 msgstr "Wi-Fi ネットワーク接続 '%s' を準備中..."
 
-#: src/applet-device-wifi.c:1306
+#: src/applet-device-wifi.c:1289
 #, c-format
 msgid "Configuring Wi-Fi network connection “%s”…"
 msgstr "Wi-Fi ネットワーク接続 '%s' を設定中です..."
 
-#: src/applet-device-wifi.c:1309
+#: src/applet-device-wifi.c:1292
 #, c-format
 msgid "User authentication required for Wi-Fi network “%s”…"
 msgstr "Wi-Fi ネットワーク '%s' にはユーザー認証が必要です..."
 
-#: src/applet-device-wifi.c:1312
+#: src/applet-device-wifi.c:1295
 #, c-format
 msgid "Requesting a Wi-Fi network address for “%s”…"
 msgstr "'%s' の Wi-Fi ネットワークアドレスを要求しています..."
 
-#: src/applet-device-wifi.c:1323
+#: src/applet-device-wifi.c:1306
 #, c-format
 msgid "Wi-Fi network connection “%s” active: %s (%d%%)"
 msgstr "Wi-Fi ネットワーク接続 '%s' はアクティブです: %s (%d%%)"
 
-#: src/applet-device-wifi.c:1327
+#: src/applet-device-wifi.c:1310
 #, c-format
 msgid "Wi-Fi network connection “%s” active"
 msgstr "Wi-Fi ネットワーク接続 '%s' はアクティブです"
 
-#: src/applet-device-wifi.c:1346
+#: src/applet-device-wifi.c:1329
 msgid "Failed to activate connection"
 msgstr "接続のアクティベートに失敗しました"
 
-#: src/applet-device-wifi.c:1347 src/applet-device-wifi.c:1367 src/applet.c:413
-#: src/applet.c:464 src/applet.c:496
+#: src/applet-device-wifi.c:1330 src/applet-device-wifi.c:1350 src/applet.c:412
+#: src/applet.c:463 src/applet.c:495
 msgid "Unknown error"
 msgstr "不明なエラー"
 
@@ -436,7 +498,7 @@ msgstr "LEAP"
 msgid "Dynamic WEP"
 msgstr "動的 WEP"
 
-#: src/applet-dialogs.c:64 src/applet-dialogs.c:226 src/applet-dialogs.c:228
+#: src/applet-dialogs.c:64 src/applet-dialogs.c:226
 msgid "WPA/WPA2"
 msgstr "WPA/WPA2"
 
@@ -448,6 +510,11 @@ msgstr "その他のアドレス"
 #: src/applet-dialogs.c:224
 msgid "WEP"
 msgstr "WEP"
+
+#: src/applet-dialogs.c:228
+#, fuzzy
+msgid "WPA/WPA2/WPA3"
+msgstr "WPA/WPA2"
 
 #: src/applet-dialogs.c:230
 msgid "WPA3"
@@ -731,23 +798,27 @@ msgstr "VPN UI への接続の書き込みに失敗しました: %s (%d)"
 msgid "Failed to write connection to VPN UI: incomplete write"
 msgstr "VPN UI への接続の書き込みに失敗しました: 不完全な書き込み"
 
-#: src/applet.c:412
+#: src/applet.c:411
 msgid "Failed to add/activate connection"
 msgstr "接続の追加、あるいは有効化に失敗しました"
 
-#: src/applet.c:463
+#: src/applet.c:462
 msgid "Device disconnect failed"
 msgstr "デバイスの切断に失敗しました"
 
-#: src/applet.c:466
+#: src/applet.c:465
 msgid "Disconnect failure"
 msgstr "切断失敗"
 
-#: src/applet.c:495
+#: src/applet.c:494
 msgid "Connection activation failed"
 msgstr "接続のアクティベートに失敗しました"
 
-#: src/applet.c:916
+#: src/applet.c:731
+msgid "Don’t show this message again"
+msgstr "このメッセージを今後表示しない"
+
+#: src/applet.c:831
 #, c-format
 msgid ""
 "\n"
@@ -757,7 +828,7 @@ msgstr ""
 "\n"
 "ネットワーク接続が中断されたため、VPN 接続 '%s' は切断されました。"
 
-#: src/applet.c:918
+#: src/applet.c:833
 #, c-format
 msgid ""
 "\n"
@@ -767,7 +838,7 @@ msgstr ""
 "\n"
 "ネットワーク接続が中断されたため、VPN 接続 '%s' は失敗しました。"
 
-#: src/applet.c:920
+#: src/applet.c:835
 #, c-format
 msgid ""
 "\n"
@@ -776,7 +847,7 @@ msgstr ""
 "\n"
 "VPN サービスが予期せずに停止したため、VPN 接続 '%s' は失敗しました。"
 
-#: src/applet.c:922
+#: src/applet.c:837
 #, c-format
 msgid ""
 "\n"
@@ -786,7 +857,7 @@ msgstr ""
 "\n"
 "VPN サービスが無効な設定を返したため、VPN 接続 '%s'は失敗しました。"
 
-#: src/applet.c:924
+#: src/applet.c:839
 #, c-format
 msgid ""
 "\n"
@@ -795,7 +866,7 @@ msgstr ""
 "\n"
 "接続試行がタイムアウトしたため、VPN 接続 '%s' は失敗しました。"
 
-#: src/applet.c:926
+#: src/applet.c:841
 #, c-format
 msgid ""
 "\n"
@@ -804,7 +875,7 @@ msgstr ""
 "\n"
 "VPN サービスが時間内に開始しなかったため、VPN 接続 '%s' は失敗しました。"
 
-#: src/applet.c:928
+#: src/applet.c:843
 #, c-format
 msgid ""
 "\n"
@@ -813,7 +884,7 @@ msgstr ""
 "\n"
 "VPN サービスが開始に失敗したため、VPN 接続 '%s' は失敗しました。"
 
-#: src/applet.c:930
+#: src/applet.c:845
 #, c-format
 msgid ""
 "\n"
@@ -822,7 +893,7 @@ msgstr ""
 "\n"
 "有効な VPN シークレットがないため、VPN 接続 '%s' は失敗しました。"
 
-#: src/applet.c:932
+#: src/applet.c:847
 #, c-format
 msgid ""
 "\n"
@@ -831,7 +902,7 @@ msgstr ""
 "\n"
 "VPN シークレットが無効なため、VPN 接続 '%s' は失敗しました。"
 
-#: src/applet.c:937
+#: src/applet.c:852
 #, c-format
 msgid ""
 "\n"
@@ -840,7 +911,7 @@ msgstr ""
 "\n"
 "VPN 接続 '%s' は失敗しました。"
 
-#: src/applet.c:964
+#: src/applet.c:879
 #, c-format
 msgid ""
 "VPN connection has been successfully established.\n"
@@ -851,19 +922,19 @@ msgstr ""
 "\n"
 "%s\n"
 
-#: src/applet.c:966
+#: src/applet.c:881
 msgid "VPN connection has been successfully established.\n"
 msgstr "VPN 接続の確立に成功しました。\n"
 
-#: src/applet.c:968
+#: src/applet.c:883
 msgid "VPN Login Message"
 msgstr "VPN ログインメッセージ"
 
-#: src/applet.c:976 src/applet.c:1016
+#: src/applet.c:891 src/applet.c:931
 msgid "VPN Connection Failed"
 msgstr "VPN 接続は失敗しました"
 
-#: src/applet.c:1020
+#: src/applet.c:935
 #, c-format
 msgid ""
 "\n"
@@ -876,7 +947,7 @@ msgstr ""
 "\n"
 "%s"
 
-#: src/applet.c:1023
+#: src/applet.c:938
 #, c-format
 msgid ""
 "\n"
@@ -889,132 +960,132 @@ msgstr ""
 "\n"
 "%s"
 
-#: src/applet.c:1338
+#: src/applet.c:1253
 msgid "device not ready (firmware missing)"
 msgstr "デバイスの準備ができていません (ファームウェア未検出)"
 
-#: src/applet.c:1340
+#: src/applet.c:1255
 msgid "device not ready"
 msgstr "デバイスの準備ができていません"
 
-#: src/applet.c:1366
+#: src/applet.c:1281
 msgid "Disconnect"
 msgstr "切断する"
 
-#: src/applet.c:1380
+#: src/applet.c:1295
 msgid "device not managed"
 msgstr "デバイスは管理されていません"
 
-#: src/applet.c:1454
+#: src/applet.c:1369
 msgid "No network devices available"
 msgstr "ネットワークデバイスがありません"
 
-#: src/applet.c:1500
+#: src/applet.c:1415
 msgid "_VPN Connections"
 msgstr "VPN 接続(_V)"
 
-#: src/applet.c:1544
+#: src/applet.c:1459
 msgid "_Configure VPN…"
 msgstr "VPN を設定(_C)..."
 
-#: src/applet.c:1547
+#: src/applet.c:1462
 msgid "_Add a VPN connection…"
 msgstr "VPN 接続を追加(_A)"
 
-#: src/applet.c:1653
+#: src/applet.c:1568
 msgid "NetworkManager is not running…"
 msgstr "NetworkManager は実行されていません..."
 
-#: src/applet.c:1658 src/applet.c:2726
+#: src/applet.c:1573 src/applet.c:2641
 msgid "Networking disabled"
 msgstr "ネットワークは無効になっています"
 
 #. 'Enable Networking' item
-#: src/applet.c:1868
+#: src/applet.c:1783
 msgid "Enable _Networking"
 msgstr "ネットワークを有効にする(_N)"
 
 #. 'Enable Wi-Fi' item
-#: src/applet.c:1877
+#: src/applet.c:1792
 msgid "Enable _Wi-Fi"
 msgstr "Wi-Fi を有効にする(_W)"
 
 #. 'Enable Mobile Broadband' item
-#: src/applet.c:1886
+#: src/applet.c:1801
 msgid "Enable _Mobile Broadband"
 msgstr "モバイルブロードバンドを有効にする(_M)"
 
 #. Toggle notifications item
-#: src/applet.c:1898
+#: src/applet.c:1813
 msgid "Enable N_otifications"
 msgstr "通知を有効にする(_O)"
 
 #. 'Connection Information' item
-#: src/applet.c:1910
+#: src/applet.c:1825
 msgid "Connection _Information"
 msgstr "接続情報(_I)"
 
 #. 'Edit Connections...' item
-#: src/applet.c:1918
+#: src/applet.c:1833
 msgid "Edit Connections…"
 msgstr "接続を編集する..."
 
-#: src/applet.c:1932
+#: src/applet.c:1847
 msgid "_About"
 msgstr "このアプリケーションについて(_A)"
 
-#: src/applet.c:2246
+#: src/applet.c:2161
 #, c-format
 msgid "You are now connected to “%s”."
 msgstr "現在'%s' に接続しています。"
 
-#: src/applet.c:2286
+#: src/applet.c:2201
 msgid "Disconnected"
 msgstr "切断されました"
 
-#: src/applet.c:2287
+#: src/applet.c:2202
 msgid "The network connection has been disconnected."
 msgstr "ネットワーク接続が切断されました。"
 
-#: src/applet.c:2589
+#: src/applet.c:2504
 #, c-format
 msgid "Preparing network connection “%s”…"
 msgstr "ネットワーク接続 '%s' を準備中..."
 
-#: src/applet.c:2592
+#: src/applet.c:2507
 #, c-format
 msgid "User authentication required for network connection “%s”…"
 msgstr "ネットワーク接続 '%s' にはユーザー認証が必要です..."
 
-#: src/applet.c:2598
+#: src/applet.c:2513
 #, c-format
 msgid "Network connection “%s” active"
 msgstr "ネットワーク接続 '%s' はアクティブです。"
 
-#: src/applet.c:2671
+#: src/applet.c:2586
 #, c-format
 msgid "Starting VPN connection “%s”…"
 msgstr "VPN 接続 '%s' を開始しています..."
 
-#: src/applet.c:2674
+#: src/applet.c:2589
 #, c-format
 msgid "User authentication required for VPN connection “%s”…"
 msgstr "VPN 接続 '%s' にはユーザー認証が必要です..."
 
-#: src/applet.c:2677
+#: src/applet.c:2592
 #, c-format
 msgid "Requesting a VPN address for “%s”…"
 msgstr "'%s' の VPN アドレスを要求しています..."
 
-#: src/applet.c:2680
+#: src/applet.c:2595
 msgid "VPN connection active"
 msgstr "VPN 接続はアクティブです"
 
-#: src/applet.c:2730
+#: src/applet.c:2645
 msgid "No network connection"
 msgstr "ネットワーク接続がありません"
 
-#: src/applet.c:3352
+#: src/applet.c:3280
 msgid "NetworkManager Applet"
 msgstr "NetworkManager アプレット"
 
@@ -1087,8 +1158,8 @@ msgid ""
 msgstr ""
 "新規接続で使用する接続の種類を選択してください。\n"
 "\n"
-"VPN 接続の一覧に、作成したい VPN 接続がにない場合は、正しい VPN プラグインが"
-"インストールされていない可能性があります。"
+"作成する VPN 接続が VPN 接続の一覧にない場合は、正しい VPN プラグインがインス"
+"トールされていない可能性があります。"
 
 #: src/connection-editor/ce-page-bluetooth.ui:35
 #: src/connection-editor/ce-page-ethernet.ui:129
@@ -1141,7 +1212,7 @@ msgid "Bonded _connections"
 msgstr "Bond 接続(_C)"
 
 #: src/connection-editor/ce-page-bond.ui:105
-#: src/connection-editor/ce-page-wifi.ui:400
+#: src/connection-editor/ce-page-wifi.ui:294
 msgid "M_ode"
 msgstr "モード(_O)"
 
@@ -1198,13 +1269,12 @@ msgid "_Primary"
 msgstr "プライマリー(_P)"
 
 #: src/connection-editor/ce-page-bond.ui:495
-#, fuzzy
 msgid ""
 "The interface name of the primary device. If set, this device will always be "
 "the active port when it is available."
 msgstr ""
-"プライマリーデバイスのインターフェース名を指定した場合、そのデバイスが利用可"
-"能である時、常にアクティブなスレーブになります。"
+"プライマリーデバイスのインターフェース名。設定すると、このデバイスが利用可能"
+"な場合に、常にアクティブなポートになります。"
 
 #: src/connection-editor/ce-page-bond.ui:507
 #: src/connection-editor/ce-page-ethernet.ui:188
@@ -1953,7 +2023,7 @@ msgstr ""
 
 #: src/connection-editor/ce-page-ip4.ui:288
 msgid "Require IPv_4 addressing for this connection to complete"
-msgstr "この接続を完了するには、IPv4 アドレスが必要 (_4)"
+msgstr "この接続を完了するには、IPv4 アドレスが必要"
 
 #: src/connection-editor/ce-page-ip4.ui:292
 msgid ""
@@ -2019,6 +2089,12 @@ msgid ""
 "that is also unset, use the kernel default value read from file \"/proc/sys/"
 "net/ipv6/conf/default/use_tempaddr\""
 msgstr ""
+"有効にすると、MACアドレスから生成される公開アドレスに加えて、カーネルが一時的"
+"な IPv6 アドレスを生成されます。これにより、セキュリティーが向上しますが、一"
+"部のアプリケーションで問題が発生する可能性があります。Default に設定すると、"
+"NetworkManager のグローバル設定からの値が使用されます。これも未設定の場"
+"合、\"/proc/sys/net/ipv6/conf/default/use_tempaddr\" ファイルから読み込んだ"
+"カーネルのデフォルト値が使用されます"
 
 #: src/connection-editor/ce-page-ip6.ui:323
 msgid "IPv6 address _generation mode"
@@ -2026,7 +2102,7 @@ msgstr "IPv6 アドレス生成モード(_G)"
 
 #: src/connection-editor/ce-page-ip6.ui:360
 msgid "Require IPv_6 addressing for this connection to complete"
-msgstr "この接続が完了するには、IPv6 アドレスが必要 (_6)"
+msgstr "この接続が完了するには、IPv6 アドレスが必要"
 
 #: src/connection-editor/ce-page-ip6.ui:364
 msgid ""
@@ -2110,7 +2186,6 @@ msgid "C_KN"
 msgstr "CKN(_K)"
 
 #: src/connection-editor/ce-page-macsec.ui:206
-#, fuzzy
 msgid "The pre-shared Connectivity-association Key Name"
 msgstr "共有前の接続に関連するキー名"
 
@@ -2818,35 +2893,19 @@ msgstr "クライアント"
 msgid "Ad-hoc"
 msgstr "アドホック"
 
-#: src/connection-editor/ce-page-wifi.ui:203
-msgid "mW"
-msgstr "mW"
-
-#: src/connection-editor/ce-page-wifi.ui:222
-msgid "Transmission po_wer"
-msgstr "送信パワー(_W)"
-
-#: src/connection-editor/ce-page-wifi.ui:256
-msgid "Mb/s"
-msgstr "Mb/s"
-
-#: src/connection-editor/ce-page-wifi.ui:275
-msgid "_Rate"
-msgstr "レート(_R)"
-
-#: src/connection-editor/ce-page-wifi.ui:311
+#: src/connection-editor/ce-page-wifi.ui:205
 msgid "_BSSID"
 msgstr "BSSID(_B)"
 
-#: src/connection-editor/ce-page-wifi.ui:336
+#: src/connection-editor/ce-page-wifi.ui:230
 msgid "C_hannel"
 msgstr "チャンネル(_H)"
 
-#: src/connection-editor/ce-page-wifi.ui:368
+#: src/connection-editor/ce-page-wifi.ui:262
 msgid "Ban_d"
 msgstr "バンド(_D)"
 
-#: src/connection-editor/ce-page-wifi.ui:414
+#: src/connection-editor/ce-page-wifi.ui:308
 msgid "SS_ID"
 msgstr "SSID(_I)"
 
@@ -3570,7 +3629,7 @@ msgstr "Bluetooth デバイスの MAC アドレス。例: 00:11:22:33:44:55"
 
 #: src/connection-editor/page-bluetooth.c:108
 msgid "Could not load Bluetooth user interface."
-msgstr "Bluetooth  ユーザーインターフェースを読み込めませんでした。"
+msgstr "Bluetooth ユーザーインターフェースを読み込めませんでした。"
 
 #: src/connection-editor/page-bluetooth.c:156
 #, c-format
@@ -3857,28 +3916,27 @@ msgstr "MACSEC 接続 %d"
 
 #: src/connection-editor/page-master.c:221
 #: src/connection-editor/page-master.c:232
-#, fuzzy
 msgid "Duplicate ports"
-msgstr "重複するスレーブ"
+msgstr "重複するポート"
 
 #: src/connection-editor/page-master.c:222
-#, fuzzy, c-format
+#, c-format
 msgid "Ports “%s” and “%s” both apply to device “%s”"
-msgstr "スレーブ '%s' と '%s' は、両方ともデバイス '%s' へ適用されます。"
+msgstr "ポート \"%s\" と \"%s\" は両方ともデバイス \"%s\" に適用されます"
 
 #: src/connection-editor/page-master.c:233
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Ports “%s” and “%s” apply to different virtual ports (“%s” and “%s”) of the "
 "same physical device."
 msgstr ""
-"スレーブ '%s' と '%s' は、それぞれ同じ物理デバイスの異なる仮想ポート ('%s' "
-"と '%s') へ適用されます。"
+"ポート \"%s\" と \"%s\" は、それぞれ同じ物理デバイスの異なる仮想ポート "
+"(\"%s\" と \"%s\") に適用されます。"
 
 #: src/connection-editor/page-master.c:357
 #, c-format
 msgid "%s port %d"
-msgstr ""
+msgstr "%s ポート %d"
 
 #: src/connection-editor/page-mobile.c:297
 msgid "Could not load mobile broadband user interface."
@@ -4066,12 +4124,14 @@ msgid "Dynamic WEP (802.1X)"
 msgstr "動的 WEP (802.1X)"
 
 #: src/connection-editor/page-wifi-security.c:410
-msgid "WPA & WPA2 Personal"
+#, fuzzy
+msgid "WPA/WPA2/WPA3 Personal"
 msgstr "WPA & WPA2 Personal"
 
 # そういう仕様の名前なので訳すべきでない。
 #: src/connection-editor/page-wifi-security.c:423
-msgid "WPA & WPA2 Enterprise"
+#, fuzzy
+msgid "WPA/WPA2 Enterprise"
 msgstr "WPA & WPA2 Enterprise"
 
 #: src/connection-editor/page-wifi-security.c:436
@@ -4216,12 +4276,11 @@ msgid "Usage:"
 msgstr "使用法:"
 
 #: src/main.c:30
-#, fuzzy
 msgid ""
 "This program is a component of NetworkManager (https://networkmanager.dev)."
 msgstr ""
-"このプログラムは、NetworkManager (https://wiki.gnome.org/Projects/"
-"NetworkManager/) のコンポーネントです。"
+"このプログラムは、NetworkManager (https://networkmanager.dev) のコンポーネン"
+"トです。"
 
 #: src/main.c:31
 msgid ""
@@ -4346,6 +4405,18 @@ msgstr "PEM 証明書 (*.pem、*.crt、*.cer)"
 #: src/utils/utils.c:546
 msgid "DER, PEM, or PKCS#12 private keys (*.der, *.pem, *.p12, *.key)"
 msgstr "DER か、PEM、 PKCS#12 の秘密鍵 (*.der, *.pem, *.p12, *.key)"
+
+#~ msgid "mW"
+#~ msgstr "mW"
+
+#~ msgid "Transmission po_wer"
+#~ msgstr "送信パワー(_W)"
+
+#~ msgid "Mb/s"
+#~ msgstr "Mb/s"
+
+#~ msgid "_Rate"
+#~ msgstr "レート(_R)"
 
 #~ msgid "More networks"
 #~ msgstr "その他のネットワーク"
@@ -4559,66 +4630,6 @@ msgstr "DER か、PEM、 PKCS#12 の秘密鍵 (*.der, *.pem, *.p12, *.key)"
 
 #~ msgid "preferences-system-network"
 #~ msgstr "preferences-system-network"
-
-#~ msgid "Disable connected notifications"
-#~ msgstr "接続通知を無効にする"
-
-#~ msgid ""
-#~ "Set this to true to disable notifications when connecting to a network."
-#~ msgstr "これを true にすると、ネットワークへの接続中の通知を無効にします。"
-
-#~ msgid "Disable disconnected notifications"
-#~ msgstr "切断通知を無効にする"
-
-#~ msgid ""
-#~ "Set this to true to disable notifications when disconnecting from a "
-#~ "network."
-#~ msgstr ""
-#~ "これを true にすると、ネットワークからの切断中の通知を無効にします。"
-
-#~ msgid "Disable VPN notifications"
-#~ msgstr "VPN 通知を無効にする"
-
-#~ msgid ""
-#~ "Set this to true to disable notifications when connecting to or "
-#~ "disconnecting from a VPN."
-#~ msgstr ""
-#~ "これを true にすると、VPN への接続、あるいは VPN からの切断の際の通知を無"
-#~ "効にします。"
-
-#~ msgid "Suppress networks available notifications"
-#~ msgstr "ネットワーク使用可能通知を抑制する"
-
-#~ msgid ""
-#~ "Set this to true to disable notifications when Wi-Fi networks are "
-#~ "available."
-#~ msgstr ""
-#~ "これを true にすると、無線ネットワークが利用可能になった時の通知を無効にし"
-#~ "ます。"
-
-#~ msgid "Stamp"
-#~ msgstr "スタンプ"
-
-#~ msgid ""
-#~ "Used to determine whether settings should be migrated to a new version."
-#~ msgstr "設定を、新規バージョンに移行すべきかどうかの判定に使用されます。"
-
-#~ msgid "Disable WiFi Create"
-#~ msgstr "Wi-Fi の作成を無効にする"
-
-#~ msgid ""
-#~ "Set to true to disable creation of adhoc networks when using the applet."
-#~ msgstr ""
-#~ "これを true にすると、アプレットでのアドホックネットワークの作成を無効にし"
-#~ "ます。"
-
-#~ msgid "Show the applet in notification area"
-#~ msgstr "通知領域にアプレットを表示する"
-
-#~ msgid ""
-#~ "Set to FALSE to disable displaying the applet in the notification area."
-#~ msgstr ""
-#~ "これを false にすると、通知領域にアプレットを表示するのを無効化します。"
 
 #~ msgid "Ignore CA certificate"
 #~ msgstr "CA 証明書を無視"
@@ -4957,6 +4968,3 @@ msgstr "DER か、PEM、 PKCS#12 の秘密鍵 (*.der, *.pem, *.p12, *.key)"
 
 #~ msgid "Wi-Fi _adapter:"
 #~ msgstr "Wi-Fi アダプター(_A):"
-
-#~ msgid "CKN"
-#~ msgstr "CKN"

@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: 3.8\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/network-manager-"
 "applet/\n"
-"POT-Creation-Date: 2022-06-07 16:48+0200\n"
-"PO-Revision-Date: 2022-02-20 13:25+0000\n"
+"POT-Creation-Date: 2022-11-07 08:48+0100\n"
+"PO-Revision-Date: 2022-10-21 13:54+0100\n"
 "Last-Translator: Hugo Carvalho <hugokarvalho@hotmail.com>\n"
 "Language-Team: Português <gnome-pt-translation@googlegroups.com>\n"
 "Language: pt\n"
@@ -20,9 +20,9 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 3.1.1\n"
 
-#: nm-applet.desktop.in:3 src/applet-dialogs.c:724 src/applet.c:3251
+#: nm-applet.desktop.in:3 src/applet-dialogs.c:724 src/applet.c:3166
 msgid "Network"
 msgstr "Rede"
 
@@ -65,6 +65,80 @@ msgstr "Configuração avançada de rede"
 #: nm-connection-editor.desktop.in:4
 msgid "Manage and change your network connection settings"
 msgstr "Gerir e alterar as suas definições da ligação de rede"
+
+#: org.gnome.nm-applet.gschema.xml.in:6
+msgid "Disable connected notifications"
+msgstr "Desativar as notificações de ligado"
+
+#: org.gnome.nm-applet.gschema.xml.in:7
+msgid "Set this to true to disable notifications when connecting to a network."
+msgstr ""
+"Defina como verdadeiro para desativar notificações ao ligar a uma rede."
+
+#: org.gnome.nm-applet.gschema.xml.in:11
+msgid "Disable disconnected notifications"
+msgstr "Desativar as notificações de desligado"
+
+#: org.gnome.nm-applet.gschema.xml.in:12
+msgid ""
+"Set this to true to disable notifications when disconnecting from a network."
+msgstr ""
+"Defina como verdadeiro para desativar notificações ao desligar de uma rede."
+
+#: org.gnome.nm-applet.gschema.xml.in:16
+msgid "Disable VPN notifications"
+msgstr "Desativar as notificações de VPN"
+
+#: org.gnome.nm-applet.gschema.xml.in:17
+msgid ""
+"Set this to true to disable notifications when connecting to or "
+"disconnecting from a VPN."
+msgstr ""
+"Defina como verdadeiro para desativar notificações ao ligar ou desligar de "
+"uma rede."
+
+#: org.gnome.nm-applet.gschema.xml.in:21
+msgid "Suppress networks available notifications"
+msgstr "Não mostrar notificações de redes sem fios disponíveis"
+
+#: org.gnome.nm-applet.gschema.xml.in:22
+msgid ""
+"Set this to true to disable notifications when Wi-Fi networks are available."
+msgstr ""
+"Defina como verdadeiro para desativar notificações quando estão disponíveis "
+"redes Wi-Fi."
+
+#: org.gnome.nm-applet.gschema.xml.in:26
+msgid "Stamp"
+msgstr "Carimbo"
+
+#: org.gnome.nm-applet.gschema.xml.in:27
+msgid "Used to determine whether settings should be migrated to a new version."
+msgstr ""
+"Usado para determinar se as definições devem ser migradas para uma nova "
+"versão."
+
+#: org.gnome.nm-applet.gschema.xml.in:31
+#, fuzzy
+msgid "Disable WiFi Create"
+msgstr "Desativar criação de Wi-Fi"
+
+#: org.gnome.nm-applet.gschema.xml.in:32
+msgid ""
+"Set to true to disable creation of adhoc networks when using the applet."
+msgstr ""
+"Defina como verdadeiro para desativar a criação de redes adhoc ao usar a "
+"applet."
+
+#: org.gnome.nm-applet.gschema.xml.in:36
+msgid "Show the applet in notification area"
+msgstr "Mostrar a applet na área de notificação"
+
+#: org.gnome.nm-applet.gschema.xml.in:37
+msgid "Set to FALSE to disable displaying the applet in the notification area."
+msgstr ""
+"Definir como FALSO para desativar a exibição da applet na área de "
+"notificação."
 
 #: shared/nm-utils/nm-shared-utils.c:793
 #, c-format
@@ -148,9 +222,8 @@ msgid "secure."
 msgstr "segura."
 
 #: src/ap-menu-item.c:77
-#, fuzzy
 msgid "insecure."
-msgstr "segura."
+msgstr "insegura."
 
 #: src/applet-device-broadband.c:147
 msgid "Wrong PUK code; please contact your provider."
@@ -187,7 +260,7 @@ msgid "New Mobile Broadband connection…"
 msgstr "Nova ligação de banda larga móvel…"
 
 #: src/applet-device-broadband.c:809 src/applet-device-bt.c:75
-#: src/applet-device-ethernet.c:124 src/applet-device-wifi.c:1269
+#: src/applet-device-ethernet.c:124 src/applet-device-wifi.c:1251
 msgid "Connection Established"
 msgstr "Ligação estabelecida"
 
@@ -228,7 +301,7 @@ msgstr ""
 "Autenticação do utilizador necessária para ligação de banda larga móvel "
 "\"%s\"…"
 
-#: src/applet-device-bt.c:113 src/applet.c:2595 src/mobile-helpers.c:593
+#: src/applet-device-bt.c:113 src/applet.c:2510 src/mobile-helpers.c:593
 #, c-format
 msgid "Requesting a network address for “%s”…"
 msgstr "A requisitar um endereço de rede para “%s”…"
@@ -261,7 +334,7 @@ msgid "Ethernet Network"
 msgstr "Rede Ethernet"
 
 #. Notify user of unmanaged or unavailable device
-#: src/applet-device-ethernet.c:99 src/applet.c:1350
+#: src/applet-device-ethernet.c:99 src/applet.c:1265
 msgid "disconnected"
 msgstr "desligado"
 
@@ -322,7 +395,7 @@ msgstr "Criar _nova rede Wi-Fi…"
 msgid "(none)"
 msgstr "(nenhum)"
 
-#: src/applet-device-wifi.c:523 src/applet-device-wifi.c:1366
+#: src/applet-device-wifi.c:523 src/applet-device-wifi.c:1349
 msgid "Failed to add new connection"
 msgstr "Falha ao adicionar uma nova ligação"
 
@@ -330,8 +403,8 @@ msgstr "Falha ao adicionar uma nova ligação"
 msgid "Insufficient privileges."
 msgstr "Privilégios insuficientes."
 
-#: src/applet-device-wifi.c:526 src/applet-device-wifi.c:1349
-#: src/applet-device-wifi.c:1369 src/applet.c:415 src/applet.c:498
+#: src/applet-device-wifi.c:526 src/applet-device-wifi.c:1332
+#: src/applet-device-wifi.c:1352 src/applet.c:414 src/applet.c:497
 msgid "Connection failure"
 msgstr "Ligação falhou"
 
@@ -363,59 +436,55 @@ msgstr "Wi-Fi está desativada por interruptor físico"
 msgid "_Available networks"
 msgstr "_Redes disponíveis"
 
-#: src/applet-device-wifi.c:1083
+#: src/applet-device-wifi.c:1066
 msgid "Wi-Fi Networks Available"
 msgstr "Redes Wi-Fi disponíveis"
 
-#: src/applet-device-wifi.c:1084
+#: src/applet-device-wifi.c:1067
 msgid "Use the network menu to connect to a Wi-Fi network"
 msgstr "Use o menu de rede para ligar a uma rede Wi-Fi"
 
-#: src/applet-device-wifi.c:1087 src/applet.c:819
-msgid "Don’t show this message again"
-msgstr "Não mostrar esta mensagem novamente"
-
-#: src/applet-device-wifi.c:1268
+#: src/applet-device-wifi.c:1249
 #, c-format
 msgid "You are now connected to the Wi-Fi network “%s”."
 msgstr "Está agora ligado à rede Wi-Fi \"%s\"."
 
-#: src/applet-device-wifi.c:1303
+#: src/applet-device-wifi.c:1286
 #, c-format
 msgid "Preparing Wi-Fi network connection “%s”…"
 msgstr "A preparar ligação à rede Wi-Fi “%s”…"
 
-#: src/applet-device-wifi.c:1306
+#: src/applet-device-wifi.c:1289
 #, c-format
 msgid "Configuring Wi-Fi network connection “%s”…"
 msgstr "A configurar ligação à rede Wi-Fi “%s”…"
 
-#: src/applet-device-wifi.c:1309
+#: src/applet-device-wifi.c:1292
 #, c-format
 msgid "User authentication required for Wi-Fi network “%s”…"
-msgstr "Autenticação do utilizador necessária para a rede Wi-Fi \"%s\"..."
+msgstr "Autenticação do utilizador necessária para a rede Wi-Fi \"%s\"…"
 
-#: src/applet-device-wifi.c:1312
+#: src/applet-device-wifi.c:1295
 #, c-format
 msgid "Requesting a Wi-Fi network address for “%s”…"
-msgstr "Requisitando um endereço de rede Wi-Fi para “%s”…"
+msgstr "A requisitar um endereço de rede Wi-Fi para “%s”…"
 
-#: src/applet-device-wifi.c:1323
+#: src/applet-device-wifi.c:1306
 #, c-format
 msgid "Wi-Fi network connection “%s” active: %s (%d%%)"
 msgstr "Ligação à rede Wi-Fi “%s” ativa: %s (%d%%)"
 
-#: src/applet-device-wifi.c:1327
+#: src/applet-device-wifi.c:1310
 #, c-format
 msgid "Wi-Fi network connection “%s” active"
 msgstr "Ligação à rede Wi-Fi “%s” ativa"
 
-#: src/applet-device-wifi.c:1346
+#: src/applet-device-wifi.c:1329
 msgid "Failed to activate connection"
 msgstr "Falha ao ativar a ligação"
 
-#: src/applet-device-wifi.c:1347 src/applet-device-wifi.c:1367 src/applet.c:413
-#: src/applet.c:464 src/applet.c:496
+#: src/applet-device-wifi.c:1330 src/applet-device-wifi.c:1350 src/applet.c:412
+#: src/applet.c:463 src/applet.c:495
 msgid "Unknown error"
 msgstr "Erro desconhecido"
 
@@ -431,7 +500,7 @@ msgstr "LEAP"
 msgid "Dynamic WEP"
 msgstr "WEP Dinâmico"
 
-#: src/applet-dialogs.c:64 src/applet-dialogs.c:226 src/applet-dialogs.c:228
+#: src/applet-dialogs.c:64 src/applet-dialogs.c:226
 msgid "WPA/WPA2"
 msgstr "WPA/WPA2"
 
@@ -443,6 +512,10 @@ msgstr "Mais endereços"
 #: src/applet-dialogs.c:224
 msgid "WEP"
 msgstr "WEP"
+
+#: src/applet-dialogs.c:228
+msgid "WPA/WPA2/WPA3"
+msgstr "WPA/WPA2/WPA3"
 
 #: src/applet-dialogs.c:230
 msgid "WPA3"
@@ -735,23 +808,27 @@ msgstr ""
 "Falha ao gravar ligação com a interface do utilizador VPN: gravação "
 "incompleta"
 
-#: src/applet.c:412
+#: src/applet.c:411
 msgid "Failed to add/activate connection"
 msgstr "Falha ao adicionar/ativar ligação"
 
-#: src/applet.c:463
+#: src/applet.c:462
 msgid "Device disconnect failed"
 msgstr "Falha ao desligar dispositivo"
 
-#: src/applet.c:466
+#: src/applet.c:465
 msgid "Disconnect failure"
 msgstr "Falha ao desligar"
 
-#: src/applet.c:495
+#: src/applet.c:494
 msgid "Connection activation failed"
 msgstr "Falha ao ativar a ligação"
 
-#: src/applet.c:916
+#: src/applet.c:731
+msgid "Don’t show this message again"
+msgstr "Não mostrar esta mensagem novamente"
+
+#: src/applet.c:831
 #, c-format
 msgid ""
 "\n"
@@ -761,7 +838,7 @@ msgstr ""
 "\n"
 "A ligação VPN “%s” foi desligada porque a ligação à rede foi interrompida."
 
-#: src/applet.c:918
+#: src/applet.c:833
 #, c-format
 msgid ""
 "\n"
@@ -771,7 +848,7 @@ msgstr ""
 "\n"
 "A ligação VPN “%s” falhou porque a ligação à rede foi interrompida."
 
-#: src/applet.c:920
+#: src/applet.c:835
 #, c-format
 msgid ""
 "\n"
@@ -780,7 +857,7 @@ msgstr ""
 "\n"
 "A ligação VPN “%s” falhou porque o serviço de VPN parou inesperadamente."
 
-#: src/applet.c:922
+#: src/applet.c:837
 #, c-format
 msgid ""
 "\n"
@@ -791,7 +868,7 @@ msgstr ""
 "A ligação VPN “%s” falhou porque o serviço VPN retornou uma configuração "
 "inválida."
 
-#: src/applet.c:924
+#: src/applet.c:839
 #, c-format
 msgid ""
 "\n"
@@ -800,7 +877,7 @@ msgstr ""
 "\n"
 "A ligação VPN “%s” falhou porque esgotou o tempo de tentativas da ligação."
 
-#: src/applet.c:926
+#: src/applet.c:841
 #, c-format
 msgid ""
 "\n"
@@ -809,7 +886,7 @@ msgstr ""
 "\n"
 "A ligação VPN “%s” falhou porque o serviço VPN não iniciou a tempo."
 
-#: src/applet.c:928
+#: src/applet.c:843
 #, c-format
 msgid ""
 "\n"
@@ -818,7 +895,7 @@ msgstr ""
 "\n"
 "A ligação VPN “%s” falhou porque o serviço VPN falhou ao iniciar."
 
-#: src/applet.c:930
+#: src/applet.c:845
 #, c-format
 msgid ""
 "\n"
@@ -827,7 +904,7 @@ msgstr ""
 "\n"
 "A ligação VPN “%s” falhou porque não haviam segredos VPN válidos."
 
-#: src/applet.c:932
+#: src/applet.c:847
 #, c-format
 msgid ""
 "\n"
@@ -836,7 +913,7 @@ msgstr ""
 "\n"
 "A ligação VPN “%s” falhou por causa das chaves VPN inválidas."
 
-#: src/applet.c:937
+#: src/applet.c:852
 #, c-format
 msgid ""
 "\n"
@@ -845,7 +922,7 @@ msgstr ""
 "\n"
 "A ligação VPN “%s” falhou."
 
-#: src/applet.c:964
+#: src/applet.c:879
 #, c-format
 msgid ""
 "VPN connection has been successfully established.\n"
@@ -856,19 +933,19 @@ msgstr ""
 "\n"
 "%s\n"
 
-#: src/applet.c:966
+#: src/applet.c:881
 msgid "VPN connection has been successfully established.\n"
 msgstr "A ligação VPN foi estabelecida com sucesso.\n"
 
-#: src/applet.c:968
+#: src/applet.c:883
 msgid "VPN Login Message"
 msgstr "Mensagem de acesso VPN"
 
-#: src/applet.c:976 src/applet.c:1016
+#: src/applet.c:891 src/applet.c:931
 msgid "VPN Connection Failed"
 msgstr "Falha de ligação VPN"
 
-#: src/applet.c:1020
+#: src/applet.c:935
 #, c-format
 msgid ""
 "\n"
@@ -881,7 +958,7 @@ msgstr ""
 "\n"
 "%s"
 
-#: src/applet.c:1023
+#: src/applet.c:938
 #, c-format
 msgid ""
 "\n"
@@ -894,132 +971,132 @@ msgstr ""
 "\n"
 "%s"
 
-#: src/applet.c:1338
+#: src/applet.c:1253
 msgid "device not ready (firmware missing)"
 msgstr "dispositivo não preparado (firmware em falta)"
 
-#: src/applet.c:1340
+#: src/applet.c:1255
 msgid "device not ready"
 msgstr "dispositivo não preparado"
 
-#: src/applet.c:1366
+#: src/applet.c:1281
 msgid "Disconnect"
 msgstr "Desligar"
 
-#: src/applet.c:1380
+#: src/applet.c:1295
 msgid "device not managed"
 msgstr "dispositivo não gerido"
 
-#: src/applet.c:1454
+#: src/applet.c:1369
 msgid "No network devices available"
 msgstr "Nenhum dispositivo de rede disponível"
 
-#: src/applet.c:1500
+#: src/applet.c:1415
 msgid "_VPN Connections"
 msgstr "Ligações _VPN"
 
-#: src/applet.c:1544
+#: src/applet.c:1459
 msgid "_Configure VPN…"
 msgstr "_Configurar VPN…"
 
-#: src/applet.c:1547
+#: src/applet.c:1462
 msgid "_Add a VPN connection…"
 msgstr "_Adicionar uma ligação VPN…"
 
-#: src/applet.c:1653
+#: src/applet.c:1568
 msgid "NetworkManager is not running…"
 msgstr "O gestor de redes não está em execução…"
 
-#: src/applet.c:1658 src/applet.c:2726
+#: src/applet.c:1573 src/applet.c:2641
 msgid "Networking disabled"
 msgstr "Rede desativada"
 
 #. 'Enable Networking' item
-#: src/applet.c:1868
+#: src/applet.c:1783
 msgid "Enable _Networking"
 msgstr "Ativar _rede"
 
 #. 'Enable Wi-Fi' item
-#: src/applet.c:1877
+#: src/applet.c:1792
 msgid "Enable _Wi-Fi"
 msgstr "Ativar _Wi-Fi"
 
 #. 'Enable Mobile Broadband' item
-#: src/applet.c:1886
+#: src/applet.c:1801
 msgid "Enable _Mobile Broadband"
 msgstr "Ativar banda larga _móvel"
 
 #. Toggle notifications item
-#: src/applet.c:1898
+#: src/applet.c:1813
 msgid "Enable N_otifications"
 msgstr "Ativar n_otificações"
 
 #. 'Connection Information' item
-#: src/applet.c:1910
+#: src/applet.c:1825
 msgid "Connection _Information"
 msgstr "_Informação de ligação"
 
 #. 'Edit Connections...' item
-#: src/applet.c:1918
+#: src/applet.c:1833
 msgid "Edit Connections…"
 msgstr "Editar ligações…"
 
-#: src/applet.c:1932
+#: src/applet.c:1847
 msgid "_About"
 msgstr "_Acerca"
 
-#: src/applet.c:2246
+#: src/applet.c:2161
 #, c-format
 msgid "You are now connected to “%s”."
 msgstr "Está agora ligado a \"%s\"."
 
-#: src/applet.c:2286
+#: src/applet.c:2201
 msgid "Disconnected"
 msgstr "Desligado"
 
-#: src/applet.c:2287
+#: src/applet.c:2202
 msgid "The network connection has been disconnected."
 msgstr "A ligação à rede foi desligada."
 
-#: src/applet.c:2589
+#: src/applet.c:2504
 #, c-format
 msgid "Preparing network connection “%s”…"
 msgstr "A preparar ligação à rede “%s”…"
 
-#: src/applet.c:2592
+#: src/applet.c:2507
 #, c-format
 msgid "User authentication required for network connection “%s”…"
 msgstr "Autenticação do utilizador necessária para ligação à rede \"%s\"…"
 
-#: src/applet.c:2598
+#: src/applet.c:2513
 #, c-format
 msgid "Network connection “%s” active"
 msgstr "Ligação à rede “%s” ativa"
 
-#: src/applet.c:2671
+#: src/applet.c:2586
 #, c-format
 msgid "Starting VPN connection “%s”…"
 msgstr "A iniciar ligação VPN “%s”…"
 
-#: src/applet.c:2674
+#: src/applet.c:2589
 #, c-format
 msgid "User authentication required for VPN connection “%s”…"
 msgstr "Autenticação do utilizador necessária para ligação VPN \"%s\"…"
 
-#: src/applet.c:2677
+#: src/applet.c:2592
 #, c-format
 msgid "Requesting a VPN address for “%s”…"
-msgstr "Requisitando um endereço de rede VPN para “%s”…"
+msgstr "A requisitar um endereço de rede VPN para “%s”…"
 
-#: src/applet.c:2680
+#: src/applet.c:2595
 msgid "VPN connection active"
 msgstr "Ligação VPN ativa"
 
-#: src/applet.c:2730
+#: src/applet.c:2645
 msgid "No network connection"
 msgstr "Sem ligação à rede"
 
-#: src/applet.c:3352
+#: src/applet.c:3280
 msgid "NetworkManager Applet"
 msgstr "Aplicação Gestor de redes"
 
@@ -1146,7 +1223,7 @@ msgid "Bonded _connections"
 msgstr "_Ligações agregadas"
 
 #: src/connection-editor/ce-page-bond.ui:105
-#: src/connection-editor/ce-page-wifi.ui:400
+#: src/connection-editor/ce-page-wifi.ui:294
 msgid "M_ode"
 msgstr "M_odo"
 
@@ -2383,7 +2460,6 @@ msgstr ""
 "enviadas após a porta ser ativada ou desativada."
 
 #: src/connection-editor/ce-page-team-port.ui:361
-#, fuzzy
 msgid ""
 "Port priority according to LACP standard. The lower number means higher "
 "priority."
@@ -2393,16 +2469,14 @@ msgstr ""
 
 #: src/connection-editor/ce-page-team-port.ui:374
 #: src/connection-editor/ce-page-team.ui:726
-#, fuzzy
 msgid ""
 "Value is positive number in milliseconds. Specifies an interval between "
 "bursts of multicast group rejoin requests."
 msgstr ""
 "O valor é um número positivo em milissegundos. Especifica um intervalo entre "
-"rajadas de requisições multicasts de reingresso em grupo."
+"sequencia de requisições multicasts de reingresso em grupo."
 
 #: src/connection-editor/ce-page-team-port.ui:376
-#, fuzzy
 msgid ""
 "Port key according to LACP standard. It is only possible to aggregate ports "
 "with the same key."
@@ -2452,17 +2526,15 @@ msgstr "Host al_vo"
 
 #: src/connection-editor/ce-page-team-port.ui:535
 #: src/connection-editor/ce-page-team.ui:1262
-#, fuzzy
 msgid ""
 "Maximum number of missed replies. If this number is exceeded, link is "
 "reported as down."
 msgstr ""
-"Número máximo de respostas perdidas. Se esse número for excedido, o link é "
-"relatado como desconectado."
+"Número máximo de respostas perdidas. Se este número for excedido, a ligação "
+"é reportada como desligada."
 
 #: src/connection-editor/ce-page-team-port.ui:548
 #: src/connection-editor/ce-page-team.ui:1275
-#, fuzzy
 msgid ""
 "Hostname to be converted to IP address which will be filled into ARP request "
 "as source address."
@@ -2472,7 +2544,6 @@ msgstr ""
 
 #: src/connection-editor/ce-page-team-port.ui:560
 #: src/connection-editor/ce-page-team.ui:1287
-#, fuzzy
 msgid ""
 "Hostname to be converted to IP address which will be filled into request as "
 "destination address."
@@ -2482,35 +2553,31 @@ msgstr ""
 
 #: src/connection-editor/ce-page-team-port.ui:570
 #: src/connection-editor/ce-page-team.ui:1297
-#, fuzzy
 msgid "Ignore invalid packets from _active ports"
 msgstr "Ignorar pacotes inválidos de portas _ativas"
 
 #: src/connection-editor/ce-page-team-port.ui:574
 #: src/connection-editor/ce-page-team.ui:1301
-#, fuzzy
 msgid ""
 "Validate received ARP packets on active ports. If this is not checked, all "
 "incoming ARP packets will be considered as a good reply."
 msgstr ""
-"Valida pacotes ARP recebidos em portas ativas. Se isso não estiver marcado, "
-"todos pacotes ARP recebidos serão considerados como reposta boa."
+"Valida pacotes ARP recebidos em portas ativas. Se isto não estiver marcado, "
+"todos pacotes ARP recebidos serão considerados como uma boa reposta."
 
 #: src/connection-editor/ce-page-team-port.ui:587
 #: src/connection-editor/ce-page-team.ui:1314
-#, fuzzy
 msgid "Ignore invalid packets from i_nactive ports"
 msgstr "Ignorar pacotes inválidos de portas i_nativas"
 
 #: src/connection-editor/ce-page-team-port.ui:591
 #: src/connection-editor/ce-page-team.ui:1318
-#, fuzzy
 msgid ""
 "Validate received ARP packets on inactive ports. If this is not checked, all "
 "incoming ARP packets will be considered as a good reply."
 msgstr ""
-"Valida pacotes ARP recebidos em portas inativas. Se isso não estiver "
-"marcado, todos pacotes ARP recebidos serão considerados como reposta boa."
+"Valida pacotes ARP recebidos em portas inativas. Se isto não estiver "
+"marcado, todos pacotes ARP recebidos serão considerados como boa reposta."
 
 #: src/connection-editor/ce-page-team-port.ui:604
 #: src/connection-editor/ce-page-team.ui:1331
@@ -2519,50 +2586,45 @@ msgstr "_Enviar em portas inativas"
 
 #: src/connection-editor/ce-page-team-port.ui:608
 #: src/connection-editor/ce-page-team.ui:1335
-#, fuzzy
 msgid ""
 "By default, ARP requests are sent on active ports only. This option allows "
 "sending even on inactive ports."
 msgstr ""
-"Por padrão, requisições ARP são enviadas apenas em portas ativas. Essa opção "
+"Por padrão, requisições ARP são enviadas apenas em portas ativas. Esta opção "
 "permite enviar até mesmo em portas inativas."
 
 #: src/connection-editor/ce-page-team-port.ui:671
 #: src/connection-editor/ce-page-team.ui:1398
-#, fuzzy
 msgid ""
 "The delay between the link coming up and the runner being notified about it."
 msgstr ""
-"O atraso entre o link ficar “up” e o executor ser notificado sobre isso."
+"O atraso entre a ligação ficar ativa e o executor ser notificado sobre isso."
 
 #: src/connection-editor/ce-page-team-port.ui:684
 #: src/connection-editor/ce-page-team.ui:1411
-#, fuzzy
 msgid ""
 "The delay between the link going down and the runner being notified about it."
 msgstr ""
-"O atraso entre o link ficar “down” e o executor ser notificado sobre isso."
+"O atraso entre a ligação ficar desativada e o executor ser notificado sobre "
+"isso."
 
 #: src/connection-editor/ce-page-team-port.ui:697
 #: src/connection-editor/ce-page-team.ui:1424
-#, fuzzy
 msgid "The interval between requests being sent."
-msgstr "O intervalo entre requisições sendo enviadas."
+msgstr "O intervalo entre requisições a ser enviadas."
 
 #: src/connection-editor/ce-page-team-port.ui:710
 #: src/connection-editor/ce-page-team.ui:1437
-#, fuzzy
 msgid ""
 "The delay between link watch initialization and the first request being sent."
 msgstr ""
-"O atraso entre inicialização de monitoramento do link e a primeira "
+"O atraso entre inicialização de monitorização da ligação e a primeira "
 "requisição ser enviada."
 
 #: src/connection-editor/ce-page-team-port.ui:723
 #: src/connection-editor/ce-page-team.ui:1450
-#, fuzzy
 msgid "The link watcher to be used."
-msgstr "O monitorador de link a ser usado."
+msgstr "O monitorizador de ligação a ser usado."
 
 #: src/connection-editor/ce-page-team-port.ui:770
 #: src/connection-editor/ce-page-team.ui:1497
@@ -2571,19 +2633,16 @@ msgstr "Monitorizador de ligação"
 
 #: src/connection-editor/ce-page-team-port.ui:790
 #: src/connection-editor/ce-page-team.ui:1517
-#, fuzzy
 msgid "Im_port team configuration from a file…"
-msgstr "Im_portar uma configuração de equipe de um arquivo…"
+msgstr "Im_portar uma configuração de equipa de um ficheiro…"
 
 #: src/connection-editor/ce-page-team-port.ui:826
 #: src/connection-editor/ce-page-team.ui:1553
-#, fuzzy
 msgid "Edit _JSON configuration"
 msgstr "Editar configuração _JSON"
 
 #: src/connection-editor/ce-page-team-port.ui:845
 #: src/connection-editor/ce-page-team.ui:1572
-#, fuzzy
 msgid "Raw Configuration"
 msgstr "Configuração não tratada"
 
@@ -2624,9 +2683,8 @@ msgid "_Teamed connections"
 msgstr "_Ligações de equipa"
 
 #: src/connection-editor/ce-page-team.ui:442
-#, fuzzy
 msgid "Load balance"
-msgstr "Balanceamento de carga"
+msgstr "Balanço de carga"
 
 #: src/connection-editor/ce-page-team.ui:446
 msgid "LACP"
@@ -2669,22 +2727,18 @@ msgid "Any L4 protocol"
 msgstr "Qualquer protocolo L4"
 
 #: src/connection-editor/ce-page-team.ui:604
-#, fuzzy
 msgid "_Peer notification count"
-msgstr "Contador de notificação da _ponta"
+msgstr "Contador de notificação da _peer"
 
 #: src/connection-editor/ce-page-team.ui:619
-#, fuzzy
 msgid "Peer _notification interval"
-msgstr "Intervalo entre _notificações da ponta"
+msgstr "Intervalo entre _notificações peer"
 
 #: src/connection-editor/ce-page-team.ui:634
-#, fuzzy
 msgid "_Multicast rejoin count"
 msgstr "Contador de reingresso _multicast"
 
 #: src/connection-editor/ce-page-team.ui:649
-#, fuzzy
 msgid "Multicast _rejoin interval"
 msgstr "Intervalo entre _reingressos multicast"
 
@@ -2693,65 +2747,58 @@ msgid "_Hardware Address"
 msgstr "Endereço de _hardware"
 
 #: src/connection-editor/ce-page-team.ui:753
-#, fuzzy
 msgid ""
 "Desired hardware address of new team device. Usual MAC address format is "
 "accepted."
 msgstr ""
-"Endereço de hardware desejado para novo dispositivo de equipe. Formato de "
-"endereço MAC usual é aceito."
+"Endereço de hardware desejado para novo dispositivo de equipa. Formato de "
+"endereço MAC usual é aceite."
 
 #: src/connection-editor/ce-page-team.ui:799
 msgid "_Runner"
 msgstr "E_xecutor"
 
 #: src/connection-editor/ce-page-team.ui:814
-#, fuzzy
 msgid "_Hardware address policy"
 msgstr "Política de endereço de _hardware"
 
 #: src/connection-editor/ce-page-team.ui:828
-#, fuzzy
 msgid "Name of runner to be used."
 msgstr "Nome do executor a ser usado."
 
 #: src/connection-editor/ce-page-team.ui:849
-#, fuzzy
 msgid ""
 "This defines the policy of how hardware addresses of team device and port "
 "devices should be set during the team lifetime."
 msgstr ""
-"Define a política de como endereços de hardware de dispositivo de equipe e "
-"dispositivos de porta devem ser definidos durante o tempo de vida de equipe."
+"Define a política de como endereços de hardware de dispositivo de equipa e "
+"dispositivos de porta devem ser definidos durante o tempo de vida de equipa."
 
 #: src/connection-editor/ce-page-team.ui:867
-#, fuzzy
 msgid "Send LACPDU frames _periodically"
-msgstr "Enviar quadros LACPDU _periodicamente"
+msgstr "Enviar fotogramas LACPDU _periodicamente"
 
 #: src/connection-editor/ce-page-team.ui:871
-#, fuzzy
 msgid ""
 "If checked, LACPDU frames are sent along the configured links periodically. "
 "If not, it acts as “speak when spoken to”."
 msgstr ""
-"Se marcado, quadros LACPDU são enviados periodicamente junto com os links "
-"configurados. Se não, age como “fale apenas quando for solicitado”."
+"Se marcado, os fotogramas LACPDU são enviados periodicamente junto com as "
+"ligações configuradas. Se não, age como “falar apenas quando for solicitado”."
 
 #: src/connection-editor/ce-page-team.ui:884
 msgid "Send a LACPDU frame _every second"
 msgstr "Enviar uma imagem LACPDU a cada s_egundo"
 
 #: src/connection-editor/ce-page-team.ui:888
-#, fuzzy
 msgid ""
 "Option specifies the rate at which our link partner is asked to transmit "
 "LACPDU packets. If checked, packets will be sent once per second. Otherwise "
 "they will be sent every 30 seconds."
 msgstr ""
-"A opção especifica a taxa na qual seu parceiro de link é solicitado "
+"A opção especifica a taxa na qual o seu parceiro de ligação é solicitado a "
 "transmitir pacotes LACPDU. Se marcado, os pacotes serão enviados um a cada "
-"segundo. Do contrário, eles serão enviados a cada 30 segundos."
+"segundo. Caso contrário, serão enviados a cada 30 segundos."
 
 #: src/connection-editor/ce-page-team.ui:904
 msgid "_System priority"
@@ -2770,21 +2817,18 @@ msgid "System priority, value can be 0 – 65535."
 msgstr "Prioridade do sistema; valor pode ser 0 – 65535."
 
 #: src/connection-editor/ce-page-team.ui:960
-#, fuzzy
 msgid ""
 "Specifies the minimum number of ports that must be active before asserting "
 "carrier in the master interface, value can be 1 – 255."
 msgstr ""
-"Especifica o número mínimo de portas que deve estar ativa antes de declarar "
-"a portadora na intervalo mestre; valor pode ser 1 – 255."
+"Especifica o número mínimo de portas que devem estar ativar antes de "
+"declarar a portadora no intervalo principal; valor pode ser 1 – 255."
 
 #: src/connection-editor/ce-page-team.ui:972
-#, fuzzy
 msgid "This selects the policy of how the aggregators will be selected."
 msgstr "Seleciona a política de como os agregadores serão selecionados."
 
 #: src/connection-editor/ce-page-team.ui:1007
-#, fuzzy
 msgid ""
 "List of fragment types (strings) which should be used for packet Tx hash "
 "computation."
@@ -2793,21 +2837,18 @@ msgstr ""
 "de hash de Tx de pacote."
 
 #: src/connection-editor/ce-page-team.ui:1036
-#, fuzzy
 msgid "_Fields for transmission hash"
 msgstr "Campos _de hash de transmissão"
 
 #: src/connection-editor/ce-page-team.ui:1052
-#, fuzzy
 msgid "In tenths of a second. Periodic interval between rebalancing."
-msgstr "Em décimos de segundo. Intervalo periódico entre rebalanceamento."
+msgstr "Em décimos de segundo. Intervalo periódico entre reajustamento."
 
 #: src/connection-editor/ce-page-team.ui:1064
-#, fuzzy
 msgid "Name of active Tx balancer. Active Tx balancing is disabled by default."
 msgstr ""
-"Nome do balanceador de Tx ativo. Balanceamento de Tx ativo está desabilitado "
-"por padrão."
+"Nome do balanceador de Tx ativo. O balanco de Tx ativo está desativado por "
+"padrão."
 
 #: src/connection-editor/ce-page-team.ui:1086
 msgid "Transmission _balancing interval"
@@ -2887,35 +2928,19 @@ msgstr "Cliente"
 msgid "Ad-hoc"
 msgstr "Ad-hoc"
 
-#: src/connection-editor/ce-page-wifi.ui:203
-msgid "mW"
-msgstr "mW"
-
-#: src/connection-editor/ce-page-wifi.ui:222
-msgid "Transmission po_wer"
-msgstr "Poder de transmissão"
-
-#: src/connection-editor/ce-page-wifi.ui:256
-msgid "Mb/s"
-msgstr "Mb/s"
-
-#: src/connection-editor/ce-page-wifi.ui:275
-msgid "_Rate"
-msgstr "_Taxa"
-
-#: src/connection-editor/ce-page-wifi.ui:311
+#: src/connection-editor/ce-page-wifi.ui:205
 msgid "_BSSID"
 msgstr "_BSSID"
 
-#: src/connection-editor/ce-page-wifi.ui:336
+#: src/connection-editor/ce-page-wifi.ui:230
 msgid "C_hannel"
 msgstr "C_anal"
 
-#: src/connection-editor/ce-page-wifi.ui:368
+#: src/connection-editor/ce-page-wifi.ui:262
 msgid "Ban_d"
 msgstr "Ban_da"
 
-#: src/connection-editor/ce-page-wifi.ui:414
+#: src/connection-editor/ce-page-wifi.ui:308
 msgid "SS_ID"
 msgstr "SS_ID"
 
@@ -2948,25 +2973,22 @@ msgid "Persistent _keepalive"
 msgstr "_Keepalive persistente"
 
 #: src/connection-editor/ce-page-wireguard.ui:228
-#, fuzzy
 msgid "A base64 public key calculated by 'wg pubkey' from a private key."
 msgstr ""
 "Uma chave pública de base64 calculada por “wg pubkey” a partir de uma chave "
 "privada."
 
 #: src/connection-editor/ce-page-wireguard.ui:240
-#, fuzzy
 msgid ""
 "Comma-separated list of IP (v4 or v6) addresses with CIDR masks from which "
 "incoming traffic for this peer is allowed and to which outgoing traffic for "
 "this peer is directed."
 msgstr ""
 "Lista separada por vírgulas de endereços IP (v4 ou v6) com máscaras CIDR a "
-"partir dos quais o tráfego de entrada para este par é permitido e para o "
-"qual o tráfego de saída para este par é direcionado."
+"partir dos quais o tráfego de entrada para este peer é permitido e para o "
+"qual o tráfego de saída para este peer é direcionado."
 
 #: src/connection-editor/ce-page-wireguard.ui:252
-#, fuzzy
 msgid ""
 "An endpoint IP or hostname, followed by a colon, and then a port number."
 msgstr ""
@@ -2974,27 +2996,25 @@ msgstr ""
 "seguir, um número de porta."
 
 #: src/connection-editor/ce-page-wireguard.ui:264
-#, fuzzy
 msgid ""
 "A base64 preshared key generated by 'wg genpsk'. Optional, and may be "
 "omitted. Adds an additional layer of symmetric-key cryptography to be mixed "
 "into the already existing public-key cryptography, for post-quantum "
 "resistance."
 msgstr ""
-"Uma chave pré-compartilhada de base64 gerada por “wg genpsk”. Opcional e "
-"pode ser omitido. Adiciona uma camada adicional de criptografia de chave "
+"Uma chave pré-partilhada de base64 gerada por “wg genpsk”. Opcional e pode "
+"ser omitida. Adiciona uma camada adicional de criptografia de chave "
 "simétrica para ser misturada à criptografia de chave pública já existente, "
 "para resistência pós-quântica."
 
 #: src/connection-editor/ce-page-wireguard.ui:280
-#, fuzzy
 msgid ""
 "How often to send an authenticated empty packet to the peer for the purpose "
 "of keeping a stateful firewall or NAT mapping valid. This is optional and "
 "not recommended outside of specific setups."
 msgstr ""
-"A frequência de envio de um pacote vazio autenticado ao par com o objetivo "
-"de manter válido um firewall stateful ou mapeamento NAT. Isso é opcional e "
+"A frequência de envio de um pacote vazio autenticado ao peer com o objetivo "
+"de manter válido um firewall stateful ou mapeamento NAT. Isto é opcional e "
 "não recomendado fora de configurações específicas."
 
 #: src/connection-editor/ce-page-wireguard.ui:297
@@ -3006,7 +3026,6 @@ msgid "Sho_w preshared key"
 msgstr "Mostrar c_have pré-partilhada"
 
 #: src/connection-editor/ce-page-wireguard.ui:386
-#, fuzzy
 msgid "The name of the wireguard interface to create."
 msgstr "O nome da interface wireguard a ser criada."
 
@@ -3015,7 +3034,6 @@ msgid "Private _key"
 msgstr "C_have privada"
 
 #: src/connection-editor/ce-page-wireguard.ui:413
-#, fuzzy
 msgid "The 256 bit private key in base64 encoding"
 msgstr "A chave privada de 256 bits na codificação base64"
 
@@ -3024,38 +3042,34 @@ msgid "_Listen port"
 msgstr "Porta para _escutar"
 
 #: src/connection-editor/ce-page-wireguard.ui:442
-#, fuzzy
 msgid ""
 "A port to listen on. If set to 'automatic', the port will be chosen randomly "
 "when the interface comes up."
 msgstr ""
-"Uma porta para escutar. Se definido como “automatic”, a porta será escolhida "
-"aleatoriamente quando a interface for ativada."
+"Uma porta para escutar. Se definido como 'automático', a porta será "
+"escolhida aleatoriamente quando a interface for ativada."
 
 #: src/connection-editor/ce-page-wireguard.ui:459
 msgid "_Fwmark"
 msgstr "_Fwmark"
 
 #: src/connection-editor/ce-page-wireguard.ui:489
-#, fuzzy
 msgid "Add peer _routes"
-msgstr "Adicionar _rotas para a ponta"
+msgstr "Adicionar _rotas peer"
 
 #: src/connection-editor/ce-page-wireguard.ui:503
-#, fuzzy
 msgid ""
 "Whether to automatically add routes for the AllowedIPs ranges of the peers"
 msgstr ""
-"Se deve adicionar rotas automaticamente para os intervalos de AllowedIPs das "
-"pontas"
+"Se deve adicionar rotas automaticamente para os intervalos de AllowedIPs dos "
+"peers"
 
 #: src/connection-editor/ce-page-wireguard.ui:543
-#, fuzzy
 msgid ""
 "A 32-bit fwmark for outgoing packets. Leave it to 'off' to disable fwmark."
 msgstr ""
-"Um fwmark de 32 bits para pacotes de saída. Deixe em “off” para desabilitar "
-"fwmark."
+"Um fwmark de 32 bits para pacotes de saída. Deixe em 'desligado' para "
+"desativar fwmark."
 
 #: src/connection-editor/ce-page-wireguard.ui:554
 msgid "_Show private key"
@@ -3094,7 +3108,6 @@ msgid "Stable"
 msgstr "Estável"
 
 #: src/connection-editor/ce-page.c:275
-#, fuzzy
 msgid ""
 "The MAC address entered here will be used as hardware address for the "
 "network device this connection is activated on. This feature is known as MAC "
@@ -3123,22 +3136,20 @@ msgid "invalid %s (%s)"
 msgstr "inválido %s (%s)"
 
 #: src/connection-editor/ce-page.c:362
-#, fuzzy, c-format
+#, c-format
 msgid "invalid interface-name for %s (%s): "
 msgstr "nome de interface inválido para %s (%s): "
 
 #: src/connection-editor/ce-page.c:366
-#, fuzzy, c-format
+#, c-format
 msgid "invalid interface-name (%s): "
 msgstr "nome de interface inválido (%s): "
 
 #: src/connection-editor/ce-page.c:545
-#, fuzzy
 msgid "can’t parse device name"
 msgstr "não foi possível analisar nome do dispositivo"
 
 #: src/connection-editor/ce-page.c:563
-#, fuzzy
 msgid "invalid hardware address"
 msgstr "endereço de hardware inválido"
 
@@ -3157,7 +3168,6 @@ msgid "invalid %s (%s) "
 msgstr "%s inválido (%s) "
 
 #: src/connection-editor/ce-page.h:94
-#, fuzzy
 msgid ""
 "IP addresses identify your computer on the network. Click the “Add” button "
 "to add static IP address to be configured in addition to the automatic ones."
@@ -3167,7 +3177,6 @@ msgstr ""
 "adição aos automáticos."
 
 #: src/connection-editor/ce-page.h:99
-#, fuzzy
 msgid ""
 "The IP address identify your computer on the network and determines the "
 "address range distributed to other computers. Click the “Add” button to add "
@@ -3176,11 +3185,10 @@ msgid ""
 msgstr ""
 "O endereço IP identifica o seu computador na rede e determina o intervalo de "
 "endereços distribuídos a outros computadores. Clique no botão “Adicionar” "
-"para adicionar um endereço IP. Se nenhum endereço for fornecido, intervalo "
+"para adicionar um endereço IP. Se nenhum endereço for fornecido, o intervalo "
 "será determinado automaticamente."
 
 #: src/connection-editor/ce-page.h:104
-#, fuzzy
 msgid "Additional static addresses"
 msgstr "Endereços estáticos adicionais"
 
@@ -3189,7 +3197,6 @@ msgid "Addresses"
 msgstr "Endereços"
 
 #: src/connection-editor/ce-page.h:106
-#, fuzzy
 msgid "Address (optional)"
 msgstr "Endereço (opcional)"
 
@@ -3224,7 +3231,7 @@ msgstr "C_HAP"
 
 #: src/connection-editor/ce-ppp-auth-methods.ui:133
 msgid "Challenge Handshake Authentication Protocol"
-msgstr "Challenge Handshake Authentication Protocol"
+msgstr "Protocolo de autenticação por desafio Handshake"
 
 #: src/connection-editor/ce-ppp-auth-methods.ui:145
 msgid "_MSCHAP"
@@ -3232,7 +3239,7 @@ msgstr "_MSCHAP"
 
 #: src/connection-editor/ce-ppp-auth-methods.ui:149
 msgid "Microsoft Challenge Handshake Authentication Protocol"
-msgstr "Microsoft Challenge Handshake Authentication Protocol"
+msgstr "Protocolo de autenticação por desafio Handshake Microsoft"
 
 #: src/connection-editor/ce-ppp-auth-methods.ui:161
 msgid "MSCHAP v_2"
@@ -3240,7 +3247,7 @@ msgstr "MSCHAP v_2"
 
 #: src/connection-editor/ce-ppp-auth-methods.ui:165
 msgid "Microsoft Challenge Handshake Authentication Protocol version 2"
-msgstr "Microsoft Challenge Handshake Authentication Protocol versão 2"
+msgstr "Protocolo de autenticação por desafio Handshake Microsoft versão 2"
 
 #: src/connection-editor/ce-ppp-auth-methods.ui:179
 msgid ""
@@ -3307,14 +3314,12 @@ msgid "VPN"
 msgstr "VPN"
 
 #: src/connection-editor/connection-helpers.c:192
-#, fuzzy
 msgid "No VPN service type."
 msgstr "Nenhum tipo de serviço VPN."
 
 #: src/connection-editor/connection-helpers.c:197
-#, fuzzy
 msgid "The VPN plugin failed to import the VPN connection correctly: "
-msgstr "O plug-in de VPN falhou na importação correta da ligação VPN: "
+msgstr "O plugin de VPN falhou na importação correta da ligação VPN: "
 
 #: src/connection-editor/connection-helpers.c:281
 #: src/connection-editor/page-proxy.c:104
@@ -3332,7 +3337,7 @@ msgstr "_Abrir"
 
 #: src/connection-editor/connection-helpers.c:316
 msgid "Hardware"
-msgstr "Equipamento"
+msgstr "Hardware"
 
 #: src/connection-editor/connection-helpers.c:343
 msgid "Virtual"
@@ -3340,9 +3345,8 @@ msgstr "Virtual"
 
 #: src/connection-editor/connection-helpers.c:492
 #: src/connection-editor/connection-helpers.c:494
-#, fuzzy
 msgid "Import a saved VPN configuration…"
-msgstr "Importar uma configuração de VPN salva…"
+msgstr "Importar uma configuração de VPN guardada…"
 
 #: src/connection-editor/connection-helpers.c:524
 msgid ""
@@ -3483,13 +3487,12 @@ msgid "Fix"
 msgstr "Corrigir"
 
 #: src/connection-editor/nm-connection-editor.ui:61
-#, fuzzy
 msgid ""
 "Security labels may prevent some files from being used with certificate "
 "authentication."
 msgstr ""
-"Rótulos de segurança podem evitar que alguns arquivos seja usados com "
-"autenticação com certificado."
+"Os rótulos de segurança podem impedir que alguns ficheiros sejam utilizados "
+"com autenticação de certificados."
 
 #: src/connection-editor/nm-connection-editor.ui:110
 msgid "Connection _name"
@@ -3508,13 +3511,12 @@ msgid "_Relabel"
 msgstr "_Rotular"
 
 #: src/connection-editor/nm-connection-editor.ui:320
-#, fuzzy
 msgid ""
 "The following files are not labelled for use with certificate "
 "authentication. Do you wish to adjust the labels?"
 msgstr ""
-"Os arquivos a seguir não estão rotulados para usar com autenticação de com "
-"certificado. você deseja ajustar os rótulos?"
+"Os seguintes ficheiros não são rotulados para utilização com autenticação de "
+"certificados. Deseja ajustar os rótulos?"
 
 #: src/connection-editor/nm-connection-editor.ui:347
 msgid "Relabel"
@@ -4167,12 +4169,12 @@ msgid "Dynamic WEP (802.1X)"
 msgstr "WEP Dinâmico (802.1X)"
 
 #: src/connection-editor/page-wifi-security.c:410
-msgid "WPA & WPA2 Personal"
-msgstr "WPA & WPA2 pessoal"
+msgid "WPA/WPA2/WPA3 Personal"
+msgstr "WPA/WPA2/WPA3 Pessoal"
 
 #: src/connection-editor/page-wifi-security.c:423
-msgid "WPA & WPA2 Enterprise"
-msgstr "WPA & WPA2 empresarial"
+msgid "WPA/WPA2 Enterprise"
+msgstr "WPA/WPA2 Empresarial"
 
 #: src/connection-editor/page-wifi-security.c:436
 msgid "WPA3 Personal"
@@ -4445,6 +4447,18 @@ msgstr "Certificados PEM (*.pem, *.crt, *.cer)"
 msgid "DER, PEM, or PKCS#12 private keys (*.der, *.pem, *.p12, *.key)"
 msgstr "Chaves privadas DER, PEM, ou PKCS#12 (*.der, *.pem, *.p12, *.key)"
 
+#~ msgid "mW"
+#~ msgstr "mW"
+
+#~ msgid "Transmission po_wer"
+#~ msgstr "Poder de transmissão"
+
+#~ msgid "Mb/s"
+#~ msgstr "Mb/s"
+
+#~ msgid "_Rate"
+#~ msgstr "_Taxa"
+
 #~ msgid "nm-device-wireless"
 #~ msgstr "nm-device-wireless"
 
@@ -4642,72 +4656,6 @@ msgstr "Chaves privadas DER, PEM, ou PKCS#12 (*.der, *.pem, *.p12, *.key)"
 #~ msgstr ""
 #~ "wpa-psk inválido: : impossível interpretar chave com 64 bytes como "
 #~ "hexadecimal"
-
-#~ msgid "Disable connected notifications"
-#~ msgstr "Desativar as notificações de ligado"
-
-#~ msgid ""
-#~ "Set this to true to disable notifications when connecting to a network."
-#~ msgstr ""
-#~ "Defina como verdadeiro para desativar notificações ao ligar a uma rede."
-
-#~ msgid "Disable disconnected notifications"
-#~ msgstr "Desativar as notificações de desligado"
-
-#~ msgid ""
-#~ "Set this to true to disable notifications when disconnecting from a "
-#~ "network."
-#~ msgstr ""
-#~ "Defina como verdadeiro para desativar notificações ao desligar de uma "
-#~ "rede."
-
-#~ msgid "Disable VPN notifications"
-#~ msgstr "Desativar as notificações de VPN"
-
-#~ msgid ""
-#~ "Set this to true to disable notifications when connecting to or "
-#~ "disconnecting from a VPN."
-#~ msgstr ""
-#~ "Defina como verdadeiro para desativar notificações ao ligar ou desligar "
-#~ "de uma rede."
-
-#~ msgid "Suppress networks available notifications"
-#~ msgstr "Não mostrar notificações de redes sem fios disponíveis"
-
-#~ msgid ""
-#~ "Set this to true to disable notifications when Wi-Fi networks are "
-#~ "available."
-#~ msgstr ""
-#~ "Defina como verdadeiro para desativar notificações quando estão "
-#~ "disponíveis redes Wi-Fi."
-
-#~ msgid "Stamp"
-#~ msgstr "Carimbo"
-
-#~ msgid ""
-#~ "Used to determine whether settings should be migrated to a new version."
-#~ msgstr ""
-#~ "Usado para determinar se as definições devem ser migradas para uma nova "
-#~ "versão."
-
-#, fuzzy
-#~ msgid "Disable WiFi Create"
-#~ msgstr "Desativar criação de Wi-Fi"
-
-#~ msgid ""
-#~ "Set to true to disable creation of adhoc networks when using the applet."
-#~ msgstr ""
-#~ "Defina como verdadeiro para desativar a criação de redes adhoc ao usar a "
-#~ "applet."
-
-#~ msgid "Show the applet in notification area"
-#~ msgstr "Mostrar a applet na área de notificação"
-
-#~ msgid ""
-#~ "Set to FALSE to disable displaying the applet in the notification area."
-#~ msgstr ""
-#~ "Definir como FALSO para desativar a exibição da applet na área de "
-#~ "notificação."
 
 #~ msgid "Ignore CA certificate"
 #~ msgstr "Ignorar o certificado da AC"

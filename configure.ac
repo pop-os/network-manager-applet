@@ -1,7 +1,7 @@
 AC_PREREQ([2.63])
 
 m4_define([nm_applet_major_version], [1])
-m4_define([nm_applet_minor_version], [28])
+m4_define([nm_applet_minor_version], [30])
 m4_define([nm_applet_micro_version], [0])
 m4_define([nm_applet_version],
           [nm_applet_major_version.nm_applet_minor_version.nm_applet_micro_version])
@@ -14,7 +14,7 @@ AC_INIT([nm-applet],
 AC_CONFIG_HEADERS([config.h])
 AC_CONFIG_MACRO_DIR([m4])
 
-AM_INIT_AUTOMAKE([1.11 no-dist-gzip dist-xz -Wno-portability])
+AM_INIT_AUTOMAKE([1.11 foreign no-dist-gzip dist-xz -Wno-portability])
 AM_MAINTAINER_MODE([enable])
 AM_SILENT_RULES([yes])
 
@@ -59,9 +59,9 @@ GETTEXT_PACKAGE=nm-applet
 AC_SUBST(GETTEXT_PACKAGE)
 AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE,"$GETTEXT_PACKAGE", [Gettext package])
 
-PKG_CHECK_MODULES(LIBNM, [libnm >= 1.15 gio-2.0 >= 2.38 gmodule-export-2.0])
-LIBNM_CFLAGS="$LIBNM_CFLAGS -DGLIB_VERSION_MIN_REQUIRED=GLIB_VERSION_2_38"
-LIBNM_CFLAGS="$LIBNM_CFLAGS -DGLIB_VERSION_MAX_ALLOWED=GLIB_VERSION_2_38"
+PKG_CHECK_MODULES(LIBNM, [libnm >= 1.15 gio-2.0 >= 2.40 gmodule-export-2.0])
+LIBNM_CFLAGS="$LIBNM_CFLAGS -DGLIB_VERSION_MIN_REQUIRED=GLIB_VERSION_2_40"
+LIBNM_CFLAGS="$LIBNM_CFLAGS -DGLIB_VERSION_MAX_ALLOWED=GLIB_VERSION_2_40"
 LIBNM_CFLAGS="$LIBNM_CFLAGS -DNM_VERSION_MIN_REQUIRED=NM_VERSION_1_16"
 LIBNM_CFLAGS="$LIBNM_CFLAGS -DNM_VERSION_MAX_ALLOWED=NM_VERSION_1_16"
 
@@ -69,13 +69,6 @@ PKG_CHECK_MODULES(LIBNMA, libnma >= 1.8.27)
 LIBNMA_CFLAGS="$LIBNMA_CFLAGS -DNMA_VERSION_MIN_REQUIRED=NMA_VERSION_1_8_28"
 
 PKG_CHECK_MODULES(LIBSECRET, [libsecret-1 >= 0.18])
-
-# Check for libnotify >= 0.7
-PKG_CHECK_MODULES(LIBNOTIFY_07, [libnotify >= 0.7], [have_libnotify_07=yes],[have_libnotify_07=no])
-if test x"$have_libnotify_07" = "xyes"; then
-	AC_DEFINE(HAVE_LIBNOTIFY_07, 1, [Define if you have libnotify 0.7 or later])
-fi
-PKG_CHECK_MODULES(NOTIFY, [libnotify >= 0.4.3])
 
 PKG_CHECK_MODULES(GTK3, gtk+-3.0 >= 3.10)
 GTK3_CFLAGS="$GTK3_CFLAGS -DGDK_VERSION_MIN_REQUIRED=GDK_VERSION_3_10 -DGDK_VERSION_MAX_ALLOWED=GDK_VERSION_3_10"
@@ -176,6 +169,7 @@ AC_CONFIG_FILES([
 Makefile
 man/nm-applet.1
 man/nm-connection-editor.1
+org.gnome.nm-applet.gschema.xml
 po/Makefile.in
 ])
 AC_OUTPUT
