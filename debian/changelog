@@ -1,3 +1,11 @@
+network-manager-applet (1.30.0-2) unstable; urgency=medium
+
+  * Reclaim org.gnome.nm-applet schema from libnma.
+    Add a proper Breaks/Replaces against libnma-common.
+    (Closes: #1023630)
+
+ -- Michael Biebl <biebl@debian.org>  Tue, 08 Nov 2022 00:03:20 +0100
+
 network-manager-applet (1.30.0-1) unstable; urgency=medium
 
   * New upstream version 1.30.0
