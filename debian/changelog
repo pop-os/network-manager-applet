@@ -1,8 +1,10 @@
-network-manager-applet (1.30.0-1) UNRELEASED; urgency=medium
+network-manager-applet (1.30.0-1) unstable; urgency=medium
 
   * New upstream version 1.30.0
+  * Rebase patches
+  * Update Build-Depends as per meson.build
 
- -- Michael Biebl <biebl@debian.org>  Mon, 07 Nov 2022 17:40:48 +0100
+ -- Michael Biebl <biebl@debian.org>  Mon, 07 Nov 2022 18:00:25 +0100
 
 network-manager-applet (1.28.0-1) unstable; urgency=medium
 
