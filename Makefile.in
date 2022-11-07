@@ -120,7 +120,8 @@ am__CONFIG_DISTCLEAN_FILES = config.status config.cache config.log \
  configure.lineno config.status.lineno
 mkinstalldirs = $(install_sh) -d
 CONFIG_HEADER = config.h
-CONFIG_CLEAN_FILES = man/nm-applet.1 man/nm-connection-editor.1
+CONFIG_CLEAN_FILES = man/nm-applet.1 man/nm-connection-editor.1 \
+	org.gnome.nm-applet.gschema.xml
 CONFIG_CLEAN_VPATH_FILES =
 am__installdirs = "$(DESTDIR)$(bindir)" "$(DESTDIR)$(libdir)" \
 	"$(DESTDIR)$(man1dir)" "$(DESTDIR)$(appdatadir)" \
@@ -269,8 +270,7 @@ src_nm_applet_DEPENDENCIES =  \
 	src/wireless-security/libwireless-security-libnm.la \
 	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
 	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
-	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
-	$(am__DEPENDENCIES_1)
+	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1)
 src_nm_applet_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) \
 	$(LIBTOOLFLAGS) --mode=link $(CCLD) $(AM_CFLAGS) $(CFLAGS) \
 	$(src_nm_applet_LDFLAGS) $(LDFLAGS) -o $@
@@ -285,8 +285,7 @@ am__DEPENDENCIES_2 =  \
 	src/wireless-security/libwireless-security-libnm.la \
 	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
 	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
-	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
-	$(am__DEPENDENCIES_1)
+	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1)
 src_tests_ethernet_dialog_DEPENDENCIES = $(am__DEPENDENCIES_2)
 am_src_utils_tests_test_utils_OBJECTS =  \
 	src/utils/tests/test_utils-test-utils.$(OBJEXT)
@@ -629,11 +628,11 @@ TEST_LOG_COMPILE = $(TEST_LOG_COMPILER) $(AM_TEST_LOG_FLAGS) \
 	$(TEST_LOG_FLAGS)
 DIST_SUBDIRS = $(SUBDIRS)
 am__DIST_COMMON = $(srcdir)/Makefile.in $(srcdir)/config.h.in \
+	$(srcdir)/org.gnome.nm-applet.gschema.xml.in \
 	$(top_srcdir)/man/nm-applet.1.in \
 	$(top_srcdir)/man/nm-connection-editor.1.in ABOUT-NLS AUTHORS \
-	COPYING ChangeLog INSTALL NEWS README compile config.guess \
-	config.rpath config.sub depcomp install-sh ltmain.sh missing \
-	test-driver
+	COPYING NEWS README compile config.guess config.rpath \
+	config.sub depcomp install-sh ltmain.sh missing test-driver
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
 distdir = $(PACKAGE)-$(VERSION)
 top_distdir = $(distdir)
@@ -710,6 +709,7 @@ EGREP = @EGREP@
 ETAGS = @ETAGS@
 EXEEXT = @EXEEXT@
 FGREP = @FGREP@
+FILECMD = @FILECMD@
 GETTEXT_MACRO_VERSION = @GETTEXT_MACRO_VERSION@
 GETTEXT_PACKAGE = @GETTEXT_PACKAGE@
 GLIB_CFLAGS = @GLIB_CFLAGS@
@@ -744,8 +744,6 @@ LIBNMA_CFLAGS = @LIBNMA_CFLAGS@
 LIBNMA_LIBS = @LIBNMA_LIBS@
 LIBNM_CFLAGS = @LIBNM_CFLAGS@
 LIBNM_LIBS = @LIBNM_LIBS@
-LIBNOTIFY_07_CFLAGS = @LIBNOTIFY_07_CFLAGS@
-LIBNOTIFY_07_LIBS = @LIBNOTIFY_07_LIBS@
 LIBOBJS = @LIBOBJS@
 LIBS = @LIBS@
 LIBSECRET_CFLAGS = @LIBSECRET_CFLAGS@
@@ -768,8 +766,6 @@ MSGFMT_015 = @MSGFMT_015@
 MSGMERGE = @MSGMERGE@
 NM = @NM@
 NMEDIT = @NMEDIT@
-NOTIFY_CFLAGS = @NOTIFY_CFLAGS@
-NOTIFY_LIBS = @NOTIFY_LIBS@
 OBJDUMP = @OBJDUMP@
 OBJEXT = @OBJEXT@
 OTOOL = @OTOOL@
@@ -1326,6 +1322,7 @@ applications_DATA = $(autostart_DATA)
 desktopdir = $(datadir)/applications
 desktop_in_files = nm-connection-editor.desktop.in
 desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
+gsettings_SCHEMAS = org.gnome.nm-applet.gschema.xml
 appdatadir = $(datadir)/metainfo
 appdata_DATA = $(appdata_in_files:.xml.in=.xml)
 appdata_in_files = nm-connection-editor.appdata.xml.in
@@ -1342,15 +1339,15 @@ $(srcdir)/Makefile.in: @MAINTAINER_MODE_TRUE@ $(srcdir)/Makefile.am  $(am__confi
 	@for dep in $?; do \
 	  case '$(am__configure_deps)' in \
 	    *$$dep*) \
-	      echo ' cd $(srcdir) && $(AUTOMAKE) --gnu'; \
-	      $(am__cd) $(srcdir) && $(AUTOMAKE) --gnu \
+	      echo ' cd $(srcdir) && $(AUTOMAKE) --foreign'; \
+	      $(am__cd) $(srcdir) && $(AUTOMAKE) --foreign \
 		&& exit 0; \
 	      exit 1;; \
 	  esac; \
 	done; \
-	echo ' cd $(top_srcdir) && $(AUTOMAKE) --gnu Makefile'; \
+	echo ' cd $(top_srcdir) && $(AUTOMAKE) --foreign Makefile'; \
 	$(am__cd) $(top_srcdir) && \
-	  $(AUTOMAKE) --gnu Makefile
+	  $(AUTOMAKE) --foreign Makefile
 Makefile: $(srcdir)/Makefile.in $(top_builddir)/config.status
 	@case '$?' in \
 	  *config.status*) \
@@ -1387,6 +1384,8 @@ distclean-hdr:
 man/nm-applet.1: $(top_builddir)/config.status $(top_srcdir)/man/nm-applet.1.in
 	cd $(top_builddir) && $(SHELL) ./config.status $@
 man/nm-connection-editor.1: $(top_builddir)/config.status $(top_srcdir)/man/nm-connection-editor.1.in
+	cd $(top_builddir) && $(SHELL) ./config.status $@
+org.gnome.nm-applet.gschema.xml: $(top_builddir)/config.status $(srcdir)/org.gnome.nm-applet.gschema.xml.in
 	cd $(top_builddir) && $(SHELL) ./config.status $@
 install-binPROGRAMS: $(bin_PROGRAMS)
 	@$(NORMAL_INSTALL)
@@ -3764,6 +3763,7 @@ nm-applet.desktop: nm-applet.desktop.in
 
 nm-connection-editor.desktop: nm-connection-editor.desktop.in
 	$(AM_V_GEN)$(MSGFMT) --desktop --template $< -d $(top_srcdir)/po -o $@
+@GSETTINGS_RULES@
 
 nm-connection-editor.appdata.xml: nm-connection-editor.appdata.xml.in
 	$(AM_V_GEN)$(MSGFMT) --xml --template $< -d $(top_srcdir)/po -o $@

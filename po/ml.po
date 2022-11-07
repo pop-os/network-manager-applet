@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: network-manager-applet.master.ml\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/network-manager-"
 "applet/\n"
-"POT-Creation-Date: 2022-06-07 16:48+0200\n"
+"POT-Creation-Date: 2022-11-07 08:48+0100\n"
 "PO-Revision-Date: 2013-04-21 23:43+0530\n"
 "Last-Translator: Balasankar C <c.balasankar@gmail.com>\n"
 "Language-Team: Swatantra Malayalam Computing\n"
@@ -22,7 +22,7 @@ msgstr ""
 "X-Generator: Virtaal 0.7.1\n"
 "X-Project-Style: gnome\n"
 
-#: nm-applet.desktop.in:3 src/applet-dialogs.c:724 src/applet.c:3251
+#: nm-applet.desktop.in:3 src/applet-dialogs.c:724 src/applet.c:3166
 msgid "Network"
 msgstr "ശൃംഖല"
 
@@ -65,6 +65,76 @@ msgstr "സജീവ ശൃംഖല ബന്ധങ്ങള്‍"
 #: nm-connection-editor.desktop.in:4
 msgid "Manage and change your network connection settings"
 msgstr "നിങ്ങളുടെ ശൃംഖല ബന്ധങ്ങള്‍ സജ്ജീകരണങ്ങള്‍ കൈകാര്യം ചെയ്യുകയും മാറ്റങ്ങള്‍ വരുത്തുകയും ചെയ്യുക."
+
+#: org.gnome.nm-applet.gschema.xml.in:6
+msgid "Disable connected notifications"
+msgstr "ബന്ധപ്പെടുമ്പോളുള്ള അറിയിപ്പുകള്‍ പ്രവര്‍ത്തന രഹിതമാക്കുക"
+
+#: org.gnome.nm-applet.gschema.xml.in:7
+msgid "Set this to true to disable notifications when connecting to a network."
+msgstr ""
+"ഒരു ശൃംഖലയുമായി ബന്ധപ്പെടുമ്പോള്‍, അറിയിപ്പുകള്‍ പ്രവര്‍ത്തന രഹിതമാക്കുന്നതിനായി ഇതു് true ആക്കുക."
+
+#: org.gnome.nm-applet.gschema.xml.in:11
+msgid "Disable disconnected notifications"
+msgstr "ബന്ധം വേര്‍പ്പെടുമ്പോളുള്ള അറിയിപ്പുകള്‍ പ്രവര്‍ത്തന രഹിതമാക്കുക"
+
+#: org.gnome.nm-applet.gschema.xml.in:12
+msgid ""
+"Set this to true to disable notifications when disconnecting from a network."
+msgstr ""
+"ഒരു ശൃംഖലയില്‍ നിന്നും ബന്ധം വിഛേദിക്കുമ്പോള്‍, അറിയിപ്പുകള്‍ പ്രവര്‍ത്തന രഹിതമാക്കുന്നതിനായി ഇതു് "
+"true ആക്കുക."
+
+#: org.gnome.nm-applet.gschema.xml.in:16
+msgid "Disable VPN notifications"
+msgstr "വിപിഎന്‍ അറിയിപ്പുകള്‍ പ്രവര്‍ത്തന രഹിതമാക്കുക"
+
+#: org.gnome.nm-applet.gschema.xml.in:17
+msgid ""
+"Set this to true to disable notifications when connecting to or "
+"disconnecting from a VPN."
+msgstr ""
+"ഒരു വിപിഎനില്‍ നിന്നും ബന്ധം വിഛേദിക്കുമ്പോള്‍ അല്ലെങ്കില്‍ തയ്യാറാക്കുമ്പോള്‍, അറിയിപ്പുകള്‍ പ്രവര്‍ത്തന "
+"രഹിതമാക്കുന്നതിനായി ഇതു് true ആക്കുക."
+
+#: org.gnome.nm-applet.gschema.xml.in:21
+msgid "Suppress networks available notifications"
+msgstr "ശൃംഖലകള്‍ ലഭ്യമാണെന്ന അറിയിപ്പ് കാണിയ്ക്കേണ്ട"
+
+#: org.gnome.nm-applet.gschema.xml.in:22
+msgid ""
+"Set this to true to disable notifications when Wi-Fi networks are available."
+msgstr ""
+"വയര്‍ലെസ് ശൃംഖലകള്‍ ലഭ്യമാകുമ്പോള്‍, അറിയിപ്പുകള്‍ പ്രവര്‍ത്തന രഹിതമാക്കുന്നതിനായി ഇതു് true ആക്കുക."
+
+#: org.gnome.nm-applet.gschema.xml.in:26
+msgid "Stamp"
+msgstr "സ്റ്റാമ്പ്"
+
+#: org.gnome.nm-applet.gschema.xml.in:27
+msgid "Used to determine whether settings should be migrated to a new version."
+msgstr "സജ്ജീകരണങ്ങള്‍ പുതിയ പതിപ്പില്‍ നീക്കേണ്ടതുണ്ടോ എന്നു് നിശ്ചയിക്കുന്നതിനായി ഉപയോഗിക്കുന്നു."
+
+#: org.gnome.nm-applet.gschema.xml.in:31
+#, fuzzy
+msgid "Disable WiFi Create"
+msgstr "വൈഫൈ ഉണ്ടാക്കുന്നതു് പ്രവര്‍ത്തന രഹിതമാക്കുക"
+
+#: org.gnome.nm-applet.gschema.xml.in:32
+msgid ""
+"Set to true to disable creation of adhoc networks when using the applet."
+msgstr ""
+"ലഘുപ്രയോഗം ഉപയോഗിച്ചു് അഡ്ഹോക് ശൃംഖലകള്‍ തയ്യാറാക്കുന്നതു് പ്രവര്‍ത്തന രഹിതമാക്കുന്നതിനായി ഇതു് true "
+"ആക്കുക."
+
+#: org.gnome.nm-applet.gschema.xml.in:36
+msgid "Show the applet in notification area"
+msgstr "ലഘുപ്രയോഗം അറിയിപ്പുകളുടെ സ്ഥാനത്ത് കാണിക്കുക"
+
+#: org.gnome.nm-applet.gschema.xml.in:37
+msgid "Set to FALSE to disable displaying the applet in the notification area."
+msgstr "ലഘുപ്രയോഗം അറിയിപ്പുകളുടെ സ്ഥാനത്ത് കാണിക്കാതിരിക്കാൻ FALSE എന്ന് ആക്കുക"
 
 #: shared/nm-utils/nm-shared-utils.c:793
 #, c-format
@@ -183,7 +253,7 @@ msgid "New Mobile Broadband connection…"
 msgstr "പുതിയ മൊബൈല്‍ ബ്രോഡ്ബാന്‍ഡ് കണക്ഷന്‍"
 
 #: src/applet-device-broadband.c:809 src/applet-device-bt.c:75
-#: src/applet-device-ethernet.c:124 src/applet-device-wifi.c:1269
+#: src/applet-device-ethernet.c:124 src/applet-device-wifi.c:1251
 msgid "Connection Established"
 msgstr "ബന്ധം സ്ഥാപിച്ചു"
 
@@ -224,7 +294,7 @@ msgstr ""
 "മൊബൈല്‍ ബ്രോഡ്ബാന്‍ഡ് ബന്ധം '%s' ഉപയോക്താവിനോടു് ആധികാരികത ഉറപ്പാക്കുന്നതിനായി "
 "ആവശ്യപ്പെട്ടിരിക്കുന്നു..."
 
-#: src/applet-device-bt.c:113 src/applet.c:2595 src/mobile-helpers.c:593
+#: src/applet-device-bt.c:113 src/applet.c:2510 src/mobile-helpers.c:593
 #, fuzzy, c-format
 msgid "Requesting a network address for “%s”…"
 msgstr "'%s'-നു് ഒരു ശൃംഖല വിലാസത്തിനായി ആവശ്യപ്പെടുന്നു..."
@@ -257,7 +327,7 @@ msgid "Ethernet Network"
 msgstr "എതര്‍നെറ്റ് ശൃംഖല"
 
 #. Notify user of unmanaged or unavailable device
-#: src/applet-device-ethernet.c:99 src/applet.c:1350
+#: src/applet-device-ethernet.c:99 src/applet.c:1265
 msgid "disconnected"
 msgstr "ബന്ധം വിഛേദിച്ചിരിയ്ക്കുന്നു"
 
@@ -320,7 +390,7 @@ msgstr "പുതിയ വയര്‍ലെസ് ശൃംഖല ഉണ്ട
 msgid "(none)"
 msgstr "(ഒന്നുമില്ല)"
 
-#: src/applet-device-wifi.c:523 src/applet-device-wifi.c:1366
+#: src/applet-device-wifi.c:523 src/applet-device-wifi.c:1349
 msgid "Failed to add new connection"
 msgstr "പുതിയ ബന്ധം ചേര്‍ക്കാനായില്ല"
 
@@ -328,8 +398,8 @@ msgstr "പുതിയ ബന്ധം ചേര്‍ക്കാനായി�
 msgid "Insufficient privileges."
 msgstr ""
 
-#: src/applet-device-wifi.c:526 src/applet-device-wifi.c:1349
-#: src/applet-device-wifi.c:1369 src/applet.c:415 src/applet.c:498
+#: src/applet-device-wifi.c:526 src/applet-device-wifi.c:1332
+#: src/applet-device-wifi.c:1352 src/applet.c:414 src/applet.c:497
 msgid "Connection failure"
 msgstr "ബന്ധമായില്ല"
 
@@ -362,61 +432,56 @@ msgstr "ഹാര്‍ഡ്‌​വെയര്‍ സ്വിച്ച് �
 msgid "_Available networks"
 msgstr "എല്ലാ ഉപയോക്താക്കള്‍ക്കും ലഭ്യമാകുക"
 
-#: src/applet-device-wifi.c:1083
+#: src/applet-device-wifi.c:1066
 msgid "Wi-Fi Networks Available"
 msgstr "ലഭ്യമായ വയര്‍ലെസ് ശൃംഖലകള്‍"
 
-#: src/applet-device-wifi.c:1084
+#: src/applet-device-wifi.c:1067
 msgid "Use the network menu to connect to a Wi-Fi network"
 msgstr "ശൃംഖലകളുടെ പട്ടികയുപയോഗിച്ചു് ഒരു വയര്‍ലെസ് ശൃംഖലയുമായി ബന്ധപ്പെടുക"
 
-#: src/applet-device-wifi.c:1087 src/applet.c:819
-#, fuzzy
-msgid "Don’t show this message again"
-msgstr "ഈ സന്ദേശം ഇനി കാണിക്കരുതു്"
-
-#: src/applet-device-wifi.c:1268
+#: src/applet-device-wifi.c:1249
 #, fuzzy, c-format
 msgid "You are now connected to the Wi-Fi network “%s”."
 msgstr "നിങ്ങള്‍ ഇപ്പോള്‍ വയര്‍ലെസ് ശൃംഖല '%s'-മായി ബന്ധപ്പെട്ടിരിയ്ക്കുന്നു."
 
-#: src/applet-device-wifi.c:1303
+#: src/applet-device-wifi.c:1286
 #, fuzzy, c-format
 msgid "Preparing Wi-Fi network connection “%s”…"
 msgstr "വയര്‍ഡ് ശൃംഖല ബന്ധം '%s' തയ്യാറാകുന്നു..."
 
-#: src/applet-device-wifi.c:1306
+#: src/applet-device-wifi.c:1289
 #, fuzzy, c-format
 msgid "Configuring Wi-Fi network connection “%s”…"
 msgstr "വയര്‍ലെസ് ശൃംഖല ബന്ധം '%s' ക്രമീകരിക്കുന്നു..."
 
-#: src/applet-device-wifi.c:1309
+#: src/applet-device-wifi.c:1292
 #, fuzzy, c-format
 msgid "User authentication required for Wi-Fi network “%s”…"
 msgstr ""
 "വയര്‍ലെസ് ബന്ധം '%s' ഉപയോക്താവിനോടു് ആധികാരികത ഉറപ്പാക്കുന്നതിനായി ആവശ്യപ്പെട്ടിരിക്കുന്നു..."
 
-#: src/applet-device-wifi.c:1312
+#: src/applet-device-wifi.c:1295
 #, fuzzy, c-format
 msgid "Requesting a Wi-Fi network address for “%s”…"
 msgstr "'%s'-നുള്ള ഒരു വയര്‍ലെസ് ശൃംഖല വിലാസത്തിനായി ആവശ്യപ്പെടുന്നു..."
 
-#: src/applet-device-wifi.c:1323
+#: src/applet-device-wifi.c:1306
 #, fuzzy, c-format
 msgid "Wi-Fi network connection “%s” active: %s (%d%%)"
 msgstr "വയര്‍ലെസ് ശൃംഖല ബന്ധം '%s' സജീവമാണു്: %s (%d%%)"
 
-#: src/applet-device-wifi.c:1327
+#: src/applet-device-wifi.c:1310
 #, fuzzy, c-format
 msgid "Wi-Fi network connection “%s” active"
 msgstr "വയര്‍ലെസ് ശൃംഖല ബന്ധം '%s' സജീവമാണു്"
 
-#: src/applet-device-wifi.c:1346
+#: src/applet-device-wifi.c:1329
 msgid "Failed to activate connection"
 msgstr "ബന്ധം സജീവമാക്കുന്നതില്‍ പരാജയപ്പെട്ടു"
 
-#: src/applet-device-wifi.c:1347 src/applet-device-wifi.c:1367 src/applet.c:413
-#: src/applet.c:464 src/applet.c:496
+#: src/applet-device-wifi.c:1330 src/applet-device-wifi.c:1350 src/applet.c:412
+#: src/applet.c:463 src/applet.c:495
 msgid "Unknown error"
 msgstr "അറിയാത്ത ഏതോ പ്രശ്നം"
 
@@ -432,7 +497,7 @@ msgstr "എല്‍ഇഎപി"
 msgid "Dynamic WEP"
 msgstr "ഡൈനമിക് ഡബ്ലിയുഇപി"
 
-#: src/applet-dialogs.c:64 src/applet-dialogs.c:226 src/applet-dialogs.c:228
+#: src/applet-dialogs.c:64 src/applet-dialogs.c:226
 msgid "WPA/WPA2"
 msgstr "ഡബ്ലിയുപിഎ/ഡബ്ലിയുപിഎ2"
 
@@ -445,6 +510,11 @@ msgstr "വിലാസങ്ങള്‍"
 #: src/applet-dialogs.c:224
 msgid "WEP"
 msgstr "ഡബ്ലിയുഇപി"
+
+#: src/applet-dialogs.c:228
+#, fuzzy
+msgid "WPA/WPA2/WPA3"
+msgstr "ഡബ്ലിയുപിഎ/ഡബ്ലിയുപിഎ2"
 
 #: src/applet-dialogs.c:230
 msgid "WPA3"
@@ -732,23 +802,28 @@ msgstr "ഡിയുഎന്‍ കണക്ഷനുണ്ടാക്കു�
 msgid "Failed to write connection to VPN UI: incomplete write"
 msgstr ""
 
-#: src/applet.c:412
+#: src/applet.c:411
 msgid "Failed to add/activate connection"
 msgstr "ഒരു ബന്ധം ചേര്‍ക്കാന്‍/സജീവമാക്കാന്‍ സാധിച്ചില്ല"
 
-#: src/applet.c:463
+#: src/applet.c:462
 msgid "Device disconnect failed"
 msgstr "ഉപകരണം വേര്‍പ്പെടുത്താന്‍ സാധിച്ചില്ല"
 
-#: src/applet.c:466
+#: src/applet.c:465
 msgid "Disconnect failure"
 msgstr "വേര്‍പ്പെടുത്താന്‍ സാധിച്ചില്ല"
 
-#: src/applet.c:495
+#: src/applet.c:494
 msgid "Connection activation failed"
 msgstr "ബന്ധം സജീവമാക്കാന്‍ സാധിച്ചില്ല"
 
-#: src/applet.c:916
+#: src/applet.c:731
+#, fuzzy
+msgid "Don’t show this message again"
+msgstr "ഈ സന്ദേശം ഇനി കാണിക്കരുതു്"
+
+#: src/applet.c:831
 #, fuzzy, c-format
 msgid ""
 "\n"
@@ -758,7 +833,7 @@ msgstr ""
 "\n"
 "വിപിഎന്‍ കണക്ഷനില്‍ തടസ്സം നേരിട്ടതിനാല്‍ വിപിഎന്‍ ബന്ധം '%s' വിഛേദിക്കപ്പെട്ടു."
 
-#: src/applet.c:918
+#: src/applet.c:833
 #, fuzzy, c-format
 msgid ""
 "\n"
@@ -768,7 +843,7 @@ msgstr ""
 "\n"
 "ശൃംഖല കണക്ഷനില്‍ തടസ്സം നേരിട്ടതിനാല്‍ വിപിഎന്‍ ബന്ധം '%s' പരാജയപ്പെട്ടു."
 
-#: src/applet.c:920
+#: src/applet.c:835
 #, fuzzy, c-format
 msgid ""
 "\n"
@@ -777,7 +852,7 @@ msgstr ""
 "\n"
 "വിപിഎന്‍ സര്‍വീസ് അപ്രതീക്ഷിതമായി നിലച്ചതിനാല്‍ വിപിഎന്‍ ബന്ധം '%s' പരാജയപ്പെട്ടു."
 
-#: src/applet.c:922
+#: src/applet.c:837
 #, fuzzy, c-format
 msgid ""
 "\n"
@@ -787,7 +862,7 @@ msgstr ""
 "\n"
 "വിപിഎന്‍ സേവനം തെറ്റായ ക്രമീകരമാണെന്നറിയിച്ചതിനാല്‍ വിപിഎന്‍ ബന്ധം '%s' പരാജയപ്പെട്ടു."
 
-#: src/applet.c:924
+#: src/applet.c:839
 #, fuzzy, c-format
 msgid ""
 "\n"
@@ -796,7 +871,7 @@ msgstr ""
 "\n"
 "ബന്ധപ്പെടാനനുവദിച്ച സമയം കഴിഞ്ഞുപോയതിനാല്‍ വിപിഎന്‍ ബന്ധം '%s' പരാജയപ്പെട്ടു."
 
-#: src/applet.c:926
+#: src/applet.c:841
 #, fuzzy, c-format
 msgid ""
 "\n"
@@ -806,7 +881,7 @@ msgstr ""
 "വിപിഎന്‍ സേവനം ശരിയായ സമയത്തു് ആരംഭിക്കുവാന്‍ സാധ്യമാകാത്തതിനാല്‍ വിപിഎന്‍ ബന്ധം '%s' "
 "പരാജയപ്പെട്ടു."
 
-#: src/applet.c:928
+#: src/applet.c:843
 #, fuzzy, c-format
 msgid ""
 "\n"
@@ -815,7 +890,7 @@ msgstr ""
 "\n"
 "വിപിഎന്‍ സേവനം ആരംഭിക്കുന്നതിലുള്ള തടസ്സം കാരണം വിപിഎന്‍ ബന്ധം '%s' പരാജയപ്പെട്ടു."
 
-#: src/applet.c:930
+#: src/applet.c:845
 #, fuzzy, c-format
 msgid ""
 "\n"
@@ -824,7 +899,7 @@ msgstr ""
 "\n"
 "സാധുവായ വിപിഎന്‍ രഹസ്യങ്ങള്‍ ലഭ്യമല്ലാത്തതിനാല്‍ വിപിഎന്‍ ബന്ധം '%s' പരാജയപ്പെട്ടു."
 
-#: src/applet.c:932
+#: src/applet.c:847
 #, fuzzy, c-format
 msgid ""
 "\n"
@@ -833,7 +908,7 @@ msgstr ""
 "\n"
 "അസാധുവായ വിപിഎന്‍ രഹസ്യങ്ങള്‍ കാരണം വിപിഎന്‍ ബന്ധം '%s' പരാജയപ്പെട്ടു."
 
-#: src/applet.c:937
+#: src/applet.c:852
 #, fuzzy, c-format
 msgid ""
 "\n"
@@ -842,7 +917,7 @@ msgstr ""
 "\n"
 "വിപിഎന്‍ ബന്ധം '%s' പരാജയപ്പെട്ടു."
 
-#: src/applet.c:964
+#: src/applet.c:879
 #, c-format
 msgid ""
 "VPN connection has been successfully established.\n"
@@ -853,19 +928,19 @@ msgstr ""
 "\n"
 "%s\n"
 
-#: src/applet.c:966
+#: src/applet.c:881
 msgid "VPN connection has been successfully established.\n"
 msgstr "വിപിഎന്‍ കണക്ഷന്‍ വിജയകരമായി സ്ഥാപിച്ചിരിയ്ക്കുന്നു.\n"
 
-#: src/applet.c:968
+#: src/applet.c:883
 msgid "VPN Login Message"
 msgstr "വിപിഎന്‍ ലോഗിന്‍ സന്ദേശം"
 
-#: src/applet.c:976 src/applet.c:1016
+#: src/applet.c:891 src/applet.c:931
 msgid "VPN Connection Failed"
 msgstr "വിപിഎന്‍ ബന്ധം പരാജയപ്പെട്ടു"
 
-#: src/applet.c:1020
+#: src/applet.c:935
 #, fuzzy, c-format
 msgid ""
 "\n"
@@ -878,7 +953,7 @@ msgstr ""
 "\n"
 "%s"
 
-#: src/applet.c:1023
+#: src/applet.c:938
 #, fuzzy, c-format
 msgid ""
 "\n"
@@ -891,139 +966,139 @@ msgstr ""
 "\n"
 "%s"
 
-#: src/applet.c:1338
+#: src/applet.c:1253
 msgid "device not ready (firmware missing)"
 msgstr "ഉപകരണം തയ്യാറല്ല (ഫേംവെയര്‍ ഇല്ല)"
 
-#: src/applet.c:1340
+#: src/applet.c:1255
 msgid "device not ready"
 msgstr "ഉപകരണം തയ്യാറല്ല"
 
-#: src/applet.c:1366
+#: src/applet.c:1281
 msgid "Disconnect"
 msgstr "ബന്ധം വിഛേദിക്കുക"
 
-#: src/applet.c:1380
+#: src/applet.c:1295
 msgid "device not managed"
 msgstr "ഉപകരണം കൈകാര്യം ചെയ്യാത്തതാണു്"
 
-#: src/applet.c:1454
+#: src/applet.c:1369
 msgid "No network devices available"
 msgstr "ശൃംഖല ഉപകരണങ്ങളൊന്നും ലഭ്യമല്ല"
 
-#: src/applet.c:1500
+#: src/applet.c:1415
 msgid "_VPN Connections"
 msgstr "_വിപിഎന്‍ ബന്ധങ്ങള്‍"
 
-#: src/applet.c:1544
+#: src/applet.c:1459
 #, fuzzy
 msgid "_Configure VPN…"
 msgstr "വിപി_എന്‍ ക്രമീകരിക്കുക..."
 
-#: src/applet.c:1547
+#: src/applet.c:1462
 #, fuzzy
 msgid "_Add a VPN connection…"
 msgstr "_വിപിഎന്‍ ബന്ധങ്ങള്‍"
 
-#: src/applet.c:1653
+#: src/applet.c:1568
 #, fuzzy
 msgid "NetworkManager is not running…"
 msgstr "NetworkManager പ്രവര്‍ത്തനത്തിലില്ല..."
 
-#: src/applet.c:1658 src/applet.c:2726
+#: src/applet.c:1573 src/applet.c:2641
 msgid "Networking disabled"
 msgstr "ശൃംഖല ബന്ധം പ്രവര്‍ത്ത രഹിതമാക്കിയിരിക്കുന്നു"
 
 #. 'Enable Networking' item
-#: src/applet.c:1868
+#: src/applet.c:1783
 msgid "Enable _Networking"
 msgstr "_ശൃംഖല ബന്ധം സജ്ജമാക്കുക"
 
 #. 'Enable Wi-Fi' item
-#: src/applet.c:1877
+#: src/applet.c:1792
 msgid "Enable _Wi-Fi"
 msgstr "_വയര്‍ലെസ് സജ്ജമാക്കുക"
 
 #. 'Enable Mobile Broadband' item
-#: src/applet.c:1886
+#: src/applet.c:1801
 msgid "Enable _Mobile Broadband"
 msgstr "_മൊബൈല്‍ ബ്രോഡ്ബാന്‍ഡ് സജ്ജമാക്കുക"
 
 #. Toggle notifications item
-#: src/applet.c:1898
+#: src/applet.c:1813
 msgid "Enable N_otifications"
 msgstr "അറിയിപ്പു_കള്‍ പ്രവര്‍ത്തന സജ്ജമാക്കുക"
 
 #. 'Connection Information' item
-#: src/applet.c:1910
+#: src/applet.c:1825
 msgid "Connection _Information"
 msgstr "ബന്ധ _വിവരം"
 
 #. 'Edit Connections...' item
-#: src/applet.c:1918
+#: src/applet.c:1833
 #, fuzzy
 msgid "Edit Connections…"
 msgstr "ബന്ധങ്ങള്‍ ചിട്ടപ്പെടുത്തുക..."
 
-#: src/applet.c:1932
+#: src/applet.c:1847
 msgid "_About"
 msgstr "_അണിയറ വിശേഷം"
 
-#: src/applet.c:2246
+#: src/applet.c:2161
 #, fuzzy, c-format
 msgid "You are now connected to “%s”."
 msgstr "നിങ്ങള്‍ ഇപ്പോള്‍ '%s'-മായി ബന്ധപ്പെട്ടിരിക്കുന്നു."
 
-#: src/applet.c:2286
+#: src/applet.c:2201
 msgid "Disconnected"
 msgstr "ബന്ധംവിഛേദിച്ചിരിക്കുന്നു"
 
-#: src/applet.c:2287
+#: src/applet.c:2202
 msgid "The network connection has been disconnected."
 msgstr "ശൃംഖല ബന്ധം വിഛേദിച്ചിരിക്കുന്നു."
 
-#: src/applet.c:2589
+#: src/applet.c:2504
 #, fuzzy, c-format
 msgid "Preparing network connection “%s”…"
 msgstr "ശൃംഖല ബന്ധം '%s'-നായി തയ്യാറെടുക്കുന്നു..."
 
-#: src/applet.c:2592
+#: src/applet.c:2507
 #, fuzzy, c-format
 msgid "User authentication required for network connection “%s”…"
 msgstr ""
 "ശൃംഖല ബന്ധം '%s' ഉപയോക്താവിനോടു് ആധികാരികത ഉറപ്പാക്കുന്നതിനായി ആവശ്യപ്പെട്ടിരിക്കുന്നു..."
 
-#: src/applet.c:2598
+#: src/applet.c:2513
 #, fuzzy, c-format
 msgid "Network connection “%s” active"
 msgstr "ശൃംഖല ബന്ധം '%s' സജീവമാണു്"
 
-#: src/applet.c:2671
+#: src/applet.c:2586
 #, fuzzy, c-format
 msgid "Starting VPN connection “%s”…"
 msgstr "വിപിഎന്‍ ബന്ധം '%s' ആരംഭിക്കുന്നു..."
 
-#: src/applet.c:2674
+#: src/applet.c:2589
 #, fuzzy, c-format
 msgid "User authentication required for VPN connection “%s”…"
 msgstr ""
 "വിപിഎന്‍ ബന്ധം '%s' ഉപയോക്താവിനോടു് ആധികാരികത ഉറപ്പാക്കുന്നതിനായി ആവശ്യപ്പെട്ടിരിക്കുന്നു..."
 
-#: src/applet.c:2677
+#: src/applet.c:2592
 #, fuzzy, c-format
 msgid "Requesting a VPN address for “%s”…"
 msgstr "'%s'-നായി ഒരു വിപിഎന്‍ വിലാസം ആവശ്യപ്പെടുന്നു..."
 
-#: src/applet.c:2680
+#: src/applet.c:2595
 #, fuzzy
 msgid "VPN connection active"
 msgstr "വിപിഎന്‍ ബന്ധം '%s' സജീവമാണു്"
 
-#: src/applet.c:2730
+#: src/applet.c:2645
 msgid "No network connection"
 msgstr "ശൃംഖല ബന്ധം ലഭ്യമല്ല"
 
-#: src/applet.c:3352
+#: src/applet.c:3280
 msgid "NetworkManager Applet"
 msgstr "NetworkManager ലഘുപ്രയോഗം"
 
@@ -1153,7 +1228,7 @@ msgid "Bonded _connections"
 msgstr "ബോണ്ടട് _ബന്ധങ്ങള്‍:"
 
 #: src/connection-editor/ce-page-bond.ui:105
-#: src/connection-editor/ce-page-wifi.ui:400
+#: src/connection-editor/ce-page-wifi.ui:294
 #, fuzzy
 msgid "M_ode"
 msgstr "_മോഡ്:"
@@ -2843,40 +2918,22 @@ msgstr ""
 msgid "Ad-hoc"
 msgstr "അഡ്-ഹോക്"
 
-#: src/connection-editor/ce-page-wifi.ui:203
-msgid "mW"
-msgstr "mW"
-
-#: src/connection-editor/ce-page-wifi.ui:222
-#, fuzzy
-msgid "Transmission po_wer"
-msgstr "ട്രാന്‍സ്മിഷന്‍ _പവര്‍:"
-
-#: src/connection-editor/ce-page-wifi.ui:256
-msgid "Mb/s"
-msgstr "Mb/s"
-
-#: src/connection-editor/ce-page-wifi.ui:275
-#, fuzzy
-msgid "_Rate"
-msgstr "_നിരക്ക്:"
-
-#: src/connection-editor/ce-page-wifi.ui:311
+#: src/connection-editor/ce-page-wifi.ui:205
 #, fuzzy
 msgid "_BSSID"
 msgstr "_BSSID:"
 
-#: src/connection-editor/ce-page-wifi.ui:336
+#: src/connection-editor/ce-page-wifi.ui:230
 #, fuzzy
 msgid "C_hannel"
 msgstr "_ചാനല്‍:"
 
-#: src/connection-editor/ce-page-wifi.ui:368
+#: src/connection-editor/ce-page-wifi.ui:262
 #, fuzzy
 msgid "Ban_d"
 msgstr "_ബാന്‍ഡ്:"
 
-#: src/connection-editor/ce-page-wifi.ui:414
+#: src/connection-editor/ce-page-wifi.ui:308
 #, fuzzy
 msgid "SS_ID"
 msgstr "എസ്എസ്_ഐഡി:"
@@ -4124,11 +4181,13 @@ msgid "Dynamic WEP (802.1X)"
 msgstr "ഡൈനമിക് WEP (802.1X)"
 
 #: src/connection-editor/page-wifi-security.c:410
-msgid "WPA & WPA2 Personal"
+#, fuzzy
+msgid "WPA/WPA2/WPA3 Personal"
 msgstr "WPA & WPA2 പേഴ്സണല്‍"
 
 #: src/connection-editor/page-wifi-security.c:423
-msgid "WPA & WPA2 Enterprise"
+#, fuzzy
+msgid "WPA/WPA2 Enterprise"
 msgstr "WPA & WPA2 എന്റര്‍പ്രൈസ്"
 
 #: src/connection-editor/page-wifi-security.c:436
@@ -4408,6 +4467,20 @@ msgstr "DER അല്ലെങ്കില്‍ PEM സര്‍ട്ടിഫ
 msgid "DER, PEM, or PKCS#12 private keys (*.der, *.pem, *.p12, *.key)"
 msgstr "DER, PEM, അല്ലെങ്കില്‍ PKCS#12 സ്വകാര്യ കീകള്‍ (*.der, *.pem, *.p12)"
 
+#~ msgid "mW"
+#~ msgstr "mW"
+
+#, fuzzy
+#~ msgid "Transmission po_wer"
+#~ msgstr "ട്രാന്‍സ്മിഷന്‍ _പവര്‍:"
+
+#~ msgid "Mb/s"
+#~ msgstr "Mb/s"
+
+#, fuzzy
+#~ msgid "_Rate"
+#~ msgstr "_നിരക്ക്:"
+
 #~ msgid "More networks"
 #~ msgstr "കൂടുതല്‍ ശൃംഖലകള്‍"
 
@@ -4525,68 +4598,6 @@ msgstr "DER, PEM, അല്ലെങ്കില്‍ PKCS#12 സ്വകാ�
 #, fuzzy
 #~ msgid "WEP inde_x"
 #~ msgstr "WEP _സൂചിക:"
-
-#~ msgid "Disable connected notifications"
-#~ msgstr "ബന്ധപ്പെടുമ്പോളുള്ള അറിയിപ്പുകള്‍ പ്രവര്‍ത്തന രഹിതമാക്കുക"
-
-#~ msgid ""
-#~ "Set this to true to disable notifications when connecting to a network."
-#~ msgstr ""
-#~ "ഒരു ശൃംഖലയുമായി ബന്ധപ്പെടുമ്പോള്‍, അറിയിപ്പുകള്‍ പ്രവര്‍ത്തന രഹിതമാക്കുന്നതിനായി ഇതു് true ആക്കുക."
-
-#~ msgid "Disable disconnected notifications"
-#~ msgstr "ബന്ധം വേര്‍പ്പെടുമ്പോളുള്ള അറിയിപ്പുകള്‍ പ്രവര്‍ത്തന രഹിതമാക്കുക"
-
-#~ msgid ""
-#~ "Set this to true to disable notifications when disconnecting from a "
-#~ "network."
-#~ msgstr ""
-#~ "ഒരു ശൃംഖലയില്‍ നിന്നും ബന്ധം വിഛേദിക്കുമ്പോള്‍, അറിയിപ്പുകള്‍ പ്രവര്‍ത്തന രഹിതമാക്കുന്നതിനായി ഇതു് "
-#~ "true ആക്കുക."
-
-#~ msgid "Disable VPN notifications"
-#~ msgstr "വിപിഎന്‍ അറിയിപ്പുകള്‍ പ്രവര്‍ത്തന രഹിതമാക്കുക"
-
-#~ msgid ""
-#~ "Set this to true to disable notifications when connecting to or "
-#~ "disconnecting from a VPN."
-#~ msgstr ""
-#~ "ഒരു വിപിഎനില്‍ നിന്നും ബന്ധം വിഛേദിക്കുമ്പോള്‍ അല്ലെങ്കില്‍ തയ്യാറാക്കുമ്പോള്‍, അറിയിപ്പുകള്‍ "
-#~ "പ്രവര്‍ത്തന രഹിതമാക്കുന്നതിനായി ഇതു് true ആക്കുക."
-
-#~ msgid "Suppress networks available notifications"
-#~ msgstr "ശൃംഖലകള്‍ ലഭ്യമാണെന്ന അറിയിപ്പ് കാണിയ്ക്കേണ്ട"
-
-#~ msgid ""
-#~ "Set this to true to disable notifications when Wi-Fi networks are "
-#~ "available."
-#~ msgstr ""
-#~ "വയര്‍ലെസ് ശൃംഖലകള്‍ ലഭ്യമാകുമ്പോള്‍, അറിയിപ്പുകള്‍ പ്രവര്‍ത്തന രഹിതമാക്കുന്നതിനായി ഇതു് true ആക്കുക."
-
-#~ msgid "Stamp"
-#~ msgstr "സ്റ്റാമ്പ്"
-
-#~ msgid ""
-#~ "Used to determine whether settings should be migrated to a new version."
-#~ msgstr ""
-#~ "സജ്ജീകരണങ്ങള്‍ പുതിയ പതിപ്പില്‍ നീക്കേണ്ടതുണ്ടോ എന്നു് നിശ്ചയിക്കുന്നതിനായി ഉപയോഗിക്കുന്നു."
-
-#, fuzzy
-#~ msgid "Disable WiFi Create"
-#~ msgstr "വൈഫൈ ഉണ്ടാക്കുന്നതു് പ്രവര്‍ത്തന രഹിതമാക്കുക"
-
-#~ msgid ""
-#~ "Set to true to disable creation of adhoc networks when using the applet."
-#~ msgstr ""
-#~ "ലഘുപ്രയോഗം ഉപയോഗിച്ചു് അഡ്ഹോക് ശൃംഖലകള്‍ തയ്യാറാക്കുന്നതു് പ്രവര്‍ത്തന രഹിതമാക്കുന്നതിനായി ഇതു് "
-#~ "true ആക്കുക."
-
-#~ msgid "Show the applet in notification area"
-#~ msgstr "ലഘുപ്രയോഗം അറിയിപ്പുകളുടെ സ്ഥാനത്ത് കാണിക്കുക"
-
-#~ msgid ""
-#~ "Set to FALSE to disable displaying the applet in the notification area."
-#~ msgstr "ലഘുപ്രയോഗം അറിയിപ്പുകളുടെ സ്ഥാനത്ത് കാണിക്കാതിരിക്കാൻ FALSE എന്ന് ആക്കുക"
 
 #~ msgid "Ignore CA certificate"
 #~ msgstr "CA സര്‍ട്ടിഫീക്കേറ്റ് വേണ്ടെന്നു്വയ്ക്കുക"

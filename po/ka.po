@@ -1,42 +1,39 @@
-# Kurdish translation for network-manager
-# Copyright (c) 2007 Rosetta Contributors and Canonical Ltd 2007
-# This file is distributed under the same license as the network-manager package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2007.
-# Erdal Ronahî <erdal dot ronahi at gmail dot com>, 2011.
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: network-manager\n"
+"Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/network-manager-"
 "applet/\n"
 "POT-Creation-Date: 2022-11-07 08:48+0100\n"
-"PO-Revision-Date: 2011-10-18 15:16+0200\n"
-"Last-Translator: Erdal Ronahî <erdal dot ronahi at gmail dot com>\n"
-"Language-Team: Kurdish Team http://pckurd.net\n"
-"Language: ku\n"
+"PO-Revision-Date: 2022-07-21 18:18+0200\n"
+"Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
+"Language-Team: \n"
+"Language: ka\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Virtaal 0.6.1\n"
-"X-Launchpad-Export-Date: 2011-10-17 13:00+0000\n"
+"X-Generator: Poedit 3.1.1\n"
 
 #: nm-applet.desktop.in:3 src/applet-dialogs.c:724 src/applet.c:3166
 msgid "Network"
-msgstr "Tor"
+msgstr "ქსელი"
 
 #: nm-applet.desktop.in:4
 msgid "Manage your network connections"
-msgstr "Girêdanên torê yên xwe birêve bike"
+msgstr "ქსელური შეერთებების მართვა"
 
 #: nm-connection-editor.appdata.xml.in:7
-#, fuzzy
 msgid "NetworkManager"
-msgstr "Sepanoka NetworkManager"
+msgstr "NetworkManager"
 
 #: nm-connection-editor.appdata.xml.in:8
-#, fuzzy
 msgid "NetworkManager connection editor"
-msgstr "Girêdana torê tune"
+msgstr "NetworkManager -ის შეერთების მორგება"
 
 #: nm-connection-editor.appdata.xml.in:11
 msgid ""
@@ -51,18 +48,16 @@ msgid ""
 msgstr ""
 
 #: nm-connection-editor.appdata.xml.in:27
-#, fuzzy
 msgid "The NetworkManager Developers"
-msgstr "Sepanoka NetworkManager"
+msgstr "NetworkManager-ის პროგრამისტები"
 
 #: nm-connection-editor.desktop.in:3
-#, fuzzy
 msgid "Advanced Network Configuration"
-msgstr "Girêdanên torê yên çalak"
+msgstr ""
 
 #: nm-connection-editor.desktop.in:4
 msgid "Manage and change your network connection settings"
-msgstr "Girêdanên torê yên xwe birêve û sererast bike"
+msgstr ""
 
 #: org.gnome.nm-applet.gschema.xml.in:6
 msgid "Disable connected notifications"
@@ -73,9 +68,8 @@ msgid "Set this to true to disable notifications when connecting to a network."
 msgstr ""
 
 #: org.gnome.nm-applet.gschema.xml.in:11
-#, fuzzy
 msgid "Disable disconnected notifications"
-msgstr "negirêdayî"
+msgstr ""
 
 #: org.gnome.nm-applet.gschema.xml.in:12
 msgid ""
@@ -103,7 +97,7 @@ msgstr ""
 
 #: org.gnome.nm-applet.gschema.xml.in:26
 msgid "Stamp"
-msgstr "Damxe"
+msgstr ""
 
 #: org.gnome.nm-applet.gschema.xml.in:27
 msgid "Used to determine whether settings should be migrated to a new version."
@@ -161,7 +155,7 @@ msgstr ""
 
 #: src/8021x.ui:7 src/ethernet-dialog.c:90
 msgid "802.1X authentication"
-msgstr ""
+msgstr "802.1X ავთენტიკაცია"
 
 #: src/8021x.ui:31 src/applet-device-ethernet.c:341 src/applet-dialogs.c:1179
 #: src/connection-editor/ce-ip4-routes.ui:30
@@ -182,28 +176,27 @@ msgstr ""
 #: src/connection-editor/vpn-helpers.c:198 src/gsm-unlock.ui:28
 #: src/mobile-helpers.c:451
 msgid "_Cancel"
-msgstr ""
+msgstr "_შეწყვეტა"
 
 #: src/8021x.ui:46
 msgid "C_onnect"
-msgstr "_Girêdan"
+msgstr "_კავშირი"
 
 #: src/8021x.ui:122
-#, fuzzy
 msgid "_Network name"
-msgstr "_Navê torê:"
+msgstr "ქსელის _სახელი"
 
 #: src/ap-menu-item.c:68
 msgid "ad-hoc"
-msgstr ""
+msgstr "ad-hoc"
 
 #: src/ap-menu-item.c:73
 msgid "secure."
-msgstr ""
+msgstr "დაცული."
 
 #: src/ap-menu-item.c:77
 msgid "insecure."
-msgstr ""
+msgstr "დაუცველი."
 
 #: src/applet-device-broadband.c:147
 msgid "Wrong PUK code; please contact your provider."
@@ -227,28 +220,26 @@ msgstr ""
 #: src/connection-editor/connection-helpers.c:95
 #: src/connection-editor/page-mobile.c:295
 msgid "Mobile Broadband"
-msgstr ""
+msgstr "მობილური ფართოზოლოვანი ინტერნეტი"
 
 #: src/applet-device-broadband.c:780 src/applet-device-bt.c:61
 #: src/applet-device-ethernet.c:107
 msgid "Available"
-msgstr "Amade"
+msgstr "ხელმისაწვდომია"
 
 #. Default connection item
 #: src/applet-device-broadband.c:793
-#, fuzzy
 msgid "New Mobile Broadband connection…"
-msgstr "Girêdana tora biqablo bi '%s' re (%d%%)"
+msgstr ""
 
 #: src/applet-device-broadband.c:809 src/applet-device-bt.c:75
 #: src/applet-device-ethernet.c:124 src/applet-device-wifi.c:1251
 msgid "Connection Established"
-msgstr "Girêdan pêkhat"
+msgstr ""
 
 #: src/applet-device-broadband.c:810
-#, fuzzy
 msgid "You are now connected to the Mobile Broadband network."
-msgstr "Niha bi tora biqablo re girêdayî yî."
+msgstr ""
 
 #: src/applet-device-broadband.c:950 src/applet-device-broadband.c:956
 msgid "Mobile Broadband network."
@@ -256,105 +247,100 @@ msgstr ""
 
 #: src/applet-device-broadband.c:951
 msgid "You are now registered on the home network."
-msgstr "Niha di tora malê de qeyd bûyî."
+msgstr ""
 
 #: src/applet-device-broadband.c:957
-#, fuzzy
 msgid "You are now registered on a roaming network."
-msgstr "Niha bi tora biqablo re girêdayî yî."
+msgstr ""
 
 #: src/applet-device-bt.c:76
-#, fuzzy
 msgid "You are now connected to the mobile broadband network."
-msgstr "Niha bi tora biqablo re girêdayî yî."
+msgstr ""
 
 #: src/applet-device-bt.c:104 src/mobile-helpers.c:584
-#, fuzzy, c-format
+#, c-format
 msgid "Preparing mobile broadband connection “%s”…"
-msgstr "Girêdana tora biqablo bi '%s' re (%d%%)"
+msgstr ""
 
 #: src/applet-device-bt.c:107 src/mobile-helpers.c:587
-#, fuzzy, c-format
+#, c-format
 msgid "Configuring mobile broadband connection “%s”…"
-msgstr "Girêdana tora biqablo bi '%s' re (%d%%)"
+msgstr ""
 
 #: src/applet-device-bt.c:110 src/mobile-helpers.c:590
-#, fuzzy, c-format
+#, c-format
 msgid "User authentication required for mobile broadband connection “%s”…"
-msgstr "Ji tora bêqablo '%s' navnîşana torê tê xwestin..."
+msgstr ""
 
 #: src/applet-device-bt.c:113 src/applet.c:2510 src/mobile-helpers.c:593
-#, fuzzy, c-format
+#, c-format
 msgid "Requesting a network address for “%s”…"
-msgstr "Ji bo '%s' navnîşana torê tê xwestin..."
+msgstr ""
 
 #: src/applet-device-bt.c:117 src/mobile-helpers.c:612
-#, fuzzy, c-format
+#, c-format
 msgid "Mobile broadband connection “%s” active"
-msgstr "Girêdana tora biqablo bi '%s' re (%d%%)"
+msgstr ""
 
 #: src/applet-device-ethernet.c:16
 msgid "Auto Ethernet"
 msgstr ""
 
 #: src/applet-device-ethernet.c:72
-#, fuzzy, c-format
+#, c-format
 msgid "Ethernet Networks (%s)"
-msgstr "Torên biqablo (%s)"
+msgstr "Ethernet ქსელები (%s)"
 
 #: src/applet-device-ethernet.c:74
-#, fuzzy, c-format
+#, c-format
 msgid "Ethernet Network (%s)"
-msgstr "Tora biqablo (%s)"
+msgstr "Ethernet ქსელი (%s)"
 
 #: src/applet-device-ethernet.c:77
-#, fuzzy
 msgid "Ethernet Networks"
-msgstr "Torên biqablo"
+msgstr "Ethernet ქსელები "
 
 #: src/applet-device-ethernet.c:79
-#, fuzzy
 msgid "Ethernet Network"
-msgstr "Tora biqablo"
+msgstr "Ethernet ქსელი"
 
 #. Notify user of unmanaged or unavailable device
 #: src/applet-device-ethernet.c:99 src/applet.c:1265
 msgid "disconnected"
-msgstr "negirêdayî"
+msgstr "გათიშულია"
 
 #: src/applet-device-ethernet.c:125
-#, fuzzy
 msgid "You are now connected to the ethernet network."
-msgstr "Niha bi tora biqablo re girêdayî yî."
+msgstr ""
 
 #: src/applet-device-ethernet.c:153
-#, fuzzy, c-format
+#, c-format
 msgid "Preparing ethernet network connection “%s”…"
-msgstr "Girêdana tora biqablo '%s' tê amadekirin..."
+msgstr ""
 
 #: src/applet-device-ethernet.c:156
-#, fuzzy, c-format
+#, c-format
 msgid "Configuring ethernet network connection “%s”…"
-msgstr "Girêdana tora biqablo '%s' tê veavakirin..."
+msgstr ""
 
 #: src/applet-device-ethernet.c:159
-#, fuzzy, c-format
+#, c-format
 msgid "User authentication required for ethernet network connection “%s”…"
-msgstr "Ji tora bêqablo '%s' navnîşana torê tê xwestin..."
+msgstr ""
 
 #: src/applet-device-ethernet.c:162
-#, fuzzy, c-format
+#, c-format
 msgid "Requesting an ethernet network address for “%s”…"
-msgstr "Ji tora bêqablo '%s' navnîşana torê tê xwestin..."
+msgstr ""
 
 #: src/applet-device-ethernet.c:166
-#, fuzzy, c-format
+#, c-format
 msgid "Ethernet network connection “%s” active"
-msgstr "Girêdana tora biqablo '%s' çalak e"
+msgstr ""
 
 #: src/applet-device-ethernet.c:338
 msgid "DSL authentication"
-msgstr ""
+msgstr "DSL ავთენტიკაცია"
 
 #: src/applet-device-ethernet.c:342 src/applet-dialogs.c:1180
 #: src/connection-editor/ce-ip4-routes.ui:44
@@ -365,26 +351,23 @@ msgstr ""
 #: src/connection-editor/page-bluetooth.c:295
 #: src/connection-editor/page-mobile.c:532 src/mobile-helpers.c:452
 msgid "_OK"
-msgstr ""
+msgstr "_დიახ"
 
 #: src/applet-device-wifi.c:208
-#, fuzzy
 msgid "_Connect to Hidden Wi-Fi Network…"
-msgstr "Li tora bêqablo ya veşartî girê bide..."
+msgstr ""
 
 #: src/applet-device-wifi.c:259
-#, fuzzy
 msgid "Create _New Wi-Fi Network…"
-msgstr "Tora bêqablo ya nû biafirîne"
+msgstr ""
 
 #: src/applet-device-wifi.c:341
 msgid "(none)"
-msgstr "(tune)"
+msgstr ""
 
 #: src/applet-device-wifi.c:523 src/applet-device-wifi.c:1349
-#, fuzzy
 msgid "Failed to add new connection"
-msgstr "Girêdana torê tune"
+msgstr ""
 
 #: src/applet-device-wifi.c:524
 msgid "Insufficient privileges."
@@ -392,95 +375,88 @@ msgstr ""
 
 #: src/applet-device-wifi.c:526 src/applet-device-wifi.c:1332
 #: src/applet-device-wifi.c:1352 src/applet.c:414 src/applet.c:497
-#, fuzzy
 msgid "Connection failure"
-msgstr "Lêzêdekirina girêdanê biserneket"
+msgstr ""
 
 #: src/applet-device-wifi.c:827
-#, fuzzy, c-format
+#, c-format
 msgid "Wi-Fi Networks (%s)"
-msgstr "Torên biqablo (%s)"
+msgstr ""
 
 #: src/applet-device-wifi.c:829
-#, fuzzy, c-format
+#, c-format
 msgid "Wi-Fi Network (%s)"
-msgstr "Tora biqablo (%s)"
+msgstr ""
 
 #: src/applet-device-wifi.c:831
-#, fuzzy
 msgid "Wi-Fi Network"
 msgid_plural "Wi-Fi Networks"
-msgstr[0] "Tora biqablo"
-msgstr[1] "Tora biqablo"
+msgstr[0] ""
+msgstr[1] ""
 
 #: src/applet-device-wifi.c:860
-#, fuzzy
 msgid "Wi-Fi is disabled"
-msgstr "Tor hate neçalakkirin"
+msgstr ""
 
 #: src/applet-device-wifi.c:861
 msgid "Wi-Fi is disabled by hardware switch"
 msgstr ""
 
 #: src/applet-device-wifi.c:887
-#, fuzzy
 msgid "_Available networks"
-msgstr "Amade"
+msgstr ""
 
 #: src/applet-device-wifi.c:1066
-#, fuzzy
 msgid "Wi-Fi Networks Available"
-msgstr "Tora bêqablo (%s)"
+msgstr ""
 
 #: src/applet-device-wifi.c:1067
-#, fuzzy
 msgid "Use the network menu to connect to a Wi-Fi network"
-msgstr "Dema girêdana bi tora bêqablo re çewtî derket"
+msgstr ""
 
 #: src/applet-device-wifi.c:1249
-#, fuzzy, c-format
+#, c-format
 msgid "You are now connected to the Wi-Fi network “%s”."
-msgstr "Niha bi tora bêqablo '%s' re girêdayî yî."
+msgstr ""
 
 #: src/applet-device-wifi.c:1286
-#, fuzzy, c-format
+#, c-format
 msgid "Preparing Wi-Fi network connection “%s”…"
-msgstr "Girêdana torê '%s' tê amadekirin..."
+msgstr ""
 
 #: src/applet-device-wifi.c:1289
-#, fuzzy, c-format
+#, c-format
 msgid "Configuring Wi-Fi network connection “%s”…"
-msgstr "Girêdana tora biqablo '%s' tê veavakirin..."
+msgstr ""
 
 #: src/applet-device-wifi.c:1292
-#, fuzzy, c-format
+#, c-format
 msgid "User authentication required for Wi-Fi network “%s”…"
-msgstr "Ji tora bêqablo '%s' navnîşana torê tê xwestin..."
+msgstr ""
 
 #: src/applet-device-wifi.c:1295
-#, fuzzy, c-format
+#, c-format
 msgid "Requesting a Wi-Fi network address for “%s”…"
-msgstr "Ji bo '%s' navnîşana torê tê xwestin..."
+msgstr ""
 
 #: src/applet-device-wifi.c:1306
-#, fuzzy, c-format
+#, c-format
 msgid "Wi-Fi network connection “%s” active: %s (%d%%)"
-msgstr "Girêdana tora biqablo bi '%s' re (%d%%)"
+msgstr ""
 
 #: src/applet-device-wifi.c:1310
-#, fuzzy, c-format
+#, c-format
 msgid "Wi-Fi network connection “%s” active"
-msgstr "Girêdana tora biqablo '%s' çalak e"
+msgstr ""
 
 #: src/applet-device-wifi.c:1329
-#, fuzzy
 msgid "Failed to activate connection"
-msgstr "Bila girêdana VPN \"%s\" were rakirin?"
+msgstr ""
 
 #: src/applet-device-wifi.c:1330 src/applet-device-wifi.c:1350 src/applet.c:412
 #: src/applet.c:463 src/applet.c:495
 msgid "Unknown error"
-msgstr ""
+msgstr "უცნობი შეცდომა"
 
 #: src/applet-dialogs.c:28
 msgid "Error displaying connection information:"
@@ -488,61 +464,58 @@ msgstr ""
 
 #: src/applet-dialogs.c:60 src/connection-editor/page-wifi-security.c:384
 msgid "LEAP"
-msgstr ""
+msgstr "LEAP"
 
 #: src/applet-dialogs.c:62
 msgid "Dynamic WEP"
-msgstr "WEP a dînamîk"
+msgstr "დინამიკური WEP"
 
 #: src/applet-dialogs.c:64 src/applet-dialogs.c:226
 msgid "WPA/WPA2"
-msgstr "WPA/WPA2"
+msgstr ""
 
 #. Create the expander
 #: src/applet-dialogs.c:163
-#, fuzzy
 msgid "More addresses"
-msgstr "Navnîşan"
+msgstr ""
 
 #: src/applet-dialogs.c:224
 msgid "WEP"
 msgstr "WEP"
 
 #: src/applet-dialogs.c:228
-#, fuzzy
 msgid "WPA/WPA2/WPA3"
-msgstr "WPA/WPA2"
+msgstr ""
 
 #: src/applet-dialogs.c:230
 msgid "WPA3"
-msgstr ""
+msgstr "WPA3"
 
 #: src/applet-dialogs.c:234 src/applet-dialogs.c:243
 #: src/connection-editor/page-wifi-security.c:327
-#, fuzzy
 msgctxt "Wi-Fi/Ethernet security"
 msgid "None"
-msgstr "Tune"
+msgstr "არაფერი"
 
 #: src/applet-dialogs.c:313 src/applet-dialogs.c:586
 #, c-format
 msgid "%u Mb/s"
-msgstr ""
+msgstr "%u მბ/წმ"
 
 #: src/applet-dialogs.c:315 src/applet-dialogs.c:588
 msgctxt "Speed"
 msgid "Unknown"
-msgstr ""
+msgstr "უცნობი"
 
 #. Address
 #: src/applet-dialogs.c:330 src/applet-dialogs.c:352
 msgctxt "Address"
 msgid "Unknown"
-msgstr ""
+msgstr "უცნობი"
 
 #: src/applet-dialogs.c:331 src/applet-dialogs.c:404
 msgid "IP Address"
-msgstr "Navnîşana IP"
+msgstr "IP მისამართი"
 
 #: src/applet-dialogs.c:353
 msgid "Broadcast Address"
@@ -552,31 +525,28 @@ msgstr ""
 #: src/applet-dialogs.c:365
 msgctxt "Subnet Mask"
 msgid "Unknown"
-msgstr ""
+msgstr "უცნობი"
 
 #: src/applet-dialogs.c:366
 msgid "Subnet Mask"
-msgstr "Rûpoşa Bintorê"
+msgstr "ქვექსელის ნიღაბი"
 
 #: src/applet-dialogs.c:428
-#, fuzzy
 msgid "Primary DNS"
-msgstr "DNS ya Yekemîn:"
+msgstr "ძირითადი DNS"
 
 #: src/applet-dialogs.c:428
-#, fuzzy
 msgid "Secondary DNS"
-msgstr "DNS ya Duyemîn:"
+msgstr "მეორადი DNS"
 
 #: src/applet-dialogs.c:428
-#, fuzzy
 msgid "Tertiary DNS"
-msgstr "DNS ya Duyemîn:"
+msgstr "მესამეული DNS"
 
 #: src/applet-dialogs.c:507
 #, c-format
 msgid "Ethernet (%s)"
-msgstr "Tora biqablo (%s)"
+msgstr "Ethernet (%s)"
 
 #: src/applet-dialogs.c:510
 #, c-format
@@ -599,86 +569,80 @@ msgstr "CDMA (%s)"
 #: src/connection-editor/ce-page-team.ui:776
 #: src/connection-editor/page-general.c:368
 msgid "General"
-msgstr ""
+msgstr "მთავარი"
 
 #: src/applet-dialogs.c:530
 msgid "Interface"
-msgstr "Navrû"
+msgstr "ინტერფეისი"
 
 #: src/applet-dialogs.c:545
 msgid "Hardware Address"
-msgstr ""
+msgstr "აპარატურული მისამართი"
 
 #. Driver
 #: src/applet-dialogs.c:558
 msgid "Driver"
-msgstr "Ajoger"
+msgstr "დრაივერი"
 
 #: src/applet-dialogs.c:591
 msgid "Speed"
-msgstr "Lez"
+msgstr "სიჩქარე"
 
 #: src/applet-dialogs.c:604
-#, fuzzy
 msgid "Security"
-msgstr "Ewlehî:"
+msgstr "უსაფრთხოება"
 
 #. --- IPv4 ---
 #: src/applet-dialogs.c:629 src/applet-dialogs.c:891
 #: src/connection-editor/ce-page-team.ui:493
 msgid "IPv4"
-msgstr ""
+msgstr "IPv4"
 
 #: src/applet-dialogs.c:648 src/applet-dialogs.c:696
 msgid "Default Route"
-msgstr ""
+msgstr "ნაგულისხმევი მარშრუტი"
 
 #: src/applet-dialogs.c:676 src/applet-dialogs.c:918
 #: src/connection-editor/ce-page-team.ui:497
 msgid "IPv6"
-msgstr ""
+msgstr "IPv6"
 
 #: src/applet-dialogs.c:717 src/connection-editor/ce-page-wifi.ui:52
 msgid "Hotspot"
-msgstr ""
+msgstr "ჰოტსპოტი"
 
 #: src/applet-dialogs.c:735
-#, fuzzy
 msgid "Password"
-msgstr "Şîfre:"
+msgstr "პაროლი"
 
 #: src/applet-dialogs.c:865
-#, fuzzy
 msgid "VPN Type"
-msgstr "Cure:"
+msgstr "VPN-ის ტიპი"
 
 #: src/applet-dialogs.c:870
 msgid "VPN Gateway"
 msgstr ""
 
 #: src/applet-dialogs.c:874
-#, fuzzy
 msgid "VPN Username"
-msgstr "Navê bikarhêner:"
+msgstr ""
 
 #: src/applet-dialogs.c:878
 msgid "VPN Banner"
 msgstr ""
 
 #: src/applet-dialogs.c:882
-#, fuzzy
 msgid "Base Connection"
-msgstr "Girêdanên VPN"
+msgstr ""
 
 #: src/applet-dialogs.c:883
 msgid "Unknown"
-msgstr ""
+msgstr "უცნობი"
 
 #. Shouldn't really happen but ...
 #: src/applet-dialogs.c:1080
-#, fuzzy
 msgid "No valid active connections found!"
-msgstr "Girêdanên çalak tune!"
+msgstr ""
 
 #: src/applet-dialogs.c:1128
 msgid ""
@@ -693,13 +657,12 @@ msgid ""
 msgstr ""
 
 #: src/applet-dialogs.c:1133
-#, fuzzy
 msgid "NetworkManager Website"
-msgstr "Sepanoka NetworkManager"
+msgstr ""
 
 #: src/applet-dialogs.c:1137
 msgid "translator-credits"
-msgstr ""
+msgstr "თემური დოღონაძე"
 
 #: src/applet-dialogs.c:1147
 msgid ""
@@ -718,21 +681,19 @@ msgstr ""
 #: src/applet-dialogs.c:1186
 #, c-format
 msgid "A password is required to connect to “%s”."
-msgstr ""
+msgstr "%s-თან დასაკავშირებლად საჭიროა პაროლი."
 
 #: src/applet-dialogs.c:1201
 msgid "Password:"
-msgstr "Şîfre:"
+msgstr "პაროლი:"
 
 #: src/applet-dialogs.c:1483
-#, fuzzy
 msgid "SIM PIN unlock required"
-msgstr "Koda PIN pêwîst e"
+msgstr "საჭიროა SIM PIN-ის განბლოკვა"
 
 #: src/applet-dialogs.c:1484
-#, fuzzy
 msgid "SIM PIN Unlock Required"
-msgstr "Koda PIN pêwîst e"
+msgstr ""
 
 #. FIXME: some warning about # of times you can enter incorrect PIN
 #: src/applet-dialogs.c:1486
@@ -745,16 +706,16 @@ msgstr ""
 #. Translators: PIN code entry label
 #: src/applet-dialogs.c:1488
 msgid "PIN code:"
-msgstr "Koda PIN:"
+msgstr "პინ-კოდი:"
 
 #. Translators: Show/obscure PIN checkbox label
 #: src/applet-dialogs.c:1492
 msgid "Show PIN code"
-msgstr "Koda PIN nîşan bide"
+msgstr "PIN კოდის ჩვენება"
 
 #: src/applet-dialogs.c:1494
 msgid "SIM PUK unlock required"
-msgstr "Vekirina SIM bi koda PUK pêwîst e"
+msgstr ""
 
 #: src/applet-dialogs.c:1495
 msgid "SIM PUK Unlock Required"
@@ -771,17 +732,17 @@ msgstr ""
 #. Translators: PUK code entry label
 #: src/applet-dialogs.c:1499
 msgid "PUK code:"
-msgstr ""
+msgstr "PUK კოდი:"
 
 #. Translators: New PIN entry label
 #: src/applet-dialogs.c:1502
 msgid "New PIN code:"
-msgstr ""
+msgstr "ახალი PIN კოდი:"
 
 #. Translators: New PIN verification entry label
 #: src/applet-dialogs.c:1504
 msgid "Re-enter new PIN code:"
-msgstr ""
+msgstr "ახალი PIN კოდი ხელახლა:"
 
 #. Translators: Show/obscure PIN/PUK checkbox label
 #: src/applet-dialogs.c:1509
@@ -789,133 +750,110 @@ msgid "Show PIN/PUK codes"
 msgstr ""
 
 #: src/applet-vpn-request.c:427
-#, fuzzy
 msgid "Connection had no VPN setting"
-msgstr "Agahiya girêdanê"
+msgstr ""
 
 #: src/applet-vpn-request.c:477
-#, fuzzy, c-format
+#, c-format
 msgid "Failed to write connection to VPN UI: %s (%d)"
-msgstr "Bila girêdana VPN \"%s\" were rakirin?"
+msgstr ""
 
 #: src/applet-vpn-request.c:485
 msgid "Failed to write connection to VPN UI: incomplete write"
 msgstr ""
 
 #: src/applet.c:411
-#, fuzzy
 msgid "Failed to add/activate connection"
-msgstr "Bila girêdana VPN \"%s\" were rakirin?"
+msgstr ""
 
 #: src/applet.c:462
-#, fuzzy
 msgid "Device disconnect failed"
-msgstr "negirêdayî"
+msgstr ""
 
 #: src/applet.c:465
-#, fuzzy
 msgid "Disconnect failure"
-msgstr "Negirêdayî"
+msgstr ""
 
 #: src/applet.c:494
-#, fuzzy
 msgid "Connection activation failed"
-msgstr "Lêzêdekirina girêdanê biserneket"
+msgstr ""
 
 #: src/applet.c:731
 msgid "Don’t show this message again"
-msgstr ""
+msgstr "მეტჯერ აღარ მაჩვენო ეს გაფრთხილება"
 
 #: src/applet.c:831
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "\n"
 "The VPN connection “%s” disconnected because the network connection was "
 "interrupted."
 msgstr ""
-"Nikarî dest bi girêdana VPN ya '%s' bike ji ber ku çewtiya girêdanê derket "
-"holê"
 
 #: src/applet.c:833
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "\n"
 "The VPN connection “%s” failed because the network connection was "
 "interrupted."
 msgstr ""
-"Nikarî dest bi girêdana VPN ya '%s' bike ji ber ku çewtiya girêdanê derket "
-"holê"
 
 #: src/applet.c:835
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "\n"
 "The VPN connection “%s” failed because the VPN service stopped unexpectedly."
 msgstr ""
-"Nikarî dest bi girêdana VPN ya '%s' bike ji ber ku çewtiya girêdanê derket "
-"holê"
 
 #: src/applet.c:837
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "\n"
 "The VPN connection “%s” failed because the VPN service returned invalid "
 "configuration."
 msgstr ""
-"Nikarî dest bi girêdana VPN ya '%s' bike ji ber ku çewtiya girêdanê derket "
-"holê"
 
 #: src/applet.c:839
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "\n"
 "The VPN connection “%s” failed because the connection attempt timed out."
 msgstr ""
-"Nikarî dest bi girêdana VPN ya '%s' bike ji ber ku çewtiya girêdanê derket "
-"holê"
 
 #: src/applet.c:841
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "\n"
 "The VPN connection “%s” failed because the VPN service did not start in time."
 msgstr ""
-"Nikarî dest bi girêdana VPN ya '%s' bike ji ber ku çewtiya girêdanê derket "
-"holê"
 
 #: src/applet.c:843
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "\n"
 "The VPN connection “%s” failed because the VPN service failed to start."
 msgstr ""
-"Nikarî dest bi girêdana VPN ya '%s' bike ji ber ku çewtiya girêdanê derket "
-"holê"
 
 #: src/applet.c:845
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "\n"
 "The VPN connection “%s” failed because there were no valid VPN secrets."
 msgstr ""
-"Nikarî dest bi girêdana VPN ya '%s' bike ji ber ku çewtiya girêdanê derket "
-"holê"
 
 #: src/applet.c:847
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "\n"
 "The VPN connection “%s” failed because of invalid VPN secrets."
 msgstr ""
-"Nikarî dest bi girêdana VPN ya '%s' bike ji ber ku çewtiya girêdanê derket "
-"holê"
 
 #: src/applet.c:852
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "\n"
 "The VPN connection “%s” failed."
-msgstr "Girêdana VPN bi '%s' re"
+msgstr ""
 
 #: src/applet.c:879
 #, c-format
@@ -931,32 +869,29 @@ msgstr ""
 
 #: src/applet.c:883
 msgid "VPN Login Message"
-msgstr "Peyaman têketina VPN"
+msgstr ""
 
 #: src/applet.c:891 src/applet.c:931
-#, fuzzy
 msgid "VPN Connection Failed"
-msgstr "Girêdana VPN biserneket"
+msgstr ""
 
 #: src/applet.c:935
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "\n"
 "The VPN connection “%s” failed because the VPN service failed to start.\n"
 "\n"
 "%s"
 msgstr ""
-"Nikarî dest bi girêdana VPN ya '%s' bike ji ber ku çewtiya girêdanê derket "
-"holê"
 
 #: src/applet.c:938
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "\n"
 "The VPN connection “%s” failed to start.\n"
 "\n"
 "%s"
-msgstr "Girêdana VPN bi '%s' re"
+msgstr ""
 
 #: src/applet.c:1253
 msgid "device not ready (firmware missing)"
@@ -968,7 +903,7 @@ msgstr ""
 
 #: src/applet.c:1281
 msgid "Disconnect"
-msgstr "Veqetîne"
+msgstr "გათიშვა"
 
 #: src/applet.c:1295
 msgid "device not managed"
@@ -976,41 +911,37 @@ msgstr ""
 
 #: src/applet.c:1369
 msgid "No network devices available"
-msgstr "Amûrên torê ne amade ne"
+msgstr "ქსელური მოწყობილობები არაა ხელმისაწვდომი"
 
 #: src/applet.c:1415
 msgid "_VPN Connections"
-msgstr "Girêdanên _VPN"
+msgstr ""
 
 #: src/applet.c:1459
-#, fuzzy
 msgid "_Configure VPN…"
-msgstr "VPN _veava bike..."
+msgstr ""
 
 #: src/applet.c:1462
-#, fuzzy
 msgid "_Add a VPN connection…"
-msgstr "Girêdana VPN a nû lê zêde bike"
+msgstr ""
 
 #: src/applet.c:1568
-#, fuzzy
 msgid "NetworkManager is not running…"
-msgstr "NetworkManager naxebite"
+msgstr ""
 
 #: src/applet.c:1573 src/applet.c:2641
 msgid "Networking disabled"
-msgstr "Tor hate neçalakkirin"
+msgstr ""
 
 #. 'Enable Networking' item
 #: src/applet.c:1783
 msgid "Enable _Networking"
-msgstr "_Torê çalak bike"
+msgstr ""
 
 #. 'Enable Wi-Fi' item
 #: src/applet.c:1792
-#, fuzzy
 msgid "Enable _Wi-Fi"
-msgstr "_Bêqablo çalak bike"
+msgstr ""
 
 #. 'Enable Mobile Broadband' item
 #: src/applet.c:1801
@@ -1025,73 +956,71 @@ msgstr ""
 #. 'Connection Information' item
 #: src/applet.c:1825
 msgid "Connection _Information"
-msgstr "_Agahiya girêdanê"
+msgstr ""
 
 #. 'Edit Connections...' item
 #: src/applet.c:1833
-#, fuzzy
 msgid "Edit Connections…"
-msgstr "Girêdanan sererast bike"
+msgstr ""
 
 #: src/applet.c:1847
 msgid "_About"
-msgstr "_Der barê de"
+msgstr "_შესახებ"
 
 #: src/applet.c:2161
-#, fuzzy, c-format
+#, c-format
 msgid "You are now connected to “%s”."
-msgstr "Niha bi '%s' re girêdayî yî."
+msgstr ""
 
 #: src/applet.c:2201
 msgid "Disconnected"
-msgstr "Negirêdayî"
+msgstr "გამოერთებული"
 
 #: src/applet.c:2202
 msgid "The network connection has been disconnected."
-msgstr "Girêdana torê qut bu."
+msgstr ""
 
 #: src/applet.c:2504
-#, fuzzy, c-format
+#, c-format
 msgid "Preparing network connection “%s”…"
-msgstr "Girêdana torê '%s' tê amadekirin..."
+msgstr ""
 
 #: src/applet.c:2507
-#, fuzzy, c-format
+#, c-format
 msgid "User authentication required for network connection “%s”…"
-msgstr "Ji tora bêqablo '%s' navnîşana torê tê xwestin..."
+msgstr ""
 
 #: src/applet.c:2513
-#, fuzzy, c-format
+#, c-format
 msgid "Network connection “%s” active"
-msgstr "Girêdana torê '%s' çalak e"
+msgstr ""
 
 #: src/applet.c:2586
-#, fuzzy, c-format
+#, c-format
 msgid "Starting VPN connection “%s”…"
-msgstr "Dest bi girêdana VPN ya '%s' dike"
+msgstr ""
 
 #: src/applet.c:2589
-#, fuzzy, c-format
+#, c-format
 msgid "User authentication required for VPN connection “%s”…"
-msgstr "Ji tora bêqablo '%s' navnîşana torê tê xwestin..."
+msgstr ""
 
 #: src/applet.c:2592
-#, fuzzy, c-format
+#, c-format
 msgid "Requesting a VPN address for “%s”…"
-msgstr "Ji bo '%s' navnîşana VPN tê xwestin..."
+msgstr ""
 
 #: src/applet.c:2595
-#, fuzzy
 msgid "VPN connection active"
-msgstr "Girêdana VPN '%s' çalak e"
+msgstr ""
 
 #: src/applet.c:2645
 msgid "No network connection"
-msgstr "Girêdana torê tune"
+msgstr ""
 
 #: src/applet.c:3280
 msgid "NetworkManager Applet"
-msgstr "Sepanoka NetworkManager"
+msgstr ""
 
 #: src/connection-editor/ce-ip4-routes.ui:88
 #: src/connection-editor/ce-ip6-routes.ui:88 src/connection-editor/ce-page.h:97
@@ -1110,7 +1039,7 @@ msgstr ""
 #: src/connection-editor/ce-page-wireguard.ui:603
 #: src/connection-editor/nm-connection-list.ui:87
 msgid "_Add"
-msgstr ""
+msgstr "დამატება"
 
 #: src/connection-editor/ce-ip4-routes.ui:124
 #: src/connection-editor/ce-ip6-routes.ui:124
@@ -1123,7 +1052,7 @@ msgstr ""
 #: src/connection-editor/connection-helpers.c:748
 #: src/connection-editor/nm-connection-list.ui:101
 msgid "_Delete"
-msgstr ""
+msgstr "_წაშლა"
 
 #: src/connection-editor/ce-ip4-routes.ui:153
 #: src/connection-editor/ce-ip6-routes.ui:153
@@ -1143,14 +1072,12 @@ msgid ""
 msgstr ""
 
 #: src/connection-editor/ce-new-connection.ui:65
-#, fuzzy
 msgid "C_reate…"
-msgstr "Biafirîne..."
+msgstr "_შექმნა…"
 
 #: src/connection-editor/ce-new-connection.ui:120
-#, fuzzy
 msgid "Choose a Connection Type"
-msgstr "Cureyê girêdana VPN hilbijêre"
+msgstr "აირჩიეთ შეერთების ტიპი"
 
 #: src/connection-editor/ce-new-connection.ui:137
 msgid ""
@@ -1164,66 +1091,63 @@ msgstr ""
 #: src/connection-editor/ce-page-ethernet.ui:129
 #: src/connection-editor/ce-page-infiniband.ui:50
 #: src/connection-editor/ce-page-wifi.ui:139
-#, fuzzy
 msgid "_Device"
-msgstr "_Servîs:"
+msgstr "_მოწყობილობა"
 
 #: src/connection-editor/ce-page-bond.ui:24
 #: src/connection-editor/ce-page-team.ui:434
 msgid "Round-robin"
-msgstr ""
+msgstr "რიგრიგობით"
 
 #: src/connection-editor/ce-page-bond.ui:27
 #: src/connection-editor/ce-page-team.ui:438
 msgid "Active backup"
-msgstr ""
+msgstr "აქტიური-მარქაფი"
 
 #: src/connection-editor/ce-page-bond.ui:30
 msgid "XOR"
-msgstr ""
+msgstr "XOR"
 
 #: src/connection-editor/ce-page-bond.ui:33
 #: src/connection-editor/ce-page-team.ui:430
 msgid "Broadcast"
-msgstr ""
+msgstr "გამოცხადება"
 
 #: src/connection-editor/ce-page-bond.ui:36
 msgid "802.3ad"
-msgstr ""
+msgstr "802.3ad"
 
 #: src/connection-editor/ce-page-bond.ui:39
 msgid "Adaptive transmit load balancing"
-msgstr ""
+msgstr "შეგუებადი გადაცემის დატვირთვის გადანაწილება"
 
 #: src/connection-editor/ce-page-bond.ui:42
 msgid "Adaptive load balancing"
-msgstr ""
+msgstr "დატვირთვის შეგუებადი გადანაწილება"
 
 #: src/connection-editor/ce-page-bond.ui:53
 msgid "MII (recommended)"
-msgstr ""
+msgstr "MII (რეკომენდებულია)"
 
 #: src/connection-editor/ce-page-bond.ui:56
-#, fuzzy
 msgid "ARP"
-msgstr "EAP"
+msgstr "ARP"
 
 #: src/connection-editor/ce-page-bond.ui:91
-#, fuzzy
 msgid "Bonded _connections"
-msgstr "Girêdanên VPN"
+msgstr "გადაბმული ქსელის _ინტერფეისები"
 
 #: src/connection-editor/ce-page-bond.ui:105
 #: src/connection-editor/ce-page-wifi.ui:294
 msgid "M_ode"
-msgstr ""
+msgstr "_რეჟიმი"
 
 #: src/connection-editor/ce-page-bond.ui:194
 #: src/connection-editor/ce-page-bridge.ui:134
 #: src/connection-editor/ce-page-team.ui:248
 #: src/connection-editor/nm-connection-list.ui:115
 msgid "_Edit"
-msgstr "_Sererastkirin"
+msgstr "ჩასწორება"
 
 #: src/connection-editor/ce-page-bond.ui:238
 msgid "Monitoring _frequency"
@@ -1233,19 +1157,18 @@ msgstr ""
 #: src/connection-editor/ce-page-bond.ui:422
 #: src/connection-editor/ce-page-bond.ui:462
 msgid "ms"
-msgstr ""
+msgstr "მწმ"
 
 #: src/connection-editor/ce-page-bond.ui:291
 #: src/connection-editor/ce-page-bridge.ui:192
 #: src/connection-editor/ce-page-team.ui:293
 #: src/connection-editor/ce-page-wireguard.ui:373
-#, fuzzy
 msgid "_Interface name"
-msgstr "Navrû:"
+msgstr "ინტერფეისის _სახელი"
 
 #: src/connection-editor/ce-page-bond.ui:316
 msgid "_Link Monitoring"
-msgstr ""
+msgstr "შეერთების _მონიტორინგი"
 
 #: src/connection-editor/ce-page-bond.ui:347
 msgid "ARP _targets"
@@ -1259,16 +1182,15 @@ msgstr ""
 
 #: src/connection-editor/ce-page-bond.ui:373
 msgid "Link _up delay"
-msgstr ""
+msgstr "შეერთების ჩართვის _დაყოვნება"
 
 #: src/connection-editor/ce-page-bond.ui:387
 msgid "Link _down delay"
-msgstr ""
+msgstr "შეერთების გათიშვის _დაყოვნება"
 
 #: src/connection-editor/ce-page-bond.ui:481
-#, fuzzy
 msgid "_Primary"
-msgstr "DNS ya Yekemîn:"
+msgstr "_ძირითადი"
 
 #: src/connection-editor/ce-page-bond.ui:495
 msgid ""
@@ -1284,7 +1206,7 @@ msgstr ""
 #: src/connection-editor/ce-page-wifi.ui:111
 #: src/connection-editor/ce-page-wireguard.ui:474
 msgid "_MTU"
-msgstr ""
+msgstr "_MTU"
 
 #: src/connection-editor/ce-page-bond.ui:540
 #: src/connection-editor/ce-page-ethernet.ui:223
@@ -1294,34 +1216,32 @@ msgstr ""
 #: src/connection-editor/ce-page-wifi.ui:92
 #: src/connection-editor/ce-page-wireguard.ui:518
 msgid "bytes"
-msgstr "bayt"
+msgstr "ბაიტი"
 
 #: src/connection-editor/ce-page-bridge-port.ui:42
 msgid "Path _cost"
-msgstr ""
+msgstr "ბილიკის _ფასი"
 
 #: src/connection-editor/ce-page-bridge-port.ui:55
 #: src/connection-editor/ce-page-bridge.ui:178
-#, fuzzy
 msgid "_Priority"
-msgstr "_Ewlehî:"
+msgstr "_პრიორიტეტი"
 
 #: src/connection-editor/ce-page-bridge-port.ui:97
 msgid "_Hairpin mode"
-msgstr ""
+msgstr "თმისსარჭის _რეჟიმი"
 
 #: src/connection-editor/ce-page-bridge.ui:62
-#, fuzzy
 msgid "Bridged _connections"
-msgstr "Girêdanên VPN"
+msgstr ""
 
 #: src/connection-editor/ce-page-bridge.ui:218
 msgid "_Forward delay"
-msgstr ""
+msgstr "გადაგზავნის _დაყოვნება"
 
 #: src/connection-editor/ce-page-bridge.ui:232
 msgid "_Hello time"
-msgstr ""
+msgstr "მისალმების _დრო"
 
 #: src/connection-editor/ce-page-bridge.ui:252
 msgid "STP forwarding delay, in seconds"
@@ -1332,16 +1252,15 @@ msgstr ""
 #: src/connection-editor/ce-page-bridge.ui:415
 #: src/connection-editor/ce-page-bridge.ui:471
 msgid "s"
-msgstr ""
+msgstr "წმ"
 
 #: src/connection-editor/ce-page-bridge.ui:294
 msgid "STP hello time, in seconds"
 msgstr ""
 
 #: src/connection-editor/ce-page-bridge.ui:328
-#, fuzzy
 msgid "Enable I_GMP snooping"
-msgstr "_Torê çalak bike"
+msgstr ""
 
 #: src/connection-editor/ce-page-bridge.ui:332
 msgid ""
@@ -1367,7 +1286,7 @@ msgstr ""
 
 #: src/connection-editor/ce-page-bridge.ui:378
 msgid "_Max age"
-msgstr ""
+msgstr "მაქს. _ასაკი"
 
 #: src/connection-editor/ce-page-bridge.ui:398
 msgid "STP maximum message age, in seconds"
@@ -1375,7 +1294,7 @@ msgstr ""
 
 #: src/connection-editor/ce-page-bridge.ui:434
 msgid "_Aging time"
-msgstr ""
+msgstr "დაბერების _დრო"
 
 #: src/connection-editor/ce-page-bridge.ui:454
 msgid "The Ethernet MAC address aging time, in seconds"
@@ -1383,7 +1302,7 @@ msgstr ""
 
 #: src/connection-editor/ce-page-bridge.ui:490
 msgid "Group _forward mask"
-msgstr ""
+msgstr "ჯგუფური გადაგზავნის ნიღაბი"
 
 #: src/connection-editor/ce-page-bridge.ui:504
 msgid ""
@@ -1399,27 +1318,27 @@ msgstr ""
 
 #: src/connection-editor/ce-page-dcb.ui:49
 msgid "FCoE"
-msgstr ""
+msgstr "FCoE"
 
 #: src/connection-editor/ce-page-dcb.ui:62
 msgid "iSCSI"
-msgstr ""
+msgstr "iSCSI"
 
 #: src/connection-editor/ce-page-dcb.ui:75
 msgid "FIP"
-msgstr ""
+msgstr "FIP"
 
 #: src/connection-editor/ce-page-dcb.ui:88
 msgid "Flow Control"
-msgstr ""
+msgstr "დინების კონტროლი"
 
 #: src/connection-editor/ce-page-dcb.ui:101
 msgid "Feature"
-msgstr ""
+msgstr "თვისება"
 
 #: src/connection-editor/ce-page-dcb.ui:118
 msgid "Enable"
-msgstr ""
+msgstr "ჩართვა"
 
 #: src/connection-editor/ce-page-dcb.ui:135
 msgid "Advertise"
@@ -1432,16 +1351,16 @@ msgstr ""
 #: src/connection-editor/ce-page-dcb.ui:168
 #: src/connection-editor/ce-page-dcb.ui:635
 msgid "Priority"
-msgstr ""
+msgstr "პრიორიტეტი"
 
 #: src/connection-editor/ce-page-dcb.ui:336
 #: src/connection-editor/ce-page-dcb.ui:401
 msgid "Options…"
-msgstr ""
+msgstr "პარამეტრები…"
 
 #: src/connection-editor/ce-page-dcb.ui:352
 msgid "Priority Groups"
-msgstr ""
+msgstr "პრიორიტეტის ჯგუფები"
 
 #: src/connection-editor/ce-page-dcb.ui:419
 #: src/connection-editor/ce-page-dcb.ui:442
@@ -1449,17 +1368,17 @@ msgstr ""
 #: src/connection-editor/page-wifi.c:144 src/connection-editor/page-wifi.c:148
 #: src/connection-editor/page-wifi.c:169
 msgid "default"
-msgstr "standard"
+msgstr "ნაგულისხმები"
 
 #: src/connection-editor/ce-page-dcb.ui:487
 #: src/connection-editor/ce-page-dcb.ui:535
 msgid "Fabric"
-msgstr ""
+msgstr "ნაჭერი"
 
 #: src/connection-editor/ce-page-dcb.ui:488
 #: src/connection-editor/ce-page-dcb.ui:539
 msgid "VN2VN"
-msgstr ""
+msgstr "VN2VN"
 
 #: src/connection-editor/ce-page-dcb.ui:546
 #: src/connection-editor/ce-page-dcb.ui:996
@@ -1481,7 +1400,7 @@ msgstr ""
 #: src/connection-editor/ce-page-wireguard.ui:530
 #: src/connection-editor/ce-page-wireguard.ui:544
 msgid "0"
-msgstr ""
+msgstr "0"
 
 #: src/connection-editor/ce-page-dcb.ui:694
 #: src/connection-editor/ce-page-dcb.ui:1135
@@ -1490,7 +1409,7 @@ msgstr ""
 #: src/connection-editor/ce-page-dcb.ui:2194
 #: src/connection-editor/ce-page-dcb.ui:2536
 msgid "1"
-msgstr ""
+msgstr "1"
 
 #: src/connection-editor/ce-page-dcb.ui:735
 #: src/connection-editor/ce-page-dcb.ui:1184
@@ -1526,7 +1445,7 @@ msgstr "4"
 #: src/connection-editor/ce-page-dcb.ui:2354
 #: src/connection-editor/ce-page-dcb.ui:2736
 msgid "5"
-msgstr ""
+msgstr "5"
 
 #: src/connection-editor/ce-page-dcb.ui:899
 #: src/connection-editor/ce-page-dcb.ui:1380
@@ -1535,7 +1454,7 @@ msgstr ""
 #: src/connection-editor/ce-page-dcb.ui:2394
 #: src/connection-editor/ce-page-dcb.ui:2786
 msgid "6"
-msgstr ""
+msgstr "6"
 
 #: src/connection-editor/ce-page-dcb.ui:940
 #: src/connection-editor/ce-page-dcb.ui:1429
@@ -1544,11 +1463,11 @@ msgstr ""
 #: src/connection-editor/ce-page-dcb.ui:2434
 #: src/connection-editor/ce-page-dcb.ui:2836
 msgid "7"
-msgstr ""
+msgstr "7"
 
 #: src/connection-editor/ce-page-dcb.ui:1069
 msgid "Traffic Class"
-msgstr ""
+msgstr "ტრაფიკის კლასი"
 
 #: src/connection-editor/ce-page-dcb.ui:1473
 msgid "Strict Bandwidth"
@@ -1564,7 +1483,7 @@ msgstr ""
 
 #: src/connection-editor/ce-page-dcb.ui:2469
 msgid "Group ID"
-msgstr ""
+msgstr "ჯგუფის ID"
 
 #: src/connection-editor/ce-page-dcb.ui:2881
 msgid "Enter the priority group ID for each User Priority."
@@ -1591,9 +1510,8 @@ msgstr ""
 
 #: src/connection-editor/ce-page-dsl.ui:19
 #: src/connection-editor/ce-page-mobile.ui:62
-#, fuzzy
 msgid "_Username"
-msgstr "_Navê Bikarhêner:"
+msgstr "_მომხმარებელი"
 
 #: src/connection-editor/ce-page-dsl.ui:33
 msgid "Username used to authenticate with the PPPoE service."
@@ -1606,13 +1524,12 @@ msgid ""
 msgstr ""
 
 #: src/connection-editor/ce-page-dsl.ui:59
-#, fuzzy
 msgid "_Service"
-msgstr "_Servîs:"
+msgstr "_სერვისი"
 
 #: src/connection-editor/ce-page-dsl.ui:71
 msgid "Sho_w password"
-msgstr "Şîfreyê _nîşan bide"
+msgstr "პაროლის _ჩვენება"
 
 #: src/connection-editor/ce-page-dsl.ui:89
 msgid "Password used to authenticate with the PPPoE service."
@@ -1620,19 +1537,16 @@ msgstr ""
 
 #: src/connection-editor/ce-page-dsl.ui:102
 #: src/connection-editor/ce-page-mobile.ui:76
-#, fuzzy
 msgid "_Password"
-msgstr "Şî_fre:"
+msgstr "პაროლი"
 
 #: src/connection-editor/ce-page-dsl.ui:116
-#, fuzzy
 msgid "PPP _interface"
-msgstr "Navrû"
+msgstr "PPP _ინტერფეისი"
 
 #: src/connection-editor/ce-page-dsl.ui:130
-#, fuzzy
 msgid "P_arent interface"
-msgstr "Navrû:"
+msgstr "მშობელი ინტერფეისი"
 
 #: src/connection-editor/ce-page-dsl.ui:144
 msgid "An arbitrary name to assign to the newly created PPP interface."
@@ -1643,9 +1557,8 @@ msgid "The interface on which the PPP connection will be established."
 msgstr ""
 
 #: src/connection-editor/ce-page-dsl.ui:171
-#, fuzzy
 msgid "C_laim interface"
-msgstr "Navrû:"
+msgstr ""
 
 #: src/connection-editor/ce-page-dsl.ui:175
 msgid ""
@@ -1664,7 +1577,7 @@ msgstr ""
 #: src/connection-editor/ce-page-wifi.ui:32
 #: src/connection-editor/page-ip4.c:118 src/connection-editor/page-ip6.c:136
 msgid "Automatic"
-msgstr "Bixweber"
+msgstr "ავტომატური"
 
 #: src/connection-editor/ce-page-ethernet.ui:20
 msgid "Twisted Pair (TP)"
@@ -1676,7 +1589,7 @@ msgstr ""
 
 #: src/connection-editor/ce-page-ethernet.ui:26
 msgid "BNC"
-msgstr ""
+msgstr "BNC"
 
 #: src/connection-editor/ce-page-ethernet.ui:29
 msgid "Media Independent Interface (MII)"
@@ -1684,63 +1597,60 @@ msgstr ""
 
 #: src/connection-editor/ce-page-ethernet.ui:40
 msgid "10 Mb/s"
-msgstr ""
+msgstr "10 მბ/წმ"
 
 #: src/connection-editor/ce-page-ethernet.ui:43
 msgid "100 Mb/s"
-msgstr ""
+msgstr "100 მბ/წმ"
 
 #: src/connection-editor/ce-page-ethernet.ui:46
 msgid "1 Gb/s"
-msgstr ""
+msgstr "1 გბ/წმ"
 
 #: src/connection-editor/ce-page-ethernet.ui:49
 msgid "10 Gb/s"
-msgstr ""
+msgstr "10 გბ/წმ"
 
 #: src/connection-editor/ce-page-ethernet.ui:60
 msgid "Half"
-msgstr ""
+msgstr "ნახევარი"
 
 #: src/connection-editor/ce-page-ethernet.ui:63
 msgid "Full"
-msgstr ""
+msgstr "სრული"
 
 #: src/connection-editor/ce-page-ethernet.ui:74
 #: src/connection-editor/page-ip6.c:149
 msgid "Ignore"
-msgstr ""
+msgstr "იგნორი"
 
 #: src/connection-editor/ce-page-ethernet.ui:80
 #: src/connection-editor/ce-page-ip4.ui:18
 #: src/connection-editor/ce-page-ip6.ui:18 src/connection-editor/page-ip4.c:155
 #: src/connection-editor/page-ip6.c:185
 msgid "Manual"
-msgstr ""
+msgstr "ხელით"
 
 #: src/connection-editor/ce-page-ethernet.ui:97
 msgid "_Port"
-msgstr ""
+msgstr "_პორტი"
 
 #: src/connection-editor/ce-page-ethernet.ui:156
 #: src/connection-editor/ce-page-wifi.ui:169
-#, fuzzy
 msgid "C_loned MAC address"
-msgstr "Navnîşan"
+msgstr ""
 
 #: src/connection-editor/ce-page-ethernet.ui:242
-#, fuzzy
 msgid "Wake on LAN"
-msgstr "Şî_freya mifteya taybet:"
+msgstr ""
 
 #: src/connection-editor/ce-page-ethernet.ui:258
-#, fuzzy
 msgid "De_fault"
-msgstr "Standard"
+msgstr "_ნაგულისხმები"
 
 #: src/connection-editor/ce-page-ethernet.ui:274
 msgid "_Ignore"
-msgstr ""
+msgstr "_იგნორი"
 
 #: src/connection-editor/ce-page-ethernet.ui:290
 msgid "_Phy"
@@ -1760,16 +1670,15 @@ msgstr ""
 
 #: src/connection-editor/ce-page-ethernet.ui:350
 msgid "_Arp"
-msgstr ""
+msgstr "_Arp"
 
 #: src/connection-editor/ce-page-ethernet.ui:365
 msgid "Ma_gic"
 msgstr ""
 
 #: src/connection-editor/ce-page-ethernet.ui:388
-#, fuzzy
 msgid "_Wake on LAN password"
-msgstr "Şî_freya mifteya taybet:"
+msgstr ""
 
 #: src/connection-editor/ce-page-ethernet.ui:402
 msgid ""
@@ -1788,9 +1697,8 @@ msgid ""
 msgstr ""
 
 #: src/connection-editor/ce-page-ethernet.ui:448
-#, fuzzy
 msgid "_Speed"
-msgstr "_Lez:"
+msgstr ""
 
 #: src/connection-editor/ce-page-ethernet.ui:462
 msgid ""
@@ -1812,17 +1720,15 @@ msgstr ""
 
 #: src/connection-editor/ce-page-general.ui:29
 msgid "Yes"
-msgstr ""
+msgstr "დიახ"
 
 #: src/connection-editor/ce-page-general.ui:32
-#, fuzzy
 msgid "No"
-msgstr "Tune"
+msgstr "არა"
 
 #: src/connection-editor/ce-page-general.ui:65
-#, fuzzy
 msgid "All _users may connect to this network"
-msgstr "Niha bi tora biqablo re girêdayî yî."
+msgstr ""
 
 #: src/connection-editor/ce-page-general.ui:80
 msgid "Automatically connect to _VPN"
@@ -1833,9 +1739,8 @@ msgid "Firewall _zone"
 msgstr ""
 
 #: src/connection-editor/ce-page-general.ui:121
-#, fuzzy
 msgid "_Metered connection"
-msgstr "Girêdanên VPN"
+msgstr ""
 
 #: src/connection-editor/ce-page-general.ui:134
 msgid ""
@@ -1846,9 +1751,8 @@ msgid ""
 msgstr ""
 
 #: src/connection-editor/ce-page-general.ui:150
-#, fuzzy
 msgid "Connect _automatically with priority"
-msgstr "Bixweber _girêbide"
+msgstr ""
 
 #: src/connection-editor/ce-page-general.ui:167
 msgid ""
@@ -1860,13 +1764,12 @@ msgstr ""
 #. IP-over-InfiniBand "datagram mode"
 #: src/connection-editor/ce-page-infiniband.ui:17
 msgid "Datagram"
-msgstr ""
+msgstr "დატაგრამა"
 
 #. IP-over-InfiniBand "connected mode"
 #: src/connection-editor/ce-page-infiniband.ui:20
-#, fuzzy
 msgid "Connected"
-msgstr "_Girêdan"
+msgstr "შეერთებული"
 
 #: src/connection-editor/ce-page-infiniband.ui:37
 msgid "_Transport mode"
@@ -1874,62 +1777,59 @@ msgstr ""
 
 #: src/connection-editor/ce-page-ip-tunnel.ui:17
 msgid "IPIP"
-msgstr ""
+msgstr "IPIP"
 
 #: src/connection-editor/ce-page-ip-tunnel.ui:20
 msgid "GRE"
-msgstr ""
+msgstr "GRE"
 
 #: src/connection-editor/ce-page-ip-tunnel.ui:23
 msgid "SIT"
-msgstr ""
+msgstr "SIT"
 
 #: src/connection-editor/ce-page-ip-tunnel.ui:26
 msgid "ISATAP"
-msgstr ""
+msgstr "ISATAP"
 
 #: src/connection-editor/ce-page-ip-tunnel.ui:29
 msgid "VTI"
-msgstr ""
+msgstr "VTI"
 
 #: src/connection-editor/ce-page-ip-tunnel.ui:32
 msgid "IP6IP6"
-msgstr ""
+msgstr "IP6IP6"
 
 #: src/connection-editor/ce-page-ip-tunnel.ui:35
 msgid "IPIP6"
-msgstr ""
+msgstr "IPIP6"
 
 #: src/connection-editor/ce-page-ip-tunnel.ui:38
 msgid "IP6GRE"
-msgstr ""
+msgstr "IP6GRE"
 
 #: src/connection-editor/ce-page-ip-tunnel.ui:41
 msgid "VTI6"
-msgstr ""
+msgstr "VTI6"
 
 #: src/connection-editor/ce-page-ip-tunnel.ui:61
-#, fuzzy
 msgid "Device name"
-msgstr "_Servîs:"
+msgstr "მოწყობილობის სახელი"
 
 #: src/connection-editor/ce-page-ip-tunnel.ui:85
-#, fuzzy
 msgid "Parent device"
-msgstr "Tora biqablo (%s)"
+msgstr ""
 
 #: src/connection-editor/ce-page-ip-tunnel.ui:115
 msgid "Mode"
-msgstr ""
+msgstr "რეჟიმი"
 
 #: src/connection-editor/ce-page-ip-tunnel.ui:128
 msgid "Local IP"
-msgstr ""
+msgstr "ლოკალური IP მისამართი"
 
 #: src/connection-editor/ce-page-ip-tunnel.ui:140
-#, fuzzy
 msgid "Remote IP"
-msgstr "_Rake"
+msgstr "დაშორებული IP მისამართი"
 
 #: src/connection-editor/ce-page-ip-tunnel.ui:152
 msgid "Input key"
@@ -1941,7 +1841,7 @@ msgstr ""
 
 #: src/connection-editor/ce-page-ip-tunnel.ui:245
 msgid "MTU"
-msgstr ""
+msgstr "MTU"
 
 #: src/connection-editor/ce-page-ip4.ui:15
 #: src/connection-editor/ce-page-ip6.ui:15
@@ -1951,19 +1851,18 @@ msgstr ""
 #: src/connection-editor/ce-page-ip4.ui:21
 #: src/connection-editor/ce-page-ip6.ui:21
 msgid "Link-Local"
-msgstr ""
+msgstr "Link-Local"
 
 #: src/connection-editor/ce-page-ip4.ui:24
 #: src/connection-editor/ce-page-ip6.ui:24 src/connection-editor/page-ip4.c:175
 #: src/connection-editor/page-ip6.c:205
 msgid "Shared to other computers"
-msgstr ""
+msgstr "გაზიარებული სხვა კომპიუტერებთან"
 
 #: src/connection-editor/ce-page-ip4.ui:47
 #: src/connection-editor/ce-page-ip6.ui:81
-#, fuzzy
 msgid "_Method"
-msgstr "_Rêbaz:"
+msgstr "_მეთოდი"
 
 #: src/connection-editor/ce-page-ip4.ui:202
 msgid ""
@@ -1992,9 +1891,8 @@ msgstr ""
 #: src/connection-editor/ce-page-ip4.ui:256
 #: src/connection-editor/ce-page-ip6.ui:263
 #: src/connection-editor/page-ip4.c:350 src/connection-editor/page-ip6.c:339
-#, fuzzy
 msgid "DNS ser_vers"
-msgstr "Pêşkêşkarên _DNS:"
+msgstr ""
 
 #: src/connection-editor/ce-page-ip4.ui:270
 msgid ""
@@ -2021,17 +1919,17 @@ msgstr ""
 #: src/connection-editor/ce-page-ip6.ui:35
 #: src/connection-editor/page-general.c:41
 msgid "Default"
-msgstr "Standard"
+msgstr "ნაგულისხმევი"
 
 #: src/connection-editor/ce-page-ip6.ui:38
 #: src/connection-editor/ce-page-macsec.ui:32
 #: src/connection-editor/page-ip4.c:185 src/connection-editor/page-ip6.c:213
 msgid "Disabled"
-msgstr "Bêbandorkirî"
+msgstr "გამორთულია"
 
 #: src/connection-editor/ce-page-ip6.ui:41
 msgid "Enabled (prefer public address)"
-msgstr ""
+msgstr "ჩართულია (პრიორიტეტი გარე მისამართზე)"
 
 #: src/connection-editor/ce-page-ip6.ui:44
 msgid "Enabled (prefer temporary address)"
@@ -2039,7 +1937,7 @@ msgstr ""
 
 #: src/connection-editor/ce-page-ip6.ui:55
 msgid "EUI64"
-msgstr ""
+msgstr "EUI64"
 
 #: src/connection-editor/ce-page-ip6.ui:58
 msgid "Stable privacy"
@@ -2082,7 +1980,7 @@ msgstr ""
 
 #: src/connection-editor/ce-page-macsec.ui:12
 msgid "PSK"
-msgstr ""
+msgstr "PSK"
 
 #: src/connection-editor/ce-page-macsec.ui:15
 #: src/connection-editor/page-ppp.c:115
@@ -2091,25 +1989,23 @@ msgstr "EAP"
 
 #: src/connection-editor/ce-page-macsec.ui:35
 msgid "Check"
-msgstr ""
+msgstr "შემოწმება"
 
 #: src/connection-editor/ce-page-macsec.ui:38
 msgid "Strict"
 msgstr ""
 
 #: src/connection-editor/ce-page-macsec.ui:58
-#, fuzzy
 msgid "_Device name"
-msgstr "_Servîs:"
+msgstr ""
 
 #: src/connection-editor/ce-page-macsec.ui:71
 msgid "The name of the MACsec device."
 msgstr ""
 
 #: src/connection-editor/ce-page-macsec.ui:85
-#, fuzzy
 msgid "_Parent device"
-msgstr "Tora biqablo (%s)"
+msgstr ""
 
 #: src/connection-editor/ce-page-macsec.ui:98
 msgid ""
@@ -2125,11 +2021,11 @@ msgstr ""
 
 #: src/connection-editor/ce-page-macsec.ui:117
 msgid "Keys"
-msgstr ""
+msgstr "გასაღებები"
 
 #: src/connection-editor/ce-page-macsec.ui:135
 msgid "_Mode"
-msgstr ""
+msgstr "_რეჟიმი"
 
 #: src/connection-editor/ce-page-macsec.ui:148
 msgid ""
@@ -2148,7 +2044,7 @@ msgstr ""
 
 #: src/connection-editor/ce-page-macsec.ui:193
 msgid "C_KN"
-msgstr ""
+msgstr "C_KN"
 
 #: src/connection-editor/ce-page-macsec.ui:206
 msgid "The pre-shared Connectivity-association Key Name"
@@ -2156,20 +2052,19 @@ msgstr ""
 
 #: src/connection-editor/ce-page-macsec.ui:217
 msgid "Parameters"
-msgstr ""
+msgstr "პარამეტრები"
 
 #: src/connection-editor/ce-page-macsec.ui:234
 msgid "_Validation"
-msgstr ""
+msgstr "_შემოწმება"
 
 #: src/connection-editor/ce-page-macsec.ui:247
 msgid "Specifies the validation mode for incoming frames"
 msgstr ""
 
 #: src/connection-editor/ce-page-macsec.ui:266
-#, fuzzy
 msgid "_SCI port"
-msgstr "Î_dhalat"
+msgstr ""
 
 #: src/connection-editor/ce-page-macsec.ui:279
 msgid "The port component of the SCI (Secure Channel Identifier)"
@@ -2177,7 +2072,7 @@ msgstr ""
 
 #: src/connection-editor/ce-page-macsec.ui:291
 msgid "_Encrypt"
-msgstr ""
+msgstr "დაშიფრ_ვა"
 
 #: src/connection-editor/ce-page-macsec.ui:296
 msgid "Whether the transmitted traffic must be encrypted"
@@ -2186,34 +2081,31 @@ msgstr ""
 #: src/connection-editor/ce-page-mobile.ui:25
 #: src/connection-editor/ce-page-team.ui:464
 msgid "Basic"
-msgstr ""
+msgstr "ძირითადი"
 
 #: src/connection-editor/ce-page-mobile.ui:48
 msgid "Nu_mber"
-msgstr ""
+msgstr "_ნომერი"
 
 #: src/connection-editor/ce-page-mobile.ui:142
 msgid "Advanced"
-msgstr "Pêşketî"
+msgstr "დამატებითი"
 
 #: src/connection-editor/ce-page-mobile.ui:165
-#, fuzzy
 msgid "_APN"
-msgstr "_APN:"
+msgstr "_APN"
 
 #: src/connection-editor/ce-page-mobile.ui:179
-#, fuzzy
 msgid "N_etwork ID"
-msgstr "_ID ya torê:"
+msgstr ""
 
 #: src/connection-editor/ce-page-mobile.ui:221
-#, fuzzy
 msgid "Change…"
-msgstr "Guhartin..."
+msgstr "ცვლილება…"
 
 #: src/connection-editor/ce-page-mobile.ui:242
 msgid "P_IN"
-msgstr ""
+msgstr "P_IN"
 
 #: src/connection-editor/ce-page-mobile.ui:266
 msgid "Allow _roaming if home network is not available"
@@ -2221,11 +2113,11 @@ msgstr ""
 
 #: src/connection-editor/ce-page-mobile.ui:303
 msgid "Sho_w passwords"
-msgstr "Şîfreyan _nîşan bide"
+msgstr "პაროლების _ჩვენება"
 
 #: src/connection-editor/ce-page-ppp.ui:24
 msgid "Authentication"
-msgstr ""
+msgstr "ავთენტიკაცია"
 
 #: src/connection-editor/ce-page-ppp.ui:53
 msgid "Allowed methods"
@@ -2237,7 +2129,7 @@ msgstr ""
 
 #: src/connection-editor/ce-page-ppp.ui:132
 msgid "Compression"
-msgstr ""
+msgstr "შეკუმშვა"
 
 #: src/connection-editor/ce-page-ppp.ui:159
 msgid "_Use point-to-point encryption (MPPE)"
@@ -2265,7 +2157,7 @@ msgstr ""
 
 #: src/connection-editor/ce-page-ppp.ui:292
 msgid "Echo"
-msgstr ""
+msgstr "ექო"
 
 #: src/connection-editor/ce-page-ppp.ui:306
 msgid "Send PPP _echo packets"
@@ -2273,9 +2165,8 @@ msgstr ""
 
 #: src/connection-editor/ce-page-proxy.ui:23
 #: src/connection-editor/ce-page-team.ui:460
-#, fuzzy
 msgid "None"
-msgstr "Tune"
+msgstr ""
 
 #: src/connection-editor/ce-page-proxy.ui:34
 msgid "For browser only"
@@ -2287,11 +2178,11 @@ msgstr ""
 
 #: src/connection-editor/ce-page-proxy.ui:52
 msgid "PAC URL"
-msgstr ""
+msgstr "PAC URL"
 
 #: src/connection-editor/ce-page-proxy.ui:64
 msgid "PAC script"
-msgstr ""
+msgstr "PAC სკრიპტი"
 
 #: src/connection-editor/ce-page-proxy.ui:76
 msgid "URL from where the PAC script is to be obtained."
@@ -2302,15 +2193,13 @@ msgid "Import script from a file…"
 msgstr ""
 
 #: src/connection-editor/ce-page-proxy.ui:101
-#, fuzzy
 msgid "Method"
-msgstr "_Rêbaz:"
+msgstr "მეთოდი"
 
 #: src/connection-editor/ce-page-team-port.ui:47
 #: src/connection-editor/ce-page-team.ui:401
-#, fuzzy
 msgid "Ad_vanced…"
-msgstr "Pêşketî"
+msgstr ""
 
 #: src/connection-editor/ce-page-team-port.ui:108
 msgid "Set by master"
@@ -2318,19 +2207,18 @@ msgstr ""
 
 #: src/connection-editor/ce-page-team-port.ui:112
 #: src/connection-editor/ce-page-team.ui:85
-#, fuzzy
 msgid "Ethernet port state"
-msgstr "Torên biqablo"
+msgstr ""
 
 #: src/connection-editor/ce-page-team-port.ui:116
 #: src/connection-editor/ce-page-team.ui:89
 msgid "ARP (IPv4)"
-msgstr ""
+msgstr "ARP (IPv4)"
 
 #: src/connection-editor/ce-page-team-port.ui:120
 #: src/connection-editor/ce-page-team.ui:93
 msgid "NDP (IPv6)"
-msgstr ""
+msgstr "NDP (IPv6)"
 
 #: src/connection-editor/ce-page-team-port.ui:151
 #: src/connection-editor/ce-page-team.ui:527
@@ -2357,9 +2245,8 @@ msgid "Active-Backup runner options"
 msgstr ""
 
 #: src/connection-editor/ce-page-team-port.ui:271
-#, fuzzy
 msgid "_Port priority"
-msgstr "_Ewlehî:"
+msgstr ""
 
 #: src/connection-editor/ce-page-team-port.ui:284
 #: src/connection-editor/ce-page-team.ui:713
@@ -2385,14 +2272,12 @@ msgid "LACP runner options"
 msgstr ""
 
 #: src/connection-editor/ce-page-team-port.ui:332
-#, fuzzy
 msgid "_LACP port priority"
-msgstr "_Ewlehî:"
+msgstr ""
 
 #: src/connection-editor/ce-page-team-port.ui:346
-#, fuzzy
 msgid "LACP port _key"
-msgstr "Mifteya _taybet:"
+msgstr ""
 
 #: src/connection-editor/ce-page-team-port.ui:359
 #: src/connection-editor/ce-page-team.ui:676
@@ -2437,9 +2322,8 @@ msgstr ""
 
 #: src/connection-editor/ce-page-team-port.ui:461
 #: src/connection-editor/ce-page-team.ui:1188
-#, fuzzy
 msgid "Send _interval"
-msgstr "Navrû:"
+msgstr ""
 
 #: src/connection-editor/ce-page-team-port.ui:476
 #: src/connection-editor/ce-page-team.ui:1203
@@ -2576,21 +2460,19 @@ msgstr ""
 
 #: src/connection-editor/ce-page-team.ui:23
 msgid "Bandwidth"
-msgstr ""
+msgstr "გამტარობა"
 
 #: src/connection-editor/ce-page-team.ui:27
 msgid "Highest number of ports"
 msgstr ""
 
 #: src/connection-editor/ce-page-team.ui:31
-#, fuzzy
 msgid "Port priority"
-msgstr "_Ewlehî:"
+msgstr ""
 
 #: src/connection-editor/ce-page-team.ui:57
-#, fuzzy
 msgid "From the team device"
-msgstr "Tora biqablo (%s)"
+msgstr ""
 
 #: src/connection-editor/ce-page-team.ui:61
 msgid "From the active port"
@@ -2601,9 +2483,8 @@ msgid "From active to team device"
 msgstr ""
 
 #: src/connection-editor/ce-page-team.ui:174
-#, fuzzy
 msgid "_Teamed connections"
-msgstr "Girêdanên VPN"
+msgstr ""
 
 #: src/connection-editor/ce-page-team.ui:442
 msgid "Load balance"
@@ -2611,41 +2492,39 @@ msgstr ""
 
 #: src/connection-editor/ce-page-team.ui:446
 msgid "LACP"
-msgstr ""
+msgstr "LACP"
 
 #: src/connection-editor/ce-page-team.ui:485
 #: src/connection-editor/connection-helpers.c:92
 #: src/connection-editor/page-ethernet.c:334
-#, fuzzy
 msgid "Ethernet"
-msgstr "Tora biqablo (%s)"
+msgstr "Ethernet"
 
 #: src/connection-editor/ce-page-team.ui:489
 #: src/connection-editor/connection-helpers.c:107
 #: src/connection-editor/page-vlan.c:575
 msgid "VLAN"
-msgstr ""
+msgstr "VLAN"
 
 #: src/connection-editor/ce-page-team.ui:501
 msgid "IP"
-msgstr ""
+msgstr "IP"
 
 #: src/connection-editor/ce-page-team.ui:505
 msgid "Any L3 protocol"
 msgstr ""
 
 #: src/connection-editor/ce-page-team.ui:509
-#, fuzzy
 msgid "TCP"
-msgstr "GTC"
+msgstr "TCP"
 
 #: src/connection-editor/ce-page-team.ui:513
 msgid "UDP"
-msgstr ""
+msgstr "UDP"
 
 #: src/connection-editor/ce-page-team.ui:517
 msgid "SCTP"
-msgstr ""
+msgstr "SCTP"
 
 #: src/connection-editor/ce-page-team.ui:521
 msgid "Any L4 protocol"
@@ -2668,9 +2547,8 @@ msgid "Multicast _rejoin interval"
 msgstr ""
 
 #: src/connection-editor/ce-page-team.ui:740
-#, fuzzy
 msgid "_Hardware Address"
-msgstr "Navnîşana IP:"
+msgstr ""
 
 #: src/connection-editor/ce-page-team.ui:753
 msgid ""
@@ -2683,9 +2561,8 @@ msgid "_Runner"
 msgstr ""
 
 #: src/connection-editor/ce-page-team.ui:814
-#, fuzzy
 msgid "_Hardware address policy"
-msgstr "Navnîşana IP:"
+msgstr ""
 
 #: src/connection-editor/ce-page-team.ui:828
 msgid "Name of runner to be used."
@@ -2719,9 +2596,8 @@ msgid ""
 msgstr ""
 
 #: src/connection-editor/ce-page-team.ui:904
-#, fuzzy
 msgid "_System priority"
-msgstr "_Ewlehî:"
+msgstr ""
 
 #: src/connection-editor/ce-page-team.ui:919
 msgid "_Minimum ports"
@@ -2776,27 +2652,24 @@ msgid "Runner"
 msgstr ""
 
 #: src/connection-editor/ce-page-vlan.ui:28
-#, fuzzy
 msgid "_Parent interface"
-msgstr "Navrû:"
+msgstr ""
 
 #: src/connection-editor/ce-page-vlan.ui:41
-#, fuzzy
 msgid "VLAN inter_face name"
-msgstr "Navrû:"
+msgstr ""
 
 #: src/connection-editor/ce-page-vlan.ui:55
-#, fuzzy
 msgid "Cloned MAC _address"
-msgstr "Navnîşan"
+msgstr ""
 
 #: src/connection-editor/ce-page-vlan.ui:140
 msgid "VLAN _id"
-msgstr ""
+msgstr "VLAN _id"
 
 #: src/connection-editor/ce-page-vlan.ui:197
 msgid "Flags"
-msgstr ""
+msgstr "ალმები"
 
 #: src/connection-editor/ce-page-vlan.ui:213
 msgid "_Reorder headers"
@@ -2804,7 +2677,7 @@ msgstr ""
 
 #: src/connection-editor/ce-page-vlan.ui:228
 msgid "_GVRP"
-msgstr ""
+msgstr "_GVRP"
 
 #: src/connection-editor/ce-page-vlan.ui:243
 msgid "_Loose binding"
@@ -2812,7 +2685,7 @@ msgstr ""
 
 #: src/connection-editor/ce-page-vlan.ui:258
 msgid "M_VRP"
-msgstr ""
+msgstr "M_VRP"
 
 #. In context, this means "concatenate the device name and the VLAN ID number together"
 #: src/connection-editor/ce-page-vlan.ui:285
@@ -2825,9 +2698,8 @@ msgid "\"vlan\" + number"
 msgstr ""
 
 #: src/connection-editor/ce-page-wifi-security.ui:29
-#, fuzzy
 msgid "S_ecurity"
-msgstr "Ewlehî:"
+msgstr "_უსაფრთხოება"
 
 #: src/connection-editor/ce-page-wifi.ui:35
 msgid "A (5 GHz)"
@@ -2839,30 +2711,27 @@ msgstr "B/G (2.4 GHz)"
 
 #: src/connection-editor/ce-page-wifi.ui:49
 msgid "Client"
-msgstr ""
+msgstr "კლიენტი"
 
 #: src/connection-editor/ce-page-wifi.ui:55
 msgid "Ad-hoc"
-msgstr ""
+msgstr "Ad-hoc"
 
 #: src/connection-editor/ce-page-wifi.ui:205
-#, fuzzy
 msgid "_BSSID"
-msgstr "_BSSID:"
+msgstr "_BSSID"
 
 #: src/connection-editor/ce-page-wifi.ui:230
-#, fuzzy
 msgid "C_hannel"
-msgstr "_Kanal:"
+msgstr "არ_ხი"
 
 #: src/connection-editor/ce-page-wifi.ui:262
-#, fuzzy
 msgid "Ban_d"
-msgstr "Ban_t:"
+msgstr ""
 
 #: src/connection-editor/ce-page-wifi.ui:308
 msgid "SS_ID"
-msgstr ""
+msgstr "SS_ID"
 
 #: src/connection-editor/ce-page-wireguard.ui:23
 msgid "Edit WireGuard peer"
@@ -2870,7 +2739,7 @@ msgstr ""
 
 #: src/connection-editor/ce-page-wireguard.ui:55
 msgid "_Apply"
-msgstr ""
+msgstr "_გადატარება"
 
 #: src/connection-editor/ce-page-wireguard.ui:159
 msgid "_Public key"
@@ -2885,9 +2754,8 @@ msgid "_Endpoint"
 msgstr ""
 
 #: src/connection-editor/ce-page-wireguard.ui:201
-#, fuzzy
 msgid "Pre_shared key"
-msgstr "Mifteya parvekirî"
+msgstr ""
 
 #: src/connection-editor/ce-page-wireguard.ui:215
 msgid "Persistent _keepalive"
@@ -2926,21 +2794,19 @@ msgstr ""
 
 #: src/connection-editor/ce-page-wireguard.ui:297
 msgid "seconds"
-msgstr ""
+msgstr "წამი"
 
 #: src/connection-editor/ce-page-wireguard.ui:313
-#, fuzzy
 msgid "Sho_w preshared key"
-msgstr "Mifteyê _nîşan bide"
+msgstr ""
 
 #: src/connection-editor/ce-page-wireguard.ui:386
 msgid "The name of the wireguard interface to create."
 msgstr ""
 
 #: src/connection-editor/ce-page-wireguard.ui:400
-#, fuzzy
 msgid "Private _key"
-msgstr "Mifteya _taybet:"
+msgstr ""
 
 #: src/connection-editor/ce-page-wireguard.ui:413
 msgid "The 256 bit private key in base64 encoding"
@@ -2975,9 +2841,8 @@ msgid ""
 msgstr ""
 
 #: src/connection-editor/ce-page-wireguard.ui:554
-#, fuzzy
 msgid "_Show private key"
-msgstr "Mifteya _taybet:"
+msgstr ""
 
 #: src/connection-editor/ce-page-wireguard.ui:641
 msgid "<b>_Peers</b>"
@@ -2985,11 +2850,11 @@ msgstr ""
 
 #: src/connection-editor/ce-page.c:105
 msgid "automatic"
-msgstr "bixweber"
+msgstr "ავტომატური"
 
 #: src/connection-editor/ce-page.c:117
 msgid "off"
-msgstr ""
+msgstr "გამორთული"
 
 #: src/connection-editor/ce-page.c:163
 msgid "unspecified error"
@@ -2997,19 +2862,19 @@ msgstr ""
 
 #: src/connection-editor/ce-page.c:268
 msgid "Preserve"
-msgstr ""
+msgstr "შენარჩუნება"
 
 #: src/connection-editor/ce-page.c:269
 msgid "Permanent"
-msgstr ""
+msgstr "სამუდამო"
 
 #: src/connection-editor/ce-page.c:270
 msgid "Random"
-msgstr ""
+msgstr "შემთხვევითი"
 
 #: src/connection-editor/ce-page.c:271
 msgid "Stable"
-msgstr ""
+msgstr "სტაბილური"
 
 #: src/connection-editor/ce-page.c:275
 msgid ""
@@ -3019,14 +2884,12 @@ msgid ""
 msgstr ""
 
 #: src/connection-editor/ce-page.c:315
-#, fuzzy
 msgid "MAC address"
-msgstr "Navnîşan"
+msgstr "MAC მისამართი"
 
 #: src/connection-editor/ce-page.c:315
-#, fuzzy
 msgid "HW address"
-msgstr "Navnîşan"
+msgstr ""
 
 #: src/connection-editor/ce-page.c:318
 #, c-format
@@ -3062,9 +2925,8 @@ msgid "invalid %s (%s): "
 msgstr ""
 
 #: src/connection-editor/ce-page.c:586 src/connection-editor/ce-page.c:591
-#, fuzzy
 msgid "device"
-msgstr "_Servîs:"
+msgstr "მოწყობილობა"
 
 #: src/connection-editor/ce-page.c:590
 #, c-format
@@ -3091,7 +2953,7 @@ msgstr ""
 
 #: src/connection-editor/ce-page.h:105
 msgid "Addresses"
-msgstr "Navnîşan"
+msgstr "მისამართები"
 
 #: src/connection-editor/ce-page.h:106
 msgid "Address (optional)"
@@ -3124,7 +2986,7 @@ msgstr ""
 
 #: src/connection-editor/ce-ppp-auth-methods.ui:129
 msgid "C_HAP"
-msgstr ""
+msgstr "C_HAP"
 
 #: src/connection-editor/ce-ppp-auth-methods.ui:133
 msgid "Challenge Handshake Authentication Protocol"
@@ -3155,52 +3017,52 @@ msgstr ""
 #: src/connection-editor/connection-helpers.c:93
 #: src/connection-editor/page-wifi.c:389
 msgid "Wi-Fi"
-msgstr ""
+msgstr "Wi-Fi"
 
 #: src/connection-editor/connection-helpers.c:101
 #: src/connection-editor/page-bluetooth.c:106
 msgid "Bluetooth"
-msgstr ""
+msgstr "Bluetooth"
 
 #: src/connection-editor/connection-helpers.c:102
 #: src/connection-editor/page-dsl.c:203
 msgid "DSL/PPPoE"
-msgstr ""
+msgstr "DSL/PPPoE"
 
 #: src/connection-editor/connection-helpers.c:103
 #: src/connection-editor/page-infiniband.c:131
 msgid "InfiniBand"
-msgstr ""
+msgstr "InfiniBand"
 
 #: src/connection-editor/connection-helpers.c:104
 #: src/connection-editor/page-bond.c:429
 msgid "Bond"
-msgstr ""
+msgstr "ინტერფეისების აგრეგაცია"
 
 #: src/connection-editor/connection-helpers.c:105
 #: src/connection-editor/page-team.c:1014
 msgid "Team"
-msgstr ""
+msgstr "გუნდი"
 
 #: src/connection-editor/connection-helpers.c:106
 #: src/connection-editor/page-bridge.c:216
 msgid "Bridge"
-msgstr ""
+msgstr "ხიდი"
 
 #: src/connection-editor/connection-helpers.c:108
 #: src/connection-editor/page-ip-tunnel.c:159
 msgid "IP tunnel"
-msgstr ""
+msgstr "IP გვირაბი"
 
 #: src/connection-editor/connection-helpers.c:109
 #: src/connection-editor/page-macsec.c:173
 msgid "MACsec"
-msgstr ""
+msgstr "MACsec"
 
 #: src/connection-editor/connection-helpers.c:110
 #: src/connection-editor/page-wireguard.c:510
 msgid "WireGuard"
-msgstr ""
+msgstr "WireGuard"
 
 #: src/connection-editor/connection-helpers.c:112
 #: src/connection-editor/connection-helpers.c:374
@@ -3221,28 +3083,27 @@ msgstr ""
 #: src/connection-editor/page-team-port.c:189
 #: src/connection-editor/page-team.c:327
 msgid "Select file to import"
-msgstr ""
+msgstr "აირჩიეთ შემოსატანი ფაილი"
 
 #: src/connection-editor/connection-helpers.c:285
 #: src/connection-editor/page-proxy.c:108
 #: src/connection-editor/page-team-port.c:193
 #: src/connection-editor/page-team.c:331
 msgid "_Open"
-msgstr ""
+msgstr "_გახსნა"
 
 #: src/connection-editor/connection-helpers.c:316
 msgid "Hardware"
-msgstr ""
+msgstr "აპარატურა"
 
 #: src/connection-editor/connection-helpers.c:343
 msgid "Virtual"
-msgstr ""
+msgstr "ვირტუალური"
 
 #: src/connection-editor/connection-helpers.c:492
 #: src/connection-editor/connection-helpers.c:494
-#, fuzzy
 msgid "Import a saved VPN configuration…"
-msgstr "Girêdana VPN sererast bike"
+msgstr ""
 
 #: src/connection-editor/connection-helpers.c:524
 msgid ""
@@ -3251,14 +3112,12 @@ msgid ""
 msgstr ""
 
 #: src/connection-editor/connection-helpers.c:533
-#, fuzzy
 msgid "Could not create new connection"
-msgstr "Girêdanên torê yên xwe kontrol bike"
+msgstr ""
 
 #: src/connection-editor/connection-helpers.c:696
-#, fuzzy
 msgid "Connection delete failed"
-msgstr "Girêdan pêkhat"
+msgstr ""
 
 #: src/connection-editor/connection-helpers.c:744
 #, c-format
@@ -3266,40 +3125,39 @@ msgid "Are you sure you wish to delete the connection %s?"
 msgstr ""
 
 #: src/connection-editor/gtk/menus.ui:6
-#, fuzzy
 msgid "_New Connection"
-msgstr "Girêdanên _VPN"
+msgstr ""
 
 #: src/connection-editor/gtk/menus.ui:13
 msgid "_Quit"
-msgstr ""
+msgstr "_გასვლა"
 
 #: src/connection-editor/ip4-routes-dialog.c:683
 #: src/connection-editor/ip6-routes-dialog.c:704
 #: src/connection-editor/page-ip4.c:1119 src/connection-editor/page-ip6.c:1121
 msgid "Address"
-msgstr "Navnîşan"
+msgstr "მისამართი"
 
 #: src/connection-editor/ip4-routes-dialog.c:702
 #: src/connection-editor/page-ip4.c:1138
 msgid "Netmask"
-msgstr "Rûpûşa torê"
+msgstr "ქსელური ნიღაბი"
 
 #: src/connection-editor/ip4-routes-dialog.c:721
 #: src/connection-editor/ip6-routes-dialog.c:742
 #: src/connection-editor/page-ip4.c:1157 src/connection-editor/page-ip6.c:1159
 msgid "Gateway"
-msgstr ""
+msgstr "მარშრუტიზატორი"
 
 #: src/connection-editor/ip4-routes-dialog.c:740
 #: src/connection-editor/ip6-routes-dialog.c:761
 msgid "Metric"
-msgstr ""
+msgstr "მეტრული სისტემა"
 
 #: src/connection-editor/ip6-routes-dialog.c:723
 #: src/connection-editor/page-ip6.c:1140
 msgid "Prefix"
-msgstr ""
+msgstr "პრეფიქსი"
 
 #: src/connection-editor/nm-connection-editor.c:97
 #, c-format
@@ -3307,14 +3165,12 @@ msgid "Editing %s"
 msgstr ""
 
 #: src/connection-editor/nm-connection-editor.c:101
-#, fuzzy
 msgid "Editing un-named connection"
-msgstr "Girêdana VPN sererast bike"
+msgstr ""
 
 #: src/connection-editor/nm-connection-editor.c:121
-#, fuzzy
 msgid "Missing connection name"
-msgstr "Navê _girêdanê:"
+msgstr ""
 
 #: src/connection-editor/nm-connection-editor.c:337
 msgid "Editor initializing…"
@@ -3322,9 +3178,8 @@ msgstr ""
 
 #: src/connection-editor/nm-connection-editor.c:344
 #: src/connection-editor/nm-connection-list.c:457
-#, fuzzy
 msgid "Connection cannot be modified"
-msgstr "Lêzêdekirina girêdanê biserneket"
+msgstr ""
 
 #: src/connection-editor/nm-connection-editor.c:359
 #, c-format
@@ -3340,7 +3195,7 @@ msgstr ""
 #: src/connection-editor/nm-connection-editor.c:568
 #: src/connection-editor/vpn-helpers.c:199
 msgid "_Save"
-msgstr "_Tomarkirin"
+msgstr "_შენახვა"
 
 #: src/connection-editor/nm-connection-editor.c:569
 msgid "Save any changes made to this connection."
@@ -3351,19 +3206,16 @@ msgid "Authenticate to save this connection for all users of this machine."
 msgstr ""
 
 #: src/connection-editor/nm-connection-editor.c:586
-#, fuzzy
 msgid "Could not create connection"
-msgstr "Girêdanên torê yên xwe kontrol bike"
+msgstr ""
 
 #: src/connection-editor/nm-connection-editor.c:586
-#, fuzzy
 msgid "Could not edit connection"
-msgstr "Girêdana torê tune"
+msgstr ""
 
 #: src/connection-editor/nm-connection-editor.c:588
-#, fuzzy
 msgid "Unknown error creating connection editor dialog."
-msgstr "Nikarî girêdana VPN ya '%s' bibîne"
+msgstr ""
 
 #: src/connection-editor/nm-connection-editor.c:729
 msgid ""
@@ -3377,11 +3229,11 @@ msgstr ""
 
 #: src/connection-editor/nm-connection-editor.c:1176
 msgid "Connection add failed"
-msgstr "Lêzêdekirina girêdanê biserneket"
+msgstr ""
 
 #: src/connection-editor/nm-connection-editor.ui:35
 msgid "Fix"
-msgstr ""
+msgstr "გასწორება"
 
 #: src/connection-editor/nm-connection-editor.ui:61
 msgid ""
@@ -3390,14 +3242,12 @@ msgid ""
 msgstr ""
 
 #: src/connection-editor/nm-connection-editor.ui:110
-#, fuzzy
 msgid "Connection _name"
-msgstr "Navê _girêdanê:"
+msgstr ""
 
 #: src/connection-editor/nm-connection-editor.ui:170
-#, fuzzy
 msgid "_Export…"
-msgstr "Î_xracat"
+msgstr "_გატანა…"
 
 #: src/connection-editor/nm-connection-editor.ui:260
 msgid "File Relabel"
@@ -3405,7 +3255,7 @@ msgstr ""
 
 #: src/connection-editor/nm-connection-editor.ui:291
 msgid "_Relabel"
-msgstr ""
+msgstr "ჭდის თავიდან დადება"
 
 #: src/connection-editor/nm-connection-editor.ui:320
 msgid ""
@@ -3415,140 +3265,128 @@ msgstr ""
 
 #: src/connection-editor/nm-connection-editor.ui:347
 msgid "Relabel"
-msgstr ""
+msgstr "ჭდის თავიდან დადება"
 
 #: src/connection-editor/nm-connection-editor.ui:361
 msgid "Filename"
-msgstr ""
+msgstr "ფაილის სახელი"
 
 #: src/connection-editor/nm-connection-list.c:134
 msgid "never"
-msgstr "tu car"
+msgstr "არასოდეს"
 
 #: src/connection-editor/nm-connection-list.c:145
 #: src/connection-editor/nm-connection-list.c:156
 msgid "now"
-msgstr "niha"
+msgstr "ახლა"
 
 #. less than an hour ago
 #: src/connection-editor/nm-connection-list.c:163
 #, c-format
 msgid "%d minute ago"
 msgid_plural "%d minutes ago"
-msgstr[0] "%d xulek berê"
-msgstr[1] "%d xulek berê"
+msgstr[0] "%d წუთის წინ"
+msgstr[1] "%d წუთის წინ"
 
 #: src/connection-editor/nm-connection-list.c:167
 #, c-format
 msgid "%d hour ago"
 msgid_plural "%d hours ago"
-msgstr[0] "%d saet berê"
-msgstr[1] "%d saet berê"
+msgstr[0] "%d საათის წინ"
+msgstr[1] "%d საათის წინ"
 
 #: src/connection-editor/nm-connection-list.c:179
 #, c-format
 msgid "%d day ago"
 msgid_plural "%d days ago"
-msgstr[0] "%d roj berê"
-msgstr[1] "%d roj berê"
+msgstr[0] "%d დღის წინ"
+msgstr[1] "%d დღის წინ"
 
 #: src/connection-editor/nm-connection-list.c:185
 #, c-format
 msgid "%d month ago"
 msgid_plural "%d months ago"
-msgstr[0] "%d meh berê"
-msgstr[1] "%d meh berê"
+msgstr[0] "%d თვის წინ"
+msgstr[1] "%d თვის წინ"
 
 #: src/connection-editor/nm-connection-list.c:189
 #, c-format
 msgid "%d year ago"
 msgid_plural "%d years ago"
-msgstr[0] "%d sal berê"
-msgstr[1] "%d sal berê"
+msgstr[0] "%d წლის წინ"
+msgstr[1] "%d წლის წინ"
 
 #: src/connection-editor/nm-connection-list.c:459
-#, fuzzy
 msgid "Connection cannot be deleted"
-msgstr "Lêzêdekirina girêdanê biserneket"
+msgstr ""
 
 #: src/connection-editor/nm-connection-list.c:462
-#, fuzzy
 msgid "Select a connection to edit"
-msgstr "Girêdana torê biqablo %d"
+msgstr ""
 
 #: src/connection-editor/nm-connection-list.c:464
-#, fuzzy
 msgid "Select a connection to delete"
-msgstr "Girêdana torê biqablo %d"
+msgstr ""
 
 #: src/connection-editor/nm-connection-list.c:785
 msgid "Name"
-msgstr "Nav"
+msgstr "სახელი"
 
 #: src/connection-editor/nm-connection-list.c:798
 msgid "Last Used"
-msgstr ""
+msgstr "ბოლოს გამოყენებული"
 
 #: src/connection-editor/nm-connection-list.c:836
-#, fuzzy
 msgid "Edit the selected connection"
-msgstr "Girêdana VPN ya hilbijartî sererast bike"
+msgstr ""
 
 #: src/connection-editor/nm-connection-list.c:837
-#, fuzzy
 msgid "Authenticate to edit the selected connection"
-msgstr "Girêdana VPN ya hilbijartî jê bibe"
+msgstr ""
 
 #: src/connection-editor/nm-connection-list.c:842
-#, fuzzy
 msgid "Delete the selected connection"
-msgstr "Girêdana VPN ya hilbijartî jê bibe"
+msgstr ""
 
 #: src/connection-editor/nm-connection-list.c:843
-#, fuzzy
 msgid "Authenticate to delete the selected connection"
-msgstr "Girêdana VPN ya hilbijartî jê bibe"
+msgstr ""
 
 #: src/connection-editor/nm-connection-list.c:1053
-#, fuzzy
 msgid "Unrecognized connection type"
-msgstr "Girêdana torê biqablo %d"
+msgstr ""
 
 #: src/connection-editor/nm-connection-list.c:1058
-#, fuzzy, c-format
+#, c-format
 msgid "Don’t know how to import “%s” connections"
-msgstr "Girêdanên torê yên xwe kontrol bike"
+msgstr ""
 
 #: src/connection-editor/nm-connection-list.c:1062
-#, fuzzy
 msgid "Error importing connection"
-msgstr "Nikarî girêdana VPN ya '%s' bibîne"
+msgstr ""
 
 #: src/connection-editor/nm-connection-list.c:1069
 #: src/connection-editor/nm-connection-list.c:1084
 #: src/connection-editor/nm-connection-list.c:1087
-#, fuzzy
 msgid "Error creating connection"
-msgstr "Nikarî girêdana VPN ya '%s' bibîne"
+msgstr ""
 
 #: src/connection-editor/nm-connection-list.c:1069
-#, fuzzy
 msgid "Connection type not specified."
-msgstr "Lêzêdekirina girêdanê biserneket"
+msgstr ""
 
 #: src/connection-editor/nm-connection-list.c:1085
 msgid "No VPN plugins are installed."
 msgstr ""
 
 #: src/connection-editor/nm-connection-list.c:1088
-#, fuzzy, c-format
+#, c-format
 msgid "Don’t know how to create “%s” connections"
-msgstr "Girêdanên torê yên xwe kontrol bike"
+msgstr ""
 
 #: src/connection-editor/nm-connection-list.c:1122
-#, fuzzy
 msgid "Error editing connection"
-msgstr "Nikarî girêdana VPN ya '%s' bibîne"
+msgstr ""
 
 #: src/connection-editor/nm-connection-list.c:1123
 #, c-format
@@ -3557,12 +3395,11 @@ msgstr ""
 
 #: src/connection-editor/nm-connection-list.ui:7
 msgid "Network Connections"
-msgstr "Girêdanên torê"
+msgstr ""
 
 #: src/connection-editor/nm-connection-list.ui:86
-#, fuzzy
 msgid "Add a new connection"
-msgstr "Girêdana VPN a nû lê zêde bike"
+msgstr ""
 
 #: src/connection-editor/page-8021x-security.c:97
 msgid "802.1X Security"
@@ -3590,9 +3427,9 @@ msgid "invalid Bluetooth device (%s)"
 msgstr ""
 
 #: src/connection-editor/page-bluetooth.c:239
-#, fuzzy, c-format
+#, c-format
 msgid "Bluetooth connection %d"
-msgstr "Girêdana torê biqablo %d"
+msgstr ""
 
 #: src/connection-editor/page-bluetooth.c:290
 msgid "Bluetooth Type"
@@ -3603,28 +3440,25 @@ msgid "Select the type of the Bluetooth connection profile."
 msgstr ""
 
 #: src/connection-editor/page-bluetooth.c:313
-#, fuzzy
 msgid "_Personal Area Network"
-msgstr "Tê_keve torê"
+msgstr ""
 
 #: src/connection-editor/page-bluetooth.c:318
-#, fuzzy
 msgid "_Dial-Up Network"
-msgstr "Tora bêqablo (%s)"
+msgstr ""
 
 #: src/connection-editor/page-bond.c:432
 msgid "Could not load bond user interface."
 msgstr ""
 
 #: src/connection-editor/page-bond.c:551
-#, fuzzy
 msgid "primary"
-msgstr "DNS ya Yekemîn:"
+msgstr "ძირითადი"
 
 #: src/connection-editor/page-bond.c:606
-#, fuzzy, c-format
+#, c-format
 msgid "Bond connection %d"
-msgstr "Girêdana torê biqablo %d"
+msgstr "ბმული შეერთება %d"
 
 #. Translators: a "Bridge Port" is a network
 #. * device that is part of a bridge.
@@ -3642,13 +3476,13 @@ msgid "Could not load bridge user interface."
 msgstr ""
 
 #: src/connection-editor/page-bridge.c:335
-#, fuzzy, c-format
+#, c-format
 msgid "Bridge connection %d"
-msgstr "Girêdana torê biqablo %d"
+msgstr "ხიდის შეერთება %d"
 
 #: src/connection-editor/page-dcb.c:610
 msgid "DCB"
-msgstr ""
+msgstr "DCB"
 
 #: src/connection-editor/page-dcb.c:612
 msgid "Could not load DCB user interface."
@@ -3659,14 +3493,13 @@ msgid "Could not load DSL user interface."
 msgstr ""
 
 #: src/connection-editor/page-dsl.c:306
-#, fuzzy
 msgid "missing parent interface"
-msgstr "Navrû:"
+msgstr ""
 
 #: src/connection-editor/page-dsl.c:351
 #, c-format
 msgid "DSL connection %d"
-msgstr "Girêdana DSL %d"
+msgstr "DSL შეერთება %d"
 
 #: src/connection-editor/page-ethernet.c:67
 msgid ""
@@ -3677,30 +3510,29 @@ msgstr ""
 
 #: src/connection-editor/page-ethernet.c:248
 msgid "ignored"
-msgstr ""
+msgstr "იგნორირებულია"
 
 #: src/connection-editor/page-ethernet.c:336
 msgid "Could not load ethernet user interface."
 msgstr ""
 
 #: src/connection-editor/page-ethernet.c:498
-#, fuzzy
 msgid "Ethernet device"
-msgstr "Tora biqablo (%s)"
+msgstr "Ethernet მოწყობილობა"
 
 #: src/connection-editor/page-ethernet.c:502
 #: src/connection-editor/page-vlan.c:723 src/connection-editor/page-wifi.c:521
 msgid "cloned MAC"
-msgstr ""
+msgstr "კლონირებული MAC მისამართი"
 
 #: src/connection-editor/page-ethernet.c:506
 msgid "Wake-on-LAN password"
 msgstr ""
 
 #: src/connection-editor/page-ethernet.c:546
-#, fuzzy, c-format
+#, c-format
 msgid "Ethernet connection %d"
-msgstr "Girêdana torê biqablo %d"
+msgstr "Ethernet შეერთება %d"
 
 #: src/connection-editor/page-general.c:42
 msgid ""
@@ -3730,22 +3562,22 @@ msgid "infiniband device"
 msgstr ""
 
 #: src/connection-editor/page-infiniband.c:237
-#, fuzzy, c-format
+#, c-format
 msgid "InfiniBand connection %d"
-msgstr "Girêdana torê biqablo %d"
+msgstr "InfiniBand შეერთება %d"
 
 #: src/connection-editor/page-ip-tunnel.c:161
 msgid "Could not load IP tunnel user interface."
 msgstr ""
 
 #: src/connection-editor/page-ip-tunnel.c:275
-#, fuzzy, c-format
+#, c-format
 msgid "IP tunnel connection %d"
-msgstr "Girêdana torê biqablo %d"
+msgstr "IP გვირაბის შეერთება %d"
 
 #: src/connection-editor/page-ip4.c:114 src/connection-editor/page-ip6.c:130
 msgid "Automatic (VPN)"
-msgstr "Bixweber (VPN)"
+msgstr ""
 
 #: src/connection-editor/page-ip4.c:115 src/connection-editor/page-ip6.c:131
 msgid "Automatic (VPN) addresses only"
@@ -3757,7 +3589,7 @@ msgstr ""
 
 #: src/connection-editor/page-ip4.c:121 src/connection-editor/page-ip6.c:133
 msgid "Automatic (PPPoE)"
-msgstr "Bixweber (PPPoE)"
+msgstr ""
 
 #: src/connection-editor/page-ip4.c:122 src/connection-editor/page-ip6.c:134
 msgid "Automatic (PPPoE) addresses only"
@@ -3765,7 +3597,7 @@ msgstr ""
 
 #: src/connection-editor/page-ip4.c:124
 msgid "Automatic (DHCP)"
-msgstr "Bixweber (DHCP)"
+msgstr "ავტომატური (მხოლოდ DHCP)"
 
 #: src/connection-editor/page-ip4.c:125
 msgid "Automatic (DHCP) addresses only"
@@ -3773,17 +3605,15 @@ msgstr ""
 
 #: src/connection-editor/page-ip4.c:168 src/connection-editor/page-ip6.c:198
 msgid "Link-Local Only"
-msgstr ""
+msgstr "Link-Local"
 
 #: src/connection-editor/page-ip4.c:348 src/connection-editor/page-ip6.c:337
-#, fuzzy
 msgid "Additional DNS ser_vers"
-msgstr "Pêşkêşkarên _DNS:"
+msgstr ""
 
 #: src/connection-editor/page-ip4.c:357 src/connection-editor/page-ip6.c:346
-#, fuzzy
 msgid "Additional s_earch domains"
-msgstr "Pêşkêşkarên _DNS:"
+msgstr ""
 
 #: src/connection-editor/page-ip4.c:1019
 #, c-format
@@ -3820,7 +3650,7 @@ msgstr ""
 
 #: src/connection-editor/page-ip6.c:173
 msgid "Automatic, DHCP only"
-msgstr ""
+msgstr "ავტომატური (მხოლოდ DHCP)"
 
 #: src/connection-editor/page-ip6.c:1022
 #, c-format
@@ -3860,9 +3690,9 @@ msgid "Could not load MACsec user interface."
 msgstr ""
 
 #: src/connection-editor/page-macsec.c:314
-#, fuzzy, c-format
+#, c-format
 msgid "MACSEC connection %d"
-msgstr "Girêdana DSL %d"
+msgstr ""
 
 #: src/connection-editor/page-master.c:221
 #: src/connection-editor/page-master.c:232
@@ -3944,7 +3774,7 @@ msgstr "MSCHAP"
 #. Translators: "none" refers to authentication methods
 #: src/connection-editor/page-ppp.c:122
 msgid "none"
-msgstr "tune"
+msgstr "არა"
 
 #: src/connection-editor/page-ppp.c:182
 #, c-format
@@ -3953,7 +3783,7 @@ msgstr ""
 
 #: src/connection-editor/page-ppp.c:264
 msgid "PPP Settings"
-msgstr ""
+msgstr "PPP-ის მორგება"
 
 #: src/connection-editor/page-ppp.c:266
 msgid "Could not load PPP user interface."
@@ -3961,7 +3791,7 @@ msgstr ""
 
 #: src/connection-editor/page-proxy.c:198
 msgid "Proxy"
-msgstr ""
+msgstr "პროქსი"
 
 #: src/connection-editor/page-proxy.c:200
 msgid "Could not load proxy user interface."
@@ -3977,7 +3807,7 @@ msgstr ""
 #.
 #: src/connection-editor/page-team-port.c:638
 msgid "Team Port"
-msgstr ""
+msgstr "ჯგუფური პორტი"
 
 #: src/connection-editor/page-team-port.c:640
 msgid "Could not load team port user interface."
@@ -3988,9 +3818,9 @@ msgid "Could not load team user interface."
 msgstr ""
 
 #: src/connection-editor/page-team.c:1114
-#, fuzzy, c-format
+#, c-format
 msgid "Team connection %d"
-msgstr "Girêdana torê biqablo %d"
+msgstr "ჯგუფური შეერთება %d"
 
 #. Translators: the first %s is a device name (eg, "em1"), the
 #. * second is a connection name (eg, "Auto Ethernet").
@@ -4001,9 +3831,8 @@ msgid "%s (via “%s”)"
 msgstr ""
 
 #: src/connection-editor/page-vlan.c:411
-#, fuzzy
 msgid "New connection…"
-msgstr "Girêdana torê tune"
+msgstr ""
 
 #: src/connection-editor/page-vlan.c:577
 msgid "Could not load vlan user interface."
@@ -4014,9 +3843,9 @@ msgid "vlan parent"
 msgstr ""
 
 #: src/connection-editor/page-vlan.c:784
-#, fuzzy, c-format
+#, c-format
 msgid "VLAN connection %d"
-msgstr "Girêdana VPN %d"
+msgstr "VLAN შეერთება %d"
 
 #: src/connection-editor/page-vpn.c:50
 #, c-format
@@ -4024,9 +3853,8 @@ msgid "Could not load editor VPN plugin for “%s” (%s)."
 msgstr ""
 
 #: src/connection-editor/page-vpn.c:51
-#, fuzzy
 msgid "unknown failure"
-msgstr "Lêzêdekirina girêdanê biserneket"
+msgstr ""
 
 #: src/connection-editor/page-vpn.c:94
 msgid "Could not load VPN user interface."
@@ -4040,11 +3868,11 @@ msgstr ""
 #: src/connection-editor/page-vpn.c:191
 #, c-format
 msgid "VPN connection %d"
-msgstr "Girêdana VPN %d"
+msgstr "VPN-შეერთება %d"
 
 #: src/connection-editor/page-vpn.c:197
 msgid "Choose a VPN Connection Type"
-msgstr "Cureyê girêdana VPN hilbijêre"
+msgstr ""
 
 #: src/connection-editor/page-vpn.c:198
 msgid ""
@@ -4055,30 +3883,27 @@ msgstr ""
 
 #: src/connection-editor/page-wifi-security.c:359
 msgid "WEP 40/128-bit Key (Hex or ASCII)"
-msgstr "Mifteya WEP a 40/128-bit (Hex an ASCII)"
+msgstr "WEP 40/128-bit Key (Hex or ASCII)"
 
 #: src/connection-editor/page-wifi-security.c:372
 msgid "WEP 128-bit Passphrase"
-msgstr "Şîfreya WEP a 128-bit"
+msgstr "WEP 128-bit Passphrase"
 
 #: src/connection-editor/page-wifi-security.c:397
 msgid "Dynamic WEP (802.1X)"
-msgstr "WEP a dînamîk (802.1X)"
+msgstr ""
 
 #: src/connection-editor/page-wifi-security.c:410
-#, fuzzy
 msgid "WPA/WPA2/WPA3 Personal"
-msgstr "WPA & WPA2 Personal"
+msgstr ""
 
 #: src/connection-editor/page-wifi-security.c:423
-#, fuzzy
 msgid "WPA/WPA2 Enterprise"
-msgstr "WPA & WPA2 Enterprise"
+msgstr "WPA/WPA2 საწარმოო"
 
 #: src/connection-editor/page-wifi-security.c:436
-#, fuzzy
 msgid "WPA3 Personal"
-msgstr "WPA Personal"
+msgstr "WPA2 პერსონალური"
 
 #: src/connection-editor/page-wifi-security.c:449
 #: src/connection-editor/page-wifi-security.c:457
@@ -4090,9 +3915,8 @@ msgid "Could not load Wi-Fi security user interface; missing Wi-Fi setting."
 msgstr ""
 
 #: src/connection-editor/page-wifi-security.c:514
-#, fuzzy
 msgid "Wi-Fi Security"
-msgstr "Ewlehiya bêqablo:"
+msgstr "Wi-Fi-ის დაცვა"
 
 #: src/connection-editor/page-wifi-security.c:516
 msgid "Could not load Wi-Fi security user interface."
@@ -4122,7 +3946,7 @@ msgstr ""
 #: src/connection-editor/page-wifi.c:173
 #, c-format
 msgid "%u (%u MHz)"
-msgstr ""
+msgstr "%u (%u მჰც)"
 
 #: src/connection-editor/page-wifi.c:391
 msgid "Could not load Wi-Fi user interface."
@@ -4130,42 +3954,42 @@ msgstr ""
 
 #: src/connection-editor/page-wifi.c:511
 msgid "bssid"
-msgstr ""
+msgstr "bssid"
 
 #: src/connection-editor/page-wifi.c:517
 msgid "Wi-Fi device"
 msgstr ""
 
 #: src/connection-editor/page-wifi.c:564
-#, fuzzy, c-format
+#, c-format
 msgid "Wi-Fi connection %d"
-msgstr "Girêdana torê biqablo %d"
+msgstr "Wi-Fi შეერთება %d"
 
 #: src/connection-editor/page-wireguard.c:261
 msgid "Public key"
-msgstr ""
+msgstr "საჯარო გასაღები"
 
 #: src/connection-editor/page-wireguard.c:268
 msgid "Allowed IPs"
-msgstr ""
+msgstr "დაშვებული IP-ები"
 
 #: src/connection-editor/page-wireguard.c:512
 msgid "Could not load WireGuard user interface."
 msgstr ""
 
 #: src/connection-editor/page-wireguard.c:628
-#, fuzzy, c-format
+#, c-format
 msgid "WireGuard connection %d"
-msgstr "Girêdana bêqablo %d"
+msgstr "WireGuard-ის შეერთება %d"
 
 #: src/connection-editor/vpn-helpers.c:118
 #, c-format
 msgid "A file named “%s” already exists."
-msgstr ""
+msgstr "ფაილი სახელით %s უკვე არსებობს."
 
 #: src/connection-editor/vpn-helpers.c:120
 msgid "_Replace"
-msgstr ""
+msgstr "_გამოცვალე"
 
 #: src/connection-editor/vpn-helpers.c:122
 #, c-format
@@ -4173,9 +3997,8 @@ msgid "Do you want to replace %s with the VPN connection you are saving?"
 msgstr ""
 
 #: src/connection-editor/vpn-helpers.c:158
-#, fuzzy
 msgid "Cannot export VPN connection"
-msgstr "Nikarî girêdana VPN lê zêde bike"
+msgstr "VPN შეერთების გატანის შეცდომა"
 
 #: src/connection-editor/vpn-helpers.c:160
 #, c-format
@@ -4186,13 +4009,12 @@ msgid ""
 msgstr ""
 
 #: src/connection-editor/vpn-helpers.c:195
-#, fuzzy
 msgid "Export VPN connection…"
-msgstr "Girêdana VPN sererast bike"
+msgstr ""
 
 #: src/gsm-unlock.ui:42
 msgid "_Unlock"
-msgstr "_Kîlît rake"
+msgstr "_განბლოკვა"
 
 #: src/gsm-unlock.ui:253
 msgid "Automatically unlock this device"
@@ -4200,23 +4022,20 @@ msgstr ""
 
 #: src/info.ui:9
 msgid "Connection Information"
-msgstr "Agahiya girêdanê"
+msgstr ""
 
 #: src/info.ui:30
 msgid "_Close"
-msgstr ""
+msgstr "და_კეტვა"
 
 #: src/main.c:28
 msgid "Usage:"
-msgstr "Bikaranîn:"
+msgstr "გამოყენება:"
 
 #: src/main.c:30
-#, fuzzy
 msgid ""
 "This program is a component of NetworkManager (https://networkmanager.dev)."
 msgstr ""
-"Ev bername beşeke NetworkManager'ê ye (https://wiki.gnome.org/Projects/"
-"NetworkManager/)."
 
 #: src/main.c:31
 msgid ""
@@ -4253,34 +4072,33 @@ msgid "HSPA"
 msgstr "HSPA"
 
 #: src/mb-menu-item.c:54
-#, fuzzy
 msgid "HSPA+"
-msgstr "HSPA"
+msgstr "HSPA+"
 
 #: src/mb-menu-item.c:56
 msgid "LTE"
-msgstr ""
+msgstr "LTE"
 
 #: src/mb-menu-item.c:103
 msgid "not enabled"
-msgstr "neçalakkirî"
+msgstr ""
 
 #: src/mb-menu-item.c:109
 msgid "not registered"
-msgstr "ne tomarkirî"
+msgstr ""
 
 #: src/mb-menu-item.c:127
 #, c-format
 msgid "Home network (%s)"
-msgstr "Tora malê (%s)"
+msgstr ""
 
 #: src/mb-menu-item.c:129
 msgid "Home network"
-msgstr "Tora malê"
+msgstr ""
 
 #: src/mb-menu-item.c:137
 msgid "searching"
-msgstr "lê digere"
+msgstr ""
 
 #: src/mb-menu-item.c:140
 msgid "registration denied"
@@ -4297,14 +4115,13 @@ msgid "%s (roaming)"
 msgstr ""
 
 #: src/mb-menu-item.c:156
-#, fuzzy, c-format
+#, c-format
 msgid "Roaming network (%s)"
-msgstr "Tora biqablo (%s)"
+msgstr ""
 
 #: src/mb-menu-item.c:158
-#, fuzzy
 msgid "Roaming network"
-msgstr "Tora biqablo"
+msgstr ""
 
 #: src/mobile-helpers.c:316
 #, c-format
@@ -4313,26 +4130,26 @@ msgstr ""
 
 #: src/mobile-helpers.c:449
 msgid "PIN code required"
-msgstr "Koda PIN pêwîst e"
+msgstr "საჭიროა PIN კოდი"
 
 #: src/mobile-helpers.c:457
 msgid "PIN code is needed for the mobile broadband device"
-msgstr ""
+msgstr "მობილური კავშირის მოწყობილობას სჭირდება PIN კოდი"
 
 #: src/mobile-helpers.c:607
-#, fuzzy, c-format
+#, c-format
 msgid "Mobile broadband connection “%s” active: (%d%%%s%s)"
-msgstr "Girêdana tora biqablo bi '%s' re (%d%%)"
+msgstr ""
 
 #: src/mobile-helpers.c:610
 msgid "roaming"
-msgstr ""
+msgstr "როუმინგი"
 
 #. The %s is a mobile provider name, eg "T-Mobile"
 #: src/utils/utils.c:160
-#, fuzzy, c-format
+#, c-format
 msgid "%s connection"
-msgstr "Girêdanên VPN"
+msgstr ""
 
 #: src/utils/utils.c:534
 msgid "PEM certificates (*.pem, *.crt, *.cer)"
@@ -4341,420 +4158,3 @@ msgstr ""
 #: src/utils/utils.c:546
 msgid "DER, PEM, or PKCS#12 private keys (*.der, *.pem, *.p12, *.key)"
 msgstr ""
-
-#~ msgid "mW"
-#~ msgstr "mW"
-
-#, fuzzy
-#~ msgid "More networks"
-#~ msgstr "Tora biqablo"
-
-#~ msgid "GTC"
-#~ msgstr "GTC"
-
-#, fuzzy
-#~ msgid "P_rivate Key Passphrase"
-#~ msgstr "Şîfreya WEP a 128-bit"
-
-#, fuzzy
-#~ msgid "Sh_ow passphrase"
-#~ msgstr "Şîfreyan _nîşan bide"
-
-#, fuzzy
-#~ msgid "no user certificate selected"
-#~ msgstr "Sertîfikaya _bikarhêner:"
-
-#, fuzzy
-#~ msgid "I_dentity"
-#~ msgstr "_Nasname:"
-
-#, fuzzy
-#~ msgid "MSCHAPv2 (no EAP)"
-#~ msgstr "MSCHAPv2"
-
-#, fuzzy
-#~ msgid "no CA certificate selected"
-#~ msgstr "Sertîfikaya _bikarhêner:"
-
-#~ msgid "TLS"
-#~ msgstr "TLS"
-
-#, fuzzy
-#~ msgid "missing password"
-#~ msgstr "Şî_freya mifteya taybet:"
-
-#, fuzzy
-#~ msgid "_Type"
-#~ msgstr "_Cure:"
-
-#~ msgid "Open System"
-#~ msgstr "Pergalê vekirî"
-
-#~ msgid "1 (Default)"
-#~ msgstr "1 (Standard)"
-
-#, fuzzy
-#~ msgid "_Key"
-#~ msgstr "_Mifte:"
-
-#, fuzzy
-#~ msgid "WEP inde_x"
-#~ msgstr "Ende_ksa WEP:"
-
-#, fuzzy
-#~ msgid "Ignore CA certificate"
-#~ msgstr "Sertîfikaya _bikarhêner:"
-
-#, fuzzy
-#~ msgid "No certificate set"
-#~ msgstr "Sertîfikaya _bikarhêner:"
-
-#, fuzzy, c-format
-#~ msgid "%s key _password"
-#~ msgstr "Şî_freya mifteya taybet:"
-
-#, fuzzy, c-format
-#~ msgid "Choose %s Certificate"
-#~ msgstr "Sertîfikaya _bikarhêner:"
-
-#, fuzzy, c-format
-#~ msgid "%s _certificate"
-#~ msgstr "Sertîfikaya _bikarhêner:"
-
-#, fuzzy
-#~ msgid "(None)"
-#~ msgstr "(tune)"
-
-#, fuzzy, c-format
-#~ msgid "Choose a %s Certificate"
-#~ msgstr "Sertîfikaya _bikarhêner:"
-
-#, fuzzy, c-format
-#~ msgid "%s certificate _password"
-#~ msgstr "Sertîfikaya _bikarhêner:"
-
-#, fuzzy
-#~ msgid "Error opening a session: "
-#~ msgstr "Nikarî girêdana VPN ya '%s' bibîne"
-
-#, fuzzy
-#~ msgid "_Unlock token"
-#~ msgstr "_Kîlît rake"
-
-#, fuzzy
-#~ msgid "Sh_ow passwords"
-#~ msgstr "Şîfreyan _nîşan bide"
-
-#, fuzzy
-#~ msgid "_Tertiary Password:"
-#~ msgstr "Şî_fre:"
-
-#, fuzzy
-#~ msgid "_Secondary Password:"
-#~ msgstr "Şî_fre:"
-
-#~ msgid "_Password:"
-#~ msgstr "Şî_fre:"
-
-#, fuzzy
-#~ msgid "Click to connect"
-#~ msgstr "Veqetîne"
-
-#~ msgctxt "Wifi/wired security"
-#~ msgid "None"
-#~ msgstr "Tune"
-
-#, fuzzy
-#~ msgid "Dynamic WEP (802.1x)"
-#~ msgstr "WEP a dînamîk (802.1X)"
-
-#~ msgid "C_reate"
-#~ msgstr "_Afirandin"
-
-#, fuzzy, c-format
-#~ msgid ""
-#~ "Passwords or encryption keys are required to access the Wi-Fi network "
-#~ "“%s”."
-#~ msgstr "Niha bi tora bêqablo '%s' re girêdayî yî."
-
-#, fuzzy
-#~ msgid "Wi-Fi Network Authentication Required"
-#~ msgstr "Mifteya tora bêqablo pêwîst e"
-
-#, fuzzy
-#~ msgid "Authentication required by Wi-Fi network"
-#~ msgstr "Tora bêqablo ya nû biafirîne"
-
-#, fuzzy
-#~ msgid "Create New Wi-Fi Network"
-#~ msgstr "Tora bêqablo ya nû biafirîne"
-
-#, fuzzy
-#~ msgid "New Wi-Fi network"
-#~ msgstr "Tora bêqablo ya nû"
-
-#, fuzzy
-#~ msgid "Connect to Hidden Wi-Fi Network"
-#~ msgstr "Li tora bêqablo ya veşartî girê bide..."
-
-#, fuzzy
-#~ msgid "Hidden Wi-Fi network"
-#~ msgstr "Tora bêqablo ya veşartî"
-
-#, fuzzy
-#~ msgid "Wi-Fi _security"
-#~ msgstr "_Ewlehiya bêqablo:"
-
-#, fuzzy
-#~ msgid "C_onnection"
-#~ msgstr "_Girêdan:"
-
-#, fuzzy
-#~ msgid "Wi-Fi _adapter"
-#~ msgstr "_Ewlehiya bêqablo:"
-
-#, fuzzy
-#~ msgid "Wi-Fi _security:"
-#~ msgstr "_Ewlehiya bêqablo:"
-
-#~ msgid "_Network name:"
-#~ msgstr "_Navê torê:"
-
-#~ msgid "C_onnection:"
-#~ msgstr "_Girêdan:"
-
-#, fuzzy
-#~ msgid "%s (default)"
-#~ msgstr "1 (Standard)"
-
-#, fuzzy
-#~ msgid "2:"
-#~ msgstr "2"
-
-#, fuzzy
-#~ msgid "3:"
-#~ msgstr "3"
-
-#, fuzzy
-#~ msgid "4:"
-#~ msgstr "4"
-
-#, fuzzy
-#~ msgid "Connection _priority for auto-activation:"
-#~ msgstr "_Agahiya girêdanê"
-
-#~ msgid "DSL"
-#~ msgstr "DSL"
-
-#, fuzzy
-#~ msgid "NetworkManager for GNOME"
-#~ msgstr "Sepanoka NetworkManager"
-
-#, fuzzy
-#~ msgid ""
-#~ "\n"
-#~ "The VPN connection '%s' disconnected."
-#~ msgstr "Girêdana torê qut bu."
-
-#~ msgid "_Disconnect VPN"
-#~ msgstr "Girêdana VPN _qut bike"
-
-#~ msgid "NetworkManager is not running..."
-#~ msgstr "NetworkManager naxebite..."
-
-#, fuzzy
-#~ msgid "_Connect to Hidden Wi-Fi Network..."
-#~ msgstr "Li tora bêqablo ya din girê bide..."
-
-#, fuzzy
-#~ msgid "Create _New Wi-Fi Network..."
-#~ msgstr "Tora bêqablo ya nû biafirîne..."
-
-#~ msgid " "
-#~ msgstr " "
-
-#, fuzzy
-#~ msgid "FirewallD is not running."
-#~ msgstr "NetworkManager naxebite..."
-
-#~ msgid "New..."
-#~ msgstr "Nû..."
-
-#~ msgid "You are now connected to the CDMA network."
-#~ msgstr "Niha bi tora CDMA re girêdayî yî."
-
-#~ msgid "CDMA network."
-#~ msgstr "Tora CDMA."
-
-#~ msgid "You are now connected to the GSM network."
-#~ msgstr "Niha bi tora GSM re girêdayî yî."
-
-#~ msgid "GSM network."
-#~ msgstr "Tora GSM"
-
-#~ msgid "Wireless Networks (%s)"
-#~ msgstr "Torên Bêqablo (%s)"
-
-#, fuzzy
-#~ msgid "Wireless Network (%s)"
-#~ msgstr "Tora bêqablo (%s)"
-
-#, fuzzy
-#~ msgid "Click on this icon to connect to a wireless network"
-#~ msgstr "Dema girêdana bi tora bêqablo re çewtî derket"
-
-#, fuzzy
-#~ msgid "Preparing wireless network connection '%s'..."
-#~ msgstr "Girêdana tora biqablo bi '%s' re (%d%%)"
-
-#, fuzzy
-#~ msgid "Requesting a wireless network address for '%s'..."
-#~ msgstr "Ji tora bêqablo '%s' navnîşana torê tê xwestin..."
-
-#, fuzzy
-#~ msgid "Wireless network connection '%s' active"
-#~ msgstr "Girêdana tora biqablo bi '%s' re (%d%%)"
-
-#, fuzzy
-#~ msgid "You are now connected to the WiMAX network."
-#~ msgstr "Niha bi tora biqablo re girêdayî yî."
-
-#, fuzzy
-#~ msgid "WiMAX (%s)"
-#~ msgstr "CDMA (%s)"
-
-#~ msgid "BSID:"
-#~ msgstr "BSID:"
-
-#~ msgid "_Help"
-#~ msgstr "_Alîkarî"
-
-#~ msgid "PI_N:"
-#~ msgstr "PI_N:"
-
-#~ msgid "Prefer 3G (UMTS/HSPA)"
-#~ msgstr "3G (UMTS/HSPA) tercîh bike"
-
-#~ msgid "_SSID:"
-#~ msgstr "_SSID:"
-
-#~ msgid "Automatic (PPP)"
-#~ msgstr "Bixweber (PPP)"
-
-#~ msgid "Wireless"
-#~ msgstr "Bêqablo"
-
-#~ msgid "_Save..."
-#~ msgstr "_Tomar bike..."
-
-#~ msgid "Error saving connection"
-#~ msgstr "Nikarî girêdanê tomar bike"
-
-#, fuzzy
-#~ msgid "Could not edit imported connection"
-#~ msgstr "Girêdana torê tune"
-
-#~ msgid "_Edit..."
-#~ msgstr "_Sererastkirin..."
-
-#~ msgid "%s Network"
-#~ msgstr "Tora %s"
-
-#~ msgid "Error: %s"
-#~ msgstr "Çewtiya %s"
-
-#, fuzzy
-#~ msgid "failed to connect to the phone."
-#~ msgstr "Niha bi tora biqablo re girêdayî yî."
-
-#~ msgid "WiMAX"
-#~ msgstr "WiMAX"
-
-#~ msgid "Passphrase for wireless network %s"
-#~ msgstr "Şîfreya tora bêqablo (%s)"
-
-#~ msgid "Wireless Ethernet (%s)"
-#~ msgstr "Tora bêqablo (%s)"
-
-#~ msgid "VPN Login Failure"
-#~ msgstr "Têketina VPN biserneket"
-
-#~ msgid "Could not start the VPN connection '%s' due to a login failure."
-#~ msgstr ""
-#~ "Nikarî dest bi girêdana VPN ya '%s' bike ji ber ku têketin biserneket"
-
-#~ msgid "VPN Start Failure"
-#~ msgstr "Destpêkirina VPN biserneket"
-
-#~ msgid "Requesting a network address from the wired network..."
-#~ msgstr "Ji tora biqablo navnîşana torê tê xwestin..."
-
-#~ msgid "VPN connecting to '%s'"
-#~ msgstr "VPN bi '%s' re girê dide"
-
-#~ msgid "Connect to %s..."
-#~ msgstr "Bi %s re girê bide..."
-
-#~ msgid "Disconnect from %s..."
-#~ msgstr "Ji %s veqetîne..."
-
-#~ msgid "WEP 64/128-bit Hex"
-#~ msgstr "WEP a 64/128-bit Hex"
-
-#~ msgid "TTLS"
-#~ msgstr "TTLS"
-
-#~ msgid "WPA Enterprise"
-#~ msgstr "WPA Enterprise"
-
-#~ msgid " (invalid Unicode)"
-#~ msgstr " (Unicode a nederbasdar)"
-
-#~ msgid ""
-#~ "Open System\n"
-#~ "Shared Key"
-#~ msgstr ""
-#~ "Pergalê vekirî\n"
-#~ "Şîfreya parvekirî"
-
-#~ msgid "Other Wireless Network..."
-#~ msgstr "Tora bêqablo ya din..."
-
-#~ msgid "Passphrase:"
-#~ msgstr "Hevoka şîfre:"
-
-#~ msgid "Unable to load"
-#~ msgstr "Nikarî bar bike"
-
-#~ msgid "Create VPN Connection - 1 of 2"
-#~ msgstr "Girêdana VPN biafirîne - 1 ji 2"
-
-#~ msgid "Create VPN Connection - 2 of 2"
-#~ msgstr "Girêdana VPN biafirîne - 2 ji 2"
-
-#~ msgid "Finish Creating VPN Connection"
-#~ msgstr "Afirandina girêdana VPN bi dawî bîne"
-
-#~ msgid "40-bit WEP"
-#~ msgstr "WEP a 40 bit"
-
-#~ msgid "104-bit WEP"
-#~ msgstr "WEP a 104 bit"
-
-#~ msgid "WPA TKIP"
-#~ msgstr "WPA TKIP"
-
-#~ msgid "WPA CCMP"
-#~ msgstr "WPA CCMP"
-
-#~ msgid "WPA2 TKIP"
-#~ msgstr "WPA2 TKIP"
-
-#~ msgid "WPA2 CCMP"
-#~ msgstr "WPA2 CCMP"
-
-#~ msgid "WPA2 Automatic"
-#~ msgstr "WPA2 Otomatîk"
-
-#~ msgid "You are now connected to the Ad-Hoc wireless network '%s'."
-#~ msgstr "Niha bi tora bêqablo Ad-Hoc '%s' re girêdayî yî."

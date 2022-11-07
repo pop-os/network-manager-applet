@@ -1,6 +1,6 @@
 # Turkish translation of network-manager-applet.
 # Copyright (C) 2010, 2011 the Free Software Foundation, Inc.
-# Copyright (C) 2012-2019 network-manager-applet'S COPYRIGHT HOLDER
+# Copyright (C) 2012-2022 network-manager-applet'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the network-manager-applet package.
 #
 # Ozan Çağlayan <ozan@pardus.org.tr>, 2010.
@@ -16,19 +16,19 @@ msgstr ""
 "Project-Id-Version: network-manager-applet master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/network-manager-"
 "applet/\n"
-"POT-Creation-Date: 2022-06-07 16:48+0200\n"
-"PO-Revision-Date: 2022-03-20 22:37+0300\n"
-"Last-Translator: Emin Tufan Çetin <etcetin@gmail.com>\n"
+"POT-Creation-Date: 2022-11-07 08:48+0100\n"
+"PO-Revision-Date: 2022-09-02 13:57+0300\n"
+"Last-Translator: Sabri Ünal <libreajans@gmail.com>\n"
 "Language-Team: Turkish <gnometurk@gnome.org>\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 2.4.3\n"
+"X-Generator: Poedit 3.1.1\n"
 "X-POOTLE-MTIME: 1434872144.000000\n"
 
-#: nm-applet.desktop.in:3 src/applet-dialogs.c:724 src/applet.c:3251
+#: nm-applet.desktop.in:3 src/applet-dialogs.c:724 src/applet.c:3166
 msgid "Network"
 msgstr "Ağ"
 
@@ -72,6 +72,70 @@ msgstr "Gelişmiş Ağ Yapılandırma"
 #: nm-connection-editor.desktop.in:4
 msgid "Manage and change your network connection settings"
 msgstr "Ağ bağlantı ayarlarını yönet ve değiştir"
+
+#: org.gnome.nm-applet.gschema.xml.in:6
+#, fuzzy
+msgid "Disable connected notifications"
+msgstr "_Bildirimleri Etkinleştir"
+
+#: org.gnome.nm-applet.gschema.xml.in:7
+msgid "Set this to true to disable notifications when connecting to a network."
+msgstr ""
+
+#: org.gnome.nm-applet.gschema.xml.in:11
+#, fuzzy
+msgid "Disable disconnected notifications"
+msgstr "Aygıt bağlantısı kesilemedi"
+
+#: org.gnome.nm-applet.gschema.xml.in:12
+msgid ""
+"Set this to true to disable notifications when disconnecting from a network."
+msgstr ""
+
+#: org.gnome.nm-applet.gschema.xml.in:16
+#, fuzzy
+msgid "Disable VPN notifications"
+msgstr "_Bildirimleri Etkinleştir"
+
+#: org.gnome.nm-applet.gschema.xml.in:17
+msgid ""
+"Set this to true to disable notifications when connecting to or "
+"disconnecting from a VPN."
+msgstr ""
+
+#: org.gnome.nm-applet.gschema.xml.in:21
+msgid "Suppress networks available notifications"
+msgstr ""
+
+#: org.gnome.nm-applet.gschema.xml.in:22
+msgid ""
+"Set this to true to disable notifications when Wi-Fi networks are available."
+msgstr ""
+
+#: org.gnome.nm-applet.gschema.xml.in:26
+msgid "Stamp"
+msgstr ""
+
+#: org.gnome.nm-applet.gschema.xml.in:27
+msgid "Used to determine whether settings should be migrated to a new version."
+msgstr ""
+
+#: org.gnome.nm-applet.gschema.xml.in:31
+msgid "Disable WiFi Create"
+msgstr ""
+
+#: org.gnome.nm-applet.gschema.xml.in:32
+msgid ""
+"Set to true to disable creation of adhoc networks when using the applet."
+msgstr ""
+
+#: org.gnome.nm-applet.gschema.xml.in:36
+msgid "Show the applet in notification area"
+msgstr ""
+
+#: org.gnome.nm-applet.gschema.xml.in:37
+msgid "Set to FALSE to disable displaying the applet in the notification area."
+msgstr ""
 
 #: shared/nm-utils/nm-shared-utils.c:793
 #, c-format
@@ -152,9 +216,8 @@ msgid "secure."
 msgstr "güvenli."
 
 #: src/ap-menu-item.c:77
-#, fuzzy
 msgid "insecure."
-msgstr "güvenli."
+msgstr "güvensiz."
 
 #: src/applet-device-broadband.c:147
 msgid "Wrong PUK code; please contact your provider."
@@ -191,7 +254,7 @@ msgid "New Mobile Broadband connection…"
 msgstr "Yeni Mobil Geniş Bant Bağlantı…"
 
 #: src/applet-device-broadband.c:809 src/applet-device-bt.c:75
-#: src/applet-device-ethernet.c:124 src/applet-device-wifi.c:1269
+#: src/applet-device-ethernet.c:124 src/applet-device-wifi.c:1251
 msgid "Connection Established"
 msgstr "Bağlantı Kuruldu"
 
@@ -230,7 +293,7 @@ msgstr "“%s” mobil geniş bant bağlantısı yapılandırılıyor…"
 msgid "User authentication required for mobile broadband connection “%s”…"
 msgstr "“%s” mobil geniş bant bağlantısı için kimlik doğrulama gerekiyor…"
 
-#: src/applet-device-bt.c:113 src/applet.c:2595 src/mobile-helpers.c:593
+#: src/applet-device-bt.c:113 src/applet.c:2510 src/mobile-helpers.c:593
 #, c-format
 msgid "Requesting a network address for “%s”…"
 msgstr "“%s” için bir ağ adresi isteniyor…"
@@ -263,7 +326,7 @@ msgid "Ethernet Network"
 msgstr "Ethernet Ağı"
 
 #. Notify user of unmanaged or unavailable device
-#: src/applet-device-ethernet.c:99 src/applet.c:1350
+#: src/applet-device-ethernet.c:99 src/applet.c:1265
 msgid "disconnected"
 msgstr "bağlantı kesildi"
 
@@ -323,7 +386,7 @@ msgstr "Ye_ni Kablosuz Ağ Oluştur…"
 msgid "(none)"
 msgstr "(hiçbiri)"
 
-#: src/applet-device-wifi.c:523 src/applet-device-wifi.c:1366
+#: src/applet-device-wifi.c:523 src/applet-device-wifi.c:1349
 msgid "Failed to add new connection"
 msgstr "Yeni bağlantı eklenemedi"
 
@@ -331,8 +394,8 @@ msgstr "Yeni bağlantı eklenemedi"
 msgid "Insufficient privileges."
 msgstr "Yetersiz öncelikler."
 
-#: src/applet-device-wifi.c:526 src/applet-device-wifi.c:1349
-#: src/applet-device-wifi.c:1369 src/applet.c:415 src/applet.c:498
+#: src/applet-device-wifi.c:526 src/applet-device-wifi.c:1332
+#: src/applet-device-wifi.c:1352 src/applet.c:414 src/applet.c:497
 msgid "Connection failure"
 msgstr "Bağlantı başarısız"
 
@@ -363,59 +426,55 @@ msgstr "Donanım anahtarıyla kablosuz kapatıldı"
 msgid "_Available networks"
 msgstr "_Kullanılabilir ağlar"
 
-#: src/applet-device-wifi.c:1083
+#: src/applet-device-wifi.c:1066
 msgid "Wi-Fi Networks Available"
 msgstr "Kullanılabilir Kablosuz Ağlar"
 
-#: src/applet-device-wifi.c:1084
+#: src/applet-device-wifi.c:1067
 msgid "Use the network menu to connect to a Wi-Fi network"
 msgstr "Kablosuz ağa bağlanmak için ağ menüsü kullanın"
 
-#: src/applet-device-wifi.c:1087 src/applet.c:819
-msgid "Don’t show this message again"
-msgstr "Bu iletiyi yeniden gösterme"
-
-#: src/applet-device-wifi.c:1268
+#: src/applet-device-wifi.c:1249
 #, c-format
 msgid "You are now connected to the Wi-Fi network “%s”."
 msgstr "Şimdi “%s” kablosuz ağına bağlandınız."
 
-#: src/applet-device-wifi.c:1303
+#: src/applet-device-wifi.c:1286
 #, c-format
 msgid "Preparing Wi-Fi network connection “%s”…"
 msgstr "“%s” kablosuz ağ bağlantısı hazırlanıyor…"
 
-#: src/applet-device-wifi.c:1306
+#: src/applet-device-wifi.c:1289
 #, c-format
 msgid "Configuring Wi-Fi network connection “%s”…"
 msgstr "“%s” kablosuz ağ bağlantısı yapılandırılıyor…"
 
-#: src/applet-device-wifi.c:1309
+#: src/applet-device-wifi.c:1292
 #, c-format
 msgid "User authentication required for Wi-Fi network “%s”…"
 msgstr "“%s” kablosuz ağı için kimlik doğrulaması gerekiyor…"
 
-#: src/applet-device-wifi.c:1312
+#: src/applet-device-wifi.c:1295
 #, c-format
 msgid "Requesting a Wi-Fi network address for “%s”…"
 msgstr "“%s” için bir kablosuz ağ adresi isteniyor…"
 
-#: src/applet-device-wifi.c:1323
+#: src/applet-device-wifi.c:1306
 #, c-format
 msgid "Wi-Fi network connection “%s” active: %s (%d%%)"
 msgstr "“%s” kablosuz ağ bağlantısı etkin: %s (%%%d)"
 
-#: src/applet-device-wifi.c:1327
+#: src/applet-device-wifi.c:1310
 #, c-format
 msgid "Wi-Fi network connection “%s” active"
 msgstr "“%s” kablosuz ağ bağlantısı etkin"
 
-#: src/applet-device-wifi.c:1346
+#: src/applet-device-wifi.c:1329
 msgid "Failed to activate connection"
 msgstr "Bağlantı etkinleştirilemedi"
 
-#: src/applet-device-wifi.c:1347 src/applet-device-wifi.c:1367 src/applet.c:413
-#: src/applet.c:464 src/applet.c:496
+#: src/applet-device-wifi.c:1330 src/applet-device-wifi.c:1350 src/applet.c:412
+#: src/applet.c:463 src/applet.c:495
 msgid "Unknown error"
 msgstr "Bilinmeyen hata"
 
@@ -431,7 +490,7 @@ msgstr "LEAP"
 msgid "Dynamic WEP"
 msgstr "Dinamik WEP"
 
-#: src/applet-dialogs.c:64 src/applet-dialogs.c:226 src/applet-dialogs.c:228
+#: src/applet-dialogs.c:64 src/applet-dialogs.c:226
 msgid "WPA/WPA2"
 msgstr "WPA/WPA2"
 
@@ -443,6 +502,10 @@ msgstr "Daha çok adres"
 #: src/applet-dialogs.c:224
 msgid "WEP"
 msgstr "WEP"
+
+#: src/applet-dialogs.c:228
+msgid "WPA/WPA2/WPA3"
+msgstr "WPA/WPA2/WPA3"
 
 #: src/applet-dialogs.c:230
 msgid "WPA3"
@@ -727,23 +790,27 @@ msgstr "Bağlantı VPN kullanıcı arayüzüne yazılamadı: %s (%d)"
 msgid "Failed to write connection to VPN UI: incomplete write"
 msgstr "Bağlantı VPN kullanıcı arayüzüne yazılamadı: tamamlanmamış yazım"
 
-#: src/applet.c:412
+#: src/applet.c:411
 msgid "Failed to add/activate connection"
 msgstr "Bağlantı ekleme/etkinleştirme başarısız oldu"
 
-#: src/applet.c:463
+#: src/applet.c:462
 msgid "Device disconnect failed"
 msgstr "Aygıt bağlantısı kesilemedi"
 
-#: src/applet.c:466
+#: src/applet.c:465
 msgid "Disconnect failure"
 msgstr "Bağlantı kesilemedi"
 
-#: src/applet.c:495
+#: src/applet.c:494
 msgid "Connection activation failed"
 msgstr "Bağlantı etkinleştirilemedi"
 
-#: src/applet.c:916
+#: src/applet.c:731
+msgid "Don’t show this message again"
+msgstr "Bu iletiyi yeniden gösterme"
+
+#: src/applet.c:831
 #, c-format
 msgid ""
 "\n"
@@ -753,7 +820,7 @@ msgstr ""
 "\n"
 "“%s” VPN bağlantısı kesildi çünkü ağ bağlantısı kesildi."
 
-#: src/applet.c:918
+#: src/applet.c:833
 #, c-format
 msgid ""
 "\n"
@@ -763,7 +830,7 @@ msgstr ""
 "\n"
 "“%s” VPN bağlantısı başarısız oldu çünkü ağ bağlantısı kesildi."
 
-#: src/applet.c:920
+#: src/applet.c:835
 #, c-format
 msgid ""
 "\n"
@@ -773,7 +840,7 @@ msgstr ""
 "“%s” VPN bağlantısı başarısız oldu çünkü VPN hizmeti beklenmedik biçimde "
 "durdu."
 
-#: src/applet.c:922
+#: src/applet.c:837
 #, c-format
 msgid ""
 "\n"
@@ -784,7 +851,7 @@ msgstr ""
 "“%s” VPN bağlantısı başarısız oldu çünkü VPN hizmeti geçersiz yapılandırma "
 "hatası bildirdi."
 
-#: src/applet.c:924
+#: src/applet.c:839
 #, c-format
 msgid ""
 "\n"
@@ -794,7 +861,7 @@ msgstr ""
 "“%s” VPN bağlantısı başarısız oldu çünkü bağlantı girişimi zaman aşımına "
 "uğradı."
 
-#: src/applet.c:926
+#: src/applet.c:841
 #, c-format
 msgid ""
 "\n"
@@ -803,7 +870,7 @@ msgstr ""
 "\n"
 "“%s” VPN bağlantısı başarısız oldu çünkü VPN hizmeti zamanında başlamadı."
 
-#: src/applet.c:928
+#: src/applet.c:843
 #, c-format
 msgid ""
 "\n"
@@ -812,7 +879,7 @@ msgstr ""
 "\n"
 "“%s” VPN bağlantısı başarısız oldu çünkü VPN hizmeti başlatılamadı."
 
-#: src/applet.c:930
+#: src/applet.c:845
 #, c-format
 msgid ""
 "\n"
@@ -821,7 +888,7 @@ msgstr ""
 "\n"
 "“%s” VPN bağlantısı başarısız oldu çünkü geçerli VPN gizi yok."
 
-#: src/applet.c:932
+#: src/applet.c:847
 #, c-format
 msgid ""
 "\n"
@@ -830,7 +897,7 @@ msgstr ""
 "\n"
 "“%s” VPN bağlantısı başarısız oldu çünkü VPN gizleri geçersiz."
 
-#: src/applet.c:937
+#: src/applet.c:852
 #, c-format
 msgid ""
 "\n"
@@ -839,7 +906,7 @@ msgstr ""
 "\n"
 "“%s” VPN bağlantısı başarısız oldu."
 
-#: src/applet.c:964
+#: src/applet.c:879
 #, c-format
 msgid ""
 "VPN connection has been successfully established.\n"
@@ -850,19 +917,19 @@ msgstr ""
 "\n"
 "%s\n"
 
-#: src/applet.c:966
+#: src/applet.c:881
 msgid "VPN connection has been successfully established.\n"
 msgstr "VPN bağlantısı başarıyla kuruldu.\n"
 
-#: src/applet.c:968
+#: src/applet.c:883
 msgid "VPN Login Message"
 msgstr "VPN Giriş İletisi"
 
-#: src/applet.c:976 src/applet.c:1016
+#: src/applet.c:891 src/applet.c:931
 msgid "VPN Connection Failed"
 msgstr "VPN Bağlantısı Başarısız"
 
-#: src/applet.c:1020
+#: src/applet.c:935
 #, c-format
 msgid ""
 "\n"
@@ -875,7 +942,7 @@ msgstr ""
 "\n"
 "%s"
 
-#: src/applet.c:1023
+#: src/applet.c:938
 #, c-format
 msgid ""
 "\n"
@@ -888,132 +955,132 @@ msgstr ""
 "\n"
 "%s"
 
-#: src/applet.c:1338
+#: src/applet.c:1253
 msgid "device not ready (firmware missing)"
 msgstr "aygıt hazır değil (ürün bilgisi eksik)"
 
-#: src/applet.c:1340
+#: src/applet.c:1255
 msgid "device not ready"
 msgstr "aygıt hazır değil"
 
-#: src/applet.c:1366
+#: src/applet.c:1281
 msgid "Disconnect"
 msgstr "Bağlantıyı Kes"
 
-#: src/applet.c:1380
+#: src/applet.c:1295
 msgid "device not managed"
 msgstr "aygıt yönetilmiyor"
 
-#: src/applet.c:1454
+#: src/applet.c:1369
 msgid "No network devices available"
 msgstr "Ağ aygıtı bulunamadı"
 
-#: src/applet.c:1500
+#: src/applet.c:1415
 msgid "_VPN Connections"
 msgstr "_VPN Bağlantıları"
 
-#: src/applet.c:1544
+#: src/applet.c:1459
 msgid "_Configure VPN…"
 msgstr "VPNʼyi _Yapılandır…"
 
-#: src/applet.c:1547
+#: src/applet.c:1462
 msgid "_Add a VPN connection…"
 msgstr "VPN bağlantısı _ekle…"
 
-#: src/applet.c:1653
+#: src/applet.c:1568
 msgid "NetworkManager is not running…"
 msgstr "Ağ Yöneticisi çalışmıyor…"
 
-#: src/applet.c:1658 src/applet.c:2726
+#: src/applet.c:1573 src/applet.c:2641
 msgid "Networking disabled"
 msgstr "Ağ yönetimi etkin değil"
 
 #. 'Enable Networking' item
-#: src/applet.c:1868
+#: src/applet.c:1783
 msgid "Enable _Networking"
 msgstr "_Ağ Yönetimini Etkinleştir"
 
 #. 'Enable Wi-Fi' item
-#: src/applet.c:1877
+#: src/applet.c:1792
 msgid "Enable _Wi-Fi"
 msgstr "_Kablosuz Bağlantıyı Etkinleştir"
 
 #. 'Enable Mobile Broadband' item
-#: src/applet.c:1886
+#: src/applet.c:1801
 msgid "Enable _Mobile Broadband"
 msgstr "_Mobil Geniş Bant Ağları Etkinleştir"
 
 #. Toggle notifications item
-#: src/applet.c:1898
+#: src/applet.c:1813
 msgid "Enable N_otifications"
 msgstr "_Bildirimleri Etkinleştir"
 
 #. 'Connection Information' item
-#: src/applet.c:1910
+#: src/applet.c:1825
 msgid "Connection _Information"
 msgstr "Bağlantı _Bilgileri"
 
 #. 'Edit Connections...' item
-#: src/applet.c:1918
+#: src/applet.c:1833
 msgid "Edit Connections…"
 msgstr "Bağlantıları Düzenle…"
 
-#: src/applet.c:1932
+#: src/applet.c:1847
 msgid "_About"
 msgstr "_Hakkında"
 
-#: src/applet.c:2246
+#: src/applet.c:2161
 #, c-format
 msgid "You are now connected to “%s”."
 msgstr "Şimdi “%s” bağlantısına bağlandınız."
 
-#: src/applet.c:2286
+#: src/applet.c:2201
 msgid "Disconnected"
 msgstr "Bağlı değil"
 
-#: src/applet.c:2287
+#: src/applet.c:2202
 msgid "The network connection has been disconnected."
 msgstr "Ağ bağlantısı kesildi."
 
-#: src/applet.c:2589
+#: src/applet.c:2504
 #, c-format
 msgid "Preparing network connection “%s”…"
 msgstr "“%s” ağ bağlantısı hazırlanıyor…"
 
-#: src/applet.c:2592
+#: src/applet.c:2507
 #, c-format
 msgid "User authentication required for network connection “%s”…"
 msgstr "“%s” ağ bağlantısı için kimlik doğrulama gerekiyor…"
 
-#: src/applet.c:2598
+#: src/applet.c:2513
 #, c-format
 msgid "Network connection “%s” active"
 msgstr "“%s” ağ bağlantısı etkin"
 
-#: src/applet.c:2671
+#: src/applet.c:2586
 #, c-format
 msgid "Starting VPN connection “%s”…"
 msgstr "“%s” VPN bağlantısı başlatılıyor…"
 
-#: src/applet.c:2674
+#: src/applet.c:2589
 #, c-format
 msgid "User authentication required for VPN connection “%s”…"
 msgstr "“%s” VPN bağlantısı için kimlik doğrulama gerekiyor…"
 
-#: src/applet.c:2677
+#: src/applet.c:2592
 #, c-format
 msgid "Requesting a VPN address for “%s”…"
 msgstr "“%s” için VPN adresi isteniyor…"
 
-#: src/applet.c:2680
+#: src/applet.c:2595
 msgid "VPN connection active"
 msgstr "VPN bağlantısı etkin"
 
-#: src/applet.c:2730
+#: src/applet.c:2645
 msgid "No network connection"
 msgstr "Ağ bağlantısı yok"
 
-#: src/applet.c:3352
+#: src/applet.c:3280
 msgid "NetworkManager Applet"
 msgstr "NetworkManager Programcığı"
 
@@ -1141,7 +1208,7 @@ msgid "Bonded _connections"
 msgstr "Bağlanmış _bağlantılar"
 
 #: src/connection-editor/ce-page-bond.ui:105
-#: src/connection-editor/ce-page-wifi.ui:400
+#: src/connection-editor/ce-page-wifi.ui:294
 msgid "M_ode"
 msgstr "_Kip"
 
@@ -2839,35 +2906,19 @@ msgstr "İstemci"
 msgid "Ad-hoc"
 msgstr "Özel (Ad-hoc)"
 
-#: src/connection-editor/ce-page-wifi.ui:203
-msgid "mW"
-msgstr "mW"
-
-#: src/connection-editor/ce-page-wifi.ui:222
-msgid "Transmission po_wer"
-msgstr "İletim _gücü"
-
-#: src/connection-editor/ce-page-wifi.ui:256
-msgid "Mb/s"
-msgstr "Mb/s"
-
-#: src/connection-editor/ce-page-wifi.ui:275
-msgid "_Rate"
-msgstr "_Oran"
-
-#: src/connection-editor/ce-page-wifi.ui:311
+#: src/connection-editor/ce-page-wifi.ui:205
 msgid "_BSSID"
 msgstr "_BSSID"
 
-#: src/connection-editor/ce-page-wifi.ui:336
+#: src/connection-editor/ce-page-wifi.ui:230
 msgid "C_hannel"
 msgstr "K_anal"
 
-#: src/connection-editor/ce-page-wifi.ui:368
+#: src/connection-editor/ce-page-wifi.ui:262
 msgid "Ban_d"
 msgstr "Ban_t"
 
-#: src/connection-editor/ce-page-wifi.ui:414
+#: src/connection-editor/ce-page-wifi.ui:308
 msgid "SS_ID"
 msgstr "SS_ID"
 
@@ -4087,12 +4138,12 @@ msgid "Dynamic WEP (802.1X)"
 msgstr "Dinamik WEP (802.1X)"
 
 #: src/connection-editor/page-wifi-security.c:410
-msgid "WPA & WPA2 Personal"
-msgstr "WPA & WPA2 Kişisel"
+msgid "WPA/WPA2/WPA3 Personal"
+msgstr "WPA/WPA2/WPA3 Kişisel"
 
 #: src/connection-editor/page-wifi-security.c:423
-msgid "WPA & WPA2 Enterprise"
-msgstr "WPA & WPA2 Enterprise"
+msgid "WPA/WPA2 Enterprise"
+msgstr "WPA/WPA2 Kurumsal"
 
 #: src/connection-editor/page-wifi-security.c:436
 msgid "WPA3 Personal"
@@ -4364,1308 +4415,3 @@ msgstr "PEM sertifikaları (*.pem, *.crt, *.cer)"
 #: src/utils/utils.c:546
 msgid "DER, PEM, or PKCS#12 private keys (*.der, *.pem, *.p12, *.key)"
 msgstr "DER, PEM, veya PKCS#12 özel anahtarları (*.der, *.pem, *.p12, *.key)"
-
-#~ msgid "nm-device-wireless"
-#~ msgstr "nm-device-wireless"
-
-#~ msgid "preferences-system-network"
-#~ msgstr "preferences-system-network"
-
-#~ msgid "More networks"
-#~ msgstr "Daha çok ağ"
-
-#~ msgid "missing EAP-FAST PAC file"
-#~ msgstr "EAP-FAST PAC dosyası eksik"
-
-#~ msgid "GTC"
-#~ msgstr "GTC"
-
-#~ msgid "Choose a PAC file"
-#~ msgstr "Bir PAC dosyası seçin"
-
-#~ msgid "PAC files (*.pac)"
-#~ msgstr "PAC dosyaları (*.pac)"
-
-#~ msgid "All files"
-#~ msgstr "Tüm dosyalar"
-
-#~ msgid "Anonymous"
-#~ msgstr "Anonim"
-
-#~ msgid "Authenticated"
-#~ msgstr "Kimlik doğrulandı"
-
-#~ msgid "Both"
-#~ msgstr "İkisi de"
-
-#~ msgid "Anony_mous identity"
-#~ msgstr "Anoni_m kimlik"
-
-#~ msgid "PAC _file"
-#~ msgstr "PAC _dosyası"
-
-#~ msgid "_Inner authentication"
-#~ msgstr "_Dahili kimlik doğrulaması"
-
-#~ msgid "Allow automatic PAC pro_visioning"
-#~ msgstr "Kendiliğinden PAC ön _hazırlığına izin ver"
-
-#~ msgid "missing EAP-LEAP username"
-#~ msgstr "EAP-LEAP kullanıcı adı eksik"
-
-#~ msgid "missing EAP-LEAP password"
-#~ msgstr "EAP-LEAP parolası eksik"
-
-#~ msgid "MD5"
-#~ msgstr "MD5"
-
-#~ msgid "Version 0"
-#~ msgstr "Sürüm 0"
-
-#~ msgid "Version 1"
-#~ msgstr "Sürüm 1"
-
-#~ msgid "No CA certificate is _required"
-#~ msgstr "CA sertifikası ge_rekli değildir"
-
-#~ msgid "PEAP _version"
-#~ msgstr "PEAP _sürümü"
-
-#~ msgid "Suffix of the server certificate name."
-#~ msgstr "Sunucu sertifika adının son eki."
-
-#~ msgid "_Domain"
-#~ msgstr "_Etki Alanı"
-
-#~ msgid "missing EAP username"
-#~ msgstr "eksik EAP kullanıcı adı"
-
-#~ msgid "missing EAP password"
-#~ msgstr "eksik EAP parolası"
-
-#~ msgid "missing EAP client Private Key passphrase"
-#~ msgstr "kayıp EAP istemci Gizli Anahtar metni"
-
-#~ msgid "P_rivate Key Passphrase"
-#~ msgstr "Gizli Anahta_r Metni"
-
-#~ msgid "Sh_ow passphrase"
-#~ msgstr "Parolayı _göster"
-
-#~ msgid "missing EAP-TLS identity"
-#~ msgstr "eksik EAP-TLS kimliği"
-
-#~ msgid "no user certificate selected"
-#~ msgstr "kullanıcı sertifikası seçilmedi"
-
-#~ msgid "selected user certificate file does not exist"
-#~ msgstr "seçilen kullanıcı sertifika dosyası yok"
-
-#~ msgid "no key selected"
-#~ msgstr "anahtar seçilmedi"
-
-#~ msgid "selected key file does not exist"
-#~ msgstr "seçilen anahtar dosyası yok"
-
-#~ msgid "I_dentity"
-#~ msgstr "K_imlik"
-
-#~ msgid "MSCHAPv2 (no EAP)"
-#~ msgstr "MSCHAPv2 (EAP yok)"
-
-#~ msgid "undefined error in 802.1X security (wpa-eap)"
-#~ msgstr "802.1X güvenliğinde (wpa-eap) tanımlanmamış hata"
-
-#~ msgid "no CA certificate selected"
-#~ msgstr "CA sertifikası seçilmedi"
-
-#~ msgid "selected CA certificate file does not exist"
-#~ msgstr "seçilen CA sertifika dosyası yok"
-
-#~ msgid "Unknown error validating 802.1X security"
-#~ msgstr "802.1X güvenliğini doğrulamada bilinmeyen hata"
-
-#~ msgid "TLS"
-#~ msgstr "TLS"
-
-#~ msgid "PWD"
-#~ msgstr "PWD"
-
-#~ msgid "FAST"
-#~ msgstr "HIZLI"
-
-#~ msgid "Tunneled TLS"
-#~ msgstr "Tünelli TLS"
-
-#~ msgid "Protected EAP (PEAP)"
-#~ msgstr "Korumalı EAP (PEAP)"
-
-#~ msgid "Externally configured"
-#~ msgstr "Harici olarak yapılandırıldı"
-
-#~ msgid "Au_thentication"
-#~ msgstr "_Yetkilendirme"
-
-#~ msgid "missing leap-username"
-#~ msgstr "leap-kullanıcı adı eksik"
-
-#~ msgid "missing leap-password"
-#~ msgstr "leap-parolası eksik"
-
-#~ msgid "missing password"
-#~ msgstr "eksik parola"
-
-#~ msgid "_Type"
-#~ msgstr "_Tür"
-
-#~ msgid "missing wep-key"
-#~ msgstr "wep-anahtarı eksik"
-
-#~ msgid ""
-#~ "invalid wep-key: key with a length of %zu must contain only hex-digits"
-#~ msgstr ""
-#~ "geçersiz wep-anahtarı: %zu uzunluğundaki bir anahtar yalnızca onaltılı "
-#~ "(hex) rakamlardan oluşmalı"
-
-#~ msgid ""
-#~ "invalid wep-key: key with a length of %zu must contain only ascii "
-#~ "characters"
-#~ msgstr ""
-#~ "geçersiz wep-anahtarı: %zu uzunluğundaki bir anahtar yalnızca ascii "
-#~ "karakterler içermelidir"
-
-#~ msgid ""
-#~ "invalid wep-key: wrong key length %zu. A key must be either of length "
-#~ "5/13 (ascii) or 10/26 (hex)"
-#~ msgstr ""
-#~ "geçersiz wep-anahtarı: geçersiz anahtar uzunluğu %zu. Bir anahtar ya 5/13 "
-#~ "(ascii) ya da 10/26 (onaltılık) uzunluğunda olmalıdır"
-
-#~ msgid "invalid wep-key: passphrase must be non-empty"
-#~ msgstr "geçersiz wep-anahtarı: parola boş olmamalıdır"
-
-#~ msgid "invalid wep-key: passphrase must be shorter than 64 characters"
-#~ msgstr "geçersiz wep-anahtarı: parola 64 karakterden kısa olmalıdır"
-
-#~ msgid "Open System"
-#~ msgstr "Açık Sistem (Open System)"
-
-#~ msgid "Shared Key"
-#~ msgstr "Paylaşılan Anahtar"
-
-#~ msgid "1 (Default)"
-#~ msgstr "1 (Öntanımlı)"
-
-#~ msgid "_Key"
-#~ msgstr "_Anahtar"
-
-#~ msgid "Sho_w key"
-#~ msgstr "Anahtarı _göster"
-
-#~ msgid "WEP inde_x"
-#~ msgstr "WEP indek_si"
-
-#~ msgid ""
-#~ "invalid wpa-psk: invalid key-length %zu. Must be [8,63] bytes or 64 hex "
-#~ "digits"
-#~ msgstr ""
-#~ "geçersiz wpa-psk: geçersiz anahtar uzunluğu %zu. [8,63] bayt ya da 64 "
-#~ "onaltılık rakam olmalıdır"
-
-#~ msgid "invalid wpa-psk: cannot interpret key with 64 bytes as hex"
-#~ msgstr ""
-#~ "geçersiz wpa-psk: 64 baytlık anahtar onaltılık olarak yorumlanamıyor"
-
-#~ msgid "Disable connected notifications"
-#~ msgstr "Bağlantı bildirimlerini kapat"
-
-#~ msgid ""
-#~ "Set this to true to disable notifications when connecting to a network."
-#~ msgstr ""
-#~ "Bir ağa bağlanırken bildirim gelmesini engellemek istiyorsanız bunu doğru "
-#~ "olarak ayarlayın."
-
-#~ msgid "Disable disconnected notifications"
-#~ msgstr "Bağlantı kesildi bildirimlerini kapat"
-
-#~ msgid ""
-#~ "Set this to true to disable notifications when disconnecting from a "
-#~ "network."
-#~ msgstr ""
-#~ "Bir ağ bağlantısını keserken bildirim gelmesini engellemek istiyorsanız "
-#~ "bu seçeneği doğru olarak ayarlayın."
-
-#~ msgid "Disable VPN notifications"
-#~ msgstr "VPN bildirimlerini kapat"
-
-#~ msgid ""
-#~ "Set this to true to disable notifications when connecting to or "
-#~ "disconnecting from a VPN."
-#~ msgstr ""
-#~ "VPN bağlantısı yaparken ya da bağlantıyı keserken bildirim gelmesini "
-#~ "engellemek istiyorsanız bunu doğru olarak ayarlayın."
-
-#~ msgid "Suppress networks available notifications"
-#~ msgstr "Erişilebilir ağ bildirimlerini kapat"
-
-#~ msgid ""
-#~ "Set this to true to disable notifications when Wi-Fi networks are "
-#~ "available."
-#~ msgstr ""
-#~ "Kullanılabilir kablosuz ağlar bulunduğunda bildirim gelmesini engellemek "
-#~ "istiyorsanız bunu doğru olarak ayarlayın."
-
-#~ msgid "Stamp"
-#~ msgstr "Damga"
-
-#~ msgid ""
-#~ "Used to determine whether settings should be migrated to a new version."
-#~ msgstr ""
-#~ "Ayarların yeni bir sürüme göç ettirip ettirilmeyeceğini belirtmek için "
-#~ "kullanılır."
-
-#~ msgid "Disable WiFi Create"
-#~ msgstr "WiFi Oluşturmayı devre dışı bırak"
-
-#~ msgid ""
-#~ "Set to true to disable creation of adhoc networks when using the applet."
-#~ msgstr ""
-#~ "Uygulamacığı kullanırken adhoc ağ oluşturulmasını engellemek istiyorsanız "
-#~ "bu seçeneği doğru olarak ayarlayın."
-
-#~ msgid "Show the applet in notification area"
-#~ msgstr "Bildirim alanında uygulamacığı göster"
-
-#~ msgid ""
-#~ "Set to FALSE to disable displaying the applet in the notification area."
-#~ msgstr ""
-#~ "Bildirim alanında uygulamacığın görüntülenmesini istemiyorsanız bu "
-#~ "seçeneği YANLIŞ olarak işaretleyin."
-
-#~ msgid "Ignore CA certificate"
-#~ msgstr "CA sertifikasını yok say"
-
-#~ msgid ""
-#~ "Set this to true to disable warnings about CA certificates in EAP "
-#~ "authentication."
-#~ msgstr ""
-#~ "EAP kimlik doğrulamasında CA sertifikaları ile ilgili uyarıları görmek "
-#~ "istemiyorsanız bu seçeneği doğru olarak işaretleyin."
-
-#~ msgid ""
-#~ "Set this to true to disable warnings about CA certificates in phase 2 of "
-#~ "EAP authentication."
-#~ msgstr ""
-#~ "EAP kimlik doğrulamasının 2. aşamasında CA sertifikaları ile ilgili "
-#~ "uyarıları görmek istemiyorsanız bu seçeneği doğru olarak işaretleyin."
-
-#~ msgid "Scan with your phone or <a href=\"nma:print\">Print</a>"
-#~ msgstr "Telefonunuzla tarayın ya da <a href=\"nma:print\">Yazdırın</a>"
-
-#~ msgid "No certificate set"
-#~ msgstr "Sertifika belirlenmedi"
-
-#~ msgid "No key set"
-#~ msgstr "Anahtar belirlenmedi"
-
-#~ msgid "Choose a key for %s Certificate"
-#~ msgstr "%s Sertifikası için anahtar seç"
-
-#~ msgid "%s key _password"
-#~ msgstr "%s anahtar _parolası"
-
-#~ msgid "Choose %s Certificate"
-#~ msgstr "%s Sertifikası Seç"
-
-#~ msgid "%s _certificate"
-#~ msgstr "%s _sertifikası"
-
-#~ msgid "My country is not listed"
-#~ msgstr "Ülkem listede değil"
-
-#~ msgid "Unlisted"
-#~ msgstr "Listelenmemiş"
-
-#~ msgid "My plan is not listed…"
-#~ msgstr "Planım listede yok…"
-
-#~ msgid "Provider"
-#~ msgstr "Sağlayıcı"
-
-#~ msgid "Installed GSM device"
-#~ msgstr "Kurulan GSM aygıtı"
-
-#~ msgid "Installed CDMA device"
-#~ msgstr "Kurulan CDMA aygıtı"
-
-#~ msgid "Any device"
-#~ msgstr "Herhangi bir aygıt"
-
-#~ msgid "New Mobile Broadband Connection"
-#~ msgstr "Yeni Mobil Geniş Bant Bağlantı"
-
-#~ msgid ""
-#~ "This assistant helps you easily set up a mobile broadband connection to a "
-#~ "cellular (3G) network."
-#~ msgstr ""
-#~ "Bu yardımcı, bir hücresel ağa (3G) kolayca mobil geniş bant bağlantı "
-#~ "kurmanıza yardımcı olacak."
-
-#~ msgid "You will need the following information:"
-#~ msgstr "Aşağıdaki bilgilere gereksineceksiniz:"
-
-#~ msgid "Your broadband provider’s name"
-#~ msgstr "Geniş bant sağlayıcınızın adı"
-
-#~ msgid "Your broadband billing plan name"
-#~ msgstr "Geniş bant ödeme planınızın adı"
-
-#~ msgid "(in some cases) Your broadband billing plan APN (Access Point Name)"
-#~ msgstr ""
-#~ "(bazı durumlarda) Geniş bant ödeme planı APNʼsi (Erişim Noktası Adı)"
-
-#~ msgid "Create a connection for _this mobile broadband device:"
-#~ msgstr "Bu mobil _geniş bant aygıtı için bir bağlantı oluştur:"
-
-#~ msgid "Set up a Mobile Broadband Connection"
-#~ msgstr "Mobil Geniş Bant Bağlantı Ayarla"
-
-#~ msgid "Country or region:"
-#~ msgstr "Ülke veya bölge:"
-
-#~ msgid "Choose your Provider’s Country or Region"
-#~ msgstr "Sağlayıcınızın Ülkesini veya Bölgesini Seçin"
-
-#~ msgid "Select your provider from a _list:"
-#~ msgstr "_Listeden sağlayıcınızı seçin:"
-
-#~ msgid ""
-#~ "I can’t find my provider and I wish to set up the connection _manually:"
-#~ msgstr "Sağlayıcımı bulamıyorum ve _elle kurmak istiyorum:"
-
-#~ msgid "My provider uses GSM technology (GPRS, EDGE, UMTS, HSPA)"
-#~ msgstr "Sağlayıcım GSM teknolojisini kullanıyor (GPRS, EDGE, UMTS, HSPA)"
-
-#~ msgid "My provider uses CDMA technology (1xRTT, EVDO)"
-#~ msgstr "Sağlayıcım CDMA teknolojisini kullanıyor (1xRTT, EVDO)"
-
-#~ msgid "Choose your Provider"
-#~ msgstr "Sağlayıcınızı Seçin"
-
-#~ msgid "_Select your plan:"
-#~ msgstr "_Planınızı seçin:"
-
-#~ msgid "Selected plan _APN (Access Point Name):"
-#~ msgstr "Seçili plan _APNʼsi (Erişim Noktası Adı):"
-
-#~ msgid ""
-#~ "Warning: Selecting an incorrect plan may result in billing issues for "
-#~ "your broadband account or may prevent connectivity.\n"
-#~ "\n"
-#~ "If you are unsure of your plan please ask your provider for your plan’s "
-#~ "APN."
-#~ msgstr ""
-#~ "Uyarı: Yanlış ödeme planı seçmeniz geniş bant hesabınız için ödeme "
-#~ "sorunları oluşturabilir veya bağlantınızı etkileyebilir.\n"
-#~ "\n"
-#~ "Planınızdan emin değilseniz hizmet sağlayıcınıza planınızın APNʼsini "
-#~ "sorun."
-
-#~ msgid "Choose your Billing Plan"
-#~ msgstr "Ödeme Planınızı Seçin"
-
-#~ msgid ""
-#~ "Your mobile broadband connection is configured with the following "
-#~ "settings:"
-#~ msgstr "Mobil geniş bant bağlantınız aşağıdaki ayarlarla yapılandırıldı:"
-
-#~ msgid "Your Device:"
-#~ msgstr "Aygıtınız:"
-
-#~ msgid "Your Provider:"
-#~ msgstr "Sağlayıcınız:"
-
-#~ msgid "Your Plan:"
-#~ msgstr "Planınız:"
-
-#~ msgid ""
-#~ "A connection will now be made to your mobile broadband provider using the "
-#~ "settings you selected. If the connection fails or you cannot access "
-#~ "network resources, double-check your settings. To modify your mobile "
-#~ "broadband connection settings, choose “Network Connections” from the "
-#~ "System → Preferences menu."
-#~ msgstr ""
-#~ "Seçtiğiniz ayarlar kullanılarak mobil geniş bant sağlayıcınızla bir "
-#~ "bağlantı yapılacak. Bağlantı başarısız olursa veya ağ öz kaynaklarına "
-#~ "ulaşamazsanız ayarlarınızı gözden geçirin. Geniş bant bağlantı "
-#~ "ayarlarınızı düzenlemek için Sistem → Tercihler menüsünden “Ağ "
-#~ "Bağlantıları”nı seçin."
-
-#~ msgid "Confirm Mobile Broadband Settings"
-#~ msgstr "Mobil Geniş Bant Ayarlarını Doğrula"
-
-#~ msgid "(None)"
-#~ msgstr "(Hiçbiri)"
-
-#~ msgid "Key in %s"
-#~ msgstr "%s içindeki anahtar"
-
-#~ msgid "Certificate in %s"
-#~ msgstr "%s içindeki sertifika"
-
-#~ msgid "(Unknown)"
-#~ msgstr "(Bilinmeyen)"
-
-#~ msgid "Select"
-#~ msgstr "Seç"
-
-#~ msgid "Cancel"
-#~ msgstr "İptal Et"
-
-#~ msgid "Select from file…"
-#~ msgstr "Dosyadan seç…"
-
-#~ msgid "Choose a %s Certificate"
-#~ msgstr "%s Sertifikası Seç"
-
-#~ msgid "%s certificate _password"
-#~ msgstr "%s sertifika _parolası"
-
-#~ msgid "Error logging in: "
-#~ msgstr "Giriş yaparken hata: "
-
-#~ msgid "Error opening a session: "
-#~ msgstr "Oturum açılırken hata: "
-
-#~ msgid "_Unlock token"
-#~ msgstr "Jetonun kilidini _aç"
-
-#~ msgid "Issued By"
-#~ msgstr "Düzenleyen"
-
-#~ msgid "Enter %s PIN"
-#~ msgstr "%s PINʼini Gir"
-
-#~ msgid "_Login"
-#~ msgstr "_Giriş"
-
-#~ msgid "_Remember PIN"
-#~ msgstr "PINʼi _Anımsa"
-
-#~ msgid "Store the password only for this user"
-#~ msgstr "Parolayı yalnızca bu kullanıcı için depola"
-
-#~ msgid "Store the password for all users"
-#~ msgstr "Parolayı tüm kullanıcılar için depola"
-
-#~ msgid "Ask for this password every time"
-#~ msgstr "Bu parolayı her zaman sor"
-
-#~ msgid "The password is not required"
-#~ msgstr "Parola gerekli değil"
-
-#~ msgid "Sh_ow passwords"
-#~ msgstr "Parolayı _Göster"
-
-#~ msgid "_Tertiary Password:"
-#~ msgstr "_Üçüncül Parola:"
-
-#~ msgid "_Secondary Password:"
-#~ msgstr "_İkincil Parola:"
-
-#~ msgid "_Password:"
-#~ msgstr "Pa_rola:"
-
-#~ msgid "Click to connect"
-#~ msgstr "Bağlanmak için tıkla"
-
-#~ msgid "New…"
-#~ msgstr "Yeni…"
-
-#~ msgctxt "Wifi/wired security"
-#~ msgid "None"
-#~ msgstr "Hiçbiri"
-
-#~ msgid "Dynamic WEP (802.1x)"
-#~ msgstr "Dinamik WEP (802.1x)"
-
-#~ msgid "C_reate"
-#~ msgstr "_Oluştur"
-
-#~ msgid ""
-#~ "Passwords or encryption keys are required to access the Wi-Fi network "
-#~ "“%s”."
-#~ msgstr ""
-#~ "“%s” kablosuz ağına erişmek için parola ya da şifreleme anahtarı "
-#~ "gereklidir."
-
-#~ msgid "Wi-Fi Network Authentication Required"
-#~ msgstr "Kablosuz Ağ Kimlik Doğrulaması Gerekli"
-
-#~ msgid "Authentication required by Wi-Fi network"
-#~ msgstr "Kablosuz ağ için kimlik doğrulaması gerekli"
-
-#~ msgid "Create New Wi-Fi Network"
-#~ msgstr "Yeni Kablosuz Ağ Oluştur"
-
-#~ msgid "New Wi-Fi network"
-#~ msgstr "Yeni Kablosuz Ağ"
-
-#~ msgid "Enter a name for the Wi-Fi network you wish to create."
-#~ msgstr "Oluşturmak istediğiniz Kablosuz ağ için bir ad girin."
-
-#~ msgid "Connect to Hidden Wi-Fi Network"
-#~ msgstr "Gizli Kablosuz Ağa Bağlan"
-
-#~ msgid "Hidden Wi-Fi network"
-#~ msgstr "Gizli Kablosuz ağ"
-
-#~ msgid ""
-#~ "Enter the name and security details of the hidden Wi-Fi network you wish "
-#~ "to connect to."
-#~ msgstr ""
-#~ "Bağlanmak istediğiniz gizli kablosuz ağın adını ve güvenlik ayrıntılarını "
-#~ "girin."
-
-#~ msgid "Wi-Fi _security"
-#~ msgstr "Kablosuz _güvenliği"
-
-#~ msgid "C_onnection"
-#~ msgstr "B_ağlantı"
-
-#~ msgid "Wi-Fi _adapter"
-#~ msgstr "Kablosuz _bağdaştırıcı"
-
-#~ msgid "I can’t find my provider and I wish to enter it _manually:"
-#~ msgstr "Sağlayıcımı bulamıyorum ve _elle girmek istiyorum:"
-
-#~ msgid "Provider:"
-#~ msgstr "Sağlayıcı:"
-
-#~ msgid "Country or Region List:"
-#~ msgstr "Ülke veya Bölge Listesi:"
-
-#~ msgid "Country or region"
-#~ msgstr "Ülke veya bölge"
-
-#~ msgid "OLPC Mesh"
-#~ msgstr "OLPC Mesh"
-
-#~ msgid "ADSL"
-#~ msgstr "ADSL"
-
-#~ msgid "PCI"
-#~ msgstr "PCI"
-
-#~ msgid "USB"
-#~ msgstr "USB"
-
-#~ msgctxt "long device name"
-#~ msgid "%s %s"
-#~ msgstr "%s %s"
-
-#~ msgid ""
-#~ "Either a password is missing or the connection is invalid. In the latter "
-#~ "case, you have to edit the connection with nm-connection-editor first"
-#~ msgstr ""
-#~ "Ya bir parola eksik ya da bağlantı geçersiz. İkinci durumda, önce "
-#~ "bağlantıyı nm-connection-editor ile düzenlemelisiniz"
-
-#~ msgid "Wi-Fi _security:"
-#~ msgstr "Kablosuz _güvenliği:"
-
-#~ msgid "_Network name:"
-#~ msgstr "_Ağ adı:"
-
-#~ msgid "C_onnection:"
-#~ msgstr "B_ağlantı:"
-
-#~ msgid "Wi-Fi _adapter:"
-#~ msgstr "Kablosuz _bağdaştırıcı:"
-
-#~ msgid "CKN"
-#~ msgstr "CKN"
-
-#~ msgid "CAK"
-#~ msgstr "CAK"
-
-#~ msgid "%s (default)"
-#~ msgstr "%s (öntanımlı)"
-
-#~ msgid "Ignored"
-#~ msgstr "Yok sayılmış"
-
-#~ msgid "Active Network Connections"
-#~ msgstr "Etkin Ağ Bağlantıları"
-
-#~ msgid "Cannot import VPN connection"
-#~ msgstr "VPN bağlantısı içeri aktarılamıyor"
-
-#~ msgid ""
-#~ "The file “%s” could not be read or does not contain recognized VPN "
-#~ "connection information\n"
-#~ "\n"
-#~ "Error: %s."
-#~ msgstr ""
-#~ "“%s” dosyası okunamadı veya tanınan VPN bağlantı bilgisi içermiyor\n"
-#~ "\n"
-#~ "Hata: %s."
-
-#~ msgid "unknown error"
-#~ msgstr "bilinmeyen hata"
-
-#~ msgid ""
-#~ "\n"
-#~ "The VPN connection “%s” disconnected because the VPN service stopped."
-#~ msgstr ""
-#~ "\n"
-#~ "“%s” VPN bağlantısı kesildi çünkü VPN hizmeti durdu."
-
-#~ msgid ""
-#~ "\n"
-#~ "The VPN connection “%s” disconnected."
-#~ msgstr ""
-#~ "\n"
-#~ "“%s” VPN bağlantısı kesildi."
-
-#~ msgid "Failed to update connection secrets due to an unknown error."
-#~ msgstr ""
-#~ "Bilinmeyen bir sorun sebebiyle bağlantı parola dosyaları güncellenemedi."
-
-#~ msgid "Priority:"
-#~ msgstr "Öncelik:"
-
-#~ msgid "0:"
-#~ msgstr "0:"
-
-#~ msgid "1:"
-#~ msgstr "1:"
-
-#~ msgid "2:"
-#~ msgstr "2:"
-
-#~ msgid "3:"
-#~ msgstr "3:"
-
-#~ msgid "4:"
-#~ msgstr "4:"
-
-#~ msgid "5:"
-#~ msgstr "5:"
-
-#~ msgid "6:"
-#~ msgstr "6:"
-
-#~ msgid "7:"
-#~ msgstr "7:"
-
-#~ msgid "_Automatically connect to this network when it is available"
-#~ msgstr "Kullanılabilir olduğunda bu ağa _kendiliğinden bağlan"
-
-#~ msgid "Connection _priority for auto-activation:"
-#~ msgstr "Kendiliğinden aktivasyon için bağlantı ö_nceliği:"
-
-#~ msgid "DSL"
-#~ msgstr "DSL"
-
-#~ msgid "unspecified error validating eap-method file"
-#~ msgstr "eap-method dosyası doğrulamada belirtilmemiş hata"
-
-#~ msgid "invalid EAP-PEAP CA certificate: %s"
-#~ msgstr "geçersiz EAP-PEAP CA sertifikası: %s"
-
-#~ msgid "invalid EAP-PEAP CA certificate: no certificate specified"
-#~ msgstr "geçersiz EAP-PEAP CA sertifikası: sertifika belirtilmedi"
-
-#~ msgid "Choose a Certificate Authority certificate"
-#~ msgstr "Sertifika Yetkilisi (CA) sertifikası seçin"
-
-#~ msgid "invalid EAP-TLS CA certificate: %s"
-#~ msgstr "geçersiz EAP-TLS CA sertifikası: %s"
-
-#~ msgid "invalid EAP-TLS CA certificate: no certificate specified"
-#~ msgstr "geçersiz EAP-TLS CA sertifikası: sertifika belirtilmedi"
-
-#~ msgid "invalid EAP-TLS password: missing"
-#~ msgstr "geçersiz EAP-TLS parolası: eksik"
-
-#~ msgid "invalid EAP-TLS private-key: %s"
-#~ msgstr "geçersiz EAP-TLS gizli-anahtarı: %s"
-
-#~ msgid "invalid EAP-TLS user-certificate: %s"
-#~ msgstr "geçersiz EAP-TLS kullanıcı-sertifikası: %s"
-
-#~ msgid "Unencrypted private keys are insecure"
-#~ msgstr "Şifrelenmemiş özel anahtarlar güvenli değildir"
-
-#~ msgid ""
-#~ "The selected private key does not appear to be protected by a password. "
-#~ "This could allow your security credentials to be compromised. Please "
-#~ "select a password-protected private key.\n"
-#~ "\n"
-#~ "(You can password-protect your private key with openssl)"
-#~ msgstr ""
-#~ "Seçili özel anahtar bir parola tarafından korunuyor görünmüyor. Güvenlik "
-#~ "kimliğinizin aşılmasına neden olabilir. Lütfen parola korumalı bir özel "
-#~ "anahtar seçin.\n"
-#~ "\n"
-#~ "(Özel anahtarınızı openssl ile parola korumalı yapabilirsiniz)"
-
-#~ msgid "Choose your private key"
-#~ msgstr "Özel anahtarınızı seçin"
-
-#~ msgid "invalid EAP-TTLS CA certificate: %s"
-#~ msgstr "geçersiz EAP-TTLS CA sertifikası: %s"
-
-#~ msgid "invalid EAP-TTLS CA certificate: no certificate specified"
-#~ msgstr "geçersiz EAP-TTLS CA sertifikası: sertifika belirtilmedi"
-
-#~ msgid "NetworkManager for GNOME"
-#~ msgstr "GNOME için Ağ Yöneticisi"
-
-#~ msgid "_Disconnect VPN"
-#~ msgstr "VPN Bağlantısını _Kes"
-
-#~ msgid "New Mobile Broadband connection..."
-#~ msgstr "Yeni Mobil Geniş Bant bağlantısı..."
-
-#~ msgid "_Connect to Hidden Wi-Fi Network..."
-#~ msgstr "Gizli Kablosuz Ağlara _Bağlan..."
-
-#~ msgid "Create _New Wi-Fi Network..."
-#~ msgstr "_Yeni Kablosuz Ağ Oluştur..."
-
-#~ msgid " "
-#~ msgstr " "
-
-#~ msgid "15"
-#~ msgstr "15"
-
-#~ msgid "Aut_onegotiate"
-#~ msgstr "Oto_algıla"
-
-#~ msgid "FirewallD is not running."
-#~ msgstr "FirewallD çalışmıyor."
-
-#~ msgid "New..."
-#~ msgstr "Yeni..."
-
-#~ msgid "_Help"
-#~ msgstr "_Yardım"
-
-#~ msgid "Enable WiMA_X Mobile Broadband"
-#~ msgstr "WiMA_X Mobil Geniş Bant Ağları Etkinleştir"
-
-#~| msgid "You are now connected to the wired network."
-#~ msgid "You are now connected to the bonded network."
-#~ msgstr "Şu anda bond ağa bağlısınız."
-
-#~| msgid "Preparing network connection '%s'..."
-#~ msgid "Preparing bond connection '%s'..."
-#~ msgstr "'%s' bond bağlantısı hazırlanıyor..."
-
-#~| msgid "Configuring mobile broadband connection '%s'..."
-#~ msgid "Configuring bond connection '%s'..."
-#~ msgstr "'%s' bond bağlantısı yapılandırılıyor..."
-
-#~| msgid "User authentication required for VPN connection '%s'..."
-#~ msgid "User authentication required for bond connection '%s'..."
-#~ msgstr "'%s' bond bağlantısı için kullanıcı kimlik doğrulaması gerekli..."
-
-#~| msgid "Requesting a VPN address for '%s'..."
-#~ msgid "Requesting address for '%s'..."
-#~ msgstr "'%s' için adres isteniyor..."
-
-#~| msgid "VPN connection '%s' active"
-#~ msgid "Bond connection '%s' active"
-#~ msgstr "'%s' bond bağlantısı etkin"
-
-#~| msgid "You are now connected to the wired network."
-#~ msgid "You are now connected to the bridged network."
-#~ msgstr "Şu anda köprü ağa bağlısınız."
-
-#~| msgid "Preparing network connection '%s'..."
-#~ msgid "Preparing bridge connection '%s'..."
-#~ msgstr "'%s' köprü bağlantısı hazırlanıyor..."
-
-#~| msgid "Configuring wired network connection '%s'..."
-#~ msgid "Configuring bridge connection '%s'..."
-#~ msgstr "'%s' köprü bağlantısı yapılandırılıyor..."
-
-#~| msgid "User authentication required for VPN connection '%s'..."
-#~ msgid "User authentication required for bridge connection '%s'..."
-#~ msgstr "'%s' köprü bağlantısı için kullanıcı kimlik doğrulaması gerekli..."
-
-#~| msgid "VPN connection '%s' active"
-#~ msgid "Bridge connection '%s' active"
-#~ msgstr "'%s' köprü bağlantısı etkin"
-
-#~ msgid "Auto InfiniBand"
-#~ msgstr "Otomatik InfiniBand"
-
-#~| msgid "Wired Networks (%s)"
-#~ msgid "InfiniBand Networks (%s)"
-#~ msgstr "InfiniBand Ağları (%s)"
-
-#~| msgid "Wired Network (%s)"
-#~ msgid "InfiniBand Network (%s)"
-#~ msgstr "InfiniBand Ağı (%s)"
-
-#~| msgid "Wired Networks"
-#~ msgid "InfiniBand Networks"
-#~ msgstr "InfiniBand Ağları"
-
-#~| msgid "Wired Network"
-#~ msgid "InfiniBand Network"
-#~ msgstr "InfiniBand Ağı"
-
-#~| msgid "You are now connected to the wired network."
-#~ msgid "You are now connected to the InfiniBand network."
-#~ msgstr "Şuanda InfiniBand ağına bağlısınız."
-
-#~| msgid "Preparing network connection '%s'..."
-#~ msgid "Preparing InfiniBand connection '%s'..."
-#~ msgstr "'%s' InfiniBand bağlantısı hazırlanıyor..."
-
-#~| msgid "Configuring mobile broadband connection '%s'..."
-#~ msgid "Configuring InfiniBand connection '%s'..."
-#~ msgstr "'%s' InfiniBand bağlantısı yapılandırılıyor..."
-
-#~| msgid "User authentication required for VPN connection '%s'..."
-#~ msgid "User authentication required for InfiniBand connection '%s'..."
-#~ msgstr ""
-#~ "'%s' InfiniBand bağlantısı için kullanıcı kimlik doğrulaması gerekli..."
-
-#~| msgid "VPN connection '%s' active"
-#~ msgid "InfiniBand connection '%s' active"
-#~ msgstr "'%s' InfiniBand bağlantısı etkin"
-
-#~| msgid "You are now connected to the wired network."
-#~ msgid "You are now connected to the teamed network."
-#~ msgstr "Şu anda takım ağa bağlısınız."
-
-#~| msgid "Preparing network connection '%s'..."
-#~ msgid "Preparing team connection '%s'..."
-#~ msgstr "'%s' takım bağlantısı hazırlanıyor..."
-
-#~| msgid "Configuring wired network connection '%s'..."
-#~ msgid "Configuring team connection '%s'..."
-#~ msgstr "'%s' takım bağlantısı yapılandırılıyor..."
-
-#~| msgid "User authentication required for VPN connection '%s'..."
-#~ msgid "User authentication required for team connection '%s'..."
-#~ msgstr "'%s' takım bağlantısı için kullanıcı kimlik doğrulaması gerekli..."
-
-#~| msgid "VPN connection '%s' active"
-#~ msgid "Team connection '%s' active"
-#~ msgstr "'%s' takım bağlantısı etkin"
-
-#~| msgid "You are now connected to the CDMA network."
-#~ msgid "You are now connected to the VLAN."
-#~ msgstr "Şu anda VLAN'a bağlısınız."
-
-#~| msgid "Starting VPN connection '%s'..."
-#~ msgid "Preparing VLAN connection '%s'..."
-#~ msgstr "'%s' VLAN bağlantısı hazırlanıyor..."
-
-#~| msgid "Starting VPN connection '%s'..."
-#~ msgid "Configuring VLAN connection '%s'..."
-#~ msgstr "'%s' VLAN bağlantısı yapılandırılıyor..."
-
-#~| msgid "User authentication required for VPN connection '%s'..."
-#~ msgid "User authentication required for VLAN connection '%s'..."
-#~ msgstr "'%s' VLAN bağlantısı için kullanıcı kimlik doğrulaması gerekli..."
-
-#~| msgid "VPN connection '%s' active"
-#~ msgid "VLAN connection '%s' active"
-#~ msgstr "'%s' VLAN bağlantısı etkin"
-
-#~ msgid "WiMAX Mobile Broadband (%s)"
-#~ msgstr "WiMAX Mobil Geniş Bant (%s)"
-
-#~ msgid "WiMAX Mobile Broadband"
-#~ msgstr "WiMAX Mobil Geniş Bant"
-
-#~ msgid "WiMAX is disabled"
-#~ msgstr "WiMAX etkin değil"
-
-#~ msgid "WiMAX is disabled by hardware switch"
-#~ msgstr "WiMAX donanım anahtarı ile kapatıldı"
-
-#~ msgid "You are now connected to the WiMAX network."
-#~ msgstr "Şimdi WiMAX ağına bağlandınız."
-
-#~ msgid "%d dB"
-#~ msgstr "%d dB"
-
-#~ msgctxt "WiMAX CINR"
-#~ msgid "unknown"
-#~ msgstr "bilinmeyen"
-
-#~ msgctxt "WiMAX Base Station ID"
-#~ msgid "unknown"
-#~ msgstr "bilinmeyen"
-
-#~ msgid "WiMAX (%s)"
-#~ msgstr "WiMAX (%s)"
-
-#~ msgid "CINR:"
-#~ msgstr "CINR:"
-
-#~ msgid "BSID:"
-#~ msgstr "BSID:"
-
-#~ msgid "I_mport team configuration from a file..."
-#~ msgstr "Bir dosyadan takım yapılandırmasını i_çeri aktar..."
-
-#~ msgid "Infrastructure"
-#~ msgstr "Yerleşik"
-
-#~ msgid "WiMAX"
-#~ msgstr "WiMAX"
-
-#~ msgid "New Mobile Broadband (CDMA) connection..."
-#~ msgstr "Yeni Mobil Geniş Bant (CDMA) bağlantısı..."
-
-#~ msgid "You are now connected to the CDMA network."
-#~ msgstr "Şimdi CDMA ağına bağlandınız."
-
-#~ msgid "CDMA network."
-#~ msgstr "CDMA şebekesi."
-
-#~ msgid "New Mobile Broadband (GSM) connection..."
-#~ msgstr "Yeni Mobil Geniş Bant (GSM) bağlantısı..."
-
-#~ msgid "You are now connected to the GSM network."
-#~ msgstr "Şimdi GSM ağına bağlandınız."
-
-#~ msgid "GSM network."
-#~ msgstr "GSM şebekesi."
-
-#~ msgid "_Device MAC address:"
-#~ msgstr "_Aygıt MAC adresi:"
-
-#~ msgid "Any"
-#~ msgstr "Herhangi biri"
-
-#~ msgid "3G (UMTS/HSPA)"
-#~ msgstr "3G (UMTS/HSPA)"
-
-#~ msgid "2G (GPRS/EDGE)"
-#~ msgstr "2G (GPRS/EDGE)"
-
-#~ msgid "Prefer 3G (UMTS/HSPA)"
-#~ msgstr "3G (UMTS/HSPA) tercih et"
-
-#~ msgid "Prefer 2G (GPRS/EDGE)"
-#~ msgstr "2G (GPRS/EDGE) tercih et "
-
-#, fuzzy
-#~| msgid "Prefer 2G (GPRS/EDGE)"
-#~ msgid "Prefer 4G (LTE)"
-#~ msgstr "3G (UMTS/HSPA) tercih et"
-
-#, fuzzy
-#~ msgid "Use only 4G (LTE)"
-#~ msgstr "Sadece yerel spam testleri kullan."
-
-#~ msgid "Error saving connection"
-#~ msgstr "Bağlantı kaydedilirken hata oluştu"
-
-#~ msgid "The property '%s' / '%s' is invalid: %d"
-#~ msgstr "Özellik '%s' / '%s' geçersiz: %d"
-
-#, fuzzy
-#~| msgid ""
-#~| "Bluetooth configuration not possible (failed to connect to D-Bus: %s)."
-#~ msgid ""
-#~ "Bluetooth configuration not possible (failed to connect to D-Bus: (%s) "
-#~ "%s)."
-#~ msgstr "Bluetooth yapılandırma mümkün değil(D-Bus:%s bağlantısı başarısız)."
-
-#, fuzzy
-#~| msgid ""
-#~| "Bluetooth configuration not possible (error finding NetworkManager: %s)."
-#~ msgid ""
-#~ "Bluetooth configuration not possible (error finding NetworkManager: (%s) "
-#~ "%s)."
-#~ msgstr "Bluetooth yapılandırma mümkün değil (Ağ Yöneticisi:%s bulunamadı)."
-
-#~ msgid "Use your mobile phone as a network device (PAN/NAP)"
-#~ msgstr "Taşınabilir telefonunuzu ağ aygıtı olarak kullanın (PAN/NAP)"
-
-#~ msgid "Access the Internet using your mobile phone (DUN)"
-#~ msgstr "Taşınabilir telefonunuzu kullanarak Internet'e erişin (DUN)"
-
-#~ msgid "Error: %s"
-#~ msgstr "Hata: %s"
-
-#~ msgid "Your phone is now ready to use!"
-#~ msgstr "Telefonunuz kullanıma hazır!"
-
-#~ msgid "Mobile wizard was canceled"
-#~ msgstr "Mobil sihirbaz iptal edildi"
-
-#~ msgid "Unknown phone device type (not GSM or CDMA)"
-#~ msgstr "Bilinmeyen telefon aygıtı tipi (GSM veya CDMA değil)"
-
-#~ msgid "failed to connect to the phone."
-#~ msgstr "telefona bağlanma başarısız oldu."
-
-#, fuzzy
-#~| msgid "Error editing connection"
-#~ msgid "error getting bus connection"
-#~ msgstr "Bağlantı bilgilerini gösterirken hata oluştu:"
-
-#~ msgid "unexpectedly disconnected from the phone."
-#~ msgstr "telefon ile bağlantı beklenmedik bir şekilde kesildi."
-
-#~ msgid "timed out detecting phone details."
-#~ msgstr "telefon detayları algılanırken zaman aşımı oldu."
-
-#~ msgid "Detecting phone configuration..."
-#~ msgstr "Telefon yapılandırması algılanıyor..."
-
-#~ msgid ""
-#~ "The default Bluetooth adapter must be enabled before setting up a Dial-Up-"
-#~ "Networking connection."
-#~ msgstr ""
-#~ "Çevirmeli Ağ bağlantısı kurabilmek için önce öntanımlı Bluetooth adaptörü "
-#~ "etkinleştirmelisiniz."
-
-#~ msgid "Failed to create PAN connection: %s"
-#~ msgstr "PAN bağlantısı oluşturulamadı: %s"
-
-#~ msgid "%s Network"
-#~ msgstr "%s Ağı"
-
-#~ msgid "Wireless Networks (%s)"
-#~ msgstr "Kablosuz Ağlar (%s)"
-
-#~ msgid "Wireless Network (%s)"
-#~ msgstr "Kablosuz Ağ (%s)"
-
-#~ msgid "Wireless Network"
-#~ msgid_plural "Wireless Networks"
-#~ msgstr[0] "Kablosuz Ağlar"
-
-#~ msgid "wireless is disabled"
-#~ msgstr "kablosuz etkin değil"
-
-#~ msgid "wireless is disabled by hardware switch"
-#~ msgstr "kablosuz bağlantı donanımsal anahtarla kapatılmış"
-
-#~ msgid "Click on this icon to connect to a wireless network"
-#~ msgstr "Bir kablosuz ağa bağlanmak için bu simgeye tıklayın"
-
-#~ msgid "Preparing wireless network connection '%s'..."
-#~ msgstr "Kablosuz ağ bağlantısı '%s' hazırlanıyor..."
-
-#~ msgid "Configuring wireless network connection '%s'..."
-#~ msgstr "Kablosuz ağ bağlantısı '%s' yapılandırılıyor..."
-
-#~ msgid "Requesting a wireless network address for '%s'..."
-#~ msgstr "'%s' için kablosuz ağ adresi isteniyor..."
-
-#~ msgid "Wireless network connection '%s' active"
-#~ msgstr "Kablosuz ağ bağlantısı '%s' etkin"
-
-#~ msgid "PI_N:"
-#~ msgstr "PI_N:"
-
-#~ msgid "MT_U:"
-#~ msgstr "MT_U:"
-
-#~ msgid "_SSID:"
-#~ msgstr "_SSID:"
-
-#~ msgid "Automatic (PPP)"
-#~ msgstr "Otomatik (PPP)"
-
-#~ msgid "Automatic (PPP) addresses only"
-#~ msgstr "Sadece otomatik (PPP) adresler"
-
-#~ msgid "Could not load Wired Security security user interface."
-#~ msgstr "Kablosuz Güvenlik kullanıcı arabirimi yüklenemedi."
-
-#~ msgid "Wireless"
-#~ msgstr "Kablosuz"
-
-#~ msgid "_Save..."
-#~ msgstr "_Kaydet..."
-
-#~ msgid "An unknown error occurred."
-#~ msgstr "Bilinmeyen bir hata oluştu."
-
-#~ msgid "Could not edit imported connection"
-#~ msgstr "İçeri aktarılan bağlantı düzenlenemiyor"
-
-#~ msgid "No VPN plugin available. Please install one to enable this button."
-#~ msgstr ""
-#~ "Kullanılabilir VPN eklentisi yok. Bu düğmeyi etkinleştirmek için lütfen "
-#~ "bir tane yükleyin."
-
-#~ msgid "_Edit..."
-#~ msgstr "Düz_enle..."
-
-#~ msgid "_Delete..."
-#~ msgstr "_Sil..."
-
-#~ msgid "Don't know how to edit '%s' connections"
-#~ msgstr "'%s' bağlantılarının nasıl düzenleneceği bilinmiyor"
-
-#~ msgid "Bluetooth configuration not possible (failed to create D-Bus proxy)."
-#~ msgstr ""
-#~ "Bluetooth yapılandırma mümkün değil (D-Bus vekili oluşturma başarısız)"
-
-#~ msgid "No Certificate Authority certificate chosen"
-#~ msgstr "Sertifika Makamı sertifikası seçilmemiş"
-
-#~ msgid ""
-#~ "Not using a Certificate Authority (CA) certificate can result in "
-#~ "connections to insecure, rogue wireless networks.  Would you like to "
-#~ "choose a Certificate Authority certificate?"
-#~ msgstr ""
-#~ "Sertifika Makamı (SM) kullanmamak bağlantılarınızın güvensiz, kablosuz "
-#~ "ağların da kolay erişilebilir olmasına neden olabilir. Sertifika Makamı "
-#~ "sertifikası seçmek ister misiniz?"
-
-#~ msgid "United Kingdom"
-#~ msgstr "Birleşik Krallık"
-
-#~ msgid "An instance of nm-applet is already running.\n"
-#~ msgstr "nm-applet zaten çalışıyor.\n"
-
-#~ msgid "Could not acquire the %s service. (%d)\n"
-#~ msgstr "%s hizmeti alınamıyor. (%d)\n"
-
-#~ msgid "PUK code required"
-#~ msgstr "PUK kodu gerekli"
-
-#~ msgid "PUK code is needed for the mobile broadband device"
-#~ msgstr "Mobil geniş bant aygıtı için PUK kodu gerekli"
-
-#~ msgid ""
-#~ "<span size=\"larger\" weight=\"bold\">Active Network Connections</span>"
-#~ msgstr "<span size=\"larger\" weight=\"bold\">Etkin Ağ Bağlantıları</span>"
-
-#~ msgid ""
-#~ "Automatic\n"
-#~ "Version 0\n"
-#~ "Version 1"
-#~ msgstr ""
-#~ "Otomatik\n"
-#~ "Sürüm 0\n"
-#~ "Sürüm 1"
-
-#~ msgid "Other Wireless Network..."
-#~ msgstr "Diğer Kablosuz Ağlar..."
-
-#~ msgid ""
-#~ "Automatic\n"
-#~ "Automatic with manual DNS settings\n"
-#~ "Manual\n"
-#~ "Link-Local\n"
-#~ "Shared to other computers"
-#~ msgstr ""
-#~ "Otomatik\n"
-#~ "Özelleştirilmiş DNS ayarlarıyla otomatik\n"
-#~ "El ile\n"
-#~ "Link-Local\n"
-#~ "Diğer bilgisayarlara paylaştırılmış"
-
-#~ msgid "_Routes&#x2026;"
-#~ msgstr "_Rotalar&#x2026;"
-
-#~ msgid "<b>Basic</b>"
-#~ msgstr "<b>Temel</b>"
-
-#~ msgid ""
-#~ "Any\n"
-#~ "3G (UMTS/HSPA)\n"
-#~ "2G (GPRS/EDGE)\n"
-#~ "Prefer 3G (UMTS/HSPA)\n"
-#~ "Prefer 2G (GPRS/EDGE)"
-#~ msgstr ""
-#~ "Herhangi biri\n"
-#~ "3G (UMTS/HSPA)\n"
-#~ "2G (GPRS/EDGE)\n"
-#~ "3G'yi tercih et (UMTS/HSPA)\n"
-#~ "2G'yi tercih et (GPRS/EDGE)"
-
-#~ msgid "<b>Authentication</b>"
-#~ msgstr "<b>Kimlik Doğrulama</b>"
-
-#~ msgid "<b>Echo</b>"
-#~ msgstr "<b>Echo</b>"
-
-#~ msgid ""
-#~ "Automatic\n"
-#~ "10 Mb/s\n"
-#~ "100 Mb/s\n"
-#~ "1 Gb/s\n"
-#~ "10 Gb/s"
-#~ msgstr ""
-#~ "Otomatik\n"
-#~ "10 Mb/s\n"
-#~ "100 Mb/s\n"
-#~ "1 Gb/s\n"
-#~ "10 Gb/s"
-
-#~ msgid ""
-#~ "Automatic\n"
-#~ "Twisted Pair (TP)\n"
-#~ "Attachment Unit Interface (AUI)\n"
-#~ "BNC\n"
-#~ "Media Independent Interface (MII)"
-#~ msgstr ""
-#~ "Otomatik\n"
-#~ "Twisted Pair (TP)\n"
-#~ "Attachment Unit Interface (AUI)\n"
-#~ "BNC\n"
-#~ "Media Independent Interface (MII)"
-
-#~ msgid ""
-#~ "Automatic\n"
-#~ "A (5 GHz)\n"
-#~ "B/G (2.4 GHz)"
-#~ msgstr ""
-#~ "Otomatik\n"
-#~ "A (5 GHz)\n"
-#~ "B/G (2.4 GHz)"
-
-#~ msgid ""
-#~ "The connection editor could not find some required resources (the "
-#~ "NetworkManager applet glade file was not found)."
-#~ msgstr ""
-#~ "Bağlantı düzenleyici gerekli bazı öz kaynakları bulamadı (NetworkManager "
-#~ "aracı glade dosyası bulunamadı)"
-
-#~ msgid "Save this connection for all users of this machine."
-#~ msgstr "Bu bağlantıyı bu makinedeki tüm kullanıcılar için kaydet."
-
-#~ msgid "Apply..."
-#~ msgstr "Uygula..."
-
-#~ msgid "could not connect to the system bus."
-#~ msgstr "sistem veriyoluna bağlanılamadı."
-
-#~ msgid "Country"
-#~ msgstr "Ülke"
-
-#~ msgid "Cannot start VPN connection '%s'"
-#~ msgstr "'%s' VPN bağlantısı başlatılamıyor"
-
-#~ msgid ""
-#~ "Could not find the authentication dialog for VPN connection type '%s'. "
-#~ "Contact your system administrator."
-#~ msgstr ""
-#~ "'%s' VPN bağlantı tipi için yetkilendirme penceresi bulunamadı. Sistem "
-#~ "yöneticinizle görüşün."
-
-#~ msgid ""
-#~ "There was a problem launching the authentication dialog for VPN "
-#~ "connection type '%s'. Contact your system administrator."
-#~ msgstr ""
-#~ "'%s' VPN bağlantı tipi için yetkilendirme penceresi başlatılırken sorun "
-#~ "oluştu. Sistem yöneticinizle görüşün."
