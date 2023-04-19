@@ -1,3 +1,9 @@
+network-manager-applet (1.32.0-1) UNRELEASED; urgency=medium
+
+  * New upstream version 1.32.0
+
+ -- Michael Biebl <biebl@debian.org>  Wed, 19 Apr 2023 21:40:41 +0200
+
 network-manager-applet (1.30.0-2) unstable; urgency=medium
 
   * Reclaim org.gnome.nm-applet schema from libnma.
