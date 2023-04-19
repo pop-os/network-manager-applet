@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: network-manager-applet master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/network-manager-"
 "applet/\n"
-"POT-Creation-Date: 2022-11-07 08:48+0100\n"
-"PO-Revision-Date: 2022-09-22 12:31+0200\n"
+"POT-Creation-Date: 2023-04-16 21:44+0200\n"
+"PO-Revision-Date: 2023-02-18 19:30+0100\n"
 "Last-Translator: Martin Srebotnjak <miles@filmsi.net>\n"
 "Language-Team: Slovenian GNOME Translation Team <gnome-si@googlegroups.com>\n"
 "Language: sl\n"
@@ -23,7 +23,7 @@ msgstr ""
 "Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || "
 "n%100==4 ? 3 : 0);\n"
 "X-Poedit-SourceCharset: utf-8\n"
-"X-Generator: Poedit 3.1.1\n"
+"X-Generator: Poedit 3.2.2\n"
 
 #: nm-applet.desktop.in:3 src/applet-dialogs.c:724 src/applet.c:3166
 msgid "Network"
@@ -34,12 +34,10 @@ msgid "Manage your network connections"
 msgstr "Upravljanje omrežnih povezav"
 
 #: nm-connection-editor.appdata.xml.in:7
-#, fuzzy
 msgid "NetworkManager"
 msgstr "Program NetworkManager"
 
 #: nm-connection-editor.appdata.xml.in:8
-#, fuzzy
 msgid "NetworkManager connection editor"
 msgstr "Urejevalnik povezave NetworkManager"
 
@@ -62,7 +60,6 @@ msgstr ""
 "urejanje obstoječih profilov povezave za NetworkManager."
 
 #: nm-connection-editor.appdata.xml.in:27
-#, fuzzy
 msgid "The NetworkManager Developers"
 msgstr "Razvijalci programa NetworkManager"
 
@@ -77,7 +74,7 @@ msgstr "Upravljanje in spreminjanje nastavitev omrežne povezave"
 #: org.gnome.nm-applet.gschema.xml.in:6
 #, fuzzy
 msgid "Disable connected notifications"
-msgstr "Omogoči _obvestila"
+msgstr "Onemogoči obvestila o vzpostavljeni povezavi"
 
 #: org.gnome.nm-applet.gschema.xml.in:7
 msgid "Set this to true to disable notifications when connecting to a network."
@@ -86,7 +83,7 @@ msgstr ""
 #: org.gnome.nm-applet.gschema.xml.in:11
 #, fuzzy
 msgid "Disable disconnected notifications"
-msgstr "Odklapljanje naprave je spodletelo."
+msgstr "Onemogoči obvestila o prekinitvi povezave"
 
 #: org.gnome.nm-applet.gschema.xml.in:12
 msgid ""
@@ -96,7 +93,7 @@ msgstr ""
 #: org.gnome.nm-applet.gschema.xml.in:16
 #, fuzzy
 msgid "Disable VPN notifications"
-msgstr "Omogoči _obvestila"
+msgstr "Onemogoči obvestila VPN"
 
 #: org.gnome.nm-applet.gschema.xml.in:17
 msgid ""
@@ -186,8 +183,8 @@ msgstr "Overitev 802.1X"
 #: src/connection-editor/ce-page-dcb.ui:1019
 #: src/connection-editor/ce-page-wireguard.ui:41
 #: src/connection-editor/ce-ppp-auth-methods.ui:28
-#: src/connection-editor/connection-helpers.c:284
-#: src/connection-editor/connection-helpers.c:747
+#: src/connection-editor/connection-helpers.c:332
+#: src/connection-editor/connection-helpers.c:795
 #: src/connection-editor/nm-connection-editor.ui:197
 #: src/connection-editor/page-bluetooth.c:293
 #: src/connection-editor/page-mobile.c:530
@@ -566,7 +563,7 @@ msgstr "Drugotni DNS"
 #: src/applet-dialogs.c:428
 #, fuzzy
 msgid "Tertiary DNS"
-msgstr "Tretji DNS"
+msgstr "Terciarni DNS"
 
 #: src/applet-dialogs.c:507
 #, c-format
@@ -996,7 +993,7 @@ msgstr "_Dodaj povezavo VPN …"
 #: src/applet.c:1568
 #, fuzzy
 msgid "NetworkManager is not running…"
-msgstr "Upravljalnik omrežja ni zagnan ..."
+msgstr "NetworkManager ni zagnan ..."
 
 #: src/applet.c:1573 src/applet.c:2641
 msgid "Networking disabled"
@@ -1120,7 +1117,7 @@ msgstr "_Dodaj"
 #: src/connection-editor/ce-page-ip6.ui:199
 #: src/connection-editor/ce-page-team.ui:262
 #: src/connection-editor/ce-page-wireguard.ui:617
-#: src/connection-editor/connection-helpers.c:748
+#: src/connection-editor/connection-helpers.c:796
 #: src/connection-editor/nm-connection-list.ui:101
 msgid "_Delete"
 msgstr "_Izbriši"
@@ -1650,7 +1647,6 @@ msgid "The interface on which the PPP connection will be established."
 msgstr "Vmesnik, na katerem bo vzpostavljena povezava PPP."
 
 #: src/connection-editor/ce-page-dsl.ui:171
-#, fuzzy
 msgid "C_laim interface"
 msgstr "_Terjaj vmesnik"
 
@@ -2341,7 +2337,6 @@ msgid "Team Advanced Options"
 msgstr ""
 
 #: src/connection-editor/ce-page-team-port.ui:225
-#, fuzzy
 msgid "_Queue ID"
 msgstr "_ID vrste"
 
@@ -2486,8 +2481,9 @@ msgstr ""
 
 #: src/connection-editor/ce-page-team-port.ui:570
 #: src/connection-editor/ce-page-team.ui:1297
+#, fuzzy
 msgid "Ignore invalid packets from _active ports"
-msgstr ""
+msgstr "Prezri neveljavne pakete z _dejavnih vrat"
 
 #: src/connection-editor/ce-page-team-port.ui:574
 #: src/connection-editor/ce-page-team.ui:1301
@@ -2498,8 +2494,9 @@ msgstr ""
 
 #: src/connection-editor/ce-page-team-port.ui:587
 #: src/connection-editor/ce-page-team.ui:1314
+#, fuzzy
 msgid "Ignore invalid packets from i_nactive ports"
-msgstr ""
+msgstr "Prezri neveljavne pakete z _nedejavnih vrat"
 
 #: src/connection-editor/ce-page-team-port.ui:591
 #: src/connection-editor/ce-page-team.ui:1318
@@ -2510,15 +2507,19 @@ msgstr ""
 
 #: src/connection-editor/ce-page-team-port.ui:604
 #: src/connection-editor/ce-page-team.ui:1331
+#, fuzzy
 msgid "S_end on inactive ports"
-msgstr ""
+msgstr "P_ošlji z nedejavnih vrat"
 
 #: src/connection-editor/ce-page-team-port.ui:608
 #: src/connection-editor/ce-page-team.ui:1335
+#, fuzzy
 msgid ""
 "By default, ARP requests are sent on active ports only. This option allows "
 "sending even on inactive ports."
 msgstr ""
+"Zahteve za ARP se privzeto pošiljajo samo z dejavnih vrat. Ta možnost "
+"omogoča pošiljanje tudi na nedejavnih vratih."
 
 #: src/connection-editor/ce-page-team-port.ui:671
 #: src/connection-editor/ce-page-team.ui:1398
@@ -2535,7 +2536,7 @@ msgstr ""
 #: src/connection-editor/ce-page-team-port.ui:697
 #: src/connection-editor/ce-page-team.ui:1424
 msgid "The interval between requests being sent."
-msgstr ""
+msgstr "Interval med poslanimi zahtevami."
 
 #: src/connection-editor/ce-page-team-port.ui:710
 #: src/connection-editor/ce-page-team.ui:1437
@@ -2594,12 +2595,14 @@ msgid "From the team device"
 msgstr "Iz skupinske naprave"
 
 #: src/connection-editor/ce-page-team.ui:61
+#, fuzzy
 msgid "From the active port"
-msgstr ""
+msgstr "Iz dejavnih vrat"
 
 #: src/connection-editor/ce-page-team.ui:65
+#, fuzzy
 msgid "From active to team device"
-msgstr ""
+msgstr "Od dejavne do skupinske naprave"
 
 #: src/connection-editor/ce-page-team.ui:174
 #, fuzzy
@@ -2607,8 +2610,9 @@ msgid "_Teamed connections"
 msgstr "Povezave _skupine"
 
 #: src/connection-editor/ce-page-team.ui:442
+#, fuzzy
 msgid "Load balance"
-msgstr ""
+msgstr "Uravnovešenost obremenitve"
 
 #: src/connection-editor/ce-page-team.ui:446
 msgid "LACP"
@@ -2677,8 +2681,9 @@ msgid ""
 msgstr ""
 
 #: src/connection-editor/ce-page-team.ui:799
+#, fuzzy
 msgid "_Runner"
-msgstr ""
+msgstr "_Tekač"
 
 #: src/connection-editor/ce-page-team.ui:814
 #, fuzzy
@@ -2686,8 +2691,9 @@ msgid "_Hardware address policy"
 msgstr "_Politika naslovov strojne opreme"
 
 #: src/connection-editor/ce-page-team.ui:828
+#, fuzzy
 msgid "Name of runner to be used."
-msgstr ""
+msgstr "Ime tekača, ki bo uporabljen."
 
 #: src/connection-editor/ce-page-team.ui:849
 msgid ""
@@ -2977,8 +2983,9 @@ msgid "_Show private key"
 msgstr "P_okaži osebni ključ"
 
 #: src/connection-editor/ce-page-wireguard.ui:641
+#, fuzzy
 msgid "<b>_Peers</b>"
-msgstr ""
+msgstr "<b>_Vrstniki</b>"
 
 #: src/connection-editor/ce-page.c:105
 msgid "automatic"
@@ -3207,62 +3214,67 @@ msgid "WireGuard"
 msgstr "WireGuard"
 
 #: src/connection-editor/connection-helpers.c:112
-#: src/connection-editor/connection-helpers.c:374
+#: src/connection-editor/connection-helpers.c:422
 #: src/connection-editor/page-vpn.c:92
 msgid "VPN"
 msgstr "VPN"
 
-#: src/connection-editor/connection-helpers.c:192
+#: src/connection-editor/connection-helpers.c:202
+#, fuzzy, c-format
+msgid "VPN plugin “%s” not found"
+msgstr "Vstavka VPN »%s« ni mogoče najti"
+
+#: src/connection-editor/connection-helpers.c:227
 msgid "No VPN service type."
 msgstr "Ni vrste storitve VPN."
 
-#: src/connection-editor/connection-helpers.c:197
+#: src/connection-editor/connection-helpers.c:241
 msgid "The VPN plugin failed to import the VPN connection correctly: "
 msgstr "Vstavek VPN ni uspel pravilno uvoziti povezave VPN: "
 
-#: src/connection-editor/connection-helpers.c:281
+#: src/connection-editor/connection-helpers.c:329
 #: src/connection-editor/page-proxy.c:104
 #: src/connection-editor/page-team-port.c:189
 #: src/connection-editor/page-team.c:327
 msgid "Select file to import"
 msgstr "Izbor datoteke za uvoz"
 
-#: src/connection-editor/connection-helpers.c:285
+#: src/connection-editor/connection-helpers.c:333
 #: src/connection-editor/page-proxy.c:108
 #: src/connection-editor/page-team-port.c:193
 #: src/connection-editor/page-team.c:331
 msgid "_Open"
 msgstr "_Odpri"
 
-#: src/connection-editor/connection-helpers.c:316
+#: src/connection-editor/connection-helpers.c:364
 msgid "Hardware"
 msgstr "Strojna oprema"
 
-#: src/connection-editor/connection-helpers.c:343
+#: src/connection-editor/connection-helpers.c:391
 msgid "Virtual"
 msgstr "Navidezno"
 
-#: src/connection-editor/connection-helpers.c:492
-#: src/connection-editor/connection-helpers.c:494
+#: src/connection-editor/connection-helpers.c:540
+#: src/connection-editor/connection-helpers.c:542
 msgid "Import a saved VPN configuration…"
 msgstr "Uvozi shranjeno prilagoditev VPN ..."
 
-#: src/connection-editor/connection-helpers.c:524
+#: src/connection-editor/connection-helpers.c:572
 msgid ""
 "The connection editor dialog could not be initialized due to an unknown "
 "error."
 msgstr ""
 "Pogovornega okna urejevalnika povezav ni mogoče začeti zaradi neznane napake."
 
-#: src/connection-editor/connection-helpers.c:533
+#: src/connection-editor/connection-helpers.c:581
 msgid "Could not create new connection"
 msgstr "Ni mogoče ustvariti nove povezave"
 
-#: src/connection-editor/connection-helpers.c:696
+#: src/connection-editor/connection-helpers.c:744
 msgid "Connection delete failed"
 msgstr "Izbris povezave ni uspel"
 
-#: src/connection-editor/connection-helpers.c:744
+#: src/connection-editor/connection-helpers.c:792
 #, c-format
 msgid "Are you sure you wish to delete the connection %s?"
 msgstr "Ali ste prepričani, da želite izbrisati povezavo %s?"
@@ -3514,43 +3526,43 @@ msgstr "Izbriši izbrano povezavo"
 msgid "Authenticate to delete the selected connection"
 msgstr "Overi za izbris izbrane povezave"
 
-#: src/connection-editor/nm-connection-list.c:1053
+#: src/connection-editor/nm-connection-list.c:1051
 msgid "Unrecognized connection type"
 msgstr "Neprepoznana vrsta povezave"
 
-#: src/connection-editor/nm-connection-list.c:1058
+#: src/connection-editor/nm-connection-list.c:1057
 #, c-format
 msgid "Don’t know how to import “%s” connections"
 msgstr "Ni znano, kako uvoziti povezave »%s«"
 
-#: src/connection-editor/nm-connection-list.c:1062
+#: src/connection-editor/nm-connection-list.c:1061
 msgid "Error importing connection"
 msgstr "Napaka pri uvozu povezave"
 
-#: src/connection-editor/nm-connection-list.c:1069
-#: src/connection-editor/nm-connection-list.c:1084
-#: src/connection-editor/nm-connection-list.c:1087
+#: src/connection-editor/nm-connection-list.c:1077
+#: src/connection-editor/nm-connection-list.c:1092
+#: src/connection-editor/nm-connection-list.c:1095
 msgid "Error creating connection"
 msgstr "Napaka med ustvarjanjem povezave"
 
-#: src/connection-editor/nm-connection-list.c:1069
+#: src/connection-editor/nm-connection-list.c:1077
 msgid "Connection type not specified."
 msgstr "Vrsta povezave ni navedena."
 
-#: src/connection-editor/nm-connection-list.c:1085
+#: src/connection-editor/nm-connection-list.c:1093
 msgid "No VPN plugins are installed."
 msgstr "Vstavki VPN niso nameščeni."
 
-#: src/connection-editor/nm-connection-list.c:1088
+#: src/connection-editor/nm-connection-list.c:1096
 #, c-format
 msgid "Don’t know how to create “%s” connections"
 msgstr "Ni jasno, kako ustvariti povezave »%s«"
 
-#: src/connection-editor/nm-connection-list.c:1122
+#: src/connection-editor/nm-connection-list.c:1130
 msgid "Error editing connection"
 msgstr "Napaka med urejanjem povezave"
 
-#: src/connection-editor/nm-connection-list.c:1123
+#: src/connection-editor/nm-connection-list.c:1131
 #, c-format
 msgid "Did not find a connection with UUID “%s”"
 msgstr "Povezave z UUID »%s« ni mogoče najti"
@@ -3607,7 +3619,6 @@ msgid "_Personal Area Network"
 msgstr "_Osebno omrežje"
 
 #: src/connection-editor/page-bluetooth.c:318
-#, fuzzy
 msgid "_Dial-Up Network"
 msgstr "_Klicno omrežje"
 

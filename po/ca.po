@@ -15,8 +15,8 @@ msgstr ""
 "Project-Id-Version: NetworkManager\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/network-manager-"
 "applet/\n"
-"POT-Creation-Date: 2022-11-07 08:48+0100\n"
-"PO-Revision-Date: 2018-06-24 20:41+0100\n"
+"POT-Creation-Date: 2023-04-16 21:44+0200\n"
+"PO-Revision-Date: 2022-03-04 20:41+0100\n"
 "Last-Translator: Jordi Mas i Hernàndez <jmas@softcatala.org>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca\n"
@@ -186,8 +186,8 @@ msgstr "Autenticació 802.1X"
 #: src/connection-editor/ce-page-dcb.ui:1019
 #: src/connection-editor/ce-page-wireguard.ui:41
 #: src/connection-editor/ce-ppp-auth-methods.ui:28
-#: src/connection-editor/connection-helpers.c:284
-#: src/connection-editor/connection-helpers.c:747
+#: src/connection-editor/connection-helpers.c:332
+#: src/connection-editor/connection-helpers.c:795
 #: src/connection-editor/nm-connection-editor.ui:197
 #: src/connection-editor/page-bluetooth.c:293
 #: src/connection-editor/page-mobile.c:530
@@ -1127,7 +1127,7 @@ msgstr "_Afegeix"
 #: src/connection-editor/ce-page-ip6.ui:199
 #: src/connection-editor/ce-page-team.ui:262
 #: src/connection-editor/ce-page-wireguard.ui:617
-#: src/connection-editor/connection-helpers.c:748
+#: src/connection-editor/connection-helpers.c:796
 #: src/connection-editor/nm-connection-list.ui:101
 msgid "_Delete"
 msgstr "_Suprimeix"
@@ -1993,7 +1993,7 @@ msgstr "Connexió local"
 #: src/connection-editor/ce-page-ip6.ui:24 src/connection-editor/page-ip4.c:175
 #: src/connection-editor/page-ip6.c:205
 msgid "Shared to other computers"
-msgstr "Compartit a altres ordinadors"
+msgstr "Compartit amb altres ordinadors"
 
 #: src/connection-editor/ce-page-ip4.ui:47
 #: src/connection-editor/ce-page-ip6.ui:81
@@ -3093,7 +3093,7 @@ msgstr "error no especificat"
 
 #: src/connection-editor/ce-page.c:268
 msgid "Preserve"
-msgstr "Preserva"
+msgstr "Conserva"
 
 #: src/connection-editor/ce-page.c:269
 msgid "Permanent"
@@ -3151,7 +3151,7 @@ msgstr "no es pot analitzar el nom del dispositiu"
 
 #: src/connection-editor/ce-page.c:563
 msgid "invalid hardware address"
-msgstr "Adreça del maquinari no vàlida"
+msgstr "adreça del maquinari no vàlida"
 
 #: src/connection-editor/ce-page.c:585
 #, c-format
@@ -3308,47 +3308,52 @@ msgid "WireGuard"
 msgstr "WireGuard"
 
 #: src/connection-editor/connection-helpers.c:112
-#: src/connection-editor/connection-helpers.c:374
+#: src/connection-editor/connection-helpers.c:422
 #: src/connection-editor/page-vpn.c:92
 msgid "VPN"
 msgstr "VPN"
 
-#: src/connection-editor/connection-helpers.c:192
+#: src/connection-editor/connection-helpers.c:202
+#, c-format
+msgid "VPN plugin “%s” not found"
+msgstr ""
+
+#: src/connection-editor/connection-helpers.c:227
 msgid "No VPN service type."
 msgstr "Sense tipus de servei VPN."
 
-#: src/connection-editor/connection-helpers.c:197
+#: src/connection-editor/connection-helpers.c:241
 msgid "The VPN plugin failed to import the VPN connection correctly: "
 msgstr "El connector VPN no ha pogut importar la connexió VPN correctament: "
 
-#: src/connection-editor/connection-helpers.c:281
+#: src/connection-editor/connection-helpers.c:329
 #: src/connection-editor/page-proxy.c:104
 #: src/connection-editor/page-team-port.c:189
 #: src/connection-editor/page-team.c:327
 msgid "Select file to import"
 msgstr "Seleccioneu el fitxer a importar"
 
-#: src/connection-editor/connection-helpers.c:285
+#: src/connection-editor/connection-helpers.c:333
 #: src/connection-editor/page-proxy.c:108
 #: src/connection-editor/page-team-port.c:193
 #: src/connection-editor/page-team.c:331
 msgid "_Open"
 msgstr "_Obre"
 
-#: src/connection-editor/connection-helpers.c:316
+#: src/connection-editor/connection-helpers.c:364
 msgid "Hardware"
 msgstr "Maquinari"
 
-#: src/connection-editor/connection-helpers.c:343
+#: src/connection-editor/connection-helpers.c:391
 msgid "Virtual"
 msgstr "Virtual"
 
-#: src/connection-editor/connection-helpers.c:492
-#: src/connection-editor/connection-helpers.c:494
+#: src/connection-editor/connection-helpers.c:540
+#: src/connection-editor/connection-helpers.c:542
 msgid "Import a saved VPN configuration…"
 msgstr "Importa una configuració VPN…"
 
-#: src/connection-editor/connection-helpers.c:524
+#: src/connection-editor/connection-helpers.c:572
 msgid ""
 "The connection editor dialog could not be initialized due to an unknown "
 "error."
@@ -3356,15 +3361,15 @@ msgstr ""
 "No s'ha pogut inicialitzar el diàleg d'edició de les connexions a causa d'un "
 "error desconegut."
 
-#: src/connection-editor/connection-helpers.c:533
+#: src/connection-editor/connection-helpers.c:581
 msgid "Could not create new connection"
 msgstr "No s'ha pogut crear la connexió nova"
 
-#: src/connection-editor/connection-helpers.c:696
+#: src/connection-editor/connection-helpers.c:744
 msgid "Connection delete failed"
 msgstr "No s'ha pogut suprimir la connexió"
 
-#: src/connection-editor/connection-helpers.c:744
+#: src/connection-editor/connection-helpers.c:792
 #, c-format
 msgid "Are you sure you wish to delete the connection %s?"
 msgstr "Segur que voleu suprimir la connexió %s?"
@@ -3474,7 +3479,7 @@ msgid ""
 "editor. They will be cleared upon save."
 msgstr ""
 "Avís: la connexió conté algunes propietats no suportades per l'editor. "
-"Aquestes es suprimiran després de desar-se."
+"Aquestes se suprimiran després de desar-se."
 
 #: src/connection-editor/nm-connection-editor.c:751
 msgid "Error initializing editor"
@@ -3609,43 +3614,43 @@ msgstr "Suprimeix la connexió seleccionada"
 msgid "Authenticate to delete the selected connection"
 msgstr "Autentiqueu-vos per a suprimir la connexió seleccionada"
 
-#: src/connection-editor/nm-connection-list.c:1053
+#: src/connection-editor/nm-connection-list.c:1051
 msgid "Unrecognized connection type"
 msgstr "Tipus de connexió desconegut"
 
-#: src/connection-editor/nm-connection-list.c:1058
+#: src/connection-editor/nm-connection-list.c:1057
 #, c-format
 msgid "Don’t know how to import “%s” connections"
 msgstr "Es desconeix com importar connexions «%s»"
 
-#: src/connection-editor/nm-connection-list.c:1062
+#: src/connection-editor/nm-connection-list.c:1061
 msgid "Error importing connection"
 msgstr "S'ha produït un error en importar la connexió"
 
-#: src/connection-editor/nm-connection-list.c:1069
-#: src/connection-editor/nm-connection-list.c:1084
-#: src/connection-editor/nm-connection-list.c:1087
+#: src/connection-editor/nm-connection-list.c:1077
+#: src/connection-editor/nm-connection-list.c:1092
+#: src/connection-editor/nm-connection-list.c:1095
 msgid "Error creating connection"
 msgstr "S'ha produït un error en crear la connexió"
 
-#: src/connection-editor/nm-connection-list.c:1069
+#: src/connection-editor/nm-connection-list.c:1077
 msgid "Connection type not specified."
 msgstr "No s'ha especificat el tipus de connexió."
 
-#: src/connection-editor/nm-connection-list.c:1085
+#: src/connection-editor/nm-connection-list.c:1093
 msgid "No VPN plugins are installed."
 msgstr "No hi ha cap connector VPN instal·lat."
 
-#: src/connection-editor/nm-connection-list.c:1088
+#: src/connection-editor/nm-connection-list.c:1096
 #, c-format
 msgid "Don’t know how to create “%s” connections"
 msgstr "Es desconeix com crear connexions «%s»"
 
-#: src/connection-editor/nm-connection-list.c:1122
+#: src/connection-editor/nm-connection-list.c:1130
 msgid "Error editing connection"
 msgstr "S'ha produït un error en editar la connexió"
 
-#: src/connection-editor/nm-connection-list.c:1123
+#: src/connection-editor/nm-connection-list.c:1131
 #, c-format
 msgid "Did not find a connection with UUID “%s”"
 msgstr "No s'ha pogut trobar cap connexió amb UUID «%s»"
@@ -3753,7 +3758,7 @@ msgstr "No s'ha pogut carregar la interfície d'usuari per a la connexió DSL."
 
 #: src/connection-editor/page-dsl.c:306
 msgid "missing parent interface"
-msgstr "Interfície pare perduda"
+msgstr "falta la interfície pare"
 
 #: src/connection-editor/page-dsl.c:351
 #, c-format
@@ -3772,7 +3777,7 @@ msgstr ""
 
 #: src/connection-editor/page-ethernet.c:248
 msgid "ignored"
-msgstr "Ignorada"
+msgstr "ignorada"
 
 #: src/connection-editor/page-ethernet.c:336
 msgid "Could not load ethernet user interface."
