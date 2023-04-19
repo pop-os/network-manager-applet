@@ -18,7 +18,7 @@ Build-Depends: debhelper-compat (= 13),
                libgudev-1.0-dev (>= 147),
                libjansson-dev (>= 2.7),
                libselinux-dev,
-Standards-Version: 4.6.1
+Standards-Version: 4.6.2
 Rules-Requires-Root: no
 Vcs-Git: https://salsa.debian.org/utopia-team/network-manager-applet.git
 Vcs-Browser: https://salsa.debian.org/utopia-team/network-manager-applet
