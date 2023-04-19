@@ -1,8 +1,11 @@
-network-manager-applet (1.32.0-1) UNRELEASED; urgency=medium
+network-manager-applet (1.32.0-1) experimental; urgency=medium
 
   * New upstream version 1.32.0
+  * Rebase patches
+  * Add explicit Build-Depends on pkg-config
+  * Bump Standards-Version to 4.6.2
 
- -- Michael Biebl <biebl@debian.org>  Wed, 19 Apr 2023 21:40:41 +0200
+ -- Michael Biebl <biebl@debian.org>  Wed, 19 Apr 2023 21:46:35 +0200
 
 network-manager-applet (1.30.0-2) unstable; urgency=medium
 
