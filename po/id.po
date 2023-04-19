@@ -7,20 +7,20 @@
 # Kukuh Syafaat <kukuhsyafaat@gnome.org>, 2017, 2018, 2019.
 msgid ""
 msgstr ""
-"Project-Id-Version: network-manager-applet master\n"
+"Project-Id-Version: network-manager-applet main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/network-manager-"
 "applet/\n"
-"POT-Creation-Date: 2022-11-07 08:48+0100\n"
-"PO-Revision-Date: 2022-07-08 10:49+0700\n"
+"POT-Creation-Date: 2023-04-16 21:44+0200\n"
+"PO-Revision-Date: 2022-11-27 18:20+0700\n"
 "Last-Translator: Andika Triwidada <andika@gmail.com>\n"
 "Language-Team: Indonesian <gnome@i15n.org>\n"
 "Language: id\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n!=1;\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Generator: Poedit 3.0\n"
+"X-Generator: Poedit 3.2.1\n"
 
 #: nm-applet.desktop.in:3 src/applet-dialogs.c:724 src/applet.c:3166
 msgid "Network"
@@ -67,68 +67,78 @@ msgid "Manage and change your network connection settings"
 msgstr "Kelola dan ubah tatanan koneksi jaringan Anda"
 
 #: org.gnome.nm-applet.gschema.xml.in:6
-#, fuzzy
 msgid "Disable connected notifications"
-msgstr "Fungsikan N_otifikasi"
+msgstr "Nonaktifkan notifikasi yang terhubung"
 
 #: org.gnome.nm-applet.gschema.xml.in:7
 msgid "Set this to true to disable notifications when connecting to a network."
 msgstr ""
+"Atur ini ke true untuk menonaktifkan pemberitahuan saat menyambungkan ke "
+"jaringan."
 
 #: org.gnome.nm-applet.gschema.xml.in:11
-#, fuzzy
 msgid "Disable disconnected notifications"
-msgstr "Pemutusan perangkat gagal"
+msgstr "Nonaktifkan notifikasi yang terputus"
 
 #: org.gnome.nm-applet.gschema.xml.in:12
 msgid ""
 "Set this to true to disable notifications when disconnecting from a network."
 msgstr ""
+"Atur ini ke true untuk menonaktifkan pemberitahuan saat memutuskan sambungan "
+"dari jaringan."
 
 #: org.gnome.nm-applet.gschema.xml.in:16
-#, fuzzy
 msgid "Disable VPN notifications"
-msgstr "Fungsikan N_otifikasi"
+msgstr "Nonaktifkan notifikasi VPN"
 
 #: org.gnome.nm-applet.gschema.xml.in:17
 msgid ""
 "Set this to true to disable notifications when connecting to or "
 "disconnecting from a VPN."
 msgstr ""
+"Atur ini ke true untuk menonaktifkan pemberitahuan saat menghubungkan atau "
+"memutuskan sambungan dari VPN."
 
 #: org.gnome.nm-applet.gschema.xml.in:21
 msgid "Suppress networks available notifications"
-msgstr ""
+msgstr "Menekan pemberitahuan jaringan tersedia"
 
 #: org.gnome.nm-applet.gschema.xml.in:22
 msgid ""
 "Set this to true to disable notifications when Wi-Fi networks are available."
 msgstr ""
+"Atur ini ke true untuk menonaktifkan pemberitahuan saat jaringan Wi-Fi "
+"tersedia."
 
 #: org.gnome.nm-applet.gschema.xml.in:26
 msgid "Stamp"
-msgstr ""
+msgstr "Stempel"
 
 #: org.gnome.nm-applet.gschema.xml.in:27
 msgid "Used to determine whether settings should be migrated to a new version."
 msgstr ""
+"Digunakan untuk menentukan apakah pengaturan harus dimigrasikan ke versi "
+"baru."
 
 #: org.gnome.nm-applet.gschema.xml.in:31
 msgid "Disable WiFi Create"
-msgstr ""
+msgstr "Matikan Pembuatan Wi-Fi"
 
 #: org.gnome.nm-applet.gschema.xml.in:32
 msgid ""
 "Set to true to disable creation of adhoc networks when using the applet."
 msgstr ""
+"Atur ke true untuk menonaktifkan pembuatan jaringan adhoc saat menggunakan "
+"applet."
 
 #: org.gnome.nm-applet.gschema.xml.in:36
 msgid "Show the applet in notification area"
-msgstr ""
+msgstr "Tampilkan applet di area notifikasi"
 
 #: org.gnome.nm-applet.gschema.xml.in:37
 msgid "Set to FALSE to disable displaying the applet in the notification area."
 msgstr ""
+"Atur ke FALSE untuk menonaktifkan menampilkan applet di area notifikasi."
 
 #: shared/nm-utils/nm-shared-utils.c:793
 #, c-format
@@ -178,8 +188,8 @@ msgstr "Autentikasi 802.1X"
 #: src/connection-editor/ce-page-dcb.ui:1019
 #: src/connection-editor/ce-page-wireguard.ui:41
 #: src/connection-editor/ce-ppp-auth-methods.ui:28
-#: src/connection-editor/connection-helpers.c:284
-#: src/connection-editor/connection-helpers.c:747
+#: src/connection-editor/connection-helpers.c:332
+#: src/connection-editor/connection-helpers.c:795
 #: src/connection-editor/nm-connection-editor.ui:197
 #: src/connection-editor/page-bluetooth.c:293
 #: src/connection-editor/page-mobile.c:530
@@ -406,7 +416,6 @@ msgstr "Jaringan Wi-Fi (%s)"
 msgid "Wi-Fi Network"
 msgid_plural "Wi-Fi Networks"
 msgstr[0] "Jaringan Wi-Fi"
-msgstr[1] "Jaringan Wi-Fi"
 
 #: src/applet-device-wifi.c:860
 msgid "Wi-Fi is disabled"
@@ -1109,7 +1118,7 @@ msgstr "T_ambah"
 #: src/connection-editor/ce-page-ip6.ui:199
 #: src/connection-editor/ce-page-team.ui:262
 #: src/connection-editor/ce-page-wireguard.ui:617
-#: src/connection-editor/connection-helpers.c:748
+#: src/connection-editor/connection-helpers.c:796
 #: src/connection-editor/nm-connection-list.ui:101
 msgid "_Delete"
 msgstr "_Hapus"
@@ -3280,47 +3289,52 @@ msgid "WireGuard"
 msgstr "WireGuard"
 
 #: src/connection-editor/connection-helpers.c:112
-#: src/connection-editor/connection-helpers.c:374
+#: src/connection-editor/connection-helpers.c:422
 #: src/connection-editor/page-vpn.c:92
 msgid "VPN"
 msgstr "VPN"
 
-#: src/connection-editor/connection-helpers.c:192
+#: src/connection-editor/connection-helpers.c:202
+#, c-format
+msgid "VPN plugin “%s” not found"
+msgstr "Plugin VPN \"%s\" tidak ditemukan"
+
+#: src/connection-editor/connection-helpers.c:227
 msgid "No VPN service type."
 msgstr "Tidak ada jenis layanan VPN."
 
-#: src/connection-editor/connection-helpers.c:197
+#: src/connection-editor/connection-helpers.c:241
 msgid "The VPN plugin failed to import the VPN connection correctly: "
 msgstr "Pengaya VPN gagal mengimpor koneksi VPN dengan benar: "
 
-#: src/connection-editor/connection-helpers.c:281
+#: src/connection-editor/connection-helpers.c:329
 #: src/connection-editor/page-proxy.c:104
 #: src/connection-editor/page-team-port.c:189
 #: src/connection-editor/page-team.c:327
 msgid "Select file to import"
 msgstr "Pilih berkas untuk diimpor"
 
-#: src/connection-editor/connection-helpers.c:285
+#: src/connection-editor/connection-helpers.c:333
 #: src/connection-editor/page-proxy.c:108
 #: src/connection-editor/page-team-port.c:193
 #: src/connection-editor/page-team.c:331
 msgid "_Open"
 msgstr "_Buka"
 
-#: src/connection-editor/connection-helpers.c:316
+#: src/connection-editor/connection-helpers.c:364
 msgid "Hardware"
 msgstr "Perangkat Keras"
 
-#: src/connection-editor/connection-helpers.c:343
+#: src/connection-editor/connection-helpers.c:391
 msgid "Virtual"
 msgstr "Virtual"
 
-#: src/connection-editor/connection-helpers.c:492
-#: src/connection-editor/connection-helpers.c:494
+#: src/connection-editor/connection-helpers.c:540
+#: src/connection-editor/connection-helpers.c:542
 msgid "Import a saved VPN configuration…"
 msgstr "Impor suatu konfigurasi VPN yang tersimpan…"
 
-#: src/connection-editor/connection-helpers.c:524
+#: src/connection-editor/connection-helpers.c:572
 msgid ""
 "The connection editor dialog could not be initialized due to an unknown "
 "error."
@@ -3328,15 +3342,15 @@ msgstr ""
 "Dialog penyunting koneksi tidak dapat diinisialisasi karena galat yang tak "
 "dikenal."
 
-#: src/connection-editor/connection-helpers.c:533
+#: src/connection-editor/connection-helpers.c:581
 msgid "Could not create new connection"
 msgstr "Tak bisa membuat koneksi baru"
 
-#: src/connection-editor/connection-helpers.c:696
+#: src/connection-editor/connection-helpers.c:744
 msgid "Connection delete failed"
 msgstr "Penghapusan koneksi gagal"
 
-#: src/connection-editor/connection-helpers.c:744
+#: src/connection-editor/connection-helpers.c:792
 #, c-format
 msgid "Are you sure you wish to delete the connection %s?"
 msgstr "Anda yakin ingin menghapus koneksi %s?"
@@ -3513,35 +3527,30 @@ msgstr "kini"
 msgid "%d minute ago"
 msgid_plural "%d minutes ago"
 msgstr[0] "%d menit lalu"
-msgstr[1] "%d menit lalu"
 
 #: src/connection-editor/nm-connection-list.c:167
 #, c-format
 msgid "%d hour ago"
 msgid_plural "%d hours ago"
 msgstr[0] "%d jam lalu"
-msgstr[1] "%d jam lalu"
 
 #: src/connection-editor/nm-connection-list.c:179
 #, c-format
 msgid "%d day ago"
 msgid_plural "%d days ago"
 msgstr[0] "%d hari lalu"
-msgstr[1] "%d hari lalu"
 
 #: src/connection-editor/nm-connection-list.c:185
 #, c-format
 msgid "%d month ago"
 msgid_plural "%d months ago"
 msgstr[0] "%d bulan lalu"
-msgstr[1] "%d bulan lalu"
 
 #: src/connection-editor/nm-connection-list.c:189
 #, c-format
 msgid "%d year ago"
 msgid_plural "%d years ago"
 msgstr[0] "%d tahun lalu"
-msgstr[1] "%d tahun lalu"
 
 #: src/connection-editor/nm-connection-list.c:459
 msgid "Connection cannot be deleted"
@@ -3579,43 +3588,43 @@ msgstr "Hapus koneksi yang dipilih"
 msgid "Authenticate to delete the selected connection"
 msgstr "Lakukan autentikasi untuk menghapus koneksi yang dipilih"
 
-#: src/connection-editor/nm-connection-list.c:1053
+#: src/connection-editor/nm-connection-list.c:1051
 msgid "Unrecognized connection type"
 msgstr "Jenis koneksi tidak dikenal"
 
-#: src/connection-editor/nm-connection-list.c:1058
+#: src/connection-editor/nm-connection-list.c:1057
 #, c-format
 msgid "Don’t know how to import “%s” connections"
 msgstr "Tidak tahu bagaimana mengimpor koneksi \"%s\""
 
-#: src/connection-editor/nm-connection-list.c:1062
+#: src/connection-editor/nm-connection-list.c:1061
 msgid "Error importing connection"
 msgstr "Galat saat mengimpor koneksi"
 
-#: src/connection-editor/nm-connection-list.c:1069
-#: src/connection-editor/nm-connection-list.c:1084
-#: src/connection-editor/nm-connection-list.c:1087
+#: src/connection-editor/nm-connection-list.c:1077
+#: src/connection-editor/nm-connection-list.c:1092
+#: src/connection-editor/nm-connection-list.c:1095
 msgid "Error creating connection"
 msgstr "Galat saat membuat koneksi"
 
-#: src/connection-editor/nm-connection-list.c:1069
+#: src/connection-editor/nm-connection-list.c:1077
 msgid "Connection type not specified."
 msgstr "Jenis koneksi tidak dinyatakan."
 
-#: src/connection-editor/nm-connection-list.c:1085
+#: src/connection-editor/nm-connection-list.c:1093
 msgid "No VPN plugins are installed."
 msgstr "Tak ada plugin VPN yang terpasang."
 
-#: src/connection-editor/nm-connection-list.c:1088
+#: src/connection-editor/nm-connection-list.c:1096
 #, c-format
 msgid "Don’t know how to create “%s” connections"
 msgstr "Tidak tahu bagaimana membuat koneksi \"%s\""
 
-#: src/connection-editor/nm-connection-list.c:1122
+#: src/connection-editor/nm-connection-list.c:1130
 msgid "Error editing connection"
 msgstr "Galat saat menyunting koneksi"
 
-#: src/connection-editor/nm-connection-list.c:1123
+#: src/connection-editor/nm-connection-list.c:1131
 #, c-format
 msgid "Did not find a connection with UUID “%s”"
 msgstr "Tidak menemukan koneksi dengan UUID \"%s\""
@@ -4417,15 +4426,3 @@ msgstr "Sertifikat PEM  (*.pem, *.crt, *.cer)"
 #: src/utils/utils.c:546
 msgid "DER, PEM, or PKCS#12 private keys (*.der, *.pem, *.p12, *.key)"
 msgstr "Kunci privat DER, PEM, atau PKCS#12 (*.der, *.pem, *.p12, *.key)"
-
-#~ msgid "mW"
-#~ msgstr "mW"
-
-#~ msgid "Transmission po_wer"
-#~ msgstr "_Daya transmisi"
-
-#~ msgid "Mb/s"
-#~ msgstr "Mb/s"
-
-#~ msgid "_Rate"
-#~ msgstr "_Laju"

@@ -5,15 +5,15 @@
 # Gintautas Miliauskas <gintas@akl.lt>, 2008.
 # Rimas Kudelis <rq@akl.lt>, 2010.
 # Algimantas Margevičius <gymka@mail.ru>, 2011.
-# Aurimas Černius <aurisc4@gmail.com>, 2010-2021.
+# Aurimas Černius <aurisc4@gmail.com>, 2010-2023.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: NetworkManager HEAD\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/network-manager-"
 "applet/\n"
-"POT-Creation-Date: 2022-11-07 08:48+0100\n"
-"PO-Revision-Date: 2021-12-11 21:38+0200\n"
+"POT-Creation-Date: 2023-04-16 21:44+0200\n"
+"PO-Revision-Date: 2023-02-27 22:20+0200\n"
 "Last-Translator: Aurimas Černius <aurisc4@gmail.com>\n"
 "Language-Team: Lietuvių <gnome-lt@lists.akl.lt>\n"
 "Language: lt\n"
@@ -22,7 +22,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "(n%100<10 || n%100>=20) ? 1 : 2)\n"
-"X-Generator: Gtranslator 40.0\n"
+"X-Generator: Gtranslator 42.0\n"
 "X-Project-Style: gnome\n"
 
 #: nm-applet.desktop.in:3 src/applet-dialogs.c:724 src/applet.c:3166
@@ -123,9 +123,8 @@ msgstr ""
 "versiją."
 
 #: org.gnome.nm-applet.gschema.xml.in:31
-#, fuzzy
 msgid "Disable WiFi Create"
-msgstr "Išjungti belaidžių tinklų kūrimo galimybę"
+msgstr "Išjungti belaidžių tinklų kūrimą"
 
 #: org.gnome.nm-applet.gschema.xml.in:32
 msgid ""
@@ -193,8 +192,8 @@ msgstr "802.1X tapatybės nustatymas"
 #: src/connection-editor/ce-page-dcb.ui:1019
 #: src/connection-editor/ce-page-wireguard.ui:41
 #: src/connection-editor/ce-ppp-auth-methods.ui:28
-#: src/connection-editor/connection-helpers.c:284
-#: src/connection-editor/connection-helpers.c:747
+#: src/connection-editor/connection-helpers.c:332
+#: src/connection-editor/connection-helpers.c:795
 #: src/connection-editor/nm-connection-editor.ui:197
 #: src/connection-editor/page-bluetooth.c:293
 #: src/connection-editor/page-mobile.c:530
@@ -223,9 +222,8 @@ msgid "secure."
 msgstr "saugus."
 
 #: src/ap-menu-item.c:77
-#, fuzzy
 msgid "insecure."
-msgstr "saugus."
+msgstr "nesaugus."
 
 #: src/applet-device-broadband.c:147
 msgid "Wrong PUK code; please contact your provider."
@@ -515,9 +513,8 @@ msgid "WEP"
 msgstr "WEP"
 
 #: src/applet-dialogs.c:228
-#, fuzzy
 msgid "WPA/WPA2/WPA3"
-msgstr "WPA/WPA2"
+msgstr "WPA/WPA2/WPA3"
 
 #: src/applet-dialogs.c:230
 msgid "WPA3"
@@ -1126,7 +1123,7 @@ msgstr "_Pridėti"
 #: src/connection-editor/ce-page-ip6.ui:199
 #: src/connection-editor/ce-page-team.ui:262
 #: src/connection-editor/ce-page-wireguard.ui:617
-#: src/connection-editor/connection-helpers.c:748
+#: src/connection-editor/connection-helpers.c:796
 #: src/connection-editor/nm-connection-list.ui:101
 msgid "_Delete"
 msgstr "Pa_šalinti"
@@ -3291,61 +3288,66 @@ msgid "WireGuard"
 msgstr "WireGuard"
 
 #: src/connection-editor/connection-helpers.c:112
-#: src/connection-editor/connection-helpers.c:374
+#: src/connection-editor/connection-helpers.c:422
 #: src/connection-editor/page-vpn.c:92
 msgid "VPN"
 msgstr "VPN"
 
-#: src/connection-editor/connection-helpers.c:192
+#: src/connection-editor/connection-helpers.c:202
+#, c-format
+msgid "VPN plugin “%s” not found"
+msgstr "VPN įskiepis „%s“ nerastas"
+
+#: src/connection-editor/connection-helpers.c:227
 msgid "No VPN service type."
 msgstr "Nėra VPN tarnybos tipo."
 
-#: src/connection-editor/connection-helpers.c:197
+#: src/connection-editor/connection-helpers.c:241
 msgid "The VPN plugin failed to import the VPN connection correctly: "
 msgstr "VPN įskiepiui nepavyko tinkamai importuoti VPN ryšio:"
 
-#: src/connection-editor/connection-helpers.c:281
+#: src/connection-editor/connection-helpers.c:329
 #: src/connection-editor/page-proxy.c:104
 #: src/connection-editor/page-team-port.c:189
 #: src/connection-editor/page-team.c:327
 msgid "Select file to import"
 msgstr "Pasirinkite importuotiną failą"
 
-#: src/connection-editor/connection-helpers.c:285
+#: src/connection-editor/connection-helpers.c:333
 #: src/connection-editor/page-proxy.c:108
 #: src/connection-editor/page-team-port.c:193
 #: src/connection-editor/page-team.c:331
 msgid "_Open"
 msgstr "_Atverti"
 
-#: src/connection-editor/connection-helpers.c:316
+#: src/connection-editor/connection-helpers.c:364
 msgid "Hardware"
 msgstr "Aparatinė įranga"
 
-#: src/connection-editor/connection-helpers.c:343
+#: src/connection-editor/connection-helpers.c:391
 msgid "Virtual"
 msgstr "Virtualus"
 
-#: src/connection-editor/connection-helpers.c:492
-#: src/connection-editor/connection-helpers.c:494
+#: src/connection-editor/connection-helpers.c:540
+#: src/connection-editor/connection-helpers.c:542
 msgid "Import a saved VPN configuration…"
 msgstr "Importuoti įrašytą VPN konfigūraciją…"
 
-#: src/connection-editor/connection-helpers.c:524
+#: src/connection-editor/connection-helpers.c:572
 msgid ""
 "The connection editor dialog could not be initialized due to an unknown "
 "error."
 msgstr "Nepavyko inicijuoti ryšių redaktoriaus dialogo dėl nežinomos klaidos."
 
-#: src/connection-editor/connection-helpers.c:533
+#: src/connection-editor/connection-helpers.c:581
 msgid "Could not create new connection"
 msgstr "Nepavyko sukurti naujo ryšio"
 
-#: src/connection-editor/connection-helpers.c:696
+#: src/connection-editor/connection-helpers.c:744
 msgid "Connection delete failed"
 msgstr "Nepavyko ištrinti ryšio"
 
-#: src/connection-editor/connection-helpers.c:744
+#: src/connection-editor/connection-helpers.c:792
 #, c-format
 msgid "Are you sure you wish to delete the connection %s?"
 msgstr "Ar tikrai norite ištrinti ryšį %s?"
@@ -3592,43 +3594,43 @@ msgstr "Pašalinti pasirinktą ryšį"
 msgid "Authenticate to delete the selected connection"
 msgstr "Norint pašalinti pasirinktą ryšį, reikia nustatyti tapatybę"
 
-#: src/connection-editor/nm-connection-list.c:1053
+#: src/connection-editor/nm-connection-list.c:1051
 msgid "Unrecognized connection type"
 msgstr "Neatpažintas ryšio tipas"
 
-#: src/connection-editor/nm-connection-list.c:1058
+#: src/connection-editor/nm-connection-list.c:1057
 #, c-format
 msgid "Don’t know how to import “%s” connections"
 msgstr "Nežinoma, kaip importuoti „%s“ ryšius"
 
-#: src/connection-editor/nm-connection-list.c:1062
+#: src/connection-editor/nm-connection-list.c:1061
 msgid "Error importing connection"
 msgstr "Klaida importuojant ryšį"
 
-#: src/connection-editor/nm-connection-list.c:1069
-#: src/connection-editor/nm-connection-list.c:1084
-#: src/connection-editor/nm-connection-list.c:1087
+#: src/connection-editor/nm-connection-list.c:1077
+#: src/connection-editor/nm-connection-list.c:1092
+#: src/connection-editor/nm-connection-list.c:1095
 msgid "Error creating connection"
 msgstr "Klaida kuriant ryšį"
 
-#: src/connection-editor/nm-connection-list.c:1069
+#: src/connection-editor/nm-connection-list.c:1077
 msgid "Connection type not specified."
 msgstr "Nenurodytas ryšio tipas"
 
-#: src/connection-editor/nm-connection-list.c:1085
+#: src/connection-editor/nm-connection-list.c:1093
 msgid "No VPN plugins are installed."
 msgstr "Nėra įdiegtų VPN įskiepių."
 
-#: src/connection-editor/nm-connection-list.c:1088
+#: src/connection-editor/nm-connection-list.c:1096
 #, c-format
 msgid "Don’t know how to create “%s” connections"
 msgstr "Nežinoma, kaip sukurti „%s“ ryšius"
 
-#: src/connection-editor/nm-connection-list.c:1122
+#: src/connection-editor/nm-connection-list.c:1130
 msgid "Error editing connection"
 msgstr "Klaida taisant ryšio nustatymus"
 
-#: src/connection-editor/nm-connection-list.c:1123
+#: src/connection-editor/nm-connection-list.c:1131
 #, c-format
 msgid "Did not find a connection with UUID “%s”"
 msgstr "Nepavyko rasti ryšio, kurio UUID „%s“"
@@ -4152,14 +4154,12 @@ msgid "Dynamic WEP (802.1X)"
 msgstr "Dinaminis WEP (802.1X)"
 
 #: src/connection-editor/page-wifi-security.c:410
-#, fuzzy
 msgid "WPA/WPA2/WPA3 Personal"
-msgstr "WPA ir WPA2 asmeninis"
+msgstr "WPA/WPA2/WPA3 asmeninis"
 
 #: src/connection-editor/page-wifi-security.c:423
-#, fuzzy
 msgid "WPA/WPA2 Enterprise"
-msgstr "WPA ir WPA2 industrinis"
+msgstr "WPA/WPA2 industrinis"
 
 #: src/connection-editor/page-wifi-security.c:436
 msgid "WPA3 Personal"

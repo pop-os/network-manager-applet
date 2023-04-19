@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/network-manager-"
 "applet/\n"
-"POT-Creation-Date: 2022-11-07 08:48+0100\n"
-"PO-Revision-Date: 2022-07-21 18:18+0200\n"
+"POT-Creation-Date: 2023-04-16 21:44+0200\n"
+"PO-Revision-Date: 2022-11-26 18:15+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: \n"
 "Language: ka\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.1.1\n"
+"X-Generator: Poedit 3.2\n"
 
 #: nm-applet.desktop.in:3 src/applet-dialogs.c:724 src/applet.c:3166
 msgid "Network"
@@ -61,90 +61,95 @@ msgstr ""
 
 #: org.gnome.nm-applet.gschema.xml.in:6
 msgid "Disable connected notifications"
-msgstr ""
+msgstr "მიერთების შეტყობინებების გამორთვა"
 
 #: org.gnome.nm-applet.gschema.xml.in:7
 msgid "Set this to true to disable notifications when connecting to a network."
-msgstr ""
+msgstr "ჩართეთ ქსელთან მიერთებისას გაფრთხილების გამოსართავად."
 
 #: org.gnome.nm-applet.gschema.xml.in:11
 msgid "Disable disconnected notifications"
-msgstr ""
+msgstr "გათიშვის შეტყობინებების გამორთვა"
 
 #: org.gnome.nm-applet.gschema.xml.in:12
 msgid ""
 "Set this to true to disable notifications when disconnecting from a network."
-msgstr ""
+msgstr "ჩართეთ ქსელიდან გამოერთებისას გაფრთხილების გამოსართავად."
 
 #: org.gnome.nm-applet.gschema.xml.in:16
 msgid "Disable VPN notifications"
-msgstr ""
+msgstr "VPN-ის შეტყობინებების გამორთვა"
 
 #: org.gnome.nm-applet.gschema.xml.in:17
 msgid ""
 "Set this to true to disable notifications when connecting to or "
 "disconnecting from a VPN."
-msgstr ""
+msgstr "ჩართეთ VPN-თან მიერთების ან გამოერთებისას გაფრთხილებების გამოსართავად."
 
 #: org.gnome.nm-applet.gschema.xml.in:21
 msgid "Suppress networks available notifications"
-msgstr ""
+msgstr "ქსელის წვდომადობის შეტყობინებების გამორთვა"
 
 #: org.gnome.nm-applet.gschema.xml.in:22
 msgid ""
 "Set this to true to disable notifications when Wi-Fi networks are available."
 msgstr ""
+"ჩართეთ Wi-Fi ქსელების აღმოჩენის შემთხვევაში გაფრთხილებების გამოსართავად."
 
 #: org.gnome.nm-applet.gschema.xml.in:26
 msgid "Stamp"
-msgstr ""
+msgstr "შტამპი"
 
 #: org.gnome.nm-applet.gschema.xml.in:27
 msgid "Used to determine whether settings should be migrated to a new version."
 msgstr ""
+"გამოიყენება დასადგენად, მოხდება პარამეტრების ახალ ვერსიაზე მიგრაცია, თუ არა."
 
 #: org.gnome.nm-applet.gschema.xml.in:31
 msgid "Disable WiFi Create"
-msgstr ""
+msgstr "Wifi -ის შექმნის გამორთვა"
 
 #: org.gnome.nm-applet.gschema.xml.in:32
 msgid ""
 "Set to true to disable creation of adhoc networks when using the applet."
-msgstr ""
+msgstr "ჩართეთ აპლეტის გამოყენებისას adhoc ქსელების შექმნის გამოსართავად."
 
 #: org.gnome.nm-applet.gschema.xml.in:36
 msgid "Show the applet in notification area"
-msgstr ""
+msgstr "გაფრთხილების ზონაში აპლეტის ჩვენება"
 
 #: org.gnome.nm-applet.gschema.xml.in:37
 msgid "Set to FALSE to disable displaying the applet in the notification area."
-msgstr ""
+msgstr "გაფრთხილების ზონაში აპლეტის ჩვენების გამოსართავად დააყენეთ გამორთულზე."
 
 #: shared/nm-utils/nm-shared-utils.c:793
 #, c-format
 msgid "object class '%s' has no property named '%s'"
-msgstr ""
+msgstr "ობიექტის კლასს '%s ' თვისება სახელით'%s' არ გააჩნია"
 
 #: shared/nm-utils/nm-shared-utils.c:800
 #, c-format
 msgid "property '%s' of object class '%s' is not writable"
-msgstr ""
+msgstr "თვისება '%s' ობიექტის კლასისთვის '%s' ჩაწერადი არაა"
 
 #: shared/nm-utils/nm-shared-utils.c:807
 #, c-format
 msgid ""
 "construct property \"%s\" for object '%s' can't be set after construction"
 msgstr ""
+"აგებული თვისების \"%s\" დაყენება ობიექტის (\"%s\") აგების შემდეგ შეუძლებელია"
 
 #: shared/nm-utils/nm-shared-utils.c:815
 #, c-format
 msgid "'%s::%s' is not a valid property name; '%s' is not a GObject subtype"
 msgstr ""
+"'%s::%s' თვისების სწორ სახელს არ წარმოადგენს; '%s' GObject-ის ქვეტიპი არაა"
 
 #: shared/nm-utils/nm-shared-utils.c:824
 #, c-format
 msgid "unable to set property '%s' of type '%s' from value of type '%s'"
 msgstr ""
+"თვისების (%s) ტიპისთვის '%s' ტიპის '%s' მნიშვნელობიდან დაყენების შეცდომა"
 
 #: shared/nm-utils/nm-shared-utils.c:835
 #, c-format
@@ -152,6 +157,8 @@ msgid ""
 "value \"%s\" of type '%s' is invalid or out of range for property '%s' of "
 "type '%s'"
 msgstr ""
+"მნიშვნელობა '%s' ტიპისთვის '%s' არასწორია ან დიაპაზონს გარეთაა თვისებისთვის "
+"'%s' ტიპისთვის '%s'"
 
 #: src/8021x.ui:7 src/ethernet-dialog.c:90
 msgid "802.1X authentication"
@@ -165,8 +172,8 @@ msgstr "802.1X ავთენტიკაცია"
 #: src/connection-editor/ce-page-dcb.ui:1019
 #: src/connection-editor/ce-page-wireguard.ui:41
 #: src/connection-editor/ce-ppp-auth-methods.ui:28
-#: src/connection-editor/connection-helpers.c:284
-#: src/connection-editor/connection-helpers.c:747
+#: src/connection-editor/connection-helpers.c:332
+#: src/connection-editor/connection-helpers.c:795
 #: src/connection-editor/nm-connection-editor.ui:197
 #: src/connection-editor/page-bluetooth.c:293
 #: src/connection-editor/page-mobile.c:530
@@ -235,7 +242,7 @@ msgstr ""
 #: src/applet-device-broadband.c:809 src/applet-device-bt.c:75
 #: src/applet-device-ethernet.c:124 src/applet-device-wifi.c:1251
 msgid "Connection Established"
-msgstr ""
+msgstr "კავშირი დამყარებულია"
 
 #: src/applet-device-broadband.c:810
 msgid "You are now connected to the Mobile Broadband network."
@@ -243,7 +250,7 @@ msgstr ""
 
 #: src/applet-device-broadband.c:950 src/applet-device-broadband.c:956
 msgid "Mobile Broadband network."
-msgstr ""
+msgstr "მობილური ფართოზოლოვანი ინტერნეტი."
 
 #: src/applet-device-broadband.c:951
 msgid "You are now registered on the home network."
@@ -284,7 +291,7 @@ msgstr ""
 
 #: src/applet-device-ethernet.c:16
 msgid "Auto Ethernet"
-msgstr ""
+msgstr "ავტომატური Ethernet"
 
 #: src/applet-device-ethernet.c:72
 #, c-format
@@ -298,7 +305,7 @@ msgstr "Ethernet ქსელი (%s)"
 
 #: src/applet-device-ethernet.c:77
 msgid "Ethernet Networks"
-msgstr "Ethernet ქსელები "
+msgstr "Ethernet ქსელები"
 
 #: src/applet-device-ethernet.c:79
 msgid "Ethernet Network"
@@ -311,7 +318,7 @@ msgstr "გათიშულია"
 
 #: src/applet-device-ethernet.c:125
 msgid "You are now connected to the ethernet network."
-msgstr ""
+msgstr "ახლა მიერთებული ბრძანდებით ethernet ქსელთან."
 
 #: src/applet-device-ethernet.c:153
 #, c-format
@@ -381,22 +388,22 @@ msgstr ""
 #: src/applet-device-wifi.c:827
 #, c-format
 msgid "Wi-Fi Networks (%s)"
-msgstr ""
+msgstr "Wi-Fi ქსელები (%s)"
 
 #: src/applet-device-wifi.c:829
 #, c-format
 msgid "Wi-Fi Network (%s)"
-msgstr ""
+msgstr "Wi-Fi ქსელები (%s)"
 
 #: src/applet-device-wifi.c:831
 msgid "Wi-Fi Network"
 msgid_plural "Wi-Fi Networks"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Wi-Fi ქსელი"
+msgstr[1] "Wi-Fi ქსელი"
 
 #: src/applet-device-wifi.c:860
 msgid "Wi-Fi is disabled"
-msgstr ""
+msgstr "Wi-Fi გამორთულია"
 
 #: src/applet-device-wifi.c:861
 msgid "Wi-Fi is disabled by hardware switch"
@@ -404,7 +411,7 @@ msgstr ""
 
 #: src/applet-device-wifi.c:887
 msgid "_Available networks"
-msgstr ""
+msgstr "_ხელმისაწვდომი ქსელები"
 
 #: src/applet-device-wifi.c:1066
 msgid "Wi-Fi Networks Available"
@@ -472,12 +479,12 @@ msgstr "დინამიკური WEP"
 
 #: src/applet-dialogs.c:64 src/applet-dialogs.c:226
 msgid "WPA/WPA2"
-msgstr ""
+msgstr "WPA/WPA2"
 
 #. Create the expander
 #: src/applet-dialogs.c:163
 msgid "More addresses"
-msgstr ""
+msgstr "მეტი მისამართი"
 
 #: src/applet-dialogs.c:224
 msgid "WEP"
@@ -485,7 +492,7 @@ msgstr "WEP"
 
 #: src/applet-dialogs.c:228
 msgid "WPA/WPA2/WPA3"
-msgstr ""
+msgstr "WPA/WPA2/WPA3"
 
 #: src/applet-dialogs.c:230
 msgid "WPA3"
@@ -519,7 +526,7 @@ msgstr "IP მისამართი"
 
 #: src/applet-dialogs.c:353
 msgid "Broadcast Address"
-msgstr ""
+msgstr "ტრანსლირების მისამართი"
 
 #. Prefix
 #: src/applet-dialogs.c:365
@@ -621,19 +628,19 @@ msgstr "VPN-ის ტიპი"
 
 #: src/applet-dialogs.c:870
 msgid "VPN Gateway"
-msgstr ""
+msgstr "VPN მარშრუტიზატორი"
 
 #: src/applet-dialogs.c:874
 msgid "VPN Username"
-msgstr ""
+msgstr "VPN მომხმარებელი"
 
 #: src/applet-dialogs.c:878
 msgid "VPN Banner"
-msgstr ""
+msgstr "VPN ბანერი"
 
 #: src/applet-dialogs.c:882
 msgid "Base Connection"
-msgstr ""
+msgstr "საბაზისო შეერთება"
 
 #: src/applet-dialogs.c:883
 msgid "Unknown"
@@ -658,7 +665,7 @@ msgstr ""
 
 #: src/applet-dialogs.c:1133
 msgid "NetworkManager Website"
-msgstr ""
+msgstr "NetworkManager -ის ვებგვერდი"
 
 #: src/applet-dialogs.c:1137
 msgid "translator-credits"
@@ -672,7 +679,7 @@ msgstr ""
 
 #: src/applet-dialogs.c:1152
 msgid "Missing resources"
-msgstr ""
+msgstr "არასაკმარისი რესურსები"
 
 #: src/applet-dialogs.c:1177
 msgid "Mobile broadband network password"
@@ -915,11 +922,11 @@ msgstr "ქსელური მოწყობილობები არა�
 
 #: src/applet.c:1415
 msgid "_VPN Connections"
-msgstr ""
+msgstr "_VPN შეერთებები"
 
 #: src/applet.c:1459
 msgid "_Configure VPN…"
-msgstr ""
+msgstr "VPN-ის მორგება…"
 
 #: src/applet.c:1462
 msgid "_Add a VPN connection…"
@@ -927,21 +934,21 @@ msgstr ""
 
 #: src/applet.c:1568
 msgid "NetworkManager is not running…"
-msgstr ""
+msgstr "NetworkManager გაშვებული არაა…"
 
 #: src/applet.c:1573 src/applet.c:2641
 msgid "Networking disabled"
-msgstr ""
+msgstr "ქსელი გამორთულია"
 
 #. 'Enable Networking' item
 #: src/applet.c:1783
 msgid "Enable _Networking"
-msgstr ""
+msgstr "_ქსელის ჩართვა"
 
 #. 'Enable Wi-Fi' item
 #: src/applet.c:1792
 msgid "Enable _Wi-Fi"
-msgstr ""
+msgstr "Wi-Fi-ის ჩართვა"
 
 #. 'Enable Mobile Broadband' item
 #: src/applet.c:1801
@@ -961,7 +968,7 @@ msgstr ""
 #. 'Edit Connections...' item
 #: src/applet.c:1833
 msgid "Edit Connections…"
-msgstr ""
+msgstr "შეერთების ჩასწორება…"
 
 #: src/applet.c:1847
 msgid "_About"
@@ -1049,7 +1056,7 @@ msgstr "დამატება"
 #: src/connection-editor/ce-page-ip6.ui:199
 #: src/connection-editor/ce-page-team.ui:262
 #: src/connection-editor/ce-page-wireguard.ui:617
-#: src/connection-editor/connection-helpers.c:748
+#: src/connection-editor/connection-helpers.c:796
 #: src/connection-editor/nm-connection-list.ui:101
 msgid "_Delete"
 msgstr "_წაშლა"
@@ -1817,7 +1824,7 @@ msgstr "მოწყობილობის სახელი"
 
 #: src/connection-editor/ce-page-ip-tunnel.ui:85
 msgid "Parent device"
-msgstr ""
+msgstr "მშობელი მოწყობილობა"
 
 #: src/connection-editor/ce-page-ip-tunnel.ui:115
 msgid "Mode"
@@ -1880,19 +1887,19 @@ msgstr ""
 
 #: src/connection-editor/ce-page-ip4.ui:228
 msgid "D_HCP client ID"
-msgstr ""
+msgstr "D_HCP კლიენტის ID"
 
 #: src/connection-editor/ce-page-ip4.ui:242
 #: src/connection-editor/ce-page-ip6.ui:249
 #: src/connection-editor/page-ip4.c:359 src/connection-editor/page-ip6.c:348
 msgid "S_earch domains"
-msgstr ""
+msgstr "_საძებნი დომენები"
 
 #: src/connection-editor/ce-page-ip4.ui:256
 #: src/connection-editor/ce-page-ip6.ui:263
 #: src/connection-editor/page-ip4.c:350 src/connection-editor/page-ip6.c:339
 msgid "DNS ser_vers"
-msgstr ""
+msgstr "DNS _სერვერები"
 
 #: src/connection-editor/ce-page-ip4.ui:270
 msgid ""
@@ -1913,7 +1920,7 @@ msgstr ""
 #: src/connection-editor/ce-page-ip4.ui:333
 #: src/connection-editor/ce-page-ip6.ui:405
 msgid "_Routes…"
-msgstr ""
+msgstr "_რაუტები…"
 
 #. TRANSLATORS: Default zone set for firewall, when no zone is selected
 #: src/connection-editor/ce-page-ip6.ui:35
@@ -1933,7 +1940,7 @@ msgstr "ჩართულია (პრიორიტეტი გარე �
 
 #: src/connection-editor/ce-page-ip6.ui:44
 msgid "Enabled (prefer temporary address)"
-msgstr ""
+msgstr "ჩართულია (პრიორიტეტი დროებით მისამართზე)"
 
 #: src/connection-editor/ce-page-ip6.ui:55
 msgid "EUI64"
@@ -1952,7 +1959,7 @@ msgstr ""
 
 #: src/connection-editor/ce-page-ip6.ui:290
 msgid "IPv6 _privacy extensions"
-msgstr ""
+msgstr "IPv6 _კონფიდენციალობის გაფართოებები"
 
 #: src/connection-editor/ce-page-ip6.ui:304
 msgid ""
@@ -1966,7 +1973,7 @@ msgstr ""
 
 #: src/connection-editor/ce-page-ip6.ui:323
 msgid "IPv6 address _generation mode"
-msgstr ""
+msgstr "IPv6 _მისამართის გენერაციის რეჟიმი"
 
 #: src/connection-editor/ce-page-ip6.ui:360
 msgid "Require IPv_6 addressing for this connection to complete"
@@ -1993,11 +2000,11 @@ msgstr "შემოწმება"
 
 #: src/connection-editor/ce-page-macsec.ui:38
 msgid "Strict"
-msgstr ""
+msgstr "მკაცრი"
 
 #: src/connection-editor/ce-page-macsec.ui:58
 msgid "_Device name"
-msgstr ""
+msgstr "_მოწყობილობის სახელი"
 
 #: src/connection-editor/ce-page-macsec.ui:71
 msgid "The name of the MACsec device."
@@ -2097,7 +2104,7 @@ msgstr "_APN"
 
 #: src/connection-editor/ce-page-mobile.ui:179
 msgid "N_etwork ID"
-msgstr ""
+msgstr "_ქსელის ID"
 
 #: src/connection-editor/ce-page-mobile.ui:221
 msgid "Change…"
@@ -2121,11 +2128,11 @@ msgstr "ავთენტიკაცია"
 
 #: src/connection-editor/ce-page-ppp.ui:53
 msgid "Allowed methods"
-msgstr ""
+msgstr "დაშვებული მეთოდები"
 
 #: src/connection-editor/ce-page-ppp.ui:89
 msgid "Configure _Methods…"
-msgstr ""
+msgstr "მეთოდების _მორგება…"
 
 #: src/connection-editor/ce-page-ppp.ui:132
 msgid "Compression"
@@ -2145,11 +2152,11 @@ msgstr ""
 
 #: src/connection-editor/ce-page-ppp.ui:225
 msgid "Allow _BSD data compression"
-msgstr ""
+msgstr "_BSD მონაცემების შეკუმშვა"
 
 #: src/connection-editor/ce-page-ppp.ui:240
 msgid "Allow _Deflate data compression"
-msgstr ""
+msgstr "Deflate მონაცემების შეკუმშვა"
 
 #: src/connection-editor/ce-page-ppp.ui:255
 msgid "Use TCP _header compression"
@@ -2166,7 +2173,7 @@ msgstr ""
 #: src/connection-editor/ce-page-proxy.ui:23
 #: src/connection-editor/ce-page-team.ui:460
 msgid "None"
-msgstr ""
+msgstr "არაფერი"
 
 #: src/connection-editor/ce-page-proxy.ui:34
 msgid "For browser only"
@@ -2199,7 +2206,7 @@ msgstr "მეთოდი"
 #: src/connection-editor/ce-page-team-port.ui:47
 #: src/connection-editor/ce-page-team.ui:401
 msgid "Ad_vanced…"
-msgstr ""
+msgstr "_დამატებით…"
 
 #: src/connection-editor/ce-page-team-port.ui:108
 msgid "Set by master"
@@ -2208,7 +2215,7 @@ msgstr ""
 #: src/connection-editor/ce-page-team-port.ui:112
 #: src/connection-editor/ce-page-team.ui:85
 msgid "Ethernet port state"
-msgstr ""
+msgstr "Ethernet პორტის მდგომარეობა"
 
 #: src/connection-editor/ce-page-team-port.ui:116
 #: src/connection-editor/ce-page-team.ui:89
@@ -2223,11 +2230,11 @@ msgstr "NDP (IPv6)"
 #: src/connection-editor/ce-page-team-port.ui:151
 #: src/connection-editor/ce-page-team.ui:527
 msgid "Team Advanced Options"
-msgstr ""
+msgstr "Team -ის დამატებითი პარამეტრები"
 
 #: src/connection-editor/ce-page-team-port.ui:225
 msgid "_Queue ID"
-msgstr ""
+msgstr "_რიგის ID"
 
 #: src/connection-editor/ce-page-team-port.ui:239
 #: src/connection-editor/ce-page-team.ui:663
@@ -2246,7 +2253,7 @@ msgstr ""
 
 #: src/connection-editor/ce-page-team-port.ui:271
 msgid "_Port priority"
-msgstr ""
+msgstr "_პორტის პრიორიტეტი"
 
 #: src/connection-editor/ce-page-team-port.ui:284
 #: src/connection-editor/ce-page-team.ui:713
@@ -2649,7 +2656,7 @@ msgstr ""
 
 #: src/connection-editor/ce-page-team.ui:1120
 msgid "Runner"
-msgstr ""
+msgstr "გამშვები"
 
 #: src/connection-editor/ce-page-vlan.ui:28
 msgid "_Parent interface"
@@ -3065,61 +3072,66 @@ msgid "WireGuard"
 msgstr "WireGuard"
 
 #: src/connection-editor/connection-helpers.c:112
-#: src/connection-editor/connection-helpers.c:374
+#: src/connection-editor/connection-helpers.c:422
 #: src/connection-editor/page-vpn.c:92
 msgid "VPN"
 msgstr "VPN"
 
-#: src/connection-editor/connection-helpers.c:192
+#: src/connection-editor/connection-helpers.c:202
+#, c-format
+msgid "VPN plugin “%s” not found"
+msgstr ""
+
+#: src/connection-editor/connection-helpers.c:227
 msgid "No VPN service type."
 msgstr ""
 
-#: src/connection-editor/connection-helpers.c:197
+#: src/connection-editor/connection-helpers.c:241
 msgid "The VPN plugin failed to import the VPN connection correctly: "
 msgstr ""
 
-#: src/connection-editor/connection-helpers.c:281
+#: src/connection-editor/connection-helpers.c:329
 #: src/connection-editor/page-proxy.c:104
 #: src/connection-editor/page-team-port.c:189
 #: src/connection-editor/page-team.c:327
 msgid "Select file to import"
 msgstr "აირჩიეთ შემოსატანი ფაილი"
 
-#: src/connection-editor/connection-helpers.c:285
+#: src/connection-editor/connection-helpers.c:333
 #: src/connection-editor/page-proxy.c:108
 #: src/connection-editor/page-team-port.c:193
 #: src/connection-editor/page-team.c:331
 msgid "_Open"
 msgstr "_გახსნა"
 
-#: src/connection-editor/connection-helpers.c:316
+#: src/connection-editor/connection-helpers.c:364
 msgid "Hardware"
 msgstr "აპარატურა"
 
-#: src/connection-editor/connection-helpers.c:343
+#: src/connection-editor/connection-helpers.c:391
 msgid "Virtual"
 msgstr "ვირტუალური"
 
-#: src/connection-editor/connection-helpers.c:492
-#: src/connection-editor/connection-helpers.c:494
+#: src/connection-editor/connection-helpers.c:540
+#: src/connection-editor/connection-helpers.c:542
 msgid "Import a saved VPN configuration…"
 msgstr ""
 
-#: src/connection-editor/connection-helpers.c:524
+#: src/connection-editor/connection-helpers.c:572
 msgid ""
 "The connection editor dialog could not be initialized due to an unknown "
 "error."
 msgstr ""
 
-#: src/connection-editor/connection-helpers.c:533
+#: src/connection-editor/connection-helpers.c:581
 msgid "Could not create new connection"
 msgstr ""
 
-#: src/connection-editor/connection-helpers.c:696
+#: src/connection-editor/connection-helpers.c:744
 msgid "Connection delete failed"
 msgstr ""
 
-#: src/connection-editor/connection-helpers.c:744
+#: src/connection-editor/connection-helpers.c:792
 #, c-format
 msgid "Are you sure you wish to delete the connection %s?"
 msgstr ""
@@ -3162,7 +3174,7 @@ msgstr "პრეფიქსი"
 #: src/connection-editor/nm-connection-editor.c:97
 #, c-format
 msgid "Editing %s"
-msgstr ""
+msgstr "%s-ის ჩასწორება"
 
 #: src/connection-editor/nm-connection-editor.c:101
 msgid "Editing un-named connection"
@@ -3184,7 +3196,7 @@ msgstr ""
 #: src/connection-editor/nm-connection-editor.c:359
 #, c-format
 msgid "Invalid setting %s: %s"
-msgstr ""
+msgstr "არასწორი პარამეტრი %s: %s"
 
 #: src/connection-editor/nm-connection-editor.c:435
 msgid ""
@@ -3352,43 +3364,43 @@ msgstr ""
 msgid "Authenticate to delete the selected connection"
 msgstr ""
 
-#: src/connection-editor/nm-connection-list.c:1053
+#: src/connection-editor/nm-connection-list.c:1051
 msgid "Unrecognized connection type"
 msgstr ""
 
-#: src/connection-editor/nm-connection-list.c:1058
+#: src/connection-editor/nm-connection-list.c:1057
 #, c-format
 msgid "Don’t know how to import “%s” connections"
 msgstr ""
 
-#: src/connection-editor/nm-connection-list.c:1062
+#: src/connection-editor/nm-connection-list.c:1061
 msgid "Error importing connection"
 msgstr ""
 
-#: src/connection-editor/nm-connection-list.c:1069
-#: src/connection-editor/nm-connection-list.c:1084
-#: src/connection-editor/nm-connection-list.c:1087
+#: src/connection-editor/nm-connection-list.c:1077
+#: src/connection-editor/nm-connection-list.c:1092
+#: src/connection-editor/nm-connection-list.c:1095
 msgid "Error creating connection"
 msgstr ""
 
-#: src/connection-editor/nm-connection-list.c:1069
+#: src/connection-editor/nm-connection-list.c:1077
 msgid "Connection type not specified."
 msgstr ""
 
-#: src/connection-editor/nm-connection-list.c:1085
+#: src/connection-editor/nm-connection-list.c:1093
 msgid "No VPN plugins are installed."
 msgstr ""
 
-#: src/connection-editor/nm-connection-list.c:1088
+#: src/connection-editor/nm-connection-list.c:1096
 #, c-format
 msgid "Don’t know how to create “%s” connections"
 msgstr ""
 
-#: src/connection-editor/nm-connection-list.c:1122
+#: src/connection-editor/nm-connection-list.c:1130
 msgid "Error editing connection"
 msgstr ""
 
-#: src/connection-editor/nm-connection-list.c:1123
+#: src/connection-editor/nm-connection-list.c:1131
 #, c-format
 msgid "Did not find a connection with UUID “%s”"
 msgstr ""
@@ -3854,7 +3866,7 @@ msgstr ""
 
 #: src/connection-editor/page-vpn.c:51
 msgid "unknown failure"
-msgstr ""
+msgstr "უცნობი შეცდომა"
 
 #: src/connection-editor/page-vpn.c:94
 msgid "Could not load VPN user interface."
@@ -3908,7 +3920,7 @@ msgstr "WPA2 პერსონალური"
 #: src/connection-editor/page-wifi-security.c:449
 #: src/connection-editor/page-wifi-security.c:457
 msgid "Enhanced Open"
-msgstr ""
+msgstr "დამატებითი გახსნა"
 
 #: src/connection-editor/page-wifi-security.c:503
 msgid "Could not load Wi-Fi security user interface; missing Wi-Fi setting."
@@ -4149,12 +4161,12 @@ msgstr "როუმინგი"
 #: src/utils/utils.c:160
 #, c-format
 msgid "%s connection"
-msgstr ""
+msgstr "%s შეერთება"
 
 #: src/utils/utils.c:534
 msgid "PEM certificates (*.pem, *.crt, *.cer)"
-msgstr ""
+msgstr "PEM სერტიფიკატები (*.pem, *.crt, *.cer)"
 
 #: src/utils/utils.c:546
 msgid "DER, PEM, or PKCS#12 private keys (*.der, *.pem, *.p12, *.key)"
-msgstr ""
+msgstr "DER, PEM, ან PKCS#12 პირადი გასაღებები (*.der, *.pem, *.p12, *.key)"

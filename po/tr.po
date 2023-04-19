@@ -9,15 +9,15 @@
 # Yunusemre Şentürk <yunusemre.senturk@pardus.org.tr>, 2018.
 # Serdar Sağlam <teknomobil@yandex.com>, 2019.
 # Muhammet Kara <muhammetk@gmail.com>, 2011-2021.
-# Emin Tufan Çetin <etcetin@gmail.com>, 2018, 2019, 2020, 2022.
+# Emin Tufan Çetin <etcetin@gmail.com>, 2018, 2019, 2020, 2022, 2023.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: network-manager-applet master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/network-manager-"
 "applet/\n"
-"POT-Creation-Date: 2022-11-07 08:48+0100\n"
-"PO-Revision-Date: 2022-09-02 13:57+0300\n"
+"POT-Creation-Date: 2023-04-16 21:44+0200\n"
+"PO-Revision-Date: 2023-03-07 00:21+0300\n"
 "Last-Translator: Sabri Ünal <libreajans@gmail.com>\n"
 "Language-Team: Turkish <gnometurk@gnome.org>\n"
 "Language: tr\n"
@@ -74,68 +74,76 @@ msgid "Manage and change your network connection settings"
 msgstr "Ağ bağlantı ayarlarını yönet ve değiştir"
 
 #: org.gnome.nm-applet.gschema.xml.in:6
-#, fuzzy
 msgid "Disable connected notifications"
-msgstr "_Bildirimleri Etkinleştir"
+msgstr "Bağlanıldı bildirimlerini devre dışı bırak"
 
 #: org.gnome.nm-applet.gschema.xml.in:7
 msgid "Set this to true to disable notifications when connecting to a network."
 msgstr ""
+"Bir ağa bağlanıldığında bildirim almamak için bunu doğru olarak belirleyin."
 
 #: org.gnome.nm-applet.gschema.xml.in:11
-#, fuzzy
 msgid "Disable disconnected notifications"
-msgstr "Aygıt bağlantısı kesilemedi"
+msgstr "Bağlantı kesildi bildirimlerini devre dışı bırak"
 
 #: org.gnome.nm-applet.gschema.xml.in:12
 msgid ""
 "Set this to true to disable notifications when disconnecting from a network."
 msgstr ""
+"Bir ağdan bağlantı kesildiğinde bildirim almamak için bunu doğru olarak "
+"belirleyin."
 
 #: org.gnome.nm-applet.gschema.xml.in:16
-#, fuzzy
 msgid "Disable VPN notifications"
-msgstr "_Bildirimleri Etkinleştir"
+msgstr "VPN bildirimlerini devre dışı bırak"
 
 #: org.gnome.nm-applet.gschema.xml.in:17
 msgid ""
 "Set this to true to disable notifications when connecting to or "
 "disconnecting from a VPN."
 msgstr ""
+"Bir VPN ile bağlantı kurulduğunda veya kesildiğinde bildirim almamak için "
+"bunu doğru olarak belirleyin."
 
 #: org.gnome.nm-applet.gschema.xml.in:21
 msgid "Suppress networks available notifications"
-msgstr ""
+msgstr "Kullanılabilir ağ bildirimlerini gizle"
 
 #: org.gnome.nm-applet.gschema.xml.in:22
 msgid ""
 "Set this to true to disable notifications when Wi-Fi networks are available."
 msgstr ""
+"Kullanılabilir Wi-Fi ağı bildirimlerini almamak için bunu doğru olarak "
+"belirleyin."
 
 #: org.gnome.nm-applet.gschema.xml.in:26
 msgid "Stamp"
-msgstr ""
+msgstr "Damga"
 
 #: org.gnome.nm-applet.gschema.xml.in:27
 msgid "Used to determine whether settings should be migrated to a new version."
-msgstr ""
+msgstr "Ayarların yeni sürüme taşınıp taşınmayacağını saptamada kullanılır."
 
 #: org.gnome.nm-applet.gschema.xml.in:31
 msgid "Disable WiFi Create"
-msgstr ""
+msgstr "WiFi Oluşturmayı devre dışı bırak"
 
 #: org.gnome.nm-applet.gschema.xml.in:32
 msgid ""
 "Set to true to disable creation of adhoc networks when using the applet."
 msgstr ""
+"Programcığı kullanırken anlık ağların oluşturulmasını devre dışı bırakmak "
+"için true (doğru) olarak belirleyin."
 
 #: org.gnome.nm-applet.gschema.xml.in:36
 msgid "Show the applet in notification area"
-msgstr ""
+msgstr "Programcığı bildirim alanında göster"
 
 #: org.gnome.nm-applet.gschema.xml.in:37
 msgid "Set to FALSE to disable displaying the applet in the notification area."
 msgstr ""
+"Programcığın bildirim alanında gösterilmesini devre dışı bırmak için FALSE "
+"(yanlış) olarak belirleyin."
 
 #: shared/nm-utils/nm-shared-utils.c:793
 #, c-format
@@ -186,8 +194,8 @@ msgstr "802.1X kimlik doğrulaması"
 #: src/connection-editor/ce-page-dcb.ui:1019
 #: src/connection-editor/ce-page-wireguard.ui:41
 #: src/connection-editor/ce-ppp-auth-methods.ui:28
-#: src/connection-editor/connection-helpers.c:284
-#: src/connection-editor/connection-helpers.c:747
+#: src/connection-editor/connection-helpers.c:332
+#: src/connection-editor/connection-helpers.c:795
 #: src/connection-editor/nm-connection-editor.ui:197
 #: src/connection-editor/page-bluetooth.c:293
 #: src/connection-editor/page-mobile.c:530
@@ -792,7 +800,7 @@ msgstr "Bağlantı VPN kullanıcı arayüzüne yazılamadı: tamamlanmamış yaz
 
 #: src/applet.c:411
 msgid "Failed to add/activate connection"
-msgstr "Bağlantı ekleme/etkinleştirme başarısız oldu"
+msgstr "Bağlantı eklenemedi/etkinleştirilemedi"
 
 #: src/applet.c:462
 msgid "Device disconnect failed"
@@ -1113,7 +1121,7 @@ msgstr "_Ekle"
 #: src/connection-editor/ce-page-ip6.ui:199
 #: src/connection-editor/ce-page-team.ui:262
 #: src/connection-editor/ce-page-wireguard.ui:617
-#: src/connection-editor/connection-helpers.c:748
+#: src/connection-editor/connection-helpers.c:796
 #: src/connection-editor/nm-connection-list.ui:101
 msgid "_Delete"
 msgstr "_Sil"
@@ -1606,7 +1614,7 @@ msgstr "_Kullanıcı adı"
 
 #: src/connection-editor/ce-page-dsl.ui:33
 msgid "Username used to authenticate with the PPPoE service."
-msgstr "PPPoE hizmetinde yetkilendirme için kullanılacak kullanıcı adı."
+msgstr "PPPoE hizmetinde kimlik doğrulama için kullanılacak kullanıcı adı."
 
 #: src/connection-editor/ce-page-dsl.ui:46
 msgid ""
@@ -1626,7 +1634,7 @@ msgstr "Parola_yı göster"
 
 #: src/connection-editor/ce-page-dsl.ui:89
 msgid "Password used to authenticate with the PPPoE service."
-msgstr "PPPoE hizmetinde yetkilendirme için kullanılacak parola."
+msgstr "PPPoE hizmetinde kimlik doğrulama için kullanılacak parola."
 
 #: src/connection-editor/ce-page-dsl.ui:102
 #: src/connection-editor/ce-page-mobile.ui:76
@@ -3284,62 +3292,67 @@ msgid "WireGuard"
 msgstr "WireGuard"
 
 #: src/connection-editor/connection-helpers.c:112
-#: src/connection-editor/connection-helpers.c:374
+#: src/connection-editor/connection-helpers.c:422
 #: src/connection-editor/page-vpn.c:92
 msgid "VPN"
 msgstr "VPN"
 
-#: src/connection-editor/connection-helpers.c:192
+#: src/connection-editor/connection-helpers.c:202
+#, c-format
+msgid "VPN plugin “%s” not found"
+msgstr "“%s” VPN eklentisi bulunamadı"
+
+#: src/connection-editor/connection-helpers.c:227
 msgid "No VPN service type."
 msgstr "VPN hizmet türü yok."
 
-#: src/connection-editor/connection-helpers.c:197
+#: src/connection-editor/connection-helpers.c:241
 msgid "The VPN plugin failed to import the VPN connection correctly: "
-msgstr "VPN eklentisi, VPN bağlantısını düzgün olarak içeri aktaramadı: "
+msgstr "VPN eklentisi, VPN bağlantısını düzgün olarak içe aktaramadı: "
 
-#: src/connection-editor/connection-helpers.c:281
+#: src/connection-editor/connection-helpers.c:329
 #: src/connection-editor/page-proxy.c:104
 #: src/connection-editor/page-team-port.c:189
 #: src/connection-editor/page-team.c:327
 msgid "Select file to import"
-msgstr "İçeri aktarılacak dosyayı seç"
+msgstr "İçe aktarılacak dosyayı seç"
 
-#: src/connection-editor/connection-helpers.c:285
+#: src/connection-editor/connection-helpers.c:333
 #: src/connection-editor/page-proxy.c:108
 #: src/connection-editor/page-team-port.c:193
 #: src/connection-editor/page-team.c:331
 msgid "_Open"
 msgstr "_Aç"
 
-#: src/connection-editor/connection-helpers.c:316
+#: src/connection-editor/connection-helpers.c:364
 msgid "Hardware"
 msgstr "Donanım"
 
-#: src/connection-editor/connection-helpers.c:343
+#: src/connection-editor/connection-helpers.c:391
 msgid "Virtual"
 msgstr "Sanal"
 
-#: src/connection-editor/connection-helpers.c:492
-#: src/connection-editor/connection-helpers.c:494
+#: src/connection-editor/connection-helpers.c:540
+#: src/connection-editor/connection-helpers.c:542
 msgid "Import a saved VPN configuration…"
 msgstr "Kayıtlı bir VPN yapılandırmasını içeri aktar…"
 
-#: src/connection-editor/connection-helpers.c:524
+#: src/connection-editor/connection-helpers.c:572
 msgid ""
 "The connection editor dialog could not be initialized due to an unknown "
 "error."
 msgstr ""
 "Bağlantı düzenleme diyaloğu bilinmeyen bir hata nedeniyle başlatılamadı."
 
-#: src/connection-editor/connection-helpers.c:533
+#: src/connection-editor/connection-helpers.c:581
 msgid "Could not create new connection"
 msgstr "Yeni bağlantı oluşturulamadı"
 
-#: src/connection-editor/connection-helpers.c:696
-msgid "Connection delete failed"
-msgstr "Bağlantı silme işlemi başarısız"
-
 #: src/connection-editor/connection-helpers.c:744
+msgid "Connection delete failed"
+msgstr "Bağlantı silinemedi"
+
+#: src/connection-editor/connection-helpers.c:792
 #, c-format
 msgid "Are you sure you wish to delete the connection %s?"
 msgstr "%s bağlantısını silmek istediğinizden emin misiniz?"
@@ -3426,8 +3439,8 @@ msgstr "Bu bağlantı üzerinde yapılan tüm değişiklikleri kaydet."
 #: src/connection-editor/nm-connection-editor.c:570
 msgid "Authenticate to save this connection for all users of this machine."
 msgstr ""
-"Bu bağlantıyı bu makinedeki tüm kullanıcılar için kaydedebilmek için yetki "
-"al."
+"Bu bağlantıyı bu makinedeki tüm kullanıcılar için kaydedebilmek için kimlik "
+"doğrula."
 
 #: src/connection-editor/nm-connection-editor.c:586
 msgid "Could not create connection"
@@ -3455,7 +3468,7 @@ msgstr "Düzenleyici başlatılırken hata"
 
 #: src/connection-editor/nm-connection-editor.c:1176
 msgid "Connection add failed"
-msgstr "Bağlantı ekleme başarısız"
+msgstr "Bağlantı eklenemedi"
 
 #: src/connection-editor/nm-connection-editor.ui:35
 msgid "Fix"
@@ -3466,7 +3479,7 @@ msgid ""
 "Security labels may prevent some files from being used with certificate "
 "authentication."
 msgstr ""
-"Güvenlik etiketleri bazı dosyaların sertifika yetkilendirmesinde "
+"Güvenlik etiketleri bazı dosyaların sertifika kimlik doğrulamasıyla "
 "kullanılmasını önleyebilir."
 
 #: src/connection-editor/nm-connection-editor.ui:110
@@ -3490,7 +3503,7 @@ msgid ""
 "The following files are not labelled for use with certificate "
 "authentication. Do you wish to adjust the labels?"
 msgstr ""
-"Takip eden dosyalar sertifika yetkilendirmesinde kullanmak için "
+"Takip eden dosyalar sertifika kimlik doğrulamasıyla kullanmak için "
 "etiketlenmemiş. Etiketleri düzeltmek ister misiniz?"
 
 #: src/connection-editor/nm-connection-editor.ui:347
@@ -3567,7 +3580,7 @@ msgstr "Seçili bağlantıyı düzenle"
 
 #: src/connection-editor/nm-connection-list.c:837
 msgid "Authenticate to edit the selected connection"
-msgstr "Seçili bağlantıyı düzenlemek için yetki al"
+msgstr "Seçili bağlantıyı düzenlemek için kimlik doğrula"
 
 #: src/connection-editor/nm-connection-list.c:842
 msgid "Delete the selected connection"
@@ -3575,45 +3588,45 @@ msgstr "Seçili bağlantıyı sil"
 
 #: src/connection-editor/nm-connection-list.c:843
 msgid "Authenticate to delete the selected connection"
-msgstr "Seçili bağlantıyı silmek için yetki al"
+msgstr "Seçili bağlantıyı silmek için kimlik doğrula"
 
-#: src/connection-editor/nm-connection-list.c:1053
+#: src/connection-editor/nm-connection-list.c:1051
 msgid "Unrecognized connection type"
 msgstr "Tanınmayan bağlantı türü"
 
-#: src/connection-editor/nm-connection-list.c:1058
+#: src/connection-editor/nm-connection-list.c:1057
 #, c-format
 msgid "Don’t know how to import “%s” connections"
 msgstr "“%s” bağlantılarının nasıl içe aktarılacağı bilinmiyor"
 
-#: src/connection-editor/nm-connection-list.c:1062
+#: src/connection-editor/nm-connection-list.c:1061
 msgid "Error importing connection"
 msgstr "Bağlantı içe aktarılırken hata oluştu"
 
-#: src/connection-editor/nm-connection-list.c:1069
-#: src/connection-editor/nm-connection-list.c:1084
-#: src/connection-editor/nm-connection-list.c:1087
+#: src/connection-editor/nm-connection-list.c:1077
+#: src/connection-editor/nm-connection-list.c:1092
+#: src/connection-editor/nm-connection-list.c:1095
 msgid "Error creating connection"
 msgstr "Bağlantı oluşturulurken hata oluştu"
 
-#: src/connection-editor/nm-connection-list.c:1069
+#: src/connection-editor/nm-connection-list.c:1077
 msgid "Connection type not specified."
 msgstr "Bağlantı türü belirtilmedi."
 
-#: src/connection-editor/nm-connection-list.c:1085
+#: src/connection-editor/nm-connection-list.c:1093
 msgid "No VPN plugins are installed."
 msgstr "Kurulu VPN eklentisi yok."
 
-#: src/connection-editor/nm-connection-list.c:1088
+#: src/connection-editor/nm-connection-list.c:1096
 #, c-format
 msgid "Don’t know how to create “%s” connections"
 msgstr "“%s” bağlantılarının nasıl oluşturulacağı bilinmiyor"
 
-#: src/connection-editor/nm-connection-list.c:1122
+#: src/connection-editor/nm-connection-list.c:1130
 msgid "Error editing connection"
 msgstr "Bağlantı düzenlenirken hata oluştu"
 
-#: src/connection-editor/nm-connection-list.c:1123
+#: src/connection-editor/nm-connection-list.c:1131
 #, c-format
 msgid "Did not find a connection with UUID “%s”"
 msgstr "“%s” UUID ile bağlantı bulunamadı"
@@ -3732,7 +3745,7 @@ msgid ""
 "its interface name or permanent MAC or both. Examples: “em1”, "
 "“3C:97:0E:42:1A:19”, “em1 (3C:97:0E:42:1A:19)”"
 msgstr ""
-"Bu seçenek bu bağlantıyı ağ aygıtına ya belirtilen arayüz adı ya kalıcı MAC "
+"Bu seçenek bu bağlantıyı, ağ aygıtına ya belirtilen arayüz adı ya kalıcı MAC "
 "adresi ya da her ikisi ile bağlar. Örnekler: “em1”, “3C:97:0E:42:1A:19”, "
 "“em1 (3C:97:0E:42:1A:19)”"
 
@@ -4020,7 +4033,7 @@ msgstr "yok"
 #: src/connection-editor/page-ppp.c:182
 #, c-format
 msgid "Editing PPP authentication methods for %s"
-msgstr "%s için PPP yetkilendirme yöntemleri düzenleniyor"
+msgstr "%s için PPP kimlik doğrulama yöntemleri düzenleniyor"
 
 #: src/connection-editor/page-ppp.c:264
 msgid "PPP Settings"

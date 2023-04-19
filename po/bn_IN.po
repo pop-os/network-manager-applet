@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/network-manager-"
 "applet/\n"
-"POT-Creation-Date: 2022-11-07 08:48+0100\n"
+"POT-Creation-Date: 2023-04-16 21:44+0200\n"
 "PO-Revision-Date: 2014-12-02 01:55-0500\n"
 "Last-Translator: \n"
 "Language-Team: Bengali (India) <anubad@lists.ankur.org.in>\n"
@@ -195,8 +195,8 @@ msgstr "তারযুক্ত 802.1X অনুমোদন ব্যবস্
 #: src/connection-editor/ce-page-dcb.ui:1019
 #: src/connection-editor/ce-page-wireguard.ui:41
 #: src/connection-editor/ce-ppp-auth-methods.ui:28
-#: src/connection-editor/connection-helpers.c:284
-#: src/connection-editor/connection-helpers.c:747
+#: src/connection-editor/connection-helpers.c:332
+#: src/connection-editor/connection-helpers.c:795
 #: src/connection-editor/nm-connection-editor.ui:197
 #: src/connection-editor/page-bluetooth.c:293
 #: src/connection-editor/page-mobile.c:530
@@ -1175,7 +1175,7 @@ msgstr ""
 #: src/connection-editor/ce-page-ip6.ui:199
 #: src/connection-editor/ce-page-team.ui:262
 #: src/connection-editor/ce-page-wireguard.ui:617
-#: src/connection-editor/connection-helpers.c:748
+#: src/connection-editor/connection-helpers.c:796
 #: src/connection-editor/nm-connection-list.ui:101
 msgid "_Delete"
 msgstr "মুছে ফেলুন (_D)"
@@ -3338,16 +3338,21 @@ msgid "WireGuard"
 msgstr "তারযুক্ত"
 
 #: src/connection-editor/connection-helpers.c:112
-#: src/connection-editor/connection-helpers.c:374
+#: src/connection-editor/connection-helpers.c:422
 #: src/connection-editor/page-vpn.c:92
 msgid "VPN"
 msgstr "VPN"
 
-#: src/connection-editor/connection-helpers.c:192
+#: src/connection-editor/connection-helpers.c:202
+#, c-format
+msgid "VPN plugin “%s” not found"
+msgstr ""
+
+#: src/connection-editor/connection-helpers.c:227
 msgid "No VPN service type."
 msgstr ""
 
-#: src/connection-editor/connection-helpers.c:197
+#: src/connection-editor/connection-helpers.c:241
 #, fuzzy
 msgid "The VPN plugin failed to import the VPN connection correctly: "
 msgstr ""
@@ -3355,49 +3360,49 @@ msgstr ""
 "\n"
 "ত্রুটি: কোনো VPN পরিসেবার ধরন উপলব্ধ নয়।"
 
-#: src/connection-editor/connection-helpers.c:281
+#: src/connection-editor/connection-helpers.c:329
 #: src/connection-editor/page-proxy.c:104
 #: src/connection-editor/page-team-port.c:189
 #: src/connection-editor/page-team.c:327
 msgid "Select file to import"
 msgstr "ইম্পোর্ট করার উদ্দেশ্যে ফাইল নির্বাচন করুন"
 
-#: src/connection-editor/connection-helpers.c:285
+#: src/connection-editor/connection-helpers.c:333
 #: src/connection-editor/page-proxy.c:108
 #: src/connection-editor/page-team-port.c:193
 #: src/connection-editor/page-team.c:331
 msgid "_Open"
 msgstr ""
 
-#: src/connection-editor/connection-helpers.c:316
+#: src/connection-editor/connection-helpers.c:364
 msgid "Hardware"
 msgstr "হার্ডওয়্যার"
 
-#: src/connection-editor/connection-helpers.c:343
+#: src/connection-editor/connection-helpers.c:391
 msgid "Virtual"
 msgstr "ভার্চুয়াল"
 
-#: src/connection-editor/connection-helpers.c:492
-#: src/connection-editor/connection-helpers.c:494
+#: src/connection-editor/connection-helpers.c:540
+#: src/connection-editor/connection-helpers.c:542
 #, fuzzy
 msgid "Import a saved VPN configuration…"
 msgstr "একটি সংরক্ষিত VPN কনফিগারেশন অামদানি করুন..."
 
-#: src/connection-editor/connection-helpers.c:524
+#: src/connection-editor/connection-helpers.c:572
 msgid ""
 "The connection editor dialog could not be initialized due to an unknown "
 "error."
 msgstr "অজানা কারণে সংযোগ সম্পাদনা ব্যবস্থার ডায়লগ আরম্ভ করা যায়নি।"
 
-#: src/connection-editor/connection-helpers.c:533
+#: src/connection-editor/connection-helpers.c:581
 msgid "Could not create new connection"
 msgstr "নতুন সংযোগ নির্মাণ করা সম্ভব হয়নি"
 
-#: src/connection-editor/connection-helpers.c:696
+#: src/connection-editor/connection-helpers.c:744
 msgid "Connection delete failed"
 msgstr "সংযোগ মুছে ফেলতে ব্যর্থ"
 
-#: src/connection-editor/connection-helpers.c:744
+#: src/connection-editor/connection-helpers.c:792
 #, c-format
 msgid "Are you sure you wish to delete the connection %s?"
 msgstr "আপনি কি নিশ্চিতরূপে %s সংযোগটি মুছে ফেলতে ইচ্ছুক?"
@@ -3641,48 +3646,48 @@ msgstr "নির্বাচিত সংযোগটি মুছে ফেল
 msgid "Authenticate to delete the selected connection"
 msgstr "নির্বাচিত সংযোগটি মুছে ফেলার পূর্বে অনুমোদিত হওয়া প্রয়োজন"
 
-#: src/connection-editor/nm-connection-list.c:1053
+#: src/connection-editor/nm-connection-list.c:1051
 #, fuzzy
 msgid "Unrecognized connection type"
 msgstr "মোবাইল ব্রড-ব্যান্ড সংযোগের ধরন সমর্থিত নয়।"
 
-#: src/connection-editor/nm-connection-list.c:1058
+#: src/connection-editor/nm-connection-list.c:1057
 #, fuzzy, c-format
 msgid "Don’t know how to import “%s” connections"
 msgstr "সংযোগ তৈরি করা সম্ভব হয়নি"
 
-#: src/connection-editor/nm-connection-list.c:1062
+#: src/connection-editor/nm-connection-list.c:1061
 #, fuzzy
 msgid "Error importing connection"
 msgstr "সংযোগ সংরক্ষণ করতে সমস্যা"
 
-#: src/connection-editor/nm-connection-list.c:1069
-#: src/connection-editor/nm-connection-list.c:1084
-#: src/connection-editor/nm-connection-list.c:1087
+#: src/connection-editor/nm-connection-list.c:1077
+#: src/connection-editor/nm-connection-list.c:1092
+#: src/connection-editor/nm-connection-list.c:1095
 #, fuzzy
 msgid "Error creating connection"
 msgstr "সংযোগ সংরক্ষণ করতে সমস্যা"
 
-#: src/connection-editor/nm-connection-list.c:1069
+#: src/connection-editor/nm-connection-list.c:1077
 #, fuzzy
 msgid "Connection type not specified."
 msgstr "সংযোগ অাপডেট ব্যর্থ হয়েছে"
 
-#: src/connection-editor/nm-connection-list.c:1085
+#: src/connection-editor/nm-connection-list.c:1093
 msgid "No VPN plugins are installed."
 msgstr ""
 
-#: src/connection-editor/nm-connection-list.c:1088
+#: src/connection-editor/nm-connection-list.c:1096
 #, fuzzy, c-format
 msgid "Don’t know how to create “%s” connections"
 msgstr "সংযোগ তৈরি করা সম্ভব হয়নি"
 
-#: src/connection-editor/nm-connection-list.c:1122
+#: src/connection-editor/nm-connection-list.c:1130
 #, fuzzy
 msgid "Error editing connection"
 msgstr "সংযোগ সংরক্ষণ করতে সমস্যা"
 
-#: src/connection-editor/nm-connection-list.c:1123
+#: src/connection-editor/nm-connection-list.c:1131
 #, c-format
 msgid "Did not find a connection with UUID “%s”"
 msgstr ""
