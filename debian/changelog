@@ -1,3 +1,10 @@
+network-manager-applet (1.32.0-3) unstable; urgency=medium
+
+  * c-e: fix crash in import_vpn_from_file_cb() when importing VPN profiles
+    (Closes: #1042712)
+
+ -- Michael Biebl <biebl@debian.org>  Sun, 30 Jul 2023 23:19:50 +0200
+
 network-manager-applet (1.32.0-2) unstable; urgency=medium
 
   * Upload to unstable
