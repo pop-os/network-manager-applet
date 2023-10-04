@@ -8,9 +8,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: network-manager-applet master\n"
-"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/network-manager-"
-"applet/\n"
-"POT-Creation-Date: 2023-04-16 21:44+0200\n"
+"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/network-manager-applet/"
+"issues\n"
+"POT-Creation-Date: 2023-10-04 18:29+0200\n"
 "PO-Revision-Date: 2023-04-09 10:00+0100\n"
 "Last-Translator: Asier Sarasua Garmendia <asiersarasua@ni.eus>\n"
 "Language-Team: Basque <librezale@librezale.eus>\n"
@@ -20,9 +20,9 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: nm-applet.desktop.in:3 src/applet-dialogs.c:724 src/applet.c:3166
-msgid "Network"
-msgstr "Sarea"
+#: nm-applet.desktop.in:3 src/applet.c:3280
+msgid "NetworkManager Applet"
+msgstr "NetworkManager miniaplikazioa"
 
 #: nm-applet.desktop.in:4
 msgid "Manage your network connections"
@@ -129,10 +129,20 @@ msgstr ""
 "miniaplikazioa erabiltzean."
 
 #: org.gnome.nm-applet.gschema.xml.in:36
+msgid "Suppress broadband device unlock prompt"
+msgstr ""
+
+#: org.gnome.nm-applet.gschema.xml.in:37
+msgid ""
+"Set to true to not prompt for PIN/PUK when providing it is required to "
+"unlock a broadband device."
+msgstr ""
+
+#: org.gnome.nm-applet.gschema.xml.in:41
 msgid "Show the applet in notification area"
 msgstr "Erakutsi miniaplikazioa jakinarazpenen arean"
 
-#: org.gnome.nm-applet.gschema.xml.in:37
+#: org.gnome.nm-applet.gschema.xml.in:42
 msgid "Set to FALSE to disable displaying the applet in the notification area."
 msgstr ""
 "Ezarri FALSE (faltsua) gisa miniaplikazioa jakinarazpenen arean erakustea "
@@ -193,7 +203,7 @@ msgstr "802.1X autentifikazioa"
 #: src/connection-editor/page-mobile.c:530
 #: src/connection-editor/page-proxy.c:107
 #: src/connection-editor/page-team-port.c:192
-#: src/connection-editor/page-team.c:330
+#: src/connection-editor/page-team.c:329
 #: src/connection-editor/vpn-helpers.c:198 src/gsm-unlock.ui:28
 #: src/mobile-helpers.c:451
 msgid "_Cancel"
@@ -232,45 +242,45 @@ msgstr "Okerreko PIN kodea. Jar zaitez hornitzailearekin harremanetan."
 msgid "Sending unlock code…"
 msgstr "Desblokeatzeko kodea bidaltzen…"
 
-#: src/applet-device-broadband.c:725 src/applet-dialogs.c:521
+#: src/applet-device-broadband.c:729 src/applet-dialogs.c:521
 #, c-format
 msgid "Mobile Broadband (%s)"
 msgstr "Bandazabal mugikorra (%s)"
 
-#: src/applet-device-broadband.c:727
+#: src/applet-device-broadband.c:731
 #: src/connection-editor/connection-helpers.c:95
 #: src/connection-editor/page-mobile.c:295
 msgid "Mobile Broadband"
 msgstr "Bandazabal mugikorra"
 
-#: src/applet-device-broadband.c:780 src/applet-device-bt.c:61
+#: src/applet-device-broadband.c:784 src/applet-device-bt.c:61
 #: src/applet-device-ethernet.c:107
 msgid "Available"
 msgstr "Erabilgarri"
 
 #. Default connection item
-#: src/applet-device-broadband.c:793
+#: src/applet-device-broadband.c:797
 msgid "New Mobile Broadband connection…"
 msgstr "Banda zabal mugikorreko konexio berria…"
 
-#: src/applet-device-broadband.c:809 src/applet-device-bt.c:75
+#: src/applet-device-broadband.c:813 src/applet-device-bt.c:75
 #: src/applet-device-ethernet.c:124 src/applet-device-wifi.c:1251
 msgid "Connection Established"
 msgstr "Konektatuta"
 
-#: src/applet-device-broadband.c:810
+#: src/applet-device-broadband.c:814
 msgid "You are now connected to the Mobile Broadband network."
 msgstr "Banda zabal mugikorreko sarera konektatuta."
 
-#: src/applet-device-broadband.c:950 src/applet-device-broadband.c:956
+#: src/applet-device-broadband.c:954 src/applet-device-broadband.c:960
 msgid "Mobile Broadband network."
 msgstr "Banda zabal mugikorreko sarea."
 
-#: src/applet-device-broadband.c:951
+#: src/applet-device-broadband.c:955
 msgid "You are now registered on the home network."
 msgstr "Orain etxeko sarera harpidetuta zaude."
 
-#: src/applet-device-broadband.c:957
+#: src/applet-device-broadband.c:961
 msgid "You are now registered on a roaming network."
 msgstr "Orain sare ibiltarian harpidetuta zaude."
 
@@ -634,6 +644,10 @@ msgstr "IPv6"
 #: src/applet-dialogs.c:717 src/connection-editor/ce-page-wifi.ui:52
 msgid "Hotspot"
 msgstr "Wifigunea"
+
+#: src/applet-dialogs.c:724 src/applet.c:3166
+msgid "Network"
+msgstr "Sarea"
 
 #: src/applet-dialogs.c:735
 msgid "Password"
@@ -1086,10 +1100,6 @@ msgstr "VPN konexioa aktiboa"
 #: src/applet.c:2645
 msgid "No network connection"
 msgstr "Ez dago sareko konexiorik"
-
-#: src/applet.c:3280
-msgid "NetworkManager Applet"
-msgstr "NetworkManager miniaplikazioa"
 
 #: src/connection-editor/ce-ip4-routes.ui:88
 #: src/connection-editor/ce-ip6-routes.ui:88 src/connection-editor/ce-page.h:97
@@ -2359,7 +2369,8 @@ msgid "Ad_vanced…"
 msgstr "Aurreratua…"
 
 #: src/connection-editor/ce-page-team-port.ui:108
-msgid "Set by master"
+#, fuzzy
+msgid "Set by controller"
 msgstr "Master bidez ezarria"
 
 #: src/connection-editor/ce-page-team-port.ui:112
@@ -2804,9 +2815,10 @@ msgid "System priority, value can be 0 – 65535."
 msgstr "Sistemaren lehentasuna, balioa izan daiteke 0-65535."
 
 #: src/connection-editor/ce-page-team.ui:960
+#, fuzzy
 msgid ""
 "Specifies the minimum number of ports that must be active before asserting "
-"carrier in the master interface, value can be 1 – 255."
+"carrier in the controller interface, value can be 1 – 255."
 msgstr ""
 "Interfaze nagusiaren operadorea aldarrikatu aurretik aktibo egon behar den "
 "gutxieneko ataken kopurua zehazten du, balioa izan daiteke 1-255."
@@ -3270,7 +3282,7 @@ msgid "Bond"
 msgstr "Lotu"
 
 #: src/connection-editor/connection-helpers.c:105
-#: src/connection-editor/page-team.c:1014
+#: src/connection-editor/page-team.c:1013
 msgid "Team"
 msgstr "Taldea"
 
@@ -3316,14 +3328,14 @@ msgstr "VPN pluginak huts egin du VPN konexioa ongo inportatzean: "
 #: src/connection-editor/connection-helpers.c:329
 #: src/connection-editor/page-proxy.c:104
 #: src/connection-editor/page-team-port.c:189
-#: src/connection-editor/page-team.c:327
+#: src/connection-editor/page-team.c:326
 msgid "Select file to import"
 msgstr "Hautatu fitxategia inportatzeko"
 
 #: src/connection-editor/connection-helpers.c:333
 #: src/connection-editor/page-proxy.c:108
 #: src/connection-editor/page-team-port.c:193
-#: src/connection-editor/page-team.c:331
+#: src/connection-editor/page-team.c:330
 msgid "_Open"
 msgstr "_Ireki"
 
@@ -3952,17 +3964,17 @@ msgstr "Ezin izan da MACsec erabiltzaile-interfazea kargatu."
 msgid "MACSEC connection %d"
 msgstr "MACSEC %d konexio"
 
-#: src/connection-editor/page-master.c:221
-#: src/connection-editor/page-master.c:232
+#: src/connection-editor/page-controller.c:221
+#: src/connection-editor/page-controller.c:232
 msgid "Duplicate ports"
 msgstr "Bikoiztu atakak"
 
-#: src/connection-editor/page-master.c:222
+#: src/connection-editor/page-controller.c:222
 #, c-format
 msgid "Ports “%s” and “%s” both apply to device “%s”"
 msgstr "“%s” eta “%s” atakak “%s” gailuari aplikatuko zaizkio"
 
-#: src/connection-editor/page-master.c:233
+#: src/connection-editor/page-controller.c:233
 #, c-format
 msgid ""
 "Ports “%s” and “%s” apply to different virtual ports (“%s” and “%s”) of the "
@@ -3971,7 +3983,7 @@ msgstr ""
 "“%s” eta “%s” atakak gailu fisiko berdineko ataka birtual desberdinei "
 "aplikatuko zaizkie (“%s” eta “%s”)."
 
-#: src/connection-editor/page-master.c:357
+#: src/connection-editor/page-controller.c:357
 #, c-format
 msgid "%s port %d"
 msgstr "%s(r)en %d. ataka"
@@ -4064,7 +4076,7 @@ msgid "Could not load proxy user interface."
 msgstr "Ezin izan da proxy erabiltzailea interfazea kargatu."
 
 #: src/connection-editor/page-team-port.c:209
-#: src/connection-editor/page-team.c:347
+#: src/connection-editor/page-team.c:346
 msgid "Error: file doesn’t contain a valid JSON configuration"
 msgstr "Errorea: fitxategiak ez dauka baliozko JSON konfigurazioa"
 
@@ -4079,11 +4091,11 @@ msgstr "Taldearen ataka"
 msgid "Could not load team port user interface."
 msgstr "Ezin izan da taldearen atakaren erabiltzailearen interfazea kargatu."
 
-#: src/connection-editor/page-team.c:1017
+#: src/connection-editor/page-team.c:1016
 msgid "Could not load team user interface."
 msgstr "Ezin izan da taldearen UIa kargatu."
 
-#: src/connection-editor/page-team.c:1114
+#: src/connection-editor/page-team.c:1113
 #, c-format
 msgid "Team connection %d"
 msgstr "%d talde-konexioa"

@@ -1,7 +1,7 @@
 AC_PREREQ([2.63])
 
 m4_define([nm_applet_major_version], [1])
-m4_define([nm_applet_minor_version], [32])
+m4_define([nm_applet_minor_version], [34])
 m4_define([nm_applet_micro_version], [0])
 m4_define([nm_applet_version],
           [nm_applet_major_version.nm_applet_minor_version.nm_applet_micro_version])
@@ -115,9 +115,6 @@ else
     AC_DEFINE(WITH_WWAN, 1, [Define if you have ModemManager/WWAN support])
 fi
 AM_CONDITIONAL(WITH_WWAN, test "${with_wwan}" != "no")
-
-dnl Check for gudev
-PKG_CHECK_MODULES(GUDEV, gudev-1.0 >= 147)
 
 dnl SELinux
 AC_ARG_WITH(selinux, AS_HELP_STRING([--with-selinux], [Enable support for adjusting SELinux labels in configuration editor (default: yes)]))

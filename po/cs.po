@@ -13,23 +13,23 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: network-manager-applet\n"
-"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/network-manager-"
-"applet/\n"
-"POT-Creation-Date: 2023-04-16 21:44+0200\n"
-"PO-Revision-Date: 2022-03-18 15:02+0100\n"
-"Last-Translator: Marek Černocký <marek@manet.cz>\n"
+"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/network-manager-applet/"
+"issues\n"
+"POT-Creation-Date: 2023-10-04 18:29+0200\n"
+"PO-Revision-Date: 2023-09-12 21:58+0200\n"
+"Last-Translator: Daniel Rusek <mail@asciiwolf.com>\n"
 "Language-Team: čeština <gnome-cs-list@gnome.org>\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Poedit 2.0.6\n"
+"X-Generator: Poedit 3.3.2\n"
 "X-Project-Style: gnome\n"
 
-#: nm-applet.desktop.in:3 src/applet-dialogs.c:724 src/applet.c:3166
-msgid "Network"
-msgstr "Síť"
+#: nm-applet.desktop.in:3 src/applet.c:3280
+msgid "NetworkManager Applet"
+msgstr "Applet NetworkManager"
 
 #: nm-applet.desktop.in:4
 msgid "Manage your network connections"
@@ -72,18 +72,16 @@ msgid "Manage and change your network connection settings"
 msgstr "Spravujte a měňte svá nastavení síťových připojení"
 
 #: org.gnome.nm-applet.gschema.xml.in:6
-#, fuzzy
 msgid "Disable connected notifications"
-msgstr "Povolit up_ozornění"
+msgstr "Zakázat upozornění o připojení"
 
 #: org.gnome.nm-applet.gschema.xml.in:7
 msgid "Set this to true to disable notifications when connecting to a network."
 msgstr ""
 
 #: org.gnome.nm-applet.gschema.xml.in:11
-#, fuzzy
 msgid "Disable disconnected notifications"
-msgstr "Odpojení zařízení selhalo"
+msgstr "Zakázat upozornění o odpojení"
 
 #: org.gnome.nm-applet.gschema.xml.in:12
 msgid ""
@@ -91,9 +89,8 @@ msgid ""
 msgstr ""
 
 #: org.gnome.nm-applet.gschema.xml.in:16
-#, fuzzy
 msgid "Disable VPN notifications"
-msgstr "Povolit up_ozornění"
+msgstr "Zakázat upozornění VPN"
 
 #: org.gnome.nm-applet.gschema.xml.in:17
 msgid ""
@@ -120,7 +117,7 @@ msgstr ""
 
 #: org.gnome.nm-applet.gschema.xml.in:31
 msgid "Disable WiFi Create"
-msgstr ""
+msgstr "Zakázat vytvoření WiFi"
 
 #: org.gnome.nm-applet.gschema.xml.in:32
 msgid ""
@@ -128,10 +125,20 @@ msgid ""
 msgstr ""
 
 #: org.gnome.nm-applet.gschema.xml.in:36
-msgid "Show the applet in notification area"
+msgid "Suppress broadband device unlock prompt"
 msgstr ""
 
 #: org.gnome.nm-applet.gschema.xml.in:37
+msgid ""
+"Set to true to not prompt for PIN/PUK when providing it is required to "
+"unlock a broadband device."
+msgstr ""
+
+#: org.gnome.nm-applet.gschema.xml.in:41
+msgid "Show the applet in notification area"
+msgstr "Zobrazit applet v oznamovací oblasti"
+
+#: org.gnome.nm-applet.gschema.xml.in:42
 msgid "Set to FALSE to disable displaying the applet in the notification area."
 msgstr ""
 
@@ -188,7 +195,7 @@ msgstr "Ověření 802.1X"
 #: src/connection-editor/page-mobile.c:530
 #: src/connection-editor/page-proxy.c:107
 #: src/connection-editor/page-team-port.c:192
-#: src/connection-editor/page-team.c:330
+#: src/connection-editor/page-team.c:329
 #: src/connection-editor/vpn-helpers.c:198 src/gsm-unlock.ui:28
 #: src/mobile-helpers.c:451
 msgid "_Cancel"
@@ -227,45 +234,45 @@ msgstr "Nesprávný kód PIN. Obraťte se prosím na svého poskytovatele."
 msgid "Sending unlock code…"
 msgstr "Odemykací kód je zasílán…"
 
-#: src/applet-device-broadband.c:725 src/applet-dialogs.c:521
+#: src/applet-device-broadband.c:729 src/applet-dialogs.c:521
 #, c-format
 msgid "Mobile Broadband (%s)"
 msgstr "Mobilní širokopásmová (%s)"
 
-#: src/applet-device-broadband.c:727
+#: src/applet-device-broadband.c:731
 #: src/connection-editor/connection-helpers.c:95
 #: src/connection-editor/page-mobile.c:295
 msgid "Mobile Broadband"
 msgstr "Mobilní širokopásmová"
 
-#: src/applet-device-broadband.c:780 src/applet-device-bt.c:61
+#: src/applet-device-broadband.c:784 src/applet-device-bt.c:61
 #: src/applet-device-ethernet.c:107
 msgid "Available"
 msgstr "Dostupné"
 
 #. Default connection item
-#: src/applet-device-broadband.c:793
+#: src/applet-device-broadband.c:797
 msgid "New Mobile Broadband connection…"
 msgstr "Nové mobilní širokopásmové připojení…"
 
-#: src/applet-device-broadband.c:809 src/applet-device-bt.c:75
+#: src/applet-device-broadband.c:813 src/applet-device-bt.c:75
 #: src/applet-device-ethernet.c:124 src/applet-device-wifi.c:1251
 msgid "Connection Established"
 msgstr "Spojení navázáno"
 
-#: src/applet-device-broadband.c:810
+#: src/applet-device-broadband.c:814
 msgid "You are now connected to the Mobile Broadband network."
 msgstr "Jste právě připojeni k mobilní širokopásmové síti."
 
-#: src/applet-device-broadband.c:950 src/applet-device-broadband.c:956
+#: src/applet-device-broadband.c:954 src/applet-device-broadband.c:960
 msgid "Mobile Broadband network."
 msgstr "Mobilní širokopásmová síť."
 
-#: src/applet-device-broadband.c:951
+#: src/applet-device-broadband.c:955
 msgid "You are now registered on the home network."
 msgstr "Jste právě připojeni k domácí síti."
 
-#: src/applet-device-broadband.c:957
+#: src/applet-device-broadband.c:961
 msgid "You are now registered on a roaming network."
 msgstr "Jste právě připojeni k roamingové síti."
 
@@ -502,9 +509,8 @@ msgid "WEP"
 msgstr "WEP"
 
 #: src/applet-dialogs.c:228
-#, fuzzy
 msgid "WPA/WPA2/WPA3"
-msgstr "WPA/WPA2"
+msgstr "WPA/WPA2/WPA3"
 
 #: src/applet-dialogs.c:230
 msgid "WPA3"
@@ -629,6 +635,10 @@ msgstr "IPv6"
 #: src/applet-dialogs.c:717 src/connection-editor/ce-page-wifi.ui:52
 msgid "Hotspot"
 msgstr "Přístupový bod"
+
+#: src/applet-dialogs.c:724 src/applet.c:3166
+msgid "Network"
+msgstr "Síť"
 
 #: src/applet-dialogs.c:735
 msgid "Password"
@@ -1075,10 +1085,6 @@ msgstr "Připojení k VPN je aktivní"
 #: src/applet.c:2645
 msgid "No network connection"
 msgstr "Žádné síťové připojení"
-
-#: src/applet.c:3280
-msgid "NetworkManager Applet"
-msgstr "Applet NetworkManager"
 
 #: src/connection-editor/ce-ip4-routes.ui:88
 #: src/connection-editor/ce-ip6-routes.ui:88 src/connection-editor/ce-page.h:97
@@ -2337,8 +2343,8 @@ msgid "Ad_vanced…"
 msgstr "Pok_ročilé…"
 
 #: src/connection-editor/ce-page-team-port.ui:108
-msgid "Set by master"
-msgstr "Nastaveno hlavní stranou"
+msgid "Set by controller"
+msgstr "Nastaveno řadičem"
 
 #: src/connection-editor/ce-page-team-port.ui:112
 #: src/connection-editor/ce-page-team.ui:85
@@ -2781,10 +2787,10 @@ msgstr "Systémová priorita, hodnota může být 0 až 65535."
 #: src/connection-editor/ce-page-team.ui:960
 msgid ""
 "Specifies the minimum number of ports that must be active before asserting "
-"carrier in the master interface, value can be 1 – 255."
+"carrier in the controller interface, value can be 1 – 255."
 msgstr ""
-"Určuje minimum portů, které musí být aktivní před uplatněním nosiče v master "
-"rozhraní. Hodnota je v intervalu 1 – 255."
+"Určuje minimum portů, které musí být aktivní před uplatněním nosiče v "
+"rozhraní řadiče. Hodnota je v intervalu 1 – 255."
 
 #: src/connection-editor/ce-page-team.ui:972
 msgid "This selects the policy of how the aggregators will be selected."
@@ -3245,7 +3251,7 @@ msgid "Bond"
 msgstr "Svazek"
 
 #: src/connection-editor/connection-helpers.c:105
-#: src/connection-editor/page-team.c:1014
+#: src/connection-editor/page-team.c:1013
 msgid "Team"
 msgstr "Tým"
 
@@ -3278,7 +3284,7 @@ msgstr "VPN"
 #: src/connection-editor/connection-helpers.c:202
 #, c-format
 msgid "VPN plugin “%s” not found"
-msgstr ""
+msgstr "Zásuvný modul VPN „%s“ nebyl nalezen"
 
 #: src/connection-editor/connection-helpers.c:227
 msgid "No VPN service type."
@@ -3292,14 +3298,14 @@ msgstr ""
 #: src/connection-editor/connection-helpers.c:329
 #: src/connection-editor/page-proxy.c:104
 #: src/connection-editor/page-team-port.c:189
-#: src/connection-editor/page-team.c:327
+#: src/connection-editor/page-team.c:326
 msgid "Select file to import"
 msgstr "Vyberte soubor k importu"
 
 #: src/connection-editor/connection-helpers.c:333
 #: src/connection-editor/page-proxy.c:108
 #: src/connection-editor/page-team-port.c:193
-#: src/connection-editor/page-team.c:331
+#: src/connection-editor/page-team.c:330
 msgid "_Open"
 msgstr "_Otevřít"
 
@@ -3932,17 +3938,17 @@ msgstr "Nezdařilo se načíst uživatelské rozhraní pro MACsec."
 msgid "MACSEC connection %d"
 msgstr "Připojení MACsec %d"
 
-#: src/connection-editor/page-master.c:221
-#: src/connection-editor/page-master.c:232
+#: src/connection-editor/page-controller.c:221
+#: src/connection-editor/page-controller.c:232
 msgid "Duplicate ports"
 msgstr "Duplikovat porty"
 
-#: src/connection-editor/page-master.c:222
+#: src/connection-editor/page-controller.c:222
 #, c-format
 msgid "Ports “%s” and “%s” both apply to device “%s”"
 msgstr "Porty „%s“ a „%s“ jsou oba přiřazené k zařízení „%s“"
 
-#: src/connection-editor/page-master.c:233
+#: src/connection-editor/page-controller.c:233
 #, c-format
 msgid ""
 "Ports “%s” and “%s” apply to different virtual ports (“%s” and “%s”) of the "
@@ -3951,7 +3957,7 @@ msgstr ""
 "Porty „%s“ a „%s“ jsou přiřazené k různým virtuálním portům („%s“ a „%s“) "
 "stejného fyzického zařízení."
 
-#: src/connection-editor/page-master.c:357
+#: src/connection-editor/page-controller.c:357
 #, c-format
 msgid "%s port %d"
 msgstr "Port %s %d"
@@ -4043,7 +4049,7 @@ msgid "Could not load proxy user interface."
 msgstr "Nezdařilo se načíst uživatelské rozhraní pro proxy."
 
 #: src/connection-editor/page-team-port.c:209
-#: src/connection-editor/page-team.c:347
+#: src/connection-editor/page-team.c:346
 msgid "Error: file doesn’t contain a valid JSON configuration"
 msgstr "Chyba: soubor neobsahuje platné nastavení JSON"
 
@@ -4058,11 +4064,11 @@ msgstr "Port Team"
 msgid "Could not load team port user interface."
 msgstr "Nezdařilo se načíst uživatelské rozhraní pro port Team."
 
-#: src/connection-editor/page-team.c:1017
+#: src/connection-editor/page-team.c:1016
 msgid "Could not load team user interface."
 msgstr "Nezdařilo se načíst uživatelské rozhraní pro Team."
 
-#: src/connection-editor/page-team.c:1114
+#: src/connection-editor/page-team.c:1113
 #, c-format
 msgid "Team connection %d"
 msgstr "Připojení Team %d"
@@ -4142,14 +4148,12 @@ msgid "Dynamic WEP (802.1X)"
 msgstr "Dynamické WEP (802.1X)"
 
 #: src/connection-editor/page-wifi-security.c:410
-#, fuzzy
 msgid "WPA/WPA2/WPA3 Personal"
-msgstr "WPA & WPA2 osobní"
+msgstr "WPA/WPA2/WPA3 osobní"
 
 #: src/connection-editor/page-wifi-security.c:423
-#, fuzzy
 msgid "WPA/WPA2 Enterprise"
-msgstr "WPA & WPA2 firemní"
+msgstr "WPA/WPA2 firemní"
 
 #: src/connection-editor/page-wifi-security.c:436
 msgid "WPA3 Personal"

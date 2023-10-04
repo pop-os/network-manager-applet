@@ -1,6 +1,6 @@
 project(
   'network-manager-applet', 'c',
-  version: '1.32.0',
+  version: '1.34.0',
   license: 'GPL2+',
   default_options: [
     'buildtype=debugoptimized',
@@ -121,9 +121,6 @@ gtk_dep = declare_dependency(
     '-DGDK_VERSION_MAX_ALLOWED=GDK_VERSION_3_10'
   ]
 )
-
-# Check for gudev
-gudev_dep = dependency('gudev-1.0', version: '>= 147')
 
 # API documentation
 nm_req_version = '>= 1.7'

@@ -8,9 +8,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: po_nm-applet-km\n"
-"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/network-manager-"
-"applet/\n"
-"POT-Creation-Date: 2023-04-16 21:44+0200\n"
+"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/network-manager-applet/"
+"issues\n"
+"POT-Creation-Date: 2023-10-04 18:29+0200\n"
 "PO-Revision-Date: 2014-04-23 15:44+0700\n"
 "Last-Translator: Sophea Sok <sophea@open.org.kh>\n"
 "Language-Team: Khmer <>\n"
@@ -22,9 +22,9 @@ msgstr ""
 "X-Generator: WordForge 0.8 RC1\n"
 "X-Language: km-KH\n"
 
-#: nm-applet.desktop.in:3 src/applet-dialogs.c:724 src/applet.c:3166
-msgid "Network"
-msgstr "បណ្ដាញ"
+#: nm-applet.desktop.in:3 src/applet.c:3280
+msgid "NetworkManager Applet"
+msgstr "អាប់ភ្លេត NetworkManager"
 
 #: nm-applet.desktop.in:4
 msgid "Manage your network connections"
@@ -121,10 +121,20 @@ msgid ""
 msgstr "កំណត់​ទៅ​ពិត​ដើម្បី​បិទ​ការ​បង្កើត​បណ្ដាញ adhoc នៅ​ពេល​ប្រើ​អាប់ភ្លេត។"
 
 #: org.gnome.nm-applet.gschema.xml.in:36
+msgid "Suppress broadband device unlock prompt"
+msgstr ""
+
+#: org.gnome.nm-applet.gschema.xml.in:37
+msgid ""
+"Set to true to not prompt for PIN/PUK when providing it is required to "
+"unlock a broadband device."
+msgstr ""
+
+#: org.gnome.nm-applet.gschema.xml.in:41
 msgid "Show the applet in notification area"
 msgstr "បង្ហាញ​អាប់ភ្លេត​នៅ​ក្នុង​តំបន់​ជូន​ដំណឹង"
 
-#: org.gnome.nm-applet.gschema.xml.in:37
+#: org.gnome.nm-applet.gschema.xml.in:42
 msgid "Set to FALSE to disable displaying the applet in the notification area."
 msgstr "កំណត់​ទៅ​មិន​ពិត ដើម្បី​បិទ​ការ​បង្ហាញ​អាប់ភ្លេត​នៅ​ក្នុង​តំបន់​ជូន​ដំណឹង។"
 
@@ -180,7 +190,7 @@ msgstr "ការ​ផ្ទៀងផ្ទាត់ 802.1X"
 #: src/connection-editor/page-mobile.c:530
 #: src/connection-editor/page-proxy.c:107
 #: src/connection-editor/page-team-port.c:192
-#: src/connection-editor/page-team.c:330
+#: src/connection-editor/page-team.c:329
 #: src/connection-editor/vpn-helpers.c:198 src/gsm-unlock.ui:28
 #: src/mobile-helpers.c:451
 msgid "_Cancel"
@@ -223,46 +233,46 @@ msgstr "កូដ PIN មិន​ត្រឹមត្រូវ សូម​ទ
 msgid "Sending unlock code…"
 msgstr "កំពុង​ផ្ញើ​កូដ​ដោះសោ..."
 
-#: src/applet-device-broadband.c:725 src/applet-dialogs.c:521
+#: src/applet-device-broadband.c:729 src/applet-dialogs.c:521
 #, c-format
 msgid "Mobile Broadband (%s)"
 msgstr "រលកអាកាស​ចល័ត (%s)"
 
-#: src/applet-device-broadband.c:727
+#: src/applet-device-broadband.c:731
 #: src/connection-editor/connection-helpers.c:95
 #: src/connection-editor/page-mobile.c:295
 msgid "Mobile Broadband"
 msgstr "រលកអាកាស​ចល័ត"
 
-#: src/applet-device-broadband.c:780 src/applet-device-bt.c:61
+#: src/applet-device-broadband.c:784 src/applet-device-bt.c:61
 #: src/applet-device-ethernet.c:107
 msgid "Available"
 msgstr "មាន"
 
 #. Default connection item
-#: src/applet-device-broadband.c:793
+#: src/applet-device-broadband.c:797
 #, fuzzy
 msgid "New Mobile Broadband connection…"
 msgstr "ការ​តភ្ជាប់​រលកអាកាស​ចល័ត​ថ្មី"
 
-#: src/applet-device-broadband.c:809 src/applet-device-bt.c:75
+#: src/applet-device-broadband.c:813 src/applet-device-bt.c:75
 #: src/applet-device-ethernet.c:124 src/applet-device-wifi.c:1251
 msgid "Connection Established"
 msgstr "បាន​បង្កើត​ការ​តភ្ជាប់"
 
-#: src/applet-device-broadband.c:810
+#: src/applet-device-broadband.c:814
 msgid "You are now connected to the Mobile Broadband network."
 msgstr "ឥឡូវនេះ​អ្នក​បាន​តភ្ជាប់​ទៅកាន់​បណ្ដាញ​រលក​អាកាស​ចល័ត។"
 
-#: src/applet-device-broadband.c:950 src/applet-device-broadband.c:956
+#: src/applet-device-broadband.c:954 src/applet-device-broadband.c:960
 msgid "Mobile Broadband network."
 msgstr "បណ្ដាញ​រលកអាកាស​ចល័ត"
 
-#: src/applet-device-broadband.c:951
+#: src/applet-device-broadband.c:955
 msgid "You are now registered on the home network."
 msgstr "ឥឡូវនេះ​អ្នក​បាន​ចុះឈ្មោះ​នៅ​លើ​បណ្ដាញ​ផ្ទះ។"
 
-#: src/applet-device-broadband.c:957
+#: src/applet-device-broadband.c:961
 msgid "You are now registered on a roaming network."
 msgstr "ឥឡូវនេះ​អ្នក​បាន​ចុះឈ្មោះ​នៅ​លើ​បណ្ដាញ​រ៉ូមីង។"
 
@@ -631,6 +641,10 @@ msgstr "IPv6"
 #: src/applet-dialogs.c:717 src/connection-editor/ce-page-wifi.ui:52
 msgid "Hotspot"
 msgstr ""
+
+#: src/applet-dialogs.c:724 src/applet.c:3166
+msgid "Network"
+msgstr "បណ្ដាញ"
 
 #: src/applet-dialogs.c:735
 #, fuzzy
@@ -1083,10 +1097,6 @@ msgstr "ការ​តភ្ជាប់ VPN '%s' សកម្ម"
 #: src/applet.c:2645
 msgid "No network connection"
 msgstr "មិនមាន​ការ​តភ្ជាប់​បណ្ដាញ"
-
-#: src/applet.c:3280
-msgid "NetworkManager Applet"
-msgstr "អាប់ភ្លេត NetworkManager"
 
 #: src/connection-editor/ce-ip4-routes.ui:88
 #: src/connection-editor/ce-ip6-routes.ui:88 src/connection-editor/ce-page.h:97
@@ -2364,7 +2374,7 @@ msgid "Ad_vanced…"
 msgstr "កម្រិត​ខ្ពស់"
 
 #: src/connection-editor/ce-page-team-port.ui:108
-msgid "Set by master"
+msgid "Set by controller"
 msgstr ""
 
 #: src/connection-editor/ce-page-team-port.ui:112
@@ -2796,7 +2806,7 @@ msgstr ""
 #: src/connection-editor/ce-page-team.ui:960
 msgid ""
 "Specifies the minimum number of ports that must be active before asserting "
-"carrier in the master interface, value can be 1 – 255."
+"carrier in the controller interface, value can be 1 – 255."
 msgstr ""
 
 #: src/connection-editor/ce-page-team.ui:972
@@ -3254,7 +3264,7 @@ msgid "Bond"
 msgstr "Bond"
 
 #: src/connection-editor/connection-helpers.c:105
-#: src/connection-editor/page-team.c:1014
+#: src/connection-editor/page-team.c:1013
 msgid "Team"
 msgstr "Team"
 
@@ -3305,14 +3315,14 @@ msgstr ""
 #: src/connection-editor/connection-helpers.c:329
 #: src/connection-editor/page-proxy.c:104
 #: src/connection-editor/page-team-port.c:189
-#: src/connection-editor/page-team.c:327
+#: src/connection-editor/page-team.c:326
 msgid "Select file to import"
 msgstr "ជ្រើស​ឯកសារ​ដើម្បី​នាំចូល"
 
 #: src/connection-editor/connection-helpers.c:333
 #: src/connection-editor/page-proxy.c:108
 #: src/connection-editor/page-team-port.c:193
-#: src/connection-editor/page-team.c:331
+#: src/connection-editor/page-team.c:330
 msgid "_Open"
 msgstr ""
 
@@ -3950,18 +3960,18 @@ msgstr "មិន​អាច​ផ្ទុក​ចំណុចប្រទា
 msgid "MACSEC connection %d"
 msgstr "ការ​តភ្ជាប់ WiMAX %d"
 
-#: src/connection-editor/page-master.c:221
-#: src/connection-editor/page-master.c:232
+#: src/connection-editor/page-controller.c:221
+#: src/connection-editor/page-controller.c:232
 #, fuzzy
 msgid "Duplicate ports"
 msgstr "កូន​ចៅ​ស្ទួន"
 
-#: src/connection-editor/page-master.c:222
+#: src/connection-editor/page-controller.c:222
 #, fuzzy, c-format
 msgid "Ports “%s” and “%s” both apply to device “%s”"
 msgstr "កូន​ចៅ '%s' និង '%s' ទាំង​ពីរ​គឺ​បាន​អនុវត្ត​ទៅកាន់​ឧបករណ៍ '%s'"
 
-#: src/connection-editor/page-master.c:233
+#: src/connection-editor/page-controller.c:233
 #, fuzzy, c-format
 msgid ""
 "Ports “%s” and “%s” apply to different virtual ports (“%s” and “%s”) of the "
@@ -3969,7 +3979,7 @@ msgid ""
 msgstr ""
 "កូនចៅ '%s' និង '%s' អនុវត្ត​ទៅកាន់​ច្រក​និម្មិត​ផ្សេងគ្នា ('%s' និង '%s') របស់​ឧបករណ៍​ដូចគ្នា។"
 
-#: src/connection-editor/page-master.c:357
+#: src/connection-editor/page-controller.c:357
 #, c-format
 msgid "%s port %d"
 msgstr ""
@@ -4059,7 +4069,7 @@ msgid "Could not load proxy user interface."
 msgstr "មិន​អាច​ផ្ទុក​ចំណុច​ប្រទាក់​អ្នកប្រើ bond ​។"
 
 #: src/connection-editor/page-team-port.c:209
-#: src/connection-editor/page-team.c:347
+#: src/connection-editor/page-team.c:346
 #, fuzzy
 msgid "Error: file doesn’t contain a valid JSON configuration"
 msgstr "កំហុស៖ ឯកសារ​មិន​មាន​ការ​កំណត់​រចនា​សម្មព័ន្ធ JSON ត្រឹមត្រូវ"
@@ -4075,11 +4085,11 @@ msgstr "ច្រក Team"
 msgid "Could not load team port user interface."
 msgstr "មិន​អាច​ផ្ទុក​ចំណុច​ប្រទាក់​អ្នកប្រើ​ច្រក Team ។"
 
-#: src/connection-editor/page-team.c:1017
+#: src/connection-editor/page-team.c:1016
 msgid "Could not load team user interface."
 msgstr "មិន​អាច​ផ្ទុក​ចំណុចប្រទាក់​អ្នកប្រើ Team ។"
 
-#: src/connection-editor/page-team.c:1114
+#: src/connection-editor/page-team.c:1113
 #, c-format
 msgid "Team connection %d"
 msgstr "ការ​តភ្ជាប់ Team %d"

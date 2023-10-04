@@ -8,9 +8,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: network-manager-applet master\n"
-"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/network-manager-"
-"applet/\n"
-"POT-Creation-Date: 2023-04-16 21:44+0200\n"
+"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/network-manager-applet/"
+"issues\n"
+"POT-Creation-Date: 2023-10-04 18:29+0200\n"
 "PO-Revision-Date: 2014-08-20 18:20+0530\n"
 "Last-Translator: Nilamdyuti Goswami <ngoswami@redhat.com>\n"
 "Language-Team: Assamese <kde-i18n-doc@kde.org>\n"
@@ -21,9 +21,9 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Lokalize 1.5\n"
 
-#: nm-applet.desktop.in:3 src/applet-dialogs.c:724 src/applet.c:3166
-msgid "Network"
-msgstr "নেটৱৰ্ক"
+#: nm-applet.desktop.in:3 src/applet.c:3280
+msgid "NetworkManager Applet"
+msgstr "NetworkManager এপ্লেট"
 
 #: nm-applet.desktop.in:4
 msgid "Manage your network connections"
@@ -130,10 +130,20 @@ msgstr ""
 "কৰক।"
 
 #: org.gnome.nm-applet.gschema.xml.in:36
+msgid "Suppress broadband device unlock prompt"
+msgstr ""
+
+#: org.gnome.nm-applet.gschema.xml.in:37
+msgid ""
+"Set to true to not prompt for PIN/PUK when providing it is required to "
+"unlock a broadband device."
+msgstr ""
+
+#: org.gnome.nm-applet.gschema.xml.in:41
 msgid "Show the applet in notification area"
 msgstr "এপ্লেটক অধিসূচনা স্থানত দেখুৱাওক"
 
-#: org.gnome.nm-applet.gschema.xml.in:37
+#: org.gnome.nm-applet.gschema.xml.in:42
 msgid "Set to FALSE to disable displaying the applet in the notification area."
 msgstr "এপ্লেটক অধিসূচনা স্থানত প্ৰদৰ্শন অসামৰ্থবান কৰিবলে FALSE লৈ সংহত।"
 
@@ -189,7 +199,7 @@ msgstr "802.1X প্ৰমাণীকৰণ"
 #: src/connection-editor/page-mobile.c:530
 #: src/connection-editor/page-proxy.c:107
 #: src/connection-editor/page-team-port.c:192
-#: src/connection-editor/page-team.c:330
+#: src/connection-editor/page-team.c:329
 #: src/connection-editor/vpn-helpers.c:198 src/gsm-unlock.ui:28
 #: src/mobile-helpers.c:451
 msgid "_Cancel"
@@ -231,46 +241,46 @@ msgstr "ভুল PIN ক'ড; অনুগ্ৰহ কৰি সেৱা উ�
 msgid "Sending unlock code…"
 msgstr "আনলক কৰাৰ ক'ড পঠিওৱা হৈছে..."
 
-#: src/applet-device-broadband.c:725 src/applet-dialogs.c:521
+#: src/applet-device-broadband.c:729 src/applet-dialogs.c:521
 #, c-format
 msgid "Mobile Broadband (%s)"
 msgstr "ম'বাইল ব্ৰ'ডবেণ্ড (%s)"
 
-#: src/applet-device-broadband.c:727
+#: src/applet-device-broadband.c:731
 #: src/connection-editor/connection-helpers.c:95
 #: src/connection-editor/page-mobile.c:295
 msgid "Mobile Broadband"
 msgstr "ম'বাইল ব্ৰ'ডবেণ্ড"
 
-#: src/applet-device-broadband.c:780 src/applet-device-bt.c:61
+#: src/applet-device-broadband.c:784 src/applet-device-bt.c:61
 #: src/applet-device-ethernet.c:107
 msgid "Available"
 msgstr "উপলব্ধ"
 
 #. Default connection item
-#: src/applet-device-broadband.c:793
+#: src/applet-device-broadband.c:797
 #, fuzzy
 msgid "New Mobile Broadband connection…"
 msgstr "নতুন ম'বাইল ব্ৰডবেণ্ড সংযোগ"
 
-#: src/applet-device-broadband.c:809 src/applet-device-bt.c:75
+#: src/applet-device-broadband.c:813 src/applet-device-bt.c:75
 #: src/applet-device-ethernet.c:124 src/applet-device-wifi.c:1251
 msgid "Connection Established"
 msgstr "সংযোগ স্থাপিত"
 
-#: src/applet-device-broadband.c:810
+#: src/applet-device-broadband.c:814
 msgid "You are now connected to the Mobile Broadband network."
 msgstr "আপুনি এতিয়া ম'বাইল ব্ৰডবেণ্ড নেটৱৰ্কৰ সৈতে সংযুক্ত।"
 
-#: src/applet-device-broadband.c:950 src/applet-device-broadband.c:956
+#: src/applet-device-broadband.c:954 src/applet-device-broadband.c:960
 msgid "Mobile Broadband network."
 msgstr "ম'বাইল ব্ৰ'ডবেণ্ড নেটৱৰ্ক।"
 
-#: src/applet-device-broadband.c:951
+#: src/applet-device-broadband.c:955
 msgid "You are now registered on the home network."
 msgstr "আপুনি এতিয়া ঘৰ নেটৱৰ্কত ৰেজিস্টাৰ্ড।"
 
-#: src/applet-device-broadband.c:957
+#: src/applet-device-broadband.c:961
 msgid "You are now registered on a roaming network."
 msgstr "আপুনি এতিয়া এটা ৰ'মিং নেটৱৰ্কত ৰেজিস্টাৰ্ড।"
 
@@ -640,6 +650,10 @@ msgstr "IPv6"
 #: src/applet-dialogs.c:717 src/connection-editor/ce-page-wifi.ui:52
 msgid "Hotspot"
 msgstr ""
+
+#: src/applet-dialogs.c:724 src/applet.c:3166
+msgid "Network"
+msgstr "নেটৱৰ্ক"
 
 #: src/applet-dialogs.c:735
 #, fuzzy
@@ -1093,10 +1107,6 @@ msgstr "VPN সংযোগ '%s' সক্ৰিয়"
 #: src/applet.c:2645
 msgid "No network connection"
 msgstr "কোনো নেটৱৰ্ক সংযোগ নাই"
-
-#: src/applet.c:3280
-msgid "NetworkManager Applet"
-msgstr "NetworkManager এপ্লেট"
 
 #: src/connection-editor/ce-ip4-routes.ui:88
 #: src/connection-editor/ce-ip6-routes.ui:88 src/connection-editor/ce-page.h:97
@@ -2388,7 +2398,7 @@ msgid "Ad_vanced…"
 msgstr "উন্নত"
 
 #: src/connection-editor/ce-page-team-port.ui:108
-msgid "Set by master"
+msgid "Set by controller"
 msgstr ""
 
 #: src/connection-editor/ce-page-team-port.ui:112
@@ -2820,7 +2830,7 @@ msgstr ""
 #: src/connection-editor/ce-page-team.ui:960
 msgid ""
 "Specifies the minimum number of ports that must be active before asserting "
-"carrier in the master interface, value can be 1 – 255."
+"carrier in the controller interface, value can be 1 – 255."
 msgstr ""
 
 #: src/connection-editor/ce-page-team.ui:972
@@ -3280,7 +3290,7 @@ msgid "Bond"
 msgstr "বান্ধনী"
 
 #: src/connection-editor/connection-helpers.c:105
-#: src/connection-editor/page-team.c:1014
+#: src/connection-editor/page-team.c:1013
 msgid "Team"
 msgstr "দল"
 
@@ -3331,14 +3341,14 @@ msgstr ""
 #: src/connection-editor/connection-helpers.c:329
 #: src/connection-editor/page-proxy.c:104
 #: src/connection-editor/page-team-port.c:189
-#: src/connection-editor/page-team.c:327
+#: src/connection-editor/page-team.c:326
 msgid "Select file to import"
 msgstr "ইমপোৰ্ট কৰিবলৈ ফাইল বাছক"
 
 #: src/connection-editor/connection-helpers.c:333
 #: src/connection-editor/page-proxy.c:108
 #: src/connection-editor/page-team-port.c:193
-#: src/connection-editor/page-team.c:331
+#: src/connection-editor/page-team.c:330
 msgid "_Open"
 msgstr ""
 
@@ -3986,18 +3996,18 @@ msgstr "WiMAX ব্যৱহাৰকাৰী আন্তঃপৃষ্ঠ �
 msgid "MACSEC connection %d"
 msgstr "WiMAX সংযোগ %d"
 
-#: src/connection-editor/page-master.c:221
-#: src/connection-editor/page-master.c:232
+#: src/connection-editor/page-controller.c:221
+#: src/connection-editor/page-controller.c:232
 #, fuzzy
 msgid "Duplicate ports"
 msgstr "প্ৰতিলিপি স্লেইভসমূহ"
 
-#: src/connection-editor/page-master.c:222
+#: src/connection-editor/page-controller.c:222
 #, fuzzy, c-format
 msgid "Ports “%s” and “%s” both apply to device “%s”"
 msgstr "স্লেইভ '%s' আৰু '%s' দুয়ো ডিভাইচ '%s' লৈ প্ৰযোজ্য নহয়"
 
-#: src/connection-editor/page-master.c:233
+#: src/connection-editor/page-controller.c:233
 #, fuzzy, c-format
 msgid ""
 "Ports “%s” and “%s” apply to different virtual ports (“%s” and “%s”) of the "
@@ -4006,7 +4016,7 @@ msgstr ""
 "স্লেইভ '%s' আৰু '%s' একেটা ভৌতিক ডিভাইচৰ বিভিন্ন ভাৰছুৱেল পৰ্ট ('%s' আৰু '%s') লৈ "
 "প্ৰযোজ্য হয়।"
 
-#: src/connection-editor/page-master.c:357
+#: src/connection-editor/page-controller.c:357
 #, c-format
 msgid "%s port %d"
 msgstr ""
@@ -4101,7 +4111,7 @@ msgid "Could not load proxy user interface."
 msgstr "বান্ধনী ব্যৱহাৰকাৰী আন্তঃপৃষ্ঠ ল'ড কৰিব পৰা নগল।"
 
 #: src/connection-editor/page-team-port.c:209
-#: src/connection-editor/page-team.c:347
+#: src/connection-editor/page-team.c:346
 #, fuzzy
 msgid "Error: file doesn’t contain a valid JSON configuration"
 msgstr "ত্ৰুটি: ফাইলত এটা বৈধ JSON সংৰূপ নাই"
@@ -4117,11 +4127,11 @@ msgstr "দল পৰ্ট"
 msgid "Could not load team port user interface."
 msgstr "দল পৰ্ট ব্যৱহাৰকাৰীৰ আন্তঃপৃষ্ঠ ল'ড কৰিব পৰা নগল।"
 
-#: src/connection-editor/page-team.c:1017
+#: src/connection-editor/page-team.c:1016
 msgid "Could not load team user interface."
 msgstr "দল ব্যৱহাৰকাৰী আন্তঃপৃষ্ঠ ল'ড কৰিব পৰা নগল।"
 
-#: src/connection-editor/page-team.c:1114
+#: src/connection-editor/page-team.c:1113
 #, c-format
 msgid "Team connection %d"
 msgstr "দল সংযোগ %d"
