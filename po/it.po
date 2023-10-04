@@ -1,6 +1,6 @@
 # Italian translation for network-manager-Applet
 # Copyright (C) 2004-2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017 the NetworkManager-Applet Copyright Holder
-# Copyright (C) 2018, 2019, 2020, 2021, 2022 the NetworkManager-Applet Copyright Holder
+# Copyright (C) 2018, 2019, 2020, 2021, 2022, 2023 the NetworkManager-Applet Copyright Holder
 # This file is distributed under the same license as the NetworkManager-Applet package.
 #
 # Note:
@@ -11,15 +11,15 @@
 #
 # Francesco Marletta <francesco.marletta@tiscali.it>, 2004, 2005, 2006, 2007, 2008, 2009, 2010.
 # Gianvito Cavasoli <gianvito@gmx.it>, 2011.
-# Milo Casagrande <milo@milo.name>, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022.
+# Milo Casagrande <milo@milo.name>, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023.
 # lrintel <lrintel@redhat.com>, 2017. #zanata
 msgid ""
 msgstr ""
 "Project-Id-Version: network-manager-applet master\n"
-"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/network-manager-"
-"applet/\n"
-"POT-Creation-Date: 2023-04-16 21:44+0200\n"
-"PO-Revision-Date: 2022-03-15 18:01+0100\n"
+"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/network-manager-applet/"
+"issues\n"
+"POT-Creation-Date: 2023-10-04 18:29+0200\n"
+"PO-Revision-Date: 2023-08-30 17:59+0200\n"
 "Last-Translator: Milo Casagrande <milo@milo.name>\n"
 "Language-Team: Italian <tp@lists.linux.it>\n"
 "Language: it\n"
@@ -28,11 +28,11 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n!=1);\n"
 "X-Launchpad-Export-Date: 2012-03-09 08:20+0000\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 3.1.1\n"
 
-#: nm-applet.desktop.in:3 src/applet-dialogs.c:724 src/applet.c:3166
-msgid "Network"
-msgstr "Rete"
+#: nm-applet.desktop.in:3 src/applet.c:3280
+msgid "NetworkManager Applet"
+msgstr "Applet NetworkManager"
 
 #: nm-applet.desktop.in:4
 msgid "Manage your network connections"
@@ -75,68 +75,89 @@ msgid "Manage and change your network connection settings"
 msgstr "Gestisce e cambia le impostazioni della connessione di rete"
 
 #: org.gnome.nm-applet.gschema.xml.in:6
-#, fuzzy
 msgid "Disable connected notifications"
-msgstr "Abilita n_otifiche"
+msgstr "Disabilita le notifiche di connessione"
 
 #: org.gnome.nm-applet.gschema.xml.in:7
 msgid "Set this to true to disable notifications when connecting to a network."
 msgstr ""
+"Impostare a VERO per disabilitare le notifiche quando si effettua la "
+"connessione a una rete."
 
 #: org.gnome.nm-applet.gschema.xml.in:11
-#, fuzzy
 msgid "Disable disconnected notifications"
-msgstr "Disconnessione dispositivo non riuscita"
+msgstr "Disabilita le notifiche di disconnessione"
 
 #: org.gnome.nm-applet.gschema.xml.in:12
 msgid ""
 "Set this to true to disable notifications when disconnecting from a network."
 msgstr ""
+"Impostare a VERO per disabilitare le notifiche quando si effettua la "
+"disconnessione da una rete."
 
 #: org.gnome.nm-applet.gschema.xml.in:16
-#, fuzzy
 msgid "Disable VPN notifications"
-msgstr "Abilita n_otifiche"
+msgstr "Disabilita le notifiche VPN"
 
 #: org.gnome.nm-applet.gschema.xml.in:17
 msgid ""
 "Set this to true to disable notifications when connecting to or "
 "disconnecting from a VPN."
 msgstr ""
+"Impostare a VERO per disabilitare le notifiche quando si effettua la "
+"connessione/disconnessione da una VPN."
 
 #: org.gnome.nm-applet.gschema.xml.in:21
 msgid "Suppress networks available notifications"
-msgstr ""
+msgstr "Sopprime le notifiche di reti disponibili"
 
 #: org.gnome.nm-applet.gschema.xml.in:22
 msgid ""
 "Set this to true to disable notifications when Wi-Fi networks are available."
 msgstr ""
+"Impostare a VERO per disabilitare le notifiche quando sono disponibili reti "
+"senza fili."
 
 #: org.gnome.nm-applet.gschema.xml.in:26
 msgid "Stamp"
-msgstr ""
+msgstr "Marcatura"
 
 #: org.gnome.nm-applet.gschema.xml.in:27
 msgid "Used to determine whether settings should be migrated to a new version."
 msgstr ""
+"Usato per determinare se le impostazioni devono essere migrate alla nuova "
+"versione."
 
 #: org.gnome.nm-applet.gschema.xml.in:31
 msgid "Disable WiFi Create"
-msgstr ""
+msgstr "Disabilita la creazione di Wi-Fi"
 
 #: org.gnome.nm-applet.gschema.xml.in:32
 msgid ""
 "Set to true to disable creation of adhoc networks when using the applet."
 msgstr ""
+"Impostare a VERO per disabilitare la creazione di reti ad-hoc quando si usa "
+"l'applet."
 
 #: org.gnome.nm-applet.gschema.xml.in:36
-msgid "Show the applet in notification area"
-msgstr ""
+msgid "Suppress broadband device unlock prompt"
+msgstr "Elimina la richiesta di sblocco del dispositivo a banda larga mobile"
 
 #: org.gnome.nm-applet.gschema.xml.in:37
-msgid "Set to FALSE to disable displaying the applet in the notification area."
+msgid ""
+"Set to true to not prompt for PIN/PUK when providing it is required to "
+"unlock a broadband device."
 msgstr ""
+"Impostare a VERO per disabilitare la richiesta di PIN/PUK per sbloccare un "
+"dispositivo a banda larga mobile."
+
+#: org.gnome.nm-applet.gschema.xml.in:41
+msgid "Show the applet in notification area"
+msgstr "Mostra l'applet nell'area di notifica"
+
+#: org.gnome.nm-applet.gschema.xml.in:42
+msgid "Set to FALSE to disable displaying the applet in the notification area."
+msgstr "Impostare a FALSO per non visualizzare l'applet nell'area di notifica."
 
 #: shared/nm-utils/nm-shared-utils.c:793
 #, c-format
@@ -196,7 +217,7 @@ msgstr "Autenticazione 802.1X"
 #: src/connection-editor/page-mobile.c:530
 #: src/connection-editor/page-proxy.c:107
 #: src/connection-editor/page-team-port.c:192
-#: src/connection-editor/page-team.c:330
+#: src/connection-editor/page-team.c:329
 #: src/connection-editor/vpn-helpers.c:198 src/gsm-unlock.ui:28
 #: src/mobile-helpers.c:451
 msgid "_Cancel"
@@ -221,9 +242,8 @@ msgstr "sicura"
 
 # (ndt) il punto alla file?
 #: src/ap-menu-item.c:77
-#, fuzzy
 msgid "insecure."
-msgstr "sicura"
+msgstr "non sicura"
 
 #: src/applet-device-broadband.c:147
 msgid "Wrong PUK code; please contact your provider."
@@ -238,45 +258,45 @@ msgstr "Codice PIN errato; contattare il provider."
 msgid "Sending unlock code…"
 msgstr "Invio codice di sblocco…"
 
-#: src/applet-device-broadband.c:725 src/applet-dialogs.c:521
+#: src/applet-device-broadband.c:729 src/applet-dialogs.c:521
 #, c-format
 msgid "Mobile Broadband (%s)"
 msgstr "Banda larga mobile (%s)"
 
-#: src/applet-device-broadband.c:727
+#: src/applet-device-broadband.c:731
 #: src/connection-editor/connection-helpers.c:95
 #: src/connection-editor/page-mobile.c:295
 msgid "Mobile Broadband"
 msgstr "Banda larga mobile"
 
-#: src/applet-device-broadband.c:780 src/applet-device-bt.c:61
+#: src/applet-device-broadband.c:784 src/applet-device-bt.c:61
 #: src/applet-device-ethernet.c:107
 msgid "Available"
 msgstr "Disponibile"
 
 #. Default connection item
-#: src/applet-device-broadband.c:793
+#: src/applet-device-broadband.c:797
 msgid "New Mobile Broadband connection…"
 msgstr "Nuova connessione a banda larga mobile…"
 
-#: src/applet-device-broadband.c:809 src/applet-device-bt.c:75
+#: src/applet-device-broadband.c:813 src/applet-device-bt.c:75
 #: src/applet-device-ethernet.c:124 src/applet-device-wifi.c:1251
 msgid "Connection Established"
 msgstr "Connessione stabilita"
 
-#: src/applet-device-broadband.c:810
+#: src/applet-device-broadband.c:814
 msgid "You are now connected to the Mobile Broadband network."
 msgstr "Attualmente connessi alla rete a banda larga mobile."
 
-#: src/applet-device-broadband.c:950 src/applet-device-broadband.c:956
+#: src/applet-device-broadband.c:954 src/applet-device-broadband.c:960
 msgid "Mobile Broadband network."
 msgstr "Rete a banda larga mobile."
 
-#: src/applet-device-broadband.c:951
+#: src/applet-device-broadband.c:955
 msgid "You are now registered on the home network."
 msgstr "Attualmente registrati sulla rete del proprio provider."
 
-#: src/applet-device-broadband.c:957
+#: src/applet-device-broadband.c:961
 msgid "You are now registered on a roaming network."
 msgstr "Attualmente registrati su una rete in roaming."
 
@@ -513,9 +533,8 @@ msgid "WEP"
 msgstr "WEP"
 
 #: src/applet-dialogs.c:228
-#, fuzzy
 msgid "WPA/WPA2/WPA3"
-msgstr "WPA/WPA2"
+msgstr "WPA/WPA2/WPA3"
 
 #: src/applet-dialogs.c:230
 msgid "WPA3"
@@ -640,6 +659,10 @@ msgstr "IPv6"
 #: src/applet-dialogs.c:717 src/connection-editor/ce-page-wifi.ui:52
 msgid "Hotspot"
 msgstr "Hotspot"
+
+#: src/applet-dialogs.c:724 src/applet.c:3166
+msgid "Network"
+msgstr "Rete"
 
 #: src/applet-dialogs.c:735
 msgid "Password"
@@ -1101,10 +1124,6 @@ msgstr "Connessione VPN attiva"
 #: src/applet.c:2645
 msgid "No network connection"
 msgstr "Nessuna connessione di rete"
-
-#: src/applet.c:3280
-msgid "NetworkManager Applet"
-msgstr "Applet NetworkManager"
 
 #: src/connection-editor/ce-ip4-routes.ui:88
 #: src/connection-editor/ce-ip6-routes.ui:88 src/connection-editor/ce-page.h:97
@@ -2376,7 +2395,8 @@ msgid "Ad_vanced…"
 msgstr "A_vanzate…"
 
 #: src/connection-editor/ce-page-team-port.ui:108
-msgid "Set by master"
+#, fuzzy
+msgid "Set by controller"
 msgstr "Impostato dal master"
 
 #: src/connection-editor/ce-page-team-port.ui:112
@@ -2827,9 +2847,10 @@ msgid "System priority, value can be 0 – 65535."
 msgstr "La priorità di sistema; valore nell'intervallo 0 - 65535"
 
 #: src/connection-editor/ce-page-team.ui:960
+#, fuzzy
 msgid ""
 "Specifies the minimum number of ports that must be active before asserting "
-"carrier in the master interface, value can be 1 – 255."
+"carrier in the controller interface, value can be 1 – 255."
 msgstr ""
 "Indica il numero minimo di porte che devono essere attive prima di "
 "verificare la portante nell'interfaccia master; valore nell'intervallo 1 - "
@@ -3297,7 +3318,7 @@ msgid "Bond"
 msgstr "Aggregata"
 
 #: src/connection-editor/connection-helpers.c:105
-#: src/connection-editor/page-team.c:1014
+#: src/connection-editor/page-team.c:1013
 msgid "Team"
 msgstr "Team"
 
@@ -3330,7 +3351,7 @@ msgstr "VPN"
 #: src/connection-editor/connection-helpers.c:202
 #, c-format
 msgid "VPN plugin “%s” not found"
-msgstr ""
+msgstr "Plugin VPN «%s» non trovato"
 
 #: src/connection-editor/connection-helpers.c:227
 msgid "No VPN service type."
@@ -3343,14 +3364,14 @@ msgstr "Importazione della connessione VPN da parte del plugin non riuscita: "
 #: src/connection-editor/connection-helpers.c:329
 #: src/connection-editor/page-proxy.c:104
 #: src/connection-editor/page-team-port.c:189
-#: src/connection-editor/page-team.c:327
+#: src/connection-editor/page-team.c:326
 msgid "Select file to import"
 msgstr "Selezionare un file da importare"
 
 #: src/connection-editor/connection-helpers.c:333
 #: src/connection-editor/page-proxy.c:108
 #: src/connection-editor/page-team-port.c:193
-#: src/connection-editor/page-team.c:331
+#: src/connection-editor/page-team.c:330
 msgid "_Open"
 msgstr "_Apri"
 
@@ -3985,17 +4006,17 @@ msgstr "Impossibile caricare l'interfaccia utente per MACsec."
 msgid "MACSEC connection %d"
 msgstr "Connessione MACsec %d"
 
-#: src/connection-editor/page-master.c:221
-#: src/connection-editor/page-master.c:232
+#: src/connection-editor/page-controller.c:221
+#: src/connection-editor/page-controller.c:232
 msgid "Duplicate ports"
 msgstr "Porte duplicate"
 
-#: src/connection-editor/page-master.c:222
+#: src/connection-editor/page-controller.c:222
 #, c-format
 msgid "Ports “%s” and “%s” both apply to device “%s”"
 msgstr "Le porte «%s» e «%s» si applicano entrambe al dispositivo «%s»"
 
-#: src/connection-editor/page-master.c:233
+#: src/connection-editor/page-controller.c:233
 #, c-format
 msgid ""
 "Ports “%s” and “%s” apply to different virtual ports (“%s” and “%s”) of the "
@@ -4004,7 +4025,7 @@ msgstr ""
 "Le porte «%s» e «%s» si applicano a diverse porte virtuali («%s» e «%s») "
 "dello stesso dispositivo fisico."
 
-#: src/connection-editor/page-master.c:357
+#: src/connection-editor/page-controller.c:357
 #, c-format
 msgid "%s port %d"
 msgstr "%s porta %d"
@@ -4094,7 +4115,7 @@ msgid "Could not load proxy user interface."
 msgstr "Impossibile caricare l'interfaccia utente per il proxy."
 
 #: src/connection-editor/page-team-port.c:209
-#: src/connection-editor/page-team.c:347
+#: src/connection-editor/page-team.c:346
 msgid "Error: file doesn’t contain a valid JSON configuration"
 msgstr "Errore: il file non contiene una configurazione JSON valida"
 
@@ -4109,11 +4130,11 @@ msgstr "Porta team"
 msgid "Could not load team port user interface."
 msgstr "Impossibile caricare l'interfaccia utente per la porta team."
 
-#: src/connection-editor/page-team.c:1017
+#: src/connection-editor/page-team.c:1016
 msgid "Could not load team user interface."
 msgstr "Impossibile caricare l'interfaccia utente di team."
 
-#: src/connection-editor/page-team.c:1114
+#: src/connection-editor/page-team.c:1113
 #, c-format
 msgid "Team connection %d"
 msgstr "Connessione team %d"
@@ -4200,14 +4221,12 @@ msgstr "WEP dinamico (802.1X)"
 # chiave condivisa mentre i WPA(2)-Enterprise utilizzeranno un server
 # di autenticazione.
 #: src/connection-editor/page-wifi-security.c:410
-#, fuzzy
 msgid "WPA/WPA2/WPA3 Personal"
-msgstr "WPA e WPA2 Personal"
+msgstr "WPA/WPA2/WPA3 Personal"
 
 #: src/connection-editor/page-wifi-security.c:423
-#, fuzzy
 msgid "WPA/WPA2 Enterprise"
-msgstr "WPA e WPA2 Enterprise"
+msgstr "WPA/WPA2 Enterprise"
 
 #: src/connection-editor/page-wifi-security.c:436
 msgid "WPA3 Personal"
@@ -4481,21 +4500,3 @@ msgstr "Certificati PEM (*.pem, *.crt, *.cer)"
 #: src/utils/utils.c:546
 msgid "DER, PEM, or PKCS#12 private keys (*.der, *.pem, *.p12, *.key)"
 msgstr "Chiavi private DER, PEM o PKCS#12 (*.der, *.pem, *.p12, *.key)"
-
-#~ msgid "mW"
-#~ msgstr "mW"
-
-#~ msgid "Transmission po_wer"
-#~ msgstr "Poten_za di trasmissione"
-
-#~ msgid "Mb/s"
-#~ msgstr "Mb/s"
-
-#~ msgid "_Rate"
-#~ msgstr "_Velocità"
-
-#~ msgid "nm-device-wireless"
-#~ msgstr "nm-device-wireless"
-
-#~ msgid "preferences-system-network"
-#~ msgstr "preferences-system-network"

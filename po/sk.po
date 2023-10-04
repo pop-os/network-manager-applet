@@ -9,9 +9,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: network-manager-applet\n"
-"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/network-manager-"
-"applet/\n"
-"POT-Creation-Date: 2023-04-16 21:44+0200\n"
+"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/network-manager-applet/"
+"issues\n"
+"POT-Creation-Date: 2023-10-04 18:29+0200\n"
 "PO-Revision-Date: 2020-04-24 07:57+0200\n"
 "Last-Translator: Dušan Kazik <prescott66@gmail.com>\n"
 "Language-Team: Slovak <gnome-sk-list@gnome.org>\n"
@@ -22,10 +22,9 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1) ? 1 : (n>=2 && n<=4) ? 2 : 0;\n"
 "X-Generator: Poedit 2.3\n"
 
-# desktop entry name
-#: nm-applet.desktop.in:3 src/applet-dialogs.c:724 src/applet.c:3166
-msgid "Network"
-msgstr "Sieť"
+#: nm-applet.desktop.in:3 src/applet.c:3280
+msgid "NetworkManager Applet"
+msgstr "Aplet Správca siete"
 
 # dektop entry comment
 #: nm-applet.desktop.in:4
@@ -142,10 +141,20 @@ msgstr ""
 "apletu."
 
 #: org.gnome.nm-applet.gschema.xml.in:36
+msgid "Suppress broadband device unlock prompt"
+msgstr ""
+
+#: org.gnome.nm-applet.gschema.xml.in:37
+msgid ""
+"Set to true to not prompt for PIN/PUK when providing it is required to "
+"unlock a broadband device."
+msgstr ""
+
+#: org.gnome.nm-applet.gschema.xml.in:41
 msgid "Show the applet in notification area"
 msgstr "Zobraziť aplet v oblasti oznámení"
 
-#: org.gnome.nm-applet.gschema.xml.in:37
+#: org.gnome.nm-applet.gschema.xml.in:42
 msgid "Set to FALSE to disable displaying the applet in the notification area."
 msgstr ""
 "Nastavte na false, keď nechcete aby sa zobrazoval aplet v oblasti oznámení."
@@ -203,7 +212,7 @@ msgstr "Overenie totožnosti protokolom 802.1X"
 #: src/connection-editor/page-mobile.c:530
 #: src/connection-editor/page-proxy.c:107
 #: src/connection-editor/page-team-port.c:192
-#: src/connection-editor/page-team.c:330
+#: src/connection-editor/page-team.c:329
 #: src/connection-editor/vpn-helpers.c:198 src/gsm-unlock.ui:28
 #: src/mobile-helpers.c:451
 msgid "_Cancel"
@@ -246,48 +255,48 @@ msgstr "Odosiela sa kód odomknutia…"
 
 # PM: nepáči sa mi že podstatné meno prekladáš prídavným, mobile broadband sa zvykne prekladať ako mobilá širokopásmová sieť, takže aspoň Mobilná sieť
 # PK: tu ide o pripojenie
-#: src/applet-device-broadband.c:725 src/applet-dialogs.c:521
+#: src/applet-device-broadband.c:729 src/applet-dialogs.c:521
 #, c-format
 msgid "Mobile Broadband (%s)"
 msgstr "Mobilné (%s)"
 
-#: src/applet-device-broadband.c:727
+#: src/applet-device-broadband.c:731
 #: src/connection-editor/connection-helpers.c:95
 #: src/connection-editor/page-mobile.c:295
 msgid "Mobile Broadband"
 msgstr "Mobilné"
 
 # to je o sieťach
-#: src/applet-device-broadband.c:780 src/applet-device-bt.c:61
+#: src/applet-device-broadband.c:784 src/applet-device-bt.c:61
 #: src/applet-device-ethernet.c:107
 msgid "Available"
 msgstr "Dostupné"
 
 #. Default connection item
-#: src/applet-device-broadband.c:793
+#: src/applet-device-broadband.c:797
 msgid "New Mobile Broadband connection…"
 msgstr "Nové mobilné pripojenie…"
 
-#: src/applet-device-broadband.c:809 src/applet-device-bt.c:75
+#: src/applet-device-broadband.c:813 src/applet-device-bt.c:75
 #: src/applet-device-ethernet.c:124 src/applet-device-wifi.c:1251
 msgid "Connection Established"
 msgstr "Pripojené"
 
-#: src/applet-device-broadband.c:810
+#: src/applet-device-broadband.c:814
 msgid "You are now connected to the Mobile Broadband network."
 msgstr "Teraz ste pripojený k mobilnej sieti."
 
-#: src/applet-device-broadband.c:950 src/applet-device-broadband.c:956
+#: src/applet-device-broadband.c:954 src/applet-device-broadband.c:960
 msgid "Mobile Broadband network."
 msgstr "Mobilná sieť"
 
-#: src/applet-device-broadband.c:951
+#: src/applet-device-broadband.c:955
 msgid "You are now registered on the home network."
 msgstr "Teraz ste registrovaný v domácej sieti."
 
 # PM: prečo nie v roamingovej? Ak sa ti to nevidí opýtaj sa v JULS
 # PK: okay, toto znie lepsie, roaming ale ponecham
-#: src/applet-device-broadband.c:957
+#: src/applet-device-broadband.c:961
 msgid "You are now registered on a roaming network."
 msgstr "Teraz ste registrovaný v roamingovej sieti."
 
@@ -657,6 +666,11 @@ msgstr "IPv6"
 #: src/applet-dialogs.c:717 src/connection-editor/ce-page-wifi.ui:52
 msgid "Hotspot"
 msgstr "Aktívny bod"
+
+# desktop entry name
+#: src/applet-dialogs.c:724 src/applet.c:3166
+msgid "Network"
+msgstr "Sieť"
 
 #: src/applet-dialogs.c:735
 msgid "Password"
@@ -1119,10 +1133,6 @@ msgstr "Pripojenie k VPN je aktívne"
 #: src/applet.c:2645
 msgid "No network connection"
 msgstr "Bez sieťového pripojenia"
-
-#: src/applet.c:3280
-msgid "NetworkManager Applet"
-msgstr "Aplet Správca siete"
 
 #: src/connection-editor/ce-ip4-routes.ui:88
 #: src/connection-editor/ce-ip6-routes.ui:88 src/connection-editor/ce-page.h:97
@@ -2369,7 +2379,7 @@ msgid "Ad_vanced…"
 msgstr "_Rozšírené…"
 
 #: src/connection-editor/ce-page-team-port.ui:108
-msgid "Set by master"
+msgid "Set by controller"
 msgstr ""
 
 #: src/connection-editor/ce-page-team-port.ui:112
@@ -2789,7 +2799,7 @@ msgstr "Priorita systému. Hodnota môže byť od 0 - 65535."
 #: src/connection-editor/ce-page-team.ui:960
 msgid ""
 "Specifies the minimum number of ports that must be active before asserting "
-"carrier in the master interface, value can be 1 – 255."
+"carrier in the controller interface, value can be 1 – 255."
 msgstr ""
 
 #: src/connection-editor/ce-page-team.ui:972
@@ -3240,7 +3250,7 @@ msgid "Bond"
 msgstr "Previazané"
 
 #: src/connection-editor/connection-helpers.c:105
-#: src/connection-editor/page-team.c:1014
+#: src/connection-editor/page-team.c:1013
 msgid "Team"
 msgstr "Tím"
 
@@ -3291,14 +3301,14 @@ msgstr ""
 #: src/connection-editor/connection-helpers.c:329
 #: src/connection-editor/page-proxy.c:104
 #: src/connection-editor/page-team-port.c:189
-#: src/connection-editor/page-team.c:327
+#: src/connection-editor/page-team.c:326
 msgid "Select file to import"
 msgstr "Výber súboru na import"
 
 #: src/connection-editor/connection-helpers.c:333
 #: src/connection-editor/page-proxy.c:108
 #: src/connection-editor/page-team-port.c:193
-#: src/connection-editor/page-team.c:331
+#: src/connection-editor/page-team.c:330
 msgid "_Open"
 msgstr "_Otvoriť"
 
@@ -3948,19 +3958,19 @@ msgstr "Nepodarilo sa načítať používateľské rozhranie pre MACsec."
 msgid "MACSEC connection %d"
 msgstr "Pripojenie MACSEC č. %d"
 
-#: src/connection-editor/page-master.c:221
-#: src/connection-editor/page-master.c:232
+#: src/connection-editor/page-controller.c:221
+#: src/connection-editor/page-controller.c:232
 #, fuzzy
 msgid "Duplicate ports"
 msgstr "Duplikátne podriadené rozhrania"
 
-#: src/connection-editor/page-master.c:222
+#: src/connection-editor/page-controller.c:222
 #, fuzzy, c-format
 msgid "Ports “%s” and “%s” both apply to device “%s”"
 msgstr ""
 "Obidve podriadené rozhrania „%s“ a „%s“ sú aplikované na zariadení „%s“"
 
-#: src/connection-editor/page-master.c:233
+#: src/connection-editor/page-controller.c:233
 #, fuzzy, c-format
 msgid ""
 "Ports “%s” and “%s” apply to different virtual ports (“%s” and “%s”) of the "
@@ -3969,7 +3979,7 @@ msgstr ""
 "Podriadené zariadenia „%s“ a „%s“ sú aplikované na rozdielne virtuálne porty "
 "(„%s“ a „%s“) toho istého fyzického zariadenia."
 
-#: src/connection-editor/page-master.c:357
+#: src/connection-editor/page-controller.c:357
 #, c-format
 msgid "%s port %d"
 msgstr ""
@@ -4063,7 +4073,7 @@ msgstr ""
 "Nepodarilo sa načítať používateľské rozhranie pre sprostredkovateľa proxy."
 
 #: src/connection-editor/page-team-port.c:209
-#: src/connection-editor/page-team.c:347
+#: src/connection-editor/page-team.c:346
 msgid "Error: file doesn’t contain a valid JSON configuration"
 msgstr "Chyba: súbor neobsahuje platnú konfiguráciu JSON"
 
@@ -4078,11 +4088,11 @@ msgstr "Port tímu"
 msgid "Could not load team port user interface."
 msgstr "Nepodarilo sa načítať používateľské rozhranie pre port tímu."
 
-#: src/connection-editor/page-team.c:1017
+#: src/connection-editor/page-team.c:1016
 msgid "Could not load team user interface."
 msgstr "Nepodarilo sa načítať tímové používateľské rozhranie."
 
-#: src/connection-editor/page-team.c:1114
+#: src/connection-editor/page-team.c:1113
 #, c-format
 msgid "Team connection %d"
 msgstr "Tímové pripojenie č. %d"

@@ -6,9 +6,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: eog\n"
-"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/network-manager-"
-"applet/\n"
-"POT-Creation-Date: 2023-04-16 21:44+0200\n"
+"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/network-manager-applet/"
+"issues\n"
+"POT-Creation-Date: 2023-10-04 18:29+0200\n"
 "PO-Revision-Date: 2017-03-09 15:27+0100\n"
 "Last-Translator: GunChleoc <fios@foramnagaidhlig.net>\n"
 "Language-Team: Fòram na Gàidhlig\n"
@@ -22,9 +22,9 @@ msgstr ""
 "X-Launchpad-Export-Date: 2013-09-15 06:24+0000\n"
 "X-Project-Style: gnome\n"
 
-#: nm-applet.desktop.in:3 src/applet-dialogs.c:724 src/applet.c:3166
-msgid "Network"
-msgstr "Lìonra"
+#: nm-applet.desktop.in:3 src/applet.c:3280
+msgid "NetworkManager Applet"
+msgstr "Aplaid Manaidsear lìonraidh"
 
 #: nm-applet.desktop.in:4
 msgid "Manage your network connections"
@@ -135,10 +135,20 @@ msgstr ""
 "lìonraidhean ad-hoc nuair a chleachdar an aplaid."
 
 #: org.gnome.nm-applet.gschema.xml.in:36
+msgid "Suppress broadband device unlock prompt"
+msgstr ""
+
+#: org.gnome.nm-applet.gschema.xml.in:37
+msgid ""
+"Set to true to not prompt for PIN/PUK when providing it is required to "
+"unlock a broadband device."
+msgstr ""
+
+#: org.gnome.nm-applet.gschema.xml.in:41
 msgid "Show the applet in notification area"
 msgstr "Seall an aplaid ann an raon nam brathan"
 
-#: org.gnome.nm-applet.gschema.xml.in:37
+#: org.gnome.nm-applet.gschema.xml.in:42
 msgid "Set to FALSE to disable displaying the applet in the notification area."
 msgstr ""
 "Tagh FALSE air a shon mur eil thu airson an aplaid fhaicinn ann an raon nam "
@@ -196,7 +206,7 @@ msgstr "Dearbhadh 802.1X"
 #: src/connection-editor/page-mobile.c:530
 #: src/connection-editor/page-proxy.c:107
 #: src/connection-editor/page-team-port.c:192
-#: src/connection-editor/page-team.c:330
+#: src/connection-editor/page-team.c:329
 #: src/connection-editor/vpn-helpers.c:198 src/gsm-unlock.ui:28
 #: src/mobile-helpers.c:451
 msgid "_Cancel"
@@ -237,45 +247,45 @@ msgstr "Tha am PIN cearr; cuir fios gun t-solaraiche agad."
 msgid "Sending unlock code…"
 msgstr "A' cur a' chòd a bheir a' ghlais dheth..."
 
-#: src/applet-device-broadband.c:725 src/applet-dialogs.c:521
+#: src/applet-device-broadband.c:729 src/applet-dialogs.c:521
 #, c-format
 msgid "Mobile Broadband (%s)"
 msgstr "Bann-leathann mobile (%s)"
 
-#: src/applet-device-broadband.c:727
+#: src/applet-device-broadband.c:731
 #: src/connection-editor/connection-helpers.c:95
 #: src/connection-editor/page-mobile.c:295
 msgid "Mobile Broadband"
 msgstr "Bann-leathann mobile"
 
-#: src/applet-device-broadband.c:780 src/applet-device-bt.c:61
+#: src/applet-device-broadband.c:784 src/applet-device-bt.c:61
 #: src/applet-device-ethernet.c:107
 msgid "Available"
 msgstr "Ri làimh"
 
 #. Default connection item
-#: src/applet-device-broadband.c:793
+#: src/applet-device-broadband.c:797
 msgid "New Mobile Broadband connection…"
 msgstr "Ceangal bann-leathainn mobile ùr..."
 
-#: src/applet-device-broadband.c:809 src/applet-device-bt.c:75
+#: src/applet-device-broadband.c:813 src/applet-device-bt.c:75
 #: src/applet-device-ethernet.c:124 src/applet-device-wifi.c:1251
 msgid "Connection Established"
 msgstr "Chaidh ceangal a dhèanamh"
 
-#: src/applet-device-broadband.c:810
+#: src/applet-device-broadband.c:814
 msgid "You are now connected to the Mobile Broadband network."
 msgstr "Tha thu air ceangal a dhèanamh ris an lìonra bann-leathainn mobile."
 
-#: src/applet-device-broadband.c:950 src/applet-device-broadband.c:956
+#: src/applet-device-broadband.c:954 src/applet-device-broadband.c:960
 msgid "Mobile Broadband network."
 msgstr "Lìonra bann-leathainn mobile."
 
-#: src/applet-device-broadband.c:951
+#: src/applet-device-broadband.c:955
 msgid "You are now registered on the home network."
 msgstr "Tha thu a-nis clàraichte air an lìonra dachaigh."
 
-#: src/applet-device-broadband.c:957
+#: src/applet-device-broadband.c:961
 msgid "You are now registered on a roaming network."
 msgstr "Tha thu a-nis clàraichte air lìonra air fàrsan."
 
@@ -649,6 +659,10 @@ msgstr "IPv6"
 #: src/applet-dialogs.c:717 src/connection-editor/ce-page-wifi.ui:52
 msgid "Hotspot"
 msgstr "Hotspot"
+
+#: src/applet-dialogs.c:724 src/applet.c:3166
+msgid "Network"
+msgstr "Lìonra"
 
 #: src/applet-dialogs.c:735
 #, fuzzy
@@ -1115,10 +1129,6 @@ msgstr "Tha an ceangal VPN gnìomhach"
 #: src/applet.c:2645
 msgid "No network connection"
 msgstr "Chan eil ceangal ris an lìonra"
-
-#: src/applet.c:3280
-msgid "NetworkManager Applet"
-msgstr "Aplaid Manaidsear lìonraidh"
 
 #: src/connection-editor/ce-ip4-routes.ui:88
 #: src/connection-editor/ce-ip6-routes.ui:88 src/connection-editor/ce-page.h:97
@@ -2404,7 +2414,7 @@ msgid "Ad_vanced…"
 msgstr "_Adhartach..."
 
 #: src/connection-editor/ce-page-team-port.ui:108
-msgid "Set by master"
+msgid "Set by controller"
 msgstr ""
 
 #: src/connection-editor/ce-page-team-port.ui:112
@@ -2826,7 +2836,7 @@ msgstr ""
 #: src/connection-editor/ce-page-team.ui:960
 msgid ""
 "Specifies the minimum number of ports that must be active before asserting "
-"carrier in the master interface, value can be 1 – 255."
+"carrier in the controller interface, value can be 1 – 255."
 msgstr ""
 
 #: src/connection-editor/ce-page-team.ui:972
@@ -3280,7 +3290,7 @@ msgid "Bond"
 msgstr "Bann"
 
 #: src/connection-editor/connection-helpers.c:105
-#: src/connection-editor/page-team.c:1014
+#: src/connection-editor/page-team.c:1013
 msgid "Team"
 msgstr "Sgioba"
 
@@ -3331,14 +3341,14 @@ msgstr ""
 #: src/connection-editor/connection-helpers.c:329
 #: src/connection-editor/page-proxy.c:104
 #: src/connection-editor/page-team-port.c:189
-#: src/connection-editor/page-team.c:327
+#: src/connection-editor/page-team.c:326
 msgid "Select file to import"
 msgstr "Tagh am faidhle a tha ri ion-phortadh"
 
 #: src/connection-editor/connection-helpers.c:333
 #: src/connection-editor/page-proxy.c:108
 #: src/connection-editor/page-team-port.c:193
-#: src/connection-editor/page-team.c:331
+#: src/connection-editor/page-team.c:330
 msgid "_Open"
 msgstr ""
 
@@ -4006,18 +4016,18 @@ msgstr "Cha b' urrainn dhuinn eadar-aghaidh cleachdaiche WiMAX a luchdadh."
 msgid "MACSEC connection %d"
 msgstr "Ceangal WiMAX %d"
 
-#: src/connection-editor/page-master.c:221
-#: src/connection-editor/page-master.c:232
+#: src/connection-editor/page-controller.c:221
+#: src/connection-editor/page-controller.c:232
 #, fuzzy
 msgid "Duplicate ports"
 msgstr "Dùblaich tràillean"
 
-#: src/connection-editor/page-master.c:222
+#: src/connection-editor/page-controller.c:222
 #, fuzzy, c-format
 msgid "Ports “%s” and “%s” both apply to device “%s”"
 msgstr "Tha an dà thràill \"%s\" agus \"%s\" an sàs airson an uidheim \"%s\""
 
-#: src/connection-editor/page-master.c:233
+#: src/connection-editor/page-controller.c:233
 #, fuzzy, c-format
 msgid ""
 "Ports “%s” and “%s” apply to different virtual ports (“%s” and “%s”) of the "
@@ -4026,7 +4036,7 @@ msgstr ""
 "Tha an dà thràill \"%s\" agus \"%s\" an sàs airson puirt bhiortail eadar-"
 "dhealaichte (\"%s\" agus \"%s\") aig an aon uidheam fhiosaigeach."
 
-#: src/connection-editor/page-master.c:357
+#: src/connection-editor/page-controller.c:357
 #, c-format
 msgid "%s port %d"
 msgstr ""
@@ -4121,7 +4131,7 @@ msgid "Could not load proxy user interface."
 msgstr "Cha b' urrainn dhuinn an eadar-aghaidh airson progsaidhean a luchdadh."
 
 #: src/connection-editor/page-team-port.c:209
-#: src/connection-editor/page-team.c:347
+#: src/connection-editor/page-team.c:346
 msgid "Error: file doesn’t contain a valid JSON configuration"
 msgstr "Mearachd: chan eil rèiteachadh JSON dligheach am broinn an fhaidhle"
 
@@ -4138,12 +4148,12 @@ msgstr ""
 "Cha b' urrainn dhuinn an eadar-aghaidh airson port sgioba a' chleachdaiche a "
 "luchdadh."
 
-#: src/connection-editor/page-team.c:1017
+#: src/connection-editor/page-team.c:1016
 msgid "Could not load team user interface."
 msgstr ""
 "Cha b' urrainn dhuinn eadar-aghaidh sgioba a' chleachdaiche a luchdadh."
 
-#: src/connection-editor/page-team.c:1114
+#: src/connection-editor/page-team.c:1113
 #, c-format
 msgid "Team connection %d"
 msgstr "Ceangal sgioba %d"

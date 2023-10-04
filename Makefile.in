@@ -201,7 +201,7 @@ am__objects_3 = src/connection-editor/nm_connection_editor-nm-connection-editor.
 	src/connection-editor/nm_connection_editor-page-ppp.$(OBJEXT) \
 	src/connection-editor/nm_connection_editor-page-proxy.$(OBJEXT) \
 	src/connection-editor/nm_connection_editor-page-vpn.$(OBJEXT) \
-	src/connection-editor/nm_connection_editor-page-master.$(OBJEXT) \
+	src/connection-editor/nm_connection_editor-page-controller.$(OBJEXT) \
 	src/connection-editor/nm_connection_editor-page-bond.$(OBJEXT) \
 	src/connection-editor/nm_connection_editor-page-team.$(OBJEXT) \
 	src/connection-editor/nm_connection_editor-page-team-port.$(OBJEXT) \
@@ -344,6 +344,7 @@ am__depfiles_remade =  \
 	src/connection-editor/$(DEPDIR)/nm_connection_editor-page-bond.Po \
 	src/connection-editor/$(DEPDIR)/nm_connection_editor-page-bridge-port.Po \
 	src/connection-editor/$(DEPDIR)/nm_connection_editor-page-bridge.Po \
+	src/connection-editor/$(DEPDIR)/nm_connection_editor-page-controller.Po \
 	src/connection-editor/$(DEPDIR)/nm_connection_editor-page-dcb.Po \
 	src/connection-editor/$(DEPDIR)/nm_connection_editor-page-dsl.Po \
 	src/connection-editor/$(DEPDIR)/nm_connection_editor-page-ethernet.Po \
@@ -353,7 +354,6 @@ am__depfiles_remade =  \
 	src/connection-editor/$(DEPDIR)/nm_connection_editor-page-ip4.Po \
 	src/connection-editor/$(DEPDIR)/nm_connection_editor-page-ip6.Po \
 	src/connection-editor/$(DEPDIR)/nm_connection_editor-page-macsec.Po \
-	src/connection-editor/$(DEPDIR)/nm_connection_editor-page-master.Po \
 	src/connection-editor/$(DEPDIR)/nm_connection_editor-page-mobile.Po \
 	src/connection-editor/$(DEPDIR)/nm_connection_editor-page-ppp.Po \
 	src/connection-editor/$(DEPDIR)/nm_connection_editor-page-proxy.Po \
@@ -725,8 +725,6 @@ GREP = @GREP@
 GSETTINGS_DISABLE_SCHEMAS_COMPILE = @GSETTINGS_DISABLE_SCHEMAS_COMPILE@
 GTK3_CFLAGS = @GTK3_CFLAGS@
 GTK3_LIBS = @GTK3_LIBS@
-GUDEV_CFLAGS = @GUDEV_CFLAGS@
-GUDEV_LIBS = @GUDEV_LIBS@
 INSTALL = @INSTALL@
 INSTALL_DATA = @INSTALL_DATA@
 INSTALL_PROGRAM = @INSTALL_PROGRAM@
@@ -1185,8 +1183,8 @@ connection_editor_hc_real = \
 	src/connection-editor/page-proxy.c \
 	src/connection-editor/page-vpn.h \
 	src/connection-editor/page-vpn.c \
-	src/connection-editor/page-master.h \
-	src/connection-editor/page-master.c \
+	src/connection-editor/page-controller.h \
+	src/connection-editor/page-controller.c \
 	src/connection-editor/page-bond.h \
 	src/connection-editor/page-bond.c \
 	src/connection-editor/page-team.h \
@@ -1598,7 +1596,7 @@ src/connection-editor/nm_connection_editor-page-proxy.$(OBJEXT):  \
 src/connection-editor/nm_connection_editor-page-vpn.$(OBJEXT):  \
 	src/connection-editor/$(am__dirstamp) \
 	src/connection-editor/$(DEPDIR)/$(am__dirstamp)
-src/connection-editor/nm_connection_editor-page-master.$(OBJEXT):  \
+src/connection-editor/nm_connection_editor-page-controller.$(OBJEXT):  \
 	src/connection-editor/$(am__dirstamp) \
 	src/connection-editor/$(DEPDIR)/$(am__dirstamp)
 src/connection-editor/nm_connection_editor-page-bond.$(OBJEXT):  \
@@ -1780,6 +1778,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@src/connection-editor/$(DEPDIR)/nm_connection_editor-page-bond.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/connection-editor/$(DEPDIR)/nm_connection_editor-page-bridge-port.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/connection-editor/$(DEPDIR)/nm_connection_editor-page-bridge.Po@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@src/connection-editor/$(DEPDIR)/nm_connection_editor-page-controller.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/connection-editor/$(DEPDIR)/nm_connection_editor-page-dcb.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/connection-editor/$(DEPDIR)/nm_connection_editor-page-dsl.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/connection-editor/$(DEPDIR)/nm_connection_editor-page-ethernet.Po@am__quote@ # am--include-marker
@@ -1789,7 +1788,6 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@src/connection-editor/$(DEPDIR)/nm_connection_editor-page-ip4.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/connection-editor/$(DEPDIR)/nm_connection_editor-page-ip6.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/connection-editor/$(DEPDIR)/nm_connection_editor-page-macsec.Po@am__quote@ # am--include-marker
-@AMDEP_TRUE@@am__include@ @am__quote@src/connection-editor/$(DEPDIR)/nm_connection_editor-page-master.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/connection-editor/$(DEPDIR)/nm_connection_editor-page-mobile.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/connection-editor/$(DEPDIR)/nm_connection_editor-page-ppp.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/connection-editor/$(DEPDIR)/nm_connection_editor-page-proxy.Po@am__quote@ # am--include-marker
@@ -2138,19 +2136,19 @@ src/connection-editor/nm_connection_editor-page-vpn.obj: src/connection-editor/p
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(src_connection_editor_nm_connection_editor_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o src/connection-editor/nm_connection_editor-page-vpn.obj `if test -f 'src/connection-editor/page-vpn.c'; then $(CYGPATH_W) 'src/connection-editor/page-vpn.c'; else $(CYGPATH_W) '$(srcdir)/src/connection-editor/page-vpn.c'; fi`
 
-src/connection-editor/nm_connection_editor-page-master.o: src/connection-editor/page-master.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(src_connection_editor_nm_connection_editor_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT src/connection-editor/nm_connection_editor-page-master.o -MD -MP -MF src/connection-editor/$(DEPDIR)/nm_connection_editor-page-master.Tpo -c -o src/connection-editor/nm_connection_editor-page-master.o `test -f 'src/connection-editor/page-master.c' || echo '$(srcdir)/'`src/connection-editor/page-master.c
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) src/connection-editor/$(DEPDIR)/nm_connection_editor-page-master.Tpo src/connection-editor/$(DEPDIR)/nm_connection_editor-page-master.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='src/connection-editor/page-master.c' object='src/connection-editor/nm_connection_editor-page-master.o' libtool=no @AMDEPBACKSLASH@
+src/connection-editor/nm_connection_editor-page-controller.o: src/connection-editor/page-controller.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(src_connection_editor_nm_connection_editor_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT src/connection-editor/nm_connection_editor-page-controller.o -MD -MP -MF src/connection-editor/$(DEPDIR)/nm_connection_editor-page-controller.Tpo -c -o src/connection-editor/nm_connection_editor-page-controller.o `test -f 'src/connection-editor/page-controller.c' || echo '$(srcdir)/'`src/connection-editor/page-controller.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) src/connection-editor/$(DEPDIR)/nm_connection_editor-page-controller.Tpo src/connection-editor/$(DEPDIR)/nm_connection_editor-page-controller.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='src/connection-editor/page-controller.c' object='src/connection-editor/nm_connection_editor-page-controller.o' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(src_connection_editor_nm_connection_editor_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o src/connection-editor/nm_connection_editor-page-master.o `test -f 'src/connection-editor/page-master.c' || echo '$(srcdir)/'`src/connection-editor/page-master.c
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(src_connection_editor_nm_connection_editor_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o src/connection-editor/nm_connection_editor-page-controller.o `test -f 'src/connection-editor/page-controller.c' || echo '$(srcdir)/'`src/connection-editor/page-controller.c
 
-src/connection-editor/nm_connection_editor-page-master.obj: src/connection-editor/page-master.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(src_connection_editor_nm_connection_editor_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT src/connection-editor/nm_connection_editor-page-master.obj -MD -MP -MF src/connection-editor/$(DEPDIR)/nm_connection_editor-page-master.Tpo -c -o src/connection-editor/nm_connection_editor-page-master.obj `if test -f 'src/connection-editor/page-master.c'; then $(CYGPATH_W) 'src/connection-editor/page-master.c'; else $(CYGPATH_W) '$(srcdir)/src/connection-editor/page-master.c'; fi`
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) src/connection-editor/$(DEPDIR)/nm_connection_editor-page-master.Tpo src/connection-editor/$(DEPDIR)/nm_connection_editor-page-master.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='src/connection-editor/page-master.c' object='src/connection-editor/nm_connection_editor-page-master.obj' libtool=no @AMDEPBACKSLASH@
+src/connection-editor/nm_connection_editor-page-controller.obj: src/connection-editor/page-controller.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(src_connection_editor_nm_connection_editor_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT src/connection-editor/nm_connection_editor-page-controller.obj -MD -MP -MF src/connection-editor/$(DEPDIR)/nm_connection_editor-page-controller.Tpo -c -o src/connection-editor/nm_connection_editor-page-controller.obj `if test -f 'src/connection-editor/page-controller.c'; then $(CYGPATH_W) 'src/connection-editor/page-controller.c'; else $(CYGPATH_W) '$(srcdir)/src/connection-editor/page-controller.c'; fi`
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) src/connection-editor/$(DEPDIR)/nm_connection_editor-page-controller.Tpo src/connection-editor/$(DEPDIR)/nm_connection_editor-page-controller.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='src/connection-editor/page-controller.c' object='src/connection-editor/nm_connection_editor-page-controller.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(src_connection_editor_nm_connection_editor_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o src/connection-editor/nm_connection_editor-page-master.obj `if test -f 'src/connection-editor/page-master.c'; then $(CYGPATH_W) 'src/connection-editor/page-master.c'; else $(CYGPATH_W) '$(srcdir)/src/connection-editor/page-master.c'; fi`
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(src_connection_editor_nm_connection_editor_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o src/connection-editor/nm_connection_editor-page-controller.obj `if test -f 'src/connection-editor/page-controller.c'; then $(CYGPATH_W) 'src/connection-editor/page-controller.c'; else $(CYGPATH_W) '$(srcdir)/src/connection-editor/page-controller.c'; fi`
 
 src/connection-editor/nm_connection_editor-page-bond.o: src/connection-editor/page-bond.c
 @am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(src_connection_editor_nm_connection_editor_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT src/connection-editor/nm_connection_editor-page-bond.o -MD -MP -MF src/connection-editor/$(DEPDIR)/nm_connection_editor-page-bond.Tpo -c -o src/connection-editor/nm_connection_editor-page-bond.o `test -f 'src/connection-editor/page-bond.c' || echo '$(srcdir)/'`src/connection-editor/page-bond.c
@@ -3534,6 +3532,7 @@ distclean: distclean-recursive
 	-rm -f src/connection-editor/$(DEPDIR)/nm_connection_editor-page-bond.Po
 	-rm -f src/connection-editor/$(DEPDIR)/nm_connection_editor-page-bridge-port.Po
 	-rm -f src/connection-editor/$(DEPDIR)/nm_connection_editor-page-bridge.Po
+	-rm -f src/connection-editor/$(DEPDIR)/nm_connection_editor-page-controller.Po
 	-rm -f src/connection-editor/$(DEPDIR)/nm_connection_editor-page-dcb.Po
 	-rm -f src/connection-editor/$(DEPDIR)/nm_connection_editor-page-dsl.Po
 	-rm -f src/connection-editor/$(DEPDIR)/nm_connection_editor-page-ethernet.Po
@@ -3543,7 +3542,6 @@ distclean: distclean-recursive
 	-rm -f src/connection-editor/$(DEPDIR)/nm_connection_editor-page-ip4.Po
 	-rm -f src/connection-editor/$(DEPDIR)/nm_connection_editor-page-ip6.Po
 	-rm -f src/connection-editor/$(DEPDIR)/nm_connection_editor-page-macsec.Po
-	-rm -f src/connection-editor/$(DEPDIR)/nm_connection_editor-page-master.Po
 	-rm -f src/connection-editor/$(DEPDIR)/nm_connection_editor-page-mobile.Po
 	-rm -f src/connection-editor/$(DEPDIR)/nm_connection_editor-page-ppp.Po
 	-rm -f src/connection-editor/$(DEPDIR)/nm_connection_editor-page-proxy.Po
@@ -3646,6 +3644,7 @@ maintainer-clean: maintainer-clean-recursive
 	-rm -f src/connection-editor/$(DEPDIR)/nm_connection_editor-page-bond.Po
 	-rm -f src/connection-editor/$(DEPDIR)/nm_connection_editor-page-bridge-port.Po
 	-rm -f src/connection-editor/$(DEPDIR)/nm_connection_editor-page-bridge.Po
+	-rm -f src/connection-editor/$(DEPDIR)/nm_connection_editor-page-controller.Po
 	-rm -f src/connection-editor/$(DEPDIR)/nm_connection_editor-page-dcb.Po
 	-rm -f src/connection-editor/$(DEPDIR)/nm_connection_editor-page-dsl.Po
 	-rm -f src/connection-editor/$(DEPDIR)/nm_connection_editor-page-ethernet.Po
@@ -3655,7 +3654,6 @@ maintainer-clean: maintainer-clean-recursive
 	-rm -f src/connection-editor/$(DEPDIR)/nm_connection_editor-page-ip4.Po
 	-rm -f src/connection-editor/$(DEPDIR)/nm_connection_editor-page-ip6.Po
 	-rm -f src/connection-editor/$(DEPDIR)/nm_connection_editor-page-macsec.Po
-	-rm -f src/connection-editor/$(DEPDIR)/nm_connection_editor-page-master.Po
 	-rm -f src/connection-editor/$(DEPDIR)/nm_connection_editor-page-mobile.Po
 	-rm -f src/connection-editor/$(DEPDIR)/nm_connection_editor-page-ppp.Po
 	-rm -f src/connection-editor/$(DEPDIR)/nm_connection_editor-page-proxy.Po

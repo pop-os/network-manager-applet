@@ -13,22 +13,22 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: NetworkManager\n"
-"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/network-manager-"
-"applet/\n"
-"POT-Creation-Date: 2023-04-16 21:44+0200\n"
-"PO-Revision-Date: 2022-03-04 20:41+0100\n"
+"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/network-manager-applet/"
+"issues\n"
+"POT-Creation-Date: 2023-10-04 18:29+0200\n"
+"PO-Revision-Date: 2023-05-13 23:57+0200\n"
 "Last-Translator: Jordi Mas i Hernàndez <jmas@softcatala.org>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bits\n"
+"Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 2.0\n"
+"X-Generator: Poedit 2.4.2\n"
 
-#: nm-applet.desktop.in:3 src/applet-dialogs.c:724 src/applet.c:3166
-msgid "Network"
-msgstr "Xarxa"
+#: nm-applet.desktop.in:3 src/applet.c:3280
+msgid "NetworkManager Applet"
+msgstr "Miniaplicació NetworkManager"
 
 #: nm-applet.desktop.in:4
 msgid "Manage your network connections"
@@ -71,68 +71,88 @@ msgid "Manage and change your network connection settings"
 msgstr "Gestioneu i modifiqueu els paràmetres de connexió de xarxa"
 
 #: org.gnome.nm-applet.gschema.xml.in:6
-#, fuzzy
 msgid "Disable connected notifications"
-msgstr "Habilita les n_otificacions"
+msgstr "Desactiva les notificacions de connexió"
 
 #: org.gnome.nm-applet.gschema.xml.in:7
 msgid "Set this to true to disable notifications when connecting to a network."
 msgstr ""
+"Establiu-lo com a cert per desactivar les notificacions al connectar-se a "
+"una xarxa."
 
 #: org.gnome.nm-applet.gschema.xml.in:11
-#, fuzzy
 msgid "Disable disconnected notifications"
-msgstr "Ha fallat la desconnexió del dispositiu"
+msgstr "Desactiva les notificacions de desconnexió"
 
 #: org.gnome.nm-applet.gschema.xml.in:12
 msgid ""
 "Set this to true to disable notifications when disconnecting from a network."
 msgstr ""
+"Establiu-lo com a cert per desactivar les notificacions al desconnectar-se "
+"d'una xarxa."
 
 #: org.gnome.nm-applet.gschema.xml.in:16
-#, fuzzy
 msgid "Disable VPN notifications"
-msgstr "Habilita les n_otificacions"
+msgstr "Desactiva les notificacions de VPN"
 
 #: org.gnome.nm-applet.gschema.xml.in:17
 msgid ""
 "Set this to true to disable notifications when connecting to or "
 "disconnecting from a VPN."
 msgstr ""
+"Establiu-lo com a cert per desactivar les notificacions al connectar-se o "
+"desconnectar-se d'una VPN."
 
 #: org.gnome.nm-applet.gschema.xml.in:21
 msgid "Suppress networks available notifications"
-msgstr ""
+msgstr "Suprimeix les notificacions de xarxes disponibles"
 
 #: org.gnome.nm-applet.gschema.xml.in:22
 msgid ""
 "Set this to true to disable notifications when Wi-Fi networks are available."
 msgstr ""
+"Establiu-lo com a cert per desactivar les notificacions quan hi hagi xarxes "
+"Wifi disponibles."
 
 #: org.gnome.nm-applet.gschema.xml.in:26
 msgid "Stamp"
-msgstr ""
+msgstr "Segell"
 
 #: org.gnome.nm-applet.gschema.xml.in:27
 msgid "Used to determine whether settings should be migrated to a new version."
 msgstr ""
+"S'usa per a determinar si els paràmetres s'han de migrar a una nova versió."
 
 #: org.gnome.nm-applet.gschema.xml.in:31
 msgid "Disable WiFi Create"
-msgstr ""
+msgstr "Desactiva la creació de Wifi"
 
 #: org.gnome.nm-applet.gschema.xml.in:32
 msgid ""
 "Set to true to disable creation of adhoc networks when using the applet."
 msgstr ""
+"Establiu com a cert per desactivar la creació de xarxes ad hoc a l'usar la "
+"miniaplicació."
 
 #: org.gnome.nm-applet.gschema.xml.in:36
-msgid "Show the applet in notification area"
+msgid "Suppress broadband device unlock prompt"
 msgstr ""
 
 #: org.gnome.nm-applet.gschema.xml.in:37
+msgid ""
+"Set to true to not prompt for PIN/PUK when providing it is required to "
+"unlock a broadband device."
+msgstr ""
+
+#: org.gnome.nm-applet.gschema.xml.in:41
+msgid "Show the applet in notification area"
+msgstr "Mostra la miniaplicació a l'àrea de notificació"
+
+#: org.gnome.nm-applet.gschema.xml.in:42
 msgid "Set to FALSE to disable displaying the applet in the notification area."
 msgstr ""
+"Establiu-lo a «FALSE» per desactivar la presència de la miniaplicació a "
+"l'àrea de notificació."
 
 #: shared/nm-utils/nm-shared-utils.c:793
 #, c-format
@@ -193,7 +213,7 @@ msgstr "Autenticació 802.1X"
 #: src/connection-editor/page-mobile.c:530
 #: src/connection-editor/page-proxy.c:107
 #: src/connection-editor/page-team-port.c:192
-#: src/connection-editor/page-team.c:330
+#: src/connection-editor/page-team.c:329
 #: src/connection-editor/vpn-helpers.c:198 src/gsm-unlock.ui:28
 #: src/mobile-helpers.c:451
 msgid "_Cancel"
@@ -216,9 +236,8 @@ msgid "secure."
 msgstr "segur."
 
 #: src/ap-menu-item.c:77
-#, fuzzy
 msgid "insecure."
-msgstr "segur."
+msgstr "insegur."
 
 #: src/applet-device-broadband.c:147
 msgid "Wrong PUK code; please contact your provider."
@@ -233,45 +252,45 @@ msgstr "El codi PIN no és correcte. Contacteu amb el vostre proveïdor."
 msgid "Sending unlock code…"
 msgstr "S'està enviant el codi de desbloqueig…"
 
-#: src/applet-device-broadband.c:725 src/applet-dialogs.c:521
+#: src/applet-device-broadband.c:729 src/applet-dialogs.c:521
 #, c-format
 msgid "Mobile Broadband (%s)"
 msgstr "Banda ampla mòbil (%s)"
 
-#: src/applet-device-broadband.c:727
+#: src/applet-device-broadband.c:731
 #: src/connection-editor/connection-helpers.c:95
 #: src/connection-editor/page-mobile.c:295
 msgid "Mobile Broadband"
 msgstr "Banda ampla mòbil"
 
-#: src/applet-device-broadband.c:780 src/applet-device-bt.c:61
+#: src/applet-device-broadband.c:784 src/applet-device-bt.c:61
 #: src/applet-device-ethernet.c:107
 msgid "Available"
 msgstr "Disponible"
 
 #. Default connection item
-#: src/applet-device-broadband.c:793
+#: src/applet-device-broadband.c:797
 msgid "New Mobile Broadband connection…"
 msgstr "Connexió de banda ampla mòbil nova…"
 
-#: src/applet-device-broadband.c:809 src/applet-device-bt.c:75
+#: src/applet-device-broadband.c:813 src/applet-device-bt.c:75
 #: src/applet-device-ethernet.c:124 src/applet-device-wifi.c:1251
 msgid "Connection Established"
 msgstr "S'ha establert la connexió"
 
-#: src/applet-device-broadband.c:810
+#: src/applet-device-broadband.c:814
 msgid "You are now connected to the Mobile Broadband network."
 msgstr "Esteu connectat a la xarxa de banda ampla mòbil."
 
-#: src/applet-device-broadband.c:950 src/applet-device-broadband.c:956
+#: src/applet-device-broadband.c:954 src/applet-device-broadband.c:960
 msgid "Mobile Broadband network."
 msgstr "Xarxa de banda ampla mòbil."
 
-#: src/applet-device-broadband.c:951
+#: src/applet-device-broadband.c:955
 msgid "You are now registered on the home network."
 msgstr "Esteu registrat a la xarxa local."
 
-#: src/applet-device-broadband.c:957
+#: src/applet-device-broadband.c:961
 msgid "You are now registered on a roaming network."
 msgstr "Esteu registrat a una xarxa d'accés itinerant."
 
@@ -507,9 +526,8 @@ msgid "WEP"
 msgstr "WEP"
 
 #: src/applet-dialogs.c:228
-#, fuzzy
 msgid "WPA/WPA2/WPA3"
-msgstr "WPA/WPA2"
+msgstr "WPA/WPA2/WPA3"
 
 #: src/applet-dialogs.c:230
 msgid "WPA3"
@@ -635,6 +653,10 @@ msgstr "IPv6"
 msgid "Hotspot"
 msgstr "Punt d'accés Wi-Fi"
 
+#: src/applet-dialogs.c:724 src/applet.c:3166
+msgid "Network"
+msgstr "Xarxa"
+
 #: src/applet-dialogs.c:735
 msgid "Password"
 msgstr "Contrasenya"
@@ -666,7 +688,7 @@ msgstr "Desconeguda"
 #. Shouldn't really happen but ...
 #: src/applet-dialogs.c:1080
 msgid "No valid active connections found!"
-msgstr "No s'ha trobat cap connexió activa vàlida"
+msgstr "No s'ha trobat cap connexió activa vàlida!"
 
 #: src/applet-dialogs.c:1128
 msgid ""
@@ -1093,10 +1115,6 @@ msgstr "La connexió VPN és activa"
 #: src/applet.c:2645
 msgid "No network connection"
 msgstr "No hi ha cap connexió de xarxa"
-
-#: src/applet.c:3280
-msgid "NetworkManager Applet"
-msgstr "Miniaplicació NetworkManager"
 
 #: src/connection-editor/ce-ip4-routes.ui:88
 #: src/connection-editor/ce-ip6-routes.ui:88 src/connection-editor/ce-page.h:97
@@ -2059,7 +2077,7 @@ msgstr ""
 #: src/connection-editor/ce-page-ip4.ui:333
 #: src/connection-editor/ce-page-ip6.ui:405
 msgid "_Routes…"
-msgstr "_Rutes..."
+msgstr "_Rutes…"
 
 #. TRANSLATORS: Default zone set for firewall, when no zone is selected
 #: src/connection-editor/ce-page-ip6.ui:35
@@ -2290,7 +2308,7 @@ msgstr "Mètodes admesos"
 
 #: src/connection-editor/ce-page-ppp.ui:89
 msgid "Configure _Methods…"
-msgstr "Configuració dels _mètodes..."
+msgstr "Configuració dels _mètodes…"
 
 #: src/connection-editor/ce-page-ppp.ui:132
 msgid "Compression"
@@ -2370,7 +2388,8 @@ msgid "Ad_vanced…"
 msgstr "A_vançat…"
 
 #: src/connection-editor/ce-page-team-port.ui:108
-msgid "Set by master"
+#, fuzzy
+msgid "Set by controller"
 msgstr "Establert pel mestre"
 
 #: src/connection-editor/ce-page-team-port.ui:112
@@ -2818,9 +2837,10 @@ msgid "System priority, value can be 0 – 65535."
 msgstr "Prioritat de sistema, el valor pot ser 0-65535."
 
 #: src/connection-editor/ce-page-team.ui:960
+#, fuzzy
 msgid ""
 "Specifies the minimum number of ports that must be active before asserting "
-"carrier in the master interface, value can be 1 – 255."
+"carrier in the controller interface, value can be 1 – 255."
 msgstr ""
 "Especifica el nombre mínim de ports que han d'estar actius abans de declarar "
 "l'operador a la interfície mestra, el valor pot ser 1-255."
@@ -3138,12 +3158,12 @@ msgstr "%s no vàlid (%s)"
 #: src/connection-editor/ce-page.c:362
 #, c-format
 msgid "invalid interface-name for %s (%s): "
-msgstr "nom no vàlid d'interfície per a %s (%s):"
+msgstr "nom no vàlid d'interfície per a %s (%s): "
 
 #: src/connection-editor/ce-page.c:366
 #, c-format
 msgid "invalid interface-name (%s): "
-msgstr "nom no vàlid d'interfície (%s):"
+msgstr "nom no vàlid d'interfície (%s): "
 
 #: src/connection-editor/ce-page.c:545
 msgid "can’t parse device name"
@@ -3156,7 +3176,7 @@ msgstr "adreça del maquinari no vàlida"
 #: src/connection-editor/ce-page.c:585
 #, c-format
 msgid "invalid %s (%s): "
-msgstr "%s no vàlid (%s):"
+msgstr "%s no vàlid (%s): "
 
 #: src/connection-editor/ce-page.c:586 src/connection-editor/ce-page.c:591
 msgid "device"
@@ -3165,7 +3185,7 @@ msgstr "dispositiu"
 #: src/connection-editor/ce-page.c:590
 #, c-format
 msgid "invalid %s (%s) "
-msgstr "%s no vàlid (%s)"
+msgstr "%s no vàlid (%s) "
 
 #: src/connection-editor/ce-page.h:94
 msgid ""
@@ -3283,7 +3303,7 @@ msgid "Bond"
 msgstr "Vinculada"
 
 #: src/connection-editor/connection-helpers.c:105
-#: src/connection-editor/page-team.c:1014
+#: src/connection-editor/page-team.c:1013
 msgid "Team"
 msgstr "Equip"
 
@@ -3316,7 +3336,7 @@ msgstr "VPN"
 #: src/connection-editor/connection-helpers.c:202
 #, c-format
 msgid "VPN plugin “%s” not found"
-msgstr ""
+msgstr "No s'ha trobar el connector de VPN «%s»"
 
 #: src/connection-editor/connection-helpers.c:227
 msgid "No VPN service type."
@@ -3329,14 +3349,14 @@ msgstr "El connector VPN no ha pogut importar la connexió VPN correctament: "
 #: src/connection-editor/connection-helpers.c:329
 #: src/connection-editor/page-proxy.c:104
 #: src/connection-editor/page-team-port.c:189
-#: src/connection-editor/page-team.c:327
+#: src/connection-editor/page-team.c:326
 msgid "Select file to import"
 msgstr "Seleccioneu el fitxer a importar"
 
 #: src/connection-editor/connection-helpers.c:333
 #: src/connection-editor/page-proxy.c:108
 #: src/connection-editor/page-team-port.c:193
-#: src/connection-editor/page-team.c:331
+#: src/connection-editor/page-team.c:330
 msgid "_Open"
 msgstr "_Obre"
 
@@ -3971,17 +3991,17 @@ msgstr "No s'ha pogut carregar la interfície d'usuari per MACsec."
 msgid "MACSEC connection %d"
 msgstr "Connexió MACSEC %d"
 
-#: src/connection-editor/page-master.c:221
-#: src/connection-editor/page-master.c:232
+#: src/connection-editor/page-controller.c:221
+#: src/connection-editor/page-controller.c:232
 msgid "Duplicate ports"
 msgstr "Duplica els ports"
 
-#: src/connection-editor/page-master.c:222
+#: src/connection-editor/page-controller.c:222
 #, c-format
 msgid "Ports “%s” and “%s” both apply to device “%s”"
 msgstr "Els ports «%s» i «%s» s'apliquen tots dos al dispositiu «%s»"
 
-#: src/connection-editor/page-master.c:233
+#: src/connection-editor/page-controller.c:233
 #, c-format
 msgid ""
 "Ports “%s” and “%s” apply to different virtual ports (“%s” and “%s”) of the "
@@ -3990,7 +4010,7 @@ msgstr ""
 "Els ports «%s» i «%s» s'apliquen a diferents ports virtuals («%s» i «%s») "
 "del mateix dispositiu físic."
 
-#: src/connection-editor/page-master.c:357
+#: src/connection-editor/page-controller.c:357
 #, c-format
 msgid "%s port %d"
 msgstr "%s port %d"
@@ -4085,7 +4105,7 @@ msgstr ""
 "No s'ha pogut carregar la interfície d'usuari de servidor intermediari."
 
 #: src/connection-editor/page-team-port.c:209
-#: src/connection-editor/page-team.c:347
+#: src/connection-editor/page-team.c:346
 msgid "Error: file doesn’t contain a valid JSON configuration"
 msgstr "Error: el fitxer no conté una configuració JSON vàlida"
 
@@ -4100,11 +4120,11 @@ msgstr "Port de l'equip"
 msgid "Could not load team port user interface."
 msgstr "No s'ha pogut carregar la interfície d'usuari del port de l'equip."
 
-#: src/connection-editor/page-team.c:1017
+#: src/connection-editor/page-team.c:1016
 msgid "Could not load team user interface."
 msgstr "No s'ha pogut carregar la interfície d'usuari de l'equip."
 
-#: src/connection-editor/page-team.c:1114
+#: src/connection-editor/page-team.c:1113
 #, c-format
 msgid "Team connection %d"
 msgstr "Connexió en equip %d"
@@ -4184,12 +4204,10 @@ msgid "Dynamic WEP (802.1X)"
 msgstr "WEP dinàmic 802.1X"
 
 #: src/connection-editor/page-wifi-security.c:410
-#, fuzzy
 msgid "WPA/WPA2/WPA3 Personal"
-msgstr "WPA i WPA2 Personal"
+msgstr "WPA,WPA2,WPA3 personal"
 
 #: src/connection-editor/page-wifi-security.c:423
-#, fuzzy
 msgid "WPA/WPA2 Enterprise"
 msgstr "WPA i WPA2 Enterprise"
 
