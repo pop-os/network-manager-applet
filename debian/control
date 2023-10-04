@@ -15,7 +15,6 @@ Build-Depends: debhelper-compat (= 13),
                libnm-dev (>= 1.15),
                libnma-dev (>= 1.8.27),
                libmm-glib-dev,
-               libgudev-1.0-dev (>= 147),
                libjansson-dev (>= 2.7),
                libselinux-dev,
 Standards-Version: 4.6.2
