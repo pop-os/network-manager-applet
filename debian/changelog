@@ -1,3 +1,12 @@
+network-manager-applet (1.34.0-2) unstable; urgency=medium
+
+  * Use default libexecdir path.
+    Stop overriding the default libexecdir path in debian/rules.
+    It's not actually needed and the main network-manager now also uses the
+    default path, which is /usr/libexec.
+
+ -- Michael Biebl <biebl@debian.org>  Mon, 20 Nov 2023 20:55:29 +0100
+
 network-manager-applet (1.34.0-1) unstable; urgency=medium
 
   * New upstream version 1.34.0
