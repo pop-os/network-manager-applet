@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: NetworkManager\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/network-manager-applet/"
 "issues\n"
-"POT-Creation-Date: 2023-10-04 18:29+0200\n"
+"POT-Creation-Date: 2024-01-19 13:12+0100\n"
 "PO-Revision-Date: 2022-10-19 10:07+0200\n"
 "Last-Translator: Мирослав Николић <miroslavnikolic@rocketmail.com>\n"
 "Language-Team: Serbian <српски <gnome-sr@googlegroups.org>>\n"
@@ -3073,23 +3073,28 @@ msgstr "искључено"
 msgid "unspecified error"
 msgstr "непозната грешка"
 
-#: src/connection-editor/ce-page.c:268
+#: src/connection-editor/ce-page.c:267 src/connection-editor/ce-page.c:271
 msgid "Preserve"
 msgstr "Очувај"
 
-#: src/connection-editor/ce-page.c:269
+#: src/connection-editor/ce-page.c:268 src/connection-editor/ce-page.c:272
 msgid "Permanent"
 msgstr "Трајно"
 
-#: src/connection-editor/ce-page.c:270
+#: src/connection-editor/ce-page.c:269 src/connection-editor/ce-page.c:273
 msgid "Random"
 msgstr "Насумично"
 
-#: src/connection-editor/ce-page.c:271
+#: src/connection-editor/ce-page.c:270 src/connection-editor/ce-page.c:274
 msgid "Stable"
 msgstr "Стабилно"
 
 #: src/connection-editor/ce-page.c:275
+#, fuzzy
+msgid "Stable per SSID"
+msgstr "Стабилна приватност"
+
+#: src/connection-editor/ce-page.c:281
 msgid ""
 "The MAC address entered here will be used as hardware address for the "
 "network device this connection is activated on. This feature is known as MAC "
@@ -3098,52 +3103,52 @@ msgstr ""
 "Унета МАК адреса се користи као адреса мрежног уређаја. Ова могућност се "
 "назива МАК клонирање или спуфинг. Пример: 00:11:22:33:44:55"
 
-#: src/connection-editor/ce-page.c:315
+#: src/connection-editor/ce-page.c:321
 msgid "MAC address"
 msgstr "МАЦ адреса"
 
-#: src/connection-editor/ce-page.c:315
+#: src/connection-editor/ce-page.c:321
 msgid "HW address"
 msgstr "ХВ адреса"
 
-#: src/connection-editor/ce-page.c:318
+#: src/connection-editor/ce-page.c:324
 #, c-format
 msgid "invalid %s for %s (%s)"
 msgstr "неисправно %s за %s (%s)"
 
-#: src/connection-editor/ce-page.c:322
+#: src/connection-editor/ce-page.c:328
 #, c-format
 msgid "invalid %s (%s)"
 msgstr "неисправно %s (%s)"
 
-#: src/connection-editor/ce-page.c:362
+#: src/connection-editor/ce-page.c:368
 #, c-format
 msgid "invalid interface-name for %s (%s): "
 msgstr "неисправан назив сучеља за %s (%s): "
 
-#: src/connection-editor/ce-page.c:366
+#: src/connection-editor/ce-page.c:372
 #, c-format
 msgid "invalid interface-name (%s): "
 msgstr "неисправан назив сучеља (%s): "
 
-#: src/connection-editor/ce-page.c:545
+#: src/connection-editor/ce-page.c:551
 msgid "can’t parse device name"
 msgstr "не могу да обрадим назив уређаја"
 
-#: src/connection-editor/ce-page.c:563
+#: src/connection-editor/ce-page.c:569
 msgid "invalid hardware address"
 msgstr "неисправна хардверска адреса"
 
-#: src/connection-editor/ce-page.c:585
+#: src/connection-editor/ce-page.c:591
 #, c-format
 msgid "invalid %s (%s): "
 msgstr "неисправно „%s“ (%s): "
 
-#: src/connection-editor/ce-page.c:586 src/connection-editor/ce-page.c:591
+#: src/connection-editor/ce-page.c:592 src/connection-editor/ce-page.c:597
 msgid "device"
 msgstr "уређај"
 
-#: src/connection-editor/ce-page.c:590
+#: src/connection-editor/ce-page.c:596
 #, c-format
 msgid "invalid %s (%s) "
 msgstr "неисправно „%s“ (%s) "

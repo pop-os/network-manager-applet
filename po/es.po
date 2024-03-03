@@ -17,7 +17,7 @@ msgstr ""
 "Project-Id-Version: networkmanager-applet.master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/network-manager-applet/"
 "issues\n"
-"POT-Creation-Date: 2023-10-04 18:29+0200\n"
+"POT-Creation-Date: 2024-01-19 13:12+0100\n"
 "PO-Revision-Date: 2023-07-19 16:03+0200\n"
 "Last-Translator: Daniel Mustieles García <daniel.mustieles@gmail.com>\n"
 "Language-Team: Spanish - Spain <gnome-es-list@gnome.org>\n"
@@ -3110,23 +3110,28 @@ msgstr "apagado"
 msgid "unspecified error"
 msgstr "error no especificado"
 
-#: src/connection-editor/ce-page.c:268
+#: src/connection-editor/ce-page.c:267 src/connection-editor/ce-page.c:271
 msgid "Preserve"
 msgstr "Mantener"
 
-#: src/connection-editor/ce-page.c:269
+#: src/connection-editor/ce-page.c:268 src/connection-editor/ce-page.c:272
 msgid "Permanent"
 msgstr "Permanente"
 
-#: src/connection-editor/ce-page.c:270
+#: src/connection-editor/ce-page.c:269 src/connection-editor/ce-page.c:273
 msgid "Random"
 msgstr "Aleatorio"
 
-#: src/connection-editor/ce-page.c:271
+#: src/connection-editor/ce-page.c:270 src/connection-editor/ce-page.c:274
 msgid "Stable"
 msgstr "Estable"
 
 #: src/connection-editor/ce-page.c:275
+#, fuzzy
+msgid "Stable per SSID"
+msgstr "Privacidad estable"
+
+#: src/connection-editor/ce-page.c:281
 msgid ""
 "The MAC address entered here will be used as hardware address for the "
 "network device this connection is activated on. This feature is known as MAC "
@@ -3136,52 +3141,52 @@ msgstr ""
 "el dispositivo de red en el que se activa esta conexión. Esta característica "
 "se conoce como clonado MAC o «spoofing». Ejemplo: 00:11:22:33:44:55"
 
-#: src/connection-editor/ce-page.c:315
+#: src/connection-editor/ce-page.c:321
 msgid "MAC address"
 msgstr "Dirección MAC"
 
-#: src/connection-editor/ce-page.c:315
+#: src/connection-editor/ce-page.c:321
 msgid "HW address"
 msgstr "Dirección HW"
 
-#: src/connection-editor/ce-page.c:318
+#: src/connection-editor/ce-page.c:324
 #, c-format
 msgid "invalid %s for %s (%s)"
 msgstr "%s no válido para %s (%s)"
 
-#: src/connection-editor/ce-page.c:322
+#: src/connection-editor/ce-page.c:328
 #, c-format
 msgid "invalid %s (%s)"
 msgstr "%s no válido (%s)"
 
-#: src/connection-editor/ce-page.c:362
+#: src/connection-editor/ce-page.c:368
 #, c-format
 msgid "invalid interface-name for %s (%s): "
 msgstr "nombre de interfaz no válido para %s (%s): "
 
-#: src/connection-editor/ce-page.c:366
+#: src/connection-editor/ce-page.c:372
 #, c-format
 msgid "invalid interface-name (%s): "
 msgstr "nombre de interfaz no válido (%s): "
 
-#: src/connection-editor/ce-page.c:545
+#: src/connection-editor/ce-page.c:551
 msgid "can’t parse device name"
 msgstr "no se puede analizar el nombre del dispositivo"
 
-#: src/connection-editor/ce-page.c:563
+#: src/connection-editor/ce-page.c:569
 msgid "invalid hardware address"
 msgstr "dirección hardware no válida"
 
-#: src/connection-editor/ce-page.c:585
+#: src/connection-editor/ce-page.c:591
 #, c-format
 msgid "invalid %s (%s): "
 msgstr "%s no válido (%s): "
 
-#: src/connection-editor/ce-page.c:586 src/connection-editor/ce-page.c:591
+#: src/connection-editor/ce-page.c:592 src/connection-editor/ce-page.c:597
 msgid "device"
 msgstr "dispositivo"
 
-#: src/connection-editor/ce-page.c:590
+#: src/connection-editor/ce-page.c:596
 #, c-format
 msgid "invalid %s (%s) "
 msgstr "%s no válido (%s) "

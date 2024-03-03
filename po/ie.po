@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: nm-applet\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/network-manager-applet/"
 "issues\n"
-"POT-Creation-Date: 2023-10-04 18:29+0200\n"
+"POT-Creation-Date: 2024-01-19 13:12+0100\n"
 "PO-Revision-Date: 2022-12-13 07:05+0700\n"
 "Last-Translator: OIS <mistresssilvara@hotmail.com>\n"
 "Language-Team: \n"
@@ -3059,77 +3059,82 @@ msgstr "no"
 msgid "unspecified error"
 msgstr "Ínspecificat errore"
 
-#: src/connection-editor/ce-page.c:268
+#: src/connection-editor/ce-page.c:267 src/connection-editor/ce-page.c:271
 msgid "Preserve"
 msgstr "Preservar"
 
-#: src/connection-editor/ce-page.c:269
+#: src/connection-editor/ce-page.c:268 src/connection-editor/ce-page.c:272
 #, fuzzy
 msgid "Permanent"
 msgstr "Memorar li conexion al ti-ci servitore"
 
-#: src/connection-editor/ce-page.c:270
+#: src/connection-editor/ce-page.c:269 src/connection-editor/ce-page.c:273
 msgid "Random"
 msgstr "Hasardal"
 
-#: src/connection-editor/ce-page.c:271
+#: src/connection-editor/ce-page.c:270 src/connection-editor/ce-page.c:274
 msgid "Stable"
 msgstr "Stabil"
 
 #: src/connection-editor/ce-page.c:275
+#, fuzzy
+msgid "Stable per SSID"
+msgstr "Stabil"
+
+#: src/connection-editor/ce-page.c:281
 msgid ""
 "The MAC address entered here will be used as hardware address for the "
 "network device this connection is activated on. This feature is known as MAC "
 "cloning or spoofing. Example: 00:11:22:33:44:55"
 msgstr ""
 
-#: src/connection-editor/ce-page.c:315
+#: src/connection-editor/ce-page.c:321
 msgid "MAC address"
 msgstr "Adresse MAC"
 
-#: src/connection-editor/ce-page.c:315
+#: src/connection-editor/ce-page.c:321
 msgid "HW address"
 msgstr "Adresse HW"
 
-#: src/connection-editor/ce-page.c:318
+#: src/connection-editor/ce-page.c:324
 #, fuzzy, c-format
 msgid "invalid %s for %s (%s)"
 msgstr "%s: codification ínvalid.\n"
 
-#: src/connection-editor/ce-page.c:322
+#: src/connection-editor/ce-page.c:328
 #, fuzzy, c-format
 msgid "invalid %s (%s)"
 msgstr "Expression regulari es ínvalid: %s"
 
-#: src/connection-editor/ce-page.c:362
+#: src/connection-editor/ce-page.c:368
 #, fuzzy, c-format
 msgid "invalid interface-name for %s (%s): "
 msgstr "Ínvalid nómine de labor-spacie: «%s»"
 
-#: src/connection-editor/ce-page.c:366
+#: src/connection-editor/ce-page.c:372
 #, fuzzy, c-format
 msgid "invalid interface-name (%s): "
 msgstr "Ínvalid nómine de labor-spacie: «%s»"
 
-#: src/connection-editor/ce-page.c:545
+#: src/connection-editor/ce-page.c:551
 msgid "can’t parse device name"
 msgstr ""
 
-#: src/connection-editor/ce-page.c:563
+#: src/connection-editor/ce-page.c:569
 #, fuzzy
 msgid "invalid hardware address"
 msgstr "Adresse de hardware:"
 
-#: src/connection-editor/ce-page.c:585
+#: src/connection-editor/ce-page.c:591
 #, fuzzy, c-format
 msgid "invalid %s (%s): "
 msgstr "Expression regulari es ínvalid: %s"
 
-#: src/connection-editor/ce-page.c:586 src/connection-editor/ce-page.c:591
+#: src/connection-editor/ce-page.c:592 src/connection-editor/ce-page.c:597
 msgid "device"
 msgstr "aparate"
 
-#: src/connection-editor/ce-page.c:590
+#: src/connection-editor/ce-page.c:596
 #, fuzzy, c-format
 msgid "invalid %s (%s) "
 msgstr "Expression regulari es ínvalid: %s"

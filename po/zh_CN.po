@@ -23,7 +23,7 @@ msgstr ""
 "Project-Id-Version: network-manager-applet main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/network-manager-applet/"
 "issues\n"
-"POT-Creation-Date: 2023-10-04 18:29+0200\n"
+"POT-Creation-Date: 2024-01-19 13:12+0100\n"
 "PO-Revision-Date: 2023-08-20 13:32-0400\n"
 "Last-Translator: Boyuan Yang <073plan@gmail.com>\n"
 "Language-Team: Chinese - China <i18n-zh@googlegroups.com>\n"
@@ -2982,23 +2982,28 @@ msgstr "关"
 msgid "unspecified error"
 msgstr "未知错误"
 
-#: src/connection-editor/ce-page.c:268
+#: src/connection-editor/ce-page.c:267 src/connection-editor/ce-page.c:271
 msgid "Preserve"
 msgstr "保留"
 
-#: src/connection-editor/ce-page.c:269
+#: src/connection-editor/ce-page.c:268 src/connection-editor/ce-page.c:272
 msgid "Permanent"
 msgstr "永久"
 
-#: src/connection-editor/ce-page.c:270
+#: src/connection-editor/ce-page.c:269 src/connection-editor/ce-page.c:273
 msgid "Random"
 msgstr "随机"
 
-#: src/connection-editor/ce-page.c:271
+#: src/connection-editor/ce-page.c:270 src/connection-editor/ce-page.c:274
 msgid "Stable"
 msgstr "固定"
 
 #: src/connection-editor/ce-page.c:275
+#, fuzzy
+msgid "Stable per SSID"
+msgstr "固定隐私"
+
+#: src/connection-editor/ce-page.c:281
 msgid ""
 "The MAC address entered here will be used as hardware address for the "
 "network device this connection is activated on. This feature is known as MAC "
@@ -3007,52 +3012,52 @@ msgstr ""
 "此处输入的 MAC 地址将用作此连接激活所在的网络设备的硬件地址。该特性被称为 "
 "MAC 克隆或欺骗。例如：00:11:22:33:44:55"
 
-#: src/connection-editor/ce-page.c:315
+#: src/connection-editor/ce-page.c:321
 msgid "MAC address"
 msgstr "MAC 地址"
 
-#: src/connection-editor/ce-page.c:315
+#: src/connection-editor/ce-page.c:321
 msgid "HW address"
 msgstr "固件地址"
 
-#: src/connection-editor/ce-page.c:318
+#: src/connection-editor/ce-page.c:324
 #, c-format
 msgid "invalid %s for %s (%s)"
 msgstr "%s 对 %s 无效（%s）"
 
-#: src/connection-editor/ce-page.c:322
+#: src/connection-editor/ce-page.c:328
 #, c-format
 msgid "invalid %s (%s)"
 msgstr "无效的 %s（%s）"
 
-#: src/connection-editor/ce-page.c:362
+#: src/connection-editor/ce-page.c:368
 #, c-format
 msgid "invalid interface-name for %s (%s): "
 msgstr "interface-name 对 %s 无效（%s）："
 
-#: src/connection-editor/ce-page.c:366
+#: src/connection-editor/ce-page.c:372
 #, c-format
 msgid "invalid interface-name (%s): "
 msgstr "无效的 interface-name（%s）："
 
-#: src/connection-editor/ce-page.c:545
+#: src/connection-editor/ce-page.c:551
 msgid "can’t parse device name"
 msgstr "无法分析设备名称"
 
-#: src/connection-editor/ce-page.c:563
+#: src/connection-editor/ce-page.c:569
 msgid "invalid hardware address"
 msgstr "无效的硬件地址"
 
-#: src/connection-editor/ce-page.c:585
+#: src/connection-editor/ce-page.c:591
 #, c-format
 msgid "invalid %s (%s): "
 msgstr "无效的 %s（%s）："
 
-#: src/connection-editor/ce-page.c:586 src/connection-editor/ce-page.c:591
+#: src/connection-editor/ce-page.c:592 src/connection-editor/ce-page.c:597
 msgid "device"
 msgstr "设备"
 
-#: src/connection-editor/ce-page.c:590
+#: src/connection-editor/ce-page.c:596
 #, c-format
 msgid "invalid %s (%s) "
 msgstr "无效的 %s（%s）"

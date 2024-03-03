@@ -23,7 +23,7 @@ msgstr ""
 "Project-Id-Version: network-manager-applet\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/network-manager-applet/"
 "issues\n"
-"POT-Creation-Date: 2023-10-04 18:29+0200\n"
+"POT-Creation-Date: 2024-01-19 13:12+0100\n"
 "PO-Revision-Date: 2020-03-02 16:09+0900\n"
 "Last-Translator: Changwoo Ryu <cwryu@debian.org>\n"
 "Language-Team: GNOME Korea <gnome-kr@googlegroups.com>\n"
@@ -3091,24 +3091,28 @@ msgstr ""
 msgid "unspecified error"
 msgstr ""
 
-#: src/connection-editor/ce-page.c:268
+#: src/connection-editor/ce-page.c:267 src/connection-editor/ce-page.c:271
 msgid "Preserve"
 msgstr ""
 
-#: src/connection-editor/ce-page.c:269
+#: src/connection-editor/ce-page.c:268 src/connection-editor/ce-page.c:272
 msgid "Permanent"
 msgstr ""
 
-#: src/connection-editor/ce-page.c:270
+#: src/connection-editor/ce-page.c:269 src/connection-editor/ce-page.c:273
 msgid "Random"
 msgstr ""
 
-#: src/connection-editor/ce-page.c:271
+#: src/connection-editor/ce-page.c:270 src/connection-editor/ce-page.c:274
 #, fuzzy
 msgid "Stable"
 msgstr "사용"
 
 #: src/connection-editor/ce-page.c:275
+msgid "Stable per SSID"
+msgstr ""
+
+#: src/connection-editor/ce-page.c:281
 #, fuzzy
 msgid ""
 "The MAC address entered here will be used as hardware address for the "
@@ -3118,56 +3122,56 @@ msgstr ""
 "여기에 입력한 MAC 주소를 이 연결의 네트워크 장치의 하드웨어 주소로 사용합니"
 "다. 이 기능을 MAC 클로닝 혹은 스푸핑이라고 합니다. 예: 00:11:22:33:44:55"
 
-#: src/connection-editor/ce-page.c:315
+#: src/connection-editor/ce-page.c:321
 #, fuzzy
 msgid "MAC address"
 msgstr "주소"
 
-#: src/connection-editor/ce-page.c:315
+#: src/connection-editor/ce-page.c:321
 #, fuzzy
 msgid "HW address"
 msgstr "주소"
 
-#: src/connection-editor/ce-page.c:318
+#: src/connection-editor/ce-page.c:324
 #, c-format
 msgid "invalid %s for %s (%s)"
 msgstr ""
 
-#: src/connection-editor/ce-page.c:322
+#: src/connection-editor/ce-page.c:328
 #, c-format
 msgid "invalid %s (%s)"
 msgstr ""
 
-#: src/connection-editor/ce-page.c:362
+#: src/connection-editor/ce-page.c:368
 #, c-format
 msgid "invalid interface-name for %s (%s): "
 msgstr ""
 
-#: src/connection-editor/ce-page.c:366
+#: src/connection-editor/ce-page.c:372
 #, fuzzy, c-format
 msgid "invalid interface-name (%s): "
 msgstr "가상 LAN 인터페이스 이름(_N):"
 
-#: src/connection-editor/ce-page.c:545
+#: src/connection-editor/ce-page.c:551
 msgid "can’t parse device name"
 msgstr ""
 
-#: src/connection-editor/ce-page.c:563
+#: src/connection-editor/ce-page.c:569
 #, fuzzy
 msgid "invalid hardware address"
 msgstr "하드웨어 주소:"
 
-#: src/connection-editor/ce-page.c:585
+#: src/connection-editor/ce-page.c:591
 #, c-format
 msgid "invalid %s (%s): "
 msgstr ""
 
-#: src/connection-editor/ce-page.c:586 src/connection-editor/ce-page.c:591
+#: src/connection-editor/ce-page.c:592 src/connection-editor/ce-page.c:597
 #, fuzzy
 msgid "device"
 msgstr "모든 장치"
 
-#: src/connection-editor/ce-page.c:590
+#: src/connection-editor/ce-page.c:596
 #, c-format
 msgid "invalid %s (%s) "
 msgstr ""

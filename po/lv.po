@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: NetworkManager.HEAD2\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/network-manager-applet/"
 "issues\n"
-"POT-Creation-Date: 2023-10-04 18:29+0200\n"
+"POT-Creation-Date: 2024-01-19 13:12+0100\n"
 "PO-Revision-Date: 2018-03-23 22:08+0200\n"
 "Last-Translator: Rūdolfs Mazurs <rudolfs.mazurs@gmail.com>\n"
 "Language-Team: Latvian <lata-l10n@googlegroups.com>\n"
@@ -3079,23 +3079,28 @@ msgstr ""
 msgid "unspecified error"
 msgstr "nespecifiska kļūda"
 
-#: src/connection-editor/ce-page.c:268
+#: src/connection-editor/ce-page.c:267 src/connection-editor/ce-page.c:271
 msgid "Preserve"
 msgstr "Saglabāt"
 
-#: src/connection-editor/ce-page.c:269
+#: src/connection-editor/ce-page.c:268 src/connection-editor/ce-page.c:272
 msgid "Permanent"
 msgstr "Pastāvīgs"
 
-#: src/connection-editor/ce-page.c:270
+#: src/connection-editor/ce-page.c:269 src/connection-editor/ce-page.c:273
 msgid "Random"
 msgstr "Nejaušs"
 
-#: src/connection-editor/ce-page.c:271
+#: src/connection-editor/ce-page.c:270 src/connection-editor/ce-page.c:274
 msgid "Stable"
 msgstr "Stabils"
 
 #: src/connection-editor/ce-page.c:275
+#, fuzzy
+msgid "Stable per SSID"
+msgstr "Stabils privātums"
+
+#: src/connection-editor/ce-page.c:281
 msgid ""
 "The MAC address entered here will be used as hardware address for the "
 "network device this connection is activated on. This feature is known as MAC "
@@ -3105,52 +3110,52 @@ msgstr ""
 "ierīcei, uz kuras ir aktivizēts šis savienojums. Šī iespēja ir pazīstama kā "
 "MAC klonēšana jeb viltošana. Piemērs: 00:11:22:33:44:55"
 
-#: src/connection-editor/ce-page.c:315
+#: src/connection-editor/ce-page.c:321
 msgid "MAC address"
 msgstr "MAC adrese"
 
-#: src/connection-editor/ce-page.c:315
+#: src/connection-editor/ce-page.c:321
 msgid "HW address"
 msgstr "Aparatūras adrese"
 
-#: src/connection-editor/ce-page.c:318
+#: src/connection-editor/ce-page.c:324
 #, c-format
 msgid "invalid %s for %s (%s)"
 msgstr "nederīgs %s prieks %s (%s)"
 
-#: src/connection-editor/ce-page.c:322
+#: src/connection-editor/ce-page.c:328
 #, c-format
 msgid "invalid %s (%s)"
 msgstr "nederīgs %s (%s)"
 
-#: src/connection-editor/ce-page.c:362
+#: src/connection-editor/ce-page.c:368
 #, c-format
 msgid "invalid interface-name for %s (%s): "
 msgstr "nederīgs saskarnes nosaukums priekš %s (%s): "
 
-#: src/connection-editor/ce-page.c:366
+#: src/connection-editor/ce-page.c:372
 #, c-format
 msgid "invalid interface-name (%s): "
 msgstr "nederīgs saskarnes nosaukums (%s): "
 
-#: src/connection-editor/ce-page.c:545
+#: src/connection-editor/ce-page.c:551
 msgid "can’t parse device name"
 msgstr "nevar parsēt ierīces nosaukumu"
 
-#: src/connection-editor/ce-page.c:563
+#: src/connection-editor/ce-page.c:569
 msgid "invalid hardware address"
 msgstr "nederīga aparatūras adrese"
 
-#: src/connection-editor/ce-page.c:585
+#: src/connection-editor/ce-page.c:591
 #, c-format
 msgid "invalid %s (%s): "
 msgstr "nederīgs %s (%s): "
 
-#: src/connection-editor/ce-page.c:586 src/connection-editor/ce-page.c:591
+#: src/connection-editor/ce-page.c:592 src/connection-editor/ce-page.c:597
 msgid "device"
 msgstr "ierīce"
 
-#: src/connection-editor/ce-page.c:590
+#: src/connection-editor/ce-page.c:596
 #, c-format
 msgid "invalid %s (%s) "
 msgstr "nederīgs %s (%s) "
