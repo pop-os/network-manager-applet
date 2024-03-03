@@ -1,3 +1,9 @@
+network-manager-applet (1.36.0-1) UNRELEASED; urgency=medium
+
+  * New upstream version 1.36.0
+
+ -- Michael Biebl <biebl@debian.org>  Sun, 03 Mar 2024 13:18:52 +0100
+
 network-manager-applet (1.34.0-2) unstable; urgency=medium
 
   * Use default libexecdir path.
