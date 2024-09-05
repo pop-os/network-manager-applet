@@ -21,7 +21,7 @@ Standards-Version: 4.6.2
 Rules-Requires-Root: no
 Vcs-Git: https://salsa.debian.org/utopia-team/network-manager-applet.git
 Vcs-Browser: https://salsa.debian.org/utopia-team/network-manager-applet
-Homepage: https://www.gnome.org/projects/NetworkManager/
+Homepage: https://networkmanager.dev
 
 Package: network-manager-gnome
 Architecture: linux-any
