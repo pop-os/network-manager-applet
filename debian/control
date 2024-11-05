@@ -23,12 +23,32 @@ Vcs-Git: https://salsa.debian.org/utopia-team/network-manager-applet.git
 Vcs-Browser: https://salsa.debian.org/utopia-team/network-manager-applet
 Homepage: https://networkmanager.dev
 
+
 Package: network-manager-gnome
 Architecture: linux-any
+Section: oldlibs
+Depends: network-manager-applet (= ${binary:Version}),
+         nm-connection-editor (= ${binary:Version}),
+Description: transitional package for network-manager-applet and nm-connection-editor
+ NetworkManager is a system network service that manages your network devices
+ and connections, attempting to keep active network connectivity when
+ available. It manages ethernet, Wi-Fi, mobile broadband (WWAN), and PPPoE
+ devices, and provides VPN integration with a variety of different VPN
+ services.
+ .
+ This transitional package depends on network-manager-applet (shipping
+ nm-applet which provides a notification area applet for controlling
+ NetworkManager) and nm-connection-editor (a network connection configuration
+ editor for NetworkManager).
+ .
+ It can be removed safely once no other package depends on it.
+
+Package: network-manager-applet
+Architecture: linux-any
 Section: gnome
-Pre-Depends: ${misc:Pre-Depends}
 Depends: ${shlibs:Depends},
          ${misc:Depends},
+         nm-connection-editor (= ${binary:Version}),
          network-manager,
          policykit-1-gnome | polkit-1-auth-agent,
          default-dbus-session-bus | dbus-session-bus
@@ -41,18 +61,35 @@ Suggests: network-manager-openconnect-gnome,
           network-manager-openvpn-gnome,
           network-manager-vpnc-gnome,
           network-manager-pptp-gnome
-Breaks: libnma-common (<< 1.10.4)
-Replaces: libnma-common (<< 1.10.4)
-Description: network management framework (GNOME frontend)
+Breaks: network-manager-gnome (<< 1.36.0-3~)
+Replaces: network-manager-gnome (<< 1.36.0-3~)
+Description: network management framework (notification area applet)
  NetworkManager is a system network service that manages your network devices
  and connections, attempting to keep active network connectivity when
  available. It manages ethernet, Wi-Fi, mobile broadband (WWAN), and PPPoE
  devices, and provides VPN integration with a variety of different VPN
  services.
  .
- This package contains a systray applet for GNOME's notification area but it
- also works for other desktop environments which provide a systray like KDE
- or Xfce.
- It displays the available networks and allows users to easily switch between
- them. For encrypted networks it will prompt the user for the key/passphrase
- and it can optionally store them in the gnome-keyring.
+ This package contains nm-applet which is a GTK‐based GUI applet to monitor
+ network status and devices and allows users to start and stop network
+ connections managed by NetworkManager.
+
+Package: nm-connection-editor
+Architecture: linux-any
+Section: gnome
+Depends: ${shlibs:Depends},
+         ${misc:Depends},
+         network-manager,
+         policykit-1-gnome | polkit-1-auth-agent,
+         default-dbus-session-bus | dbus-session-bus
+Breaks: network-manager-gnome (<< 1.36.0-3~)
+Replaces: network-manager-gnome (<< 1.36.0-3~)
+Description: network management framework (connection configuration editor)
+ NetworkManager is a system network service that manages your network devices
+ and connections, attempting to keep active network connectivity when
+ available. It manages ethernet, Wi-Fi, mobile broadband (WWAN), and PPPoE
+ devices, and provides VPN integration with a variety of different VPN
+ services.
+ .
+ This package contains nm-connection-editor which allows users to edit
+ NetworkManager connection settings.

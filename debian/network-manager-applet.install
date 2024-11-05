@@ -1,0 +1,6 @@
+etc/xdg/autostart/nm-applet.desktop
+usr/bin/nm-applet
+usr/share/GConf/gsettings/nm-applet.convert
+usr/share/applications/nm-applet.desktop
+usr/share/glib-2.0/schemas/org.gnome.nm-applet.gschema.xml
+usr/share/man/man1/nm-applet.1

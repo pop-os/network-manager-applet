@@ -1,0 +1,10 @@
+usr/bin/nm-connection-editor
+usr/share/applications/nm-connection-editor.desktop
+# Icons and locales go into nm-connection-editor, as network-manager-applet
+# depends on nm-connection-editor.
+# The alternative would be to split those into a -data or -common package which
+# both packages can depend on.
+usr/share/icons/
+usr/share/locale/
+usr/share/man/man1/nm-connection-editor.1
+usr/share/metainfo/nm-connection-editor.appdata.xml
