@@ -1,3 +1,12 @@
+network-manager-applet (1.36.0-4) unstable; urgency=medium
+
+  * Rename debian-branch to debian/latest as per DEP-14
+  * Bump Standards-Version to 4.7.2
+  * Add Recommends mobile-broadband-provider-info to nm-connection-editor
+    (Closes: #1086947, #1095531)
+
+ -- Michael Biebl <biebl@debian.org>  Fri, 15 Aug 2025 21:29:46 +0200
+
 network-manager-applet (1.36.0-3) unstable; urgency=medium
 
   * Split up nm-applet and nm-connection-editor.
