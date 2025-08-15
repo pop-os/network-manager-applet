@@ -82,6 +82,7 @@ Depends: ${shlibs:Depends},
          network-manager,
          policykit-1-gnome | polkit-1-auth-agent,
          default-dbus-session-bus | dbus-session-bus
+Recommends: mobile-broadband-provider-info,
 Breaks: network-manager-gnome (<< 1.36.0-3~)
 Replaces: network-manager-gnome (<< 1.36.0-3~)
 Description: network management framework (connection configuration editor)
