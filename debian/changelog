@@ -1,3 +1,9 @@
+network-manager-applet (1.36.0-4ubuntu1pop0) resolute; urgency=medium
+
+  * Pop!_OS patches
+
+ -- Jeremy Soller <jeremy@system76.com>  Fri, 30 Jan 2026 15:20:48 -0700
+
 network-manager-applet (1.36.0-4ubuntu1) resolute; urgency=medium
 
   * Merge with Debian unstable (LP: #2130134). Remaining changes:
