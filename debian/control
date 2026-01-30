@@ -1,9 +1,11 @@
 Source: network-manager-applet
 Section: gnome
 Priority: optional
-Maintainer: Utopia Maintenance Team <pkg-utopia-maintainers@lists.alioth.debian.org>
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+XSBC-Original-Maintainer: Utopia Maintenance Team <pkg-utopia-maintainers@lists.alioth.debian.org>
 Uploaders: Michael Biebl <biebl@debian.org>
 Build-Depends: debhelper-compat (= 13),
+               dh-sequence-translations,
                meson (>= 0.46.0),
                gettext (>= 0.18),
                pkgconf,
@@ -50,10 +52,10 @@ Depends: ${shlibs:Depends},
          ${misc:Depends},
          nm-connection-editor (= ${binary:Version}),
          network-manager,
-         policykit-1-gnome | polkit-1-auth-agent,
+         gnome-shell | policykit-1-gnome | polkit-1-auth-agent,
          default-dbus-session-bus | dbus-session-bus
-Recommends: notification-daemon,
-            gnome-keyring,
+Recommends: gnome-shell | notification-daemon,
+            gnome-keyring | kwalletmanager,
             gnome-icon-theme,
             mobile-broadband-provider-info,
             iso-codes
@@ -80,7 +82,7 @@ Section: gnome
 Depends: ${shlibs:Depends},
          ${misc:Depends},
          network-manager,
-         policykit-1-gnome | polkit-1-auth-agent,
+         gnome-shell | policykit-1-gnome | polkit-1-auth-agent,
          default-dbus-session-bus | dbus-session-bus
 Recommends: mobile-broadband-provider-info,
 Breaks: network-manager-gnome (<< 1.36.0-3~)

@@ -1,3 +1,23 @@
+network-manager-applet (1.36.0-4ubuntu1) resolute; urgency=medium
+
+  * Merge with Debian unstable (LP: #2130134). Remaining changes:
+    - d/control:
+      + Build-Depend on on dh-sequence-translations
+      + Add gnome-shell alternate dependency to more easily
+        keep policykit-1-gnome and notification-daemon in universe
+      + Add alternate Recommends on kwalletmanager for gnome-keyring
+    - d/patches:
+      + Have-the-appindicator-enabled-by-default.patch
+      + lp341684_device_sensitive_disconnect_notify.patch
+      + Make-policykit-restricted-actions-insensitive.patch
+      + Support-hiding-rather-than-desensitizing-disallowed-items.patch
+  * Dropped changes:
+    - d/control: Replace gnome-icon-theme by humanity-icon-theme in Recommends.
+      This package is in universe now, so it's ok if it recommends something
+      that isn't installed by default.
+
+ -- Ural Tunaboyu <ural.tunaboyu@canonical.com>  Fri, 31 Oct 2025 12:38:40 +0300
+
 network-manager-applet (1.36.0-4) unstable; urgency=medium
 
   * Rename debian-branch to debian/latest as per DEP-14
@@ -6,6 +26,31 @@ network-manager-applet (1.36.0-4) unstable; urgency=medium
     (Closes: #1086947, #1095531)
 
  -- Michael Biebl <biebl@debian.org>  Fri, 15 Aug 2025 21:29:46 +0200
+
+network-manager-applet (1.36.0-3ubuntu2) plucky; urgency=medium
+
+  * In network-manager-applet, add an alternative Recommends on kwalletmanager
+    for gnome-keyring.
+
+ -- Simon Quigley <tsimonq2@ubuntu.com>  Wed, 12 Feb 2025 23:44:17 -0600
+
+network-manager-applet (1.36.0-3ubuntu1) plucky; urgency=medium
+
+  * Resynchronize on Debian, remaining changes:
+    - d/control:
+      + Build-Depend on on dh-sequence-translations
+      + Replace gnome-icon-theme by humanity-icon-theme in Recommends.
+        Both provide gnome-lockscreen's icon, but the latter is installed
+        by default in Ubuntu.
+      + Add gnome-shell alternate dependency to more easily
+        keep policykit-1-gnome and notification-daemon in universe
+    - d/patches:
+      + Have-the-appindicator-enabled-by-default.patch
+      + lp341684_device_sensitive_disconnect_notify.patch
+      + Make-policykit-restricted-actions-insensitive.patch
+      + Support-hiding-rather-than-desensitizing-disallowed-items.patch
+
+ -- Nathan Pratta Teodosio <nathan.teodosio@canonical.com>  Mon, 16 Oct 2023 14:56:25 +0200
 
 network-manager-applet (1.36.0-3) unstable; urgency=medium
 
@@ -25,6 +70,24 @@ network-manager-applet (1.36.0-2) unstable; urgency=medium
 
  -- Michael Biebl <biebl@debian.org>  Thu, 05 Sep 2024 21:08:37 +0200
 
+network-manager-applet (1.36.0-1ubuntu1) oracular; urgency=medium
+
+  * Merge from Debian unstable, remaining changes:
+    - d/control:
+      + Build-Depend on on dh-sequence-translations
+      + Replace gnome-icon-theme by humanity-icon-theme in Recommends.
+        Both provide gnome-lockscreen's icon, but the latter is installed
+        by default in Ubuntu.
+      + Add gnome-shell alternate dependency to more easily
+        keep policykit-1-gnome and notification-daemon in universe
+    - d/patches:
+      + Have-the-appindicator-enabled-by-default.patch
+      + lp341684_device_sensitive_disconnect_notify.patch
+      + Make-policykit-restricted-actions-insensitive.patch
+      + Support-hiding-rather-than-desensitizing-disallowed-items.patch
+
+ -- Steve Langasek <steve.langasek@ubuntu.com>  Wed, 05 Jun 2024 15:52:51 -0700
+
 network-manager-applet (1.36.0-1) unstable; urgency=medium
 
   * New upstream version 1.36.0
@@ -41,6 +104,36 @@ network-manager-applet (1.34.0-2) unstable; urgency=medium
 
  -- Michael Biebl <biebl@debian.org>  Mon, 20 Nov 2023 20:55:29 +0100
 
+network-manager-applet (1.34.0-1ubuntu3) noble; urgency=medium
+
+  * No-change rebuild for CVE-2024-3094
+
+ -- Steve Langasek <steve.langasek@ubuntu.com>  Sun, 31 Mar 2024 09:20:44 +0000
+
+network-manager-applet (1.34.0-1ubuntu2) noble; urgency=medium
+
+  * No-change rebuild against libglib2.0-0t64
+
+ -- Steve Langasek <steve.langasek@ubuntu.com>  Fri, 08 Mar 2024 05:49:36 +0000
+
+network-manager-applet (1.34.0-1ubuntu1) noble; urgency=medium
+
+  * Resynchronize on Debian, remaining changes (LP: #2039460):
+    - d/control:
+      + Build-Depend on on dh-sequence-translations
+      + Replace gnome-icon-theme by humanity-icon-theme in Recommends.
+        Both provide gnome-lockscreen's icon, but the latter is installed
+        by default in Ubuntu.
+      + Add gnome-shell alternate dependency to more easily
+        keep policykit-1-gnome and notification-daemon in universe
+    - d/patches:
+      + Have-the-appindicator-enabled-by-default.patch
+      + lp341684_device_sensitive_disconnect_notify.patch
+      + Make-policykit-restricted-actions-insensitive.patch
+      + Support-hiding-rather-than-desensitizing-disallowed-items.patch
+
+ -- Nathan Pratta Teodosio <nathan.teodosio@canonical.com>  Mon, 16 Oct 2023 14:56:25 +0200
+
 network-manager-applet (1.34.0-1) unstable; urgency=medium
 
   * New upstream version 1.34.0
@@ -48,6 +141,24 @@ network-manager-applet (1.34.0-1) unstable; urgency=medium
   * Drop libgudev-1.0-dev Build-Depends, no longer needed
 
  -- Michael Biebl <biebl@debian.org>  Wed, 04 Oct 2023 19:03:18 +0200
+
+network-manager-applet (1.32.0-3ubuntu1) mantic; urgency=medium
+
+  * Resynchronize on Debian, remaining changes:
+    - d/control:
+      + Build-Depend on on dh-sequence-translations
+      + Replace gnome-icon-theme by humanity-icon-theme in Recommends.
+        Both provide gnome-lockscreen's icon, but the latter is installed
+        by default in Ubuntu.
+      + Add gnome-shell alternate dependency to more easily
+        keep policykit-1-gnome and notification-daemon in universe
+    - d/patches:
+      + Have-the-appindicator-enabled-by-default.patch
+      + lp341684_device_sensitive_disconnect_notify.patch
+      + Make-policykit-restricted-actions-insensitive.patch
+      + Support-hiding-rather-than-desensitizing-disallowed-items.patch
+
+ -- Nathan Pratta Teodosio <nathan.teodosio@canonical.com>  Fri, 04 Aug 2023 10:01:35 +0200
 
 network-manager-applet (1.32.0-3) unstable; urgency=medium
 
@@ -61,6 +172,25 @@ network-manager-applet (1.32.0-2) unstable; urgency=medium
   * Upload to unstable
 
  -- Michael Biebl <biebl@debian.org>  Sat, 08 Jul 2023 00:31:16 +0200
+
+network-manager-applet (1.32.0-1ubuntu1) mantic; urgency=medium
+
+  * Resynchronize on Debian, remaining changes:
+    - d/control:
+      + Build-Depend on on dh-sequence-translations
+      + Replace gnome-icon-theme by humanity-icon-theme in Recommends.
+        Both provide gnome-lockscreen's icon, but the latter is installed
+        by default in Ubuntu.
+      + Add gnome-shell alternate dependency to more easily
+        keep policykit-1-gnome and notification-daemon in universe
+    - d/patches:
+      + Force-online-state-with-unmanaged-devices.patch
+      + Have-the-appindicator-enabled-by-default.patch
+      + lp341684_device_sensitive_disconnect_notify.patch
+      + Make-policykit-restricted-actions-insensitive.patch
+      + Support-hiding-rather-than-desensitizing-disallowed-items.patch
+
+ -- Sebastien Bacher <seb128@ubuntu.com>  Thu, 22 Jun 2023 13:09:23 +0200
 
 network-manager-applet (1.32.0-1) experimental; urgency=medium
 
@@ -86,6 +216,29 @@ network-manager-applet (1.30.0-1) unstable; urgency=medium
   * Update Build-Depends as per meson.build
 
  -- Michael Biebl <biebl@debian.org>  Mon, 07 Nov 2022 18:00:25 +0100
+
+network-manager-applet (1.28.0-1ubuntu1) kinetic; urgency=medium
+
+  * Merge with Debian.  Remaining changes:
+    - d/control, d/rules:
+      + Run dh_translations.
+    - d/control:
+      + Replace gnome-icon-theme by humanity-icon-theme in Recommends.
+        Both provide gnome-lockscreen's icon, but the latter is installed
+        by default in Ubuntu.
+    - d/patches:
+      + Force-online-state-with-unmanaged-devices.patch
+      + Have-the-appindicator-enabled-by-default.patch
+      + lp341684_device_sensitive_disconnect_notify.patch
+      + lp460144_correctly_update_notification.patch
+      + Make-policykit-restricted-actions-insensitive.patch
+      + Support-hiding-rather-than-desensitizing-disallowed-items.patch
+  * Drop patches applied upstream:
+    - git_owe_activation.patch
+    - gitlab_new_meson.patch
+  * d/rules: Drop <!s390x>, since the packages are now also available in s390x.
+
+ -- Nathan Pratta Teodosio <nathan.teodosio@canonical.com>  Mon, 13 Jun 2022 11:09:32 +0200
 
 network-manager-applet (1.28.0-1) unstable; urgency=medium
 
@@ -114,6 +267,27 @@ network-manager-applet (1.24.0-2) unstable; urgency=medium
 
  -- Michael Biebl <biebl@debian.org>  Sun, 13 Feb 2022 12:58:56 +0100
 
+network-manager-applet (1.24.0-1ubuntu3) jammy; urgency=medium
+
+  * debian/patches/gitlab_new_meson.patch:
+    - build compat changes for the new meson version
+
+ -- Sebastien Bacher <seb128@ubuntu.com>  Mon, 07 Mar 2022 16:56:10 +0100
+
+network-manager-applet (1.24.0-1ubuntu2) jammy; urgency=medium
+
+  * debian/patches/git_owe_activation.patch
+    - Fix Enhanced Open (OWE) not being saved properly
+      (lp: #1963906)
+
+ -- Sebastien Bacher <seb128@ubuntu.com>  Mon, 07 Mar 2022 16:23:08 +0100
+
+network-manager-applet (1.24.0-1ubuntu1) impish; urgency=medium
+
+  * New upstream version rebased on Debian
+
+ -- Sebastien Bacher <seb128@ubuntu.com>  Wed, 25 Aug 2021 18:07:10 +0200
+
 network-manager-applet (1.24.0-1) unstable; urgency=medium
 
   * New upstream version 1.24.0
@@ -128,6 +302,12 @@ network-manager-applet (1.22.0-1) unstable; urgency=medium
   * Rebase patches
 
  -- Michael Biebl <biebl@debian.org>  Mon, 16 Aug 2021 10:46:27 +0200
+
+network-manager-applet (1.22.0-0ubuntu1) impish; urgency=medium
+
+  * New upstream version
+
+ -- Sebastien Bacher <seb128@ubuntu.com>  Thu, 17 Jun 2021 11:28:20 +0200
 
 network-manager-applet (1.20.0-3) unstable; urgency=medium
 
@@ -152,6 +332,32 @@ network-manager-applet (1.20.0-1) unstable; urgency=medium
 
  -- Michael Biebl <biebl@debian.org>  Wed, 03 Feb 2021 15:59:07 +0100
 
+network-manager-applet (1.18.0-1ubuntu2) groovy; urgency=medium
+
+  * d/p/Support-hiding-rather-than-desensitizing-disallowed-items.patch!
+    - restore initialization code for some of the 'allowed' variables which
+      was dropped by error in 16.10, fixes log warnings (lp: #1853331)
+
+ -- Sebastien Bacher <seb128@ubuntu.com>  Wed, 29 Jul 2020 17:50:27 +0200
+
+network-manager-applet (1.18.0-1ubuntu1) groovy; urgency=low
+
+  * Merge from Debian unstable.  Remaining changes:
+    - Support for SAE authentication (WPA3 Personal) was added.
+      (lp: #1848339)
+    - Fixed external UI mode without interactive secrets. (lp: #1857253)
+    - use libappindicator for now, it is tested and in main and the
+      new ayatana variant from Debian hasn't been reviewed yet.
+    - Run dh_translations
+    - Add Ubuntu patches:
+      - lp341684_device_sensitive_disconnect_notify.patch
+      - lp460144_correctly_update_notification.patch
+      - Have-the-appindicator-enabled-by-default.patch
+      - Make-policykit-restricted-actions-insensitive.patch
+      - Support-hiding-rather-than-desensitizing-disallowed-items.patch
+
+ -- Gianfranco Costamagna <locutusofborg@debian.org>  Tue, 23 Jun 2020 10:04:08 +0200
+
 network-manager-applet (1.18.0-1) unstable; urgency=medium
 
   * New upstream version 1.18.0
@@ -159,6 +365,24 @@ network-manager-applet (1.18.0-1) unstable; urgency=medium
   * Remove unused architecture.mk include
 
  -- Michael Biebl <biebl@debian.org>  Mon, 22 Jun 2020 18:10:51 +0200
+
+network-manager-applet (1.16.0-1ubuntu1) groovy; urgency=low
+
+  * Merge from Debian unstable.  Remaining changes:
+    - Support for SAE authentication (WPA3 Personal) was added.
+      (lp: #1848339)
+    - Fixed external UI mode without interactive secrets. (lp: #1857253)
+    - use libappindicator for now, it is tested and in main and the
+      new ayatana variant from Debian hasn't been reviewed yet.
+    - Run dh_translations
+    - Add Ubuntu patches:
+      - lp341684_device_sensitive_disconnect_notify.patch
+      - lp460144_correctly_update_notification.patch
+      - Have-the-appindicator-enabled-by-default.patch
+      - Make-policykit-restricted-actions-insensitive.patch
+      - Support-hiding-rather-than-desensitizing-disallowed-items.patch
+
+ -- Gianfranco Costamagna <locutusofborg@debian.org>  Mon, 01 Jun 2020 09:37:52 +0200
 
 network-manager-applet (1.16.0-1) unstable; urgency=medium
 
@@ -178,6 +402,21 @@ network-manager-applet (1.16.0-1) unstable; urgency=medium
     from upstream.
 
  -- Michael Biebl <biebl@debian.org>  Wed, 22 Apr 2020 18:06:30 +0200
+
+network-manager-applet (1.8.24-1ubuntu2) focal; urgency=medium
+
+  * No-change rebuild with fixed binutils on arm64.
+
+ -- Matthias Klose <doko@ubuntu.com>  Sat, 08 Feb 2020 11:12:34 +0000
+
+network-manager-applet (1.8.24-1ubuntu1) focal; urgency=medium
+
+  * Resynchronize on Debian
+    - Support for SAE authentication (WPA3 Personal) was added.
+      (lp: #1848339)
+    - Fixed external UI mode without interactive secrets. (lp: #1857253)
+
+ -- Sebastien Bacher <seb128@ubuntu.com>  Mon, 13 Jan 2020 23:28:29 +0100
 
 network-manager-applet (1.8.24-1) unstable; urgency=medium
 
@@ -211,6 +450,45 @@ network-manager-applet (1.8.20-1.1) unstable; urgency=medium
 
  -- Boyuan Yang <byang@debian.org>  Fri, 19 Apr 2019 13:27:26 -0400
 
+network-manager-applet (1.8.20-1ubuntu2) eoan; urgency=medium
+
+  * debian/control.in, debian/libnm-gtk*, debian/rules:
+    - Remove deprecated libnm-gtk0/libnm-gtk-dev, following Debian,
+      unity-control-centerwas ported to newer iibraries now.
+  * debian/compat, debian/control:
+    - Remove delta to stay on debhelper 11
+  * debian/patches/Allow-to-create-and-connect-to-Ad-Hoc-RSN-networks.patch:
+    - remove, the n-m side was dropped in zesty
+
+ -- Sebastien Bacher <seb128@ubuntu.com>  Wed, 22 May 2019 15:01:28 +0200
+
+network-manager-applet (1.8.20-1ubuntu1) disco; urgency=medium
+
+  * Resynchronize on Debian
+  * The new version includes
+    -  connection-editor: re-enable launcher in GNOME and KDE,
+       it's needed for some sort of configurion which are not handled
+       by the desktop settings interfaces (lp: #1812697)
+  * debian/patches/git_wrong_free.patch:
+    - wifi-dialog: fix wrong free
+  * debian/patches/git_desktop_category.patch:
+    - connection-editor: add Utilities category to desktop file
+  * debian/patches/git_password_entry.patch:
+    - nma/pkcs11-cert-chooser: show the password entries when it makes sense
+  * debian/rules:
+    - build with --with-libnm-gtk, the default is now to disable it
+      upstream but we still have unity-control-center depending on it.
+
+ -- Sebastien Bacher <seb128@ubuntu.com>  Mon, 04 Mar 2019 16:17:00 +0100
+
+network-manager-applet (1.8.20-1.1) unstable; urgency=medium
+
+  * Non-maintainer upload.
+  * Fix crash on creating custom Wi-Fi connection in wifi-dialog.
+    (Closes: #926328)
+
+ -- Boyuan Yang <byang@debian.org>  Fri, 19 Apr 2019 13:27:26 -0400
+
 network-manager-applet (1.8.20-1) unstable; urgency=medium
 
   * New upstream version 1.8.20
@@ -224,6 +502,64 @@ network-manager-applet (1.8.20-1) unstable; urgency=medium
 
  -- Michael Biebl <biebl@debian.org>  Tue, 26 Feb 2019 18:47:42 +0100
 
+network-manager-applet (1.8.18-2ubuntu5) disco; urgency=medium
+
+  * Don't require gnome-shell on s390x since it's not built there.
+    Don't require the alternate dependencies either (notification-daemon
+    and policykit-1-gnome) since we're trying to demote them to universe.
+
+ -- Jeremy Bicha <jbicha@ubuntu.com>  Sat, 16 Feb 2019 11:04:05 -0500
+
+network-manager-applet (1.8.18-2ubuntu4) disco; urgency=medium
+
+  * Add gnome-shell as an alternate dependency to policykit-1-gnome
+    so that policykit-1-gnome can be demoted to universe
+
+ -- Jeremy Bicha <jbicha@ubuntu.com>  Sun, 10 Feb 2019 13:11:46 -0500
+
+network-manager-applet (1.8.18-2ubuntu3) disco; urgency=medium
+
+  * Add gnome-shell as an alternate dependency to notification-daemon
+    so that notification-daemon can be demoted to universe.
+
+ -- Jeremy Bicha <jbicha@ubuntu.com>  Sat, 09 Feb 2019 22:02:10 -0500
+
+network-manager-applet (1.8.18-2ubuntu2) cosmic; urgency=medium
+
+  * No change rebuild for launchpad translations import
+
+ -- Sebastien Bacher <seb128@ubuntu.com>  Tue, 09 Oct 2018 11:11:19 +0200
+
+network-manager-applet (1.8.18-2ubuntu1) cosmic; urgency=medium
+
+  * Merge from Debian unstable. Remaining changes:
+    - debian/control, debian/rules:
+      + Drop gir1.2-nmgtk-1.0 as part of the libnm-gtk removal process
+      + use libappindicator for now, it is tested and in main and the
+        new ayatana variant from Debian hasn't been reviewed yet.
+      + Run dh_translations
+    - debian/control, debian/rules, debian/libnm-gtk*.symbols:
+      + Add legacy libnm-gtk packages, until unity-control-center
+        is ported (see LP 1744619)
+    - Add lp341684_device_sensitive_disconnect_notify.patch:
+      + Show correct notification messages for disconnect events, to be in
+        line with the other *connect*text patches.
+    - Add lp460144_correctly_update_notification.patch: cleaner notification
+        messages, and allow for messages to be updated instead of cleared.
+    - Add Have-the-appindicator-enabled-by-default.patch:
+      + enable appindicator by default.
+    - Add applet-wifi-menu-before-vpn.patch:
+      + Show Create New and Connect to Hidden wifi menu items with the other
+        Wifi items, rather than separated by the VPN menus.
+    - Allow-to-create-and-connect-to-Ad-Hoc-RSN-networks.patch:
+      + Enable Ad-Hoc using WPA RSN
+    - Make-sure-the-behavior-for-policykit-restricted-acti.patch,
+      Support-hiding-rather-than-desensitizing-disallowed-items.patch,
+      + provide methods to desensitize and hide menu items which are useless
+        given the current policykit policy level of the user.
+
+ -- Iain Lane <iain@orangesquash.org.uk>  Mon, 01 Oct 2018 12:13:44 +0100
+
 network-manager-applet (1.8.18-2) unstable; urgency=medium
 
   * debian/patches/Revert*: Cherry-pick patches to fix "Apply" button
@@ -232,6 +568,38 @@ network-manager-applet (1.8.18-2) unstable; urgency=medium
     some cases, for example when configuring OpenVPN VPNs.
 
  -- Iain Lane <laney@debian.org>  Mon, 01 Oct 2018 11:53:20 +0100
+
+network-manager-applet (1.8.18-1ubuntu1) cosmic; urgency=medium
+
+  * Merge from Debian unstable. Picking new bug-fix only release.
+    Remaining changes: (LP: #1791271)
+    - debian/control, debian/rules:
+      + Drop gir1.2-nmgtk-1.0 as part of the libnm-gtk removal process
+      + use libappindicator for now, it is tested and in main and the
+        new ayatana variant from Debian hasn't been reviewed yet.
+      + Run dh_translations
+    - debian/control, debian/rules, debian/libnm-gtk*.symbols:
+      + Add legacy libnm-gtk packages, until unity-control-center
+        is ported (see LP 1744619)
+    - Add lp341684_device_sensitive_disconnect_notify.patch:
+      + Show correct notification messages for disconnect events, to be in
+        line with the other *connect*text patches.
+    - Add lp460144_correctly_update_notification.patch: cleaner notification
+        messages, and allow for messages to be updated instead of cleared.
+    - Add Have-the-appindicator-enabled-by-default.patch:
+      + enable appindicator by default.
+    - Add applet-wifi-menu-before-vpn.patch:
+      + Show Create New and Connect to Hidden wifi menu items with the other
+        Wifi items, rather than separated by the VPN menus.
+    - Allow-to-create-and-connect-to-Ad-Hoc-RSN-networks.patch:
+      + Enable Ad-Hoc using WPA RSN
+    - Make-sure-the-behavior-for-policykit-restricted-acti.patch,
+      Support-hiding-rather-than-desensitizing-disallowed-items.patch,
+      + provide methods to desensitize and hide menu items which are useless
+        given the current policykit policy level of the user.
+  * Refresh patches
+
+ -- Didier Roche <didrocks@ubuntu.com>  Tue, 11 Sep 2018 09:45:44 +0200
 
 network-manager-applet (1.8.18-1) unstable; urgency=medium
 
@@ -242,6 +610,37 @@ network-manager-applet (1.8.18-1) unstable; urgency=medium
   * Rebase patches
 
  -- Michael Biebl <biebl@debian.org>  Sat, 08 Sep 2018 18:42:36 +0200
+
+network-manager-applet (1.8.16-1ubuntu1) cosmic; urgency=low
+
+  * Merge from Debian unstable. Remaining changes: (LP: #1791271)
+    - debian/control, debian/rules:
+      + Drop gir1.2-nmgtk-1.0 as part of the libnm-gtk removal process
+      + use libappindicator for now, it is tested and in main and the
+        new ayatana variant from Debian hasn't been reviewed yet.
+      + Run dh_translations
+    - debian/control, debian/rules, debian/libnm-gtk*.symbols:
+      + Add legacy libnm-gtk packages, until unity-control-center
+        is ported (see LP 1744619)
+    - Add lp341684_device_sensitive_disconnect_notify.patch:
+      + Show correct notification messages for disconnect events, to be in
+        line with the other *connect*text patches.
+    - Add lp460144_correctly_update_notification.patch: cleaner notification
+        messages, and allow for messages to be updated instead of cleared.
+    - Add Have-the-appindicator-enabled-by-default.patch:
+      + enable appindicator by default.
+    - Add applet-wifi-menu-before-vpn.patch:
+      + Show Create New and Connect to Hidden wifi menu items with the other
+        Wifi items, rather than separated by the VPN menus.
+    - Allow-to-create-and-connect-to-Ad-Hoc-RSN-networks.patch:
+      + Enable Ad-Hoc using WPA RSN
+    - Make-sure-the-behavior-for-policykit-restricted-acti.patch,
+      Support-hiding-rather-than-desensitizing-disallowed-items.patch,
+      + provide methods to desensitize and hide menu items which are useless
+        given the current policykit policy level of the user.
+
+
+ -- Didier Roche <didrocks@ubuntu.com>  Thu, 06 Sep 2018 12:31:31 +0200
 
 network-manager-applet (1.8.16-1) unstable; urgency=medium
 
@@ -274,6 +673,56 @@ network-manager-applet (1.8.12-1) unstable; urgency=medium
 
  -- Michael Biebl <biebl@debian.org>  Sun, 03 Jun 2018 23:59:13 +0200
 
+network-manager-applet (1.8.10-5ubuntu4) cosmic; urgency=medium
+
+  * debian/control, debian/rules:
+    - use libappindicator for now, it is tested and in main and the
+      new ayatana variant from Debian hasn't been reviewed yet.
+
+ -- Sebastien Bacher <seb128@ubuntu.com>  Tue, 03 Jul 2018 09:53:01 +0200
+
+network-manager-applet (1.8.10-5ubuntu3) cosmic; urgency=medium
+
+  * Drop gir1.2-nmgtk-1.0 as part of the libnm-gtk removal process
+
+ -- Jeremy Bicha <jbicha@ubuntu.com>  Fri, 11 May 2018 19:57:10 -0400
+
+network-manager-applet (1.8.10-5ubuntu2) cosmic; urgency=medium
+
+  * Add againn the legacy libnm-gtk packages, until unity-control-center
+    is ported (see LP 1744619)
+
+ -- Gianfranco Costamagna <locutusofborg@debian.org>  Wed, 09 May 2018 14:45:19 +0200
+
+network-manager-applet (1.8.10-5ubuntu1) cosmic; urgency=low
+
+  * Merge from Debian unstable.  Remaining changes:
+    - debian/icons/, debian/rules, debian/source/include-binaries:
+      + Add "secure" icons
+    - debian/control, debian/rules:
+      + Run dh_translations
+    - Add lp341684_device_sensitive_disconnect_notify.patch:
+      + Show correct notification messages for disconnect events, to be in
+        line with the other *connect*text patches.
+    - Add lp460144_correctly_update_notification.patch: cleaner notification
+        messages, and allow for messages to be updated instead of cleared.
+    - Add Have-the-appindicator-enabled-by-default.patch:
+      + enable appindicator by default.
+    - Add applet-wifi-menu-before-vpn.patch:
+      + Show Create New and Connect to Hidden wifi menu items with the other
+        Wifi items, rather than separated by the VPN menus.
+    - Allow-to-create-and-connect-to-Ad-Hoc-RSN-networks.patch:
+      + Enable Ad-Hoc using WPA RSN
+    - On-Ubuntu-we-use-premade-icons-for-the-indicator-VPN.patch:
+      + use '-secure'-suffixed icons when connected to the VPN, since we
+        can't composit icons on the fly.
+    - Make-sure-the-behavior-for-policykit-restricted-acti.patch,
+      Support-hiding-rather-than-desensitizing-disallowed-items.patch,
+      + provide methods to desensitize and hide menu items which are useless
+        given the current policykit policy level of the user.
+
+ -- Gianfranco Costamagna <locutusofborg@debian.org>  Wed, 09 May 2018 10:42:28 +0200
+
 network-manager-applet (1.8.10-5) unstable; urgency=medium
 
   * Enable Ayatana AppIndicator support (Closes: #880169)
@@ -301,6 +750,36 @@ network-manager-applet (1.8.10-3) unstable; urgency=medium
 
  -- Michael Biebl <biebl@debian.org>  Sun, 08 Apr 2018 18:58:14 +0200
 
+network-manager-applet (1.8.10-2ubuntu1) bionic; urgency=medium
+
+  * Sync with Debian. Remaining changes:
+    - debian/icons/, debian/rules, debian/source/include-binaries:
+      + Add "secure" icons
+    - debian/control, debian/rules:
+      + Build appindicator support
+      + Run dh_translations
+    - Add lp341684_device_sensitive_disconnect_notify.patch:
+      + Show correct notification messages for disconnect events, to be in
+        line with the other *connect*text patches.
+    - Add lp460144_correctly_update_notification.patch: cleaner notification
+        messages, and allow for messages to be updated instead of cleared.
+    - Add applet-wifi-menu-before-vpn.patch:
+      + Show Create New and Connect to Hidden wifi menu items with the other
+        Wifi items, rather than separated by the VPN menus.
+    - Allow-to-create-and-connect-to-Ad-Hoc-RSN-networks.patch:
+      + Enable Ad-Hoc using WPA RSN
+    - Have-the-appindicator-enabled-by-default.patch:
+      + Enable the indicator by default
+    - On-Ubuntu-we-use-premade-icons-for-the-indicator-VPN.patch:
+      + use '-secure'-suffixed icons when connected to the VPN, since we
+        can't composit icons on the fly.
+    - Make-sure-the-behavior-for-policykit-restricted-acti.patch,
+      Support-hiding-rather-than-desensitizing-disallowed-items.patch,
+      + provide methods to desensitize and hide menu items which are useless
+        given the current policykit policy level of the user.
+
+ -- Jeremy Bicha <jbicha@ubuntu.com>  Mon, 22 Jan 2018 13:59:16 -0500
+
 network-manager-applet (1.8.10-2) unstable; urgency=medium
 
   * shared/compat: Fix memory handling of nm_setting_vpn_get_*_keys
@@ -326,6 +805,40 @@ network-manager-applet (1.8.6-1) unstable; urgency=medium
 
  -- Michael Biebl <biebl@debian.org>  Tue, 07 Nov 2017 20:57:13 +0100
 
+network-manager-applet (1.8.4-1ubuntu1) artful; urgency=medium
+
+  * Sync with Debian. Remaining changes:
+    - debian/icons/, debian/rules, debian/source/include-binaries:
+      + Add "secure" icons
+    - debian/control, debian/rules:
+      + Build appindicator support
+      + Run dh_translations
+    - Add lp341684_device_sensitive_disconnect_notify.patch:
+      + Show correct notification messages for disconnect events, to be in
+        line with the other *connect*text patches.
+    - Add lp460144_correctly_update_notification.patch: cleaner notification
+        messages, and allow for messages to be updated instead of cleared.
+    - Add applet-wifi-menu-before-vpn.patch:
+      + Show Create New and Connect to Hidden wifi menu items with the other
+        Wifi items, rather than separated by the VPN menus.
+    - Allow-to-create-and-connect-to-Ad-Hoc-RSN-networks.patch:
+      + Enable Ad-Hoc using WPA RSN
+    - Have-the-appindicator-enabled-by-default.patch:
+      + Enable the indicator by default
+    - On-Ubuntu-we-use-premade-icons-for-the-indicator-VPN.patch:
+      + use '-secure'-suffixed icons when connected to the VPN, since we
+        can't composit icons on the fly.
+    - Make-sure-the-behavior-for-policykit-restricted-acti.patch,
+      Support-hiding-rather-than-desensitizing-disallowed-items.patch,
+      + provide methods to desensitize and hide menu items which are useless
+        given the current policykit policy level of the user.
+  * Refresh patches
+  * Drop patches applied in new release:
+    - reorder-indicator-items.patch
+    - Always-center-dialogs-on-the-screen.patch
+
+ -- Jeremy Bicha <jbicha@ubuntu.com>  Fri, 22 Sep 2017 15:03:15 -0400
+
 network-manager-applet (1.8.4-1) unstable; urgency=medium
 
   * New upstream version 1.8.4
@@ -336,6 +849,41 @@ network-manager-applet (1.8.4-1) unstable; urgency=medium
   * Don't build static libraries
 
  -- Michael Biebl <biebl@debian.org>  Wed, 20 Sep 2017 22:22:26 +0200
+
+network-manager-applet (1.8.2-1ubuntu1) artful; urgency=medium
+
+  * Sync with Debian. Remaining changes:
+    - debian/icons/, debian/rules, debian/source/include-binaries:
+      + Add "secure" icons
+    - debian/control, debian/rules:
+      + Build appindicator support
+      + Run dh_translations
+    - Add lp341684_device_sensitive_disconnect_notify.patch:
+      + Show correct notification messages for disconnect events, to be in
+        line with the other *connect*text patches.
+    - Add lp460144_correctly_update_notification.patch: cleaner notification
+        messages, and allow for messages to be updated instead of cleared.
+    - Add applet-wifi-menu-before-vpn.patch:
+      + Show Create New and Connect to Hidden wifi menu items with the other
+        Wifi items, rather than separated by the VPN menus.
+    - Always-center-dialogs-on-the-screen.patch:
+      + Position dialogs at the center of the screen
+    - Allow-to-create-and-connect-to-Ad-Hoc-RSN-networks.patch:
+      + Enable Ad-Hoc using WPA RSN
+    - reorder-indicator-items.patch:
+      + Make sure devices show before networking toggles
+    - Have-the-appindicator-enabled-by-default.patch:
+      + Enable the indicator by default
+    - On-Ubuntu-we-use-premade-icons-for-the-indicator-VPN.patch:
+      + use '-secure'-suffixed icons when connected to the VPN, since we
+        can't composit icons on the fly.
+    - Make-sure-the-behavior-for-policykit-restricted-acti.patch,
+      Support-hiding-rather-than-desensitizing-disallowed-items.patch,
+      + provide methods to desensitize and hide menu items which are useless
+        given the current policykit policy level of the user.
+  * Refresh patches
+
+ -- Jeremy Bicha <jbicha@ubuntu.com>  Sun, 18 Jun 2017 19:06:46 -0400
 
 network-manager-applet (1.8.2-1) unstable; urgency=medium
 
